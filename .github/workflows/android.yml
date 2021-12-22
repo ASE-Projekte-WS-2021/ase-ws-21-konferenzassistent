@@ -53,15 +53,6 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ github.token }}
 
-    - name: Save name of our Artifact
-      id: set-result-artifact
-      run: |
-        ARTIFACT_PATHNAME_APK=$(ls app/build/outputs/apk/debug/*.apk | head -n 1)
-        ARTIFACT_NAME_APK=$(basename $ARTIFACT_PATHNAME_APK)
-        echo "ARTIFACT_NAME_APK is " ${ARTIFACT_NAME_APK}
-        echo "ARTIFACT_PATHNAME_APK=${ARTIFACT_PATHNAME_APK}" >> $GITHUB_ENV
-        echo "ARTIFACT_NAME_APK=${ARTIFACT_NAME_APK}" >> $GITHUB_ENV
-
     - name: Upload our Artifact Assets
       id: upload-release-asset
       uses: actions/upload-release-asset@v1
@@ -69,7 +60,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ${{ env.ARTIFACT_PATHNAME_APK }}
-        asset_name: ${{ env.ARTIFACT_NAME_APK }}
+        asset_path: apk/app-debug.apk
+        asset_name: MensaApp.apk
         asset_content_type: application/zip
 
