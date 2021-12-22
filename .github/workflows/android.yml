@@ -39,6 +39,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - name: Download APK from build
+      uses: actions/download-artifact@v1
+      with:
+        name: apk  
+
     - name: release
       uses: actions/create-release@v1
       id: create_release
