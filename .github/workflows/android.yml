@@ -1,20 +1,21 @@
-name: Android CI
-
+name: Build CI
 on:
   push:
-    tags:
-    - 'v*.*.*'
-    branches: [ main ]
+    branches:
+      - main
   pull_request:
-    branches: [ main ]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
+    - name: Checkout
+      uses: actions/checkout@v2
+    - uses: Klemensas/action-autotag@stable
+      with:
+        GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+
     - name: set up JDK 11
       uses: actions/setup-java@v2
       with:
@@ -46,7 +47,7 @@ jobs:
     - name: Save name of our Artifact
       id: set-result-artifact
       run: |
-        ARTIFACT_PATHNAME_APK=$(ls app/build/outputs/apk/ourbuildtype/release/*.apk | head -n 1)
+        ARTIFACT_PATHNAME_APK=$(ls app/build/outputs/apk/debug/*.apk | head -n 1)
         ARTIFACT_NAME_APK=$(basename $ARTIFACT_PATHNAME_APK)
         echo "ARTIFACT_NAME_APK is " ${ARTIFACT_NAME_APK}
         echo "ARTIFACT_PATHNAME_APK=${ARTIFACT_PATHNAME_APK}" >> $GITHUB_ENV
