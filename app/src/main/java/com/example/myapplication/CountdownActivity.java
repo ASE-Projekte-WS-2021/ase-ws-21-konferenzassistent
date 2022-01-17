@@ -3,16 +3,93 @@ package com.example.myapplication;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.IntentCompat;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
 public class CountdownActivity extends AppCompatActivity {
+
+    // Countdown TextView
+    private TextView countdownText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_countdown);
+
+        countdownText = findViewById(R.id.countdownView);
+
+        // start the Countdown service
+        startService(new Intent(this, CountdownService.class));
+    }
+
+    private BroadcastReceiver br = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            // update the Gui
+            updateTime(intent);
+        }
+    };
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // register the Receiver
+        registerReceiver(br, new IntentFilter(CountdownService.COUNTDOWN_SERVICE));
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        // unregister the Receiver
+        unregisterReceiver(br);
+    }
+
+    @Override
+    public void onStop() {
+        try {
+            // unregister the Receiver
+            unregisterReceiver(br);
+        } catch (Exception e) {
+            // Receiver was probably already stopped in onPause()
+        }
+        super.onStop();
+    }
+
+    @Override
+    public void onDestroy() {
+        // stop the Service
+        stopService(new Intent(this, CountdownService.class));
+        super.onDestroy();
+    }
+
+    // Update Countdown Timer
+    private void updateTime(Intent intent){
+        if(intent.getExtras() != null){
+            long milliSUntilFinish = intent.getLongExtra("countdown", 0);
+
+            // Convert to minutes and seconds
+            int minutes = (int) milliSUntilFinish/60000;
+            int seconds = (int) milliSUntilFinish%60000/1000;
+
+            // Build a string
+            String timeLeft;
+
+            timeLeft = "" + minutes;
+            timeLeft += ":";
+            // Add a leading 0 to seconds
+            if(seconds < 10) timeLeft += "0";
+            timeLeft += seconds;
+
+            // Set the countdown text
+            countdownText.setText(timeLeft);
+        }
+
+
     }
 
     /* finishMeeting method code by Kimmi Dhingra:

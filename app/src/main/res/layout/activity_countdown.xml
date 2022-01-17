@@ -7,10 +7,10 @@
     tools:context=".CountdownActivity">
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/countdownView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Platzhalter Countdowns"
+        android:text=""
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -25,5 +25,5 @@
         android:text="END MEETING"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+        app:layout_constraintTop_toBottomOf="@+id/countdownView" />
 </androidx.constraintlayout.widget.ConstraintLayout>
