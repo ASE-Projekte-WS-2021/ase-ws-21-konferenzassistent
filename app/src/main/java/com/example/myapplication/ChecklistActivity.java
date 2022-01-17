@@ -14,6 +14,7 @@ public class ChecklistActivity extends AppCompatActivity {
         setContentView(R.layout.activity_checklist);
     }
 
+    // open the new activity
     public void openCountdownActivity(View view) {
         Intent intent = new Intent(this, CountdownActivity.class);
         startActivity(intent);
