@@ -5,19 +5,34 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
+
+    private EditText luefungstime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        luefungstime = findViewById(R.id.lueftungstime);
+
     }
 
     public void openChecklistActivity(View view) {
         Intent intent = new Intent(this, ChecklistActivity.class);
-        startActivity(intent);
 
+        long maxCountdownTime = 30000;
+
+        if(!luefungstime.getText().toString().isEmpty()){
+
+            maxCountdownTime = Long.parseLong(luefungstime.getText().toString()) * 60000;
+        }
+
+        intent.putExtra("maxCountdownTime", maxCountdownTime);
+        startActivity(intent);
     }
 }
 

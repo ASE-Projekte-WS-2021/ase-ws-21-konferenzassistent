@@ -15,6 +15,7 @@ public class CountdownActivity extends AppCompatActivity {
 
     // Countdown TextView
     private TextView countdownText;
+    private long maxCountdownTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,8 +24,14 @@ public class CountdownActivity extends AppCompatActivity {
 
         countdownText = findViewById(R.id.countdownView);
 
+        // get max Countdown from intent
+        maxCountdownTime = getIntent().getLongExtra("maxCountdownTime", 0);
+
         // start the Countdown service
-        startService(new Intent(this, CountdownService.class));
+        Intent countdownIntent = new Intent(this, CountdownService.class);
+        // add the countdown Time to the intent
+        countdownIntent.putExtra("maxCountdownTime", maxCountdownTime);
+        startService(countdownIntent);
     }
 
     private BroadcastReceiver br = new BroadcastReceiver() {
