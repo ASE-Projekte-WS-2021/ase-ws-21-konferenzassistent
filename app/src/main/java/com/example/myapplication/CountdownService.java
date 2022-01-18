@@ -1,7 +1,10 @@
 package com.example.myapplication;
 
 import android.app.Service;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.CountDownTimer;
 import android.os.IBinder;
 import android.util.Log;
@@ -23,6 +26,8 @@ public class CountdownService extends Service {
 
     @Override
     public void onCreate() {
+        // Register Receiver to listen for button presses
+        registerReceiver(br, new IntentFilter(CountdownActivity.COUNTDOWN_BUTTONS));
         super.onCreate();
     }
 
@@ -30,6 +35,7 @@ public class CountdownService extends Service {
     public void onDestroy() {
         // Stop the timer
         countDownTimer.cancel();
+        unregisterReceiver(br);
         super.onDestroy();
     }
 
@@ -42,7 +48,7 @@ public class CountdownService extends Service {
                 // Broadcast the countdown and status of the window
                 bi.putExtra("countdown", milliSUnitlFinished);
                 bi.putExtra("windowOpen", isOpen);
-
+                bi.putExtra("timerDone", false);
                 // Broadcast Timer
                 sendBroadcast(bi);
             }
@@ -51,14 +57,11 @@ public class CountdownService extends Service {
             public void onFinish() {
                 // Timer finished
                 // Restart timer with Window Open/Closed
-                if(isOpen){
-                    startTimer(maxCountdownTime);
-                    isOpen = false;
-                }
-                else{
-                    startTimer(lueftungsCountdown);
-                    isOpen = true;
-                }
+                bi.putExtra("timerDone", true);
+
+                // Broadcast timer done
+                sendBroadcast(bi);
+                countDownTimer.cancel();
             }
         };
         // Start the timer
@@ -82,4 +85,21 @@ public class CountdownService extends Service {
     public IBinder onBind(Intent intent) {
         return null;
     }
+
+    // Receives the button press on the Countdown activity
+    private BroadcastReceiver br = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent){
+            // If open set to closed and restart timer
+            if(isOpen){
+                startTimer(maxCountdownTime);
+                isOpen = false;
+            }
+            else{
+                startTimer(lueftungsCountdown);
+                isOpen = true;
+            }
+        }
+    };
+
 }
