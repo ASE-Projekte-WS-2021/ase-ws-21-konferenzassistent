@@ -1,5 +1,9 @@
 package com.example.myapplication;
 
+import static com.example.myapplication.App.CHANNEL_ID;
+
+import android.app.Notification;
+import android.app.PendingIntent;
 import android.app.Service;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -10,6 +14,7 @@ import android.os.IBinder;
 import android.util.Log;
 
 import androidx.annotation.Nullable;
+import androidx.core.app.NotificationCompat;
 
 public class CountdownService extends Service {
 
@@ -77,7 +82,26 @@ public class CountdownService extends Service {
         // start timer with countdown timer
         startTimer(maxCountdownTime);
 
-        return super.onStartCommand(intent, flags, startId);
+        Intent notificationIntent = new Intent(this, CountdownActivity.class);
+
+        PendingIntent pendingIntent = PendingIntent.getActivity(this,
+                0, intent, 0);
+
+        // build the Notification
+        Notification notification = new NotificationCompat.Builder(this, CHANNEL_ID)
+                .setContentTitle("Konferenzassistent")
+                .setContentText("timeText")
+                .setSmallIcon(R.drawable.ic_android)
+                .setContentIntent(pendingIntent)
+                .setCategory(NotificationCompat.CATEGORY_MESSAGE)
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setDefaults(Notification.DEFAULT_ALL)
+                .build();
+
+        // Start as Foreground Service
+        startForeground(1, notification);
+
+        return START_NOT_STICKY;
     }
 
     @Nullable

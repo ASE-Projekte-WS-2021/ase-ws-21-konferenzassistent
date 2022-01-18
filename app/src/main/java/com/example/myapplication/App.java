@@ -7,7 +7,7 @@ import android.app.NotificationManager;
 import android.os.Build;
 
 public class App extends Application {
-    public static final String CHANNEL_ID = "konferenzassistentServiceChannel";
+    public static final String CHANNEL_ID = "exampleServiceChannel";
 
     @Override
     public void onCreate() {
@@ -21,7 +21,7 @@ public class App extends Application {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
             NotificationChannel serviceChannel = new NotificationChannel(
                     CHANNEL_ID,
-                    "Konferenz Assistent Channel",
+                    "Example Service Channel",
                     NotificationManager.IMPORTANCE_HIGH // Set to high for Notification messages
             );
 
