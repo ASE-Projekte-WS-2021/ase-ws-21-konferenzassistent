@@ -10,3 +10,9 @@ Ich will als Leiter einer Arbeitsgruppe persönliche Meetings abhalten und von d
 
 ### Lösungsvorschlag:
 Die App erinnert mich als Arbeitsgruppenleiter an das Lüften des Konferenzraumes, sowie das Sicherstellen anderer Vorschriften, ob von Seiten des Unternehmens oder gesetzlich vorgeschrieben. Hierbei kann eingestellt werden wie und an was alles mich die App erinnern soll. Die App liefert einige Grundparameter auf Basis dieser Vorschriften (Mindestabstand, etc.), welche individuell angepasst werden können. Nachdem zu Beginn des Meetings die App gestartet und mögliche Variablen eingegeben wurden, muss ich nur noch auf Benachrichtigungen über die Vorgaben reagieren und kann mich dadurch voll auf das Meeting konzentrieren. 
+
+## MVP
+### Skizze
+![](https://github.com/ASE-Projekte-WS-2021/ase-ws-21-konferenzassistent/blob/main/documentation/mvp_skizze.png)
+### Milestone
+[Link](https://github.com/ASE-Projekte-WS-2021/ase-ws-21-konferenzassistent/milestone/1)
