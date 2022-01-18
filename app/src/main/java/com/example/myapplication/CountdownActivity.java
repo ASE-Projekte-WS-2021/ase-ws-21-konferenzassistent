@@ -16,6 +16,7 @@ public class CountdownActivity extends AppCompatActivity {
     // Countdown TextView
     private TextView countdownText;
     private long maxCountdownTime;
+    private long maxLueftungsTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,11 +27,16 @@ public class CountdownActivity extends AppCompatActivity {
 
         // get max Countdown from intent
         maxCountdownTime = getIntent().getLongExtra("maxCountdownTime", 0);
+        maxLueftungsTime = getIntent().getLongExtra("maxLueftungsTimer", 0);
 
         // start the Countdown service
         Intent countdownIntent = new Intent(this, CountdownService.class);
+
         // add the countdown Time to the intent
         countdownIntent.putExtra("maxCountdownTime", maxCountdownTime);
+        countdownIntent.putExtra("maxLueftungsTimer", maxLueftungsTime);
+
+        // start the service
         startService(countdownIntent);
     }
 
@@ -78,7 +84,7 @@ public class CountdownActivity extends AppCompatActivity {
     private void updateTime(Intent intent){
         if(intent.getExtras() != null){
             long milliSUntilFinish = intent.getLongExtra("countdown", 0);
-
+            boolean isOpen = intent.getBooleanExtra("windowOpen", false);
             // Convert to minutes and seconds
             int minutes = (int) milliSUntilFinish/60000;
             int seconds = (int) milliSUntilFinish%60000/1000;
@@ -86,11 +92,20 @@ public class CountdownActivity extends AppCompatActivity {
             // Build a string
             String timeLeft;
 
-            timeLeft = "" + minutes;
+            timeLeft = "in " + minutes;
             timeLeft += ":";
             // Add a leading 0 to seconds
             if(seconds < 10) timeLeft += "0";
             timeLeft += seconds;
+
+            // Add the description
+            if(isOpen) {
+                timeLeft += " schließen!";
+
+            }
+            else{
+                timeLeft += " öffnen!";
+            }
 
             // Set the countdown text
             countdownText.setText(timeLeft);

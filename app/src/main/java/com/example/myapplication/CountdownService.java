@@ -15,6 +15,8 @@ public class CountdownService extends Service {
     public static final String COUNTDOWN_SERVICE = "com.example.myapplication.countdown_service";
 
     private long maxCountdownTime;
+    private long lueftungsCountdown;
+    private boolean isOpen = false;
 
     Intent bi = new Intent(COUNTDOWN_SERVICE);
     CountDownTimer countDownTimer = null;
@@ -36,7 +38,11 @@ public class CountdownService extends Service {
         countDownTimer = new CountDownTimer(maxTime, 1000) {
             @Override
             public void onTick(long milliSUnitlFinished) {
+
+                // Broadcast the countdown and status of the window
                 bi.putExtra("countdown", milliSUnitlFinished);
+                bi.putExtra("windowOpen", isOpen);
+
                 // Broadcast Timer
                 sendBroadcast(bi);
             }
@@ -44,6 +50,15 @@ public class CountdownService extends Service {
             @Override
             public void onFinish() {
                 // Timer finished
+                // Restart timer with Window Open/Closed
+                if(isOpen){
+                    startTimer(maxCountdownTime);
+                    isOpen = false;
+                }
+                else{
+                    startTimer(lueftungsCountdown);
+                    isOpen = true;
+                }
             }
         };
         // Start the timer
@@ -54,8 +69,11 @@ public class CountdownService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
         // Get max time from intent
         maxCountdownTime = intent.getLongExtra("maxCountdownTime", 0);
+        lueftungsCountdown = intent.getLongExtra("maxLueftungsTimer", 0);
 
+        // start timer with countdown timer
         startTimer(maxCountdownTime);
+
         return super.onStartCommand(intent, flags, startId);
     }
 
