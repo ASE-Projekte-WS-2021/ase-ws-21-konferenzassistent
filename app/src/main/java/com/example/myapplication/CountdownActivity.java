@@ -8,13 +8,22 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 public class CountdownActivity extends AppCompatActivity {
 
     // Countdown TextView
     private TextView countdownText;
+    private Button startCountdownButton;
+
+    public static final String COUNTDOWN_BUTTONS = "my.action.COUNTDOWN_BUTTONS";
+
+    private long maxCountdownTime;
+    private long maxLueftungsTime;
+    private boolean isFinished = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,9 +31,21 @@ public class CountdownActivity extends AppCompatActivity {
         setContentView(R.layout.activity_countdown);
 
         countdownText = findViewById(R.id.countdownView);
+        startCountdownButton = findViewById((R.id.StartButton));
+
+        // get max Countdown from intent
+        maxCountdownTime = getIntent().getLongExtra("maxCountdownTime", 0);
+        maxLueftungsTime = getIntent().getLongExtra("maxLueftungsTimer", 0);
 
         // start the Countdown service
-        startService(new Intent(this, CountdownService.class));
+        Intent countdownIntent = new Intent(this, CountdownService.class);
+
+        // add the countdown Time to the intent
+        countdownIntent.putExtra("maxCountdownTime", maxCountdownTime);
+        countdownIntent.putExtra("maxLueftungsTimer", maxLueftungsTime);
+
+        // start the service
+        startService(countdownIntent);
     }
 
     private BroadcastReceiver br = new BroadcastReceiver() {
@@ -70,7 +91,13 @@ public class CountdownActivity extends AppCompatActivity {
     // Update Countdown Timer
     private void updateTime(Intent intent){
         if(intent.getExtras() != null){
+
+            // get the countdown and if window is open
             long milliSUntilFinish = intent.getLongExtra("countdown", 0);
+            boolean isOpen = intent.getBooleanExtra("windowOpen", false);
+
+            // Get if timer is finished
+            isFinished = intent.getBooleanExtra("timerDone", false);
 
             // Convert to minutes and seconds
             int minutes = (int) milliSUntilFinish/60000;
@@ -79,17 +106,40 @@ public class CountdownActivity extends AppCompatActivity {
             // Build a string
             String timeLeft;
 
-            timeLeft = "" + minutes;
+            timeLeft = "in " + minutes;
             timeLeft += ":";
             // Add a leading 0 to seconds
             if(seconds < 10) timeLeft += "0";
             timeLeft += seconds;
 
+            // Add the description
+            if(isOpen) {
+                timeLeft += " schließen!";
+                startCountdownButton.setText("Fenster Offen.");
+            }
+            else{
+                timeLeft += " öffnen!";
+                startCountdownButton.setText("Fenster Geschlossen.");
+            }
+
+            // Check if timer is done
+            if(isFinished){
+                startCountdownButton.setEnabled(true);
+            }
+            else{
+                startCountdownButton.setEnabled(false);
+            }
+
             // Set the countdown text
             countdownText.setText(timeLeft);
         }
 
+    }
 
+    public void startCountdown(View view){
+        // Send a Broadcast to the Service if button is pressed
+        Intent intent = new Intent(COUNTDOWN_BUTTONS);
+        sendBroadcast(intent);
     }
 
     /* finishMeeting method code by Kimmi Dhingra:
