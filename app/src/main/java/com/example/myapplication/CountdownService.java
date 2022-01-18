@@ -5,6 +5,9 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.media.MediaPlayer;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.CountDownTimer;
 import android.os.IBinder;
 import android.util.Log;
@@ -24,6 +27,9 @@ public class CountdownService extends Service {
     Intent bi = new Intent(COUNTDOWN_SERVICE);
     CountDownTimer countDownTimer = null;
 
+    // Media Player for audible alerts
+    private MediaPlayer mp;
+
     @Override
     public void onCreate() {
         // Register Receiver to listen for button presses
@@ -36,6 +42,7 @@ public class CountdownService extends Service {
         // Stop the timer
         countDownTimer.cancel();
         unregisterReceiver(br);
+        mp.stop();
         super.onDestroy();
     }
 
@@ -62,6 +69,11 @@ public class CountdownService extends Service {
                 // Broadcast timer done
                 sendBroadcast(bi);
                 countDownTimer.cancel();
+
+                // activate the alert
+                Uri alert = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
+                mp = MediaPlayer.create(getApplicationContext(), alert);
+                mp.start();
             }
         };
         // Start the timer
@@ -90,14 +102,23 @@ public class CountdownService extends Service {
     private BroadcastReceiver br = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent){
-            // If open set to closed and restart timer
-            if(isOpen){
-                startTimer(maxCountdownTime);
-                isOpen = false;
-            }
-            else{
-                startTimer(lueftungsCountdown);
-                isOpen = true;
+            // get if its a button Press
+            boolean userInteraction = intent.getBooleanExtra("userInteraction", true);
+
+            // Check if its a user Interaction or if the app got resumed
+            if(userInteraction){
+                // Stop the alert
+                mp.stop();
+
+                // If open set to closed and restart timer
+                if(isOpen){
+                    startTimer(maxCountdownTime);
+                    isOpen = false;
+                }
+                else{
+                    startTimer(lueftungsCountdown);
+                    isOpen = true;
+                }
             }
         }
     };
