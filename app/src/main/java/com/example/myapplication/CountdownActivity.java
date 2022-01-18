@@ -61,6 +61,15 @@ public class CountdownActivity extends AppCompatActivity {
         super.onResume();
         // register the Receiver
         registerReceiver(br, new IntentFilter(CountdownService.COUNTDOWN_SERVICE));
+        wakeUpTimer();
+    }
+
+    // Wakes up the timer if app was in background
+    private void wakeUpTimer(){
+        Intent intent = new Intent(COUNTDOWN_BUTTONS);
+        // set userInteraction to false to signal its not a Button Press
+        intent.putExtra("userInteraction",false);
+        sendBroadcast(intent);
     }
 
     @Override

@@ -11,7 +11,8 @@
         android:theme="@style/Theme.MyApplication">
         <activity
             android:name=".CountdownActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:launchMode="singleTop"/>
         <activity
             android:name=".ChecklistActivity"
             android:exported="false" />
@@ -28,5 +29,6 @@
         <service android:name=".CountdownService" />
 
     </application>
-
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+    <uses-permission android:name="android.permission.VIBRATE"/>
 </manifest>
