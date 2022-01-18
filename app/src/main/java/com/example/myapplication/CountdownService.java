@@ -3,6 +3,7 @@ package com.example.myapplication;
 import static com.example.myapplication.App.CHANNEL_ID;
 
 import android.app.Notification;
+import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.BroadcastReceiver;
@@ -25,9 +26,11 @@ public class CountdownService extends Service {
     private long maxCountdownTime;
     private long lueftungsCountdown;
     private boolean isOpen = false;
+    private long currentTime;
+    private boolean timerDone = false;
 
-    Intent bi = new Intent(COUNTDOWN_SERVICE);
-    CountDownTimer countDownTimer = null;
+    private Intent bi = new Intent(COUNTDOWN_SERVICE);
+    private CountDownTimer countDownTimer = null;
 
     @Override
     public void onCreate() {
@@ -50,12 +53,16 @@ public class CountdownService extends Service {
             @Override
             public void onTick(long milliSUnitlFinished) {
 
+                currentTime = milliSUnitlFinished;
+                timerDone = false;
+
                 // Broadcast the countdown and status of the window
                 bi.putExtra("countdown", milliSUnitlFinished);
                 bi.putExtra("windowOpen", isOpen);
                 bi.putExtra("timerDone", false);
                 // Broadcast Timer
                 sendBroadcast(bi);
+                notifyNotification(NotificationTextBuilder());
             }
 
             @Override
@@ -64,6 +71,7 @@ public class CountdownService extends Service {
                 // Restart timer with Window Open/Closed
                 bi.putExtra("timerDone", true);
 
+                timerDone = true;
                 // Broadcast timer done
                 sendBroadcast(bi);
                 countDownTimer.cancel();
@@ -71,6 +79,25 @@ public class CountdownService extends Service {
         };
         // Start the timer
         countDownTimer.start();
+    }
+
+    private void notifyNotification(String text) {
+
+        Intent notificationIntent = new Intent(this, CountdownActivity.class);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this,
+                0, notificationIntent, 0);
+
+        Notification notification = new NotificationCompat.Builder(this, CHANNEL_ID)
+                .setContentTitle("Konferenzassistent")
+                .setContentText(text)
+                .setSmallIcon(R.drawable.ic_android)
+                .setContentIntent(pendingIntent)
+                .build();
+
+        NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+
+        mNotificationManager.notify(1, notification);
+
     }
 
     @Override
@@ -83,14 +110,13 @@ public class CountdownService extends Service {
         startTimer(maxCountdownTime);
 
         Intent notificationIntent = new Intent(this, CountdownActivity.class);
-
         PendingIntent pendingIntent = PendingIntent.getActivity(this,
-                0, intent, 0);
+                0, notificationIntent, 0);
 
         // build the Notification
         Notification notification = new NotificationCompat.Builder(this, CHANNEL_ID)
                 .setContentTitle("Konferenzassistent")
-                .setContentText("timeText")
+                .setContentText(NotificationTextBuilder())
                 .setSmallIcon(R.drawable.ic_android)
                 .setContentIntent(pendingIntent)
                 .setCategory(NotificationCompat.CATEGORY_MESSAGE)
@@ -115,15 +141,55 @@ public class CountdownService extends Service {
         @Override
         public void onReceive(Context context, Intent intent){
             // If open set to closed and restart timer
-            if(isOpen){
-                startTimer(maxCountdownTime);
-                isOpen = false;
+            // get if its a button Press
+            boolean userInteraction = intent.getBooleanExtra("userInteraction", true);
+
+            // Check if its a user Interaction or if the app got resumed
+            if(userInteraction){
+                if(isOpen){
+                    startTimer(maxCountdownTime);
+                    isOpen = false;
+                }
+                else{
+                    startTimer(lueftungsCountdown);
+                    isOpen = true;
+                }
             }
+
+            // if app got resumed send timer data
             else{
-                startTimer(lueftungsCountdown);
-                isOpen = true;
+                bi.putExtra("countdown", currentTime);
+                bi.putExtra("windowOpen", isOpen);
+                bi.putExtra("timerDone", timerDone);
+
+                sendBroadcast(bi);
             }
+
         }
     };
+
+    private String NotificationTextBuilder(){
+        String notificationText = "";
+
+        // Convert to minutes and seconds
+        int minutes = (int) currentTime/60000;
+        int seconds = (int) currentTime%60000/1000;
+
+        notificationText = "Noch " + minutes;
+        notificationText += ":";
+        // Add a leading 0 to seconds
+        if(seconds < 10) notificationText += "0";
+        notificationText += seconds;
+
+        // Add the description
+        if(isOpen) {
+            notificationText += " bis zum schließen des Fensters!";
+        }
+        else{
+            notificationText += " bis zum öffnen des Fensters!";
+        }
+
+        return notificationText;
+    }
 
 }
