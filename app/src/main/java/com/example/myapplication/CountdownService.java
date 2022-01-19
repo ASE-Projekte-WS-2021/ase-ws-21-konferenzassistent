@@ -36,7 +36,7 @@ public class CountdownService extends Service {
     private CountDownTimer countDownTimer = null;
 
     // Media Player for audible alerts
-    private MediaPlayer mp;
+    private MediaPlayer mp = new MediaPlayer();
 
     @Override
     public void onCreate() {
@@ -49,8 +49,11 @@ public class CountdownService extends Service {
     public void onDestroy() {
         // Stop the timer
         countDownTimer.cancel();
+
+        if(mp.isPlaying()){
+            mp.stop();
+        }
         unregisterReceiver(br);
-        mp.stop();
         super.onDestroy();
     }
 
