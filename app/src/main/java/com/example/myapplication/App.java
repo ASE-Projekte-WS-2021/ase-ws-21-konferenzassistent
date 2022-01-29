@@ -22,7 +22,7 @@ public class App extends Application {
             NotificationChannel serviceChannel = new NotificationChannel(
                     CHANNEL_ID,
                     "Example Service Channel",
-                    NotificationManager.IMPORTANCE_HIGH // Set to high for Notification messages
+                    NotificationManager.IMPORTANCE_LOW // Set to high for Notification messages
             );
 
             NotificationManager manger = getSystemService(NotificationManager.class);
