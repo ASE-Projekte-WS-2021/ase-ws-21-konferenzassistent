@@ -13,8 +13,12 @@ import android.content.IntentFilter;
 import android.media.MediaPlayer;
 import android.media.RingtoneManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.CountDownTimer;
 import android.os.IBinder;
+import android.text.Html;
+import android.text.Spannable;
+import android.text.SpannableString;
 import android.util.Log;
 
 import androidx.annotation.Nullable;
@@ -26,17 +30,36 @@ public class CountdownService extends Service {
     private final static String TAG = "CountdownService";
     public static final String COUNTDOWN_SERVICE = "com.example.myapplication.countdown_service";
 
-    private long maxCountdownTime;
-    private long lueftungsCountdown;
+    // Max Timer values
+    private long maxlueftenTime;
+    private long maxLueftungsTime;
+    private long maxAbstandsTime;
+
+    // if window got already opned
     private boolean isOpen = false;
-    private long currentTime;
-    private boolean timerDone = false;
+
+    // Countdown Object that save the current states of the Countdowns
+    private CountDownObject lueftungsObject;
+    private CountDownObject abstandsObject;
 
     private Intent bi = new Intent(COUNTDOWN_SERVICE);
-    private CountDownTimer countDownTimer = null;
+
+    // Countdown Timers
+    private CountDownTimer lueftungsCountdown = null;
+    private CountDownTimer abstandsCountdown = null;
 
     // Media Player for audible alerts
     private MediaPlayer mp = new MediaPlayer();
+
+    // Object to create a Countdown
+    static class CountDownObject{
+        long currentTime;
+        boolean timerDone;
+
+        public void createNotification(){
+
+        }
+    }
 
     @Override
     public void onCreate() {
@@ -48,7 +71,8 @@ public class CountdownService extends Service {
     @Override
     public void onDestroy() {
         // Stop the timer
-        countDownTimer.cancel();
+        lueftungsCountdown.cancel();
+        abstandsCountdown.cancel();
 
         if(mp.isPlaying()){
             mp.stop();
@@ -57,46 +81,50 @@ public class CountdownService extends Service {
         super.onDestroy();
     }
 
-    private void startTimer(long maxTime){
+    // Start a Countdown Timer and returns the CountdownTimer object
+    private CountDownTimer startTimer(long maxTime, CountDownTimer timer, CountDownObject cdObject){
         // Create a new Countdown Timer
-        countDownTimer = new CountDownTimer(maxTime, 1000) {
+        timer = new CountDownTimer(maxTime, 1000) {
             @Override
             public void onTick(long milliSUnitlFinished) {
 
-                currentTime = milliSUnitlFinished;
-                timerDone = false;
+                // set Values
+                cdObject.currentTime = milliSUnitlFinished;
+                cdObject.timerDone = false;
 
-                // Broadcast the countdown and status of the window
-                bi.putExtra("countdown", milliSUnitlFinished);
-                bi.putExtra("windowOpen", isOpen);
-                bi.putExtra("timerDone", false);
-                // Broadcast Timer
-                sendBroadcast(bi);
-                notifyNotification(NotificationTextBuilder());
+                // send Notification
+                cdObject.createNotification();
             }
 
             @Override
             public void onFinish() {
                 // Timer finished
                 // Restart timer with Window Open/Closed
-                bi.putExtra("timerDone", true);
+                cdObject.timerDone = true;
 
-                timerDone = true;
                 // Broadcast timer done
-                sendBroadcast(bi);
-                countDownTimer.cancel();
+                cdObject.createNotification();
 
                 // activate the alert
                 Uri alert = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
-                mp = MediaPlayer.create(getApplicationContext(), alert);
-                mp.start();
+                if(!mp.isPlaying()){
+                    mp = MediaPlayer.create(getApplicationContext(), alert);
+                    mp.start();
+                }
+
             }
         };
         // Start the timer
-        countDownTimer.start();
+        timer.start();
+
+        // return the timer so it isn´t null anymore
+        return timer;
     }
 
+    // Sends a Notification to the user
     private void notifyNotification(String text) {
+        // Create a new spannable string
+        SpannableString htmlText = new SpannableString(Html.fromHtml(text, Html.FROM_HTML_MODE_LEGACY));
 
         Intent notificationIntent = new Intent(this, CountdownActivity.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(this,
@@ -104,7 +132,8 @@ public class CountdownService extends Service {
 
         Notification notification = new NotificationCompat.Builder(this, CHANNEL_ID)
                 .setContentTitle("Konferenzassistent")
-                .setContentText(text)
+                .setContentText(htmlText)
+                .setStyle(new NotificationCompat.BigTextStyle().bigText(htmlText).setBigContentTitle("Konferenzassistent"))
                 .setSmallIcon(R.drawable.ic_android)
                 .setContentIntent(pendingIntent)
                 .build();
@@ -112,17 +141,18 @@ public class CountdownService extends Service {
         NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
         mNotificationManager.notify(1, notification);
-
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         // Get max time from intent
-        maxCountdownTime = intent.getLongExtra("maxCountdownTime", 0);
-        lueftungsCountdown = intent.getLongExtra("maxLueftungsTimer", 0);
+        maxLueftungsTime = intent.getLongExtra("maxCountdownTime", 0);
+        maxlueftenTime = intent.getLongExtra("maxLueftungsTimer", 0);
+        maxAbstandsTime = intent.getLongExtra("maxAbstandsTimer", 0);
 
-        // start timer with countdown timer
-        startTimer(maxCountdownTime);
+        // Start the timers
+        StartLueftungsTimer(maxLueftungsTime);
+        StartAbstandsTimer(maxAbstandsTime);
 
         Intent notificationIntent = new Intent(this, CountdownActivity.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(this,
@@ -156,47 +186,53 @@ public class CountdownService extends Service {
         @Override
         public void onReceive(Context context, Intent intent){
             // get if its a button Press
-            boolean userInteraction = intent.getBooleanExtra("userInteraction", true);
+            boolean lueftungsUserInteraction = intent.getBooleanExtra("lueftungsUserInteraction", false);
+            boolean abstandsUserInteraction = intent.getBooleanExtra("abstandsUserInteraction", false);
 
-            // Check if its a user Interaction or if the app got resumed
-            if(userInteraction){
+            // Check if its a user Interaction and what button got pressed or if the app got resumed
+            if(lueftungsUserInteraction){
                 // Stop the alert
-                mp.stop();
+                if(mp.isPlaying())mp.stop();
 
                   // If open set to closed and restart timer
                   if(isOpen){
-                      startTimer(maxCountdownTime);
+                      StartLueftungsTimer(maxLueftungsTime);
                       isOpen = false;
                   }
                   else{
-                      startTimer(lueftungsCountdown);
+                      StartLueftungsTimer(maxlueftenTime);
                       isOpen = true;
                   }
             }
+            else if(abstandsUserInteraction)
+            {
+                // Stop the alert
+                if(mp.isPlaying())mp.stop();
+
+                StartAbstandsTimer(maxAbstandsTime);
+            }
             // if app got resumed send timer data
             else{
-                bi.putExtra("countdown", currentTime);
+                // Data for Lueftung
+                bi.putExtra("lueftungsMilliS", lueftungsObject.currentTime);
                 bi.putExtra("windowOpen", isOpen);
-                bi.putExtra("timerDone", timerDone);
+                bi.putExtra("lueftungDone", lueftungsObject.timerDone);
+
+                // Data for Abstand
+                bi.putExtra("abstandsMilliS", abstandsObject.currentTime);
+                bi.putExtra("abstandDone", abstandsObject.timerDone);
 
                 sendBroadcast(bi);
             }
-
         }
     };
 
+    // Builds the Notification Text
     private String NotificationTextBuilder(){
         String notificationText = "";
 
-        // Convert to minutes and seconds
-        int minutes = (int) currentTime/60000;
-        int seconds = (int) currentTime%60000/1000;
-
-        notificationText = "Noch " + minutes;
-        notificationText += ":";
-        // Add a leading 0 to seconds
-        if(seconds < 10) notificationText += "0";
-        notificationText += seconds;
+        // add the lueftungstimer as text
+        notificationText += LongToStringForTime(lueftungsObject.currentTime);
 
         // Add the description
         if(isOpen) {
@@ -206,7 +242,76 @@ public class CountdownService extends Service {
             notificationText += " bis zum öffnen des Fensters!";
         }
 
+        // add a line break
+        notificationText += "<br>";
+
+        // add the abstands timer as text
+        notificationText += LongToStringForTime(abstandsObject.currentTime);
+        notificationText += " bis zum nächsten Abstands check!";
+
         return notificationText;
     }
 
+    // returns the Long time as a String in minutes and seconds
+    private String LongToStringForTime(long time){
+        String text = "";
+
+        // Convert to minutes and seconds Lueftung
+        int minutes = (int) time/60000;
+        int seconds = (int) time%60000/1000;
+
+        text += "Noch " + minutes;
+        text += ":";
+        // Add a leading 0 to seconds
+        if(seconds < 10) text += "0";
+        text += seconds;
+
+        return text;
+    }
+
+    // Starts the lueftungstimer
+    private void StartLueftungsTimer(long startingTimer){
+        // create a CountDownObject for lueftung
+        lueftungsObject  = new CountDownObject(){
+            @Override
+            public void createNotification(){
+                bi.putExtra("lueftungsMilliS", this.currentTime);
+                bi.putExtra("windowOpen", isOpen);
+                bi.putExtra("lueftungDone", this.timerDone);
+                // Broadcast Timer
+                sendBroadcast(bi);
+                notifyNotification(NotificationTextBuilder());
+            }
+        };
+
+        lueftungsObject.timerDone = false;
+        lueftungsObject.currentTime = maxLueftungsTime;
+
+        // start timer with countdown timer
+        lueftungsCountdown = startTimer(startingTimer, lueftungsCountdown, lueftungsObject);
+    }
+
+    // Starts the abstandstimer
+    private void StartAbstandsTimer(long startingTimer){
+        // create a CountDownObject for lueftung
+        abstandsObject  = new CountDownObject(){
+            @Override
+            public void createNotification(){
+                bi.putExtra("abstandsMilliS", this.currentTime);
+                bi.putExtra("abstandDone", this.timerDone);
+                // Broadcast Timer
+                sendBroadcast(bi);
+                notifyNotification(NotificationTextBuilder());
+            }
+        };
+
+        abstandsObject.timerDone = false;
+        abstandsObject.currentTime = maxLueftungsTime;
+
+        // start timer with countdown timer
+        abstandsCountdown = startTimer(startingTimer, abstandsCountdown, abstandsObject);
+    }
+
 }
+
+

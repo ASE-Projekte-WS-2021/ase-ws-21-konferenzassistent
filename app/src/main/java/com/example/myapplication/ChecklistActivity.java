@@ -12,6 +12,8 @@ public class ChecklistActivity extends AppCompatActivity {
     private long maxCountdownTime;
     private long maxLueftungsTime;
 
+    private long maxAbstandsTime;
+
     //checklist Checkbox
     private CheckBox cbTest;
 
@@ -24,6 +26,8 @@ public class ChecklistActivity extends AppCompatActivity {
         maxCountdownTime = getIntent().getLongExtra("maxCountdownTime", 0);
         maxLueftungsTime = getIntent().getLongExtra("maxLueftungsTimer", 0);
 
+        maxAbstandsTime = getIntent().getLongExtra("maxAbstandsTimer", 0);
+
         super.onCreate(savedInstanceState);
     }
 
@@ -34,6 +38,7 @@ public class ChecklistActivity extends AppCompatActivity {
           // send to next activity
           intent.putExtra("maxCountdownTime", maxCountdownTime);
           intent.putExtra("maxLueftungsTimer", maxLueftungsTime);
+          intent.putExtra("maxAbstandsTimer", maxAbstandsTime);
 
           // start next activity
           startActivity(intent);

@@ -19,11 +19,17 @@ public class CountdownActivity extends AppCompatActivity {
     private TextView countdownText;
     private Button startCountdownButton;
 
+    private Button abstandsButton;
+    private TextView abstandsView;
+
     public static final String COUNTDOWN_BUTTONS = "my.action.COUNTDOWN_BUTTONS";
 
     private long maxCountdownTime;
     private long maxLueftungsTime;
-    private boolean isFinished = false;
+    private long maxAbstandsTime;
+
+    private boolean lueftungIsFinished = false;
+    private boolean abstandIsFinished = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,9 +39,14 @@ public class CountdownActivity extends AppCompatActivity {
         countdownText = findViewById(R.id.countdownView);
         startCountdownButton = findViewById((R.id.StartButton));
 
+        abstandsButton = findViewById(R.id.abstandsButton);
+        abstandsView = findViewById(R.id.abstandsView);
+
         // get max Countdown from intent
         maxCountdownTime = getIntent().getLongExtra("maxCountdownTime", 0);
         maxLueftungsTime = getIntent().getLongExtra("maxLueftungsTimer", 0);
+
+        maxAbstandsTime = getIntent().getLongExtra("maxAbstandsTimer", 0);
 
         // start the Countdown service
         Intent countdownIntent = new Intent(this, CountdownService.class);
@@ -43,6 +54,8 @@ public class CountdownActivity extends AppCompatActivity {
         // add the countdown Time to the intent
         countdownIntent.putExtra("maxCountdownTime", maxCountdownTime);
         countdownIntent.putExtra("maxLueftungsTimer", maxLueftungsTime);
+
+        countdownIntent.putExtra("maxAbstandsTimer", maxAbstandsTime);
 
         // start the service
         startService(countdownIntent);
@@ -101,46 +114,51 @@ public class CountdownActivity extends AppCompatActivity {
     private void updateTime(Intent intent){
         if(intent.getExtras() != null){
 
-            // get the countdown and if window is open
-            long milliSUntilFinish = intent.getLongExtra("countdown", 0);
+            // get the countdowns and if window is open
+            long lueftungsMilliS = intent.getLongExtra("lueftungsMilliS", 0);
             boolean isOpen = intent.getBooleanExtra("windowOpen", false);
 
-            // Get if timer is finished
-            isFinished = intent.getBooleanExtra("timerDone", false);
+            long abstandsMilliS = intent.getLongExtra("abstandsMilliS", 0);
 
-            // Convert to minutes and seconds
-            int minutes = (int) milliSUntilFinish/60000;
-            int seconds = (int) milliSUntilFinish%60000/1000;
+            // Get if timer is finished
+            lueftungIsFinished = intent.getBooleanExtra("lueftungDone", false);
+            abstandIsFinished = intent.getBooleanExtra("abstandDone", false);
+
 
             // Build a string
-            String timeLeft;
+            String lueftungsTimeLeft = timeStringBuilder(lueftungsMilliS);
+            String abstandsTimeLeft = timeStringBuilder(abstandsMilliS);
 
-            timeLeft = "in " + minutes;
-            timeLeft += ":";
-            // Add a leading 0 to seconds
-            if(seconds < 10) timeLeft += "0";
-            timeLeft += seconds;
 
             // Add the description
             if(isOpen) {
-                timeLeft += " schließen!";
+                lueftungsTimeLeft += " schließen!";
                 startCountdownButton.setText("Fenster Offen.");
             }
             else{
-                timeLeft += " öffnen!";
+                lueftungsTimeLeft += " öffnen!";
                 startCountdownButton.setText("Fenster Geschlossen.");
             }
 
-            // Check if timer is done
-            if(isFinished){
+            // Check if Lüftungstimer is done
+            if(lueftungIsFinished){
                 startCountdownButton.setEnabled(true);
             }
             else{
                 startCountdownButton.setEnabled(false);
             }
 
+            // Check if Abstandstimer is done
+            if(abstandIsFinished){
+                abstandsButton.setEnabled(true);
+            }
+            else{
+                abstandsButton.setEnabled(false);
+            }
+
             // Set the countdown text
-            countdownText.setText(timeLeft);
+            countdownText.setText(lueftungsTimeLeft);
+            abstandsView.setText(abstandsTimeLeft);
         }
 
     }
@@ -148,7 +166,33 @@ public class CountdownActivity extends AppCompatActivity {
     public void startCountdown(View view){
         // Send a Broadcast to the Service if button is pressed
         Intent intent = new Intent(COUNTDOWN_BUTTONS);
+        intent.putExtra("lueftungsUserInteraction", true);
         sendBroadcast(intent);
+    }
+
+    public void startAbstand(View view){
+        // Send a Broadcast to the Service if button is pressed
+        Intent intent = new Intent(COUNTDOWN_BUTTONS);
+        intent.putExtra("abstandsUserInteraction", true);
+        sendBroadcast(intent);
+    }
+
+    // Builds a String to show the Timer
+    private String timeStringBuilder(long timer){
+        // Convert to minutes and seconds
+        int minutes = (int) timer/60000;
+        int seconds = (int) timer%60000/1000;
+
+        // Build a string
+        String timeLeft;
+
+        timeLeft = "in " + minutes;
+        timeLeft += ":";
+        // Add a leading 0 to seconds
+        if(seconds < 10) timeLeft += "0";
+        timeLeft += seconds;
+
+        return timeLeft;
     }
 
     /* finishMeeting method code by Kimmi Dhingra:
