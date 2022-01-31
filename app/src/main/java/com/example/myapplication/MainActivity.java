@@ -10,8 +10,12 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
+    // Input fields for "Lüftung
     private EditText luefungstime;
     private EditText lueftungsdauer;
+
+    // Input fields for "Abstand"
+    private EditText abstandstime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +25,8 @@ public class MainActivity extends AppCompatActivity {
         // Find inputs
         luefungstime = findViewById(R.id.lueftungstime);
         lueftungsdauer = findViewById(R.id.lueftungsdauer);
+
+        abstandstime = findViewById(R.id.abstandstime);
 ;    }
 
     public void openChecklistActivity(View view) {
@@ -30,19 +36,27 @@ public class MainActivity extends AppCompatActivity {
         long maxCountdownTime = 30000;
         long lueftungsCountdownTime = 15000;
 
+        long abstandsCountdownTime = 15000;
+
         // Get the Lueftungs timer from the EditText
         if(!luefungstime.getText().toString().isEmpty()){
             maxCountdownTime = Long.parseLong(luefungstime.getText().toString()) * 60000;
         }
 
-        // Get th Lueftungsdauer from the EditText
+        // Get the Lueftungsdauer from the EditText
         if(!lueftungsdauer.getText().toString().isEmpty()){
             lueftungsCountdownTime = Long.parseLong(lueftungsdauer.getText().toString()) * 60000;
+        }
+
+        // Get the Abstandstimer from the EditText
+        if(!abstandstime.getText().toString().isEmpty()){
+            abstandsCountdownTime = Long.parseLong(abstandstime.getText().toString()) * 60000;
         }
 
         // Send them as intent to the next Activity
         intent.putExtra("maxCountdownTime", maxCountdownTime);
         intent.putExtra("maxLueftungsTimer", lueftungsCountdownTime);
+        intent.putExtra("maxAbstandsTimer", abstandsCountdownTime);
 
         // Start next Activity
         startActivity(intent);
