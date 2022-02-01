@@ -54,8 +54,9 @@
 
     <Button
         android:id="@+id/button2"
-        android:layout_width="398dp"
+        android:layout_width="412dp"
         android:layout_height="45dp"
+        android:background="@color/purple_500"
         android:onClick="finishMeeting"
         android:text="END MEETING"
         app:layout_constraintBottom_toBottomOf="parent"

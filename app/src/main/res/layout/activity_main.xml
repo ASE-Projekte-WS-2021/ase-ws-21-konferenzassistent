@@ -8,8 +8,9 @@
 
     <Button
         android:id="@+id/startButton"
-        android:layout_width="398dp"
-        android:layout_height="45dp"
+        android:layout_width="415dp"
+        android:layout_height="44dp"
+        android:background="@color/purple_500"
         android:onClick="openChecklistActivity"
         android:text="START"
         app:layout_constraintBottom_toBottomOf="parent"
