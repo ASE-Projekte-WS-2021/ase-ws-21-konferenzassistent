@@ -20,6 +20,9 @@ public class ChecklistActivity extends AppCompatActivity {
     //start Meeting Button
     private Button startMeetingButton;
 
+    private boolean lueftungsSwitchStatus;
+    private boolean abstandsSwitchStatus;
+
     private int checkedItems;
 
     @Override
@@ -36,6 +39,9 @@ public class ChecklistActivity extends AppCompatActivity {
 
         maxAbstandsTime = getIntent().getLongExtra("maxAbstandsTimer", 0);
 
+        lueftungsSwitchStatus = getIntent().getBooleanExtra("lueftungsSwitchStatus", false);
+        abstandsSwitchStatus = getIntent().getBooleanExtra("abstandsSwitchStatus", false);
+
         super.onCreate(savedInstanceState);
     }
 
@@ -47,6 +53,9 @@ public class ChecklistActivity extends AppCompatActivity {
           intent.putExtra("maxCountdownTime", maxCountdownTime);
           intent.putExtra("maxLueftungsTimer", maxLueftungsTime);
           intent.putExtra("maxAbstandsTimer", maxAbstandsTime);
+
+        intent.putExtra("lueftungsSwitchStatus", lueftungsSwitchStatus);
+        intent.putExtra("abstandsSwitchStatus", abstandsSwitchStatus);
 
           // start next activity
           startActivity(intent);

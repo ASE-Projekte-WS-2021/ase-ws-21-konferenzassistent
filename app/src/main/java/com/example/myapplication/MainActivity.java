@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Switch;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
@@ -17,6 +18,10 @@ public class MainActivity extends AppCompatActivity {
     // Input fields for "Abstand"
     private EditText abstandstime;
 
+    // Switches to deactivate Timers
+    private Switch lueftungsSwitch;
+    private Switch abstandsSwitch;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,6 +32,9 @@ public class MainActivity extends AppCompatActivity {
         lueftungsdauer = findViewById(R.id.lueftungsdauer);
 
         abstandstime = findViewById(R.id.abstandstime);
+
+        lueftungsSwitch = findViewById(R.id.switchLueften);
+        abstandsSwitch = findViewById(R.id.switchAbstand);
 ;    }
 
     public void openChecklistActivity(View view) {
@@ -57,6 +65,10 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra("maxCountdownTime", maxCountdownTime);
         intent.putExtra("maxLueftungsTimer", lueftungsCountdownTime);
         intent.putExtra("maxAbstandsTimer", abstandsCountdownTime);
+
+        // Send the switch status to the next Activity
+        intent.putExtra("lueftungsSwitchStatus", lueftungsSwitch.isChecked());
+        intent.putExtra("abstandsSwitchStatus", abstandsSwitch.isChecked());
 
         // Start next Activity
         startActivity(intent);

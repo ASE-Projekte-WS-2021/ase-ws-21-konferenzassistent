@@ -6,51 +6,99 @@
     android:layout_height="match_parent"
     tools:context=".CountdownActivity">
 
-    <Button
-        android:id="@+id/abstandsButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="36dp"
-        android:onClick="startAbstand"
-        android:text="Abstand Überprüfen"
-        app:layout_constraintBottom_toTopOf="@+id/countdownView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent" />
+    <ProgressBar
+        android:id="@+id/lueftungsProgressBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_centerInParent="true"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="48dp"
+        android:indeterminate="false"
+        android:max="100"
+        android:padding="5dp"
+        android:progress="100"
+        android:progressDrawable="@drawable/drawable_circle"
+        android:rotation="-90"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dividerBar" />
 
     <Button
         android:id="@+id/StartButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="216dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="100dp"
+        android:background="@drawable/ic_baseline_replay_24"
+        android:minWidth="24dp"
+        android:minHeight="24dp"
         android:onClick="startCountdown"
-        android:text="Fenster offen"
-        app:layout_constraintBottom_toTopOf="@+id/button2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.156"
+        app:layout_constraintStart_toEndOf="@+id/lueftungsProgressBar"
+        app:layout_constraintTop_toBottomOf="@+id/dividerBar" />
+
+    <Button
+        android:id="@+id/abstandsButton"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="108dp"
+        android:background="@drawable/ic_baseline_replay_24"
+        android:minWidth="24dp"
+        android:minHeight="24dp"
+        android:onClick="startAbstand"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.015"
+        app:layout_constraintStart_toEndOf="@+id/abstandsProgressBar"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/abstandsView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text=""
-        app:layout_constraintBottom_toTopOf="@+id/abstandsButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintBottom_toBottomOf="@+id/abstandsProgressBar"
+        app:layout_constraintEnd_toEndOf="@+id/abstandsProgressBar"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="@+id/abstandsProgressBar"
+        app:layout_constraintTop_toTopOf="@+id/abstandsProgressBar"
+        app:layout_constraintVertical_bias="0.506" />
+
+    <ProgressBar
+        android:id="@+id/abstandsProgressBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_centerInParent="true"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="24dp"
+        android:indeterminate="false"
+        android:max="100"
+        android:padding="5dp"
+        android:progress="100"
+        android:progressDrawable="@drawable/drawable_circle"
+        android:rotation="-90"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.911" />
+        app:layout_constraintTop_toBottomOf="@+id/textView_lüften" />
+
+    <View
+        android:id="@+id/dividerBar"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="24dp"
+        android:background="@android:color/darker_gray"
+        app:layout_constraintTop_toBottomOf="@+id/abstandsButton"
+        tools:layout_editor_absoluteX="6dp" />
 
     <TextView
         android:id="@+id/countdownView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
         android:text=""
-        app:layout_constraintBottom_toTopOf="@+id/StartButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintBottom_toBottomOf="@+id/lueftungsProgressBar"
+        app:layout_constraintEnd_toEndOf="@+id/lueftungsProgressBar"
+        app:layout_constraintStart_toStartOf="@+id/lueftungsProgressBar"
+        app:layout_constraintTop_toTopOf="@+id/lueftungsProgressBar" />
 
     <Button
         android:id="@+id/button2"
@@ -75,5 +123,16 @@
         app:layout_constraintHorizontal_bias="0.025"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/lueftungsInfoText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="35dp"
+        android:layout_marginBottom="12dp"
+        android:textSize="20sp"
+        android:text="Fenster Offen"
+        app:layout_constraintBottom_toTopOf="@+id/StartButton"
+        app:layout_constraintStart_toEndOf="@+id/lueftungsProgressBar" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
