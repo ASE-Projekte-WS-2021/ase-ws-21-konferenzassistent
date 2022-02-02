@@ -23,19 +23,24 @@ public class CountdownActivity extends AppCompatActivity {
     private Button abstandsButton;
     private TextView abstandsView;
 
+    private TextView lueftungsInfoText;
+
     public static final String COUNTDOWN_BUTTONS = "my.action.COUNTDOWN_BUTTONS";
 
     private long maxCountdownTime;
     private long maxLueftungsTime;
     private long maxAbstandsTime;
 
+
+    private boolean isOpen;
     private boolean lueftungIsFinished = false;
     private boolean abstandIsFinished = false;
 
     private boolean lueftungsSwitchStatus = false;
     private boolean abstandsSwitchStatus = false;
 
-    private ProgressBar progressBarCircle;
+    private ProgressBar abstandsProgressBar;
+    private ProgressBar lueftungsProgressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,8 +52,11 @@ public class CountdownActivity extends AppCompatActivity {
 
         abstandsButton = findViewById(R.id.abstandsButton);
         abstandsView = findViewById(R.id.abstandsView);
-        progressBarCircle = findViewById(R.id.progressBarCircle);
 
+        lueftungsInfoText = findViewById(R.id.lueftungsInfoText);
+
+        abstandsProgressBar = findViewById(R.id.abstandsProgressBar);
+        lueftungsProgressBar = findViewById(R.id.lueftungsProgressBar);
 
         // get max Countdown from intent
         maxCountdownTime = getIntent().getLongExtra("maxCountdownTime", 0);
@@ -59,17 +67,6 @@ public class CountdownActivity extends AppCompatActivity {
         lueftungsSwitchStatus = getIntent().getBooleanExtra("lueftungsSwitchStatus", false);
         abstandsSwitchStatus = getIntent().getBooleanExtra("abstandsSwitchStatus", false);
 
-        // If "lueftung" is turned off hide the button and timer
-        if(!lueftungsSwitchStatus){
-            countdownText.setVisibility(View.GONE);
-            startCountdownButton.setVisibility(View.GONE);
-        }
-
-        // If "abstand" is turned off hide the button and timer
-        if(!abstandsSwitchStatus) {
-            abstandsView.setVisibility(View.GONE);
-            abstandsButton.setVisibility(View.GONE);
-        }
 
         // start the Countdown service
         Intent countdownIntent = new Intent(this, CountdownService.class);
@@ -85,7 +82,30 @@ public class CountdownActivity extends AppCompatActivity {
         // start the service
         startService(countdownIntent);
 
-        setProgressBarValues(maxAbstandsTime);
+        // Setting the initial and Max values of the Progress bar
+        setProgressBarValues(maxAbstandsTime, abstandsProgressBar);
+        setProgressBarValues(maxCountdownTime, lueftungsProgressBar);
+
+        hideUI();
+    }
+
+
+    // Sets the Ui to Invisible if not used
+    private void hideUI(){
+        // If "Lüftung" is disabled
+        if(!lueftungsSwitchStatus){
+            countdownText.setVisibility(View.GONE);
+            startCountdownButton.setVisibility(View.GONE);
+            lueftungsProgressBar.setVisibility(View.GONE);
+        }
+        // If "Abstand" is disabled
+        if(!abstandsSwitchStatus){
+            abstandsView.setVisibility(View.GONE);
+            abstandsButton.setVisibility(View.GONE);
+            abstandsProgressBar.setVisibility(View.GONE);
+            findViewById(R.id.dividerBar).setVisibility(View.GONE);
+        }
+
     }
 
 
@@ -97,10 +117,12 @@ public class CountdownActivity extends AppCompatActivity {
         }
     };
 
-    private void setProgressBarValues(long startTime) {
+    // Sets the initial values of the Progress Bar
+    private void setProgressBarValues(long startTime, ProgressBar progressBar) {
 
-        progressBarCircle.setMax((int) startTime / 1000);
-        progressBarCircle.setProgress((int) startTime / 1000);
+        progressBar.setMax((int) startTime / 1000);
+        progressBar.setProgress((int) startTime / 1000);
+
     }
 
     @Override
@@ -150,7 +172,7 @@ public class CountdownActivity extends AppCompatActivity {
 
             // get the countdowns and if window is open
             long lueftungsMilliS = intent.getLongExtra("lueftungsMilliS", 0);
-            boolean isOpen = intent.getBooleanExtra("windowOpen", false);
+            isOpen = intent.getBooleanExtra("windowOpen", false);
 
             long abstandsMilliS = intent.getLongExtra("abstandsMilliS", 0);
 
@@ -166,16 +188,18 @@ public class CountdownActivity extends AppCompatActivity {
 
             // Add the description
             if(isOpen) {
-                lueftungsTimeLeft += " schließen!";
-                startCountdownButton.setText("Fenster Offen.");
+               // lueftungsTimeLeft += " schließen!";
+                lueftungsInfoText.setText("Fenster Offen.");
             }
             else{
-                lueftungsTimeLeft += " öffnen!";
-                startCountdownButton.setText("Fenster Geschlossen.");
+                //lueftungsTimeLeft += " öffnen!";
+                lueftungsInfoText.setText("Fenster Geschlossen.");
             }
 
             // Check if Lüftungstimer is done
             if(lueftungIsFinished){
+                // Recalibrate the Progress Bar cause timer changes every iteration
+
                 startCountdownButton.setEnabled(true);
             }
             else{
@@ -194,7 +218,8 @@ public class CountdownActivity extends AppCompatActivity {
             countdownText.setText(lueftungsTimeLeft);
             abstandsView.setText(abstandsTimeLeft);
 
-            progressBarCircle.setProgress((int) (abstandsMilliS / 1000));
+            abstandsProgressBar.setProgress((int) (abstandsMilliS / 1000));
+            lueftungsProgressBar.setProgress((int) (lueftungsMilliS / 1000));
 
         }
 
@@ -205,6 +230,10 @@ public class CountdownActivity extends AppCompatActivity {
         Intent intent = new Intent(COUNTDOWN_BUTTONS);
         intent.putExtra("lueftungsUserInteraction", true);
         sendBroadcast(intent);
+
+        // Check if Window is open
+       if(!isOpen)lueftungsProgressBar.setMax((int) maxLueftungsTime/1000);
+       else lueftungsProgressBar.setMax((int) maxCountdownTime/1000);
     }
 
     public void startAbstand(View view){
@@ -223,7 +252,7 @@ public class CountdownActivity extends AppCompatActivity {
         // Build a string
         String timeLeft;
 
-        timeLeft = "in " + minutes;
+        timeLeft = "" + minutes;
         timeLeft += ":";
         // Add a leading 0 to seconds
         if(seconds < 10) timeLeft += "0";
