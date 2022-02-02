@@ -31,6 +31,9 @@ public class CountdownActivity extends AppCompatActivity {
     private boolean lueftungIsFinished = false;
     private boolean abstandIsFinished = false;
 
+    private boolean lueftungsSwitchStatus = false;
+    private boolean abstandsSwitchStatus = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +51,21 @@ public class CountdownActivity extends AppCompatActivity {
 
         maxAbstandsTime = getIntent().getLongExtra("maxAbstandsTimer", 0);
 
+        lueftungsSwitchStatus = getIntent().getBooleanExtra("lueftungsSwitchStatus", false);
+        abstandsSwitchStatus = getIntent().getBooleanExtra("abstandsSwitchStatus", false);
+
+        // If "lueftung" is turned off hide the button and timer
+        if(!lueftungsSwitchStatus){
+            countdownText.setVisibility(View.GONE);
+            startCountdownButton.setVisibility(View.GONE);
+        }
+
+        // If "abstand" is turned off hide the button and timer
+        if(!abstandsSwitchStatus) {
+            abstandsView.setVisibility(View.GONE);
+            abstandsButton.setVisibility(View.GONE);
+        }
+
         // start the Countdown service
         Intent countdownIntent = new Intent(this, CountdownService.class);
 
@@ -57,6 +75,8 @@ public class CountdownActivity extends AppCompatActivity {
 
         countdownIntent.putExtra("maxAbstandsTimer", maxAbstandsTime);
 
+        countdownIntent.putExtra("lueftungsSwitchStatus", lueftungsSwitchStatus);
+        countdownIntent.putExtra("abstandsSwitchStatus", abstandsSwitchStatus);
         // start the service
         startService(countdownIntent);
     }

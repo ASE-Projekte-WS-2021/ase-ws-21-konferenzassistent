@@ -51,6 +51,10 @@ public class CountdownService extends Service {
     // Media Player for audible alerts
     private MediaPlayer mp = new MediaPlayer();
 
+    // switches in Main Activity
+    private Boolean lueftungsSwitchStatus;
+    private Boolean abstandsSwitchStatus;
+
     // Object to create a Countdown
     static class CountDownObject{
         long currentTime;
@@ -71,8 +75,8 @@ public class CountdownService extends Service {
     @Override
     public void onDestroy() {
         // Stop the timer
-        lueftungsCountdown.cancel();
-        abstandsCountdown.cancel();
+        if(lueftungsSwitchStatus)lueftungsCountdown.cancel();
+        if(abstandsSwitchStatus)abstandsCountdown.cancel();
 
         if(mp.isPlaying()){
             mp.stop();
@@ -150,9 +154,13 @@ public class CountdownService extends Service {
         maxlueftenTime = intent.getLongExtra("maxLueftungsTimer", 0);
         maxAbstandsTime = intent.getLongExtra("maxAbstandsTimer", 0);
 
+
+        lueftungsSwitchStatus = intent.getBooleanExtra("lueftungsSwitchStatus", false);
+        abstandsSwitchStatus = intent.getBooleanExtra("abstandsSwitchStatus", false);
+
         // Start the timers
-        StartLueftungsTimer(maxLueftungsTime);
-        StartAbstandsTimer(maxAbstandsTime);
+        if(lueftungsSwitchStatus)StartLueftungsTimer(maxLueftungsTime);
+        if(abstandsSwitchStatus)StartAbstandsTimer(maxAbstandsTime);
 
         Intent notificationIntent = new Intent(this, CountdownActivity.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(this,
@@ -231,23 +239,32 @@ public class CountdownService extends Service {
     private String NotificationTextBuilder(){
         String notificationText = "";
 
-        // add the lueftungstimer as text
-        notificationText += LongToStringForTime(lueftungsObject.currentTime);
+        // If "Lueftung" is activated
+        if(lueftungsSwitchStatus){
+            // add the lueftungstimer as text
+            notificationText += LongToStringForTime(lueftungsObject.currentTime);
 
-        // Add the description
-        if(isOpen) {
-            notificationText += " bis zum schließen des Fensters!";
+            // Add the description
+            if(isOpen) {
+                notificationText += " bis zum schließen des Fensters!";
+            }
+            else{
+                notificationText += " bis zum öffnen des Fensters!";
+            }
         }
-        else{
-            notificationText += " bis zum öffnen des Fensters!";
+        // IF "Abstand" is activated
+        if(abstandsSwitchStatus){
+            // add a line break
+            notificationText += "<br>";
+
+            // add the abstands timer as text
+            notificationText += LongToStringForTime(abstandsObject.currentTime);
+            notificationText += " bis zum nächsten Abstands check!";
         }
 
-        // add a line break
-        notificationText += "<br>";
-
-        // add the abstands timer as text
-        notificationText += LongToStringForTime(abstandsObject.currentTime);
-        notificationText += " bis zum nächsten Abstands check!";
+        if(!abstandsSwitchStatus && !lueftungsSwitchStatus){
+            notificationText += "Keine Timer ausgewählt!";
+        }
 
         return notificationText;
     }
