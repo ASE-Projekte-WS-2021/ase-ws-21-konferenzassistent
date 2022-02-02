@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 public class CountdownActivity extends AppCompatActivity {
@@ -34,6 +35,8 @@ public class CountdownActivity extends AppCompatActivity {
     private boolean lueftungsSwitchStatus = false;
     private boolean abstandsSwitchStatus = false;
 
+    private ProgressBar progressBarCircle;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +47,8 @@ public class CountdownActivity extends AppCompatActivity {
 
         abstandsButton = findViewById(R.id.abstandsButton);
         abstandsView = findViewById(R.id.abstandsView);
+        progressBarCircle = findViewById(R.id.progressBarCircle);
+
 
         // get max Countdown from intent
         maxCountdownTime = getIntent().getLongExtra("maxCountdownTime", 0);
@@ -79,7 +84,10 @@ public class CountdownActivity extends AppCompatActivity {
         countdownIntent.putExtra("abstandsSwitchStatus", abstandsSwitchStatus);
         // start the service
         startService(countdownIntent);
+
+        setProgressBarValues(maxAbstandsTime);
     }
+
 
     private BroadcastReceiver br = new BroadcastReceiver() {
         @Override
@@ -88,6 +96,12 @@ public class CountdownActivity extends AppCompatActivity {
             updateTime(intent);
         }
     };
+
+    private void setProgressBarValues(long startTime) {
+
+        progressBarCircle.setMax((int) startTime / 1000);
+        progressBarCircle.setProgress((int) startTime / 1000);
+    }
 
     @Override
     protected void onResume() {
@@ -179,6 +193,9 @@ public class CountdownActivity extends AppCompatActivity {
             // Set the countdown text
             countdownText.setText(lueftungsTimeLeft);
             abstandsView.setText(abstandsTimeLeft);
+
+            progressBarCircle.setProgress((int) (abstandsMilliS / 1000));
+
         }
 
     }
