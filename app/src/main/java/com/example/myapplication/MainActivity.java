@@ -1,26 +1,42 @@
 package com.example.myapplication;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Switch;
+
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.android.material.switchmaterial.SwitchMaterial;
+
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
-    // Input fields for "Lüftung
-    private EditText luefungstime;
-    private EditText lueftungsdauer;
-
-    // Input fields for "Abstand"
-    private EditText abstandstime;
-
     // Switches to deactivate Timers
-    private Switch lueftungsSwitch;
-    private Switch abstandsSwitch;
+    private SwitchMaterial lueftungsSwitch;
+    private SwitchMaterial abstandsSwitch;
+
+    private Button startMeetingButton;
+
+    private LinearLayout lueftungstimeClickable;
+    private LinearLayout lueftungsdauerClickable;
+    private LinearLayout abstandstimeClickable;
+
+    private TextView lueftungstimeClickableText;
+    private TextView lueftungsdauerClickableText;
+    private TextView abstandstimeClickableText;
+
+    // Countdown timers in minutes
+    private long maxCountdownTime = 15;
+    private long lueftungsCountdownTime = 5;
+    private long abstandsCountdownTime = 15;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,38 +44,59 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // Find inputs
-        luefungstime = findViewById(R.id.lueftungstime);
-        lueftungsdauer = findViewById(R.id.lueftungsdauer);
-
-        abstandstime = findViewById(R.id.abstandstime);
-
         lueftungsSwitch = findViewById(R.id.switchLueften);
         abstandsSwitch = findViewById(R.id.switchAbstand);
+
+        lueftungstimeClickable = findViewById(R.id.lueftungstime_clickable);
+        lueftungstimeClickableText = findViewById(R.id.lueftungstime_clickable_text);
+        setupListener(lueftungstimeClickable,lueftungstimeClickableText);
+
+        lueftungsdauerClickable = findViewById(R.id.lueftungsdauer_clickable);
+        lueftungsdauerClickableText = findViewById(R.id.lueftungsdauer_clickable_text);
+        setupListener(lueftungsdauerClickable,lueftungsdauerClickableText);
+
+        abstandstimeClickable = findViewById(R.id.abstandstime_clickable);
+        abstandstimeClickableText = findViewById(R.id.abstandstime_clickable_text);
+        setupListener(abstandstimeClickable,abstandstimeClickableText);
+
+        startMeetingButton = findViewById(R.id.startButton);
+
 ;    }
+
+    private void setupListener(LinearLayout clickable, TextView textToChange) {
+
+        EditText minuteInput = new EditText(MainActivity.this);
+        minuteInput.setInputType(InputType.TYPE_CLASS_NUMBER);
+        MaterialAlertDialogBuilder minuteInputDialog =
+                new MaterialAlertDialogBuilder(MainActivity.this)
+                        .setTitle("Dauer")
+                        .setMessage("Gib die Dauer des Timers in Minuten ein.")
+                        .setView(minuteInput)
+                        .setPositiveButton("OK", (dialogInterface, i) -> {
+                            int clickableId = clickable.getId();
+                            long parsedLong = Long.parseLong(minuteInput.getText().toString());
+                            if (clickableId == lueftungstimeClickable.getId()) {
+                                maxCountdownTime = parsedLong;
+                            } else if (clickableId == lueftungsdauerClickable.getId()) {
+                                lueftungsCountdownTime = parsedLong;
+                            } else {
+                                abstandsCountdownTime = parsedLong;
+                            }
+                            textToChange.setText(maxCountdownTime + " Minuten");
+                        })
+                        .setNegativeButton("CANCEL", (dialogInterface, i) -> {
+                            // do nothing
+                        });
+        final AlertDialog a = minuteInputDialog.create();
+        clickable.setOnClickListener(view -> a.show());
+    }
 
     public void openChecklistActivity(View view) {
         Intent intent = new Intent(this, ChecklistActivity.class);
 
-        // Default values for Testing purposes
-        long maxCountdownTime = 30000;
-        long lueftungsCountdownTime = 15000;
-
-        long abstandsCountdownTime = 15000;
-
-        // Get the Lueftungs timer from the EditText
-        if(!luefungstime.getText().toString().isEmpty()){
-            maxCountdownTime = Long.parseLong(luefungstime.getText().toString()) * 60000;
-        }
-
-        // Get the Lueftungsdauer from the EditText
-        if(!lueftungsdauer.getText().toString().isEmpty()){
-            lueftungsCountdownTime = Long.parseLong(lueftungsdauer.getText().toString()) * 60000;
-        }
-
-        // Get the Abstandstimer from the EditText
-        if(!abstandstime.getText().toString().isEmpty()){
-            abstandsCountdownTime = Long.parseLong(abstandstime.getText().toString()) * 60000;
-        }
+        maxCountdownTime = maxCountdownTime * 60000;
+        lueftungsCountdownTime = lueftungsCountdownTime * 60000;
+        abstandsCountdownTime = abstandsCountdownTime * 60000;
 
         // Send them as intent to the next Activity
         intent.putExtra("maxCountdownTime", maxCountdownTime);
@@ -72,6 +109,25 @@ public class MainActivity extends AppCompatActivity {
 
         // Start next Activity
         startActivity(intent);
+    }
+
+    public void checkRadio(View view) {
+        int checkedItems = 0;
+        if(lueftungsSwitch.isChecked()){
+            checkedItems++;
+        }
+        if(abstandsSwitch.isChecked()){
+            checkedItems++;
+        }
+        if(checkedItems != 0){//change startMeetingButton color
+            startMeetingButton.setEnabled(true);
+            startMeetingButton.setBackgroundColor(getResources().getColor(R.color.purple_500));
+            startMeetingButton.setTextColor(getResources().getColor(R.color.white));
+        }else{
+            startMeetingButton.setEnabled(false);
+            startMeetingButton.setBackgroundColor(getResources().getColor(R.color.gray));
+            startMeetingButton.setTextColor(getResources().getColor(R.color.dark_gray));
+        }
     }
 }
 
