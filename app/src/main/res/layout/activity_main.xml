@@ -10,11 +10,10 @@
         android:id="@+id/textView_Einstellung"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="8dp"
         android:text="Meetingseinstellungen"
         android:textSize="34sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.025"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -139,14 +138,14 @@
 
     <Button
         android:id="@+id/startButton"
-        android:layout_width="415dp"
-        android:layout_height="44dp"
+        android:layout_width="match_parent"
+        android:layout_height="160dp"
+        android:textSize="34sp"
         android:background="@color/purple_500"
         android:onClick="openChecklistActivity"
         android:text="START"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.461"
         app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

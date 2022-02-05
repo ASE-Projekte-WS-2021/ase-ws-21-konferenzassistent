@@ -21,15 +21,15 @@
 
     <Button
         android:id="@+id/startMeetingButton"
-        android:layout_width="415dp"
-        android:layout_height="45dp"
+        android:layout_width="match_parent"
+        android:layout_height="160dp"
+        android:textSize="34sp"
         android:background="@color/purple_500"
         android:onClick="openCountdownActivity"
         android:text="START MEETING"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.461"
         app:layout_constraintStart_toStartOf="parent" />
 
     <CheckBox

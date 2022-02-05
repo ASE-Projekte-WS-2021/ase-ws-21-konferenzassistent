@@ -102,14 +102,14 @@
 
     <Button
         android:id="@+id/button2"
-        android:layout_width="412dp"
-        android:layout_height="45dp"
+        android:layout_width="match_parent"
+        android:layout_height="160dp"
+        android:textSize="20sp"
         android:background="@color/purple_500"
         android:onClick="finishMeeting"
-        android:text="END MEETING"
+        android:text="Beende Meeting"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.461"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
