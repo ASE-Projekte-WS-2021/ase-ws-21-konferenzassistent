@@ -47,6 +47,8 @@ public class CountdownActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_countdown);
 
+        getSupportActionBar().setTitle("Meeting");
+
         countdownText = findViewById(R.id.countdownView);
         startCountdownButton = findViewById((R.id.StartButton));
 

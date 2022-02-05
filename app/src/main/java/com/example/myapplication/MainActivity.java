@@ -43,6 +43,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        getSupportActionBar().setTitle("Meetingseinstellungen");
+
         // Find inputs
         lueftungsSwitch = findViewById(R.id.switchLueften);
         abstandsSwitch = findViewById(R.id.switchAbstand);
