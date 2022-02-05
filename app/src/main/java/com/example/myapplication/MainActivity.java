@@ -96,10 +96,6 @@ public class MainActivity extends AppCompatActivity {
     public void openChecklistActivity(View view) {
         Intent intent = new Intent(this, ChecklistActivity.class);
 
-        maxCountdownTime = maxCountdownTime * 60000;
-        lueftungsCountdownTime = lueftungsCountdownTime * 60000;
-        abstandsCountdownTime = abstandsCountdownTime * 60000;
-
         // Send them as intent to the next Activity
         intent.putExtra("maxCountdownTime", maxCountdownTime);
         intent.putExtra("maxLueftungsTimer", lueftungsCountdownTime);

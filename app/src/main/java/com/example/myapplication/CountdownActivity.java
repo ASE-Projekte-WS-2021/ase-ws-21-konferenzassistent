@@ -61,10 +61,10 @@ public class CountdownActivity extends AppCompatActivity {
         lueftungsProgressBar = findViewById(R.id.lueftungsProgressBar);
 
         // get max Countdown from intent
-        maxCountdownTime = getIntent().getLongExtra("maxCountdownTime", 0);
-        maxLueftungsTime = getIntent().getLongExtra("maxLueftungsTimer", 0);
+        maxCountdownTime = getIntent().getLongExtra("maxCountdownTime", 0) * 60000;
+        maxLueftungsTime = getIntent().getLongExtra("maxLueftungsTimer", 0) * 60000;
 
-        maxAbstandsTime = getIntent().getLongExtra("maxAbstandsTimer", 0);
+        maxAbstandsTime = getIntent().getLongExtra("maxAbstandsTimer", 0) * 60000;
 
         lueftungsSwitchStatus = getIntent().getBooleanExtra("lueftungsSwitchStatus", false);
         abstandsSwitchStatus = getIntent().getBooleanExtra("abstandsSwitchStatus", false);

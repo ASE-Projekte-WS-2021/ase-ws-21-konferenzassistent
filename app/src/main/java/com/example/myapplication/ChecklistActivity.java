@@ -1,10 +1,13 @@
 package com.example.myapplication;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -29,7 +32,11 @@ public class ChecklistActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         setContentView(R.layout.activity_checklist);
 
-        getSupportActionBar().setTitle("Pre-Meeting-Checkliste");
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            getSupportActionBar().setTitle("Pre-Meeting-Checkliste");
+            actionBar.setDisplayHomeAsUpEnabled(true); // sets up back button in action bar
+        }
 
         cb1 = (CheckBox) findViewById(R.id.checkBox); cb2 = (CheckBox) findViewById(R.id.checkBox2);
         cb3 = (CheckBox) findViewById(R.id.checkBox3); cb4 = (CheckBox) findViewById(R.id.checkBox4);
@@ -93,5 +100,15 @@ public class ChecklistActivity extends AppCompatActivity {
         startMeetingButton.setEnabled(false);
         startMeetingButton.setBackgroundColor(getResources().getColor(R.color.gray));
         startMeetingButton.setTextColor(getResources().getColor(R.color.dark_gray));
+    }
+
+
+    // adds functionality to back button in action bar
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            this.finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
