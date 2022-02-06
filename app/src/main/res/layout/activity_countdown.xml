@@ -27,30 +27,28 @@
         android:id="@+id/StartButton"
         android:layout_width="48dp"
         android:layout_height="48dp"
-        android:layout_marginTop="100dp"
         android:background="@drawable/ic_baseline_replay_24"
         android:minWidth="24dp"
         android:minHeight="24dp"
         android:onClick="startCountdown"
+        app:layout_constraintBottom_toBottomOf="@+id/lueftungsProgressBar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.156"
-        app:layout_constraintStart_toEndOf="@+id/lueftungsProgressBar"
-        app:layout_constraintTop_toBottomOf="@+id/dividerBar" />
+        app:layout_constraintStart_toEndOf="@+id/lueftungsProgressBar" />
 
     <Button
         android:id="@+id/abstandsButton"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="108dp"
         android:background="@drawable/ic_baseline_replay_24"
         android:minWidth="24dp"
         android:minHeight="24dp"
         android:onClick="startAbstand"
+        app:layout_constraintBottom_toBottomOf="@+id/abstandsProgressBar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.015"
-        app:layout_constraintStart_toEndOf="@+id/abstandsProgressBar"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toEndOf="@+id/abstandsProgressBar" />
 
     <TextView
         android:id="@+id/abstandsView"
@@ -79,7 +77,7 @@
         android:progressDrawable="@drawable/drawable_circle"
         android:rotation="-90"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_lüften" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <View
         android:id="@+id/dividerBar"
@@ -102,27 +100,15 @@
 
     <Button
         android:id="@+id/button2"
-        android:layout_width="412dp"
-        android:layout_height="45dp"
+        android:layout_width="match_parent"
+        android:layout_height="160dp"
+        android:textSize="20sp"
         android:background="@color/purple_500"
         android:onClick="finishMeeting"
-        android:text="END MEETING"
+        android:text="Beende Meeting"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.461"
         app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/textView_lüften"
-        android:layout_width="175dp"
-        android:layout_height="31dp"
-        android:layout_marginTop="4dp"
-        android:text="Lüften"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.025"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/lueftungsInfoText"
@@ -130,9 +116,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="35dp"
         android:layout_marginBottom="12dp"
-        android:textSize="20sp"
         android:text="Fenster Offen"
+        android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/StartButton"
-        app:layout_constraintStart_toEndOf="@+id/lueftungsProgressBar" />
+        app:layout_constraintStart_toEndOf="@+id/lueftungsProgressBar"
+        app:layout_constraintTop_toTopOf="@+id/lueftungsProgressBar" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,14 +1,12 @@
 package com.example.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.IntentCompat;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
@@ -47,6 +45,8 @@ public class CountdownActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_countdown);
 
+        getSupportActionBar().setTitle("Meeting");
+
         countdownText = findViewById(R.id.countdownView);
         startCountdownButton = findViewById((R.id.StartButton));
 
@@ -59,10 +59,10 @@ public class CountdownActivity extends AppCompatActivity {
         lueftungsProgressBar = findViewById(R.id.lueftungsProgressBar);
 
         // get max Countdown from intent
-        maxCountdownTime = getIntent().getLongExtra("maxCountdownTime", 0);
-        maxLueftungsTime = getIntent().getLongExtra("maxLueftungsTimer", 0);
+        maxCountdownTime = getIntent().getLongExtra("maxCountdownTime", 0) * 60000;
+        maxLueftungsTime = getIntent().getLongExtra("maxLueftungsTimer", 0) * 60000;
 
-        maxAbstandsTime = getIntent().getLongExtra("maxAbstandsTimer", 0);
+        maxAbstandsTime = getIntent().getLongExtra("maxAbstandsTimer", 0) * 60000;
 
         lueftungsSwitchStatus = getIntent().getBooleanExtra("lueftungsSwitchStatus", false);
         abstandsSwitchStatus = getIntent().getBooleanExtra("abstandsSwitchStatus", false);
@@ -97,6 +97,7 @@ public class CountdownActivity extends AppCompatActivity {
             countdownText.setVisibility(View.GONE);
             startCountdownButton.setVisibility(View.GONE);
             lueftungsProgressBar.setVisibility(View.GONE);
+            lueftungsInfoText.setVisibility(View.GONE);
         }
         // If "Abstand" is disabled
         if(!abstandsSwitchStatus){
