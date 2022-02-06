@@ -7,12 +7,27 @@
     tools:context=".MainActivity">
 
     <TextView
+        android:id="@+id/introText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
+        android:padding="16dp"
+        android:text="Herzlich willkommen im Corona-Konferenz-Assistent. Wir unterstützen dich dabei, deine Meetings in Zeiten von Corona so sicher wie möglich abzuhalten. Klicke auf den “+”-Button, um ein Meeting zu starten!"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.4"
+        app:useCompatPadding="true" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/new_meeting_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="openSettingsActivity"
+        app:backgroundTint="@color/purple_500"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@android:drawable/ic_input_add"
+        app:tint="@android:color/white"
+        app:useCompatPadding="true" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
