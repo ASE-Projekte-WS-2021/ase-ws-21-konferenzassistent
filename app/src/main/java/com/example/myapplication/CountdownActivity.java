@@ -97,6 +97,7 @@ public class CountdownActivity extends AppCompatActivity {
             countdownText.setVisibility(View.GONE);
             startCountdownButton.setVisibility(View.GONE);
             lueftungsProgressBar.setVisibility(View.GONE);
+            lueftungsInfoText.setVisibility(View.GONE);
         }
         // If "Abstand" is disabled
         if(!abstandsSwitchStatus){
