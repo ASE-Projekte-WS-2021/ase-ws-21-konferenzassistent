@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputFilter;
 import android.text.InputType;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,6 +19,7 @@ import com.google.android.material.switchmaterial.SwitchMaterial;
 
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class SettingsActivity extends AppCompatActivity {
 
@@ -79,6 +81,7 @@ public class SettingsActivity extends AppCompatActivity {
 
         EditText minuteInput = new EditText(SettingsActivity.this);
         minuteInput.setInputType(InputType.TYPE_CLASS_NUMBER);
+        minuteInput.setFilters(new InputFilter[]{ new InputFilter.LengthFilter(3)}); // setzt maximale Inputlänge auf 3 Charaktere/Ziffern
         MaterialAlertDialogBuilder minuteInputDialog =
                 new MaterialAlertDialogBuilder(SettingsActivity.this)
                         .setTitle("Dauer")
@@ -86,15 +89,21 @@ public class SettingsActivity extends AppCompatActivity {
                         .setView(minuteInput)
                         .setPositiveButton("OK", (dialogInterface, i) -> {
                             int clickableId = clickable.getId();
-                            long parsedLong = Long.parseLong(minuteInput.getText().toString());
-                            if (clickableId == lueftungstimeClickable.getId()) {
-                                maxCountdownTime = parsedLong;
-                            } else if (clickableId == lueftungsdauerClickable.getId()) {
-                                lueftungsCountdownTime = parsedLong;
-                            } else {
-                                abstandsCountdownTime = parsedLong;
+                            try {
+                                long parsedLong = Long.parseLong(minuteInput.getText().toString());
+                                if (clickableId == lueftungstimeClickable.getId()) {
+                                    maxCountdownTime = parsedLong;
+                                    textToChange.setText(maxCountdownTime + " Minuten");
+                                } else if (clickableId == lueftungsdauerClickable.getId()) {
+                                    lueftungsCountdownTime = parsedLong;
+                                    textToChange.setText(lueftungsCountdownTime + " Minuten");
+                                } else {
+                                    abstandsCountdownTime = parsedLong;
+                                    textToChange.setText(abstandsCountdownTime + " Minuten");
+                                }
+                            } catch (NumberFormatException nfe) {
+                                Toast.makeText(getApplicationContext(), "Bitte eine Zahl eingeben", Toast.LENGTH_SHORT).show();
                             }
-                            textToChange.setText(maxCountdownTime + " Minuten");
                         })
                         .setNegativeButton("CANCEL", (dialogInterface, i) -> {
                             // do nothing
