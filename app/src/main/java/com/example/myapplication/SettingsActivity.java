@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputFilter;
 import android.text.InputType;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -144,6 +145,24 @@ public class SettingsActivity extends AppCompatActivity {
             startMeetingButton.setEnabled(false);
             startMeetingButton.setBackgroundColor(getResources().getColor(R.color.gray));
             startMeetingButton.setTextColor(getResources().getColor(R.color.dark_gray));
+        }
+        switch (view.getId()) {
+            case R.id.switchLueften:
+                if (lueftungsSwitch.isChecked()) {
+                    findViewById(R.id.lueftungstime_clickable).setVisibility(View.VISIBLE);
+                    findViewById(R.id.lueftungsdauer_clickable).setVisibility(View.VISIBLE);
+                } else {
+                    findViewById(R.id.lueftungstime_clickable).setVisibility(View.GONE);
+                    findViewById(R.id.lueftungsdauer_clickable).setVisibility(View.GONE);
+                }
+                break;
+            case R.id.switchAbstand:
+                if (abstandsSwitch.isChecked()) {
+                    findViewById(R.id.abstandstime_clickable).setVisibility(View.VISIBLE);
+                } else {
+                    findViewById(R.id.abstandstime_clickable).setVisibility(View.GONE);
+                }
+                break;
         }
     }
 
