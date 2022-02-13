@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Corona-Konferenz-Assistent</string>
+    <string name="settings_info_text">Regelmäßiges Lüften und Einhalten eines Sicherheitsabstandes reduzieren erwiesenermaßen die Verbreitung des Coronavirus. Lege hier fest, ob und in welchen zeitlichen Abständen du ans Lüften und Abstandskontrollen erinnert werden möchtest.</string>
 </resources>
