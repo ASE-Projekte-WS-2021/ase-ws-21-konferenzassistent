@@ -9,6 +9,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputFilter;
 import android.text.InputType;
+import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -145,13 +147,45 @@ public class SettingsActivity extends AppCompatActivity {
             startMeetingButton.setBackgroundColor(getResources().getColor(R.color.gray));
             startMeetingButton.setTextColor(getResources().getColor(R.color.dark_gray));
         }
+        switch (view.getId()) {
+            case R.id.switchLueften:
+                if (lueftungsSwitch.isChecked()) {
+                    findViewById(R.id.lueftungstime_clickable).setVisibility(View.VISIBLE);
+                    findViewById(R.id.lueftungsdauer_clickable).setVisibility(View.VISIBLE);
+                } else {
+                    findViewById(R.id.lueftungstime_clickable).setVisibility(View.GONE);
+                    findViewById(R.id.lueftungsdauer_clickable).setVisibility(View.GONE);
+                }
+                break;
+            case R.id.switchAbstand:
+                if (abstandsSwitch.isChecked()) {
+                    findViewById(R.id.abstandstime_clickable).setVisibility(View.VISIBLE);
+                } else {
+                    findViewById(R.id.abstandstime_clickable).setVisibility(View.GONE);
+                }
+                break;
+        }
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        getMenuInflater().inflate(R.menu.settings_menu,menu);
+        return super.onCreateOptionsMenu(menu);
     }
 
     // adds functionality to back button in action bar
+    @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (item.getItemId() == android.R.id.home) {
+        int itemId = item.getItemId();
+        if (itemId == android.R.id.home) {
             this.finish();
             return true;
+        } else if (itemId == R.id.info_button) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this)
+                    .setMessage(R.string.settings_info_text)
+                    .setPositiveButton("OK",(dialogInterface, i) -> {
+                        // do nothing
+                    });
+            builder.create().show();
         }
         return super.onOptionsItemSelected(item);
     }
