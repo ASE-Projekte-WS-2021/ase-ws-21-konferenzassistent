@@ -189,11 +189,11 @@ public class CountdownActivity extends AppCompatActivity {
             // Add the description
             if(isOpen) {
                // lueftungsTimeLeft += " schließen!";
-                lueftungsInfoText.setText("Fenster Offen.");
+                lueftungsInfoText.setText("Fenster sollte geöffnet sein!");
             }
             else{
                 //lueftungsTimeLeft += " öffnen!";
-                lueftungsInfoText.setText("Fenster Geschlossen.");
+                lueftungsInfoText.setText("Fenster sollte geschlossen sein!");
             }
 
             // Check if Lüftungstimer is done

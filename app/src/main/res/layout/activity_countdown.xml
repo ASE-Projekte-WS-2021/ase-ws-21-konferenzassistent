@@ -7,6 +7,7 @@
     android:background="@color/corona_white"
     tools:context=".CountdownActivity">
 
+
     <Button
         android:id="@+id/button2"
         android:layout_width="418dp"
@@ -17,29 +18,92 @@
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.571"
         app:layout_constraintStart_toStartOf="parent" />
-
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/materialCardView2"
         android:layout_width="372dp"
-        android:layout_height="223dp"
-        android:layout_marginStart="16dp"
+        android:layout_height="169dp"
         android:layout_marginBottom="32dp"
         app:cardBackgroundColor="@color/white"
         app:cardCornerRadius="4dp"
         app:layout_constraintBottom_toTopOf="@+id/materialCardView5"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0">
+        app:layout_constraintVertical_bias="0.985">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
             android:padding="2dp"
             android:text="Meeting Informationen"
-            android:layout_gravity="center_horizontal"
             android:textAppearance="?attr/textAppearanceHeadline6" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="left"
+            android:layout_marginTop="40dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Luftqualität:"
+                android:textAppearance="?attr/textAppearanceHeadline6" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:text="Schlecht"
+                android:textAppearance="?attr/textAppearanceHeadline6"
+                android:textColor="#FF0000" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="left"
+            android:layout_marginTop="70dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Teilnehmer:"
+                android:textAppearance="?attr/textAppearanceHeadline6" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:text="15"
+                android:textAppearance="?attr/textAppearanceHeadline6" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="left"
+            android:layout_marginTop="100dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ort:"
+                android:textAppearance="?attr/textAppearanceHeadline6" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="105dp"
+                android:text="Uni Regensburg"
+                android:textAppearance="?attr/textAppearanceHeadline6" />
+        </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
 
     <com.google.android.material.card.MaterialCardView
@@ -61,7 +125,7 @@
             android:layout_gravity="center"
             android:text="Fenster sollte offen sein!"
             android:textColor="@color/corona_white"
-            android:textSize="30dp"
+            android:textSize="25dp"
             tools:layout_editor_absoluteX="222dp"
             tools:layout_editor_absoluteY="462dp" />
     </com.google.android.material.card.MaterialCardView>
@@ -122,14 +186,26 @@
 
 
             <Button
+                android:id="@+id/PauseButton"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_gravity="right"
+                android:background="@drawable/ic_baseline_pause_24"
+                android:minWidth="24dp"
+                android:minHeight="24dp"
+                android:layout_marginBottom="-48dp"
+                android:layout_marginRight="15dp"
+                android:onClick="startCountdown" />
+
+            <Button
                 android:id="@+id/StartButton"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:layout_gravity="center"
+                android:layout_gravity="left"
                 android:background="@drawable/ic_baseline_replay_24"
                 android:minWidth="24dp"
                 android:minHeight="24dp"
-
+                android:layout_marginLeft="15dp"
                 android:onClick="startCountdown" />
 
         </LinearLayout>
@@ -194,16 +270,27 @@
             android:padding="2dp">
 
             <Button
+                android:id="@+id/abstandsPauseButton"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_gravity="right"
+                android:background="@drawable/ic_baseline_pause_24"
+                android:minWidth="24dp"
+                android:minHeight="24dp"
+                android:layout_marginBottom="-48dp"
+                android:layout_marginRight="15dp"
+                android:onClick="startAbstand" />
+
+            <Button
                 android:id="@+id/abstandsButton"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:layout_gravity="center"
+                android:layout_gravity="left"
                 android:background="@drawable/ic_baseline_replay_24"
                 android:minWidth="24dp"
                 android:minHeight="24dp"
-                android:onClick="startAbstand"
-                tools:layout_editor_absoluteX="232dp"
-                tools:layout_editor_absoluteY="533dp" />
+                android:layout_marginLeft="15dp"
+                android:onClick="startCountdown" />
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
 
