@@ -4,122 +4,207 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/corona_white"
     tools:context=".CountdownActivity">
-
-    <ProgressBar
-        android:id="@+id/lueftungsProgressBar"
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_centerInParent="true"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="48dp"
-        android:indeterminate="false"
-        android:max="100"
-        android:padding="5dp"
-        android:progress="100"
-        android:progressDrawable="@drawable/drawable_circle"
-        android:rotation="-90"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dividerBar" />
-
-    <Button
-        android:id="@+id/StartButton"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:background="@drawable/ic_baseline_replay_24"
-        android:minWidth="24dp"
-        android:minHeight="24dp"
-        android:onClick="startCountdown"
-        app:layout_constraintBottom_toBottomOf="@+id/lueftungsProgressBar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.156"
-        app:layout_constraintStart_toEndOf="@+id/lueftungsProgressBar" />
-
-    <Button
-        android:id="@+id/abstandsButton"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="32dp"
-        android:background="@drawable/ic_baseline_replay_24"
-        android:minWidth="24dp"
-        android:minHeight="24dp"
-        android:onClick="startAbstand"
-        app:layout_constraintBottom_toBottomOf="@+id/abstandsProgressBar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.015"
-        app:layout_constraintStart_toEndOf="@+id/abstandsProgressBar" />
-
-    <TextView
-        android:id="@+id/abstandsView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text=""
-        app:layout_constraintBottom_toBottomOf="@+id/abstandsProgressBar"
-        app:layout_constraintEnd_toEndOf="@+id/abstandsProgressBar"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="@+id/abstandsProgressBar"
-        app:layout_constraintTop_toTopOf="@+id/abstandsProgressBar"
-        app:layout_constraintVertical_bias="0.506" />
-
-    <ProgressBar
-        android:id="@+id/abstandsProgressBar"
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_centerInParent="true"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="24dp"
-        android:indeterminate="false"
-        android:max="100"
-        android:padding="5dp"
-        android:progress="100"
-        android:progressDrawable="@drawable/drawable_circle"
-        android:rotation="-90"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <View
-        android:id="@+id/dividerBar"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="24dp"
-        android:background="@android:color/darker_gray"
-        app:layout_constraintTop_toBottomOf="@+id/abstandsButton"
-        tools:layout_editor_absoluteX="6dp" />
-
-    <TextView
-        android:id="@+id/countdownView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text=""
-        app:layout_constraintBottom_toBottomOf="@+id/lueftungsProgressBar"
-        app:layout_constraintEnd_toEndOf="@+id/lueftungsProgressBar"
-        app:layout_constraintStart_toStartOf="@+id/lueftungsProgressBar"
-        app:layout_constraintTop_toTopOf="@+id/lueftungsProgressBar" />
 
     <Button
         android:id="@+id/button2"
-        android:layout_width="match_parent"
-        android:layout_height="160dp"
-        android:textSize="20sp"
-        android:background="@color/purple_500"
+        android:layout_width="418dp"
+        android:layout_height="70dp"
+        android:background="@color/corona_blue"
         android:onClick="finishMeeting"
         android:text="Beende Meeting"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <TextView
-        android:id="@+id/lueftungsInfoText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="35dp"
-        android:layout_marginBottom="12dp"
-        android:text="Fenster Offen"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/StartButton"
-        app:layout_constraintStart_toEndOf="@+id/lueftungsProgressBar"
-        app:layout_constraintTop_toTopOf="@+id/lueftungsProgressBar" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/materialCardView2"
+        android:layout_width="372dp"
+        android:layout_height="223dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="32dp"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="4dp"
+        app:layout_constraintBottom_toTopOf="@+id/materialCardView5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="2dp"
+            android:text="Meeting Informationen"
+            android:layout_gravity="center_horizontal"
+            android:textAppearance="?attr/textAppearanceHeadline6" />
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/materialCardView5"
+        android:layout_width="376dp"
+        android:layout_height="98dp"
+        android:layout_marginBottom="32dp"
+        app:cardBackgroundColor="@color/corona_blue"
+        app:cardCornerRadius="4dp"
+        app:layout_constraintBottom_toTopOf="@+id/materialCardView4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.542"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:id="@+id/lueftungsInfoText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Fenster sollte offen sein!"
+            android:textColor="@color/corona_white"
+            android:textSize="30dp"
+            tools:layout_editor_absoluteX="222dp"
+            tools:layout_editor_absoluteY="462dp" />
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/materialCardView3"
+        android:layout_width="171dp"
+        android:layout_height="215dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="28dp"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="4dp"
+        app:layout_constraintBottom_toTopOf="@+id/button2"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:padding="2dp"
+            android:text="Lüftungstimer"
+            android:textAppearance="?attr/textAppearanceHeadline6" />
+
+        <ProgressBar
+            android:id="@+id/lueftungsProgressBar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            android:indeterminate="false"
+            android:max="100"
+            android:padding="5dp"
+            android:progress="100"
+            android:progressDrawable="@drawable/drawable_circle"
+            android:rotation="-90" />
+
+        <TextView
+            android:id="@+id/countdownView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text=""
+            app:layout_constraintBottom_toBottomOf="@+id/lueftungsProgressBar"
+            app:layout_constraintEnd_toEndOf="@+id/lueftungsProgressBar"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="@+id/lueftungsProgressBar"
+            app:layout_constraintTop_toTopOf="@+id/lueftungsProgressBar"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:background="@color/white"
+            android:orientation="vertical"
+            android:padding="2dp">
+
+
+            <Button
+                android:id="@+id/StartButton"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_gravity="center"
+                android:background="@drawable/ic_baseline_replay_24"
+                android:minWidth="24dp"
+                android:minHeight="24dp"
+
+                android:onClick="startCountdown" />
+
+        </LinearLayout>
+
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/materialCardView4"
+        android:layout_width="171dp"
+        android:layout_height="215dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="28dp"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="4dp"
+        app:layout_constraintBottom_toTopOf="@+id/button2"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_height="wrap_content"
+            android:padding="2dp"
+            android:text="Abstandstimer"
+            android:textAppearance="?attr/textAppearanceHeadline6" />
+
+        <ProgressBar
+            android:id="@+id/abstandsProgressBar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            android:indeterminate="false"
+            android:max="100"
+            android:padding="5dp"
+            android:progress="100"
+            android:progressDrawable="@drawable/drawable_circle"
+            android:rotation="-90"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/abstandsView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text=""
+            app:layout_constraintBottom_toBottomOf="@+id/abstandsProgressBar"
+            app:layout_constraintEnd_toEndOf="@+id/abstandsProgressBar"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="@+id/abstandsProgressBar"
+            app:layout_constraintTop_toTopOf="@+id/abstandsProgressBar"
+            app:layout_constraintVertical_bias="0.506" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:background="@color/white"
+            android:orientation="vertical"
+            android:padding="2dp">
+
+            <Button
+                android:id="@+id/abstandsButton"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_gravity="center"
+                android:background="@drawable/ic_baseline_replay_24"
+                android:minWidth="24dp"
+                android:minHeight="24dp"
+                android:onClick="startAbstand"
+                tools:layout_editor_absoluteX="232dp"
+                tools:layout_editor_absoluteY="533dp" />
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -104,7 +104,6 @@ public class CountdownActivity extends AppCompatActivity {
             abstandsView.setVisibility(View.GONE);
             abstandsButton.setVisibility(View.GONE);
             abstandsProgressBar.setVisibility(View.GONE);
-            findViewById(R.id.dividerBar).setVisibility(View.GONE);
         }
 
     }
