@@ -5,11 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.text.InputType;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -22,6 +22,12 @@ public class LocationParticipantsActivity extends AppCompatActivity implements A
 
     private Spinner locationsSpinner;
     private List<String> spinnerArray;
+    private ArrayAdapter<String> spinnerArrayAdapter;
+
+    private ListView participantsView;
+    private List<String> participantsArray;
+    private ArrayAdapter<String> participantsArrayAdapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,17 +40,60 @@ public class LocationParticipantsActivity extends AppCompatActivity implements A
         spinnerArray.add("<leer>");
         spinnerArray.add("<Neuen Ort hinzufügen...>");
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,spinnerArray);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerArrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,spinnerArray);
+        spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-        locationsSpinner.setAdapter(adapter);
+        locationsSpinner.setAdapter(spinnerArrayAdapter);
         locationsSpinner.setOnItemSelectedListener(this);
+
+        participantsView = findViewById(R.id.participants_view);
+
+        participantsArray = new ArrayList<String>();
+        participantsArray.add("Max Mustermann");
+        participantsArray.add("TEST test");
+        participantsArray.add("Definitv kein Roboter");
+
+        participantsArrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,participantsArray);
+        participantsView.setAdapter(participantsArrayAdapter);
+        UIUtils.setListViewHeightBasedOnItems(participantsView);
+
+        participantsView.setOnItemLongClickListener((parent, view, position, id) -> {
+            participantsArray.remove(position);
+            participantsArrayAdapter.notifyDataSetChanged();
+            UIUtils.setListViewHeightBasedOnItems(participantsView);
+            return false;
+        });
+    }
+
+    public void onAddParticipantButtonClicked(View view) {
+        EditText participantInput = new EditText(LocationParticipantsActivity.this);
+        participantInput.setInputType(InputType.TYPE_CLASS_TEXT);
+        MaterialAlertDialogBuilder participantInputDialog =
+                new MaterialAlertDialogBuilder(LocationParticipantsActivity.this)
+                        .setTitle("Teilnehmer")
+                        .setMessage("Gib einen Namen für den neu anzulegenden Teilnehmer ein.")
+                        .setView(participantInput)
+                        .setPositiveButton("OK",((dialogInterface, i) -> {
+                            String s = participantInput.getText().toString();
+                            if (s.length() == 0) {
+                                Toast.makeText(getApplicationContext(),"Bitte einen Namen eingeben.", Toast.LENGTH_SHORT).show();
+                            } else {
+                                participantsArray.add(s);
+                                participantsArrayAdapter.notifyDataSetChanged();
+                                UIUtils.setListViewHeightBasedOnItems(participantsView);
+                            }
+                        }))
+                        .setNegativeButton("CANCEL",((dialogInterface, i) -> {
+                            // do nothing
+                        }));
+        final AlertDialog a = participantInputDialog.create();
+        a.show();
     }
 
     public void onTestButtonClicked(View view) {
-        spinnerArray.remove(spinnerArray.size() - 1);
-        spinnerArray.add("test");
-        spinnerArray.add("<Neuen Ort hinzufügen...>");
+        participantsArray.add("Max Mustermann");
+        participantsArrayAdapter.notifyDataSetChanged();
+        UIUtils.setListViewHeightBasedOnItems(participantsView);
     }
 
     @Override
