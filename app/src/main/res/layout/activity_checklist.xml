@@ -21,7 +21,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:onClick="checkItem"
-            android:text="Abstände gewährleistet" />
+            android:text="Desinfektionsmittel bereit" />
 
         <CheckBox
             android:id="@+id/checkBox2"
@@ -29,7 +29,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:onClick="checkItem"
-            android:text="Desinfektionsmittel bereit" />
+            android:text="3G-Regelung o.ä. geprüft" />
 
         <CheckBox
             android:id="@+id/checkBox3"
@@ -45,7 +45,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:onClick="checkItem"
-            android:text="3G-Regelung o.ä. geprüft" />
+            android:text="Abstände gewährleistet" />
     </LinearLayout>
 
     <Button
