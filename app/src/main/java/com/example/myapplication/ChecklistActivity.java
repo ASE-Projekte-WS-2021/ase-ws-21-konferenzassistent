@@ -21,7 +21,7 @@ public class ChecklistActivity extends AppCompatActivity {
     //checklist Checkbox
     private CheckBox cb1, cb2, cb3, cb4;
     //start Meeting Button
-    private Button startMeetingButton;
+    private Button startMeetingButton, disableMeetingButton;
 
     private boolean lueftungsSwitchStatus;
     private boolean abstandsSwitchStatus;
@@ -42,7 +42,8 @@ public class ChecklistActivity extends AppCompatActivity {
         cb3 = (CheckBox) findViewById(R.id.checkBox3); cb4 = (CheckBox) findViewById(R.id.checkBox4);
 
         startMeetingButton = findViewById(R.id.startMeetingButton);
-        enableButton();
+        disableMeetingButton = findViewById(R.id.disable_startMeetingButton);
+        hideStartMeetingButton();
         // Get extras
         maxCountdownTime = getIntent().getLongExtra("maxCountdownTime", 0);
         maxLueftungsTime = getIntent().getLongExtra("maxLueftungsTimer", 0);
@@ -88,18 +89,16 @@ public class ChecklistActivity extends AppCompatActivity {
             checkedItems++;
         }
         if(checkedItems == 4){//change startMeetingButton color
-            startMeetingButton.setEnabled(true);
-            startMeetingButton.setBackgroundColor(getResources().getColor(R.color.purple_500));
-            startMeetingButton.setTextColor(getResources().getColor(R.color.white));
+            startMeetingButton.setVisibility(View.VISIBLE);
+            disableMeetingButton.setVisibility(View.GONE);
         }else{
-            enableButton();
+            hideStartMeetingButton();
         }
     }
 
-    private void enableButton(){
-        startMeetingButton.setEnabled(false);
-        startMeetingButton.setBackgroundColor(getResources().getColor(R.color.gray));
-        startMeetingButton.setTextColor(getResources().getColor(R.color.dark_gray));
+    private void hideStartMeetingButton(){
+        startMeetingButton.setVisibility(View.GONE);
+        disableMeetingButton.setVisibility(View.VISIBLE);
     }
 
 

@@ -18,14 +18,19 @@
         app:layout_constraintVertical_bias="0.4"
         app:useCompatPadding="true" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
+    <Button
         android:id="@+id/new_meeting_button"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="140px"
+        android:background="@drawable/btn_default"
         android:onClick="openSettingsActivity"
-        app:backgroundTint="@color/purple_500"
+        android:text="+"
+        android:textSize="20sp"
+        android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@android:drawable/ic_input_add"
         app:tint="@android:color/white"
         app:useCompatPadding="true" />

@@ -100,15 +100,16 @@
 
     <Button
         android:id="@+id/button2"
-        android:layout_width="match_parent"
-        android:layout_height="160dp"
+        android:layout_width="wrap_content"
+        android:layout_height="140px"
         android:textSize="20sp"
-        android:background="@color/purple_500"
+        android:background="@drawable/btn_default"
         android:onClick="finishMeeting"
         android:text="Beende Meeting"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginBottom="16dp"/>
 
     <TextView
         android:id="@+id/lueftungsInfoText"
