@@ -13,39 +13,53 @@
         android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@+id/startMeetingButton"
         app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="1dp">
+        app:layout_constraintVertical_bias="0.0"
+        tools:layout_editor_absoluteX="0dp">
 
-        <CheckBox
-            android:id="@+id/checkBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
+        <Switch
             android:onClick="checkItem"
-            android:text="Desinfektionsmittel bereit" />
-
-        <CheckBox
-            android:id="@+id/checkBox2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
+            android:id="@+id/switch1"
+            android:layout_width="346dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginBottom="4dp"
+            android:text="Desinfektionsmittel bereit"
+            android:textSize="15dp"/>
+        <Switch
             android:onClick="checkItem"
-            android:text="3G-Regelung o.ä. geprüft" />
-
-        <CheckBox
-            android:id="@+id/checkBox3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
+            android:id="@+id/switch2"
+            android:layout_width="346dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginBottom="4dp"
+            android:text="3G-Regelung o.ä. geprüft"
+            android:textSize="15dp"/>
+        <Switch
             android:onClick="checkItem"
-            android:text="Masken / Plexiglas geprüft" />
-
-        <CheckBox
-            android:id="@+id/checkBox4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
+            android:id="@+id/switch3"
+            android:layout_width="346dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginBottom="4dp"
+            android:text="Masken / Plexiglas geprüft"
+            android:textSize="15dp"/>
+        <Switch
             android:onClick="checkItem"
-            android:text="Abstände gewährleistet" />
+            android:id="@+id/switch4"
+            android:layout_width="346dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginBottom="4dp"
+            android:text="Abstände gewährleistet"
+            android:textSize="15dp"/>
     </LinearLayout>
 
     <Button
