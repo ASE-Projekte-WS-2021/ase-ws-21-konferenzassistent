@@ -195,7 +195,7 @@
                 android:minHeight="24dp"
                 android:layout_marginBottom="-48dp"
                 android:layout_marginRight="15dp"
-                android:onClick="startCountdown" />
+                android:onClick="pauseCountdown" />
 
             <Button
                 android:id="@+id/StartButton"
@@ -279,7 +279,7 @@
                 android:minHeight="24dp"
                 android:layout_marginBottom="-48dp"
                 android:layout_marginRight="15dp"
-                android:onClick="startAbstand" />
+                android:onClick="pauseAbstand" />
 
             <Button
                 android:id="@+id/abstandsButton"
@@ -290,7 +290,7 @@
                 android:minWidth="24dp"
                 android:minHeight="24dp"
                 android:layout_marginLeft="15dp"
-                android:onClick="startCountdown" />
+                android:onClick="startAbstand" />
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
 
