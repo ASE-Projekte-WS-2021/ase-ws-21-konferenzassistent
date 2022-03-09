@@ -90,12 +90,6 @@ public class LocationParticipantsActivity extends AppCompatActivity implements A
         a.show();
     }
 
-    public void onTestButtonClicked(View view) {
-        participantsArray.add("Max Mustermann");
-        participantsArrayAdapter.notifyDataSetChanged();
-        UIUtils.setListViewHeightBasedOnItems(participantsView);
-    }
-
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         // if last entry selected
