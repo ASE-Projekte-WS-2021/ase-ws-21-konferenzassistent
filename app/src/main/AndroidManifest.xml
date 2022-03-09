@@ -15,7 +15,12 @@
         android:theme="@style/Theme.MyApplication">
         <activity
             android:name=".LocationParticipantsActivity"
-            android:exported="false" />
+            android:exported="false">
+        </activity>
+        <activity
+            android:android:name=".PastMeetingInfoActivity"
+            android:exported="false">
+        </activity>
         <activity
             android:name=".MainActivity"
             android:exported="true">

@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.Switch;
 
 public class ChecklistActivity extends AppCompatActivity {
     private long maxCountdownTime;
@@ -19,9 +20,9 @@ public class ChecklistActivity extends AppCompatActivity {
     private long maxAbstandsTime;
 
     //checklist Checkbox
-    private CheckBox cb1, cb2, cb3, cb4;
+    private Switch sw1, sw2, sw3, sw4;
     //start Meeting Button
-    private Button startMeetingButton;
+    private Button startMeetingButton, disableMeetingButton;
 
     private boolean lueftungsSwitchStatus;
     private boolean abstandsSwitchStatus;
@@ -38,11 +39,12 @@ public class ChecklistActivity extends AppCompatActivity {
             actionBar.setDisplayHomeAsUpEnabled(true); // sets up back button in action bar
         }
 
-        cb1 = (CheckBox) findViewById(R.id.checkBox); cb2 = (CheckBox) findViewById(R.id.checkBox2);
-        cb3 = (CheckBox) findViewById(R.id.checkBox3); cb4 = (CheckBox) findViewById(R.id.checkBox4);
+        sw1 = (Switch) findViewById(R.id.switch1); sw2 = (Switch) findViewById(R.id.switch2);
+        sw3 = (Switch) findViewById(R.id.switch3); sw4 = (Switch) findViewById(R.id.switch4);
 
         startMeetingButton = findViewById(R.id.startMeetingButton);
-        enableButton();
+        disableMeetingButton = findViewById(R.id.disable_startMeetingButton);
+        hideStartMeetingButton();
         // Get extras
         maxCountdownTime = getIntent().getLongExtra("maxCountdownTime", 0);
         maxLueftungsTime = getIntent().getLongExtra("maxLueftungsTimer", 0);
@@ -75,31 +77,29 @@ public class ChecklistActivity extends AppCompatActivity {
     //check checklist
     public void checkItem(View view){
         checkedItems = 0;
-        if(cb1.isChecked()){
+        if(sw1.isChecked()){
             checkedItems++;
         }
-        if(cb2.isChecked()){
+        if(sw2.isChecked()){
             checkedItems++;
         }
-        if(cb3.isChecked()){
+        if(sw3.isChecked()){
             checkedItems++;
         }
-        if(cb4.isChecked()){
+        if(sw4.isChecked()){
             checkedItems++;
         }
         if(checkedItems == 4){//change startMeetingButton color
-            startMeetingButton.setEnabled(true);
-            startMeetingButton.setBackgroundColor(getResources().getColor(R.color.purple_500));
-            startMeetingButton.setTextColor(getResources().getColor(R.color.white));
+            startMeetingButton.setVisibility(View.VISIBLE);
+            disableMeetingButton.setVisibility(View.GONE);
         }else{
-            enableButton();
+            hideStartMeetingButton();
         }
     }
 
-    private void enableButton(){
-        startMeetingButton.setEnabled(false);
-        startMeetingButton.setBackgroundColor(getResources().getColor(R.color.gray));
-        startMeetingButton.setTextColor(getResources().getColor(R.color.dark_gray));
+    private void hideStartMeetingButton(){
+        startMeetingButton.setVisibility(View.GONE);
+        disableMeetingButton.setVisibility(View.VISIBLE);
     }
 
 
