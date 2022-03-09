@@ -1,12 +1,14 @@
 package com.example.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.res.ResourcesCompat;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
@@ -21,6 +23,9 @@ public class CountdownActivity extends AppCompatActivity {
     private Button abstandsButton;
     private TextView abstandsView;
 
+    private Button abstandsPauseButton;
+    private Button countdownPauseButton;
+
     private TextView lueftungsInfoText;
 
     public static final String COUNTDOWN_BUTTONS = "my.action.COUNTDOWN_BUTTONS";
@@ -29,6 +34,8 @@ public class CountdownActivity extends AppCompatActivity {
     private long maxLueftungsTime;
     private long maxAbstandsTime;
 
+    private boolean countdownPaused = false;
+    private boolean abstandPaused = false;
 
     private boolean isOpen;
     private boolean lueftungIsFinished = false;
@@ -49,6 +56,9 @@ public class CountdownActivity extends AppCompatActivity {
 
         countdownText = findViewById(R.id.countdownView);
         startCountdownButton = findViewById((R.id.StartButton));
+
+        abstandsPauseButton = findViewById(R.id.abstandsPauseButton);
+        countdownPauseButton = findViewById(R.id.PauseButton);
 
         abstandsButton = findViewById(R.id.abstandsButton);
         abstandsView = findViewById(R.id.abstandsView);
@@ -104,7 +114,6 @@ public class CountdownActivity extends AppCompatActivity {
             abstandsView.setVisibility(View.GONE);
             abstandsButton.setVisibility(View.GONE);
             abstandsProgressBar.setVisibility(View.GONE);
-            findViewById(R.id.dividerBar).setVisibility(View.GONE);
         }
 
     }
@@ -190,11 +199,11 @@ public class CountdownActivity extends AppCompatActivity {
             // Add the description
             if(isOpen) {
                // lueftungsTimeLeft += " schließen!";
-                lueftungsInfoText.setText("Fenster Offen.");
+                lueftungsInfoText.setText("Fenster sollte geöffnet sein!");
             }
             else{
                 //lueftungsTimeLeft += " öffnen!";
-                lueftungsInfoText.setText("Fenster Geschlossen.");
+                lueftungsInfoText.setText("Fenster sollte geschlossen sein!");
             }
 
             // Check if Lüftungstimer is done
@@ -242,6 +251,36 @@ public class CountdownActivity extends AppCompatActivity {
         Intent intent = new Intent(COUNTDOWN_BUTTONS);
         intent.putExtra("abstandsUserInteraction", true);
         sendBroadcast(intent);
+    }
+
+    public void pauseCountdown(View view){
+        // Send a Broadcast to the Service if button is pressed
+        Intent intent = new Intent(COUNTDOWN_BUTTONS);
+        intent.putExtra("lueftungsPauseUserInteraction", true);
+        sendBroadcast(intent);
+        countdownPaused = !countdownPaused;
+
+        toggleIcon(countdownPauseButton, countdownPaused);
+    }
+
+    public void pauseAbstand(View view){
+        // Send a Broadcast to the Service if button is pressed
+        Intent intent = new Intent(COUNTDOWN_BUTTONS);
+        intent.putExtra("abstandsPauseUserInteraction", true);
+        sendBroadcast(intent);
+        abstandPaused = !abstandPaused;
+
+        toggleIcon(abstandsPauseButton, abstandPaused);
+    }
+
+    private void toggleIcon(Button button, Boolean isPaused){
+        if(isPaused)
+        {
+            button.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_baseline_play_arrow_24, null));
+        }
+        else{
+            button.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_baseline_pause_24, null));
+        }
     }
 
     // Builds a String to show the Timer
