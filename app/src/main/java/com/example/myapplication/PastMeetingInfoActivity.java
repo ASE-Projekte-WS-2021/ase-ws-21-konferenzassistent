@@ -1,14 +1,19 @@
 package com.example.myapplication;
 
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.widget.TextView;
 
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
 
 @SuppressLint("NewApi")
@@ -25,6 +30,8 @@ public class PastMeetingInfoActivity extends AppCompatActivity {
     private String location;
     private int windowInterval, windowTime, distanceInterval;
 
+    private ArrayList<String> participantList;
+
     private DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
 
 
@@ -36,7 +43,30 @@ public class PastMeetingInfoActivity extends AppCompatActivity {
         findTextViews();
         updateData();
         updateView();
+        setParticipantListAndAlert();
     }
+
+    private void setParticipantListAndAlert() {
+        participantList = new ArrayList<>();
+        participantList.add("test1");
+        participantList.add("test2");
+        participantList.add("test3");
+        participantList.add("test4");
+        participantList.add("test5");
+        String[] participantArray = new String[participantList.size()];
+        participantArray = participantList.toArray(participantArray);
+
+        MaterialAlertDialogBuilder materialAlertDialogBuilder = new MaterialAlertDialogBuilder(PastMeetingInfoActivity.this)
+                .setItems(participantArray, (dialogInterface, i) -> {
+                    // do nothing
+                })
+                .setPositiveButton("OK", ((dialogInterface, i) -> {
+                    // do nothing
+                }));
+        final AlertDialog a = materialAlertDialogBuilder.create();
+        findViewById(R.id.cardViewParticipants).setOnClickListener(view -> a.show());
+    }
+
     private void updateView() {
         tvMinutes.setText(minutes + " Minuten");
         tvStartTime.setText(dateTimeFormatter.format(startTime));
