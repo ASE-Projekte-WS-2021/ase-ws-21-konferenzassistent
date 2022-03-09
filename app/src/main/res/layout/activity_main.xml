@@ -35,19 +35,4 @@
         app:tint="@android:color/white"
         app:useCompatPadding="true" />
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="159dp"
-        android:layout_marginTop="68dp"
-        android:layout_marginEnd="158dp"
-        android:layout_marginBottom="193dp"
-        android:onClick="openTestActivity"
-        android:text="Button"
-        app:layout_constraintBottom_toTopOf="@+id/new_meeting_button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/introText" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>
