@@ -14,8 +14,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication">
         <activity
-            android:name=".PastMeetingInfoActivity"
-            android:exported="false" />
+            android:name=".LocationParticipantsActivity"
+            android:exported="false">
+        </activity>
+        <activity
+            android:android:name=".PastMeetingInfoActivity"
+            android:exported="false">
+        </activity>
         <activity
             android:name=".MainActivity"
             android:exported="true">
