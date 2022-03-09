@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="8dp"
+    tools:context=".PastMeetingInfoActivity">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardViewDuration"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="8dp">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:minHeight="48dp"
+            android:padding="8dp">
+
+            <ImageView
+                android:id="@+id/ivTimeIcon"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginStart="8dp"
+                android:scaleType="fitXY"
+                app:layout_constraintBottom_toTopOf="@+id/tvDuration"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_baseline_schedule_24" />
+
+            <TextView
+                android:id="@+id/tvDuration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Dauer"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/ivTimeIcon"
+                app:layout_constraintStart_toStartOf="@+id/ivTimeIcon" />
+
+            <TextView
+                android:id="@+id/tvMinutes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="x_minutes"
+                android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/ivTimeIcon"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvStartTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="start_time"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvDash"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="-"
+                app:layout_constraintBottom_toTopOf="@+id/tvEndTime"
+                app:layout_constraintEnd_toEndOf="@+id/tvStartTime"
+                app:layout_constraintStart_toStartOf="@+id/tvStartTime"
+                app:layout_constraintTop_toBottomOf="@+id/tvStartTime" />
+
+            <TextView
+                android:id="@+id/tvEndTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="end_time"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/tvStartTime" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardViewParticipants"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:cardCornerRadius="8dp">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:minHeight="48dp"
+            android:padding="8dp">
+
+            <ImageView
+                android:id="@+id/ivPartIcon"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginStart="8dp"
+                android:scaleType="fitXY"
+                app:layout_constraintBottom_toTopOf="@+id/tvParticipants"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_outline_people_24" />
+
+            <TextView
+                android:id="@+id/tvParticipants"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Teilnehmer"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/ivPartIcon"
+                app:layout_constraintStart_toStartOf="@+id/ivPartIcon" />
+
+            <TextView
+                android:id="@+id/tvNumOfParticipants"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="x_participants"
+                android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/ivPartIcon"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardViewLocation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:minHeight="48dp"
+            android:padding="8dp">
+
+            <ImageView
+                android:id="@+id/ivLocaIcon"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginStart="8dp"
+                android:scaleType="fitXY"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_outline_place_24" />
+
+            <TextView
+                android:id="@+id/tvLocationSubtitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ort"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/ivLocaIcon"
+                app:layout_constraintStart_toStartOf="@+id/ivLocaIcon"
+                app:layout_constraintTop_toBottomOf="@+id/ivLocaIcon" />
+
+            <TextView
+                android:id="@+id/tvLocation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="x_location"
+                android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/ivLocaIcon"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardViewSettings"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:minHeight="48dp"
+            android:padding="8dp">
+
+            <ImageView
+                android:id="@+id/ivSettingsIcon"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginStart="8dp"
+                android:scaleType="fitXY"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_outline_settings_24" />
+
+            <TextView
+                android:id="@+id/tvSettings"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Einst."
+                app:layout_constraintEnd_toEndOf="@+id/ivSettingsIcon"
+                app:layout_constraintStart_toStartOf="@+id/ivSettingsIcon"
+                app:layout_constraintTop_toBottomOf="@+id/ivSettingsIcon" />
+
+            <TextView
+                android:id="@+id/tvWindowInterval_"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:text="Lüftungsintervall:"
+                app:layout_constraintStart_toEndOf="@+id/ivSettingsIcon"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvWindowInterval"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="x_minutes"
+                app:layout_constraintBottom_toBottomOf="@+id/tvWindowInterval_"
+                app:layout_constraintStart_toEndOf="@+id/tvWindowInterval_"
+                app:layout_constraintTop_toTopOf="@+id/tvWindowInterval_" />
+
+            <TextView
+                android:id="@+id/tvWindowTime_"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Lüftungsdauer:"
+                app:layout_constraintStart_toStartOf="@+id/tvDistanceInterval_"
+                app:layout_constraintTop_toBottomOf="@+id/tvWindowInterval_" />
+
+            <TextView
+                android:id="@+id/tvWindowTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="x_minutes"
+                app:layout_constraintBottom_toBottomOf="@+id/tvWindowTime_"
+                app:layout_constraintStart_toEndOf="@+id/tvWindowTime_"
+                app:layout_constraintTop_toTopOf="@+id/tvWindowTime_" />
+
+            <TextView
+                android:id="@+id/tvDistanceInterval_"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Abstandskontrolle:"
+                app:layout_constraintStart_toStartOf="@+id/tvWindowInterval_"
+                app:layout_constraintTop_toBottomOf="@+id/tvWindowTime_" />
+
+            <TextView
+                android:id="@+id/tvDistanceInterval"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="x_minutes"
+                app:layout_constraintBottom_toBottomOf="@+id/tvDistanceInterval_"
+                app:layout_constraintStart_toEndOf="@+id/tvDistanceInterval_"
+                app:layout_constraintTop_toTopOf="@+id/tvDistanceInterval_" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+</LinearLayout>
