@@ -23,8 +23,10 @@
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/materialCardView2"
-        android:layout_width="372dp"
-        android:layout_height="169dp"
+        android:layout_width="0dp"
+        app:layout_constraintWidth_percent="0.9"
+        android:layout_height="0dp"
+        app:layout_constraintHeight_percent="0.2"
         android:layout_marginBottom="32dp"
         app:cardBackgroundColor="@color/white"
         app:cardCornerRadius="4dp"
@@ -46,7 +48,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="left"
-            android:layout_marginTop="40dp">
+            android:layout_marginTop="40dp"
+            android:layout_marginStart="15dp"
+            >
 
             <TextView
                 android:layout_width="wrap_content"
@@ -68,6 +72,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="left"
+            android:layout_marginStart="15dp"
             android:layout_marginTop="70dp">
 
             <TextView
@@ -89,6 +94,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="left"
+            android:layout_marginStart="15dp"
             android:layout_marginTop="100dp">
 
             <TextView
@@ -100,7 +106,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="105dp"
+                android:layout_marginStart="105dp"
                 android:text="Uni Regensburg"
                 android:textAppearance="?attr/textAppearanceHeadline6" />
         </LinearLayout>
@@ -108,8 +114,10 @@
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/materialCardView5"
-        android:layout_width="376dp"
-        android:layout_height="98dp"
+        android:layout_width="0dp"
+        app:layout_constraintWidth_percent="0.9"
+        app:layout_constraintHeight_percent="0.1"
+        android:layout_height="0dp"
         android:layout_marginBottom="32dp"
         app:cardBackgroundColor="@color/corona_blue"
         app:cardCornerRadius="4dp"
@@ -132,9 +140,11 @@
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/materialCardView3"
-        android:layout_width="171dp"
-        android:layout_height="215dp"
-        android:layout_marginStart="16dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintWidth_percent="0.4"
+        app:layout_constraintHeight_percent="0.25"
+        android:layout_marginStart="25dp"
         android:layout_marginBottom="28dp"
         app:cardBackgroundColor="@color/white"
         app:cardCornerRadius="4dp"
@@ -152,13 +162,13 @@
         <ProgressBar
             android:id="@+id/lueftungsProgressBar"
             style="?android:attr/progressBarStyleHorizontal"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_centerInParent="true"
             android:layout_gravity="center"
             android:indeterminate="false"
             android:max="100"
-            android:padding="5dp"
+            android:padding="40dp"
             android:progress="100"
             android:progressDrawable="@drawable/drawable_circle"
             android:rotation="-90" />
@@ -188,24 +198,24 @@
             <Button
                 android:id="@+id/PauseButton"
                 android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_gravity="right"
+                android:layout_height="match_parent"
+                android:layout_gravity="end"
+                android:layout_marginEnd="15dp"
+                android:layout_marginBottom="-39dp"
                 android:background="@drawable/ic_baseline_pause_24"
                 android:minWidth="24dp"
                 android:minHeight="24dp"
-                android:layout_marginBottom="-48dp"
-                android:layout_marginRight="15dp"
                 android:onClick="pauseCountdown" />
 
             <Button
                 android:id="@+id/StartButton"
                 android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_gravity="left"
+                android:layout_height="match_parent"
+                android:layout_gravity="start"
+                android:layout_marginStart="15dp"
                 android:background="@drawable/ic_baseline_replay_24"
                 android:minWidth="24dp"
                 android:minHeight="24dp"
-                android:layout_marginLeft="15dp"
                 android:onClick="startCountdown" />
 
         </LinearLayout>
@@ -215,9 +225,11 @@
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/materialCardView4"
-        android:layout_width="171dp"
-        android:layout_height="215dp"
-        android:layout_marginEnd="16dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintWidth_percent="0.4"
+        app:layout_constraintHeight_percent="0.25"
+        android:layout_marginEnd="25dp"
         android:layout_marginBottom="28dp"
         app:cardBackgroundColor="@color/white"
         app:cardCornerRadius="4dp"
@@ -235,13 +247,12 @@
         <ProgressBar
             android:id="@+id/abstandsProgressBar"
             style="?android:attr/progressBarStyleHorizontal"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_centerInParent="true"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_gravity="center"
             android:indeterminate="false"
             android:max="100"
-            android:padding="5dp"
+            android:padding="40dp"
             android:progress="100"
             android:progressDrawable="@drawable/drawable_circle"
             android:rotation="-90"
@@ -272,24 +283,24 @@
             <Button
                 android:id="@+id/abstandsPauseButton"
                 android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_gravity="right"
+                android:layout_height="match_parent"
+                android:layout_gravity="end"
+                android:layout_marginEnd="15dp"
+                android:layout_marginBottom="-39dp"
                 android:background="@drawable/ic_baseline_pause_24"
                 android:minWidth="24dp"
                 android:minHeight="24dp"
-                android:layout_marginBottom="-48dp"
-                android:layout_marginRight="15dp"
                 android:onClick="pauseAbstand" />
 
             <Button
                 android:id="@+id/abstandsButton"
                 android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_gravity="left"
+                android:layout_height="match_parent"
+                android:layout_gravity="start"
+                android:layout_marginStart="15dp"
                 android:background="@drawable/ic_baseline_replay_24"
                 android:minWidth="24dp"
                 android:minHeight="24dp"
-                android:layout_marginLeft="15dp"
                 android:onClick="startAbstand" />
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
