@@ -18,4 +18,9 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, SettingsActivity.class);
         startActivity(intent);
     }
+
+    public void openPastMeeting(View view){
+        Intent intent = new Intent(this, PastMeetingInfoActivity.class);
+        startActivity(intent);
+    }
 }
