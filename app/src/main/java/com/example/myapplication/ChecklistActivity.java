@@ -22,7 +22,7 @@ public class ChecklistActivity extends AppCompatActivity {
     //checklist Checkbox
     private Switch sw1, sw2, sw3, sw4;
     //start Meeting Button
-    private Button startMeetingButton, disableMeetingButton;
+    private Button startMeetingButton;
 
     private boolean lueftungsSwitchStatus;
     private boolean abstandsSwitchStatus;
@@ -43,8 +43,7 @@ public class ChecklistActivity extends AppCompatActivity {
         sw3 = (Switch) findViewById(R.id.switch3); sw4 = (Switch) findViewById(R.id.switch4);
 
         startMeetingButton = findViewById(R.id.startMeetingButton);
-        disableMeetingButton = findViewById(R.id.disable_startMeetingButton);
-        hideStartMeetingButton();
+        startMeetingButton.setBackgroundResource(R.drawable.btn_disable);
         // Get extras
         maxCountdownTime = getIntent().getLongExtra("maxCountdownTime", 0);
         maxLueftungsTime = getIntent().getLongExtra("maxLueftungsTimer", 0);
@@ -90,18 +89,11 @@ public class ChecklistActivity extends AppCompatActivity {
             checkedItems++;
         }
         if(checkedItems == 4){//change startMeetingButton color
-            startMeetingButton.setVisibility(View.VISIBLE);
-            disableMeetingButton.setVisibility(View.GONE);
+            startMeetingButton.setBackgroundResource(R.drawable.btn_default);
         }else{
-            hideStartMeetingButton();
+            startMeetingButton.setBackgroundResource(R.drawable.btn_disable);
         }
     }
-
-    private void hideStartMeetingButton(){
-        startMeetingButton.setVisibility(View.GONE);
-        disableMeetingButton.setVisibility(View.VISIBLE);
-    }
-
 
     // adds functionality to back button in action bar
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
