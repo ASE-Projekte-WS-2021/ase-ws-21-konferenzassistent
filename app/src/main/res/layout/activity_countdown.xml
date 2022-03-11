@@ -131,11 +131,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:gravity="center"
             android:text="Fenster sollte offen sein!"
             android:textColor="@color/corona_white"
-            android:textSize="25dp"
-            tools:layout_editor_absoluteX="222dp"
-            tools:layout_editor_absoluteY="462dp" />
+            android:textSize="25sp"/>
     </com.google.android.material.card.MaterialCardView>
 
     <com.google.android.material.card.MaterialCardView
@@ -168,7 +167,8 @@
             android:layout_gravity="center"
             android:indeterminate="false"
             android:max="100"
-            android:padding="40dp"
+            android:padding="5dp"
+            android:layout_margin="40dp"
             android:progress="100"
             android:progressDrawable="@drawable/drawable_circle"
             android:rotation="-90" />
@@ -252,7 +252,8 @@
             android:layout_gravity="center"
             android:indeterminate="false"
             android:max="100"
-            android:padding="40dp"
+            android:padding="5dp"
+            android:layout_margin="40dp"
             android:progress="100"
             android:progressDrawable="@drawable/drawable_circle"
             android:rotation="-90"
