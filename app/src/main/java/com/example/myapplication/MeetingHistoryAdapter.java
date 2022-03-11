@@ -33,7 +33,7 @@ public class MeetingHistoryAdapter extends RecyclerView.Adapter<MeetingHistoryAd
 
     @Override
     public void onBindViewHolder(@NonNull MeetingHistoryViewHolder holder, int position) {
-        holder.tvTitle.setText(meetingsList.get(position));
+        holder.tvDate.setText(meetingsList.get(position));
 
         holder.cardView.setOnClickListener(view -> {
             Intent intent = new Intent(ct, PastMeetingInfoActivity.class);
@@ -49,11 +49,11 @@ public class MeetingHistoryAdapter extends RecyclerView.Adapter<MeetingHistoryAd
     public class MeetingHistoryViewHolder extends RecyclerView.ViewHolder {
 
         CardView cardView;
-        TextView tvTitle;
+        TextView tvDate;
 
         public MeetingHistoryViewHolder(@NonNull View itemView) {
             super(itemView);
-            tvTitle = itemView.findViewById(R.id.tvTitleRow);
+            tvDate = itemView.findViewById(R.id.tvDateRow);
             cardView = itemView.findViewById(R.id.cvRow);
         }
 

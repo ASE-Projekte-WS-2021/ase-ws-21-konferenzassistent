@@ -61,21 +61,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void onButtonTestPlusClicked(View view) {
-        meetingsList.add("test" + counter);
-        counter++;
-        onDataChanged();
-    }
-
-    public void onButtonTestMinusClicked(View view) {
-        if (meetingsList.isEmpty()) {
-            Toast.makeText(this,"List empty",Toast.LENGTH_SHORT).show();
-        } else {
-            meetingsList.remove(meetingsList.size() - 1);
-            onDataChanged();
-        }
-    }
-
     public void openSettingsActivity(View view) {
         Intent intent = new Intent(this, SettingsActivity.class);
         startActivity(intent);
