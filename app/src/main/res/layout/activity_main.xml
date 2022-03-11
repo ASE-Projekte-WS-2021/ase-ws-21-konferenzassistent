@@ -6,24 +6,12 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/introText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="16dp"
-        android:text="Herzlich willkommen im Corona-Konferenz-Assistent. Wir unterstützen dich dabei, deine Meetings in Zeiten von Corona so sicher wie möglich abzuhalten. Klicke auf den “+”-Button, um ein Meeting zu starten!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.4"
-        app:useCompatPadding="true" />
-
     <Button
         android:id="@+id/new_meeting_button"
         android:layout_width="wrap_content"
         android:layout_height="56dp"
         android:layout_marginBottom="16dp"
-        android:background="@drawable/btn_default"
+        app:cardBackgroundColor="@drawable/btn_default"
         android:onClick="openSettingsActivity"
         android:text="+"
         android:textSize="20sp"
@@ -33,7 +21,6 @@
         app:srcCompat="@android:drawable/ic_input_add"
         app:tint="@android:color/white"
         app:useCompatPadding="true" />
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_history"
         android:layout_width="match_parent"
@@ -42,5 +29,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/introText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:text="Herzlich willkommen im Corona-Konferenz-Assistent. Wir unterstützen dich dabei, deine Meetings in Zeiten von Corona so sicher wie möglich abzuhalten. Klicke auf den “+”-Button, um ein Meeting hinzufügen!"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.4"
+        app:useCompatPadding="true" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

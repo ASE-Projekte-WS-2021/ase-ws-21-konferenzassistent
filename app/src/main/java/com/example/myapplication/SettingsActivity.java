@@ -140,12 +140,14 @@ public class SettingsActivity extends AppCompatActivity {
         }
         if(checkedItems != 0){//change startMeetingButton color
             startMeetingButton.setEnabled(true);
-            startMeetingButton.setBackgroundColor(getResources().getColor(R.color.purple_500));
-            startMeetingButton.setTextColor(getResources().getColor(R.color.white));
+            startMeetingButton.setBackgroundResource(R.drawable.btn_default);
+            //startMeetingButton.setBackgroundColor(getResources().getColor(R.color.purple_500));
+            //startMeetingButton.setTextColor(getResources().getColor(R.color.white));
         }else{
             startMeetingButton.setEnabled(false);
-            startMeetingButton.setBackgroundColor(getResources().getColor(R.color.gray));
-            startMeetingButton.setTextColor(getResources().getColor(R.color.dark_gray));
+            startMeetingButton.setBackgroundResource(R.drawable.btn_disable);
+            //startMeetingButton.setBackgroundColor(getResources().getColor(R.color.gray));
+            //startMeetingButton.setTextColor(getResources().getColor(R.color.dark_gray));
         }
         switch (view.getId()) {
             case R.id.switchLueften:
