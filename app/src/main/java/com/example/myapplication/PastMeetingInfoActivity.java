@@ -5,11 +5,16 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.MenuItemCompat;
 
 import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
@@ -45,6 +50,7 @@ public class PastMeetingInfoActivity extends AppCompatActivity {
 
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
+            getSupportActionBar().setTitle("Meeting");
             actionBar.setDisplayHomeAsUpEnabled(true); // sets up back button in action bar
         }
 
@@ -115,11 +121,30 @@ public class PastMeetingInfoActivity extends AppCompatActivity {
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.past_meeting_info_options,menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
 
         if (id == android.R.id.home) {
             finish();
+        } else if (id == R.id.past_meeting_info_options_delete) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this)
+                    .setMessage("Meeting wird gelöscht. Dieser Schritt kann nicht rückgängig gemacht werden. Fortfahren?")
+                    .setPositiveButton("OK",(dialogInterface, i) -> {
+                        // remove this meeting from database
+                        // TODO
+
+                        finish();
+                    })
+                    .setNegativeButton("CANCEL",(dialogInterface, i) -> {
+                        // do nothing
+                    });
+            builder.create().show();
         }
 
         return super.onOptionsItemSelected(item);
