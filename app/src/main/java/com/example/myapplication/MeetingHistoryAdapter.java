@@ -12,13 +12,14 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MeetingHistoryAdapter extends RecyclerView.Adapter<MeetingHistoryAdapter.MeetingHistoryViewHolder> {
 
     private Context ct;
-    private ArrayList<String> meetingsList;
+    private List<Meeting> meetingsList;
 
-    public MeetingHistoryAdapter(Context ct, ArrayList<String> meetingsList) {
+    public MeetingHistoryAdapter(Context ct, List<Meeting> meetingsList) {
         this.ct = ct;
         this.meetingsList = meetingsList;
     }
@@ -33,7 +34,9 @@ public class MeetingHistoryAdapter extends RecyclerView.Adapter<MeetingHistoryAd
 
     @Override
     public void onBindViewHolder(@NonNull MeetingHistoryViewHolder holder, int position) {
-        holder.tvDate.setText(meetingsList.get(position));
+        holder.tvDate.setText(meetingsList.get(position).getDate());
+        holder.tvDuration.setText(meetingsList.get(position).getDuration() + " min");
+        holder.tvNumParticipants.setText(meetingsList.get(position).getNumberParticipants());
 
         holder.cardView.setOnClickListener(view -> {
             Intent intent = new Intent(ct, PastMeetingInfoActivity.class);
@@ -49,12 +52,14 @@ public class MeetingHistoryAdapter extends RecyclerView.Adapter<MeetingHistoryAd
     public class MeetingHistoryViewHolder extends RecyclerView.ViewHolder {
 
         CardView cardView;
-        TextView tvDate;
+        TextView tvDate, tvDuration, tvNumParticipants;
 
         public MeetingHistoryViewHolder(@NonNull View itemView) {
             super(itemView);
             tvDate = itemView.findViewById(R.id.tvDateRow);
             cardView = itemView.findViewById(R.id.cvRow);
+            tvDuration = itemView.findViewById(R.id.tvDurationRow);
+            tvNumParticipants = itemView.findViewById(R.id.tvParticipantsRow);
         }
 
     }

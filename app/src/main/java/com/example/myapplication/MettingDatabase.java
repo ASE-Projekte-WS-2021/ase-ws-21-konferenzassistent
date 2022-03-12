@@ -14,7 +14,7 @@ public class MettingDatabase extends SQLiteOpenHelper {
     private Context context;
     private static final String DB_NAME = "meetings.db";
     private static final int DB_VERSION = 1;
-    private static final String TABLE_NAME = "my_meetings.db";
+    private static final String TABLE_NAME = "my_meetings"; // "my_meetings.db"
     private static final String COLUMN_ID = "_id";
     private static final String COLUMN_DATE = "meeting_date";
     private static final String COLUMN_DURATION = "meeting_duration";
