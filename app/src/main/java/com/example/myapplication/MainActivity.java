@@ -68,6 +68,11 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void openTestActivity(View view) {
+        Intent intent = new Intent(this,LocationParticipantsActivity.class);
+        startActivity(intent);
+    }
+
     public void openPastMeeting(View view){
         Intent intent = new Intent(this, PastMeetingInfoActivity.class);
         startActivity(intent);
