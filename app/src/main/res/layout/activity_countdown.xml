@@ -10,32 +10,30 @@
 
     <Button
         android:id="@+id/button2"
-        android:layout_width="418dp"
-        android:layout_height="70dp"
-        android:background="@color/corona_blue"
+        android:layout_width="wrap_content"
+        android:layout_height="56dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/btn_default"
         android:onClick="finishMeeting"
         android:text="Beende Meeting"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.571"
         app:layout_constraintStart_toStartOf="parent" />
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/materialCardView2"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="32dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="32dp"
         app:cardBackgroundColor="@color/white"
         app:cardCornerRadius="4dp"
-        app:layout_constraintBottom_toTopOf="@+id/materialCardView5"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_percent="0.2"
+
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.985"
-        android:layout_gravity="center_horizontal"
-
         app:layout_constraintWidth_percent="0.9">
 
         <TextView
@@ -106,14 +104,14 @@
         android:id="@+id/materialCardView5"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="40dp"
         app:cardBackgroundColor="@color/corona_blue"
         app:cardCornerRadius="4dp"
-        app:layout_constraintBottom_toTopOf="@+id/materialCardView3"
+        app:layout_constraintBottom_toTopOf="@+id/button2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_percent="0.1"
-        app:layout_constraintHorizontal_bias="0.625"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/materialCardView2"
+        app:layout_constraintVertical_bias="0.25"
         app:layout_constraintWidth_percent="0.9">
 
         <TextView
@@ -217,13 +215,13 @@
         android:id="@+id/materialCardView4"
         android:layout_width="165dp"
         android:layout_height="0dp"
-        android:layout_marginStart="36dp"
+        android:layout_marginEnd="25dp"
         android:layout_marginBottom="28dp"
         app:cardBackgroundColor="@color/white"
         app:cardCornerRadius="4dp"
         app:layout_constraintBottom_toTopOf="@+id/button2"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_percent="0.25"
-        app:layout_constraintStart_toEndOf="@+id/materialCardView3"
         app:layout_constraintWidth_percent="0.4">
 
         <TextView

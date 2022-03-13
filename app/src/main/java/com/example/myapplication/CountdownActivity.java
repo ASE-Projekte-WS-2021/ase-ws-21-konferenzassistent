@@ -143,6 +143,7 @@ public class CountdownActivity extends AppCompatActivity {
             lueftungsProgressBar.setVisibility(View.GONE);
             lueftungsInfoText.setVisibility(View.GONE);
             findViewById(R.id.materialCardView3).setVisibility(View.GONE);
+            findViewById(R.id.materialCardView5).setVisibility(View.GONE);
         }
         // If "Abstand" is disabled
         if(!abstandsSwitchStatus){

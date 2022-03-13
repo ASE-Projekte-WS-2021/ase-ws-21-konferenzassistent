@@ -1,5 +1,7 @@
 package com.example.myapplication;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,6 +9,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -50,6 +53,12 @@ public class LocationParticipantsActivity extends AppCompatActivity implements A
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_location_participants);
+
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            getSupportActionBar().setTitle("Ort und Teilnehmer");
+            actionBar.setDisplayHomeAsUpEnabled(true); // sets up back button in action bar
+        }
 
         dbHelper = new MettingDatabase(this);
 
@@ -215,5 +224,14 @@ public class LocationParticipantsActivity extends AppCompatActivity implements A
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
         // nicht so tief, Rüdiger!!
+    }
+
+    // adds functionality to back button in action bar
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            this.finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

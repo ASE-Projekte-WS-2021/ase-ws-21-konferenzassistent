@@ -105,7 +105,7 @@ public class PastMeetingInfoActivity extends AppCompatActivity {
                     // do nothing
                 }));
         final AlertDialog a = materialAlertDialogBuilder.create();
-        findViewById(R.id.cardViewParticipants).setOnClickListener(view -> a.show());
+        // findViewById(R.id.cardViewParticipants).setOnClickListener(view -> a.show());
     }
 
     private void updateView() {
