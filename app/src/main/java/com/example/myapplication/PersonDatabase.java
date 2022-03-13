@@ -9,12 +9,15 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class PersonDatabase extends SQLiteOpenHelper {
 
     private Context context;
     private static final String DB_NAME = "persons.db";
     private static final int DB_VERSION = 1;
-    private static final String TABLE_NAME = "my_persons.db";
+    private static final String TABLE_NAME = "my_persons_db";
     private static final String COLUMN_ID = "_id";
     private static final String COLUMN_NAME = "name";
 
@@ -45,14 +48,18 @@ public class PersonDatabase extends SQLiteOpenHelper {
         }
     }
 
-    public Cursor readAllData(){
+    public List<String> getParticipants(){
         String query = "SELECT * FROM " + TABLE_NAME;
         SQLiteDatabase db= this.getReadableDatabase();
         Cursor cursor = null;
         if(db != null){
             cursor = db.rawQuery(query,null);
         }
-        return cursor;
+        List <String> participantList = new ArrayList<>();
+        while (cursor.moveToNext()) {
+            participantList.add(cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_NAME)));
+        }
+        return participantList;
     }
 
     public void updateName(String id, String name){

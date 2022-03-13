@@ -8,17 +8,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.TimeZone;
 
@@ -61,7 +57,7 @@ public class CountdownActivity extends AppCompatActivity {
     private Date startDate;
     private Date endDate;
 
-    private int participants = 0;
+    private String participantCount = "0";
     private String ort;
 
     @Override
@@ -82,14 +78,14 @@ public class CountdownActivity extends AppCompatActivity {
 
         lueftungsSwitchStatus = getIntent().getBooleanExtra("lueftungsSwitchStatus", false);
         abstandsSwitchStatus = getIntent().getBooleanExtra("abstandsSwitchStatus", false);
-        participants = getIntent().getIntExtra("participants", 0);
-        ort = getIntent().getStringExtra("ort");
+        participantCount = getIntent().getStringExtra("participantCount");
+        ort = getIntent().getStringExtra("location");
 
-        /* DEBUG */
-        participants = 9;
-        ort = "Regensburg 1";
+        if (ort.equals("")) {
+            ort = "<leer>";
+        }
 
-        FillInformationField("" + participants, ort);
+        FillInformationField("" + participantCount, ort);
 
         // start the Countdown service
         Intent countdownIntent = new Intent(this, CountdownService.class);
@@ -354,11 +350,11 @@ public class CountdownActivity extends AppCompatActivity {
         long minutes = seconds / 60;
         long hours = minutes / 60;
 
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         dateFormat.setTimeZone(TimeZone.getTimeZone("Europe/Berlin"));
 
         MettingDatabase database = new MettingDatabase(this);
-        database.addMeeting("" + dateFormat.format(startDate), dateFormat.format(endDate),ort, "" + seconds, "" +participants);
+        database.addMeeting("" + dateFormat.format(startDate), dateFormat.format(endDate),ort, "" + seconds, "" + participantCount);
     }
 
     public void finishMeeting(View view) {

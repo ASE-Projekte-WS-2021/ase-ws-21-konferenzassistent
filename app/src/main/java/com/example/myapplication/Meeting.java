@@ -2,13 +2,31 @@ package com.example.myapplication;
 
 public class Meeting {
 
-    private String id, date, duration, numberParticipants;
+    private String id, date, dateEnd, location, duration, numberParticipants;
 
-    public Meeting(String id, String date, String duration, String numberParticipants) {
+    public Meeting(String id, String date, String dateEnd, String location, String duration, String numberParticipants) {
         this.id = id;
         this.date = date;
+        this.dateEnd = dateEnd;
+        this.location = location;
         this.duration = duration;
         this.numberParticipants = numberParticipants;
+    }
+
+    public String getDateEnd() {
+        return dateEnd;
+    }
+
+    public void setDateEnd(String dateEnd) {
+        this.dateEnd = dateEnd;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
     }
 
     public String getId() {
@@ -48,6 +66,8 @@ public class Meeting {
         return "Meeting{" +
                 "id='" + id + '\'' +
                 ", date='" + date + '\'' +
+                ", dateEnd='" + dateEnd + '\'' +
+                ", location='" + location + '\'' +
                 ", duration='" + duration + '\'' +
                 ", numberParticipants='" + numberParticipants + '\'' +
                 '}';

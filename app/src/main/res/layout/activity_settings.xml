@@ -118,6 +118,7 @@
                 android:layout_height="wrap_content"
                 android:text="15 Minuten" />
         </LinearLayout>
+
     </LinearLayout>
 
     <Button
@@ -126,8 +127,8 @@
         android:layout_height="56dp"
         android:layout_marginBottom="16dp"
         android:background="@drawable/btn_default"
-        android:onClick="openChecklistActivity"
-        android:text="START"
+        android:onClick="openLocationParticipantsActivity"
+        android:text="WEITER"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

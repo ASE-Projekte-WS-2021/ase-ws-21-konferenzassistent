@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -26,6 +27,8 @@ public class ChecklistActivity extends AppCompatActivity {
 
     private boolean lueftungsSwitchStatus;
     private boolean abstandsSwitchStatus;
+
+    private String location, participantCount;
 
     private int checkedItems;
 
@@ -54,6 +57,11 @@ public class ChecklistActivity extends AppCompatActivity {
         lueftungsSwitchStatus = getIntent().getBooleanExtra("lueftungsSwitchStatus", false);
         abstandsSwitchStatus = getIntent().getBooleanExtra("abstandsSwitchStatus", false);
 
+        location = getIntent().getStringExtra("location");
+        participantCount = getIntent().getStringExtra("participantCount");
+
+
+
         super.onCreate(savedInstanceState);
     }
 
@@ -68,6 +76,9 @@ public class ChecklistActivity extends AppCompatActivity {
 
         intent.putExtra("lueftungsSwitchStatus", lueftungsSwitchStatus);
         intent.putExtra("abstandsSwitchStatus", abstandsSwitchStatus);
+
+        intent.putExtra("location", location);
+        intent.putExtra("participantCount", participantCount);
 
           // start next activity
           startActivity(intent);

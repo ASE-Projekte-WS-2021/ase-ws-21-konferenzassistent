@@ -37,32 +37,49 @@ public class MainActivity extends AppCompatActivity {
 
         dbHelper = new MettingDatabase(this);
 
+        /*
         String randomDate =
                 2021 + "-" +
-                        (new Random().nextInt(12) + 1) + "-" +
-                        (new Random().nextInt(29) + 1);
-        String randomDuration = Integer.toString(new Random().nextInt(41) + 5);
+                        (new Random().nextInt(24) + 12) + "-" +
+                        (new Random().nextInt(24) + 12) + " " +
+                        (new Random().nextInt(50) + 25) + ":" +
+                        (new Random().nextInt(50) + 25);
+        String randomDateEnd =
+                2021 + "-" +
+                        (new Random().nextInt(24) + 12) + "-" +
+                        (new Random().nextInt(24) + 12) + " " +
+                        (new Random().nextInt(50) + 25) + ":" +
+                        (new Random().nextInt(50) + 25);
+        String randomLocation = Integer.toString(new Random().nextInt(1000) + 10);
+        String randomDuration = Integer.toString(new Random().nextInt(5701) + 300);
         String randomParticipants = Integer.toString(new Random().nextInt(13) + 3);
-        dbHelper.addMeeting(randomDate,randomDuration,randomParticipants);
+        dbHelper.addMeeting(randomDate,randomDateEnd,randomLocation,randomDuration,randomParticipants);
+        */
 
-        Cursor cursor = dbHelper.readAllData();
+        rvMeetings = findViewById(R.id.rv_history);
+        introText = findViewById(R.id.introText);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
 
         meetingsList = new ArrayList<>();
+        Cursor cursor = dbHelper.readAllData();
 
         while (cursor.moveToNext()) {
             String mId = cursor.getString(cursor.getColumnIndexOrThrow("_id"));
             String mDate = cursor.getString(cursor.getColumnIndexOrThrow("meeting_date"));
-            String mDuration = cursor.getString(cursor.getColumnIndexOrThrow("meeting_duration"));;
-            String mNumberParticipants = cursor.getString(cursor.getColumnIndexOrThrow("meeting_number_participants"));;
-            meetingsList.add(new Meeting(mId,mDate,mDuration,mNumberParticipants));
+            String mDateEnd = cursor.getString(cursor.getColumnIndexOrThrow("meeting_date_end"));
+            String mDuration = cursor.getString(cursor.getColumnIndexOrThrow("meeting_duration"));
+            String mLocation = cursor.getString(cursor.getColumnIndexOrThrow("meeting_position"));
+            String mNumberParticipants = cursor.getString(cursor.getColumnIndexOrThrow("meeting_number_participants"));
+            meetingsList.add(new Meeting(mId,mDate,mDateEnd,mLocation,mDuration,mNumberParticipants));
         }
         Log.d("database", Arrays.toString(cursor.getColumnNames()));
         for (Meeting m:  meetingsList) {
             Log.d("database", m.toString());
         }
-
-        rvMeetings = findViewById(R.id.rv_history);
-        introText = findViewById(R.id.introText);
 
         meetingHistoryAdapter = new MeetingHistoryAdapter(this,meetingsList);
         rvMeetings.setAdapter(meetingHistoryAdapter);
@@ -70,12 +87,8 @@ public class MainActivity extends AppCompatActivity {
         linearLayoutManager.setReverseLayout(true);
         linearLayoutManager.setStackFromEnd(true);
         rvMeetings.setLayoutManager(linearLayoutManager);
-    }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        meetingHistoryAdapter.notifyDataSetChanged();
+        // meetingHistoryAdapter.notifyDataSetChanged();
         setIntroTextVisibility();
     }
 

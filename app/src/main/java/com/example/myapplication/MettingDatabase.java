@@ -9,6 +9,11 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+
 public class MettingDatabase extends SQLiteOpenHelper {
 
     private Context context;
@@ -44,7 +49,7 @@ public class MettingDatabase extends SQLiteOpenHelper {
         cv.put(COLUMN_DATE, date);
         cv.put(COLUMN_DATE_END, dateEnd);
         cv.put(COLUMN_POSITION, position);
-        cv.put(COLUMN_POSITION, duration);
+        cv.put(COLUMN_DURATION, duration);
         cv.put(COLUMN_NUMBER_OF_PARTICIPANTS, numberParticipants);
 
         long res = db.insert(TABLE_NAME, null, cv);
@@ -61,6 +66,33 @@ public class MettingDatabase extends SQLiteOpenHelper {
             cursor = db.rawQuery(query,null);
         }
         return cursor;
+    }
+
+    public Cursor findDataById(String id) {
+        String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + COLUMN_ID + "=" + id;
+        SQLiteDatabase db= this.getReadableDatabase();
+        Cursor cursor = null;
+        if(db != null){
+            cursor = db.rawQuery(query,null);
+        }
+        return cursor;
+    }
+
+    public List<String> getLocations() {
+        String query = "SELECT " + COLUMN_POSITION + " FROM " + TABLE_NAME;
+        SQLiteDatabase db= this.getReadableDatabase();
+        Cursor cursor = null;
+        if(db != null){
+            cursor = db.rawQuery(query,null);
+        }
+        ArrayList<String> locations = new ArrayList<>();
+        while (cursor.moveToNext()) {
+            locations.add(cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_POSITION)));
+        }
+        HashSet<String> uniqueLocationsSet = new HashSet<>(locations);
+        List<String> uniqueLocationsList = new ArrayList<>(uniqueLocationsSet);
+        Collections.sort(uniqueLocationsList);
+        return uniqueLocationsList;
     }
 
     public void updateData(String id, String dateEnd, String position, String date, String duration, String numberParticipants){

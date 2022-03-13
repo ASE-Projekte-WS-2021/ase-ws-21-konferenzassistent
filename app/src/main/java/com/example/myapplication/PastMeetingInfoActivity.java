@@ -9,6 +9,7 @@ import androidx.core.view.MenuItemCompat;
 
 import android.annotation.SuppressLint;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
@@ -39,11 +40,10 @@ public class PastMeetingInfoActivity extends AppCompatActivity {
     private String location;
     private int windowInterval, windowTime, distanceInterval;
 
-    private String meeting_date;
-    private String meeting_duration;
-    private String meeting_number_participants;
+    private String meeting_id,meeting_date,meeting_date_end,meeting_position,meeting_duration,meeting_number_participants;
 
     private int dataBaseID;
+    private MettingDatabase database;
 
     private ArrayList<String> participantList;
 
@@ -61,18 +61,25 @@ public class PastMeetingInfoActivity extends AppCompatActivity {
             actionBar.setDisplayHomeAsUpEnabled(true); // sets up back button in action bar
         }
         dataBaseID = getIntent().getIntExtra("Database_ID", 0);
-        MettingDatabase database = new MettingDatabase(this);
+        database = new MettingDatabase(this);
         Cursor data = database.readAllData();
 
-        if(dataBaseID == -1)
+        if (dataBaseID == -1) {
             data.moveToLast();
-        else
-            data.moveToPosition(dataBaseID);
-
+        }
+        else {
+            data = database.findDataById(Integer.toString(dataBaseID));
+            data.moveToLast();
+        }
         // Get Data From database
-        meeting_date = data.getString(1);
-        meeting_duration = data.getString(2);
-        meeting_number_participants = data.getString(3);
+        meeting_id = data.getString(data.getColumnIndexOrThrow("_id"));
+        meeting_date = data.getString(data.getColumnIndexOrThrow("meeting_date"));
+        meeting_date_end = data.getString(data.getColumnIndexOrThrow("meeting_date_end"));
+        meeting_position = data.getString(data.getColumnIndexOrThrow("meeting_position"));
+        meeting_duration = data.getString(data.getColumnIndexOrThrow("meeting_duration"));
+        meeting_number_participants = data.getString(data.getColumnIndexOrThrow("meeting_number_participants"));
+
+        Log.d("database",meeting_id);
 
         findTextViews();
         updateData();
@@ -118,9 +125,9 @@ public class PastMeetingInfoActivity extends AppCompatActivity {
     private void updateData() {
         minutes = "" + Integer.parseInt(meeting_duration)/60;
         startTime = meeting_date;
-        endTime = "24";
+        endTime = meeting_date_end;
         numOfParticipants = meeting_number_participants;
-        location = "Testgelände";
+        location = meeting_position;
         windowInterval = 15;
         windowTime = 5;
         distanceInterval = 10;
@@ -147,19 +154,31 @@ public class PastMeetingInfoActivity extends AppCompatActivity {
     }
 
     @Override
+    public void onBackPressed() {
+        openHomeScreen();
+    }
+
+    private void openHomeScreen() {
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+                | Intent.FLAG_ACTIVITY_CLEAR_TOP
+                | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        finish();
+    }
+
+    @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
 
         if (id == android.R.id.home) {
-            finish();
+            openHomeScreen();
         } else if (id == R.id.past_meeting_info_options_delete) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this)
                     .setMessage("Meeting wird gelöscht. Dieser Schritt kann nicht rückgängig gemacht werden. Fortfahren?")
                     .setPositiveButton("OK",(dialogInterface, i) -> {
-                        // remove this meeting from database
-                        // TODO
-
-                        finish();
+                        database.deleteOne(meeting_id);
+                        openHomeScreen();
                     })
                     .setNegativeButton("CANCEL",(dialogInterface, i) -> {
                         // do nothing

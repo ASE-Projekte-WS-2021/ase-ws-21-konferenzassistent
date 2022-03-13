@@ -34,12 +34,19 @@ public class MeetingHistoryAdapter extends RecyclerView.Adapter<MeetingHistoryAd
 
     @Override
     public void onBindViewHolder(@NonNull MeetingHistoryViewHolder holder, int position) {
-        holder.tvDate.setText(meetingsList.get(position).getDate());
-        holder.tvDuration.setText(meetingsList.get(position).getDuration() + " min");
+        holder.tvDate.setText(meetingsList.get(position).getDate().substring(0,10));
+        holder.tvTime.setText(
+                meetingsList.get(position).getDate().substring(11) +
+                        " - " +
+                        meetingsList.get(position).getDateEnd().substring(11)
+        );
+        holder.tvLocation.setText(meetingsList.get(position).getLocation());
+        holder.tvDuration.setText(Integer.parseInt(meetingsList.get(position).getDuration())/60 + " min");
         holder.tvNumParticipants.setText(meetingsList.get(position).getNumberParticipants());
 
         holder.cardView.setOnClickListener(view -> {
             Intent intent = new Intent(ct, PastMeetingInfoActivity.class);
+            intent.putExtra("Database_ID",Integer.parseInt(meetingsList.get(position).getId()));
             ct.startActivity(intent);
         });
     }
@@ -52,12 +59,14 @@ public class MeetingHistoryAdapter extends RecyclerView.Adapter<MeetingHistoryAd
     public class MeetingHistoryViewHolder extends RecyclerView.ViewHolder {
 
         CardView cardView;
-        TextView tvDate, tvDuration, tvNumParticipants;
+        TextView tvDate, tvTime, tvLocation, tvDuration, tvNumParticipants;
 
         public MeetingHistoryViewHolder(@NonNull View itemView) {
             super(itemView);
             tvDate = itemView.findViewById(R.id.tvDateRow);
+            tvTime = itemView.findViewById(R.id.tvTimeRow);
             cardView = itemView.findViewById(R.id.cvRow);
+            tvLocation = itemView.findViewById(R.id.tvLocationRow);
             tvDuration = itemView.findViewById(R.id.tvDurationRow);
             tvNumParticipants = itemView.findViewById(R.id.tvParticipantsRow);
         }
