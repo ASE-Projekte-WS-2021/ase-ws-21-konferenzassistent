@@ -6,8 +6,12 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.location.Location;
 import android.os.Bundle;
+import android.text.InputFilter;
 import android.text.InputType;
+import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -18,6 +22,7 @@ import com.google.android.material.switchmaterial.SwitchMaterial;
 
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class SettingsActivity extends AppCompatActivity {
 
@@ -79,6 +84,7 @@ public class SettingsActivity extends AppCompatActivity {
 
         EditText minuteInput = new EditText(SettingsActivity.this);
         minuteInput.setInputType(InputType.TYPE_CLASS_NUMBER);
+        minuteInput.setFilters(new InputFilter[]{ new InputFilter.LengthFilter(3)}); // setzt maximale Inputlänge auf 3 Charaktere/Ziffern
         MaterialAlertDialogBuilder minuteInputDialog =
                 new MaterialAlertDialogBuilder(SettingsActivity.this)
                         .setTitle("Dauer")
@@ -86,15 +92,21 @@ public class SettingsActivity extends AppCompatActivity {
                         .setView(minuteInput)
                         .setPositiveButton("OK", (dialogInterface, i) -> {
                             int clickableId = clickable.getId();
-                            long parsedLong = Long.parseLong(minuteInput.getText().toString());
-                            if (clickableId == lueftungstimeClickable.getId()) {
-                                maxCountdownTime = parsedLong;
-                            } else if (clickableId == lueftungsdauerClickable.getId()) {
-                                lueftungsCountdownTime = parsedLong;
-                            } else {
-                                abstandsCountdownTime = parsedLong;
+                            try {
+                                long parsedLong = Long.parseLong(minuteInput.getText().toString());
+                                if (clickableId == lueftungstimeClickable.getId()) {
+                                    maxCountdownTime = parsedLong;
+                                    textToChange.setText(maxCountdownTime + " Minuten");
+                                } else if (clickableId == lueftungsdauerClickable.getId()) {
+                                    lueftungsCountdownTime = parsedLong;
+                                    textToChange.setText(lueftungsCountdownTime + " Minuten");
+                                } else {
+                                    abstandsCountdownTime = parsedLong;
+                                    textToChange.setText(abstandsCountdownTime + " Minuten");
+                                }
+                            } catch (NumberFormatException nfe) {
+                                Toast.makeText(getApplicationContext(), "Bitte eine Zahl eingeben", Toast.LENGTH_SHORT).show();
                             }
-                            textToChange.setText(maxCountdownTime + " Minuten");
                         })
                         .setNegativeButton("CANCEL", (dialogInterface, i) -> {
                             // do nothing
@@ -103,8 +115,8 @@ public class SettingsActivity extends AppCompatActivity {
         clickable.setOnClickListener(view -> a.show());
     }
 
-    public void openChecklistActivity(View view) {
-        Intent intent = new Intent(this, ChecklistActivity.class);
+    public void openLocationParticipantsActivity(View view) {
+        Intent intent = new Intent(this, LocationParticipantsActivity.class);
 
         // Send them as intent to the next Activity
         intent.putExtra("maxCountdownTime", maxCountdownTime);
@@ -129,20 +141,54 @@ public class SettingsActivity extends AppCompatActivity {
         }
         if(checkedItems != 0){//change startMeetingButton color
             startMeetingButton.setEnabled(true);
-            startMeetingButton.setBackgroundColor(getResources().getColor(R.color.purple_500));
-            startMeetingButton.setTextColor(getResources().getColor(R.color.white));
+            startMeetingButton.setBackgroundResource(R.drawable.btn_default);
+            //startMeetingButton.setBackgroundColor(getResources().getColor(R.color.purple_500));
+            //startMeetingButton.setTextColor(getResources().getColor(R.color.white));
         }else{
             startMeetingButton.setEnabled(false);
-            startMeetingButton.setBackgroundColor(getResources().getColor(R.color.gray));
-            startMeetingButton.setTextColor(getResources().getColor(R.color.dark_gray));
+            startMeetingButton.setBackgroundResource(R.drawable.btn_disable);
+            //startMeetingButton.setBackgroundColor(getResources().getColor(R.color.gray));
+            //startMeetingButton.setTextColor(getResources().getColor(R.color.dark_gray));
         }
+        switch (view.getId()) {
+            case R.id.switchLueften:
+                if (lueftungsSwitch.isChecked()) {
+                    findViewById(R.id.lueftungstime_clickable).setVisibility(View.VISIBLE);
+                    findViewById(R.id.lueftungsdauer_clickable).setVisibility(View.VISIBLE);
+                } else {
+                    findViewById(R.id.lueftungstime_clickable).setVisibility(View.GONE);
+                    findViewById(R.id.lueftungsdauer_clickable).setVisibility(View.GONE);
+                }
+                break;
+            case R.id.switchAbstand:
+                if (abstandsSwitch.isChecked()) {
+                    findViewById(R.id.abstandstime_clickable).setVisibility(View.VISIBLE);
+                } else {
+                    findViewById(R.id.abstandstime_clickable).setVisibility(View.GONE);
+                }
+                break;
+        }
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        getMenuInflater().inflate(R.menu.settings_menu,menu);
+        return super.onCreateOptionsMenu(menu);
     }
 
     // adds functionality to back button in action bar
+    @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (item.getItemId() == android.R.id.home) {
+        int itemId = item.getItemId();
+        if (itemId == android.R.id.home) {
             this.finish();
             return true;
+        } else if (itemId == R.id.info_button) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this)
+                    .setMessage(R.string.settings_info_text)
+                    .setPositiveButton("OK",(dialogInterface, i) -> {
+                        // do nothing
+                    });
+            builder.create().show();
         }
         return super.onOptionsItemSelected(item);
     }

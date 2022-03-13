@@ -24,6 +24,8 @@ import android.util.Log;
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
 
+import java.util.Timer;
+
 public class CountdownService extends Service {
 
     // Service Tag
@@ -54,6 +56,9 @@ public class CountdownService extends Service {
     // switches in Main Activity
     private Boolean lueftungsSwitchStatus;
     private Boolean abstandsSwitchStatus;
+
+    private Boolean abstandsCountdownRunning = false;
+    private Boolean lueftungsCountdownRunning = false;
 
     // Object to create a Countdown
     static class CountDownObject{
@@ -117,13 +122,22 @@ public class CountdownService extends Service {
                 }
 
             }
+
         };
         // Start the timer
         timer.start();
-
         // return the timer so it isn´t null anymore
         return timer;
     }
+
+    private void pauseTimer(CountDownTimer timer){
+        timer.cancel();
+    }
+
+    private CountDownTimer resumeTimer(CountDownTimer timer, CountDownObject cdObject){
+        return startTimer(cdObject.currentTime, timer, cdObject);
+    }
+
 
     // Sends a Notification to the user
     private void notifyNotification(String text) {
@@ -159,8 +173,15 @@ public class CountdownService extends Service {
         abstandsSwitchStatus = intent.getBooleanExtra("abstandsSwitchStatus", false);
 
         // Start the timers
-        if(lueftungsSwitchStatus)StartLueftungsTimer(maxLueftungsTime);
-        if(abstandsSwitchStatus)StartAbstandsTimer(maxAbstandsTime);
+        if(lueftungsSwitchStatus){
+            StartLueftungsTimer(maxLueftungsTime);
+            lueftungsCountdownRunning = true;
+        }
+
+        if(abstandsSwitchStatus){
+            StartAbstandsTimer(maxAbstandsTime);
+            abstandsCountdownRunning = true;
+        }
 
         Intent notificationIntent = new Intent(this, CountdownActivity.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(this,
@@ -197,6 +218,11 @@ public class CountdownService extends Service {
             boolean lueftungsUserInteraction = intent.getBooleanExtra("lueftungsUserInteraction", false);
             boolean abstandsUserInteraction = intent.getBooleanExtra("abstandsUserInteraction", false);
 
+            boolean lueftungsPauseUserInteraction = intent.getBooleanExtra("lueftungsPauseUserInteraction", false);
+            boolean abstandsPauseUserInteraction = intent.getBooleanExtra("abstandsPauseUserInteraction", false);
+
+            //TODO: switch to a switch
+
             // Check if its a user Interaction and what button got pressed or if the app got resumed
             if(lueftungsUserInteraction){
                 // Stop the alert
@@ -212,12 +238,18 @@ public class CountdownService extends Service {
                       isOpen = true;
                   }
             }
-            else if(abstandsUserInteraction)
-            {
+            else if(abstandsUserInteraction) {
                 // Stop the alert
-                if(mp.isPlaying())mp.stop();
+                if (mp.isPlaying()) mp.stop();
 
                 StartAbstandsTimer(maxAbstandsTime);
+            }
+            else if(lueftungsPauseUserInteraction){
+                toggleLueftungsCountdown();
+
+            }
+            else if(abstandsPauseUserInteraction){
+                toggleAbstandsCountdown();
             }
             // if app got resumed send timer data
             else{
@@ -234,6 +266,26 @@ public class CountdownService extends Service {
             }
         }
     };
+
+    private void toggleLueftungsCountdown(){
+        if(lueftungsCountdownRunning){
+            lueftungsCountdownRunning = false;
+            pauseTimer(lueftungsCountdown);
+            return;
+        }
+        lueftungsCountdown = resumeTimer(lueftungsCountdown, lueftungsObject);
+        lueftungsCountdownRunning = true;
+    }
+
+    private void toggleAbstandsCountdown(){
+        if(abstandsCountdownRunning){
+            abstandsCountdownRunning = false;
+            pauseTimer(abstandsCountdown);
+            return;
+        }
+        abstandsCountdown = resumeTimer(abstandsCountdown, abstandsObject);
+        abstandsCountdownRunning = true;
+    }
 
     // Builds the Notification Text
     private String NotificationTextBuilder(){

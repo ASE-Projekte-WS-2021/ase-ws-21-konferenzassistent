@@ -9,4 +9,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="gray">#CCCCCC</color>
     <color name="dark_gray">#666666</color>
+    <color name="corona_blue">#004DBA</color>
+    <color name="corona_white">#f4f3f8</color>
+    <color name="heller_corona_blue">#5878ed</color>
 </resources>

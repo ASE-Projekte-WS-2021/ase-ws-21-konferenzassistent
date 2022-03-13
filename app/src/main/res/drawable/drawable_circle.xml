@@ -6,7 +6,7 @@
     android:shape="ring"
     android:thicknessRatio="5.0"
     android:useLevel="true">
-    <solid android:color="#6a0dad" />
+    <solid android:color="@color/corona_blue" />
     </shape>
 </item>
 </layer-list>

@@ -1,6 +1,7 @@
 package com.example.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.res.ResourcesCompat;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -12,6 +13,11 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.TimeZone;
+
 public class CountdownActivity extends AppCompatActivity {
 
     // Countdown TextView
@@ -21,6 +27,9 @@ public class CountdownActivity extends AppCompatActivity {
     private Button abstandsButton;
     private TextView abstandsView;
 
+    private Button abstandsPauseButton;
+    private Button countdownPauseButton;
+
     private TextView lueftungsInfoText;
 
     public static final String COUNTDOWN_BUTTONS = "my.action.COUNTDOWN_BUTTONS";
@@ -29,6 +38,8 @@ public class CountdownActivity extends AppCompatActivity {
     private long maxLueftungsTime;
     private long maxAbstandsTime;
 
+    private boolean countdownPaused = false;
+    private boolean abstandPaused = false;
 
     private boolean isOpen;
     private boolean lueftungIsFinished = false;
@@ -40,23 +51,24 @@ public class CountdownActivity extends AppCompatActivity {
     private ProgressBar abstandsProgressBar;
     private ProgressBar lueftungsProgressBar;
 
+    private TextView teilnehmerTextView;
+    private TextView ortTextView;
+
+    private Date startDate;
+    private Date endDate;
+
+    private String participantCount = "0";
+    private String ort;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_countdown);
-
         getSupportActionBar().setTitle("Meeting");
 
-        countdownText = findViewById(R.id.countdownView);
-        startCountdownButton = findViewById((R.id.StartButton));
+        initiateComponents();
 
-        abstandsButton = findViewById(R.id.abstandsButton);
-        abstandsView = findViewById(R.id.abstandsView);
-
-        lueftungsInfoText = findViewById(R.id.lueftungsInfoText);
-
-        abstandsProgressBar = findViewById(R.id.abstandsProgressBar);
-        lueftungsProgressBar = findViewById(R.id.lueftungsProgressBar);
+        startDate = new Date();
 
         // get max Countdown from intent
         maxCountdownTime = getIntent().getLongExtra("maxCountdownTime", 0) * 60000;
@@ -66,7 +78,14 @@ public class CountdownActivity extends AppCompatActivity {
 
         lueftungsSwitchStatus = getIntent().getBooleanExtra("lueftungsSwitchStatus", false);
         abstandsSwitchStatus = getIntent().getBooleanExtra("abstandsSwitchStatus", false);
+        participantCount = getIntent().getStringExtra("participantCount");
+        ort = getIntent().getStringExtra("location");
 
+        if (ort.equals("")) {
+            ort = "<leer>";
+        }
+
+        FillInformationField("" + participantCount, ort);
 
         // start the Countdown service
         Intent countdownIntent = new Intent(this, CountdownService.class);
@@ -89,6 +108,31 @@ public class CountdownActivity extends AppCompatActivity {
         hideUI();
     }
 
+    private void FillInformationField(String teilnehmer, String ort){
+        teilnehmerTextView.setText(teilnehmer);
+        ortTextView.setText(ort);
+    }
+
+    // Finds the Components in the View
+    private void initiateComponents(){
+        countdownText = findViewById(R.id.countdownView);
+        startCountdownButton = findViewById((R.id.StartButton));
+
+        abstandsPauseButton = findViewById(R.id.abstandsPauseButton);
+        countdownPauseButton = findViewById(R.id.PauseButton);
+
+        abstandsButton = findViewById(R.id.abstandsButton);
+        abstandsView = findViewById(R.id.abstandsView);
+
+        lueftungsInfoText = findViewById(R.id.lueftungsInfoText);
+
+        abstandsProgressBar = findViewById(R.id.abstandsProgressBar);
+        lueftungsProgressBar = findViewById(R.id.lueftungsProgressBar);
+
+        teilnehmerTextView = findViewById(R.id.teilnehmerTextView);
+        ortTextView = findViewById(R.id.ortTextView);
+    }
+
 
     // Sets the Ui to Invisible if not used
     private void hideUI(){
@@ -98,13 +142,15 @@ public class CountdownActivity extends AppCompatActivity {
             startCountdownButton.setVisibility(View.GONE);
             lueftungsProgressBar.setVisibility(View.GONE);
             lueftungsInfoText.setVisibility(View.GONE);
+            findViewById(R.id.materialCardView3).setVisibility(View.GONE);
+            findViewById(R.id.materialCardView5).setVisibility(View.GONE);
         }
         // If "Abstand" is disabled
         if(!abstandsSwitchStatus){
             abstandsView.setVisibility(View.GONE);
             abstandsButton.setVisibility(View.GONE);
             abstandsProgressBar.setVisibility(View.GONE);
-            findViewById(R.id.dividerBar).setVisibility(View.GONE);
+            findViewById(R.id.materialCardView4).setVisibility(View.GONE);
         }
 
     }
@@ -190,11 +236,11 @@ public class CountdownActivity extends AppCompatActivity {
             // Add the description
             if(isOpen) {
                // lueftungsTimeLeft += " schließen!";
-                lueftungsInfoText.setText("Fenster Offen.");
+                lueftungsInfoText.setText("Fenster sollte geöffnet sein!");
             }
             else{
                 //lueftungsTimeLeft += " öffnen!";
-                lueftungsInfoText.setText("Fenster Geschlossen.");
+                lueftungsInfoText.setText("Fenster sollte geschlossen sein!");
             }
 
             // Check if Lüftungstimer is done
@@ -244,6 +290,36 @@ public class CountdownActivity extends AppCompatActivity {
         sendBroadcast(intent);
     }
 
+    public void pauseCountdown(View view){
+        // Send a Broadcast to the Service if button is pressed
+        Intent intent = new Intent(COUNTDOWN_BUTTONS);
+        intent.putExtra("lueftungsPauseUserInteraction", true);
+        sendBroadcast(intent);
+        countdownPaused = !countdownPaused;
+
+        toggleIcon(countdownPauseButton, countdownPaused);
+    }
+
+    public void pauseAbstand(View view){
+        // Send a Broadcast to the Service if button is pressed
+        Intent intent = new Intent(COUNTDOWN_BUTTONS);
+        intent.putExtra("abstandsPauseUserInteraction", true);
+        sendBroadcast(intent);
+        abstandPaused = !abstandPaused;
+
+        toggleIcon(abstandsPauseButton, abstandPaused);
+    }
+
+    private void toggleIcon(Button button, Boolean isPaused){
+        if(isPaused)
+        {
+            button.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_baseline_play_arrow_24, null));
+        }
+        else{
+            button.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_baseline_pause_24, null));
+        }
+    }
+
     // Builds a String to show the Timer
     private String timeStringBuilder(long timer){
         // Convert to minutes and seconds
@@ -268,11 +344,30 @@ public class CountdownActivity extends AppCompatActivity {
     * "To clear top activities from stack use below code
     * It will delete all activities from stack either asynctask run or not in the application." */
 
+    private void SaveToDatabase(){
+        endDate = new Date();
+        long diff = endDate.getTime() - startDate.getTime();
+        long seconds = diff / 1000;
+        long minutes = seconds / 60;
+        long hours = minutes / 60;
+
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        dateFormat.setTimeZone(TimeZone.getTimeZone("Europe/Berlin"));
+
+        MettingDatabase database = new MettingDatabase(this);
+        database.addMeeting("" + dateFormat.format(startDate), dateFormat.format(endDate),ort, "" + seconds, "" + participantCount);
+    }
+
     public void finishMeeting(View view) {
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, PastMeetingInfoActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK
         | Intent.FLAG_ACTIVITY_CLEAR_TOP
         | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+
+        SaveToDatabase();
+
+        // Send -1 to signal that its the latest entry in the database
+        intent.putExtra("Database_ID", -1);
         startActivity(intent);
         finish();
     }
