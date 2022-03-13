@@ -35,6 +35,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.985"
         android:layout_gravity="center_horizontal"
+
         app:layout_constraintWidth_percent="0.9">
 
         <TextView
@@ -75,6 +76,7 @@
             </LinearLayout>
 
             <LinearLayout
+
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
@@ -96,7 +98,6 @@
             </LinearLayout>
 
         </LinearLayout>
-
 
 
     </com.google.android.material.card.MaterialCardView>
@@ -214,7 +215,7 @@
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/materialCardView4"
-        android:layout_width="0dp"
+        android:layout_width="165dp"
         android:layout_height="0dp"
         android:layout_marginStart="36dp"
         android:layout_marginBottom="28dp"

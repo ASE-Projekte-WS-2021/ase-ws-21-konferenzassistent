@@ -7,10 +7,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.Switch;
 
 public class ChecklistActivity extends AppCompatActivity {
     private long maxCountdownTime;
@@ -19,12 +21,14 @@ public class ChecklistActivity extends AppCompatActivity {
     private long maxAbstandsTime;
 
     //checklist Checkbox
-    private CheckBox cb1, cb2, cb3, cb4;
+    private Switch sw1, sw2, sw3, sw4;
     //start Meeting Button
     private Button startMeetingButton;
 
     private boolean lueftungsSwitchStatus;
     private boolean abstandsSwitchStatus;
+
+    private String location, participantCount;
 
     private int checkedItems;
 
@@ -38,11 +42,12 @@ public class ChecklistActivity extends AppCompatActivity {
             actionBar.setDisplayHomeAsUpEnabled(true); // sets up back button in action bar
         }
 
-        cb1 = (CheckBox) findViewById(R.id.checkBox); cb2 = (CheckBox) findViewById(R.id.checkBox2);
-        cb3 = (CheckBox) findViewById(R.id.checkBox3); cb4 = (CheckBox) findViewById(R.id.checkBox4);
+        sw1 = (Switch) findViewById(R.id.switch1); sw2 = (Switch) findViewById(R.id.switch2);
+        sw3 = (Switch) findViewById(R.id.switch3); sw4 = (Switch) findViewById(R.id.switch4);
 
         startMeetingButton = findViewById(R.id.startMeetingButton);
-        enableButton();
+        startMeetingButton.setBackgroundResource(R.drawable.btn_disable);
+        startMeetingButton.setClickable(false);
         // Get extras
         maxCountdownTime = getIntent().getLongExtra("maxCountdownTime", 0);
         maxLueftungsTime = getIntent().getLongExtra("maxLueftungsTimer", 0);
@@ -51,6 +56,11 @@ public class ChecklistActivity extends AppCompatActivity {
 
         lueftungsSwitchStatus = getIntent().getBooleanExtra("lueftungsSwitchStatus", false);
         abstandsSwitchStatus = getIntent().getBooleanExtra("abstandsSwitchStatus", false);
+
+        location = getIntent().getStringExtra("location");
+        participantCount = getIntent().getStringExtra("participantCount");
+
+
 
         super.onCreate(savedInstanceState);
     }
@@ -67,6 +77,9 @@ public class ChecklistActivity extends AppCompatActivity {
         intent.putExtra("lueftungsSwitchStatus", lueftungsSwitchStatus);
         intent.putExtra("abstandsSwitchStatus", abstandsSwitchStatus);
 
+        intent.putExtra("location", location);
+        intent.putExtra("participantCount", participantCount);
+
           // start next activity
           startActivity(intent);
         //}
@@ -75,33 +88,26 @@ public class ChecklistActivity extends AppCompatActivity {
     //check checklist
     public void checkItem(View view){
         checkedItems = 0;
-        if(cb1.isChecked()){
+        if(sw1.isChecked()){
             checkedItems++;
         }
-        if(cb2.isChecked()){
+        if(sw2.isChecked()){
             checkedItems++;
         }
-        if(cb3.isChecked()){
+        if(sw3.isChecked()){
             checkedItems++;
         }
-        if(cb4.isChecked()){
+        if(sw4.isChecked()){
             checkedItems++;
         }
         if(checkedItems == 4){//change startMeetingButton color
-            startMeetingButton.setEnabled(true);
-            startMeetingButton.setBackgroundColor(getResources().getColor(R.color.purple_500));
-            startMeetingButton.setTextColor(getResources().getColor(R.color.white));
+            startMeetingButton.setBackgroundResource(R.drawable.btn_default);
+            startMeetingButton.setClickable(true);
         }else{
-            enableButton();
+            startMeetingButton.setBackgroundResource(R.drawable.btn_disable);
+            startMeetingButton.setClickable(false);
         }
     }
-
-    private void enableButton(){
-        startMeetingButton.setEnabled(false);
-        startMeetingButton.setBackgroundColor(getResources().getColor(R.color.gray));
-        startMeetingButton.setTextColor(getResources().getColor(R.color.dark_gray));
-    }
-
 
     // adds functionality to back button in action bar
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {

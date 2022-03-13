@@ -6,6 +6,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.location.Location;
 import android.os.Bundle;
 import android.text.InputFilter;
 import android.text.InputType;
@@ -114,8 +115,8 @@ public class SettingsActivity extends AppCompatActivity {
         clickable.setOnClickListener(view -> a.show());
     }
 
-    public void openChecklistActivity(View view) {
-        Intent intent = new Intent(this, ChecklistActivity.class);
+    public void openLocationParticipantsActivity(View view) {
+        Intent intent = new Intent(this, LocationParticipantsActivity.class);
 
         // Send them as intent to the next Activity
         intent.putExtra("maxCountdownTime", maxCountdownTime);
@@ -140,12 +141,14 @@ public class SettingsActivity extends AppCompatActivity {
         }
         if(checkedItems != 0){//change startMeetingButton color
             startMeetingButton.setEnabled(true);
-            startMeetingButton.setBackgroundColor(getResources().getColor(R.color.purple_500));
-            startMeetingButton.setTextColor(getResources().getColor(R.color.white));
+            startMeetingButton.setBackgroundResource(R.drawable.btn_default);
+            //startMeetingButton.setBackgroundColor(getResources().getColor(R.color.purple_500));
+            //startMeetingButton.setTextColor(getResources().getColor(R.color.white));
         }else{
             startMeetingButton.setEnabled(false);
-            startMeetingButton.setBackgroundColor(getResources().getColor(R.color.gray));
-            startMeetingButton.setTextColor(getResources().getColor(R.color.dark_gray));
+            startMeetingButton.setBackgroundResource(R.drawable.btn_disable);
+            //startMeetingButton.setBackgroundColor(getResources().getColor(R.color.gray));
+            //startMeetingButton.setTextColor(getResources().getColor(R.color.dark_gray));
         }
         switch (view.getId()) {
             case R.id.switchLueften:
