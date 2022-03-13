@@ -146,7 +146,7 @@ public class CountdownService extends Service {
 
         Intent notificationIntent = new Intent(this, CountdownActivity.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(this,
-                0, notificationIntent, 0);
+                0, notificationIntent, PendingIntent.FLAG_IMMUTABLE);
 
         Notification notification = new NotificationCompat.Builder(this, CHANNEL_ID)
                 .setContentTitle("Konferenzassistent")
@@ -185,7 +185,7 @@ public class CountdownService extends Service {
 
         Intent notificationIntent = new Intent(this, CountdownActivity.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(this,
-                0, notificationIntent, 0);
+                0, notificationIntent, PendingIntent.FLAG_IMMUTABLE);
 
         // build the Notification
         Notification notification = new NotificationCompat.Builder(this, CHANNEL_ID)
