@@ -5,12 +5,15 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.text.InputType;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
@@ -59,34 +62,47 @@ public class LocationParticipantsActivity extends AppCompatActivity implements A
 
         participantsView.setOnItemLongClickListener((parent, view, position, id) -> {
             participantsArray.remove(position);
-            participantsArrayAdapter.notifyDataSetChanged();
-            UIUtils.setListViewHeightBasedOnItems(participantsView);
+            onDataChanged();
             return false;
         });
     }
 
     public void onAddParticipantButtonClicked(View view) {
-        EditText participantInput = new EditText(LocationParticipantsActivity.this);
-        participantInput.setInputType(InputType.TYPE_CLASS_TEXT);
+
+        View participantsAlertView = this.getLayoutInflater().inflate(R.layout.participants_alert,null);
+        ListView participantsAlertListView = participantsAlertView.findViewById(R.id.participants_alert_listview);
+        ArrayAdapter<String> participantsAlertViewAdapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,participantsArray);
+        participantsAlertListView.setAdapter(participantsAlertViewAdapter);
+        UIUtils.setListViewHeightBasedOnItems(participantsAlertListView);
+
+        EditText participantsAlertEditText = participantsAlertView.findViewById(R.id.participants_alert_edittext);
+        ImageButton participantsAlertAddButton = participantsAlertView.findViewById(R.id.participants_alert_addbutton);
+
         MaterialAlertDialogBuilder participantInputDialog =
                 new MaterialAlertDialogBuilder(LocationParticipantsActivity.this)
                         .setTitle("Teilnehmer")
-                        .setMessage("Gib einen Namen für den neu anzulegenden Teilnehmer ein.")
-                        .setView(participantInput)
-                        .setPositiveButton("OK",((dialogInterface, i) -> {
-                            String s = participantInput.getText().toString();
-                            if (s.length() == 0) {
-                                Toast.makeText(getApplicationContext(),"Bitte einen Namen eingeben.", Toast.LENGTH_SHORT).show();
-                            } else {
-                                participantsArray.add(s);
-                                participantsArrayAdapter.notifyDataSetChanged();
-                                UIUtils.setListViewHeightBasedOnItems(participantsView);
-                            }
-                        }))
-                        .setNegativeButton("CANCEL",((dialogInterface, i) -> {
-                            // do nothing
-                        }));
+                        .setMessage("Wähle eine*n bestehende*n Teilnehmer*in -oder- Gib einen Namen für den oder die neu anzulegende*n Teilnehmer*in ein.")
+                        .setView(participantsAlertView);
         final AlertDialog a = participantInputDialog.create();
+
+        participantsAlertListView.setOnItemClickListener((parent, view1, position, id) -> {
+            String value = (String) parent.getItemAtPosition(position);
+            participantsArray.add(value);
+            onDataChanged();
+            a.dismiss();
+        });
+
+        participantsAlertAddButton.setOnClickListener(view1 -> {
+            String value = participantsAlertEditText.getText().toString();
+            if (value.length() == 0) {
+                Toast.makeText(this,"Bitte einen Namen eingeben.",Toast.LENGTH_SHORT).show();
+            } else {
+                participantsArray.add(value);
+                onDataChanged();
+                a.dismiss();
+            }
+        });
+
         a.show();
     }
 
@@ -122,6 +138,11 @@ public class LocationParticipantsActivity extends AppCompatActivity implements A
             a.show();
         }
 
+    }
+
+    private void onDataChanged() {
+        participantsArrayAdapter.notifyDataSetChanged();
+        UIUtils.setListViewHeightBasedOnItems(participantsView);
     }
 
     @Override

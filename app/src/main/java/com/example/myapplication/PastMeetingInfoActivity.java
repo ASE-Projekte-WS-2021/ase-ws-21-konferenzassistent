@@ -9,6 +9,7 @@ import androidx.core.view.MenuItemCompat;
 
 import android.annotation.SuppressLint;
 import android.content.DialogInterface;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -32,11 +33,17 @@ public class PastMeetingInfoActivity extends AppCompatActivity {
             tvLocation,
             tvWindowInterval, tvWindowTime, tvDistanceInterval;
 
-    private int minutes;
-    private LocalDateTime startTime, endTime;
-    private int numOfParticipants;
+    private String minutes;
+    private String startTime, endTime;
+    private String numOfParticipants;
     private String location;
     private int windowInterval, windowTime, distanceInterval;
+
+    private String meeting_date;
+    private String meeting_duration;
+    private String meeting_number_participants;
+
+    private int dataBaseID;
 
     private ArrayList<String> participantList;
 
@@ -53,6 +60,19 @@ public class PastMeetingInfoActivity extends AppCompatActivity {
             getSupportActionBar().setTitle("Meeting");
             actionBar.setDisplayHomeAsUpEnabled(true); // sets up back button in action bar
         }
+        dataBaseID = getIntent().getIntExtra("Database_ID", 0);
+        MettingDatabase database = new MettingDatabase(this);
+        Cursor data = database.readAllData();
+
+        if(dataBaseID == -1)
+            data.moveToLast();
+        else
+            data.moveToPosition(dataBaseID);
+
+        // Get Data From database
+        meeting_date = data.getString(1);
+        meeting_duration = data.getString(2);
+        meeting_number_participants = data.getString(3);
 
         findTextViews();
         updateData();
@@ -83,8 +103,8 @@ public class PastMeetingInfoActivity extends AppCompatActivity {
 
     private void updateView() {
         tvMinutes.setText(minutes + " Minuten");
-        tvStartTime.setText(dateTimeFormatter.format(startTime));
-        tvEndTime.setText(dateTimeFormatter.format(endTime));
+        tvStartTime.setText(startTime);
+        tvEndTime.setText(endTime);
 
         tvNumOfParticipants.setText(numOfParticipants + " Teilnehmer");
 
@@ -96,10 +116,10 @@ public class PastMeetingInfoActivity extends AppCompatActivity {
     }
 
     private void updateData() {
-        minutes = 23;
-        startTime = LocalDateTime.now();
-        endTime = LocalDateTime.now();
-        numOfParticipants = 5;
+        minutes = "" + Integer.parseInt(meeting_duration)/60;
+        startTime = meeting_date;
+        endTime = "24";
+        numOfParticipants = meeting_number_participants;
         location = "Testgelände";
         windowInterval = 15;
         windowTime = 5;

@@ -44,6 +44,7 @@ public class ChecklistActivity extends AppCompatActivity {
 
         startMeetingButton = findViewById(R.id.startMeetingButton);
         startMeetingButton.setBackgroundResource(R.drawable.btn_disable);
+        startMeetingButton.setClickable(false);
         // Get extras
         maxCountdownTime = getIntent().getLongExtra("maxCountdownTime", 0);
         maxLueftungsTime = getIntent().getLongExtra("maxLueftungsTimer", 0);
@@ -90,8 +91,10 @@ public class ChecklistActivity extends AppCompatActivity {
         }
         if(checkedItems == 4){//change startMeetingButton color
             startMeetingButton.setBackgroundResource(R.drawable.btn_default);
+            startMeetingButton.setClickable(true);
         }else{
             startMeetingButton.setBackgroundResource(R.drawable.btn_disable);
+            startMeetingButton.setClickable(false);
         }
     }
 
