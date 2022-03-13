@@ -358,7 +358,7 @@ public class CountdownActivity extends AppCompatActivity {
         dateFormat.setTimeZone(TimeZone.getTimeZone("Europe/Berlin"));
 
         MettingDatabase database = new MettingDatabase(this);
-        database.addMeeting("" + dateFormat.format(startDate) , "" + seconds, "" +participants);
+        database.addMeeting("" + dateFormat.format(startDate), dateFormat.format(endDate),ort, "" + seconds, "" +participants);
     }
 
     public void finishMeeting(View view) {
