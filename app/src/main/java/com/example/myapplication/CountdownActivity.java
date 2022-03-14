@@ -1,17 +1,29 @@
 package com.example.myapplication;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.res.ResourcesCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentStatePagerAdapter;
+import androidx.viewpager2.adapter.FragmentStateAdapter;
+import androidx.viewpager2.widget.ViewPager2;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import com.google.android.material.tabs.TabLayout;
+import com.google.android.material.tabs.TabLayoutMediator;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -20,22 +32,12 @@ import java.util.TimeZone;
 
 public class CountdownActivity extends AppCompatActivity {
 
-    // Countdown TextView
-    private TextView countdownText;
-    private Button startCountdownButton;
 
-    private Button abstandsButton;
-    private TextView abstandsView;
-
-    private Button abstandsPauseButton;
-    private Button countdownPauseButton;
-
-    private TextView lueftungsInfoText;
 
     public static final String COUNTDOWN_BUTTONS = "my.action.COUNTDOWN_BUTTONS";
 
-    private long maxCountdownTime;
-    private long maxLueftungsTime;
+    private long maxWindowClosedTime;
+    private long maxWindowOpenTime;
     private long maxAbstandsTime;
 
     private boolean countdownPaused = false;
@@ -48,128 +50,36 @@ public class CountdownActivity extends AppCompatActivity {
     private boolean lueftungsSwitchStatus = false;
     private boolean abstandsSwitchStatus = false;
 
-    private ProgressBar abstandsProgressBar;
-    private ProgressBar lueftungsProgressBar;
-
-    private TextView teilnehmerTextView;
-    private TextView ortTextView;
-
     private Date startDate;
-    private Date endDate;
 
     private String participantCount = "0";
     private String ort;
 
+    // Fragments
+    private CountdownTimerFragment timer;
+    private Fragment information;
+
+    // Tabs Layout
+    TabLayout tabLayout;
+    ViewPager2 viewPager;
+    TabAdapter tabAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_countdown);
-        getSupportActionBar().setTitle("Meeting");
+        //getSupportActionBar().setTitle("Meeting");
+        // Hide the action bar
+        getSupportActionBar().hide();
 
-        initiateComponents();
+        getIntents();
 
+        // Get the Starting Time of the Meeting
         startDate = new Date();
 
-        // get max Countdown from intent
-        maxCountdownTime = getIntent().getLongExtra("maxCountdownTime", 0) * 60000;
-        maxLueftungsTime = getIntent().getLongExtra("maxLueftungsTimer", 0) * 60000;
-
-        maxAbstandsTime = getIntent().getLongExtra("maxAbstandsTimer", 0) * 60000;
-
-        lueftungsSwitchStatus = getIntent().getBooleanExtra("lueftungsSwitchStatus", false);
-        abstandsSwitchStatus = getIntent().getBooleanExtra("abstandsSwitchStatus", false);
-        participantCount = getIntent().getStringExtra("participantCount");
-        ort = getIntent().getStringExtra("location");
-
-        if (ort.equals("")) {
-            ort = "<leer>";
-        }
-
-        FillInformationField("" + participantCount, ort);
-
-        // start the Countdown service
-        Intent countdownIntent = new Intent(this, CountdownService.class);
-
-        // add the countdown Time to the intent
-        countdownIntent.putExtra("maxCountdownTime", maxCountdownTime);
-        countdownIntent.putExtra("maxLueftungsTimer", maxLueftungsTime);
-
-        countdownIntent.putExtra("maxAbstandsTimer", maxAbstandsTime);
-
-        countdownIntent.putExtra("lueftungsSwitchStatus", lueftungsSwitchStatus);
-        countdownIntent.putExtra("abstandsSwitchStatus", abstandsSwitchStatus);
-        // start the service
-        startService(countdownIntent);
-
-        // Setting the initial and Max values of the Progress bar
-        setProgressBarValues(maxAbstandsTime, abstandsProgressBar);
-        setProgressBarValues(maxCountdownTime, lueftungsProgressBar);
-
-        hideUI();
-    }
-
-    private void FillInformationField(String teilnehmer, String ort){
-        teilnehmerTextView.setText(teilnehmer);
-        ortTextView.setText(ort);
-    }
-
-    // Finds the Components in the View
-    private void initiateComponents(){
-        countdownText = findViewById(R.id.countdownView);
-        startCountdownButton = findViewById((R.id.StartButton));
-
-        abstandsPauseButton = findViewById(R.id.abstandsPauseButton);
-        countdownPauseButton = findViewById(R.id.PauseButton);
-
-        abstandsButton = findViewById(R.id.abstandsButton);
-        abstandsView = findViewById(R.id.abstandsView);
-
-        lueftungsInfoText = findViewById(R.id.lueftungsInfoText);
-
-        abstandsProgressBar = findViewById(R.id.abstandsProgressBar);
-        lueftungsProgressBar = findViewById(R.id.lueftungsProgressBar);
-
-        teilnehmerTextView = findViewById(R.id.teilnehmerTextView);
-        ortTextView = findViewById(R.id.ortTextView);
-    }
-
-
-    // Sets the Ui to Invisible if not used
-    private void hideUI(){
-        // If "Lüftung" is disabled
-        if(!lueftungsSwitchStatus){
-            countdownText.setVisibility(View.GONE);
-            startCountdownButton.setVisibility(View.GONE);
-            lueftungsProgressBar.setVisibility(View.GONE);
-            lueftungsInfoText.setVisibility(View.GONE);
-            findViewById(R.id.materialCardView3).setVisibility(View.GONE);
-            findViewById(R.id.materialCardView5).setVisibility(View.GONE);
-        }
-        // If "Abstand" is disabled
-        if(!abstandsSwitchStatus){
-            abstandsView.setVisibility(View.GONE);
-            abstandsButton.setVisibility(View.GONE);
-            abstandsProgressBar.setVisibility(View.GONE);
-            findViewById(R.id.materialCardView4).setVisibility(View.GONE);
-        }
-
-    }
-
-
-    private BroadcastReceiver br = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            // update the Gui
-            updateTime(intent);
-        }
-    };
-
-    // Sets the initial values of the Progress Bar
-    private void setProgressBarValues(long startTime, ProgressBar progressBar) {
-
-        progressBar.setMax((int) startTime / 1000);
-        progressBar.setProgress((int) startTime / 1000);
-
+        // Start the Countdown Service
+        startCountDownService();
     }
 
     @Override
@@ -177,15 +87,15 @@ public class CountdownActivity extends AppCompatActivity {
         super.onResume();
         // register the Receiver
         registerReceiver(br, new IntentFilter(CountdownService.COUNTDOWN_SERVICE));
+        // Make sure the Timer updates
         wakeUpTimer();
-    }
 
-    // Wakes up the timer if app was in background
-    private void wakeUpTimer(){
-        Intent intent = new Intent(COUNTDOWN_BUTTONS);
-        // set userInteraction to false to signal its not a Button Press
-        intent.putExtra("userInteraction",false);
-        sendBroadcast(intent);
+        // Init Views
+        initViews();
+        timer.hideUI(lueftungsSwitchStatus,abstandsSwitchStatus);
+        // Set the ProgressBar Values to the initial Values
+        timer.setupProgressBars(maxAbstandsTime, maxWindowClosedTime);
+
     }
 
     @Override
@@ -213,10 +123,82 @@ public class CountdownActivity extends AppCompatActivity {
         super.onDestroy();
     }
 
-    // Update Countdown Timer
-    private void updateTime(Intent intent){
-        if(intent.getExtras() != null){
+    // Finds Views
+    protected void initViews(){
+        tabLayout = findViewById(R.id.tab_layout);
+        viewPager = findViewById(R.id.view_pager);
 
+        // create timer
+        timer = CountdownTimerFragment.newInstance();
+        CountdownInformationFragment information = CountdownInformationFragment.newInstance();
+
+        tabAdapter = new TabAdapter(getSupportFragmentManager(), getLifecycle());
+        // Add fragments
+        tabAdapter.addFragment(timer);
+        tabAdapter.addFragment(information);
+        // Set Adapter
+        viewPager.setAdapter(tabAdapter);
+        // Create Tabs
+        TabLayoutMediator tabLayoutMediator = new TabLayoutMediator(tabLayout, viewPager, new TabConfigurationStrategy());
+        tabLayoutMediator.attach();
+    }
+
+
+    // Get the Data from the Intents
+    protected void getIntents(){
+
+        // Get Countdown Timer
+        maxWindowClosedTime = getIntent().getLongExtra("maxCountdownTime", 0) * 60000;
+        maxWindowOpenTime = getIntent().getLongExtra("maxLueftungsTimer", 0) * 60000;
+        maxAbstandsTime = getIntent().getLongExtra("maxAbstandsTimer", 0) * 60000;
+
+        // Get Activation Status
+        lueftungsSwitchStatus = getIntent().getBooleanExtra("lueftungsSwitchStatus", false);
+        abstandsSwitchStatus = getIntent().getBooleanExtra("abstandsSwitchStatus", false);
+
+        // Get Meeting Information
+        participantCount = getIntent().getStringExtra("participantCount");
+        ort = getIntent().getStringExtra("location");
+    }
+
+    // Start the Countdown Service
+    private void startCountDownService(){
+        Intent countdownIntent = new Intent(this, CountdownService.class);
+
+        // Put the countdown timer as Extra
+        countdownIntent.putExtra("maxCountdownTime", maxWindowClosedTime);
+        countdownIntent.putExtra("maxLueftungsTimer", maxWindowOpenTime);
+        countdownIntent.putExtra("maxAbstandsTimer", maxAbstandsTime);
+
+        // Put the countdown status as Extra
+        countdownIntent.putExtra("lueftungsSwitchStatus", lueftungsSwitchStatus);
+        countdownIntent.putExtra("abstandsSwitchStatus", abstandsSwitchStatus);
+
+        // start the service
+        startService(countdownIntent);
+    }
+
+    // Broadcast Receiver to receive updates on the countdown
+    private BroadcastReceiver br = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            // send Update to the UI
+            updateTime(intent);
+        }
+    };
+
+    // Wakes up the timer if app was in background
+    private void wakeUpTimer(){
+        Intent intent = new Intent(COUNTDOWN_BUTTONS);
+        // set userInteraction to false to signal its not a Button Press
+        intent.putExtra("userInteraction",false);
+        sendBroadcast(intent);
+    }
+
+    // Update Countdown Timer and sends UI updates to the Fragment
+    private void updateTime(Intent intent){
+        // Check if the Intent has Extras
+        if(intent.getExtras() != null){
             // get the countdowns and if window is open
             long lueftungsMilliS = intent.getLongExtra("lueftungsMilliS", 0);
             isOpen = intent.getBooleanExtra("windowOpen", false);
@@ -227,62 +209,24 @@ public class CountdownActivity extends AppCompatActivity {
             lueftungIsFinished = intent.getBooleanExtra("lueftungDone", false);
             abstandIsFinished = intent.getBooleanExtra("abstandDone", false);
 
-
-            // Build a string
-            String lueftungsTimeLeft = timeStringBuilder(lueftungsMilliS);
-            String abstandsTimeLeft = timeStringBuilder(abstandsMilliS);
-
-
-            // Add the description
-            if(isOpen) {
-               // lueftungsTimeLeft += " schließen!";
-                lueftungsInfoText.setText("Fenster sollte geöffnet sein!");
-            }
-            else{
-                //lueftungsTimeLeft += " öffnen!";
-                lueftungsInfoText.setText("Fenster sollte geschlossen sein!");
-            }
-
-            // Check if Lüftungstimer is done
-            if(lueftungIsFinished){
-                // Recalibrate the Progress Bar cause timer changes every iteration
-
-                startCountdownButton.setEnabled(true);
-            }
-            else{
-                startCountdownButton.setEnabled(false);
-            }
-
-            // Check if Abstandstimer is done
-            if(abstandIsFinished){
-                abstandsButton.setEnabled(true);
-            }
-            else{
-                abstandsButton.setEnabled(false);
-            }
-
-            // Set the countdown text
-            countdownText.setText(lueftungsTimeLeft);
-            abstandsView.setText(abstandsTimeLeft);
-
-            abstandsProgressBar.setProgress((int) (abstandsMilliS / 1000));
-            lueftungsProgressBar.setProgress((int) (lueftungsMilliS / 1000));
-
+            // Update the UI of the timer
+            timer.UpdateUI(isOpen, lueftungIsFinished, abstandIsFinished, abstandsMilliS, lueftungsMilliS);
         }
-
     }
 
-    public void startCountdown(View view){
+    // Starts the lueftungs countdown
+    public void startLueftung(View view){
         // Send a Broadcast to the Service if button is pressed
         Intent intent = new Intent(COUNTDOWN_BUTTONS);
         intent.putExtra("lueftungsUserInteraction", true);
         sendBroadcast(intent);
 
-        // Check if Window is open
-       if(!isOpen)lueftungsProgressBar.setMax((int) maxLueftungsTime/1000);
-       else lueftungsProgressBar.setMax((int) maxCountdownTime/1000);
+        // Check if Window is open and reset progressbars in the UI
+       if(!isOpen)timer.resetLueftungsProgressBar(maxWindowOpenTime);
+       else timer.resetLueftungsProgressBar(maxWindowClosedTime);
     }
 
+    // Starts the abstands countdown
     public void startAbstand(View view){
         // Send a Broadcast to the Service if button is pressed
         Intent intent = new Intent(COUNTDOWN_BUTTONS);
@@ -290,16 +234,18 @@ public class CountdownActivity extends AppCompatActivity {
         sendBroadcast(intent);
     }
 
-    public void pauseCountdown(View view){
+    // Pauses the lueftungsCountdown
+    public void pauseLueftungsCountdown(View view){
         // Send a Broadcast to the Service if button is pressed
         Intent intent = new Intent(COUNTDOWN_BUTTONS);
         intent.putExtra("lueftungsPauseUserInteraction", true);
         sendBroadcast(intent);
         countdownPaused = !countdownPaused;
 
-        toggleIcon(countdownPauseButton, countdownPaused);
+        timer.pauseButtonToggle(countdownPaused, CountdownTimerFragment.PAUSE_LUEFTUNGS_BUTTON);
     }
 
+    // Paused the abstands countdown
     public void pauseAbstand(View view){
         // Send a Broadcast to the Service if button is pressed
         Intent intent = new Intent(COUNTDOWN_BUTTONS);
@@ -307,45 +253,11 @@ public class CountdownActivity extends AppCompatActivity {
         sendBroadcast(intent);
         abstandPaused = !abstandPaused;
 
-        toggleIcon(abstandsPauseButton, abstandPaused);
+        timer.pauseButtonToggle(abstandPaused, CountdownTimerFragment.PAUSE_ABSTAND_BUTTON);
     }
-
-    private void toggleIcon(Button button, Boolean isPaused){
-        if(isPaused)
-        {
-            button.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_baseline_play_arrow_24, null));
-        }
-        else{
-            button.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_baseline_pause_24, null));
-        }
-    }
-
-    // Builds a String to show the Timer
-    private String timeStringBuilder(long timer){
-        // Convert to minutes and seconds
-        int minutes = (int) timer/60000;
-        int seconds = (int) timer%60000/1000;
-
-        // Build a string
-        String timeLeft;
-
-        timeLeft = "" + minutes;
-        timeLeft += ":";
-        // Add a leading 0 to seconds
-        if(seconds < 10) timeLeft += "0";
-        timeLeft += seconds;
-
-        return timeLeft;
-    }
-
-    /* finishMeeting method code by Kimmi Dhingra:
-    * https://stackoverflow.com/questions/18442328/how-to-finish-all-activities-except-the-first-activity
-    * submitted 2014-08-06, edited 2017-10-10
-    * "To clear top activities from stack use below code
-    * It will delete all activities from stack either asynctask run or not in the application." */
 
     private void SaveToDatabase(){
-        endDate = new Date();
+        Date endDate = new Date();
         long diff = endDate.getTime() - startDate.getTime();
         long seconds = diff / 1000;
         long minutes = seconds / 60;
@@ -357,6 +269,12 @@ public class CountdownActivity extends AppCompatActivity {
         MettingDatabase database = new MettingDatabase(this);
         database.addMeeting("" + dateFormat.format(startDate), dateFormat.format(endDate),ort, "" + seconds, "" + participantCount);
     }
+
+    /* finishMeeting method code by Kimmi Dhingra:
+     * https://stackoverflow.com/questions/18442328/how-to-finish-all-activities-except-the-first-activity
+     * submitted 2014-08-06, edited 2017-10-10
+     * "To clear top activities from stack use below code
+     * It will delete all activities from stack either asynctask run or not in the application." */
 
     public void finishMeeting(View view) {
         Intent intent = new Intent(this, PastMeetingInfoActivity.class);
