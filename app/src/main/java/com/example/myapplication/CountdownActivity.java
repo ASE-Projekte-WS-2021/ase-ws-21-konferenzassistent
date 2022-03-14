@@ -2,6 +2,7 @@ package com.example.myapplication;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
@@ -12,6 +13,7 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
@@ -21,6 +23,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
@@ -54,6 +57,9 @@ public class CountdownActivity extends AppCompatActivity {
 
     private String participantCount = "0";
     private String ort;
+
+    // Meeting end Button
+    private Button endMeetingButton;
 
     // Fragments
     private CountdownTimerFragment timer;
@@ -127,6 +133,7 @@ public class CountdownActivity extends AppCompatActivity {
     protected void initViews(){
         tabLayout = findViewById(R.id.tab_layout);
         viewPager = findViewById(R.id.view_pager);
+        endMeetingButton = findViewById(R.id.end_meeting);
 
         // create timer
         timer = CountdownTimerFragment.newInstance();
@@ -141,8 +148,44 @@ public class CountdownActivity extends AppCompatActivity {
         // Create Tabs
         TabLayoutMediator tabLayoutMediator = new TabLayoutMediator(tabLayout, viewPager, new TabConfigurationStrategy());
         tabLayoutMediator.attach();
+
+        // Set listeners for End Button
+        endMeetingButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast toast = Toast.makeText(getApplicationContext(), "Butten gedrückt halten um Meeting zu beenden", Toast.LENGTH_SHORT);
+                toast.show();
+            }
+        });
+
+        endMeetingButton.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                displayDialog(view).show();
+                return true;
+            }
+        });
     }
 
+
+    private AlertDialog displayDialog(View view){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        // Add the buttons
+        builder.setPositiveButton("ja", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                // User clicked OK button
+                finishMeeting(view);
+            }
+        });
+        builder.setNegativeButton("nein", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                // User cancelled the dialog
+            }
+        });
+        builder.setMessage("Wollen sie das Meeting wirklich Beenden?");
+        return builder.create();
+
+    }
 
     // Get the Data from the Intents
     protected void getIntents(){
