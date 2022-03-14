@@ -115,8 +115,6 @@ public class CountdownTimerFragment extends Fragment {
             abstandsProgressBar = mView.findViewById(R.id.abstandsProgressBar);
             lueftungsProgressBar = mView.findViewById(R.id.lueftungsProgressBar);
 
-            teilnehmerTextView = mView.findViewById(R.id.teilnehmerTextView);
-            ortTextView = mView.findViewById(R.id.ortTextView);
         }
     }
 
