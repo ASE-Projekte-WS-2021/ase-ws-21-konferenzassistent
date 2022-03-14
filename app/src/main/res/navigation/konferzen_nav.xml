@@ -8,11 +8,11 @@
     <fragment
         android:id="@+id/miHome"
         android:name="com.example.myapplication.HomeFragment"
-        android:label="fragment_home"
+        android:label="Corona-Konferenz-Assistent"
         tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/miSettings"
         android:name="com.example.myapplication.SettingsFragment"
-        android:label="fragment_settings"
+        android:label="Einstellungen"
         tools:layout="@layout/fragment_settings" />
 </navigation>

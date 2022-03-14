@@ -3,6 +3,7 @@ package com.example.myapplication;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
+import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -22,6 +23,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
+import java.util.Set;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -44,8 +46,12 @@ public class MainActivity extends AppCompatActivity {
         // Setup Navigation Controller
         NavigationUI.setupWithNavController(navigationView, navController);
 
-        navigationView.setSelectedItemId(R.id.miHome);
+        // Configure App Bar to Change
+        AppBarConfiguration appBarConfiguration = new AppBarConfiguration
+                .Builder(R.id.miHome, R.id.miSettings).build();
 
+        // Setup the App Bar with the Navigation Controller
+        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
     }
 
     // Opens the Meeting Wizard
@@ -58,6 +64,4 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
     }
-
-
 }
