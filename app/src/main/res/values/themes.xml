@@ -16,6 +16,7 @@
         <item name="android:buttonTint" tools:targetApi="l">?attr/colorSecondaryVariant</item>
 
     </style>
-
-
+    <style name="CustomTabText" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">20sp</item>
+    </style>
 </resources>
