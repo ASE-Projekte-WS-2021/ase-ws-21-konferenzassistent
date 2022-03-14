@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/konferzen_nav"
+    app:startDestination="@id/miHome">
+
+    <fragment
+        android:id="@+id/miHome"
+        android:name="com.example.myapplication.HomeFragment"
+        android:label="Corona-Konferenz-Assistent"
+        tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/miSettings"
+        android:name="com.example.myapplication.SettingsFragment"
+        android:label="Einstellungen"
+        tools:layout="@layout/fragment_settings" />
+</navigation>
