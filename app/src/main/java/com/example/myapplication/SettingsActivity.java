@@ -1,10 +1,15 @@
 package com.example.myapplication;
+import android.os.CountDownTimer;
+import android.text.format.DateFormat;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
 
+import android.app.Dialog;
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
@@ -16,13 +21,18 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import static java.lang.Math.toIntExact;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.switchmaterial.SwitchMaterial;
 
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
+
+import org.w3c.dom.Text;
+
 
 public class SettingsActivity extends AppCompatActivity {
 
@@ -41,18 +51,18 @@ public class SettingsActivity extends AppCompatActivity {
     private TextView abstandstimeClickableText;
 
     // Countdown timers in minutes
-    private long maxCountdownTime;
-    private long lueftungsCountdownTime;
-    private long abstandsCountdownTime;
+    private CustomCountdownTimer maxCountdownTime;
+    private CustomCountdownTimer lueftungsCountdownTime;
+    private CustomCountdownTimer abstandsCountdownTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
-        maxCountdownTime = 15;
-        lueftungsCountdownTime = 5;
-        abstandsCountdownTime = 15;
+        maxCountdownTime = new CustomCountdownTimer(15);
+        lueftungsCountdownTime = new CustomCountdownTimer(5);
+        abstandsCountdownTime = new CustomCountdownTimer(15);
 
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
@@ -78,10 +88,34 @@ public class SettingsActivity extends AppCompatActivity {
 
         startMeetingButton = findViewById(R.id.startButton);
 
-;    }
+  }
+
+    private void showTimePickerDialog(View v, LinearLayout clickable, TextView textToChange){
+        float countdown = 0;
+        CustomCountdownTimer timer;
+        int clickableId = clickable.getId();
+
+        // Preset the Spinner to the rigth values
+        if (clickableId == lueftungstimeClickable.getId()) {
+            countdown = maxCountdownTime.getTimer();
+            timer = maxCountdownTime;
+        } else if (clickableId == lueftungsdauerClickable.getId()) {
+            countdown = lueftungsCountdownTime.getTimer();
+            timer = lueftungsCountdownTime;
+        } else {
+            countdown = abstandsCountdownTime.getTimer();
+            timer = abstandsCountdownTime;
+        }
+
+        DialogFragment timerFragment = new TimePickerFragment(Math.round(countdown), v, textToChange, timer);
+        timerFragment.show(getSupportFragmentManager(), "timePicker");
+    }
+
 
     private void setupListener(LinearLayout clickable, TextView textToChange) {
+        clickable.setOnClickListener(View -> showTimePickerDialog(View, clickable, textToChange));
 
+        /*
         EditText minuteInput = new EditText(SettingsActivity.this);
         minuteInput.setInputType(InputType.TYPE_CLASS_NUMBER);
         minuteInput.setFilters(new InputFilter[]{ new InputFilter.LengthFilter(3)}); // setzt maximale Inputlänge auf 3 Charaktere/Ziffern
@@ -113,15 +147,66 @@ public class SettingsActivity extends AppCompatActivity {
                         });
         final AlertDialog a = minuteInputDialog.create();
         clickable.setOnClickListener(view -> a.show());
+        */
+
+    }
+
+    // The Time Picker Fragment
+    public static class TimePickerFragment extends DialogFragment implements CustomTimePickerDialog.OnTimeSetListener {
+        private int minutes;
+        private View view;
+        private TextView textToChange;
+        private CustomCountdownTimer timer;
+        TimePickerFragment(int minutes, View v, TextView textToChange, CustomCountdownTimer timer){
+            this.minutes = minutes;
+            view = v;
+            this.timer = timer;
+            this.textToChange = textToChange;
+        }
+        @Override
+        public Dialog onCreateDialog(Bundle saveInstanceState){
+            int hour = 0;
+
+            CustomTimePickerDialog time_picker = new CustomTimePickerDialog(getActivity(),this,hour,minutes, true);
+
+            return time_picker;
+        }
+
+
+        public void onTimeSet(TimePicker picker, int hourOfDay, int minute) {
+            // Do something with the time chosen by the user
+            minutes = minute;
+            long parsedLong = Long.parseLong(Integer.toString(minutes));
+            textToChange.setText(minutes + " Minuten");
+            timer.setTimer(parsedLong);
+        }
+
+    }
+
+    private class CustomCountdownTimer{
+        long timer;
+
+        public long getTimer() {
+            return timer;
+        }
+
+        public void setTimer(long timer) {
+            this.timer = timer;
+        }
+
+
+        CustomCountdownTimer(long timer){
+            this.timer = timer;
+        }
     }
 
     public void openLocationParticipantsActivity(View view) {
         Intent intent = new Intent(this, LocationParticipantsActivity.class);
 
         // Send them as intent to the next Activity
-        intent.putExtra("maxCountdownTime", maxCountdownTime);
-        intent.putExtra("maxLueftungsTimer", lueftungsCountdownTime);
-        intent.putExtra("maxAbstandsTimer", abstandsCountdownTime);
+        intent.putExtra("maxCountdownTime", maxCountdownTime.getTimer());
+        intent.putExtra("maxLueftungsTimer", lueftungsCountdownTime.getTimer());
+        intent.putExtra("maxAbstandsTimer", abstandsCountdownTime.getTimer());
 
         // Send the switch status to the next Activity
         intent.putExtra("lueftungsSwitchStatus", lueftungsSwitch.isChecked());
@@ -193,6 +278,8 @@ public class SettingsActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 }
+
+
 
 /*
 Starting another activity:
