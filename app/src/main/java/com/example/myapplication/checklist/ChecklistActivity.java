@@ -68,7 +68,7 @@ public class ChecklistActivity extends AppCompatActivity implements OnAdapterIte
 
         // initialize checklist and recyclerview
         checklistItems = new ArrayList<>();
-        checklistItems.add(new ChecklistItem("Desinfektionsmittel bereit", "test"));
+        checklistItems.add(new ChecklistItem("Desinfektionsmittel bereit"));
         checklistItems.add(new ChecklistItem("3G-Regelung o.ä. geprüft"));
         checklistItems.add(new ChecklistItem("Masken / Plexiglas geprüft"));
         checklistItems.add(new ChecklistItem("Abstände gewährleistet"));
