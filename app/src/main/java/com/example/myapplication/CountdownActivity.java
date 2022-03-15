@@ -63,7 +63,7 @@ public class CountdownActivity extends AppCompatActivity {
 
     // Fragments
     private CountdownTimerFragment timer;
-    private Fragment information;
+    private CountdownInformationFragment information;
 
     // Tabs Layout
     TabLayout tabLayout;
@@ -98,9 +98,18 @@ public class CountdownActivity extends AppCompatActivity {
 
         // Init Views
         initViews();
+
+        // Hide the UI that got turned off
         timer.hideUI(lueftungsSwitchStatus,abstandsSwitchStatus);
+
         // Set the ProgressBar Values to the initial Values
         timer.setupProgressBars(maxAbstandsTime, maxWindowClosedTime);
+
+        // Date Formatter
+        DateFormat dateFormat = new SimpleDateFormat("HH:mm");
+        dateFormat.setTimeZone(TimeZone.getDefault());
+
+        information.getValuesForTextViews(ort,"" + dateFormat.format(startDate),participantCount);
 
     }
 
@@ -137,7 +146,7 @@ public class CountdownActivity extends AppCompatActivity {
 
         // create timer
         timer = CountdownTimerFragment.newInstance();
-        CountdownInformationFragment information = CountdownInformationFragment.newInstance();
+        information = CountdownInformationFragment.newInstance();
 
         tabAdapter = new TabAdapter(getSupportFragmentManager(), getLifecycle());
         // Add fragments
@@ -167,7 +176,7 @@ public class CountdownActivity extends AppCompatActivity {
         });
     }
 
-
+    // Alert Dialog for finish meeting confirmation
     private AlertDialog displayDialog(View view){
         AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.dialogAlertStyle);
         // Add the buttons
