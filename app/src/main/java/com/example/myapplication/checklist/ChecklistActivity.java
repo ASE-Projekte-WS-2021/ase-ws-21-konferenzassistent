@@ -1,17 +1,16 @@
 package com.example.myapplication.checklist;
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.content.Intent;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 
 import com.example.myapplication.CountdownActivity;
 import com.example.myapplication.R;
@@ -69,12 +68,12 @@ public class ChecklistActivity extends AppCompatActivity implements OnAdapterIte
 
         // initialize checklist and recyclerview
         checklistItems = new ArrayList<>();
-        checklistItems.add(new ChecklistItem("Desinfektionsmittel bereit","test"));
+        checklistItems.add(new ChecklistItem("Desinfektionsmittel bereit", "test"));
         checklistItems.add(new ChecklistItem("3G-Regelung o.ä. geprüft"));
         checklistItems.add(new ChecklistItem("Masken / Plexiglas geprüft"));
         checklistItems.add(new ChecklistItem("Abstände gewährleistet"));
 
-        checklistAdapter = new ChecklistAdapter(this,checklistItems);
+        checklistAdapter = new ChecklistAdapter(this, checklistItems);
         rvChecklist.setAdapter(checklistAdapter);
         linearLayoutManager = new LinearLayoutManager(this);
         rvChecklist.setLayoutManager(linearLayoutManager);
@@ -86,10 +85,10 @@ public class ChecklistActivity extends AppCompatActivity implements OnAdapterIte
     public void openCountdownActivity(View view) {
         Intent intent = new Intent(this, CountdownActivity.class);
         //if(checkedItems == 4/*cb1.isChecked() && cb2.isChecked() && cb3.isChecked() && cb4.isChecked()*/){//Meeting will only start if checklist items are selected
-          // send to next activity
-          intent.putExtra("maxCountdownTime", maxCountdownTime);
-          intent.putExtra("maxLueftungsTimer", maxLueftungsTime);
-          intent.putExtra("maxAbstandsTimer", maxAbstandsTime);
+        // send to next activity
+        intent.putExtra("maxCountdownTime", maxCountdownTime);
+        intent.putExtra("maxLueftungsTimer", maxLueftungsTime);
+        intent.putExtra("maxAbstandsTimer", maxAbstandsTime);
 
         intent.putExtra("lueftungsSwitchStatus", lueftungsSwitchStatus);
         intent.putExtra("abstandsSwitchStatus", abstandsSwitchStatus);
@@ -97,8 +96,8 @@ public class ChecklistActivity extends AppCompatActivity implements OnAdapterIte
         intent.putExtra("location", location);
         intent.putExtra("participantCount", participantCount);
 
-          // start next activity
-          startActivity(intent);
+        // start next activity
+        startActivity(intent);
         //}
     }
 
@@ -110,10 +109,10 @@ public class ChecklistActivity extends AppCompatActivity implements OnAdapterIte
                 checkedItems++;
             }
         }
-        if(checkedItems == checklistItems.size()){ //change startMeetingButton color
+        if (checkedItems == checklistItems.size()) { //change startMeetingButton color
             startMeetingButton.setBackgroundResource(R.drawable.btn_default);
             startMeetingButton.setClickable(true);
-        }else{
+        } else {
             startMeetingButton.setBackgroundResource(R.drawable.btn_disable);
             startMeetingButton.setClickable(false);
         }

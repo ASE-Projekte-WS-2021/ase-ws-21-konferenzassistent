@@ -32,7 +32,7 @@ public class ChecklistAdapter extends RecyclerView.Adapter<ChecklistAdapter.Chec
     @Override
     public ChecklistViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(ct);
-        View view = inflater.inflate(R.layout.rv_row_checklist,parent,false);
+        View view = inflater.inflate(R.layout.rv_row_checklist, parent, false);
         return new ChecklistViewHolder(view);
     }
 
@@ -52,7 +52,7 @@ public class ChecklistAdapter extends RecyclerView.Adapter<ChecklistAdapter.Chec
             holder.infoButtonItem.setOnClickListener(view -> {
                 AlertDialog.Builder builder = new AlertDialog.Builder(ct)
                         .setMessage(hint)
-                        .setPositiveButton("OK",(dialogInterface, i) -> {
+                        .setPositiveButton("OK", (dialogInterface, i) -> {
                             // do nothing
                         });
                 builder.create().show();
@@ -65,7 +65,7 @@ public class ChecklistAdapter extends RecyclerView.Adapter<ChecklistAdapter.Chec
         return checklistItems.size();
     }
 
-    public class ChecklistViewHolder extends RecyclerView.ViewHolder{
+    public class ChecklistViewHolder extends RecyclerView.ViewHolder {
 
         CardView cardViewItem;
         CheckBox checkBoxItem;
