@@ -128,7 +128,7 @@ public class ChecklistActivity extends AppCompatActivity implements OnAdapterIte
     }
 
     @Override
-    public void onAdapterItemClickListener() {
+    public void onAdapterItemClick() {
         checkItem();
     }
 }

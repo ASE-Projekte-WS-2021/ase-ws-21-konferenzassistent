@@ -43,7 +43,7 @@ public class ChecklistAdapter extends RecyclerView.Adapter<ChecklistAdapter.Chec
         holder.cardViewItem.setOnClickListener(view -> {
             checklistItems.get(position).toggle();
             holder.checkBoxItem.toggle();
-            adapterItemClickListener.onAdapterItemClickListener();
+            adapterItemClickListener.onAdapterItemClick();
         });
         String hint = checklistItems.get(position).getHint();
         if (hint.equals("")) {
