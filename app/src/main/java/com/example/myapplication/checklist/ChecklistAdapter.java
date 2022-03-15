@@ -22,10 +22,10 @@ public class ChecklistAdapter extends RecyclerView.Adapter<ChecklistAdapter.Chec
     private List<ChecklistItem> checklistItems;
     private OnAdapterItemClickListener adapterItemClickListener = null;
 
-    public ChecklistAdapter(OnAdapterItemClickListener ct, List<ChecklistItem> checklistItems) {
-        this.adapterItemClickListener = ct;
-        this.ct = (Context) ct;
+    public ChecklistAdapter(Context ct, List<ChecklistItem> checklistItems) {
+        this.ct = ct;
         this.checklistItems = checklistItems;
+        this.adapterItemClickListener = (OnAdapterItemClickListener) ct;
     }
 
     @NonNull
