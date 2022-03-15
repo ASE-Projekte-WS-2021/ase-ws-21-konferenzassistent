@@ -1,31 +1,24 @@
 package com.example.myapplication;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
+
 import androidx.cardview.widget.CardView;
-import androidx.databinding.DataBindingUtil;
-import androidx.databinding.ViewDataBinding;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.myapplication.databinding.MeetingBottomSheetBinding;
-
-import java.util.ArrayList;
 import java.util.List;
 
 public class MeetingHistoryAdapter extends RecyclerView.Adapter<MeetingHistoryAdapter.MeetingHistoryViewHolder> {
 
-    private Context ct;
-    private FragmentManager manager;
-    private List<Meeting> meetingsList;
+    private final Context ct;
+    private final FragmentManager manager;
+    private final List<Meeting> meetingsList;
 
     public MeetingHistoryAdapter(Context ct, FragmentManager manager, List<Meeting> meetingsList) {
         this.ct = ct;
@@ -43,7 +36,6 @@ public class MeetingHistoryAdapter extends RecyclerView.Adapter<MeetingHistoryAd
 
     @Override
     public void onBindViewHolder(@NonNull MeetingHistoryViewHolder holder, int position) {
-
         // Get the Values from the meeting List
         String duration = Integer.parseInt(meetingsList.get(position).getDuration())/60 + "";
         String startTime = meetingsList.get(position).getDate().substring(11);
@@ -52,17 +44,25 @@ public class MeetingHistoryAdapter extends RecyclerView.Adapter<MeetingHistoryAd
         String ort = meetingsList.get(position).getLocation();
         String date = meetingsList.get(position).getDate().substring(0,10);
 
+        // set the Text Values of the Holder
         holder.tvDate.setText(date);
-        holder.tvTime.setText(startTime + " - " + endTime);
+        holder.tvTime.setText(String.format(ct.getString(R.string.meeting_history_minutes_divider),startTime,endTime));
         holder.tvLocation.setText(ort);
-        holder.tvDuration.setText(duration + " min");
+        holder.tvDuration.setText(String.format(ct.getString(R.string.meeting_history_minutes_short),duration));
         holder.tvNumParticipants.setText(participants);
 
+        // set onclick listener on the cardView
         holder.cardView.setOnClickListener(view -> {
             // create a new bottom sheet and set the values for the view
             MeetingBottomSheetAdapter meetingBottomSheetAdapter = new MeetingBottomSheetAdapter();
             meetingBottomSheetAdapter.show(manager , meetingBottomSheetAdapter.getTag());
-            meetingBottomSheetAdapter.setValues(duration + " Minuten", date, startTime, endTime, participants, ort);
+            meetingBottomSheetAdapter.setValues(
+                    String.format(ct.getString(R.string.meeting_history_minutes_long),duration),
+                    date,
+                    startTime,
+                    endTime,
+                    participants,
+                    ort);
 
             /*
             Intent intent = new Intent(ct, PastMeetingInfoActivity.class);
@@ -77,7 +77,7 @@ public class MeetingHistoryAdapter extends RecyclerView.Adapter<MeetingHistoryAd
         return meetingsList.size();
     }
 
-    public class MeetingHistoryViewHolder extends RecyclerView.ViewHolder {
+    public static class MeetingHistoryViewHolder extends RecyclerView.ViewHolder {
 
         CardView cardView;
         TextView tvDate, tvTime, tvLocation, tvDuration, tvNumParticipants;
