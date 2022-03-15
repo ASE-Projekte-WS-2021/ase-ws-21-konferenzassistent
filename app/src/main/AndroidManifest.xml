@@ -37,7 +37,7 @@
             android:exported="false"
             android:launchMode="singleTop" />
         <activity
-            android:name=".ChecklistActivity"
+            android:name=".checklist.ChecklistActivity"
             android:exported="false" />
         <activity
             android:name=".SettingsActivity"
