@@ -3,21 +3,23 @@ package com.example.myapplication.checklist;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.Switch;
 
 import com.example.myapplication.CountdownActivity;
 import com.example.myapplication.R;
 
-public class ChecklistActivity extends AppCompatActivity {
+import java.util.ArrayList;
+import java.util.List;
+
+public class ChecklistActivity extends AppCompatActivity implements OnAdapterItemClickListener {
     private long maxCountdownTime;
     private long maxLueftungsTime;
 
@@ -32,6 +34,11 @@ public class ChecklistActivity extends AppCompatActivity {
     private String location, participantCount;
 
     private int checkedItems;
+
+    private RecyclerView rvChecklist;
+    private List<ChecklistItem> checklistItems;
+    private ChecklistAdapter checklistAdapter;
+    private LinearLayoutManager linearLayoutManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +65,19 @@ public class ChecklistActivity extends AppCompatActivity {
         location = getIntent().getStringExtra("location");
         participantCount = getIntent().getStringExtra("participantCount");
 
+        rvChecklist = findViewById(R.id.rv_checklist);
 
+        // initialize checklist and recyclerview
+        checklistItems = new ArrayList<>();
+        checklistItems.add(new ChecklistItem("Desinfektionsmittel bereit","test"));
+        checklistItems.add(new ChecklistItem("3G-Regelung o.ä. geprüft"));
+        checklistItems.add(new ChecklistItem("Masken / Plexiglas geprüft"));
+        checklistItems.add(new ChecklistItem("Abstände gewährleistet"));
+
+        checklistAdapter = new ChecklistAdapter(this,checklistItems);
+        rvChecklist.setAdapter(checklistAdapter);
+        linearLayoutManager = new LinearLayoutManager(this);
+        rvChecklist.setLayoutManager(linearLayoutManager);
 
         super.onCreate(savedInstanceState);
     }
@@ -84,21 +103,14 @@ public class ChecklistActivity extends AppCompatActivity {
     }
 
     //check checklist
-    public void checkItem(View view){
+    public void checkItem() {
         checkedItems = 0;
-//        if(cb1.isChecked()){
-//            checkedItems++;
-//        }
-//        if(cb2.isChecked()){
-//            checkedItems++;
-//        }
-//        if(cb3.isChecked()){
-//            checkedItems++;
-//        }
-//        if(cb4.isChecked()){
-//            checkedItems++;
-//        }
-        if(checkedItems == 4){//change startMeetingButton color
+        for (ChecklistItem item : checklistItems) {
+            if (item.isChecked()) {
+                checkedItems++;
+            }
+        }
+        if(checkedItems == checklistItems.size()){ //change startMeetingButton color
             startMeetingButton.setBackgroundResource(R.drawable.btn_default);
             startMeetingButton.setClickable(true);
         }else{
@@ -114,5 +126,10 @@ public class ChecklistActivity extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onAdapterItemClickListener() {
+        checkItem();
     }
 }

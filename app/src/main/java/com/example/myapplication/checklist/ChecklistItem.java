@@ -47,6 +47,10 @@ public class ChecklistItem {
         isChecked = checked;
     }
 
+    public void toggle() {
+        isChecked = !isChecked;
+    }
+
     @Override
     public String toString() {
         return "ChecklistItem{" +
