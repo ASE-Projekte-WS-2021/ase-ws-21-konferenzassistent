@@ -29,6 +29,7 @@
                 android:layout_height="wrap_content"
                 android:buttonTint="@color/corona_blue"
                 android:checked="false"
+                android:clickable="false"
                 android:paddingLeft="8dp"
                 android:text="ChecklistItem"
                 android:textSize="16sp"
