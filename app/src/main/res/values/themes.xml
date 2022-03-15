@@ -14,8 +14,24 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorSecondary</item>
         <!-- Customize your theme here. -->
         <item name="android:buttonTint" tools:targetApi="l">?attr/colorSecondaryVariant</item>
+        <item name="colorButtonNormal">@color/corona_blue</item>
+        <item name="android:colorButtonNormal">@color/corona_blue</item>
+        <item name="materialButtonStyle">@style/CustomButton</item>
 
     </style>
 
+    <style  name="CustomButton" parent="Widget.AppCompat.Button.Colored">
+        <item name="colorButtonNormal">@color/corona_blue</item>
+    </style>
+
+    <style name="CustomTabText" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="dialogAlertStyle" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="colorAccent">@color/corona_blue</item>
+        <item name="android:textColorPrimary">@color/black</item>
+        <item name="android:background">@color/corona_white</item>
+    </style>
 
 </resources>
