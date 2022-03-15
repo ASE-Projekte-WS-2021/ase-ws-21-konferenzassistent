@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.myapplication.checklist;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -13,6 +13,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.Switch;
+
+import com.example.myapplication.CountdownActivity;
+import com.example.myapplication.R;
 
 public class ChecklistActivity extends AppCompatActivity {
     private long maxCountdownTime;
