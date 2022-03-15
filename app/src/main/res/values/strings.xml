@@ -22,4 +22,9 @@
     <string name="meeting_history_minutes_long">%1$s Minuten</string>
     <string name="meeting_history_minutes_divider">%1$s - %2$s</string>
 
+    <string name="empty_history">
+        <!--Herzlich willkommen im Corona-Konferenz-Assistent. Wir unterstützen dich dabei, deine Meetings in Zeiten von Corona so sicher wie möglich abzuhalten. Klicke auf den “+”-Button, um ein Meeting hinzufügen! -->
+        Sobald Sie ein Meeting abgeschlossen haben können sie dieses hier einsehen.
+    </string>
+
 </resources>
