@@ -23,8 +23,6 @@ public class ChecklistActivity extends AppCompatActivity {
 
     private long maxAbstandsTime;
 
-    //Checkbox
-    private CheckBox cb1, cb2, cb3, cb4;
     // start Meeting Button
     private Button startMeetingButton;
 
@@ -44,9 +42,6 @@ public class ChecklistActivity extends AppCompatActivity {
             getSupportActionBar().setTitle("Pre-Meeting-Checkliste");
             actionBar.setDisplayHomeAsUpEnabled(true); // sets up back button in action bar
         }
-
-        cb1 = (CheckBox) findViewById(R.id.checkBox); cb2 = (CheckBox) findViewById(R.id.checkBox2);
-        cb3 = (CheckBox) findViewById(R.id.checkBox3); cb4 = (CheckBox) findViewById(R.id.checkBox4);
 
         startMeetingButton = findViewById(R.id.startMeetingButton);
         startMeetingButton.setBackgroundResource(R.drawable.btn_disable);
@@ -91,18 +86,18 @@ public class ChecklistActivity extends AppCompatActivity {
     //check checklist
     public void checkItem(View view){
         checkedItems = 0;
-        if(cb1.isChecked()){
-            checkedItems++;
-        }
-        if(cb2.isChecked()){
-            checkedItems++;
-        }
-        if(cb3.isChecked()){
-            checkedItems++;
-        }
-        if(cb4.isChecked()){
-            checkedItems++;
-        }
+//        if(cb1.isChecked()){
+//            checkedItems++;
+//        }
+//        if(cb2.isChecked()){
+//            checkedItems++;
+//        }
+//        if(cb3.isChecked()){
+//            checkedItems++;
+//        }
+//        if(cb4.isChecked()){
+//            checkedItems++;
+//        }
         if(checkedItems == 4){//change startMeetingButton color
             startMeetingButton.setBackgroundResource(R.drawable.btn_default);
             startMeetingButton.setClickable(true);
