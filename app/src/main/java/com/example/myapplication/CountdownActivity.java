@@ -306,7 +306,7 @@ public class CountdownActivity extends AppCompatActivity {
         long minutes = seconds / 60;
         long hours = minutes / 60;
 
-        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy - HH:mm");
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
         dateFormat.setTimeZone(TimeZone.getDefault());
 
         MettingDatabase database = new MettingDatabase(this);

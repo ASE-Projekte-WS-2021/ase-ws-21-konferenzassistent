@@ -15,6 +15,8 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.google.android.material.timepicker.TimeFormat;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link CountdownTimerFragment#newInstance} factory method to
@@ -23,23 +25,9 @@ import android.widget.TextView;
 public class CountdownTimerFragment extends Fragment {
     public static final int PAUSE_ABSTAND_BUTTON = 0;
     public static final int PAUSE_LUEFTUNGS_BUTTON = 1;
-    // Countdown TextView
-    private TextView countdownText;
-    private Button startCountdownButton;
-
-    private Button abstandsButton;
-    private TextView abstandsView;
-
-    private Button abstandsPauseButton;
-    private Button countdownPauseButton;
-
-    private TextView lueftungsInfoText;
-
-    private ProgressBar abstandsProgressBar;
-    private ProgressBar lueftungsProgressBar;
-
-    private TextView teilnehmerTextView;
-    private TextView ortTextView;
+    // Countdown Fragments
+   private TimerFragment lueftungsTimer;
+   private TimerFragment abstandsTimer;
 
     private View mView;
 
@@ -49,14 +37,49 @@ public class CountdownTimerFragment extends Fragment {
     private boolean lueftungactive;
     private boolean abstandactive;
 
+    private TextView windowStatus;
+
     public static CountdownTimerFragment newInstance(){
         return new CountdownTimerFragment();
+    }
+
+    // Implements the TimerListener for LueftungsTimer
+    public static class LueftungsTimer extends TimerFragment implements TimerFragment.TimerListener{
+        @Override
+        public void onReplaySend(View view) {
+            ((CountdownActivity)getActivity()).startLueftung(view);
+        }
+
+        @Override
+        public void onPauseSend(View view) {
+            ((CountdownActivity)getActivity()).pauseLueftungsCountdown(view);
+        }
+    }
+
+    // Implements the TimerListener for AbstandsTimer
+    public static class AbstandsTimer extends TimerFragment implements TimerFragment.TimerListener{
+        @Override
+        public void onReplaySend(View view) {
+            ((CountdownActivity)getActivity()).startAbstand(view);
+        }
+
+        @Override
+        public void onPauseSend(View view) {
+            ((CountdownActivity)getActivity()).pauseAbstand(view);
+        }
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        // Create new Fragments
+        lueftungsTimer = new LueftungsTimer();
+        abstandsTimer = new AbstandsTimer();
+
+        // Set the listeners
+        lueftungsTimer.setListener((TimerFragment.TimerListener) lueftungsTimer);
+        abstandsTimer.setListener((TimerFragment.TimerListener) abstandsTimer);
     }
 
     @Override
@@ -81,47 +104,18 @@ public class CountdownTimerFragment extends Fragment {
 
         // Set Progress bar
         setupProgressBars(maxAbstandsTime,maxWindowClosedTime);
-        /*
-        if (ort.equals("")) {
-            ort = "<leer>";
-        }
-
-                // Setting the initial and Max values of the Progress bar
-        setProgressBarValues(maxAbstandsTime, abstandsProgressBar);
-        setProgressBarValues(maxCountdownTime, lueftungsProgressBar);
-
-        */
-                 /*
-        FillInformationField("" + participantCount, ort);
-
-        */
-
     }
 
     // Gets the Views by Id
     private void initiateComponents(View view){
         if(mView != null) {
-            countdownText = mView.findViewById(R.id.countdownView);
-            startCountdownButton = mView.findViewById((R.id.StartButton));
+            getChildFragmentManager().beginTransaction().
+                    replace(R.id.fragment_container_lueftung, lueftungsTimer)
+                    .replace(R.id.fragmet_container_abstand, abstandsTimer)
+                    .commit();
 
-            abstandsPauseButton = mView.findViewById(R.id.abstandsPauseButton);
-            countdownPauseButton = mView.findViewById(R.id.PauseButton);
-
-            abstandsButton = mView.findViewById(R.id.abstandsButton);
-            abstandsView = mView.findViewById(R.id.abstandsView);
-
-            lueftungsInfoText = mView.findViewById(R.id.lueftungsInfoText);
-
-            abstandsProgressBar = mView.findViewById(R.id.abstandsProgressBar);
-            lueftungsProgressBar = mView.findViewById(R.id.lueftungsProgressBar);
-
+           windowStatus = mView.findViewById(R.id.window_status_text);
         }
-    }
-
-    // TODO: delete
-    private void FillInformationField(String teilnehmer, String ort){
-        teilnehmerTextView.setText(teilnehmer);
-        ortTextView.setText(ort);
     }
 
     public void setupProgressBars(long maxAbstandsTime, long maxWindowClosedTime){
@@ -145,19 +139,11 @@ public class CountdownTimerFragment extends Fragment {
 
             // If "Lüftung" is disabled
             if (!lueftungsSwitchStatus) {
-                countdownText.setVisibility(View.GONE);
-                startCountdownButton.setVisibility(View.GONE);
-                lueftungsProgressBar.setVisibility(View.GONE);
-                lueftungsInfoText.setVisibility(View.GONE);
-                mView.findViewById(R.id.materialCardView3).setVisibility(View.GONE);
-                mView.findViewById(R.id.materialCardView5).setVisibility(View.GONE);
+               mView.findViewById(R.id.fragment_container_lueftung).setVisibility(View.GONE);
             }
             // If "Abstand" is disabled
             if (!abstandsSwitchStatus) {
-                abstandsView.setVisibility(View.GONE);
-                abstandsButton.setVisibility(View.GONE);
-                abstandsProgressBar.setVisibility(View.GONE);
-                mView.findViewById(R.id.materialCardView4).setVisibility(View.GONE);
+                mView.findViewById(R.id.fragmet_container_abstand).setVisibility(View.GONE);
             }
         }
         else
@@ -172,50 +158,45 @@ public class CountdownTimerFragment extends Fragment {
         // Check if View is null
         if(mView != null) {
             // Change the Information Text depending on the window status
+
             if (isOpen)
-                lueftungsInfoText.setText("Fenster sollte geöffnet sein!");
+                windowStatus.setText("Fenster sollte geöffnet sein!");
             else
-                lueftungsInfoText.setText("Fenster sollte geschlossen sein!");
+                windowStatus.setText("Fenster sollte geschlossen sein!");
 
             // Check if Lüftungstimer is done to Enable the Buttons
             if (lueftungIsFinished)
-                startCountdownButton.setEnabled(true);
+                lueftungsTimer.setReplayButtonEnabled(true);
             else
-                startCountdownButton.setEnabled(false);
+                lueftungsTimer.setReplayButtonEnabled(false);
 
             // Check if Abstandstimer is done to Enable the Buttons
             if (abstandIsFinished)
-                abstandsButton.setEnabled(true);
+                abstandsTimer.setReplayButtonEnabled(true);
             else
-                abstandsButton.setEnabled(false);
+                abstandsTimer.setReplayButtonEnabled(false);
 
             // Build the Text String
             String lueftungsTimeLeft = timeStringBuilder(lueftungsMilliS);
             String abstandsTimeLeft = timeStringBuilder(abstandsMilliS);
 
             // Set the countdown text
-            countdownText.setText(lueftungsTimeLeft);
-            abstandsView.setText(abstandsTimeLeft);
+            lueftungsTimer.updateTimer(lueftungsTimeLeft);
+            abstandsTimer.updateTimer(abstandsTimeLeft);
 
             // Update the Progress Bars
-            abstandsProgressBar.setProgress((int) (abstandsMilliS / 1000));
-            lueftungsProgressBar.setProgress((int) (lueftungsMilliS / 1000));
+            lueftungsTimer.setSpinnerProgress((int) (lueftungsMilliS / 1000));
+            abstandsTimer.setSpinnerProgress((int) (abstandsMilliS / 1000));
         }
     }
 
     // Resets the Window Progress Bar to the defined time
     public void resetLueftungsProgressBar(long time){
-        lueftungsProgressBar.setMax((int) time /1000);
+        lueftungsTimer.setProgressBar((int) time /1000);
     }
 
     public void resetAbstandProgressBar(long time){
-        abstandsProgressBar.setMax((int) time /1000);
-    }
-
-    // Sets the initial values of the Progress Bar
-    private void setProgressBarValues(long startTime, ProgressBar progressBar) {
-        progressBar.setMax((int) startTime / 1000);
-        progressBar.setProgress((int) startTime / 1000);
+        abstandsTimer.setProgressBar((int) time /1000);
     }
 
     // Builds a String to show the Timer
@@ -239,19 +220,10 @@ public class CountdownTimerFragment extends Fragment {
     // Toggles the pause Buttons
     public void pauseButtonToggle(boolean paused, int id){
         if(id == PAUSE_ABSTAND_BUTTON)
-            toggleIcon(abstandsPauseButton, paused);
+            abstandsTimer.setPauseButton(paused);
         else
-            toggleIcon(countdownPauseButton, paused);
+            lueftungsTimer.setPauseButton(paused);
     }
 
-    // Toggles the pause icon
-    private void toggleIcon(Button button, Boolean isPaused){
-        if(isPaused)
-        {
-            button.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_baseline_play_arrow_24, null));
-        }
-        else{
-            button.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_baseline_pause_24, null));
-        }
-    }
+
 }
