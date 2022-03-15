@@ -17,4 +17,9 @@
     <string name="attachment_summary_on">Automatically download attachments for incoming emails
     </string>
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
+
+    <string name="meeting_history_minutes_short">%1$s min</string>
+    <string name="meeting_history_minutes_long">%1$s Minuten</string>
+    <string name="meeting_history_minutes_divider">%1$s - %2$s</string>
+
 </resources>

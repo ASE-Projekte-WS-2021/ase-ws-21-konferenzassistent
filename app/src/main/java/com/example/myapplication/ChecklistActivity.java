@@ -20,9 +20,9 @@ public class ChecklistActivity extends AppCompatActivity {
 
     private long maxAbstandsTime;
 
-    //checklist Checkbox
-    private Switch sw1, sw2, sw3, sw4;
-    //start Meeting Button
+    //Checkbox
+    private CheckBox cb1, cb2, cb3, cb4;
+    // start Meeting Button
     private Button startMeetingButton;
 
     private boolean lueftungsSwitchStatus;
@@ -42,8 +42,8 @@ public class ChecklistActivity extends AppCompatActivity {
             actionBar.setDisplayHomeAsUpEnabled(true); // sets up back button in action bar
         }
 
-        sw1 = (Switch) findViewById(R.id.switch1); sw2 = (Switch) findViewById(R.id.switch2);
-        sw3 = (Switch) findViewById(R.id.switch3); sw4 = (Switch) findViewById(R.id.switch4);
+        cb1 = (CheckBox) findViewById(R.id.checkBox); cb2 = (CheckBox) findViewById(R.id.checkBox2);
+        cb3 = (CheckBox) findViewById(R.id.checkBox3); cb4 = (CheckBox) findViewById(R.id.checkBox4);
 
         startMeetingButton = findViewById(R.id.startMeetingButton);
         startMeetingButton.setBackgroundResource(R.drawable.btn_disable);
@@ -88,16 +88,16 @@ public class ChecklistActivity extends AppCompatActivity {
     //check checklist
     public void checkItem(View view){
         checkedItems = 0;
-        if(sw1.isChecked()){
+        if(cb1.isChecked()){
             checkedItems++;
         }
-        if(sw2.isChecked()){
+        if(cb2.isChecked()){
             checkedItems++;
         }
-        if(sw3.isChecked()){
+        if(cb3.isChecked()){
             checkedItems++;
         }
-        if(sw4.isChecked()){
+        if(cb4.isChecked()){
             checkedItems++;
         }
         if(checkedItems == 4){//change startMeetingButton color

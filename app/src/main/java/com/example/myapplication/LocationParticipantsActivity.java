@@ -123,7 +123,7 @@ public class LocationParticipantsActivity extends AppCompatActivity implements A
         ImageButton participantsAlertAddButton = participantsAlertView.findViewById(R.id.participants_alert_addbutton);
 
         MaterialAlertDialogBuilder participantInputDialog =
-                new MaterialAlertDialogBuilder(LocationParticipantsActivity.this)
+                new MaterialAlertDialogBuilder(LocationParticipantsActivity.this, R.style.dialogAlertStyle)
                         .setTitle("Teilnehmer")
                         .setMessage("Wähle eine*n bestehende*n Teilnehmer*in -oder- Gib einen Namen für den oder die neu anzulegende*n Teilnehmer*in ein.")
                         .setView(participantsAlertView);
@@ -160,7 +160,7 @@ public class LocationParticipantsActivity extends AppCompatActivity implements A
             EditText locationInput = new EditText(LocationParticipantsActivity.this);
             locationInput.setInputType(InputType.TYPE_CLASS_TEXT);
             MaterialAlertDialogBuilder locationInputDialog =
-                    new MaterialAlertDialogBuilder(LocationParticipantsActivity.this)
+                    new MaterialAlertDialogBuilder(LocationParticipantsActivity.this, R.style.dialogAlertStyle)
                     .setTitle("Ort")
                     .setMessage("Gib einen Namen für den neu anzulegenden Ort ein.")
                     .setView(locationInput)
