@@ -3,9 +3,12 @@ package com.example.myapplication;
 import android.database.Cursor;
 import android.os.Bundle;
 
+import androidx.databinding.ViewDataBinding;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import androidx.databinding.DataBindingUtil;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,6 +28,8 @@ public class HomeFragment extends Fragment {
         // Required empty public constructor
     }
 
+    ViewDataBinding bi;
+
     // Meeting database
     private MettingDatabase dbHelper;
 
@@ -43,6 +48,7 @@ public class HomeFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         dbHelper = new MettingDatabase(this.getContext());
+
     }
 
     @Override
@@ -92,7 +98,7 @@ public class HomeFragment extends Fragment {
         }
         */
 
-        meetingHistoryAdapter = new MeetingHistoryAdapter(this.getContext(), meetingsList);
+        meetingHistoryAdapter = new MeetingHistoryAdapter(this.getContext(), getParentFragmentManager(), meetingsList);
         rvMeetings.setAdapter(meetingHistoryAdapter);
         linearLayoutManager = new LinearLayoutManager(this.getContext());
         linearLayoutManager.setReverseLayout(true);
@@ -103,6 +109,7 @@ public class HomeFragment extends Fragment {
 
         setIntroTextVisibility();
     }
+
 
     // Listen for Data Set Changes
     private void onDataChanged() {

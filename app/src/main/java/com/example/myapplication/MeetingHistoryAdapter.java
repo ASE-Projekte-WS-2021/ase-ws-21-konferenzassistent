@@ -1,5 +1,6 @@
 package com.example.myapplication;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -8,8 +9,14 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.databinding.DataBindingUtil;
+import androidx.databinding.ViewDataBinding;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.myapplication.databinding.MeetingBottomSheetBinding;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,10 +24,12 @@ import java.util.List;
 public class MeetingHistoryAdapter extends RecyclerView.Adapter<MeetingHistoryAdapter.MeetingHistoryViewHolder> {
 
     private Context ct;
+    private FragmentManager manager;
     private List<Meeting> meetingsList;
 
-    public MeetingHistoryAdapter(Context ct, List<Meeting> meetingsList) {
+    public MeetingHistoryAdapter(Context ct, FragmentManager manager, List<Meeting> meetingsList) {
         this.ct = ct;
+        this.manager = manager;
         this.meetingsList = meetingsList;
     }
 
@@ -34,20 +43,32 @@ public class MeetingHistoryAdapter extends RecyclerView.Adapter<MeetingHistoryAd
 
     @Override
     public void onBindViewHolder(@NonNull MeetingHistoryViewHolder holder, int position) {
-        holder.tvDate.setText(meetingsList.get(position).getDate().substring(0,10));
-        holder.tvTime.setText(
-                meetingsList.get(position).getDate().substring(11) +
-                        " - " +
-                        meetingsList.get(position).getDateEnd().substring(11)
-        );
-        holder.tvLocation.setText(meetingsList.get(position).getLocation());
-        holder.tvDuration.setText(Integer.parseInt(meetingsList.get(position).getDuration())/60 + " min");
-        holder.tvNumParticipants.setText(meetingsList.get(position).getNumberParticipants());
+
+        // Get the Values from the meeting List
+        String duration = Integer.parseInt(meetingsList.get(position).getDuration())/60 + "";
+        String startTime = meetingsList.get(position).getDate().substring(11);
+        String endTime = meetingsList.get(position).getDateEnd().substring(11);
+        String participants = meetingsList.get(position).getNumberParticipants();
+        String ort = meetingsList.get(position).getLocation();
+        String date = meetingsList.get(position).getDate().substring(0,10);
+
+        holder.tvDate.setText(date);
+        holder.tvTime.setText(startTime + " - " + endTime);
+        holder.tvLocation.setText(ort);
+        holder.tvDuration.setText(duration + " min");
+        holder.tvNumParticipants.setText(participants);
 
         holder.cardView.setOnClickListener(view -> {
+            // create a new bottom sheet and set the values for the view
+            MeetingBottomSheetAdapter meetingBottomSheetAdapter = new MeetingBottomSheetAdapter();
+            meetingBottomSheetAdapter.show(manager , meetingBottomSheetAdapter.getTag());
+            meetingBottomSheetAdapter.setValues(duration + " Minuten", date, startTime, endTime, participants, ort);
+
+            /*
             Intent intent = new Intent(ct, PastMeetingInfoActivity.class);
             intent.putExtra("Database_ID",Integer.parseInt(meetingsList.get(position).getId()));
             ct.startActivity(intent);
+            */
         });
     }
 
