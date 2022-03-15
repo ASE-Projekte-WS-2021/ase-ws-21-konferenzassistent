@@ -12,4 +12,6 @@
     <color name="corona_blue">#004DBA</color>
     <color name="corona_white">#f4f3f8</color>
     <color name="heller_corona_blue">#5878ed</color>
+    <color name="transparent_corona_blue">#DD004DBA</color>
+    <color name="transparent">#00FFFFFF</color>
 </resources>
