@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/miHome"
         android:name="com.example.myapplication.HomeFragment"
-        android:label="Corona-Konferenz-Assistent"
+        android:label="Meine Meetings"
         tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/miSettings"

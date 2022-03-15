@@ -1,31 +1,28 @@
 package com.example.myapplication;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import androidx.appcompat.app.AppCompatDelegate;
 
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
-import java.util.Set;
+import java.util.Objects;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity{
+
+    private TextView actionBarText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +30,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         // Disables Night mode
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+
+        // Hide the action bar, we only want to show it once the user scrolls down
+        Objects.requireNonNull(getSupportActionBar()).hide();
 
         setUpMenu();
     }
@@ -43,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView navigationView = findViewById(R.id.bottomNavigationView);
         NavController navController = Navigation.findNavController(this, R.id.fragment);
 
+
         // Setup Navigation Controller
         NavigationUI.setupWithNavController(navigationView, navController);
 
@@ -52,6 +53,22 @@ public class MainActivity extends AppCompatActivity {
 
         // Setup the App Bar with the Navigation Controller
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
+
+        // initialize the custom action bar header
+        actionBarText = findViewById(R.id.main_bar_title);
+
+        // add listener for fragment change
+        NavController.OnDestinationChangedListener listener =
+                ((controller, navDestination, bundle) -> {
+                    rebuildActionBar();
+                } );
+        navController.addOnDestinationChangedListener(listener);
+
+    }
+
+    // Edits the custom actionbar for every Fragment
+    private void rebuildActionBar(){
+        actionBarText.setText(Objects.requireNonNull(getSupportActionBar()).getTitle());
     }
 
     // Opens the Meeting Wizard
