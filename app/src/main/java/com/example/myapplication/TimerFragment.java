@@ -29,7 +29,9 @@ public class TimerFragment extends Fragment {
 
     private ProgressBar countdownSpinner;
     private TimerListener listener;
+
     private int maxValue;
+    private String cdName;
 
     public TimerFragment() {
         // Required empty public constructor
@@ -79,6 +81,7 @@ interface TimerListener {
 
         // Setup View
         setProgressBar(maxValue);
+        setTimerName(cdName);
 
         // Setup onclick listeners
         replayButton.setOnClickListener(new View.OnClickListener() {
@@ -112,7 +115,11 @@ interface TimerListener {
 
     // Sets the Timer name
     public void setTimerName(String name){
-        countdownName.setText(name);
+        if(countdownName != null)
+            countdownName.setText(name);
+        else
+            cdName = name;
+
     }
 
     // Switch replay button status

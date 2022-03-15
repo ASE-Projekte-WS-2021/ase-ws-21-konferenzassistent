@@ -104,6 +104,10 @@ public class CountdownTimerFragment extends Fragment {
 
         // Set Progress bar
         setupProgressBars(maxAbstandsTime,maxWindowClosedTime);
+
+        // Set countdown titles
+        lueftungsTimer.setTimerName("Lüftungs Timer");
+        abstandsTimer.setTimerName("Abstands Timer");
     }
 
     // Gets the Views by Id

@@ -17,7 +17,6 @@
         <item name="colorButtonNormal">@color/corona_blue</item>
         <item name="android:colorButtonNormal">@color/corona_blue</item>
         <item name="materialButtonStyle">@style/CustomButton</item>
-        <item name="android:alertDialogStyle">@style/dialogAlertStyle</item>
 
     </style>
 
@@ -30,7 +29,9 @@
     </style>
 
     <style name="dialogAlertStyle" parent="Theme.AppCompat.Light.Dialog.Alert">
-        <item name="colorButtonNormal">@color/heller_corona_blue</item>
+        <item name="colorAccent">@color/corona_blue</item>
+        <item name="android:textColorPrimary">@color/black</item>
+        <item name="android:background">@color/corona_white</item>
     </style>
 
 </resources>

@@ -13,6 +13,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.ContextThemeWrapper;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -174,7 +175,7 @@ public class PastMeetingInfoActivity extends AppCompatActivity {
         if (id == android.R.id.home) {
             openHomeScreen();
         } else if (id == R.id.past_meeting_info_options_delete) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(this)
+            AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.dialogAlertStyle)
                     .setMessage("Meeting wird gelöscht. Dieser Schritt kann nicht rückgängig gemacht werden. Fortfahren?")
                     .setPositiveButton("OK",(dialogInterface, i) -> {
                         database.deleteOne(meeting_id);

@@ -6,9 +6,13 @@
     android:layout_height="match_parent"
     tools:context=".TimerFragment">
 
-    <androidx.cardview.widget.CardView
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:elevation="8dp"
+        app:cardElevation="8dp"
+
+        tools:elevation="8dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/countdown_card"
@@ -34,11 +38,11 @@
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="16dp"
                 android:background="@drawable/ic_baseline_pause_24"
+                android:backgroundTint="@color/corona_blue"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/replay_button"
-                app:layout_goneMarginBottom="16dp"
-                android:backgroundTint="@color/corona_blue" />
+                app:layout_goneMarginBottom="16dp" />
 
             <TextView
                 android:id="@+id/countdown_name"
@@ -70,17 +74,17 @@
                 style="?android:attr/progressBarStyleHorizontal"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/divider2"
-                app:layout_constraintHorizontal_bias="0.11"
-                app:layout_constraintStart_toStartOf="parent"
                 android:max="100"
-                app:layout_constraintDimensionRatio="1:1"
                 android:padding="5dp"
                 android:progress="100"
                 android:progressDrawable="@drawable/drawable_circle"
                 android:rotation="-90"
-                app:layout_constraintTop_toBottomOf="@+id/countdown_name" />
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintEnd_toStartOf="@+id/divider2"
+                app:layout_constraintHorizontal_bias="0.11"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
 
             <TextView
@@ -98,6 +102,6 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </androidx.cardview.widget.CardView>
+    </com.google.android.material.card.MaterialCardView>
 
 </FrameLayout>
