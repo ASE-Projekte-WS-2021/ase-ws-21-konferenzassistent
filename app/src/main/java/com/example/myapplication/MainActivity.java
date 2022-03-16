@@ -73,6 +73,14 @@ public class MainActivity extends AppCompatActivity{
 
     // Opens the Meeting Wizard
     public void openMeetingWizard(View view) {
+
+        // creates a Bottom sheet to create a meeting
+        CreateMeetingBottomSheetAdapter createMeetingBottomSheetAdapter = new CreateMeetingBottomSheetAdapter();
+        createMeetingBottomSheetAdapter.show(getSupportFragmentManager() , createMeetingBottomSheetAdapter.getTag());
+
+    }
+
+    public void startMeetingWizard(View view){
         Intent intent = new Intent(this, SettingsActivity.class);
         startActivity(intent);
     }
