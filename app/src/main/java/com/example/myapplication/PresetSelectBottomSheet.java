@@ -116,7 +116,6 @@ public class PresetSelectBottomSheet extends BottomSheetDialogFragment {
     // Closes the Sheet
     public void closePresets(){
         dismiss();
-
     }
 
     @Override

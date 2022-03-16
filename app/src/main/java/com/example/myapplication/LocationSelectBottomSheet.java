@@ -4,23 +4,32 @@ import android.app.Dialog;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.KeyEvent;
+
+import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
-import android.widget.TextView;
+
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.databinding.BottomSheetLocationSelectBinding;
-import com.example.myapplication.databinding.CutsomAlertBottomSheetBinding;
+
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
+import java.util.ArrayList;
+
 public class LocationSelectBottomSheet extends BottomSheetDialogFragment {
     BottomSheetLocationSelectBinding bi;
     BottomSheetBehavior<View> bottomSheetBehavior;
+
+    // Location List
+    private ArrayList<String> locationNames;
+    RecyclerViewLocationAdapter recyclerViewLocationAdapter;
 
     // Make the background Transparent
     @Override
@@ -55,7 +64,7 @@ public class LocationSelectBottomSheet extends BottomSheetDialogFragment {
         // skip it being collapsable
         bottomSheetBehavior.setSkipCollapsed(true);
 
-        ((View) view.getParent()).setBackgroundColor(getResources().getColor(android.R.color.transparent));
+        ((View) view.getParent()).setBackgroundColor(getResources().getColor(android.R.color.transparent, null));
 
         bottomSheetBehavior.addBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
             @Override
@@ -70,45 +79,76 @@ public class LocationSelectBottomSheet extends BottomSheetDialogFragment {
 
 
         // cancel button clicked
-        bi.buttonDismiss.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view){
-                dismiss();
-            }
-        });
+        bi.buttonDismiss.setOnClickListener(viewListener -> dismiss());
 
         // Add a setOnEditorActionListener to close the Sheet once the user is done typing
-        //https://stackoverflow.com/a/8063533
-        bi.textInputSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
-                if (i == EditorInfo.IME_ACTION_SEARCH ||
-                        i == EditorInfo.IME_ACTION_DONE ||
-                        keyEvent != null &&
-                        keyEvent.getAction() == KeyEvent.ACTION_DOWN &&
-                        keyEvent.getKeyCode() == KeyEvent.KEYCODE_ENTER) {
-                    if (keyEvent == null || !keyEvent.isShiftPressed()) {
+        // https://stackoverflow.com/a/5100007
+        bi.textInputSearch.setOnEditorActionListener((textView, i, keyEvent) -> {
+            switch (i){
+                case EditorInfo.IME_ACTION_DONE:
+                case EditorInfo.IME_ACTION_NEXT:
+                case EditorInfo.IME_ACTION_PREVIOUS:
+                    // the user is done typing.
+                    if(!bi.textInputSearch.getText().toString().equals("")){
 
-                        // the user is done typing.
-                        if(!bi.textInputSearch.getText().toString().equals("")){
+                        // Send Location to Meeting Adapter
+                        if(((MainActivity)getActivity()) != null)
+                            ((MainActivity)getActivity()).getMeetingAdapter()
+                                    .setLocation(bi.textInputSearch.getText().toString());
 
-                            // Send Location to Meeting Adapter
-                            if(((MainActivity)getActivity()) != null)
-                                ((MainActivity)getActivity()).getMeetingAdapter()
-                                        .setLocation(bi.textInputSearch.getText().toString());
-
-                            // Dismiss the Sheet
-                            dismiss();
-                        }
-                        return true; // consume.
+                        // Dismiss the Sheet
+                        dismiss();
                     }
-                }
-                return false; // pass on to other listeners.
+                return true;
+            }
+
+            return false; // pass on to other listeners.
+        });
+
+        // Listen for Text input changes to filter locations
+        bi.textInputSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                // Filter locations
+                recyclerViewLocationAdapter.filter(charSequence.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
             }
         });
 
         setStyle(CustomAlertBottomSheetAdapter.STYLE_NORMAL, R.style.CustomBottomSheetDialogTheme);
+        buildRecyclerView();
+
         return bottomSheet;
+    }
+
+    // Build and fills the recycler view
+    private void buildRecyclerView(){
+        RecyclerView recyclerView = bi.locationRecyclerView;
+        recyclerViewLocationAdapter = new RecyclerViewLocationAdapter(
+                locationNames,
+                this.getContext()
+        );
+        recyclerView.setAdapter(recyclerViewLocationAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
+    }
+
+    // Initializes the Presets
+    public void initLocation(ArrayList<String> locationNames){
+        this.locationNames = locationNames;
+    }
+
+    // Closes the Sheet
+    public void closeLocation(){
+        dismiss();
     }
 
     @Override

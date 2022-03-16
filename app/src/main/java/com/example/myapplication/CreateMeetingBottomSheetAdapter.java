@@ -5,6 +5,7 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -30,6 +31,9 @@ public class CreateMeetingBottomSheetAdapter extends BottomSheetDialogFragment {
     ArrayList<String> itemNames = new ArrayList<>();
     ArrayList<Integer> selectValues = new ArrayList<>();
 
+    // Location list
+    ArrayList<String> locationNames = new ArrayList<>();
+
     // TODO: remove Debug
     ArrayList<String> timerItemNames = new ArrayList<>();
     ArrayList<Integer> timerSelectValues = new ArrayList<>();
@@ -37,7 +41,7 @@ public class CreateMeetingBottomSheetAdapter extends BottomSheetDialogFragment {
     ArrayList<Integer> checklistSelectValues = new ArrayList<>();
 
     PresetSelectBottomSheet presetSelectBottomSheet;
-
+    LocationSelectBottomSheet locationSelectBottomSheet;
     // should the sheet be leave able
     boolean cancelable = true;
     boolean warning = false;
@@ -85,6 +89,8 @@ public class CreateMeetingBottomSheetAdapter extends BottomSheetDialogFragment {
 
         timerItemNames.add("Weiterer Timer");
         timerSelectValues.add(View.INVISIBLE);
+
+
     }
 
     @NonNull
@@ -155,7 +161,19 @@ public class CreateMeetingBottomSheetAdapter extends BottomSheetDialogFragment {
         // location button clicked
         bi.buttonOrt.setOnClickListener(viewListener -> {
             // Open the Location Sheet
-            LocationSelectBottomSheet locationSelectBottomSheet = new LocationSelectBottomSheet();
+            locationSelectBottomSheet = new LocationSelectBottomSheet();
+
+            // TODO: Load locations
+            // TODO: Remove debug Data
+            locationNames = new ArrayList<>();
+            locationNames.add("Regensburg");
+            locationNames.add("Passau");
+            locationNames.add("Schwandorf");
+            locationNames.add("München");
+            locationNames.add("Hörsaal H2");
+
+            // feeds the locations into the checklist recycler view
+            locationSelectBottomSheet.initLocation(locationNames);
             locationSelectBottomSheet.show(getParentFragmentManager() , locationSelectBottomSheet.getTag());
         });
 
@@ -249,8 +267,7 @@ public class CreateMeetingBottomSheetAdapter extends BottomSheetDialogFragment {
     // Sets the meeting location and displays it on the location Button
     public void setLocation(String location){
         this.location = location;
-        bi.buttonOrt.setText(location);
-        bi.buttonOrt.setTextColor(getResources().getColor(R.color.black, null));
+        bi.locationSelectedName.setText(location);
     }
 
     // Enables button if title got set
@@ -303,5 +320,16 @@ public class CreateMeetingBottomSheetAdapter extends BottomSheetDialogFragment {
 
         // close the sheet
         presetSelectBottomSheet.closePresets();
+    }
+
+    public void signalLocationChange(int adapterPosition) {
+        // Set the location
+        location = locationNames.get(adapterPosition);
+
+        // Set the location text
+        bi.locationSelectedName.setText(location);
+
+       // close the sheet
+        locationSelectBottomSheet.closeLocation();
     }
 }
