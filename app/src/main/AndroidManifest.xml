@@ -14,14 +14,17 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication">
         <activity
+            android:name=".onboarding.OnboardingActivity"
+            android:exported="false" />
+        <activity
             android:name=".PresetActivity"
             android:exported="false" />
         <activity
             android:name=".LocationParticipantsActivity"
-            android:exported="false"></activity>
+            android:exported="false" />
         <activity
             android:name=".PastMeetingInfoActivity"
-            android:exported="false"></activity>
+            android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="true">
@@ -41,7 +44,7 @@
             android:exported="false" />
         <activity
             android:name=".SettingsActivity"
-            android:exported="false"></activity>
+            android:exported="false" />
 
         <service android:name=".CountdownService" />
     </application>

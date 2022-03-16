@@ -1,6 +1,5 @@
 package com.example.myapplication;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -8,15 +7,15 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 import androidx.appcompat.app.AppCompatDelegate;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import com.example.myapplication.onboarding.OnboardingActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.navigation.NavigationBarView;
 
 import java.util.Objects;
 
@@ -35,6 +34,15 @@ public class MainActivity extends AppCompatActivity{
         Objects.requireNonNull(getSupportActionBar()).hide();
 
         setUpMenu();
+
+        // Show Onboarding if app opened for the first time
+        SharedPreferences preferences = this.getPreferences(Context.MODE_PRIVATE);
+        boolean appOpenedFirstTime = preferences.getBoolean(getString(R.string.app_opened_first_time_key),true);
+        if (appOpenedFirstTime) {
+            preferences.edit().putBoolean(getString(R.string.app_opened_first_time_key),false).apply();
+            startActivity(new Intent(this, OnboardingActivity.class));
+        }
+        // startActivity(new Intent(this, OnboardingActivity.class));
     }
 
     // Setup the Bottom Menu
