@@ -12,6 +12,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:cardCornerRadius="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
             android:background="@color/corona_white">
 
             <LinearLayout
@@ -35,6 +37,7 @@
                     android:background="#e6e6e6" />
 
                 <Button
+                    android:id="@+id/button_dismiss_changes"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/corona_white"
@@ -50,6 +53,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardCornerRadius="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
         android:background="@color/corona_white">

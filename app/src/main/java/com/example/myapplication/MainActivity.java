@@ -23,6 +23,7 @@ import java.util.Objects;
 public class MainActivity extends AppCompatActivity{
 
     private TextView actionBarText;
+    private CreateMeetingBottomSheetAdapter meetingAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,8 +77,13 @@ public class MainActivity extends AppCompatActivity{
 
         // creates a Bottom sheet to create a meeting
         CreateMeetingBottomSheetAdapter createMeetingBottomSheetAdapter = new CreateMeetingBottomSheetAdapter();
+        meetingAdapter = createMeetingBottomSheetAdapter;
         createMeetingBottomSheetAdapter.show(getSupportFragmentManager() , createMeetingBottomSheetAdapter.getTag());
 
+    }
+
+    public CreateMeetingBottomSheetAdapter getMeetingAdapter(){
+        return  meetingAdapter;
     }
 
     public void startMeetingWizard(View view){

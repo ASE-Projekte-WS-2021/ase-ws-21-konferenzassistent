@@ -75,6 +75,17 @@ public class CustomAlertBottomSheetAdapter extends BottomSheetDialogFragment {
             }
         });
 
+        bi.buttonDismissChanges.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(((MainActivity)getActivity()) != null)
+                    ((MainActivity)getActivity()).getMeetingAdapter().dismissMeeting();
+
+                // dismiss the alert
+                dismiss();
+            }
+        });
+
         setStyle(CustomAlertBottomSheetAdapter.STYLE_NORMAL, R.style.CustomBottomSheetDialogTheme);
         return bottomSheet;
     }
@@ -85,6 +96,11 @@ public class CustomAlertBottomSheetAdapter extends BottomSheetDialogFragment {
         //bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
     }
 
-
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if(((MainActivity)getActivity()) != null)
+            ((MainActivity)getActivity()).getMeetingAdapter().resetWarning();
+    }
 }
 

@@ -5,11 +5,11 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="8dp"
         android:orientation="vertical">
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
+            android:layout_marginTop="32dp"
             app:cardCornerRadius="8dp"
             android:background="@color/white"
             android:layout_height="match_parent">
@@ -40,7 +40,7 @@
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
-                        android:text="Meeting"
+                        android:text="Neues Meeting"
                         android:textSize="16sp"
                         android:gravity="center"
                         android:textStyle="bold"
@@ -82,6 +82,7 @@
                                 android:orientation="vertical">
 
                                 <EditText
+                                    android:id="@+id/text_input_meeting"
                                     android:layout_width="match_parent"
                                     android:hint="Meeting Titel"
                                     android:textSize="16sp"
