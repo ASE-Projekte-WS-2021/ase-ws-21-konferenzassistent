@@ -35,4 +35,8 @@
     <string name="star"> START</string>
     <string name="weiter"> WEITER</string>
     <string name="fenOffen"> Fenster sollte offen sein!</string>
+
+    <string name="bottom_nav_menu_home">Startseite</string>
+    <string name="bottom_nav_menu_start_meeting">Meeting starten</string>
+    <string name="bottom_nav_menu_settings">Einstellungen</string>
 </resources>
