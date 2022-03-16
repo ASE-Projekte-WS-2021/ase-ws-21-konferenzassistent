@@ -98,7 +98,7 @@ public class PastMeetingInfoActivity extends AppCompatActivity {
         String[] participantArray = new String[participantList.size()];
         participantArray = participantList.toArray(participantArray);
 
-        MaterialAlertDialogBuilder materialAlertDialogBuilder = new MaterialAlertDialogBuilder(PastMeetingInfoActivity.this)
+        MaterialAlertDialogBuilder materialAlertDialogBuilder = new MaterialAlertDialogBuilder(PastMeetingInfoActivity.this,R.style.dialogAlertStyle)
                 .setItems(participantArray, (dialogInterface, i) -> {
                     // do nothing
                 })

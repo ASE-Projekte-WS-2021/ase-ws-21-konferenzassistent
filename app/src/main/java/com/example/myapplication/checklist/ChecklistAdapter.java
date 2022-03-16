@@ -50,7 +50,7 @@ public class ChecklistAdapter extends RecyclerView.Adapter<ChecklistAdapter.Chec
             holder.infoButtonItem.setVisibility(View.GONE);
         } else {
             holder.infoButtonItem.setOnClickListener(view -> {
-                AlertDialog.Builder builder = new AlertDialog.Builder(ct)
+                AlertDialog.Builder builder = new AlertDialog.Builder(ct,R.style.dialogAlertStyle)
                         .setMessage(hint)
                         .setPositiveButton("OK", (dialogInterface, i) -> {
                             // do nothing

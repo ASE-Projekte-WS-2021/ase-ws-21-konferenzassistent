@@ -268,7 +268,7 @@ public class SettingsActivity extends AppCompatActivity {
             this.finish();
             return true;
         } else if (itemId == R.id.info_button) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(this)
+            AlertDialog.Builder builder = new AlertDialog.Builder(this,R.style.dialogAlertStyle)
                     .setMessage(R.string.settings_info_text)
                     .setPositiveButton("OK",(dialogInterface, i) -> {
                         // do nothing
