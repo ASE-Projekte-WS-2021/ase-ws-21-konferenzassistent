@@ -27,4 +27,9 @@
         Sobald Sie ein Meeting abgeschlossen haben können sie dieses hier einsehen.
     </string>
 
+    <string name="start"> Starte Meeting</string>
+    <string name="end"> Beende Meeting</string>
+    <string name="star"> START</string>
+    <string name="weiter"> WEITER</string>
+    <string name="fenOffen"> Fenster sollte offen sein!</string>
 </resources>

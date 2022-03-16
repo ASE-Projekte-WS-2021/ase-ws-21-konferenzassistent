@@ -24,7 +24,7 @@
         android:onClick="openCountdownActivity"
         android:paddingStart="8dp"
         android:paddingEnd="8dp"
-        android:text="Starte Meeting"
+        android:text="@string/start"
         android:textColor="@color/white"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"

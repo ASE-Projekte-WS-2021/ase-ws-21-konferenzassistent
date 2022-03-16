@@ -45,7 +45,7 @@
         android:layout_marginBottom="16dp"
         android:background="@drawable/btn_default"
         android:padding="8dp"
-        android:text="Beende Meeting"
+        android:text="@string/end"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

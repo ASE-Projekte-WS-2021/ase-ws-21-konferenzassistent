@@ -31,7 +31,7 @@
                 android:layout_height="match_parent"
 
                 android:gravity="center|center_vertical"
-                android:text="Fenster sollte offen sein!"
+                android:text="@string/fenOffen"
                 android:textColor="@color/corona_white"
                 android:textSize="25sp" />
         </com.google.android.material.card.MaterialCardView>
