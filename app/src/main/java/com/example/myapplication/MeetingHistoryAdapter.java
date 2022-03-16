@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
@@ -12,10 +13,12 @@ import androidx.cardview.widget.CardView;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import org.w3c.dom.Document;
+
 import java.util.List;
 
 public class MeetingHistoryAdapter extends RecyclerView.Adapter<MeetingHistoryAdapter.MeetingHistoryViewHolder> {
-
+    OnSwipeTouchListener onSwipeTouchListener;
     private final Context ct;
     private final FragmentManager manager;
     private final List<Meeting> meetingsList;
@@ -69,6 +72,15 @@ public class MeetingHistoryAdapter extends RecyclerView.Adapter<MeetingHistoryAd
             intent.putExtra("Database_ID",Integer.parseInt(meetingsList.get(position).getId()));
             ct.startActivity(intent);
             */
+        });
+
+        holder.cardView.setOnTouchListener(new OnSwipeTouchListener(ct) {
+            public void onSwipeRight() {
+                Toast.makeText(ct, "right", Toast.LENGTH_SHORT).show();
+            }
+            public void onSwipeLeft() {
+                Toast.makeText(ct, "left", Toast.LENGTH_SHORT).show();
+            }
         });
     }
 
