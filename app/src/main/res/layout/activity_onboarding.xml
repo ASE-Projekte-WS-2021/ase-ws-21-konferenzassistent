@@ -31,7 +31,8 @@
         app:layout_constraintTop_toTopOf="parent"
         app:pageColor="@color/dark_gray"
         app:radius="6dp"
-        app:slideInterval="3000">
+        app:slideInterval="3000"
+        app:disableAutoPlayOnUserInteraction="true">
 
     </com.synnapps.carouselview.CarouselView>
 
