@@ -1,22 +1,25 @@
 package com.example.myapplication;
 
 import android.app.Dialog;
-import android.content.res.Resources;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 
+import com.example.myapplication.databinding.BottomSheetLocationSelectBinding;
 import com.example.myapplication.databinding.CutsomAlertBottomSheetBinding;
-
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
-public class CustomAlertBottomSheetAdapter extends BottomSheetDialogFragment {
-
-    CutsomAlertBottomSheetBinding bi;
+public class LocationSelectBottomSheet extends BottomSheetDialogFragment {
+    BottomSheetLocationSelectBinding bi;
     BottomSheetBehavior<View> bottomSheetBehavior;
 
     // Make the background Transparent
@@ -32,7 +35,7 @@ public class CustomAlertBottomSheetAdapter extends BottomSheetDialogFragment {
         BottomSheetDialog bottomSheet = (BottomSheetDialog) super.onCreateDialog(savedInstanceState);
 
         // inflating Layout
-        View view = View.inflate(bottomSheet.getContext(), R.layout.cutsom_alert_bottom_sheet, null);
+        View view = View.inflate(bottomSheet.getContext(), R.layout.bottom_sheet_location_select, null);
 
         // binding views to data binding
         bi = DataBindingUtil.bind(view);
@@ -66,7 +69,7 @@ public class CustomAlertBottomSheetAdapter extends BottomSheetDialogFragment {
         });
 
 
-        // cancel buttun clicked
+        // cancel button clicked
         bi.buttonDismiss.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
@@ -74,14 +77,33 @@ public class CustomAlertBottomSheetAdapter extends BottomSheetDialogFragment {
             }
         });
 
-        bi.buttonDismissChanges.setOnClickListener(new View.OnClickListener() {
+        // Add a setOnEditorActionListener to close the Sheet once the user is done typing
+        //https://stackoverflow.com/a/8063533
+        bi.textInputSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
-            public void onClick(View view) {
-                if(((MainActivity)getActivity()) != null)
-                    ((MainActivity)getActivity()).getMeetingAdapter().dismissMeeting();
+            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+                if (i == EditorInfo.IME_ACTION_SEARCH ||
+                        i == EditorInfo.IME_ACTION_DONE ||
+                        keyEvent != null &&
+                        keyEvent.getAction() == KeyEvent.ACTION_DOWN &&
+                        keyEvent.getKeyCode() == KeyEvent.KEYCODE_ENTER) {
+                    if (keyEvent == null || !keyEvent.isShiftPressed()) {
 
-                // dismiss the alert
-                dismiss();
+                        // the user is done typing.
+                        if(!bi.textInputSearch.getText().toString().equals("")){
+
+                            // Send Location to Meeting Adapter
+                            if(((MainActivity)getActivity()) != null)
+                                ((MainActivity)getActivity()).getMeetingAdapter()
+                                        .setLocation(bi.textInputSearch.getText().toString());
+
+                            // Dismiss the Sheet
+                            dismiss();
+                        }
+                        return true; // consume.
+                    }
+                }
+                return false; // pass on to other listeners.
             }
         });
 
@@ -95,11 +117,4 @@ public class CustomAlertBottomSheetAdapter extends BottomSheetDialogFragment {
         //bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
     }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        if(((MainActivity)getActivity()) != null)
-            ((MainActivity)getActivity()).getMeetingAdapter().resetWarning();
-    }
 }
-

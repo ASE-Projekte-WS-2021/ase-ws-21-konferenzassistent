@@ -25,6 +25,7 @@ public class CreateMeetingBottomSheetAdapter extends BottomSheetDialogFragment {
 
     // Input fields
     String title;
+    String location;
 
     // should the sheet be leave able
     boolean cancelable = true;
@@ -111,6 +112,17 @@ public class CreateMeetingBottomSheetAdapter extends BottomSheetDialogFragment {
             }
         });
 
+        // location button clicked
+        bi.buttonOrt.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                // Open the Location Sheet
+                LocationSelectBottomSheet locationSelectBottomSheet = new LocationSelectBottomSheet();
+                locationSelectBottomSheet.show(getParentFragmentManager() , locationSelectBottomSheet.getTag());
+            }
+        });
+
+
         // Add a Text Change Listener to update the Title once text got changed
         bi.textInputMeeting.addTextChangedListener(new TextWatcher() {
             @Override
@@ -159,6 +171,13 @@ public class CreateMeetingBottomSheetAdapter extends BottomSheetDialogFragment {
 
     public void resetWarning(){
         warning = false;
+    }
+
+    public void setLocation(String location){
+        this.location = location;
+        Log.i("TAG", "setLocation: " + location);
+        bi.buttonOrt.setText(location);
+        bi.buttonOrt.setTextColor(getResources().getColor(R.color.black));
     }
 
     private void isCreateable(){

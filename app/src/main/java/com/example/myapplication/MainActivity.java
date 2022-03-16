@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity{
     }
 
     public CreateMeetingBottomSheetAdapter getMeetingAdapter(){
-        return  meetingAdapter;
+        return meetingAdapter;
     }
 
     public void startMeetingWizard(View view){
