@@ -24,11 +24,13 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 import java.util.ArrayList;
 
-public class LocationBottomSheetAdapter extends BottomSheetDialogFragment{
+public class ParticipantBottomSheetAdapter extends BottomSheetDialogFragment{
     BottomSheetParticipantsBinding bi;
     BottomSheetBehavior<View> bottomSheetBehavior;
 
+    RecycleViewParticipantList recycleViewParticipantList;
     // Participant List
+    ArrayList<Participant> participants;
 
     // Make the background Transparent
     @Override
@@ -109,20 +111,20 @@ public class LocationBottomSheetAdapter extends BottomSheetDialogFragment{
 
     // Build and fills the recycler view
     private void buildRecyclerView(){
-        /*
-        RecyclerView recyclerView = bi.locationRecyclerView;
-        recyclerViewLocationAdapter = new RecyclerViewLocationAdapter(
-                locationNames,
+
+        RecyclerView recyclerView = bi.participantRecycleView;
+        recycleViewParticipantList = new RecycleViewParticipantList(
+                participants,
                 this.getContext()
         );
-        recyclerView.setAdapter(recyclerViewLocationAdapter);
+        recyclerView.setAdapter(recycleViewParticipantList);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
-        */
+
     }
 
     // Initializes the Presets
-    public void initLocation(ArrayList<String> locationNames){
-       // this.locationNames = locationNames;
+    public void initParticipants(ArrayList<Participant> participants){
+       this.participants = participants;
     }
 
     // Closes the Sheet

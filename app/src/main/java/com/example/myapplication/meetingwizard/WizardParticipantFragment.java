@@ -11,13 +11,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.myapplication.InformationBottomSheetAdapter;
 import com.example.myapplication.R;
 import com.example.myapplication.databinding.FragmentWizardParticipantBinding;
+
+import java.util.ArrayList;
 
 public class WizardParticipantFragment extends Fragment {
 
     FragmentWizardParticipantBinding bi;
+
+    ArrayList<Participant> participants = new ArrayList<>();
 
     public WizardParticipantFragment() {
         // Required empty public constructor
@@ -52,13 +55,18 @@ public class WizardParticipantFragment extends Fragment {
     private void setupListeners(){
         bi.participantAdd.setOnClickListener(view -> {
             // creates a Bottom sheet to display Information
-            LocationBottomSheetAdapter locationBottomSheetAdapter = new LocationBottomSheetAdapter();
-            locationBottomSheetAdapter.show(getParentFragmentManager(), locationBottomSheetAdapter.getTag());
+            ParticipantBottomSheetAdapter participantBottomSheetAdapter = new ParticipantBottomSheetAdapter();
+            participantBottomSheetAdapter.participants = participants;
+            participantBottomSheetAdapter.show(getParentFragmentManager(), participantBottomSheetAdapter.getTag());
         });
     }
 
     private void getParticipantList(){
+        // get the MeetingWizardActivity
+        MeetingWizardActivity activity = ((MeetingWizardActivity)getActivity());
 
+        assert activity != null;
+        participants = activity.getParticipants();
     }
 
     private void buildRecyclerView(){
