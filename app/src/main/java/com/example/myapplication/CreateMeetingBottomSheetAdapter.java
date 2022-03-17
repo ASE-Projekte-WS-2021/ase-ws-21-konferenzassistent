@@ -5,7 +5,6 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -155,7 +154,7 @@ public class CreateMeetingBottomSheetAdapter extends BottomSheetDialogFragment {
 
             // Open the Meeting wizard
             if(((MainActivity)getActivity()) != null)
-                ((MainActivity)getActivity()).startMeetingWizard(viewListener);
+                ((MainActivity)getActivity()).startMeetingWizard(title, location);
         });
 
         // location button clicked

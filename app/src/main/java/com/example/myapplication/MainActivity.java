@@ -1,22 +1,18 @@
 package com.example.myapplication;
 
-import androidx.annotation.NonNull;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
-import androidx.appcompat.app.AppCompatDelegate;
-
-import android.content.Intent;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.TextView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.navigation.NavigationBarView;
 
 import java.util.Objects;
 
@@ -60,9 +56,7 @@ public class MainActivity extends AppCompatActivity{
 
         // add listener for fragment change
         NavController.OnDestinationChangedListener listener =
-                ((controller, navDestination, bundle) -> {
-                    rebuildActionBar();
-                } );
+                ((controller, navDestination, bundle) -> rebuildActionBar());
         navController.addOnDestinationChangedListener(listener);
 
     }
@@ -86,8 +80,13 @@ public class MainActivity extends AppCompatActivity{
         return meetingAdapter;
     }
 
-    public void startMeetingWizard(View view){
+    // Start the Meeting Creation Wizard
+    public void startMeetingWizard(String title, String location){
         Intent intent = new Intent(this, SettingsActivity.class);
+
+        // Give it the title and location
+        intent.putExtra("meeting_wizard_title", title);
+        intent.putExtra("meeting_wizard_location", location);
         startActivity(intent);
     }
 
