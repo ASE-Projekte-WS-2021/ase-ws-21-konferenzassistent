@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        android:orientation="vertical">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_marginTop="48dp"
+            app:cardCornerRadius="16dp"
+            android:backgroundTint="@color/corona_white"
+            android:layout_height="match_parent">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/corona_white"
+                android:orientation="vertical">
+
+                <!-- Header -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:orientation="horizontal">
+
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="Teilnehmer"
+                        android:textSize="16sp"
+                        android:gravity="center"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"/>
+
+                    <ImageButton
+                        android:id="@+id/button_dismiss"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="16dp"
+                        android:backgroundTint="@color/black"
+                        android:background="@drawable/ic_baseline_close_24"
+                        />
+
+                </LinearLayout>
+
+                <!-- Scroll View -->
+                <androidx.core.widget.NestedScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    >
+
+                    <!-- Text input -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="match_parent"
+                            app:cardCornerRadius="16dp"
+                            android:layout_margin="8dp"
+                            android:background="@color/corona_white"
+                            android:layout_height="wrap_content">
+                            <!-- Searchbar -->
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+                                <EditText
+                                    android:id="@+id/text_input_search"
+                                    android:layout_width="0dp"
+                                    android:hint="Teilnehmer Suchen"
+                                    android:layout_weight="1"
+                                    android:textSize="16sp"
+                                    android:inputType="text"
+                                    android:maxLines="1"
+                                    android:drawableLeft="@drawable/ic_baseline_search_24"
+                                    android:layout_margin="8dp"
+                                    android:background="@color/transparent"
+                                    android:layout_height="wrap_content"/>
+
+                                <ImageButton
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:background="@drawable/ic_baseline_close_24"
+                                    android:backgroundTint="@color/dark_gray"
+                                    android:layout_marginEnd="16dp"/>
+                            </LinearLayout>
+
+
+                        </androidx.cardview.widget.CardView>
+
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="left"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginTop="8dp"
+                            android:textStyle="bold"
+                            android:layout_marginEnd="16dp"
+                            android:text="Bekannte Teilnehmer"/>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginEnd="16dp"
+                            android:layout_height="1dp"
+                            android:background="#e6e6e6" />
+
+                        <androidx.core.widget.NestedScrollView
+                            android:layout_width="match_parent"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginEnd="16dp"
+                            android:layout_height="wrap_content">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <androidx.recyclerview.widget.RecyclerView
+                                    android:id="@+id/participant_recycle_view"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"/>
+
+
+                                <!-- Add new Participant -->
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="horizontal"
+                                        >
+
+                                        <LinearLayout
+                                            android:layout_width="0dp"
+                                            android:layout_weight="1"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginTop="8dp"
+                                            android:orientation="horizontal">
+
+                                            <androidx.cardview.widget.CardView
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                app:cardCornerRadius="100dp"
+                                                android:backgroundTint="@color/corona_blue">
+
+                                                <ImageView
+                                                    android:layout_margin="4dp"
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    android:background="@drawable/ic_baseline_add_24_blue"
+                                                    android:backgroundTint="@color/white"/>
+
+                                            </androidx.cardview.widget.CardView>
+
+                                            <TextView
+                                                android:id="@+id/participant_name"
+                                                android:layout_marginStart="16dp"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="match_parent"
+                                                android:textColor="@color/black"
+                                                android:gravity="center"
+                                                android:textSize="16sp"
+                                                android:text="Neuen Teilnehmer hinzufügen"/>
+
+
+                                        </LinearLayout>
+
+                                    </LinearLayout>
+
+
+                                </LinearLayout>
+
+
+                            </LinearLayout>
+                        </androidx.core.widget.NestedScrollView>
+
+                    </LinearLayout>
+
+                </androidx.core.widget.NestedScrollView>
+
+            </LinearLayout>
+
+            <View
+                android:id="@+id/extraSpace"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </androidx.cardview.widget.CardView>
+    </LinearLayout>
+</layout>
+
