@@ -18,6 +18,32 @@ public class CustomAlertBottomSheetAdapter extends BottomSheetDialogFragment {
 
     CutsomAlertBottomSheetBinding bi;
     BottomSheetBehavior<View> bottomSheetBehavior;
+    onLeaveListener listener;
+
+    public void setWarningText(String warningText) {
+        this.warningText = warningText;
+    }
+
+    public void setAcceptText(String acceptText) {
+        this.acceptText = acceptText;
+    }
+
+    public void setDeclineText(String declineText) {
+        this.declineText = declineText;
+    }
+
+    String warningText = "";
+    String acceptText = "";
+    String declineText = "";
+
+    public CustomAlertBottomSheetAdapter(onLeaveListener listener){
+        this.listener = listener;
+    }
+
+    public interface onLeaveListener{
+        public void onLeaving();
+        public void clearWarnings();
+    }
 
     // Make the background Transparent
     @Override
@@ -77,8 +103,7 @@ public class CustomAlertBottomSheetAdapter extends BottomSheetDialogFragment {
         bi.buttonDismissChanges.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(((MainActivity)getActivity()) != null)
-                    ((MainActivity)getActivity()).getMeetingAdapter().dismissMeeting();
+                listener.onLeaving();
 
                 // dismiss the alert
                 dismiss();
@@ -86,20 +111,31 @@ public class CustomAlertBottomSheetAdapter extends BottomSheetDialogFragment {
         });
 
         setStyle(CustomAlertBottomSheetAdapter.STYLE_NORMAL, R.style.CustomBottomSheetDialogTheme);
+
+        // Set Button Texts
+        setupDialogText();
+
         return bottomSheet;
+    }
+
+    // Sets up the Dialog text
+    private void setupDialogText(){
+        bi.buttonDismiss.setText(declineText);
+        bi.buttonDismissChanges.setText(acceptText);
+        bi.alertWarningText.setText(warningText);
     }
 
     @Override
     public void onStart(){
         super.onStart();
+
         //bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if(((MainActivity)getActivity()) != null)
-            ((MainActivity)getActivity()).getMeetingAdapter().resetWarning();
+        listener.clearWarnings();
     }
 }
 

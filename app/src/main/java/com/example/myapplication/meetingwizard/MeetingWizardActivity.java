@@ -1,25 +1,23 @@
 package com.example.myapplication.meetingwizard;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.myapplication.CountdownActivity;
+import com.example.myapplication.CustomAlertBottomSheetAdapter;
 import com.example.myapplication.R;
 import com.example.myapplication.checklist.OnAdapterItemClickListener;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class MeetingWizardActivity extends AppCompatActivity implements OnAdapterItemClickListener {
+public class MeetingWizardActivity extends AppCompatActivity implements OnAdapterItemClickListener, CustomAlertBottomSheetAdapter.onLeaveListener {
 
     // Array List of all Wizard Fragments
     private final ArrayList<Fragment> fragmentArrayList = new ArrayList<>();
@@ -134,6 +132,15 @@ public class MeetingWizardActivity extends AppCompatActivity implements OnAdapte
                 loadFragment(wizardPosition);
                 setForm();
             }
+            // Check if user is already at the first Fragment
+            else if(wizardPosition == 0){
+                // Warn user about leaving
+                CustomAlertBottomSheetAdapter customAlertBottomSheetAdapter = new CustomAlertBottomSheetAdapter(this);
+                customAlertBottomSheetAdapter.setWarningText("Solle das Meeting wirklich vorzeitig Beendet werden?");
+                customAlertBottomSheetAdapter.setAcceptText("Meeting Verwerfen");
+                customAlertBottomSheetAdapter.setDeclineText("Fortfahren");
+                customAlertBottomSheetAdapter.show(getSupportFragmentManager() , customAlertBottomSheetAdapter.getTag());
+            }
         });
     }
 
@@ -198,10 +205,22 @@ public class MeetingWizardActivity extends AppCompatActivity implements OnAdapte
     }
 
     @Override
+    public void onLeaving() {
+        // go back
+        finish();
+    }
+
+    @Override
+    public void clearWarnings() {
+        // Empty
+    }
+
+    @Override
     public void onAdapterItemClick() {
         WizardChecklistFragment fragment =(WizardChecklistFragment) fragmentArrayList.get(STATE_IS_CHECKLIST);
 
         fragment.checkItem();
     }
+
 
 }

@@ -17,7 +17,8 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 import java.util.ArrayList;
 
-public class CreateMeetingBottomSheetAdapter extends BottomSheetDialogFragment {
+public class CreateMeetingBottomSheetAdapter extends BottomSheetDialogFragment implements CustomAlertBottomSheetAdapter.onLeaveListener
+{
 
     CreateMeetingBottomSheetBinding bi;
     BottomSheetBehavior<View> bottomSheetBehavior;
@@ -253,7 +254,10 @@ public class CreateMeetingBottomSheetAdapter extends BottomSheetDialogFragment {
             // set warning as true
             warning = true;
             // creates a Bottom sheet to create a meeting
-            CustomAlertBottomSheetAdapter customAlertBottomSheetAdapter = new CustomAlertBottomSheetAdapter();
+            CustomAlertBottomSheetAdapter customAlertBottomSheetAdapter = new CustomAlertBottomSheetAdapter(this);
+            customAlertBottomSheetAdapter.setWarningText("Solle dieses neue Meeting wirlich gelöscht werden?");
+            customAlertBottomSheetAdapter.setAcceptText("Änderungen Verwerfen");
+            customAlertBottomSheetAdapter.setDeclineText("Weiter Bearbeiten");
             customAlertBottomSheetAdapter.show(getParentFragmentManager() , customAlertBottomSheetAdapter.getTag());
         }
     }
@@ -330,5 +334,15 @@ public class CreateMeetingBottomSheetAdapter extends BottomSheetDialogFragment {
 
        // close the sheet
         locationSelectBottomSheet.closeLocation();
+    }
+
+    @Override
+    public void onLeaving() {
+        dismissMeeting();
+    }
+
+    @Override
+    public void clearWarnings() {
+        resetWarning();
     }
 }
