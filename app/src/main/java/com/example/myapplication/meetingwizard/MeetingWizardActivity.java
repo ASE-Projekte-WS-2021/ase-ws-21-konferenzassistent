@@ -32,6 +32,36 @@ public class MeetingWizardActivity extends AppCompatActivity implements OnAdapte
     final static int STATE_IS_PARTICIPANT = 1;
     final static int STATE_IS_CHECKLIST = 2;
 
+    public ArrayList<String> getmCountdownNames() {
+        return mCountdownNames;
+    }
+
+    public void setmCountdownNames(ArrayList<String> mCountdownNames) {
+        this.mCountdownNames = mCountdownNames;
+    }
+
+    public ArrayList<Long> getmCountdownTime() {
+        return mCountdownTime;
+    }
+
+    public void setmCountdownTime(ArrayList<Long> mCountdownTime) {
+        this.mCountdownTime = mCountdownTime;
+    }
+
+    public ArrayList<Boolean> getmEnabled() {
+        return mEnabled;
+    }
+
+    public void setmEnabled(ArrayList<Boolean> mEnabled) {
+        this.mEnabled = mEnabled;
+    }
+
+    // Countdowns
+    private ArrayList<String> mCountdownNames;
+    private ArrayList<Long> mCountdownTime;
+    private ArrayList<Boolean> mEnabled;
+
+
     // Views
     TextView titleText;
     TextView stageText;
@@ -50,6 +80,27 @@ public class MeetingWizardActivity extends AppCompatActivity implements OnAdapte
         setupViews();
         getExtras();
 
+        mCountdownNames = new ArrayList<>();
+        mCountdownTime = new ArrayList<>();
+        mEnabled = new ArrayList<>();
+
+        // TODO: Give real Countdown Data
+        mCountdownNames.add("Lüftungstimer");
+        mCountdownTime.add((long)15);
+        mEnabled.add(true);
+
+        mCountdownNames.add("Abstandstimer");
+        mCountdownTime.add((long)15);
+        mEnabled.add(true);
+
+        mCountdownNames.add("Third Timer");
+        mCountdownTime.add((long)28);
+        mEnabled.add(false);
+
+        mCountdownNames.add("Testtimer");
+        mCountdownTime.add((long)55);
+        mEnabled.add(false);
+
         // Loads the first Fragment
         loadFragment(0);
     }
@@ -58,7 +109,7 @@ public class MeetingWizardActivity extends AppCompatActivity implements OnAdapte
     private void setupFragments(){
         fragmentArrayList.add(new WizardCountdownFragment());
         fragmentArrayList.add(new WizardParticipantFragment());
-        fragmentArrayList.add(new WizardChecklistFragment(this::onAdapterItemClick));
+        fragmentArrayList.add(new WizardChecklistFragment(this));
     }
 
     // Setup all the listeners on the buttons
@@ -121,6 +172,11 @@ public class MeetingWizardActivity extends AppCompatActivity implements OnAdapte
                 stageText.setText("Checkliste abarbeiten");
                 break;
         }
+    }
+
+    // Gets and sets the Countdown Data depending what got entered in the wizard
+    public void getCountdownData(){
+
     }
 
     private void startCountdownActivity(){

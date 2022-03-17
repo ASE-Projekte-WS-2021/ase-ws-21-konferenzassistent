@@ -6,14 +6,21 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.myapplication.CountdownActivity;
+import com.example.myapplication.MainActivity;
+import com.example.myapplication.RecyclerViewLocationAdapter;
 import com.example.myapplication.databinding.FragmentWizardCountdownBinding;
 import com.example.myapplication.R;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -22,29 +29,21 @@ import com.example.myapplication.R;
  */
 public class WizardCountdownFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
     FragmentWizardCountdownBinding bi;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    ArrayList<String> mCountdownNames = new ArrayList<>();
+    ArrayList<Long> mCountdownTime = new ArrayList<>();
+    ArrayList<Boolean> mEnabled = new ArrayList<>();
+
+    RecyclerViewCountdownAdapter recyclerViewCountdownAdapter;
 
     public WizardCountdownFragment() {
         // Required empty public constructor
     }
 
     // TODO: Rename and change types and number of parameters
-    public static WizardCountdownFragment newInstance(String param1, String param2) {
-        WizardCountdownFragment fragment = new WizardCountdownFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
+    public static WizardCountdownFragment newInstance() {
+        return new WizardCountdownFragment();
     }
 
     @Override
@@ -59,19 +58,60 @@ public class WizardCountdownFragment extends Fragment {
         bi = DataBindingUtil.bind(view);
         assert bi != null;
 
-        // Example how to set Countdown Picker
-        bi.wizardNumberPicker.setValue(5);
+        getCountdowns();
 
-        bi.countdownSwitch.setOnClickListener(view1 -> {
-            if(!bi.countdownSwitch.isChecked()){
-                bi.countdownContainer.setVisibility(View.GONE);
-            }
-            else{
-                Log.i("TAG", "onViewCreated: ghua");
-                bi.countdownContainer.setVisibility(View.VISIBLE);
-            }
-        });
+        // Builds the Recycler View and displays the Countdowns
+        buildRecyclerView();
 
+    }
+
+    // Gets the Arrays form the Activity
+    private void getCountdowns(){
+        // get the MeetingWizardActivity
+        MeetingWizardActivity activity = ((MeetingWizardActivity)getActivity());
+
+        assert activity != null;
+        mCountdownNames = activity.getmCountdownNames();
+        mCountdownTime = activity.getmCountdownTime();
+        mEnabled = activity.getmEnabled();
+    }
+
+    // Sets the Arrays in the Activity
+    private void setCountdowns(){
+        // get the MeetingWizardActivity
+        MeetingWizardActivity activity = ((MeetingWizardActivity)getActivity());
+
+        // get the data from the adapter
+        mCountdownNames = recyclerViewCountdownAdapter.getmCountdownNames();
+        mCountdownTime = recyclerViewCountdownAdapter.getmCountdownTime();
+        mEnabled = recyclerViewCountdownAdapter.getmEnabled();
+
+        assert activity != null;
+        activity.setmCountdownNames(mCountdownNames);
+        activity.setmCountdownTime(mCountdownTime);
+        activity.setmEnabled(mEnabled);
+    }
+
+    // Build and fills the recycler view
+    private void buildRecyclerView(){
+        RecyclerView recyclerView = bi.countdownRecycleView;
+        recyclerViewCountdownAdapter = new RecyclerViewCountdownAdapter(
+                mCountdownNames,
+                mCountdownTime,
+                mEnabled,
+                this.getContext()
+        );
+        recyclerView.setAdapter(recyclerViewCountdownAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+
+        Log.i("TAG", "onDetach: ");
+        // Set the Countdowns once User leaves the Fragment
+        setCountdowns();
     }
 
     @Override
