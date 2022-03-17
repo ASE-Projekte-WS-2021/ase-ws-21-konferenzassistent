@@ -1,25 +1,25 @@
 package com.example.myapplication.meetingwizard;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.myapplication.CountdownActivity;
+import com.example.myapplication.CreateMeetingBottomSheetAdapter;
+import com.example.myapplication.CustomAlertBottomSheetAdapter;
+import com.example.myapplication.InformationBottomSheetAdapter;
 import com.example.myapplication.R;
 import com.example.myapplication.checklist.OnAdapterItemClickListener;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class MeetingWizardActivity extends AppCompatActivity implements OnAdapterItemClickListener {
+public class MeetingWizardActivity extends AppCompatActivity implements OnAdapterItemClickListener, CustomAlertBottomSheetAdapter.onLeaveListener {
 
     // Array List of all Wizard Fragments
     private final ArrayList<Fragment> fragmentArrayList = new ArrayList<>();
@@ -31,6 +31,46 @@ public class MeetingWizardActivity extends AppCompatActivity implements OnAdapte
     final static int STATE_IS_COUNTDOWN = 0;
     final static int STATE_IS_PARTICIPANT = 1;
     final static int STATE_IS_CHECKLIST = 2;
+
+    public ArrayList<String> getmCountdownNames() {
+        return mCountdownNames;
+    }
+
+    public void setmCountdownNames(ArrayList<String> mCountdownNames) {
+        this.mCountdownNames = mCountdownNames;
+    }
+
+    public ArrayList<Long> getmCountdownTime() {
+        return mCountdownTime;
+    }
+
+    public void setmCountdownTime(ArrayList<Long> mCountdownTime) {
+        this.mCountdownTime = mCountdownTime;
+    }
+
+    public ArrayList<Boolean> getmEnabled() {
+        return mEnabled;
+    }
+
+    public void setmEnabled(ArrayList<Boolean> mEnabled) {
+        this.mEnabled = mEnabled;
+    }
+
+    // Countdowns
+    private ArrayList<String> mCountdownNames;
+    private ArrayList<Long> mCountdownTime;
+    private ArrayList<Boolean> mEnabled;
+
+    public ArrayList<RecyclerViewAdvancedCountdownAdapter.AdvancedCountdownObject> getAdvancedCountdownObjects() {
+        return advancedCountdownObjects;
+    }
+
+    public void setAdvancedCountdownObjects(ArrayList<RecyclerViewAdvancedCountdownAdapter.AdvancedCountdownObject> advancedCountdownObjects) {
+        this.advancedCountdownObjects = advancedCountdownObjects;
+    }
+
+    // advanced Countdown
+    private ArrayList<RecyclerViewAdvancedCountdownAdapter.AdvancedCountdownObject> advancedCountdownObjects;
 
     // Views
     TextView titleText;
@@ -50,6 +90,65 @@ public class MeetingWizardActivity extends AppCompatActivity implements OnAdapte
         setupViews();
         getExtras();
 
+        mCountdownNames = new ArrayList<>();
+        mCountdownTime = new ArrayList<>();
+        mEnabled = new ArrayList<>();
+        advancedCountdownObjects = new ArrayList<>();
+
+        // TODO: Give real Countdown Data
+        mCountdownNames.add("Lüftungstimer");
+        mCountdownTime.add((long)15);
+        mEnabled.add(true);
+
+        mCountdownNames.add("Abstandstimer");
+        mCountdownTime.add((long)15);
+        mEnabled.add(true);
+
+        mCountdownNames.add("Third Timer");
+        mCountdownTime.add((long)28);
+        mEnabled.add(false);
+
+        mCountdownNames.add("Testtimer");
+        mCountdownTime.add((long)55);
+        mEnabled.add(false);
+
+        // TODO: LOAD OBJECTS
+        RecyclerViewAdvancedCountdownItemAdapter.AdvancedCountdownItem child1 =
+                new RecyclerViewAdvancedCountdownItemAdapter.AdvancedCountdownItem(
+                        (long) 15,
+                        "Fenster sollte geöffnet sein");
+
+        RecyclerViewAdvancedCountdownItemAdapter.AdvancedCountdownItem child2 =
+                new RecyclerViewAdvancedCountdownItemAdapter.AdvancedCountdownItem(
+                        (long) 15,
+                        "Fenster sollte geschlossen sein");
+
+        RecyclerViewAdvancedCountdownItemAdapter.AdvancedCountdownItem child3 =
+                new RecyclerViewAdvancedCountdownItemAdapter.AdvancedCountdownItem(
+                        (long) 15,
+                        "");
+
+        ArrayList<RecyclerViewAdvancedCountdownItemAdapter.AdvancedCountdownItem> children =
+                new ArrayList<>();
+        children.add(child1);
+        children.add(child2);
+
+        ArrayList<RecyclerViewAdvancedCountdownItemAdapter.AdvancedCountdownItem> children2 =
+                new ArrayList<>();
+
+        children2.add(child3);
+
+        RecyclerViewAdvancedCountdownAdapter.AdvancedCountdownObject advancedCountdownObject =
+                new RecyclerViewAdvancedCountdownAdapter.AdvancedCountdownObject("Lüftungstimer", true, children);
+
+        RecyclerViewAdvancedCountdownAdapter.AdvancedCountdownObject advancedCountdownObject2 =
+                new RecyclerViewAdvancedCountdownAdapter.AdvancedCountdownObject("Abstandstimer", false, children2);
+
+        advancedCountdownObjects.add(advancedCountdownObject);
+        advancedCountdownObjects.add(advancedCountdownObject2);
+
+        // TODO: END OF DEBUG
+
         // Loads the first Fragment
         loadFragment(0);
     }
@@ -58,7 +157,7 @@ public class MeetingWizardActivity extends AppCompatActivity implements OnAdapte
     private void setupFragments(){
         fragmentArrayList.add(new WizardCountdownFragment());
         fragmentArrayList.add(new WizardParticipantFragment());
-        fragmentArrayList.add(new WizardChecklistFragment(this::onAdapterItemClick));
+        fragmentArrayList.add(new WizardChecklistFragment(this));
     }
 
     // Setup all the listeners on the buttons
@@ -83,6 +182,26 @@ public class MeetingWizardActivity extends AppCompatActivity implements OnAdapte
                 loadFragment(wizardPosition);
                 setForm();
             }
+            // Check if user is already at the first Fragment
+            else if(wizardPosition == 0){
+                // Warn user about leaving
+                CustomAlertBottomSheetAdapter customAlertBottomSheetAdapter = new CustomAlertBottomSheetAdapter(this);
+                customAlertBottomSheetAdapter.setWarningText("Solle das Meeting wirklich vorzeitig Beendet werden?");
+                customAlertBottomSheetAdapter.setAcceptText("Meeting Verwerfen");
+                customAlertBottomSheetAdapter.setDeclineText("Fortfahren");
+                customAlertBottomSheetAdapter.show(getSupportFragmentManager() , customAlertBottomSheetAdapter.getTag());
+            }
+        });
+
+        // Information button
+        findViewById(R.id.wizard_information_button).setOnClickListener(view -> {
+            // creates a Bottom sheet to display Information
+            InformationBottomSheetAdapter informationBottomSheetAdapter = new InformationBottomSheetAdapter();
+            // Set the layout
+            informationBottomSheetAdapter.setmLayout(R.layout.example_layout);
+            informationBottomSheetAdapter.show(getSupportFragmentManager() , informationBottomSheetAdapter.getTag());
+
+
         });
     }
 
@@ -123,6 +242,11 @@ public class MeetingWizardActivity extends AppCompatActivity implements OnAdapte
         }
     }
 
+    // Gets and sets the Countdown Data depending what got entered in the wizard
+    public void getCountdownData(){
+
+    }
+
     private void startCountdownActivity(){
         Intent intent = new Intent(this, CountdownActivity.class);
 
@@ -142,10 +266,22 @@ public class MeetingWizardActivity extends AppCompatActivity implements OnAdapte
     }
 
     @Override
+    public void onLeaving() {
+        // go back
+        finish();
+    }
+
+    @Override
+    public void clearWarnings() {
+        // Empty
+    }
+
+    @Override
     public void onAdapterItemClick() {
         WizardChecklistFragment fragment =(WizardChecklistFragment) fragmentArrayList.get(STATE_IS_CHECKLIST);
 
         fragment.checkItem();
     }
+
 
 }

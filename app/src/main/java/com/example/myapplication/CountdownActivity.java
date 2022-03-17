@@ -1,28 +1,15 @@
 package com.example.myapplication;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.res.ResourcesCompat;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentStatePagerAdapter;
-import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
-import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.tabs.TabLayout;
@@ -33,7 +20,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
 
-public class CountdownActivity extends AppCompatActivity {
+public class CountdownActivity extends AppCompatActivity implements CustomAlertBottomSheetAdapter.onLeaveListener{
 
 
 
@@ -170,12 +157,13 @@ public class CountdownActivity extends AppCompatActivity {
         endMeetingButton.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
-                displayDialog(view).show();
+                // Warn user about leaving
+                onLeaveWarning();
                 return true;
             }
         });
     }
-
+    /*
     // Alert Dialog for finish meeting confirmation
     private AlertDialog displayDialog(View view){
         AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.dialogAlertStyle);
@@ -194,6 +182,15 @@ public class CountdownActivity extends AppCompatActivity {
         builder.setMessage("Wollen sie das Meeting wirklich Beenden?");
         return builder.create();
 
+    }
+*/
+
+    private void onLeaveWarning(){
+        CustomAlertBottomSheetAdapter customAlertBottomSheetAdapter = new CustomAlertBottomSheetAdapter(this);
+        customAlertBottomSheetAdapter.setWarningText("Solle das Meeting wirklich Beendet werden?");
+        customAlertBottomSheetAdapter.setAcceptText("Meeting Beenden");
+        customAlertBottomSheetAdapter.setDeclineText("Meeting Fortfahren");
+        customAlertBottomSheetAdapter.show(getSupportFragmentManager() , customAlertBottomSheetAdapter.getTag());
     }
 
     // Get the Data from the Intents
@@ -328,7 +325,7 @@ public class CountdownActivity extends AppCompatActivity {
      * "To clear top activities from stack use below code
      * It will delete all activities from stack either asynctask run or not in the application." */
 
-    public void finishMeeting(View view) {
+    public void finishMeeting() {
         Intent intent = new Intent(this, PastMeetingInfoActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK
         | Intent.FLAG_ACTIVITY_CLEAR_TOP
@@ -340,5 +337,15 @@ public class CountdownActivity extends AppCompatActivity {
         intent.putExtra("Database_ID", -1);
         startActivity(intent);
         finish();
+    }
+
+    @Override
+    public void onLeaving() {
+        finishMeeting();
+    }
+
+    @Override
+    public void clearWarnings() {
+
     }
 }

@@ -1,50 +1,42 @@
 package com.example.myapplication;
 
 import android.app.Dialog;
-import android.content.res.Resources;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
+import android.widget.RelativeLayout;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.myapplication.databinding.CutsomAlertBottomSheetBinding;
-
+import com.example.myapplication.databinding.BottomSheetInformationDisplayBinding;
+import com.example.myapplication.databinding.BottomSheetLocationSelectBinding;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
-public class CustomAlertBottomSheetAdapter extends BottomSheetDialogFragment {
+import java.util.ArrayList;
 
-    CutsomAlertBottomSheetBinding bi;
+public class InformationBottomSheetAdapter extends BottomSheetDialogFragment {
+    private static final float MIN_SCROLL_FOR_CLOSURE = 0.1f;
+    BottomSheetInformationDisplayBinding bi;
     BottomSheetBehavior<View> bottomSheetBehavior;
-    onLeaveListener listener;
 
-    public void setWarningText(String warningText) {
-        this.warningText = warningText;
+    // Location List
+    RecyclerViewLocationAdapter recyclerViewLocationAdapter;
+    RelativeLayout relativeLayout;
+
+    public void setmLayout(Integer mLayout) {
+        this.mLayout = mLayout;
     }
 
-    public void setAcceptText(String acceptText) {
-        this.acceptText = acceptText;
-    }
-
-    public void setDeclineText(String declineText) {
-        this.declineText = declineText;
-    }
-
-    String warningText = "";
-    String acceptText = "";
-    String declineText = "";
-
-    public CustomAlertBottomSheetAdapter(onLeaveListener listener){
-        this.listener = listener;
-    }
-
-    public interface onLeaveListener{
-        public void onLeaving();
-        public void clearWarnings();
-    }
-
+    private Integer mLayout;
     // Make the background Transparent
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -58,7 +50,7 @@ public class CustomAlertBottomSheetAdapter extends BottomSheetDialogFragment {
         BottomSheetDialog bottomSheet = (BottomSheetDialog) super.onCreateDialog(savedInstanceState);
 
         // inflating Layout
-        View view = View.inflate(bottomSheet.getContext(), R.layout.cutsom_alert_bottom_sheet, null);
+        View view = View.inflate(bottomSheet.getContext(), R.layout.bottom_sheet_information_display, null);
 
         // binding views to data binding
         bi = DataBindingUtil.bind(view);
@@ -78,64 +70,54 @@ public class CustomAlertBottomSheetAdapter extends BottomSheetDialogFragment {
         // skip it being collapsable
         bottomSheetBehavior.setSkipCollapsed(true);
 
-        ((View) view.getParent()).setBackgroundColor(getResources().getColor(android.R.color.transparent));
+        ((View) view.getParent()).setBackgroundColor(getResources().getColor(android.R.color.transparent, null));
 
         bottomSheetBehavior.addBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
             @Override
             public void onStateChanged(@NonNull View bottomSheet, int newState) {
+                if(newState == BottomSheetBehavior.STATE_COLLAPSED ){
+                    bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+                }
             }
 
             @Override
             public void onSlide(@NonNull View bottomSheet, float slideOffset) {
-
+                if(slideOffset < MIN_SCROLL_FOR_CLOSURE){
+                    setCancelable(true);
+                }
+                else
+                {
+                    setCancelable(false);
+                }
             }
         });
+        setCancelable(false);
 
+        inflateInformationLayout();
 
-        // cancel buttun clicked
-        bi.buttonDismiss.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view){
-                dismiss();
-            }
-        });
-
-        bi.buttonDismissChanges.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                listener.onLeaving();
-
-                // dismiss the alert
-                dismiss();
-            }
-        });
+        // cancel button clicked
+        bi.informationButtonDismiss.setOnClickListener(viewListener -> dismiss());
 
         setStyle(CustomAlertBottomSheetAdapter.STYLE_NORMAL, R.style.CustomBottomSheetDialogTheme);
 
-        // Set Button Texts
-        setupDialogText();
 
         return bottomSheet;
     }
 
-    // Sets up the Dialog text
-    private void setupDialogText(){
-        bi.buttonDismiss.setText(declineText);
-        bi.buttonDismissChanges.setText(acceptText);
-        bi.alertWarningText.setText(warningText);
+    private void inflateInformationLayout(){
+        LayoutInflater layoutInflater = (LayoutInflater)
+                this.getLayoutInflater();
+        bi.informationLayout.addView(layoutInflater.inflate(mLayout, (ViewGroup) getView(), false), 0);
+    }
+
+    // Closes the Sheet
+    public void closeLocation(){
+        dismiss();
     }
 
     @Override
     public void onStart(){
         super.onStart();
-
-        //bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
     }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        listener.clearWarnings();
-    }
 }
-

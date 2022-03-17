@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/corona_white"
+        android:layout_margin="16dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/countdown_recycler_description_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+        <!-- Time Picker Description -->
+            <TextView
+                android:id="@+id/countdown_recycler_picker_description"
+                android:text="Intervall zwischen Fensteröffnungen"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_height="1dp"
+                android:background="#e6e6e6" />
+        </LinearLayout>
+
+        <!-- Time Picker -->
+        <com.example.myapplication.meetingwizard.CustomNumberPicker
+            android:id="@+id/countdown_recycler_picker_item"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            max="59"
+            min="1"
+            android:background="@color/white"
+            android:solidColor="@color/corona_white"
+            android:divider="@color/corona_blue"/>
+
+
+    </LinearLayout>
+
+
+</layout>

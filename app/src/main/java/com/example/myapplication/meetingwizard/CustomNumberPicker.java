@@ -27,7 +27,8 @@ public class CustomNumberPicker extends NumberPicker {
         this.setMinValue(attrs.getAttributeIntValue(null, "min", 0));
         this.setMaxValue(attrs.getAttributeIntValue(null, "max", 0));
 
-        this.setFormatter(i -> i + " Minuten");
+        // Sets the Prefix, makes sure to differentiate between plural and singular
+        this.setFormatter(i -> i > 1? i + " Minuten" : i +" Minute");
 
         // Fix for bug in Android Picker where the first element is not shown
         // https://stackoverflow.com/a/44949069
