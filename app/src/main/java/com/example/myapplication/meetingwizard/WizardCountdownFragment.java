@@ -35,7 +35,10 @@ public class WizardCountdownFragment extends Fragment {
     ArrayList<Long> mCountdownTime = new ArrayList<>();
     ArrayList<Boolean> mEnabled = new ArrayList<>();
 
-    RecyclerViewCountdownAdapter recyclerViewCountdownAdapter;
+    ArrayList<RecyclerViewAdvancedCountdownAdapter.AdvancedCountdownObject> mCountdown =
+            new ArrayList<>();
+
+    RecyclerViewAdvancedCountdownAdapter recyclerViewCountdownAdapter;
 
     public WizardCountdownFragment() {
         // Required empty public constructor
@@ -74,6 +77,7 @@ public class WizardCountdownFragment extends Fragment {
         mCountdownNames = activity.getmCountdownNames();
         mCountdownTime = activity.getmCountdownTime();
         mEnabled = activity.getmEnabled();
+        mCountdown = activity.getAdvancedCountdownObjects();
     }
 
     // Sets the Arrays in the Activity
@@ -82,23 +86,38 @@ public class WizardCountdownFragment extends Fragment {
         MeetingWizardActivity activity = ((MeetingWizardActivity)getActivity());
 
         // get the data from the adapter
+        /*
         mCountdownNames = recyclerViewCountdownAdapter.getmCountdownNames();
         mCountdownTime = recyclerViewCountdownAdapter.getmCountdownTime();
         mEnabled = recyclerViewCountdownAdapter.getmEnabled();
+        */
+        mCountdown = recyclerViewCountdownAdapter.getmAdvancedCountdownObjects();
 
         assert activity != null;
         activity.setmCountdownNames(mCountdownNames);
         activity.setmCountdownTime(mCountdownTime);
         activity.setmEnabled(mEnabled);
+        activity.setAdvancedCountdownObjects(mCountdown);
     }
 
     // Build and fills the recycler view
     private void buildRecyclerView(){
+        /* Simple Countdown View
         RecyclerView recyclerView = bi.countdownRecycleView;
         recyclerViewCountdownAdapter = new RecyclerViewCountdownAdapter(
                 mCountdownNames,
                 mCountdownTime,
                 mEnabled,
+                this.getContext()
+        );
+        recyclerView.setAdapter(recyclerViewCountdownAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
+        */
+
+        //
+        RecyclerView recyclerView = bi.countdownRecycleView;
+        recyclerViewCountdownAdapter = new RecyclerViewAdvancedCountdownAdapter(
+                mCountdown,
                 this.getContext()
         );
         recyclerView.setAdapter(recyclerViewCountdownAdapter);

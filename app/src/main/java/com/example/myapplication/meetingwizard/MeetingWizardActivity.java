@@ -59,6 +59,16 @@ public class MeetingWizardActivity extends AppCompatActivity implements OnAdapte
     private ArrayList<Long> mCountdownTime;
     private ArrayList<Boolean> mEnabled;
 
+    public ArrayList<RecyclerViewAdvancedCountdownAdapter.AdvancedCountdownObject> getAdvancedCountdownObjects() {
+        return advancedCountdownObjects;
+    }
+
+    public void setAdvancedCountdownObjects(ArrayList<RecyclerViewAdvancedCountdownAdapter.AdvancedCountdownObject> advancedCountdownObjects) {
+        this.advancedCountdownObjects = advancedCountdownObjects;
+    }
+
+    // advanced Countdown
+    private ArrayList<RecyclerViewAdvancedCountdownAdapter.AdvancedCountdownObject> advancedCountdownObjects;
 
     // Views
     TextView titleText;
@@ -81,6 +91,7 @@ public class MeetingWizardActivity extends AppCompatActivity implements OnAdapte
         mCountdownNames = new ArrayList<>();
         mCountdownTime = new ArrayList<>();
         mEnabled = new ArrayList<>();
+        advancedCountdownObjects = new ArrayList<>();
 
         // TODO: Give real Countdown Data
         mCountdownNames.add("Lüftungstimer");
@@ -98,6 +109,43 @@ public class MeetingWizardActivity extends AppCompatActivity implements OnAdapte
         mCountdownNames.add("Testtimer");
         mCountdownTime.add((long)55);
         mEnabled.add(false);
+
+        // TODO: LOAD OBJECTS
+        RecyclerViewAdvancedCountdownItemAdapter.AdvancedCountdownItem child1 =
+                new RecyclerViewAdvancedCountdownItemAdapter.AdvancedCountdownItem(
+                        (long) 15,
+                        "Fenster sollte geöffnet sein");
+
+        RecyclerViewAdvancedCountdownItemAdapter.AdvancedCountdownItem child2 =
+                new RecyclerViewAdvancedCountdownItemAdapter.AdvancedCountdownItem(
+                        (long) 15,
+                        "Fenster sollte geschlossen sein");
+
+        RecyclerViewAdvancedCountdownItemAdapter.AdvancedCountdownItem child3 =
+                new RecyclerViewAdvancedCountdownItemAdapter.AdvancedCountdownItem(
+                        (long) 15,
+                        "");
+
+        ArrayList<RecyclerViewAdvancedCountdownItemAdapter.AdvancedCountdownItem> children =
+                new ArrayList<>();
+        children.add(child1);
+        children.add(child2);
+
+        ArrayList<RecyclerViewAdvancedCountdownItemAdapter.AdvancedCountdownItem> children2 =
+                new ArrayList<>();
+
+        children2.add(child3);
+
+        RecyclerViewAdvancedCountdownAdapter.AdvancedCountdownObject advancedCountdownObject =
+                new RecyclerViewAdvancedCountdownAdapter.AdvancedCountdownObject("Lüftungstimer", false, children);
+
+        RecyclerViewAdvancedCountdownAdapter.AdvancedCountdownObject advancedCountdownObject2 =
+                new RecyclerViewAdvancedCountdownAdapter.AdvancedCountdownObject("Abstandstimer", false, children2);
+
+        advancedCountdownObjects.add(advancedCountdownObject);
+        advancedCountdownObjects.add(advancedCountdownObject2);
+
+        // TODO: END OF DEBUG
 
         // Loads the first Fragment
         loadFragment(0);
