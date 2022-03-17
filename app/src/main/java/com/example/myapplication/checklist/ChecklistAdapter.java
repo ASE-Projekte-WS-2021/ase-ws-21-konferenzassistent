@@ -1,6 +1,7 @@
 package com.example.myapplication.checklist;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import android.widget.ImageButton;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.cardview.widget.CardView;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.R;
@@ -22,10 +24,10 @@ public class ChecklistAdapter extends RecyclerView.Adapter<ChecklistAdapter.Chec
     private List<ChecklistItem> checklistItems;
     private OnAdapterItemClickListener adapterItemClickListener = null;
 
-    public ChecklistAdapter(Context ct, List<ChecklistItem> checklistItems) {
+    public ChecklistAdapter(Context ct, OnAdapterItemClickListener listener, List<ChecklistItem> checklistItems) {
         this.ct = ct;
         this.checklistItems = checklistItems;
-        this.adapterItemClickListener = (OnAdapterItemClickListener) ct;
+        this.adapterItemClickListener = (OnAdapterItemClickListener) listener;
     }
 
     @NonNull
@@ -58,6 +60,7 @@ public class ChecklistAdapter extends RecyclerView.Adapter<ChecklistAdapter.Chec
                 builder.create().show();
             });
         }
+
     }
 
     @Override

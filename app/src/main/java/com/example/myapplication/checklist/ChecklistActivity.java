@@ -73,7 +73,7 @@ public class ChecklistActivity extends AppCompatActivity implements OnAdapterIte
         checklistItems.add(new ChecklistItem("Masken / Plexiglas geprüft"));
         checklistItems.add(new ChecklistItem("Abstände gewährleistet"));
 
-        checklistAdapter = new ChecklistAdapter(this, checklistItems);
+        checklistAdapter = new ChecklistAdapter(this, this, checklistItems);
         rvChecklist.setAdapter(checklistAdapter);
         linearLayoutManager = new LinearLayoutManager(this);
         rvChecklist.setLayoutManager(linearLayoutManager);

@@ -16,6 +16,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import com.example.myapplication.meetingwizard.MeetingWizardActivity;
 import com.example.myapplication.onboarding.OnboardingActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -96,7 +97,7 @@ public class MainActivity extends AppCompatActivity{
 
     // Start the Meeting Creation Wizard
     public void startMeetingWizard(String title, String location){
-        Intent intent = new Intent(this, SettingsActivity.class);
+        Intent intent = new Intent(this, MeetingWizardActivity.class);
 
         // Give it the title and location
         intent.putExtra("meeting_wizard_title", title);
