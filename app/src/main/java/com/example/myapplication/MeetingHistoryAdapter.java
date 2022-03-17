@@ -43,6 +43,7 @@ public class MeetingHistoryAdapter extends RecyclerView.Adapter<MeetingHistoryAd
         String participants = meetingsList.get(position).getNumberParticipants();
         String ort = meetingsList.get(position).getLocation();
         String date = meetingsList.get(position).getDate().substring(0,10);
+        String title = meetingsList.get(position).getTitle();
 
         // set the Text Values of the Holder
         holder.tvDate.setText(date);
@@ -50,6 +51,7 @@ public class MeetingHistoryAdapter extends RecyclerView.Adapter<MeetingHistoryAd
         holder.tvLocation.setText(ort);
         holder.tvDuration.setText(String.format(ct.getString(R.string.meeting_history_minutes_short),duration));
         holder.tvNumParticipants.setText(participants);
+        holder.tvTitle.setText(title);
 
         // set onclick listener on the cardView
         holder.cardView.setOnClickListener(view -> {
@@ -80,7 +82,7 @@ public class MeetingHistoryAdapter extends RecyclerView.Adapter<MeetingHistoryAd
     public static class MeetingHistoryViewHolder extends RecyclerView.ViewHolder {
 
         CardView cardView;
-        TextView tvDate, tvTime, tvLocation, tvDuration, tvNumParticipants;
+        TextView tvDate, tvTime, tvLocation, tvDuration, tvNumParticipants, tvTitle;
 
         public MeetingHistoryViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -90,6 +92,7 @@ public class MeetingHistoryAdapter extends RecyclerView.Adapter<MeetingHistoryAd
             tvLocation = itemView.findViewById(R.id.tvLocationRow);
             tvDuration = itemView.findViewById(R.id.tvDurationRow);
             tvNumParticipants = itemView.findViewById(R.id.tvParticipantsRow);
+            tvTitle = itemView.findViewById(R.id.tvTitle);
         }
 
     }

@@ -100,7 +100,8 @@ public class HomeFragment extends Fragment {
             String mDuration = cursor.getString(cursor.getColumnIndexOrThrow("meeting_duration"));
             String mLocation = cursor.getString(cursor.getColumnIndexOrThrow("meeting_position"));
             String mNumberParticipants = cursor.getString(cursor.getColumnIndexOrThrow("meeting_number_participants"));
-            meetingsList.add(new Meeting(mId,mDate,mDateEnd,mLocation,mDuration,mNumberParticipants));
+            String mNTitle = cursor.getString(cursor.getColumnIndexOrThrow("meeting_title"));
+            meetingsList.add(new Meeting(mId,mDate,mDateEnd,mLocation,mNTitle, mDuration, mNumberParticipants));
         }
 
         /* Log.d("database", Arrays.toString(cursor.getColumnNames()));
