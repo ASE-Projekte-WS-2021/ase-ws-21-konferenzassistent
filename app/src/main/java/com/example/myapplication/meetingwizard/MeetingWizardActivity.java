@@ -6,7 +6,9 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.myapplication.CountdownActivity;
+import com.example.myapplication.CreateMeetingBottomSheetAdapter;
 import com.example.myapplication.CustomAlertBottomSheetAdapter;
+import com.example.myapplication.InformationBottomSheetAdapter;
 import com.example.myapplication.R;
 import com.example.myapplication.checklist.OnAdapterItemClickListener;
 
@@ -189,6 +191,17 @@ public class MeetingWizardActivity extends AppCompatActivity implements OnAdapte
                 customAlertBottomSheetAdapter.setDeclineText("Fortfahren");
                 customAlertBottomSheetAdapter.show(getSupportFragmentManager() , customAlertBottomSheetAdapter.getTag());
             }
+        });
+
+        // Information button
+        findViewById(R.id.wizard_information_button).setOnClickListener(view -> {
+            // creates a Bottom sheet to display Information
+            InformationBottomSheetAdapter informationBottomSheetAdapter = new InformationBottomSheetAdapter();
+            // Set the layout
+            informationBottomSheetAdapter.setmLayout(R.layout.example_layout);
+            informationBottomSheetAdapter.show(getSupportFragmentManager() , informationBottomSheetAdapter.getTag());
+
+
         });
     }
 
