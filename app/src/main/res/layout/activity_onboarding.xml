@@ -9,7 +9,7 @@
     <Button
         android:id="@+id/onboarding_botton_get_started"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:layout_marginBottom="64dp"
         android:background="@drawable/btn_default"
         android:onClick="onGetStartedButtonClicked"
