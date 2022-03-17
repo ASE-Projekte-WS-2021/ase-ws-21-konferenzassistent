@@ -51,6 +51,11 @@ public class RecyclerViewAdvancedCountdownItemAdapter
         holder.subCountdownDescription.setText(mAdvancedCountdownItem.get(holder.getAdapterPosition()).subCountdownDescription);
         holder.subCountdownPicker.setValue(Math.toIntExact(mAdvancedCountdownItem.get(holder.getAdapterPosition()).subCountdown));
 
+        // If there is only one item remove description
+        if(mAdvancedCountdownItem.size() == 1){
+            holder.descriptionContainer.setVisibility(View.GONE);
+        }
+
         holder.subCountdownPicker.setOnValueChangedListener(
                 (numberPicker, i, i1) -> mAdvancedCountdownItem.get(holder.getAdapterPosition()).subCountdown = (long) i1);
     }
@@ -70,12 +75,14 @@ public class RecyclerViewAdvancedCountdownItemAdapter
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView subCountdownDescription;
+        LinearLayout descriptionContainer;
         CustomNumberPicker subCountdownPicker;
 
         public ViewHolder(View countdownView){
             super(countdownView);
             subCountdownDescription = countdownView.findViewById(R.id.countdown_recycler_picker_description);
             subCountdownPicker = countdownView.findViewById(R.id.countdown_recycler_picker_item);
+            descriptionContainer = countdownView.findViewById(R.id.countdown_recycler_description_container);
     }
 
 }

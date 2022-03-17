@@ -137,7 +137,7 @@ public class MeetingWizardActivity extends AppCompatActivity implements OnAdapte
         children2.add(child3);
 
         RecyclerViewAdvancedCountdownAdapter.AdvancedCountdownObject advancedCountdownObject =
-                new RecyclerViewAdvancedCountdownAdapter.AdvancedCountdownObject("Lüftungstimer", false, children);
+                new RecyclerViewAdvancedCountdownAdapter.AdvancedCountdownObject("Lüftungstimer", true, children);
 
         RecyclerViewAdvancedCountdownAdapter.AdvancedCountdownObject advancedCountdownObject2 =
                 new RecyclerViewAdvancedCountdownAdapter.AdvancedCountdownObject("Abstandstimer", false, children2);
