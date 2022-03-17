@@ -31,12 +31,12 @@
 
     <string name="app_opened_first_time_key">app_opened_first_time</string>
     <string name="onboarding_get_started">Los gehts!</string>
-    <string name="onboarding_page_1_headline">Onboarding Page 1 Headline</string>
-    <string name="onboarding_page_1_subhead">Onboarding Page 1 Subhead</string>
-    <string name="onboarding_page_2_headline">Onboarding Page 2 Headline</string>
-    <string name="onboarding_page_2_subhead">Onboarding Page 2 Subhead</string>
-    <string name="onboarding_page_3_headline">Onboarding Page 3 Headline</string>
-    <string name="onboarding_page_3_subhead">Onboarding Page 3 Subhead</string>
+    <string name="onboarding_page_1_headline">Meetings? Aber sicher!</string>
+    <string name="onboarding_page_1_subhead">Trotz Corona sicher persönliche Meetings abhalten können.</string>
+    <string name="onboarding_page_2_headline">Reminder für Maßnahmen</string>
+    <string name="onboarding_page_2_subhead">Während des Meetings an regelmäßiges Lüften und Abstandskontrollen erinnert werden! Frei einstellbar.</string>
+    <string name="onboarding_page_3_headline">Meetings auf einen Blick</string>
+    <string name="onboarding_page_3_subhead">Informationen über vergangene Meetings ermöglichen Kontaktverfolgung.</string>
 
     <string name="start"> Starte Meeting</string>
     <string name="end"> Beende Meeting</string>

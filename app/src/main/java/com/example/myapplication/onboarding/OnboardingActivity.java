@@ -31,15 +31,15 @@ public class OnboardingActivity extends AppCompatActivity {
         onboardingPages.add(new OnboardingPageData(
                 getString(R.string.onboarding_page_1_headline),
                 getString(R.string.onboarding_page_1_subhead),
-                R.drawable.ic_android));
+                R.drawable.ic_outline_group_24));
         onboardingPages.add(new OnboardingPageData(
                 getString(R.string.onboarding_page_2_headline),
                 getString(R.string.onboarding_page_2_subhead),
-                R.drawable.ic_android));
+                R.drawable.ic_outline_notifications_active_24));
         onboardingPages.add(new OnboardingPageData(
                 getString(R.string.onboarding_page_3_headline),
                 getString(R.string.onboarding_page_3_subhead),
-                R.drawable.ic_android));
+                R.drawable.ic_outline_history_24));
 
 
         carouselView = findViewById(R.id.carouselView);
