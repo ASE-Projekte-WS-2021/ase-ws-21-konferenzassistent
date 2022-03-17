@@ -1,10 +1,12 @@
 package com.example.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
+
 import androidx.appcompat.app.AppCompatDelegate;
 
 import android.content.Context;
@@ -22,6 +24,7 @@ import java.util.Objects;
 public class MainActivity extends AppCompatActivity{
 
     private TextView actionBarText;
+    private CreateMeetingBottomSheetAdapter meetingAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,9 +70,7 @@ public class MainActivity extends AppCompatActivity{
 
         // add listener for fragment change
         NavController.OnDestinationChangedListener listener =
-                ((controller, navDestination, bundle) -> {
-                    rebuildActionBar();
-                } );
+                ((controller, navDestination, bundle) -> rebuildActionBar());
         navController.addOnDestinationChangedListener(listener);
 
     }
@@ -81,7 +82,25 @@ public class MainActivity extends AppCompatActivity{
 
     // Opens the Meeting Wizard
     public void openMeetingWizard(View view) {
+
+        // creates a Bottom sheet to create a meeting
+        CreateMeetingBottomSheetAdapter createMeetingBottomSheetAdapter = new CreateMeetingBottomSheetAdapter();
+        meetingAdapter = createMeetingBottomSheetAdapter;
+        createMeetingBottomSheetAdapter.show(getSupportFragmentManager() , createMeetingBottomSheetAdapter.getTag());
+
+    }
+
+    public CreateMeetingBottomSheetAdapter getMeetingAdapter(){
+        return meetingAdapter;
+    }
+
+    // Start the Meeting Creation Wizard
+    public void startMeetingWizard(String title, String location){
         Intent intent = new Intent(this, SettingsActivity.class);
+
+        // Give it the title and location
+        intent.putExtra("meeting_wizard_title", title);
+        intent.putExtra("meeting_wizard_location", location);
         startActivity(intent);
     }
 

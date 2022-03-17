@@ -88,6 +88,10 @@ public class SettingsActivity extends AppCompatActivity {
 
         startMeetingButton = findViewById(R.id.startButton);
 
+        String title = getIntent().getStringExtra("meeting_wizard_title");
+        getIntent().getStringExtra("meeting_wizard_location");
+        assert actionBar != null;
+        actionBar.setTitle(title);
   }
 
     private void showTimePickerDialog(View v, LinearLayout clickable, TextView textToChange){

@@ -16,10 +16,10 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
-
 /**
     https://betterprogramming.pub/bottom-sheet-android-340703e114d2
  */
+
 public class MeetingBottomSheetAdapter extends  BottomSheetDialogFragment{
     BottomSheetBehavior bottomSheetBehavior;
     MeetingBottomSheetBinding bi;
@@ -29,6 +29,14 @@ public class MeetingBottomSheetAdapter extends  BottomSheetDialogFragment{
     private String participants;
     private String ort;
     private String meetingDate;
+
+    // Make the background Transparent
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // Set the style so the background is Transparent
+        setStyle(BottomSheetDialogFragment.STYLE_NORMAL, R.style.CustomBottomSheetDialogTheme);
+    }
 
     @NonNull
     @Override
@@ -53,6 +61,8 @@ public class MeetingBottomSheetAdapter extends  BottomSheetDialogFragment{
         bi.extraSpace.setMinimumHeight((Resources.getSystem().getDisplayMetrics().heightPixels) / 2);
 
         bottomSheetBehavior.addBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
+
+
             @Override
             public void onStateChanged(@NonNull View bottomSheet, int newState) {
                 if(BottomSheetBehavior.STATE_EXPANDED == newState){
