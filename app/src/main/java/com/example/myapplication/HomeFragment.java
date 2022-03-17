@@ -35,7 +35,7 @@ public class HomeFragment extends Fragment {
 
     // Components
     private RecyclerView rvMeetings;
-    private TextView introText;
+    private TextView introText, pastMeetingCountText;
 
     // Meeting List
     private List<Meeting> meetingsList;
@@ -63,18 +63,29 @@ public class HomeFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         initialiseView();
-        createArrayListFromDatabase();
     }
 
     @Override
     public void onResume() {
         super.onResume();
+        createArrayListFromDatabase();
+        updateRKIandPastMeetingInfo();
+    }
+
+    private void updateRKIandPastMeetingInfo() {
+        // update RKI info
+        // todo
+
+        // update past meeting counter
+        pastMeetingCountText.setText(Integer.toString(meetingsList.size()));
     }
 
     // Initialises the Components
     private void initialiseView() {
         rvMeetings = getView().findViewById(R.id.rv_history);
         introText = getView().findViewById(R.id.introText);
+
+        pastMeetingCountText = getView().findViewById(R.id.fragment_home_past_meet_count);
     }
 
     // Creates an ArrayList From the Database entries

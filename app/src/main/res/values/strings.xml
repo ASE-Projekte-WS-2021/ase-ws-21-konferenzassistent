@@ -27,9 +27,16 @@
         Sobald Sie ein Meeting abgeschlossen haben können sie dieses hier einsehen.
     </string>
 
+    <string name="app_opened_first_time_key">app_opened_first_time</string>
+    <string name="onboarding_get_started">Los gehts!</string>
+
     <string name="start"> Starte Meeting</string>
     <string name="end"> Beende Meeting</string>
     <string name="star"> START</string>
     <string name="weiter"> WEITER</string>
     <string name="fenOffen"> Fenster sollte offen sein!</string>
+
+    <string name="bottom_nav_menu_home">Startseite</string>
+    <string name="bottom_nav_menu_start_meeting">Meeting starten</string>
+    <string name="bottom_nav_menu_settings">Einstellungen</string>
 </resources>
