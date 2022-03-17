@@ -41,6 +41,7 @@ public class CountdownActivity extends AppCompatActivity implements CustomAlertB
     private boolean abstandsSwitchStatus = false;
 
     private Date startDate;
+    private String title = "Test Meeting";
 
     private String participantCount = "0";
     private String ort;
@@ -316,7 +317,12 @@ public class CountdownActivity extends AppCompatActivity implements CustomAlertB
         dateFormat.setTimeZone(TimeZone.getDefault());
 
         MettingDatabase database = new MettingDatabase(this);
-        database.addMeeting("" + dateFormat.format(startDate), dateFormat.format(endDate),ort, "" + seconds, "" + participantCount);
+        database.addMeeting("" + dateFormat.format(startDate),
+                dateFormat.format(endDate),
+                ort,
+                title,
+                "" + seconds,
+                "" + participantCount);
     }
 
     /* finishMeeting method code by Kimmi Dhingra:

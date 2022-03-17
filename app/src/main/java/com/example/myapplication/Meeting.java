@@ -2,15 +2,16 @@ package com.example.myapplication;
 
 public class Meeting {
 
-    private String id, date, dateEnd, location, duration, numberParticipants;
+    private String id, date, dateEnd, location, duration, numberParticipants, title;
 
-    public Meeting(String id, String date, String dateEnd, String location, String duration, String numberParticipants) {
+    public Meeting(String id, String date, String dateEnd, String location,String title, String duration, String numberParticipants) {
         this.id = id;
         this.date = date;
         this.dateEnd = dateEnd;
         this.location = location;
         this.duration = duration;
         this.numberParticipants = numberParticipants;
+        this.title = title;
     }
 
     public String getDateEnd() {
@@ -59,6 +60,14 @@ public class Meeting {
 
     public void setNumberParticipants(String numberParticipants) {
         this.numberParticipants = numberParticipants;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     @Override
