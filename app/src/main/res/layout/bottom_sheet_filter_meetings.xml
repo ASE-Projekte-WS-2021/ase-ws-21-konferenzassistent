@@ -21,16 +21,18 @@
             android:layout_marginBottom="24dp">
 
             <Button
+                android:id="@+id/bottom_sheet_filter_meetings_reset_button"
                 style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:textColor="@color/corona_blue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Reset"
+                android:textColor="@color/corona_blue"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <Button
+                android:id="@+id/bottom_sheet_filter_meetings_filter_button"
                 style="@style/Widget.MaterialComponents.Button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -66,35 +68,9 @@
             android:layout_height="wrap_content">
 
             <com.google.android.material.chip.ChipGroup
+                android:id="@+id/bottom_sheet_filter_meetings_people_chip_group"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-                <com.google.android.material.chip.Chip
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Max Mustermann" />
-
-                <com.google.android.material.chip.Chip
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Fred Frikadelle" />
-
-                <com.google.android.material.chip.Chip
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Max Mustermann" />
-
-                <com.google.android.material.chip.Chip
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Max Mustermann" />
-
-                <com.google.android.material.chip.Chip
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Max Mustermann" />
-
-            </com.google.android.material.chip.ChipGroup>
+                android:layout_height="wrap_content"/>
         </HorizontalScrollView>
 
         <com.google.android.material.divider.MaterialDivider
@@ -130,11 +106,12 @@
                 app:hintTextColor="@color/corona_blue">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/bottom_sheet_filter_meetings_count_min"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:imeOptions="actionDone"
                     android:inputType="number"
-                    android:maxLength="2"
-                    android:imeOptions="actionDone"/>
+                    android:maxLength="2" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -149,11 +126,12 @@
                 app:hintTextColor="@color/corona_blue">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/bottom_sheet_filter_meetings_count_max"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:imeOptions="actionDone"
                     android:inputType="number"
-                    android:maxLength="2"
-                    android:imeOptions="actionDone"/>
+                    android:maxLength="2" />
 
             </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
@@ -177,34 +155,9 @@
             android:layout_height="wrap_content">
 
             <com.google.android.material.chip.ChipGroup
+                android:id="@+id/bottom_sheet_filter_meetings_location_chip_group"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent">
-
-                <com.google.android.material.chip.Chip
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Musterort" />
-
-                <com.google.android.material.chip.Chip
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Musterort" />
-
-                <com.google.android.material.chip.Chip
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Musterort" />
-
-                <com.google.android.material.chip.Chip
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Musterort" />
-
-                <com.google.android.material.chip.Chip
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Musterort" />
-            </com.google.android.material.chip.ChipGroup>
+                android:layout_height="match_parent"/>
         </HorizontalScrollView>
 
         <com.google.android.material.divider.MaterialDivider
@@ -237,13 +190,19 @@
                 android:layout_weight="1"
                 android:hint="Startdatum"
                 app:boxStrokeColor="@color/corona_blue"
-                app:hintTextColor="@color/corona_blue">
+                app:hintTextColor="@color/corona_blue"
+                app:startIconDrawable="@drawable/ic_baseline_calendar_month_24">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/bottom_sheet_filter_meetings_date_start"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="date"
-                    android:imeOptions="actionDone" />
+                    android:imeOptions="actionDone"
+                    android:clickable="false"
+                    android:cursorVisible="false"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
+                    android:inputType="date" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -255,13 +214,19 @@
                 android:layout_weight="1"
                 android:hint="Enddatum"
                 app:boxStrokeColor="@color/corona_blue"
-                app:hintTextColor="@color/corona_blue">
+                app:hintTextColor="@color/corona_blue"
+                app:startIconDrawable="@drawable/ic_baseline_calendar_month_24">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/bottom_sheet_filter_meetings_date_end"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="date"
-                    android:imeOptions="actionDone" />
+                    android:imeOptions="actionDone"
+                    android:clickable="false"
+                    android:cursorVisible="false"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
+                    android:inputType="date" />
 
             </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>

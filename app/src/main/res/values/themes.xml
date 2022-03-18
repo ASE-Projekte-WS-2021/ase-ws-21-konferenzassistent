@@ -41,4 +41,9 @@
     <style name="CustomBottomSheetStyle" parent="Widget.Design.BottomSheet.Modal">
         <item name="android:background">@android:color/transparent</item>
     </style>
+
+    <style name="CustomDatePickerStyle" parent="ThemeOverlay.MaterialComponents.MaterialCalendar.Fullscreen">
+        <item name="colorPrimary">@color/corona_blue</item>
+        <item name="colorOnPrimary">@color/corona_white</item>
+    </style>
 </resources>
