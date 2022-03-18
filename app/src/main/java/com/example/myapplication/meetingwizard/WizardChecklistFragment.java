@@ -35,23 +35,31 @@ import java.util.List;
  */
 public class WizardChecklistFragment extends Fragment {
 
+    public int getCheckedItems() {
+        return checkedItems;
+    }
+
+    public void setCheckedItems(int checkedItems) {
+        this.checkedItems = checkedItems;
+    }
+
     private int checkedItems;
 
     private RecyclerView rvChecklist;
-    private List<ChecklistItem> checklistItems;
+    private final ArrayList<ChecklistItem> checklistItems = new ArrayList<>();
     private ChecklistAdapter checklistAdapter;
     private LinearLayoutManager linearLayoutManager;
 
     OnAdapterItemClickListener listener;
-    // TODO: Rename and change types and number of parameters
-    public static WizardChecklistFragment newInstance() {
+    public WizardChecklistFragment newInstance() {
         return new WizardChecklistFragment();
     }
 
     public WizardChecklistFragment() {
         // Required empty public constructor
     }
-    public WizardChecklistFragment(OnAdapterItemClickListener listener){
+    public WizardChecklistFragment(OnAdapterItemClickListener listener, ArrayList<ChecklistItem> checklistItems){
+        this.checklistItems.addAll(checklistItems);
         this.listener = listener;
     }
 
@@ -60,14 +68,6 @@ public class WizardChecklistFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         rvChecklist = view.findViewById(R.id.rv_checklist_wizard);
-
-        // initialize checklist and recyclerview
-        checklistItems = new ArrayList<>();
-        checklistItems.add(new ChecklistItem("Desinfektionsmittel bereit"));
-        checklistItems.add(new ChecklistItem("3G-Regelung o.ä. geprüft"));
-        checklistItems.add(new ChecklistItem("Masken / Plexiglas geprüft"));
-        checklistItems.add(new ChecklistItem("Abstände gewährleistet"));
-
 
         checklistAdapter = new ChecklistAdapter(this.getContext(), listener, checklistItems);
         rvChecklist.setAdapter(checklistAdapter);
@@ -81,13 +81,15 @@ public class WizardChecklistFragment extends Fragment {
     }
 
     //check checklist
-    public void checkItem() {
+    public int checkItem() {
         checkedItems = 0;
         for (ChecklistItem item : checklistItems) {
             if (item.isChecked()) {
                 checkedItems++;
             }
         }
+
+        return checkedItems;
     }
 
     @Override

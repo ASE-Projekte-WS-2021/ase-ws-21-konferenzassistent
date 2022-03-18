@@ -16,15 +16,42 @@ import androidx.recyclerview.widget.SnapHelper;
 
 import com.example.myapplication.R;
 
+import java.io.Serializable;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class RecyclerViewAdvancedCountdownAdapter
         extends RecyclerView.Adapter<RecyclerViewAdvancedCountdownAdapter.ViewHolder>{
 
-    public static class AdvancedCountdownObject{
+    public static Object AdvancedCountdownObject;
+
+    public static class AdvancedCountdownObject implements Serializable {
         String mCountdownName;
         Boolean mEnabled;
+
+        public String getmCountdownName() {
+            return mCountdownName;
+        }
+
+        public void setmCountdownName(String mCountdownName) {
+            this.mCountdownName = mCountdownName;
+        }
+
+        public Boolean getmEnabled() {
+            return mEnabled;
+        }
+
+        public void setmEnabled(Boolean mEnabled) {
+            this.mEnabled = mEnabled;
+        }
+
+        public ArrayList<RecyclerViewAdvancedCountdownItemAdapter.AdvancedCountdownItem> getmItems() {
+            return mItems;
+        }
+
+        public void setmItems(ArrayList<RecyclerViewAdvancedCountdownItemAdapter.AdvancedCountdownItem> mItems) {
+            this.mItems = mItems;
+        }
 
         ArrayList<RecyclerViewAdvancedCountdownItemAdapter.AdvancedCountdownItem> mItems;
 

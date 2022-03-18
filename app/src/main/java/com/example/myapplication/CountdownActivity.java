@@ -8,15 +8,21 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.myapplication.meetingwizard.MeetingWizardActivity;
+import com.example.myapplication.meetingwizard.Participant;
+import com.example.myapplication.meetingwizard.RecyclerViewAdvancedCountdownAdapter;
+import com.example.myapplication.meetingwizard.RecyclerViewAdvancedCountdownItemAdapter;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.TimeZone;
 
@@ -197,18 +203,46 @@ public class CountdownActivity extends AppCompatActivity implements CustomAlertB
     // Get the Data from the Intents
     protected void getIntents(){
 
+        ArrayList<RecyclerViewAdvancedCountdownAdapter.AdvancedCountdownObject> countdownObjects =
+                (ArrayList<RecyclerViewAdvancedCountdownAdapter.AdvancedCountdownObject>)
+                        getIntent().getSerializableExtra(MeetingWizardActivity.COUNTDOWN_ARRAY);
+
+        ArrayList<Participant> participants32 =
+                (ArrayList<Participant>)
+                        getIntent().getSerializableExtra(MeetingWizardActivity.PARTICIPANT_ARRAY);
+
+        ort = getIntent().getStringExtra(MeetingWizardActivity.MEETING_LOCATION);
+        title = getIntent().getStringExtra(MeetingWizardActivity.MEETING_TITLE);
+
+        ArrayList<Participant> newAList = new ArrayList<>();
+        newAList.addAll(participants32);
+        participantCount = "" + participants32.size();
+
+        // TODO: Rework that part :YIKERS:
         // Get Countdown Timer
-        maxWindowClosedTime = getIntent().getLongExtra("maxCountdownTime", 0) * 60000;
-        maxWindowOpenTime = getIntent().getLongExtra("maxLueftungsTimer", 0) * 60000;
-        maxAbstandsTime = getIntent().getLongExtra("maxAbstandsTimer", 0) * 60000;
+        RecyclerViewAdvancedCountdownAdapter.AdvancedCountdownObject  countdownObject = countdownObjects.get(0);
+        RecyclerViewAdvancedCountdownAdapter.AdvancedCountdownObject  countdownObject1 = countdownObjects.get(1);
+
+        RecyclerViewAdvancedCountdownItemAdapter.AdvancedCountdownItem countdownItem = countdownObject.getmItems().get(0);
+        RecyclerViewAdvancedCountdownItemAdapter.AdvancedCountdownItem countdownItem2 = countdownObject.getmItems().get(1);
+
+        RecyclerViewAdvancedCountdownItemAdapter.AdvancedCountdownItem countdownItem3 = countdownObject1.getmItems().get(0);
+
+        maxWindowClosedTime = countdownItem.getSubCountdown() * 60000;
+        maxWindowOpenTime = countdownItem2.getSubCountdown() * 60000;
+
+        maxAbstandsTime = countdownItem3.getSubCountdown() * 60000;
+
+        lueftungsSwitchStatus = countdownObject.getmEnabled();
+        abstandsSwitchStatus = countdownObject1.getmEnabled();
+        //maxWindowClosedTime = getIntent().getLongExtra("maxCountdownTime", 0) * 60000;
+        //maxWindowOpenTime = getIntent().getLongExtra("maxLueftungsTimer", 0) * 60000;
+        //maxAbstandsTime = getIntent().getLongExtra("maxAbstandsTimer", 0) * 60000;
 
         // Get Activation Status
-        lueftungsSwitchStatus = getIntent().getBooleanExtra("lueftungsSwitchStatus", false);
-        abstandsSwitchStatus = getIntent().getBooleanExtra("abstandsSwitchStatus", false);
+        //lueftungsSwitchStatus = getIntent().getBooleanExtra("lueftungsSwitchStatus", false);
+        //abstandsSwitchStatus = getIntent().getBooleanExtra("abstandsSwitchStatus", false);
 
-        // Get Meeting Information
-        participantCount = getIntent().getStringExtra("participantCount");
-        ort = getIntent().getStringExtra("location");
     }
 
     // Start the Countdown Service
