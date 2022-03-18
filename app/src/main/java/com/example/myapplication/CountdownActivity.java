@@ -64,6 +64,8 @@ public class CountdownActivity extends AppCompatActivity implements CustomAlertB
     ViewPager2 viewPager;
     TabAdapter tabAdapter;
 
+    ArrayList<RecyclerViewAdvancedCountdownAdapter.AdvancedCountdownObject> countdownObjects;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -94,11 +96,12 @@ public class CountdownActivity extends AppCompatActivity implements CustomAlertB
         initViews();
 
         // Hide the UI that got turned off
+        /*
         timer.hideUI(lueftungsSwitchStatus,abstandsSwitchStatus);
 
         // Set the ProgressBar Values to the initial Values
         timer.setupProgressBars(maxAbstandsTime, maxWindowClosedTime);
-
+    */
         // Date Formatter
         DateFormat dateFormat = new SimpleDateFormat("HH:mm");
         dateFormat.setTimeZone(TimeZone.getDefault());
@@ -139,7 +142,7 @@ public class CountdownActivity extends AppCompatActivity implements CustomAlertB
         endMeetingButton = findViewById(R.id.end_meeting);
 
         // create timer
-        timer = CountdownTimerFragment.newInstance();
+        timer = CountdownTimerFragment.newInstance(countdownObjects);
         information = CountdownInformationFragment.newInstance();
 
         tabAdapter = new TabAdapter(getSupportFragmentManager(), getLifecycle());
@@ -203,7 +206,7 @@ public class CountdownActivity extends AppCompatActivity implements CustomAlertB
     // Get the Data from the Intents
     protected void getIntents(){
 
-        ArrayList<RecyclerViewAdvancedCountdownAdapter.AdvancedCountdownObject> countdownObjects =
+        countdownObjects =
                 (ArrayList<RecyclerViewAdvancedCountdownAdapter.AdvancedCountdownObject>)
                         getIntent().getSerializableExtra(MeetingWizardActivity.COUNTDOWN_ARRAY);
 
@@ -294,10 +297,11 @@ public class CountdownActivity extends AppCompatActivity implements CustomAlertB
             abstandIsFinished = intent.getBooleanExtra("abstandDone", false);
 
             // Update the UI of the timer
-            timer.UpdateUI(isOpen, lueftungIsFinished, abstandIsFinished, abstandsMilliS, lueftungsMilliS);
+            //timer.UpdateUI(isOpen, lueftungIsFinished, abstandIsFinished, abstandsMilliS, lueftungsMilliS);
         }
     }
 
+    /*
     // Starts the lueftungs countdown
     public void startLueftung(View view){
         // Send a Broadcast to the Service if button is pressed
@@ -358,6 +362,8 @@ public class CountdownActivity extends AppCompatActivity implements CustomAlertB
                 "" + seconds,
                 "" + participantCount);
     }
+    */
+
 
     /* finishMeeting method code by Kimmi Dhingra:
      * https://stackoverflow.com/questions/18442328/how-to-finish-all-activities-except-the-first-activity
@@ -371,7 +377,7 @@ public class CountdownActivity extends AppCompatActivity implements CustomAlertB
         | Intent.FLAG_ACTIVITY_CLEAR_TOP
         | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
-        SaveToDatabase();
+        //saveToDatabase();
 
         // Send -1 to signal that its the latest entry in the database
         intent.putExtra("Database_ID", -1);

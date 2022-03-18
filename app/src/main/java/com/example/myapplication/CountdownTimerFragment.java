@@ -5,7 +5,10 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.res.ResourcesCompat;
+import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,80 +18,40 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.example.myapplication.databinding.FragmentCountdownTimerBinding;
+import com.example.myapplication.meetingwizard.RecycleViewContactList;
+import com.example.myapplication.meetingwizard.RecyclerViewAdvancedCountdownAdapter;
 import com.google.android.material.timepicker.TimeFormat;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link CountdownTimerFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.util.ArrayList;
+
+
 public class CountdownTimerFragment extends Fragment {
-    public static final int PAUSE_ABSTAND_BUTTON = 0;
-    public static final int PAUSE_LUEFTUNGS_BUTTON = 1;
-    // Countdown Fragments
-   private TimerFragment lueftungsTimer;
-   private TimerFragment abstandsTimer;
 
-    private View mView;
+    FragmentCountdownTimerBinding bi;
+    RecycleViewCountdownAdapter recycleViewCountdownAdapter;
+    ArrayList<RecyclerViewAdvancedCountdownAdapter.AdvancedCountdownObject> advancedCountdownObjects;
 
-    private long maxWindowClosedTime;
-    private long maxAbstandsTime;
-
-    private boolean lueftungactive;
-    private boolean abstandactive;
-
-    private TextView windowStatus;
-
-    public static CountdownTimerFragment newInstance(){
-        return new CountdownTimerFragment();
+    public static CountdownTimerFragment newInstance(
+            ArrayList<RecyclerViewAdvancedCountdownAdapter.AdvancedCountdownObject> advancedCountdownObjects){
+        return new CountdownTimerFragment(advancedCountdownObjects);
     }
 
-    // Implements the TimerListener for LueftungsTimer
-    public static class LueftungsTimer extends TimerFragment implements TimerFragment.TimerListener{
-        @Override
-        public void onReplaySend(View view) {
-            ((CountdownActivity)getActivity()).startLueftung(view);
-        }
-
-        @Override
-        public void onPauseSend(View view) {
-            ((CountdownActivity)getActivity()).pauseLueftungsCountdown(view);
-        }
-    }
-
-    // Implements the TimerListener for AbstandsTimer
-    public static class AbstandsTimer extends TimerFragment implements TimerFragment.TimerListener{
-        @Override
-        public void onReplaySend(View view) {
-            ((CountdownActivity)getActivity()).startAbstand(view);
-        }
-
-        @Override
-        public void onPauseSend(View view) {
-            ((CountdownActivity)getActivity()).pauseAbstand(view);
-        }
+    public CountdownTimerFragment(ArrayList<RecyclerViewAdvancedCountdownAdapter.AdvancedCountdownObject> advancedCountdownObjects) {
+        this.advancedCountdownObjects = advancedCountdownObjects;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // Create new Fragments
-        lueftungsTimer = new LueftungsTimer();
-        abstandsTimer = new AbstandsTimer();
-
-        // Set the listeners
-        lueftungsTimer.setListener((TimerFragment.TimerListener) lueftungsTimer);
-        abstandsTimer.setListener((TimerFragment.TimerListener) abstandsTimer);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_countdown_timer, container, false);
-        this.mView = view;
         return view;
     }
 
@@ -96,6 +59,11 @@ public class CountdownTimerFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        // binding views to data binding
+        bi = DataBindingUtil.bind(view);
+
+        buildRecyclerView();
+        /*
         // Get Views
         initiateComponents(view);
 
@@ -108,9 +76,11 @@ public class CountdownTimerFragment extends Fragment {
         // Set countdown titles
         lueftungsTimer.setTimerName("Lüftungs Timer");
         abstandsTimer.setTimerName("Abstands Timer");
+         */
     }
 
     // Gets the Views by Id
+    /*
     private void initiateComponents(View view){
         if(mView != null) {
             getChildFragmentManager().beginTransaction().
@@ -120,22 +90,25 @@ public class CountdownTimerFragment extends Fragment {
 
            windowStatus = mView.findViewById(R.id.window_status_text);
         }
+
+     */
+
+    // Build and fills the recycler view
+    private void buildRecyclerView(){
+
+        RecyclerView recyclerView = bi.countdownRecycleViewContainer;
+        recycleViewCountdownAdapter = new RecycleViewCountdownAdapter(
+                advancedCountdownObjects,
+                this.getContext()
+        );
+        recyclerView.setAdapter(recycleViewCountdownAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
+
+    }
     }
 
-    public void setupProgressBars(long maxAbstandsTime, long maxWindowClosedTime){
-        // Check if the View is null
-        if(mView != null) {
-            resetLueftungsProgressBar(maxWindowClosedTime);
-            resetAbstandProgressBar(maxAbstandsTime);
-        }
-        else
-        {
-            // if view is null save the values for later
-            this.maxWindowClosedTime = maxWindowClosedTime;
-            this.maxAbstandsTime = maxAbstandsTime;
-        }
-    }
 
+    /*
     // Sets the Ui to Invisible if not used
     public void hideUI(boolean lueftungsSwitchStatus, boolean abstandsSwitchStatus){
         // Makes sure the view is not null
@@ -194,14 +167,6 @@ public class CountdownTimerFragment extends Fragment {
         }
     }
 
-    // Resets the Window Progress Bar to the defined time
-    public void resetLueftungsProgressBar(long time){
-        lueftungsTimer.setProgressBar((int) time /1000);
-    }
-
-    public void resetAbstandProgressBar(long time){
-        abstandsTimer.setProgressBar((int) time /1000);
-    }
 
     // Builds a String to show the Timer
     private String timeStringBuilder(long timer){
@@ -229,5 +194,4 @@ public class CountdownTimerFragment extends Fragment {
             lueftungsTimer.setPauseButton(paused);
     }
 
-
-}
+     */
