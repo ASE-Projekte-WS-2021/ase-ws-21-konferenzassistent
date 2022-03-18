@@ -21,7 +21,7 @@ public class WizardParticipantFragment extends Fragment {
     FragmentWizardParticipantBinding bi;
 
     ArrayList<Participant> participants = new ArrayList<>();
-
+    ParticipantBottomSheetAdapter participantBottomSheetAdapter;
     public WizardParticipantFragment() {
         // Required empty public constructor
     }
@@ -55,7 +55,7 @@ public class WizardParticipantFragment extends Fragment {
     private void setupListeners(){
         bi.participantAdd.setOnClickListener(view -> {
             // creates a Bottom sheet to display Information
-            ParticipantBottomSheetAdapter participantBottomSheetAdapter = new ParticipantBottomSheetAdapter();
+            participantBottomSheetAdapter = new ParticipantBottomSheetAdapter();
             participantBottomSheetAdapter.participants = participants;
             participantBottomSheetAdapter.show(getParentFragmentManager(), participantBottomSheetAdapter.getTag());
         });
@@ -67,6 +67,11 @@ public class WizardParticipantFragment extends Fragment {
 
         assert activity != null;
         participants = activity.getParticipants();
+    }
+
+    public void onParticipentUpdate(){
+        getParticipantList();
+        participantBottomSheetAdapter.onParticipentAdded();
     }
 
     private void buildRecyclerView(){

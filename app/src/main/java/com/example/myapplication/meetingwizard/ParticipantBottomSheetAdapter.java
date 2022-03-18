@@ -24,9 +24,10 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 import java.util.ArrayList;
 
-public class ParticipantBottomSheetAdapter extends BottomSheetDialogFragment{
+public class ParticipantBottomSheetAdapter extends BottomSheetDialogFragment {
     BottomSheetParticipantsBinding bi;
     BottomSheetBehavior<View> bottomSheetBehavior;
+    final static float MIN_SCROLL_FOR_CLOSURE = 0.5f;
 
     RecycleViewParticipantList recycleViewParticipantList;
     // Participant List
@@ -70,20 +71,35 @@ public class ParticipantBottomSheetAdapter extends BottomSheetDialogFragment{
         bottomSheetBehavior.addBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
             @Override
             public void onStateChanged(@NonNull View bottomSheet, int newState) {
+                if(newState == BottomSheetBehavior.STATE_COLLAPSED ){
+                    bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+                }
             }
 
             @Override
             public void onSlide(@NonNull View bottomSheet, float slideOffset) {
-
+                if(slideOffset < MIN_SCROLL_FOR_CLOSURE){
+                    setCancelable(true);
+                }
+                else
+                {
+                    setCancelable(false);
+                }
             }
         });
 
+        setCancelable(false);
 
         // cancel button clicked
         bi.buttonDismiss.setOnClickListener(viewListener -> dismiss());
 
+        // on new participant button
+        bi.participantAddNew.setOnClickListener(viewListener ->{
+            ParticipantCreationBottomSheetAdapter participantCreationBottomSheetAdapter = new ParticipantCreationBottomSheetAdapter();
+            participantCreationBottomSheetAdapter.show(getParentFragmentManager(), participantCreationBottomSheetAdapter.getTag());
+        });
+
         // Listen for Text input changes to filter locations
-        /*
         bi.textInputSearch.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -93,7 +109,7 @@ public class ParticipantBottomSheetAdapter extends BottomSheetDialogFragment{
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 // Filter locations
-                recyclerViewLocationAdapter.filter(charSequence.toString());
+                recycleViewParticipantList.filter(charSequence.toString());
             }
 
             @Override
@@ -101,7 +117,6 @@ public class ParticipantBottomSheetAdapter extends BottomSheetDialogFragment{
 
             }
         });
-        */
 
         setStyle(CustomAlertBottomSheetAdapter.STYLE_NORMAL, R.style.CustomBottomSheetDialogTheme);
         buildRecyclerView();
@@ -132,9 +147,19 @@ public class ParticipantBottomSheetAdapter extends BottomSheetDialogFragment{
         dismiss();
     }
 
+    public void onParticipentAdded() {
+        // get the MeetingWizardActivity
+        MeetingWizardActivity activity = ((MeetingWizardActivity)getActivity());
+
+        assert activity != null;
+        participants = activity.getParticipants();
+        recycleViewParticipantList.notifyItemRangeInserted(participants.size(), 1);
+    }
+
     @Override
     public void onStart(){
         super.onStart();
         //bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
     }
+
 }

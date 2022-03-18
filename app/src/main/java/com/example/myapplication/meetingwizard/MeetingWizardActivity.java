@@ -274,10 +274,15 @@ public class MeetingWizardActivity extends AppCompatActivity implements OnAdapte
         }
     }
 
-    // Gets and sets the Countdown Data depending what got entered in the wizard
-    public void getCountdownData(){
-
+    public void addNewParticipant(String name, String status){
+        // TODO: Database Stuff here
+        Participant participant = new Participant(name, status, true);
+        participants.add(participant);
+        WizardParticipantFragment fragment = (WizardParticipantFragment)fragmentArrayList.get(STATE_IS_PARTICIPANT);
+        fragment.onParticipentUpdate();
     }
+
+
 
     private void startCountdownActivity(){
         Intent intent = new Intent(this, CountdownActivity.class);
@@ -296,6 +301,7 @@ public class MeetingWizardActivity extends AppCompatActivity implements OnAdapte
         startActivity(intent);
         //}
     }
+
 
     @Override
     public void onLeaving() {

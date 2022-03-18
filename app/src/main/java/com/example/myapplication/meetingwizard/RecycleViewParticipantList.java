@@ -9,7 +9,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.widget.SwitchCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.R;
@@ -19,17 +18,19 @@ import java.util.ArrayList;
 public class RecycleViewParticipantList extends RecyclerView.Adapter<RecycleViewParticipantList.ViewHolder>{
 
     // Content
-    private final ArrayList<Participant> mparticipants;
+    private final ArrayList<Participant> mParticipants;
+    private final ArrayList<Participant> mParticipantsCopy = new ArrayList<>();
     private final Context mContext;
 
-    public RecycleViewParticipantList(ArrayList<Participant> mparticipants, Context mContext) {
-        this.mparticipants = mparticipants;
+    public RecycleViewParticipantList(ArrayList<Participant> mParticipants, Context mContext) {
+        this.mParticipants = mParticipants;
         this.mContext = mContext;
+        mParticipantsCopy.addAll(mParticipants);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-            Participant participant = mparticipants.get(holder.getAdapterPosition());
+            Participant participant = mParticipants.get(holder.getAdapterPosition());
             holder.participantName.setText(participant.getName());
             holder.isParticipant.setVisibility(participant.getSelected()? View.VISIBLE : View.GONE);
             holder.participantStatus.setText(participant.getStatus());
@@ -48,8 +49,26 @@ public class RecycleViewParticipantList extends RecyclerView.Adapter<RecycleView
 
     @Override
     public int getItemCount() {
-            return mparticipants.size();
+            return mParticipants.size();
             }
+
+    // Filter the Participants
+    // https://stackoverflow.com/a/37562572
+    public void filter(String text) {
+        mParticipants.clear();
+        if (text.isEmpty()) {
+            mParticipants.addAll(mParticipantsCopy);
+        } else {
+            text = text.toLowerCase();
+            for (Participant item : mParticipantsCopy) {
+                if (item.getName().toLowerCase().contains(text)) {
+                    mParticipants.add(item);
+                }
+            }
+        }
+        notifyDataSetChanged();
+    }
+
 
     @NonNull
     @Override
