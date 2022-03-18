@@ -153,7 +153,14 @@ public class ParticipantBottomSheetAdapter extends BottomSheetDialogFragment {
 
         assert activity != null;
         participants = activity.getParticipants();
+        recycleViewParticipantList.updateCopy(participants);
         recycleViewParticipantList.notifyItemRangeInserted(participants.size(), 1);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        recycleViewParticipantList.onDestroy();
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.example.myapplication.meetingwizard;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +20,7 @@ public class RecycleViewParticipantList extends RecyclerView.Adapter<RecycleView
 
     // Content
     private final ArrayList<Participant> mParticipants;
-    private final ArrayList<Participant> mParticipantsCopy = new ArrayList<>();
+    private ArrayList<Participant> mParticipantsCopy = new ArrayList<>();
     private final Context mContext;
 
     public RecycleViewParticipantList(ArrayList<Participant> mParticipants, Context mContext) {
@@ -69,6 +70,17 @@ public class RecycleViewParticipantList extends RecyclerView.Adapter<RecycleView
         notifyDataSetChanged();
     }
 
+    public void updateCopy(ArrayList<Participant> participants){
+        mParticipantsCopy.clear();
+        Log.i("TAG", "updateCopy: " + participants);
+        mParticipantsCopy.addAll(participants);
+    }
+
+    // onDestroy reset Search
+    public void onDestroy() {
+        mParticipants.clear();
+        mParticipants.addAll(mParticipantsCopy);
+    }
 
     @NonNull
     @Override
