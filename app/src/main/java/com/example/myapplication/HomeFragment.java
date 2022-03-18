@@ -10,19 +10,27 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import androidx.databinding.DataBindingUtil;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
+
+import java.time.Clock;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Home Fragment Class
  *
  */
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment  implements OnFilterButtonClickListener {
 
     public HomeFragment() {
         // Required empty public constructor
@@ -42,6 +50,11 @@ public class HomeFragment extends Fragment {
 
     private MeetingHistoryAdapter meetingHistoryAdapter;
     private LinearLayoutManager linearLayoutManager;
+
+    // Filter Button
+    private Button filterButton;
+
+    private boolean dataIsFiltered = false;
 
 
     @Override
@@ -63,6 +76,7 @@ public class HomeFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         initialiseView();
+        setupButtonListener();
     }
 
     @Override
@@ -86,6 +100,16 @@ public class HomeFragment extends Fragment {
         introText = getView().findViewById(R.id.introText);
 
         pastMeetingCountText = getView().findViewById(R.id.fragment_home_past_meet_count);
+        filterButton = getView().findViewById(R.id.main_fragment_filter_button);
+    }
+
+    private void setupButtonListener() {
+        filterButton.setOnClickListener(view -> {
+
+            final MeetingFilterBottomSheet meetingFilterBottomSheet = new MeetingFilterBottomSheet(meetingsList,this);
+            meetingFilterBottomSheet.show(getParentFragmentManager(),meetingFilterBottomSheet.getTag());
+
+        });
     }
 
     // Creates an ArrayList From the Database entries
@@ -138,13 +162,73 @@ public class HomeFragment extends Fragment {
             introText.setVisibility(View.INVISIBLE);
         }
     }
+
+    @Override
+    public void onFilterButtonClicked(FilterData filterData) {
+        // TODO filter meetingsList based on filterData
+        Log.d("test",filterData.toString());
+
+        /*
+        // early return if reset-button instead of filter button clicked
+        if (!filterData.isShouldFilter()) {
+            if (!dataIsFiltered) {
+                return;
+            }
+            // TODO duplicate code from createArrayFromDatabase
+            meetingHistoryAdapter = new MeetingHistoryAdapter(this.getContext(), getParentFragmentManager(), meetingsList);
+            rvMeetings.setAdapter(meetingHistoryAdapter);
+            dataIsFiltered = false;
+            return;
+        }
+        Stream<Meeting> filteredMeetingsStream = meetingsList.stream();
+        */
+        // for every person in peopleList
+        // get list of meetings person was in from ConnectionDatabase
+        // filter meetings with this person
+        /*
+        filteredMeetingsStream.filter(meeting -> personMeetingIds.contains(meeting.getId()));
+        */
+        // if minCount not -1: filter meetings where numParticipants >= mincount
+        /*
+        if (filterData.getMinCount() != -1) {
+            filteredMeetingsStream.filter(meeting -> Integer.parseInt(meeting.getNumberParticipants()) >= filterData.getMinCount());
+        }
+        */
+        // same respectively for maxCount
+        /*
+        if (filterData.getMaxCount() != -1) {
+            filteredMeetingsStream.filter(meeting -> Integer.parseInt(meeting.getNumberParticipants()) <= filterData.getMaxCount());
+        }
+        */
+        // filter meetings with same location
+        /*
+        if (!filterData.getLocation().equals("null")) {
+            filteredMeetingsStream.filter(meeting -> meeting.getLocation() == filterData.getLocation());
+        }
+        */
+        // Convert start or end time to millis (probably add method to Meeting class), filter where time >= filterData.dateStart and <= filterData.dateEnd
+        /*
+        if (!filterData.getDateStart() == null || !filterData.getDateEnd() == null) {
+            filteredMeetingsStream.filter(meeting -> meeting.asMilli() >= filterData.getDateStart() && meeting.asMilli() <= filterData.getDateEnd()
+        }
+        */
+        // Collect stream as list, sort by id if necessary, change dataIsFiltered, set filtered list to adapter
+        /*
+        List<Meeting> filteredMeetingList = filteredMeetingsStream.collect(Collectors.toList());
+        dataIsFiltered = true;
+        rvMeetings.setAdapter(new MeetingHistoryAdapter(
+                this.getContext(),
+                getParentFragmentManager(),
+                filteredMeetingList)
+        );
+        */
+    }
     /*
     public void openPastMeeting(View view){
         Intent intent = new Intent(this, PastMeetingInfoActivity.class);
         startActivity(intent);
     }
      */
-
 }
 
 
