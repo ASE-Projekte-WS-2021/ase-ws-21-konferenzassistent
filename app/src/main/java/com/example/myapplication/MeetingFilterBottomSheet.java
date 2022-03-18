@@ -10,7 +10,19 @@ import androidx.annotation.Nullable;
 
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
+import java.util.List;
+
 public class MeetingFilterBottomSheet extends BottomSheetDialogFragment {
+
+    private List<Meeting> meetingList;
+    private OnFilterButtonClickListener listener;
+
+    public MeetingFilterBottomSheet(List<Meeting> meetingList, OnFilterButtonClickListener listener) {
+        super();
+
+        this.meetingList = meetingList;
+        this.listener = listener;
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {

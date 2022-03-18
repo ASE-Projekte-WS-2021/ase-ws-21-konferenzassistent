@@ -26,7 +26,7 @@ import java.util.List;
  * Home Fragment Class
  *
  */
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment  implements OnFilterButtonClickListener {
 
     public HomeFragment() {
         // Required empty public constructor
@@ -100,7 +100,7 @@ public class HomeFragment extends Fragment {
     private void setupButtonListener() {
         filterButton.setOnClickListener(view -> {
 
-            final MeetingFilterBottomSheet meetingFilterBottomSheet = new MeetingFilterBottomSheet();
+            final MeetingFilterBottomSheet meetingFilterBottomSheet = new MeetingFilterBottomSheet(meetingsList,this);
             meetingFilterBottomSheet.show(getParentFragmentManager(),meetingFilterBottomSheet.getTag());
 
         });
