@@ -8,147 +8,144 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/corona_white"
-        android:orientation="vertical">
-
-        <!-- Header -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/corona_blue"
-            android:elevation="8dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/wizard_meeting_title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Vorlesung Nachbesprechung H25"
-                android:layout_margin="8dp"
-                android:textSize="20sp"
-                android:gravity="center"
-                android:textStyle="bold"
-                android:textColor="@color/white"/>
-
-        </LinearLayout>
-
-        <!-- Stepper -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:gravity="center"
-                android:textSize="24sp"
-                android:text="Hier könnte ihr Stepper stehen!"/>
-
-        </LinearLayout>
-
-        <!-- Wizard -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@color/corona_white"
             android:orientation="vertical">
 
-            <androidx.cardview.widget.CardView
+            <!-- Header -->
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:backgroundTint="@color/white"
-                app:cardCornerRadius="16dp">
+                android:layout_height="wrap_content"
+                android:background="@color/corona_blue"
+                android:elevation="8dp"
+                android:orientation="horizontal">
 
-                <LinearLayout
+                <TextView
+                    android:id="@+id/wizard_meeting_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:text="Vorlesung Nachbesprechung H25"
+                    android:layout_margin="8dp"
+                    android:textSize="20sp"
+                    android:gravity="center"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"/>
+
+            </LinearLayout>
+
+            <!-- Stepper -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:gravity="center"
+                    android:textSize="24sp"
+                    android:text="Hier könnte ihr Stepper stehen!"/>
+
+            </LinearLayout>
+
+            <!-- Wizard -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:backgroundTint="@color/white"
+                    app:cardCornerRadius="16dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="16dp"
-                        android:orientation="horizontal">
+                        android:orientation="vertical">
 
-                        <ImageButton
-                            android:id="@+id/wizard_back_button"
-                            android:layout_width="wrap_content"
+                        <LinearLayout
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:padding="15dp"
-                            android:layout_marginTop="4dp"
-                            android:background="@drawable/ic_baseline_arrow_back_24"
-                            />
+                            android:layout_margin="16dp"
+                            android:orientation="horizontal">
 
-                        <TextView
-                            android:id="@+id/wizard_stage_title"
-                            android:layout_width="0dp"
-                            android:layout_weight="1"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
-                            android:gravity="center"
-                            android:textStyle="bold"
-                            android:text="Countdown einstellen"
-                            android:textColor="@color/dark_gray"
-                            android:textSize="24sp" />
+                            <ImageButton
+                                android:id="@+id/wizard_back_button"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:padding="15dp"
+                                android:layout_marginTop="4dp"
+                                android:background="@drawable/ic_baseline_arrow_back_24"
+                                />
 
-                        <ImageButton
-                            android:id="@+id/wizard_information_button"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:padding="15dp"
-                            android:layout_marginTop="4dp"
-                            android:background="@drawable/ic_baseline_info_24"
-                            />
+                            <TextView
+                                android:id="@+id/wizard_stage_title"
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="8dp"
+                                android:gravity="center"
+                                android:textStyle="bold"
+                                android:text="Countdown einstellen"
+                                android:textColor="@color/dark_gray"
+                                android:textSize="24sp" />
+
+                            <ImageButton
+                                android:id="@+id/wizard_information_button"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:padding="15dp"
+                                android:layout_marginTop="4dp"
+                                android:background="@drawable/ic_baseline_info_24"
+                                />
+
+                        </LinearLayout>
+
+                        <FrameLayout
+                            android:id="@+id/fragmentContainerView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
 
                     </LinearLayout>
 
-                    <FrameLayout
-                        android:id="@+id/fragmentContainerView"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                </androidx.cardview.widget.CardView>
 
-
-
-
-
-                </LinearLayout>
-
-
-            </androidx.cardview.widget.CardView>
-
+            </LinearLayout>
 
         </LinearLayout>
-
-    </LinearLayout>
-    <!-- Next Step Button -->
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <LinearLayout
+        <!-- Next Step Button -->
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:background="@color/white"
-            android:paddingTop="8dp"
-            android:layout_gravity="bottom"
-            >
-        <Button
-            android:id="@+id/wizard_continue"
-            android:layout_width="match_parent"
-            android:layout_margin="16dp"
-            app:cornerRadius="49dp"
-            android:text="Weiter"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:background="@drawable/btn_round"
-            android:layout_height="wrap_content"
-           />
-    </LinearLayout>
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@color/white"
+                android:layout_gravity="bottom"
+                >
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="#e6e6e6" />
+                <Button
+                    android:id="@+id/wizard_continue"
+                    android:layout_width="match_parent"
+                    android:layout_margin="16dp"
+                    app:cornerRadius="49dp"
+                    android:text="Weiter"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:background="@drawable/btn_round"
+                    android:layout_height="wrap_content"
+                   />
+                </LinearLayout>
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
     </RelativeLayout>
 </layout>

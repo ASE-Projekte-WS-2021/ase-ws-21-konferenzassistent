@@ -61,6 +61,7 @@ public class MeetingWizardActivity extends AppCompatActivity implements OnAdapte
     private ArrayList<Long> mCountdownTime;
     private ArrayList<Boolean> mEnabled;
 
+
     public ArrayList<RecyclerViewAdvancedCountdownAdapter.AdvancedCountdownObject> getAdvancedCountdownObjects() {
         return advancedCountdownObjects;
     }
@@ -71,6 +72,17 @@ public class MeetingWizardActivity extends AppCompatActivity implements OnAdapte
 
     // advanced Countdown
     private ArrayList<RecyclerViewAdvancedCountdownAdapter.AdvancedCountdownObject> advancedCountdownObjects;
+
+    // participants
+    private ArrayList<Participant> participants;
+
+    public ArrayList<Participant> getParticipants() {
+        return participants;
+    }
+
+    public void setParticipants(ArrayList<Participant> participants) {
+        this.participants = participants;
+    }
 
     // Views
     TextView titleText;
@@ -94,6 +106,7 @@ public class MeetingWizardActivity extends AppCompatActivity implements OnAdapte
         mCountdownTime = new ArrayList<>();
         mEnabled = new ArrayList<>();
         advancedCountdownObjects = new ArrayList<>();
+        participants = new ArrayList<>();
 
         // TODO: Give real Countdown Data
         mCountdownNames.add("Lüftungstimer");
@@ -147,6 +160,25 @@ public class MeetingWizardActivity extends AppCompatActivity implements OnAdapte
         advancedCountdownObjects.add(advancedCountdownObject);
         advancedCountdownObjects.add(advancedCountdownObject2);
 
+        // TODO: LOAD OBJECTS
+
+        Participant participant1 = new Participant("Klaus Müller", "Ungeimpft", false);
+        Participant participant2 = new Participant("Peter Meier", "Geimpft", false);
+        Participant participant3 = new Participant("Karl Heinz", "Genesen", false);
+        Participant participant4 = new Participant("Otto Peters", "Ungeimpft", false);
+        Participant participant5 = new Participant("Max Mustermann", "Geimpft", false);
+        Participant participant6 = new Participant("Tobias Bauer", "Ungeimpft", false);
+        Participant participant7 = new Participant("Helmut Hartmann", "Ungeimpft", false);
+        Participant participant8 = new Participant("Sabrina Hering", "Genesen", false);
+
+        participants.add(participant1);
+        participants.add(participant2);
+        participants.add(participant3);
+        participants.add(participant4);
+        participants.add(participant5);
+        participants.add(participant6);
+        participants.add(participant7);
+        participants.add(participant8);
         // TODO: END OF DEBUG
 
         // Loads the first Fragment
@@ -242,9 +274,17 @@ public class MeetingWizardActivity extends AppCompatActivity implements OnAdapte
         }
     }
 
-    // Gets and sets the Countdown Data depending what got entered in the wizard
-    public void getCountdownData(){
+    public void addNewParticipant(String name, String status){
+        // TODO: Database Stuff here
+        Participant participant = new Participant(name, status, true);
+        participants.add(participant);
+        WizardParticipantFragment fragment = (WizardParticipantFragment)fragmentArrayList.get(STATE_IS_PARTICIPANT);
+        fragment.onParticipentUpdate();
+    }
 
+    public void updateDataSet(){
+        WizardParticipantFragment fragment = (WizardParticipantFragment)fragmentArrayList.get(STATE_IS_PARTICIPANT);
+        fragment.updateDataSet();
     }
 
     private void startCountdownActivity(){
@@ -264,6 +304,7 @@ public class MeetingWizardActivity extends AppCompatActivity implements OnAdapte
         startActivity(intent);
         //}
     }
+
 
     @Override
     public void onLeaving() {

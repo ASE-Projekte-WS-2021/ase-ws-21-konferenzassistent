@@ -43,8 +43,6 @@ public class WizardCountdownFragment extends Fragment {
     public WizardCountdownFragment() {
         // Required empty public constructor
     }
-
-    // TODO: Rename and change types and number of parameters
     public static WizardCountdownFragment newInstance() {
         return new WizardCountdownFragment();
     }

@@ -48,4 +48,8 @@
     <string name="bottom_nav_menu_start_meeting">Meeting starten</string>
     <string name="bottom_nav_menu_settings">Einstellungen</string>
     <string name="countdown_main_description">Wählen sie zunächst welche Timer sie aktivieren wollen und setzten sie diese im Anschluss auf die von ihnen gewünschte Zeit.</string>
+    <string name="countdown_participant_description">Fügen sie nun alle Teilnehmer ihres Meetings hinzu </string>
+    <string name="contacts_search_hint">Kontakte suchen</string>
+    <string name="cancel_text">Abbrechen</string>
+    <string name="contacts_header_text">Kontakte</string>
 </resources>

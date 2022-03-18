@@ -2,59 +2,97 @@ package com.example.myapplication.meetingwizard;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.myapplication.R;
+import com.example.myapplication.databinding.FragmentWizardParticipantBinding;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link WizardParticipantFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.util.ArrayList;
+
 public class WizardParticipantFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    FragmentWizardParticipantBinding bi;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    RecycleViewAttendingParticipantList recycleViewParticipantList;
 
+    ArrayList<Participant> participants = new ArrayList<>();
+    ParticipantBottomSheetAdapter participantBottomSheetAdapter;
     public WizardParticipantFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment WizardParticipantFragment.
-     */
-    // TODO: Rename and change types and number of parameters
     public static WizardParticipantFragment newInstance(String param1, String param2) {
-        WizardParticipantFragment fragment = new WizardParticipantFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
+        return new WizardParticipantFragment();
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        bi = DataBindingUtil.bind(view);
+        assert bi != null;
+
+        setupListeners();
+
+
+        getParticipantList();
+
+        // Builds the Recycler View and displays the Participants (Should still be empty at this point)
+        buildRecyclerView();
+    }
+
+    // Setup listeners
+    private void setupListeners(){
+        bi.participantAdd.setOnClickListener(view -> {
+            // creates a Bottom sheet to display Information
+            participantBottomSheetAdapter = new ParticipantBottomSheetAdapter();
+            participantBottomSheetAdapter.participants = participants;
+            participantBottomSheetAdapter.show(getParentFragmentManager(), participantBottomSheetAdapter.getTag());
+        });
+    }
+
+    private void getParticipantList(){
+        // get the MeetingWizardActivity
+        MeetingWizardActivity activity = ((MeetingWizardActivity)getActivity());
+
+        assert activity != null;
+        participants = activity.getParticipants();
+    }
+
+    public void onParticipentUpdate(){
+        getParticipantList();
+        participantBottomSheetAdapter.onParticipentAdded();
+    }
+
+    public void updateDataSet(){
+        recycleViewParticipantList.notifyDataSetChanged();
+    }
+
+    // Build and fills the recycler view
+    private void buildRecyclerView(){
+
+        RecyclerView recyclerView = bi.participantRecycleView;
+        recycleViewParticipantList = new RecycleViewAttendingParticipantList(
+                participants,
+                this.getContext()
+        );
+        recyclerView.setAdapter(recycleViewParticipantList);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
+
     }
 
     @Override
