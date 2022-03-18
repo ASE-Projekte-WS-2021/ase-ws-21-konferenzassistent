@@ -13,7 +13,11 @@ import androidx.databinding.DataBindingUtil;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
+
+import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,6 +47,9 @@ public class HomeFragment extends Fragment {
     private MeetingHistoryAdapter meetingHistoryAdapter;
     private LinearLayoutManager linearLayoutManager;
 
+    // Filter Button
+    private Button filterButton;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -63,6 +70,7 @@ public class HomeFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         initialiseView();
+        setupButtonListener();
     }
 
     @Override
@@ -86,6 +94,16 @@ public class HomeFragment extends Fragment {
         introText = getView().findViewById(R.id.introText);
 
         pastMeetingCountText = getView().findViewById(R.id.fragment_home_past_meet_count);
+        filterButton = getView().findViewById(R.id.main_fragment_filter_button);
+    }
+
+    private void setupButtonListener() {
+        filterButton.setOnClickListener(view -> {
+
+            final MeetingFilterBottomSheet meetingFilterBottomSheet = new MeetingFilterBottomSheet();
+            meetingFilterBottomSheet.show(getParentFragmentManager(),meetingFilterBottomSheet.getTag());
+
+        });
     }
 
     // Creates an ArrayList From the Database entries
@@ -144,7 +162,6 @@ public class HomeFragment extends Fragment {
         startActivity(intent);
     }
      */
-
 }
 
 
