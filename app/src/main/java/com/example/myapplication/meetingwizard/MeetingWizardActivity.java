@@ -282,7 +282,10 @@ public class MeetingWizardActivity extends AppCompatActivity implements OnAdapte
         fragment.onParticipentUpdate();
     }
 
-
+    public void updateDataSet(){
+        WizardParticipantFragment fragment = (WizardParticipantFragment)fragmentArrayList.get(STATE_IS_PARTICIPANT);
+        fragment.updateDataSet();
+    }
 
     private void startCountdownActivity(){
         Intent intent = new Intent(this, CountdownActivity.class);

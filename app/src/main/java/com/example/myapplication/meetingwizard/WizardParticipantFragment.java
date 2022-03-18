@@ -6,6 +6,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +21,8 @@ import java.util.ArrayList;
 public class WizardParticipantFragment extends Fragment {
 
     FragmentWizardParticipantBinding bi;
+
+    RecycleViewAttendingParticipantList recycleViewParticipantList;
 
     ArrayList<Participant> participants = new ArrayList<>();
     ParticipantBottomSheetAdapter participantBottomSheetAdapter;
@@ -74,7 +78,20 @@ public class WizardParticipantFragment extends Fragment {
         participantBottomSheetAdapter.onParticipentAdded();
     }
 
+    public void updateDataSet(){
+        recycleViewParticipantList.notifyDataSetChanged();
+    }
+
+    // Build and fills the recycler view
     private void buildRecyclerView(){
+
+        RecyclerView recyclerView = bi.participantRecycleView;
+        recycleViewParticipantList = new RecycleViewAttendingParticipantList(
+                participants,
+                this.getContext()
+        );
+        recyclerView.setAdapter(recycleViewParticipantList);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
 
     }
 

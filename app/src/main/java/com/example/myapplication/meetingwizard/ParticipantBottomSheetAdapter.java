@@ -110,6 +110,13 @@ public class ParticipantBottomSheetAdapter extends BottomSheetDialogFragment {
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 // Filter locations
                 recycleViewParticipantList.filter(charSequence.toString());
+                if(charSequence == ""){
+                    bi.clearTextButton.setVisibility(View.INVISIBLE);
+                }
+                else{
+                    bi.clearTextButton.setVisibility(View.VISIBLE);
+                }
+
             }
 
             @Override
@@ -118,6 +125,10 @@ public class ParticipantBottomSheetAdapter extends BottomSheetDialogFragment {
             }
         });
 
+        // Listener to clear Text
+        bi.clearTextButton.setOnClickListener(view1 -> {
+            bi.textInputSearch.setText("");
+        });
         setStyle(CustomAlertBottomSheetAdapter.STYLE_NORMAL, R.style.CustomBottomSheetDialogTheme);
         buildRecyclerView();
 
@@ -161,6 +172,12 @@ public class ParticipantBottomSheetAdapter extends BottomSheetDialogFragment {
     public void onDestroy() {
         super.onDestroy();
         recycleViewParticipantList.onDestroy();
+
+        // udate view
+        MeetingWizardActivity activity = ((MeetingWizardActivity)getActivity());
+        assert activity != null;
+
+        activity.updateDataSet();
     }
 
     @Override
