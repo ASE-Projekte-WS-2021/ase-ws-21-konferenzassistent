@@ -22,9 +22,11 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 import java.util.ArrayList;
 
-public class ParticipantCreationBottomSheetAdapter extends BottomSheetDialogFragment implements CustomAlertBottomSheetAdapter.onLeaveListener {
+public class ParticipantCreationBottomSheetAdapter extends BottomSheetDialogFragment implements CustomAlertBottomSheetAdapter.onLeaveListener, RecycleViewContactList.contactListener{
     BottomSheetParticipantsAddNewBinding bi;
     BottomSheetBehavior<View> bottomSheetBehavior;
+
+    ParticipantImportContactBottomSheetAdapter participantImportContactBottomSheetAdapter;
 
     // should the sheet be leave able
     boolean cancelable = true;
@@ -111,6 +113,16 @@ public class ParticipantCreationBottomSheetAdapter extends BottomSheetDialogFrag
 
 
             dismiss();
+        });
+
+        // open Contacts
+        bi.buttonImportParticipant.setOnClickListener(viewListener -> {
+            participantImportContactBottomSheetAdapter =
+                    new ParticipantImportContactBottomSheetAdapter();
+
+            participantImportContactBottomSheetAdapter.setListener(this);
+            participantImportContactBottomSheetAdapter.show(getParentFragmentManager(),
+                    participantImportContactBottomSheetAdapter.getTag());
         });
 
         // Add a Text Change Listener to update the Title once text got changed
@@ -208,4 +220,11 @@ public class ParticipantCreationBottomSheetAdapter extends BottomSheetDialogFrag
     public void clearWarnings() {
         resetWarning();
     }
+    // Enter name into Name field
+    @Override
+    public void onContactSelected(String name) {
+        bi.participantInputName.setText(name);
+        participantImportContactBottomSheetAdapter.dismiss();
+    }
+
 }

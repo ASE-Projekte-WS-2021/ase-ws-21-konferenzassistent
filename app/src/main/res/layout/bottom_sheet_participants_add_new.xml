@@ -153,7 +153,7 @@
                                 <!-- Status Text Edit -->
 
                                 <LinearLayout
-                                    android:id="@+id/button_impport_participant"
+                                    android:id="@+id/button_import_participant"
                                     style="@style/Widget.AppCompat.Button"
                                     android:orientation="horizontal"
                                     android:layout_width="match_parent"
