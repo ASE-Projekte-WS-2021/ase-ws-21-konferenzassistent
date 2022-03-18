@@ -1,8 +1,6 @@
 package com.example.myapplication;
 
-import android.content.DialogInterface;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,9 +19,7 @@ import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClic
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class MeetingFilterBottomSheet extends BottomSheetDialogFragment {
@@ -34,6 +30,7 @@ public class MeetingFilterBottomSheet extends BottomSheetDialogFragment {
     private Button resetButton, filterButton;
     private ChipGroup peopleChipGroup, locationChipGroup;
     private TextInputEditText countMinEditText, countMaxEditText, dateStartEditText, dateEndEditText;
+    private Long dateStart, dateEnd;
 
     public MeetingFilterBottomSheet(List<Meeting> meetingList, OnFilterButtonClickListener listener) {
         super();
@@ -113,9 +110,11 @@ public class MeetingFilterBottomSheet extends BottomSheetDialogFragment {
 
     private void setListeners() {
         resetButton.setOnClickListener(view -> {
+            listener.onFilterButtonClicked(new FilterData(false)); // pass empty filter, should return
             dismiss();
         });
         filterButton.setOnClickListener(view -> {
+            onFilterButtonClicked();
             dismiss();
         });
 
@@ -125,12 +124,11 @@ public class MeetingFilterBottomSheet extends BottomSheetDialogFragment {
                 .build();
 
         picker.addOnPositiveButtonClickListener((MaterialPickerOnPositiveButtonClickListener<Pair<Long, Long>>) selection -> {
-            Long start, end;
-            start = selection.first;
-            end = selection.second;
+            dateStart = selection.first;
+            dateEnd = selection.second;
             DateFormat dateFormat = DateFormat.getDateInstance();
-            dateStartEditText.setText(dateFormat.format(start));
-            dateEndEditText.setText(dateFormat.format(end));
+            dateStartEditText.setText(dateFormat.format(dateStart));
+            dateEndEditText.setText(dateFormat.format(dateEnd));
         });
 
         picker.addOnNegativeButtonClickListener(view -> {
@@ -140,5 +138,41 @@ public class MeetingFilterBottomSheet extends BottomSheetDialogFragment {
 
         dateStartEditText.setOnClickListener(view -> picker.show(getParentFragmentManager(),getTag()));
         dateEndEditText.setOnClickListener(view -> picker.show(getParentFragmentManager(),getTag()));
+    }
+
+    private void onFilterButtonClicked() {
+        FilterData filterData = new FilterData(true);
+
+        List<String> filterDataPeople = new ArrayList<>();
+        for (Integer id : peopleChipGroup.getCheckedChipIds()) {
+            Chip chip = getView().findViewById(id);
+            filterDataPeople.add(chip.getText().toString());
+        }
+        filterData.setPeopleList(filterDataPeople);
+
+        String countMinString = countMinEditText.getText().toString();
+        if (countMinString.equals("")) {
+            filterData.setMinCount(-1);
+        } else {
+            filterData.setMinCount(Integer.parseInt(countMinString));
+        }
+        String countMaxString = countMaxEditText.getText().toString();
+        if (countMaxString.equals("")) {
+            filterData.setMaxCount(-1);
+        } else {
+            filterData.setMaxCount(Integer.parseInt(countMaxString));
+        }
+
+        Chip chip = getView().findViewById(locationChipGroup.getCheckedChipId());
+        if (chip == null) {
+            filterData.setLocation(null);
+        } else {
+            filterData.setLocation(chip.getText().toString());
+        }
+
+        filterData.setDateStart(dateStart);
+        filterData.setDateEnd(dateEnd);
+
+        listener.onFilterButtonClicked(filterData);
     }
 }

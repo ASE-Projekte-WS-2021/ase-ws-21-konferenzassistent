@@ -157,7 +157,9 @@
             <com.google.android.material.chip.ChipGroup
                 android:id="@+id/bottom_sheet_filter_meetings_location_chip_group"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"/>
+                android:layout_height="match_parent"
+                app:singleSelection="true"/>
+
         </HorizontalScrollView>
 
         <com.google.android.material.divider.MaterialDivider
