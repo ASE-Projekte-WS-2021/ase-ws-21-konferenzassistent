@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/countdown_last_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/heller_corona_blue"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/countdown_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/countdown_background"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="80dp"
+                android:orientation="vertical">
+
+                <!-- Countdown Name -->
+                <TextView
+                    android:id="@+id/countdown_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="LüftungsCountdown"
+                    android:textColor="@color/corona_white"
+                    android:textStyle="bold"
+                    android:textSize="16sp"/>
+
+                <!-- Countdown Timer -->
+                <TextView
+                    android:id="@+id/countdown_timer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="30:00"
+                    android:layout_marginTop="16dp"
+                    android:gravity=""
+                    android:textColor="@color/white"
+                    android:textSize="32sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/countdown_name"
+                    app:layout_constraintStart_toStartOf="@+id/countdown_name"
+                    app:layout_constraintTop_toBottomOf="@+id/countdown_name"
+                    app:layout_constraintVertical_bias="0.407" />
+
+                <!-- Countdown Description -->
+                <TextView
+                    android:id="@+id/countdown_description"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Bis zum nächsten Lüften."
+                    android:textColor="@color/gray"
+                    android:textSize="12sp"
+                    android:layout_marginBottom="16dp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toStartOf="@+id/replay_button"
+                    app:layout_constraintHorizontal_bias="0.64"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </LinearLayout>
+
+            <!-- controll container -->
+            <LinearLayout
+                android:layout_height="match_parent"
+                android:layout_width="wrap_content"
+                android:gravity="center"
+                android:layout_margin="8dp"
+                android:orientation="vertical">
+
+                <ImageButton
+                    android:id="@+id/replay_button"
+                    android:minWidth="48dp"
+                    android:minHeight="48dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/ic_baseline_replay_24"
+                    app:backgroundTint="@color/gray" />
+
+                <ImageButton
+                    android:id="@+id/pause_button"
+                    android:minWidth="48dp"
+                    android:minHeight="48dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/ic_baseline_pause_24"
+                    app:backgroundTint ="@color/white" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>
+
+

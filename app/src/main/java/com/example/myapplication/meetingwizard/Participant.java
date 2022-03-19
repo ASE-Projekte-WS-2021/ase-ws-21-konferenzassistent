@@ -1,6 +1,8 @@
 package com.example.myapplication.meetingwizard;
 
-public class Participant {
+import java.io.Serializable;
+
+public class Participant implements Serializable {
 
     String Name;
     String Status;

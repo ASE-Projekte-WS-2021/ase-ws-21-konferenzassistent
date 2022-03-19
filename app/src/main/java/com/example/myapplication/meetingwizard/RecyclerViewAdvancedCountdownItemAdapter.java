@@ -13,17 +13,34 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.R;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 public class RecyclerViewAdvancedCountdownItemAdapter
         extends RecyclerView.Adapter<RecyclerViewAdvancedCountdownItemAdapter.ViewHolder>{
 
-    public static class AdvancedCountdownItem{
+    public static class AdvancedCountdownItem implements Serializable {
         Long subCountdown;
         String subCountdownDescription;
 
+        public Long getSubCountdown() {
+            return subCountdown;
+        }
+
+        public void setSubCountdown(Long subCountdown) {
+            this.subCountdown = subCountdown;
+        }
+
+        public String getSubCountdownDescription() {
+            return subCountdownDescription;
+        }
+
+        public void setSubCountdownDescription(String subCountdownDescription) {
+            this.subCountdownDescription = subCountdownDescription;
+        }
+
         public AdvancedCountdownItem(Long subCountdown,
-                                       String onSubCountdownDescription) {
+                                     String onSubCountdownDescription) {
             this.subCountdown = subCountdown;
             this.subCountdownDescription = onSubCountdownDescription;
         }
