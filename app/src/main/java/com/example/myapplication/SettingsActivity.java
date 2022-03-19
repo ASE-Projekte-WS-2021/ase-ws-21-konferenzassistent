@@ -88,6 +88,10 @@ public class SettingsActivity extends AppCompatActivity {
 
         startMeetingButton = findViewById(R.id.startButton);
 
+        String title = getIntent().getStringExtra("meeting_wizard_title");
+        getIntent().getStringExtra("meeting_wizard_location");
+        assert actionBar != null;
+        actionBar.setTitle(title);
   }
 
     private void showTimePickerDialog(View v, LinearLayout clickable, TextView textToChange){
@@ -176,9 +180,13 @@ public class SettingsActivity extends AppCompatActivity {
         public void onTimeSet(TimePicker picker, int hourOfDay, int minute) {
             // Do something with the time chosen by the user
             minutes = minute;
-            long parsedLong = Long.parseLong(Integer.toString(minutes));
-            textToChange.setText(minutes + " Minuten");
-            timer.setTimer(parsedLong);
+            if (minutes == 0) {
+                Toast.makeText(getContext(), "Countdown kann nicht 0 Minuten lang sein.", Toast.LENGTH_LONG).show();
+            } else {
+                long parsedLong = Long.parseLong(Integer.toString(minutes));
+                textToChange.setText(minutes + " Minuten");
+                timer.setTimer(parsedLong);                
+            }
         }
 
     }

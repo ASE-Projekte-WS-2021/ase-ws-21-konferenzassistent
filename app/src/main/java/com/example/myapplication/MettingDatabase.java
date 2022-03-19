@@ -25,6 +25,7 @@ public class MettingDatabase extends SQLiteOpenHelper {
     private static final String COLUMN_DATE_END = "meeting_date_end";
     private static final String COLUMN_POSITION = "meeting_position";
     private static final String COLUMN_DURATION = "meeting_duration";
+    private static final String COLUMN_TITLE = "meeting_title";
     private static final String COLUMN_NUMBER_OF_PARTICIPANTS = "meeting_number_participants";
 
     public MettingDatabase(@Nullable Context context) {
@@ -33,7 +34,15 @@ public class MettingDatabase extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String query = "CREATE TABLE "  + TABLE_NAME  + " (" + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUMN_DATE + " TEXT, " + COLUMN_DATE_END + " TEXT, " + COLUMN_POSITION + " TEXT, " + COLUMN_DURATION + " TEXT, " + COLUMN_NUMBER_OF_PARTICIPANTS + " TEXT);";
+        String query = "CREATE TABLE "
+                + TABLE_NAME  +
+                " (" + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                COLUMN_DATE + " TEXT, " +
+                COLUMN_DATE_END + " TEXT, " +
+                COLUMN_POSITION + " TEXT, " +
+                COLUMN_TITLE + " TEXT, " +
+                COLUMN_DURATION + " TEXT, " +
+                COLUMN_NUMBER_OF_PARTICIPANTS + " TEXT);";
         db.execSQL(query);
     }
 
@@ -43,12 +52,13 @@ public class MettingDatabase extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public void addMeeting(String date, String dateEnd, String position, String duration, String numberParticipants){
+    public void addMeeting(String date, String dateEnd, String position, String title, String duration, String numberParticipants){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
         cv.put(COLUMN_DATE, date);
         cv.put(COLUMN_DATE_END, dateEnd);
         cv.put(COLUMN_POSITION, position);
+        cv.put(COLUMN_TITLE, title);
         cv.put(COLUMN_DURATION, duration);
         cv.put(COLUMN_NUMBER_OF_PARTICIPANTS, numberParticipants);
 
@@ -95,13 +105,14 @@ public class MettingDatabase extends SQLiteOpenHelper {
         return uniqueLocationsList;
     }
 
-    public void updateData(String id, String dateEnd, String position, String date, String duration, String numberParticipants){
+    public void updateData(String id, String dateEnd, String position, String date, String title, String duration, String numberParticipants){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
         cv.put(COLUMN_DATE, date);
         cv.put(COLUMN_DATE_END, dateEnd);
         cv.put(COLUMN_POSITION, position);
         cv.put(COLUMN_DURATION, duration);
+        cv.put(COLUMN_TITLE, title);
         cv.put(COLUMN_NUMBER_OF_PARTICIPANTS, numberParticipants);
         long res = db.update(TABLE_NAME, cv, "_id=", new String[]{id});
         if(res == -1){

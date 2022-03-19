@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="8dp"
+                    android:textSize="32sp"
+                    android:textColor="@color/dark_gray"
+                    android:text="Die wichtigsten Funktionen"/>
+
+                <ImageView
+                    android:src="@drawable/ic_baseline_image_24"
+                    android:minHeight="150dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+                <!-- Paragraph -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp"
+                    android:layout_margin="16dp"
+                    android:orientation="vertical"
+                    >
+                    <!-- Headline -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:orientation="horizontal">
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_baseline_looks_one_24"/>
+                        <TextView
+                            android:layout_marginStart="16dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Erinnerung ans Lüften"
+                            android:textStyle="bold"
+                            android:textSize="16dp"
+                            android:textColor="@color/black"/>
+
+                    </LinearLayout>
+
+                    <!-- Text -->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="16dp"
+                        android:layout_marginTop="8dp"
+                        android:justificationMode="inter_word"
+                        android:text="Das richtige Lüften von Innenräumen kann helfen, das Risiko einer Ansteckung mit dem Coronavirus SARS-CoV-2 über Aerosole zu verringern. Aerosole (feinste luftgetragene Flüssigkeitspartikel und Tröpfchenkerne) sind ein möglicher Übertragungsweg des Coronavirus SARS-CoV-2. Um nicht zu vergessen zu Lüften erinnert dich die App regelmäßig daran, die Fenster aufzumachen. Du kannst einstellen, wie oft das passieren soll."
+                        android:textColor="@color/black" />
+                </LinearLayout>
+
+                <!-- Paragraph -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_margin="16dp"
+                    android:layout_marginTop="32dp"
+                    >
+                    <!-- Headline -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:orientation="horizontal">
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_baseline_looks_two_24"/>
+                        <TextView
+                            android:layout_marginStart="16dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Erinnerung an das Einhalten von Abständen"
+                            android:textStyle="bold"
+                            android:textSize="16dp"
+                            android:textColor="@color/black"/>
+
+                    </LinearLayout>
+
+                    <!-- Text -->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="16dp"
+                        android:layout_marginTop="8dp"
+                        android:textColor="@color/black"
+                        android:justificationMode="inter_word"
+
+                        android:text="Die Wahrscheinlichkeit, mit virushaltigen Tröpfchen und Aerosolen in Kontakt zu kommen, ist insbesondere im Umkreis von ein bis zwei Metern um eine mit dem Coronavirus SARS-CoV-2 infizierte Person erhöht. Abstand halten reduziert daher das Risiko, sich und andere anzustecken. Um nicht zu vergessen, die nötigen Abstände einzuhalten, erinnert dich die App regelmäßig daran, die Fenster aufzumachen. Du kannst einstellen, wie oft das passieren soll."
+                        />
+                </LinearLayout>
+
+                <!-- Paragraph -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_margin="16dp"
+                    android:layout_marginTop="32dp"
+                    >
+                    <!-- Headline -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:orientation="horizontal">
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_baseline_looks_two_24"/>
+                        <TextView
+                            android:layout_marginStart="16dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Ein Timer für eigene Erinnerungen"
+                            android:textStyle="bold"
+                            android:textSize="16dp"
+                            android:textColor="@color/black"/>
+
+                    </LinearLayout>
+
+                    <!-- Text -->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="16dp"
+                        android:layout_marginTop="8dp"
+                        android:justificationMode="inter_word"
+                        android:textColor="@color/black"
+                        android:text="Wenn du noch in regelmäßigen Abständen an etwas anderes, wie an das Desinfizieren von Oberflächen erinnert werden willst, kannst du dir auch dafür einen eigenen Timer stellen."
+                        />
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+
+    </LinearLayout>
+
+
+</layout>

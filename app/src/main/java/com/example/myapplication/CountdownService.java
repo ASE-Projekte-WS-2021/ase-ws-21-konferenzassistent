@@ -1,6 +1,9 @@
 package com.example.myapplication;
 
 import static com.example.myapplication.App.CHANNEL_ID;
+import static com.example.myapplication.CountdownActivity.COUNTDOWN_OBJECTS;
+import static com.example.myapplication.CountdownActivity.PAUSE_BUTTON_PRESSED_ID;
+import static com.example.myapplication.CountdownActivity.REPLAY_BUTTON_PRESSED_ID;
 
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -24,6 +27,9 @@ import android.util.Log;
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
 
+import com.example.myapplication.meetingwizard.cdServiceObject;
+
+import java.util.ArrayList;
 import java.util.Timer;
 
 public class CountdownService extends Service {
@@ -32,43 +38,13 @@ public class CountdownService extends Service {
     private final static String TAG = "CountdownService";
     public static final String COUNTDOWN_SERVICE = "com.example.myapplication.countdown_service";
 
-    // Max Timer values
-    private long maxlueftenTime;
-    private long maxLueftungsTime;
-    private long maxAbstandsTime;
-
-    // if window got already opned
-    private boolean isOpen = false;
-
     // Countdown Object that save the current states of the Countdowns
-    private CountDownObject lueftungsObject;
-    private CountDownObject abstandsObject;
+    ArrayList<cdServiceObject> countdownServiceObjects;
 
-    private Intent bi = new Intent(COUNTDOWN_SERVICE);
-
-    // Countdown Timers
-    private CountDownTimer lueftungsCountdown = null;
-    private CountDownTimer abstandsCountdown = null;
+    private final Intent bi = new Intent(COUNTDOWN_SERVICE);
 
     // Media Player for audible alerts
     private MediaPlayer mp = new MediaPlayer();
-
-    // switches in Main Activity
-    private Boolean lueftungsSwitchStatus;
-    private Boolean abstandsSwitchStatus;
-
-    private Boolean abstandsCountdownRunning = false;
-    private Boolean lueftungsCountdownRunning = false;
-
-    // Object to create a Countdown
-    static class CountDownObject{
-        long currentTime;
-        boolean timerDone;
-
-        public void createNotification(){
-
-        }
-    }
 
     @Override
     public void onCreate() {
@@ -79,41 +55,44 @@ public class CountdownService extends Service {
 
     @Override
     public void onDestroy() {
-        // Stop the timer
-        if(lueftungsSwitchStatus)lueftungsCountdown.cancel();
-        if(abstandsSwitchStatus)abstandsCountdown.cancel();
+        // Stop all timers
+        countdownServiceObjects.forEach(object ->{
+            object.getCountDownTimer().cancel();
+        });
 
+        // Stop the Media Player if it still is playing
         if(mp.isPlaying()){
             mp.stop();
         }
+
         unregisterReceiver(br);
         super.onDestroy();
     }
 
     // Start a Countdown Timer and returns the CountdownTimer object
-    private CountDownTimer startTimer(long maxTime, CountDownTimer timer, CountDownObject cdObject){
+    private void startTimer(cdServiceObject cdObject, long maxTime){
         // Create a new Countdown Timer
-        timer = new CountDownTimer(maxTime, 1000) {
+        cdObject.setCountDownTimer(new CountDownTimer(maxTime, 1000) {
             @Override
             public void onTick(long milliSUnitlFinished) {
 
                 // set Values
-                cdObject.currentTime = milliSUnitlFinished;
-                cdObject.timerDone = false;
+                cdObject.setCurrentTime(milliSUnitlFinished);
+                cdObject.setTimerDone(false);
 
                 // send Notification
-                cdObject.createNotification();
+                bi.putExtra(COUNTDOWN_OBJECTS, countdownServiceObjects);
+                sendBroadcast(bi);
+                notifyNotification(NotificationTextBuilder());
             }
 
             @Override
             public void onFinish() {
                 // Timer finished
                 // Restart timer with Window Open/Closed
-                cdObject.timerDone = true;
+                cdObject.setTimerDone(true);
 
-                // Broadcast timer done
-                cdObject.createNotification();
-
+                sendBroadcast(bi);
                 // activate the alert
                 Uri alert = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
                 if(!mp.isPlaying()){
@@ -123,23 +102,25 @@ public class CountdownService extends Service {
 
             }
 
-        };
+        });
+
         // Start the timer
-        timer.start();
-        // return the timer so it isn´t null anymore
-        return timer;
+        cdObject.getCountDownTimer().start();
     }
 
+    // Pauses the Timer
     private void pauseTimer(CountDownTimer timer){
         timer.cancel();
     }
 
-    private CountDownTimer resumeTimer(CountDownTimer timer, CountDownObject cdObject){
-        return startTimer(cdObject.currentTime, timer, cdObject);
+    // Resumes the Timer
+
+    private void resumeTimer(cdServiceObject cdObject){
+        startTimer(cdObject, cdObject.getCurrentTime());
     }
 
-
     // Sends a Notification to the user
+    // TODO: FIX BUGS
     private void notifyNotification(String text) {
         // Create a new spannable string
         SpannableString htmlText = new SpannableString(Html.fromHtml(text, Html.FROM_HTML_MODE_LEGACY));
@@ -163,25 +144,12 @@ public class CountdownService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        // Get max time from intent
-        maxLueftungsTime = intent.getLongExtra("maxCountdownTime", 0);
-        maxlueftenTime = intent.getLongExtra("maxLueftungsTimer", 0);
-        maxAbstandsTime = intent.getLongExtra("maxAbstandsTimer", 0);
-
-
-        lueftungsSwitchStatus = intent.getBooleanExtra("lueftungsSwitchStatus", false);
-        abstandsSwitchStatus = intent.getBooleanExtra("abstandsSwitchStatus", false);
+        // Get extra
+        countdownServiceObjects = (ArrayList<cdServiceObject>)
+                intent.getSerializableExtra(COUNTDOWN_OBJECTS);
 
         // Start the timers
-        if(lueftungsSwitchStatus){
-            StartLueftungsTimer(maxLueftungsTime);
-            lueftungsCountdownRunning = true;
-        }
-
-        if(abstandsSwitchStatus){
-            StartAbstandsTimer(maxAbstandsTime);
-            abstandsCountdownRunning = true;
-        }
+        startTimers();
 
         Intent notificationIntent = new Intent(this, CountdownActivity.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(this,
@@ -214,15 +182,36 @@ public class CountdownService extends Service {
     private BroadcastReceiver br = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent){
-            // get if its a button Press
-            boolean lueftungsUserInteraction = intent.getBooleanExtra("lueftungsUserInteraction", false);
-            boolean abstandsUserInteraction = intent.getBooleanExtra("abstandsUserInteraction", false);
+            Integer id = intent.getIntExtra(PAUSE_BUTTON_PRESSED_ID, -1);
 
-            boolean lueftungsPauseUserInteraction = intent.getBooleanExtra("lueftungsPauseUserInteraction", false);
-            boolean abstandsPauseUserInteraction = intent.getBooleanExtra("abstandsPauseUserInteraction", false);
+            if(id != -1){
+                cdServiceObject timer = countdownServiceObjects.get(id);
+                timer.setTimerRunning(!timer.getTimerRunning());
 
-            //TODO: switch to a switch
+                if(!timer.getTimerRunning()){
+                    pauseTimer(timer.getCountDownTimer());
+                }else{
+                    resumeTimer(timer);
+                }
+                sendBroadcast(bi);
+            }
 
+            Integer restart_id = intent.getIntExtra(REPLAY_BUTTON_PRESSED_ID, -1);
+            Log.i(TAG, "onReceive: " + restart_id);
+
+            if(restart_id != -1){
+                cdServiceObject cdObject = countdownServiceObjects.get(restart_id);
+                if(cdObject.getCountdownPosition() < cdObject.getTimer().getmItems().size() -1){
+                    cdObject.setCountdownPosition(cdObject.getCountdownPosition()+1);
+                }
+                else{
+                    cdObject.setCountdownPosition(0);
+                }
+
+                startSpecificTimer(restart_id);
+                }
+            }
+            /*
             // Check if its a user Interaction and what button got pressed or if the app got resumed
             if(lueftungsUserInteraction){
                 // Stop the alert
@@ -251,6 +240,7 @@ public class CountdownService extends Service {
             else if(abstandsPauseUserInteraction){
                 toggleAbstandsCountdown();
             }
+
             // if app got resumed send timer data
             else{
                 // Data for Lueftung
@@ -264,9 +254,12 @@ public class CountdownService extends Service {
 
                 sendBroadcast(bi);
             }
-        }
+
+             */
+
     };
 
+    /*
     private void toggleLueftungsCountdown(){
         if(lueftungsCountdownRunning){
             lueftungsCountdownRunning = false;
@@ -277,20 +270,13 @@ public class CountdownService extends Service {
         lueftungsCountdownRunning = true;
     }
 
-    private void toggleAbstandsCountdown(){
-        if(abstandsCountdownRunning){
-            abstandsCountdownRunning = false;
-            pauseTimer(abstandsCountdown);
-            return;
-        }
-        abstandsCountdown = resumeTimer(abstandsCountdown, abstandsObject);
-        abstandsCountdownRunning = true;
-    }
+
+*/
 
     // Builds the Notification Text
     private String NotificationTextBuilder(){
-        String notificationText = "";
-
+        String notificationText = "Timer sind aktiv";
+        /*
         // If "Lueftung" is activated
         if(lueftungsSwitchStatus){
             // add the lueftungstimer as text
@@ -317,6 +303,8 @@ public class CountdownService extends Service {
         if(!abstandsSwitchStatus && !lueftungsSwitchStatus){
             notificationText += "Keine Timer ausgewählt!";
         }
+        */
+
 
         return notificationText;
     }
@@ -339,47 +327,33 @@ public class CountdownService extends Service {
     }
 
     // Starts the lueftungstimer
-    private void StartLueftungsTimer(long startingTimer){
+
+    private void startSpecificTimer(Integer id){
+        cdServiceObject object = countdownServiceObjects.get(id);
+        startTimer(object, object.getTimer().getmItems().get(object.getCountdownPosition()).getSubCountdown() * 60000);
+        object.setTimerRunning(true);
+    }
+
+    private void startTimers(){
+        // For every Countdow do the same
+        countdownServiceObjects.forEach(object ->{
+            startTimer(object, object.getTimer().getmItems().get(object.getCountdownPosition()).getSubCountdown() * 60000);
+            object.setTimerRunning(true);
+
+        });
+        Log.i(TAG, "startTimers: ");
+
         // create a CountDownObject for lueftung
-        lueftungsObject  = new CountDownObject(){
-            @Override
-            public void createNotification(){
-                bi.putExtra("lueftungsMilliS", this.currentTime);
-                bi.putExtra("windowOpen", isOpen);
-                bi.putExtra("lueftungDone", this.timerDone);
-                // Broadcast Timer
-                sendBroadcast(bi);
-                notifyNotification(NotificationTextBuilder());
-            }
-        };
+        /*
 
         lueftungsObject.timerDone = false;
         lueftungsObject.currentTime = maxLueftungsTime;
 
         // start timer with countdown timer
         lueftungsCountdown = startTimer(startingTimer, lueftungsCountdown, lueftungsObject);
+         */
     }
 
-    // Starts the abstandstimer
-    private void StartAbstandsTimer(long startingTimer){
-        // create a CountDownObject for lueftung
-        abstandsObject  = new CountDownObject(){
-            @Override
-            public void createNotification(){
-                bi.putExtra("abstandsMilliS", this.currentTime);
-                bi.putExtra("abstandDone", this.timerDone);
-                // Broadcast Timer
-                sendBroadcast(bi);
-                notifyNotification(NotificationTextBuilder());
-            }
-        };
-
-        abstandsObject.timerDone = false;
-        abstandsObject.currentTime = maxLueftungsTime;
-
-        // start timer with countdown timer
-        abstandsCountdown = startTimer(startingTimer, abstandsCountdown, abstandsObject);
-    }
 
 }
 
