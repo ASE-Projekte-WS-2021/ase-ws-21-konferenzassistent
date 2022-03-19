@@ -69,6 +69,32 @@
         <entry key="..\:/Users/erdi/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/meeting_history_row.xml" value="0.16979166666666667" />
         <entry key="..\:/Users/erdi/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/participants_alert.xml" value="0.16979166666666667" />
         <entry key="..\:/Users/erdi/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/rv_row_checklist.xml" value="0.16979166666666667" />
+        <entry key="..\:/xuexiiii/UniRegensburg/2021WS/Advanced Software Engineering/project/app/src/main/res/font/font.xml" value="0.9" />
+        <entry key="..\:/xuexiiii/UniRegensburg/2021WS/Advanced Software Engineering/project/app/src/main/res/font/fontfamily.xml" value="0.2712962962962963" />
+        <entry key="..\:/xuexiiii/UniRegensburg/2021WS/Advanced Software Engineering/project/app/src/main/res/font/fontlight.xml" value="0.22314814814814815" />
+        <entry key="..\:/xuexiiii/UniRegensburg/2021WS/Advanced Software Engineering/project/app/src/main/res/layout/activity_checklist.xml" value="0.29846014492753625" />
+        <entry key="..\:/xuexiiii/UniRegensburg/2021WS/Advanced Software Engineering/project/app/src/main/res/layout/activity_countdown.xml" value="0.25" />
+        <entry key="..\:/xuexiiii/UniRegensburg/2021WS/Advanced Software Engineering/project/app/src/main/res/layout/activity_location_participants.xml" value="0.36614583333333334" />
+        <entry key="..\:/xuexiiii/UniRegensburg/2021WS/Advanced Software Engineering/project/app/src/main/res/layout/activity_main.xml" value="0.3125" />
+        <entry key="..\:/xuexiiii/UniRegensburg/2021WS/Advanced Software Engineering/project/app/src/main/res/layout/activity_meeting_wizard.xml" value="0.36614583333333334" />
+        <entry key="..\:/xuexiiii/UniRegensburg/2021WS/Advanced Software Engineering/project/app/src/main/res/layout/activity_onboarding.xml" value="0.35052083333333334" />
+        <entry key="..\:/xuexiiii/UniRegensburg/2021WS/Advanced Software Engineering/project/app/src/main/res/layout/activity_preset.xml" value="0.36614583333333334" />
+        <entry key="..\:/xuexiiii/UniRegensburg/2021WS/Advanced Software Engineering/project/app/src/main/res/layout/bottom_sheet_participants_add_new.xml" value="0.36614583333333334" />
+        <entry key="..\:/xuexiiii/UniRegensburg/2021WS/Advanced Software Engineering/project/app/src/main/res/layout/create_meeting_bottom_sheet.xml" value="0.33" />
+        <entry key="..\:/xuexiiii/UniRegensburg/2021WS/Advanced Software Engineering/project/app/src/main/res/layout/cutsom_alert_bottom_sheet.xml" value="0.36614583333333334" />
+        <entry key="..\:/xuexiiii/UniRegensburg/2021WS/Advanced Software Engineering/project/app/src/main/res/layout/example_layout.xml" value="0.36614583333333334" />
+        <entry key="..\:/xuexiiii/UniRegensburg/2021WS/Advanced Software Engineering/project/app/src/main/res/layout/fragment_countdown_information.xml" value="0.36614583333333334" />
+        <entry key="..\:/xuexiiii/UniRegensburg/2021WS/Advanced Software Engineering/project/app/src/main/res/layout/fragment_settings.xml" value="0.35052083333333334" />
+        <entry key="..\:/xuexiiii/UniRegensburg/2021WS/Advanced Software Engineering/project/app/src/main/res/layout/fragment_wizard_checklist.xml" value="0.35052083333333334" />
+        <entry key="..\:/xuexiiii/UniRegensburg/2021WS/Advanced Software Engineering/project/app/src/main/res/layout/fragment_wizard_participant.xml" value="0.36614583333333334" />
+        <entry key="..\:/xuexiiii/UniRegensburg/2021WS/Advanced Software Engineering/project/app/src/main/res/layout/meeting_bottom_sheet.xml" value="0.36614583333333334" />
+        <entry key="..\:/xuexiiii/UniRegensburg/2021WS/Advanced Software Engineering/project/app/src/main/res/layout/meeting_history_row.xml" value="0.25" />
+        <entry key="..\:/xuexiiii/UniRegensburg/2021WS/Advanced Software Engineering/project/app/src/main/res/layout/onboarding_carousel_page.xml" value="0.36614583333333334" />
+        <entry key="..\:/xuexiiii/UniRegensburg/2021WS/Advanced Software Engineering/project/app/src/main/res/layout/recycler_advanced_countdown_picker_items.xml" value="0.36614583333333334" />
+        <entry key="..\:/xuexiiii/UniRegensburg/2021WS/Advanced Software Engineering/project/app/src/main/res/layout/recycler_countdown_picker.xml" value="0.36614583333333334" />
+        <entry key="..\:/xuexiiii/UniRegensburg/2021WS/Advanced Software Engineering/project/app/src/main/res/menu/bottom_nav_menu.xml" value="0.35052083333333334" />
+        <entry key="..\:/xuexiiii/UniRegensburg/2021WS/Advanced Software Engineering/project/app/src/main/res/menu/past_meeting_info_options.xml" value="0.35052083333333334" />
+        <entry key="..\:/xuexiiii/UniRegensburg/2021WS/Advanced Software Engineering/project/app/src/main/res/menu/settings_menu.xml" value="0.35052083333333334" />
         <entry key="..\:/xuexiiii/UniRegensburg/2021WS/Advanced Software Engineering/projekt/app/src/main/res/layout/activity_checklist.xml" value="0.22" />
         <entry key="..\:/xuexiiii/UniRegensburg/2021WS/Advanced Software Engineering/projekt/app/src/main/res/layout/activity_countdown.xml" value="0.22" />
         <entry key="..\:/xuexiiii/UniRegensburg/2021WS/Advanced Software Engineering/projekt/app/src/main/res/layout/activity_main.xml" value="0.25" />
