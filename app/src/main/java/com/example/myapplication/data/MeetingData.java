@@ -14,11 +14,14 @@ public class MeetingData implements Serializable {
     @ColumnInfo(name = "title")
     private String title;
 
-    @ColumnInfo(name = "date")
-    private String date;
+    @ColumnInfo(name = "start_date")
+    private String startDate;
+
+    @ColumnInfo(name = "end_date")
+    private String endDate;
 
     @ColumnInfo(name = "duration")
-    private int duration;
+    private long duration;
 
     @ColumnInfo(name = "location")
     private String location;
@@ -39,19 +42,11 @@ public class MeetingData implements Serializable {
         this.title = title;
     }
 
-    public String getDate() {
-        return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
-    }
-
-    public int getDuration() {
+    public long getDuration() {
         return duration;
     }
 
-    public void setDuration(int duration) {
+    public void setDuration(long duration) {
         this.duration = duration;
     }
 
@@ -63,4 +58,19 @@ public class MeetingData implements Serializable {
         this.location = location;
     }
 
+    public String getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
+    }
+
+    public String getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
+    }
 }

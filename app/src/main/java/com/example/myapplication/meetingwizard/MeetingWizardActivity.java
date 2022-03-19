@@ -177,14 +177,13 @@ public class MeetingWizardActivity extends AppCompatActivity implements OnAdapte
         advancedCountdownObjects.add(advancedCountdownObject);
         advancedCountdownObjects.add(advancedCountdownObject2);
 
-        // TODO: LOAD OBJECTS
-
+        // Load Participants Objects
         List<ParticipantData> d = new ArrayList<>();
         database = RoomDB.getInstance(getBaseContext());
         d = database.participantDao().getAll();
 
         d.forEach(participantData -> {
-            Participant participant = new Participant(participantData.getName(), participantData.getStatus(), false);
+            Participant participant = new Participant(participantData.getName(), participantData.getStatus(), false, participantData.getID());
             participants.add(participant);
         });
 
@@ -308,14 +307,15 @@ public class MeetingWizardActivity extends AppCompatActivity implements OnAdapte
     }
 
     public void addNewParticipant(String name, String status) {
-        // TODO: Database Stuff here
-        Participant participant = new Participant(name, status, true);
-        participants.add(participant);
+        Participant participant = new Participant(name, status, true, 0);
         WizardParticipantFragment fragment = (WizardParticipantFragment) fragmentArrayList.get(STATE_IS_PARTICIPANT);
 
         ParticipantData participantData = new ParticipantData();
         participantData.setName(participant.getName());
         participantData.setStatus(participant.getStatus());
+        participant.setId(participantData.getID());
+        participants.add(participant);
+
         database.participantDao().insert(participantData);
 
         fragment.onParticipentUpdate();

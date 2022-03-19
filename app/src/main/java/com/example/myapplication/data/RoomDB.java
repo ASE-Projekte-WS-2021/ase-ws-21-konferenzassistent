@@ -24,5 +24,6 @@ public abstract class RoomDB extends RoomDatabase {
 
     public abstract MeetingDao meetingDao();
     public abstract ParticipantDao participantDao();
+    public abstract MeetingWithParticipantDao meetingWithParticipantDao();
 
 }

@@ -10,13 +10,29 @@ public class MeetingParticipantPair {
         @Embedded
         MeetingData meeting;
         @Relation(
-                parentColumn = "meetingID",
+                parentColumn = "ID",
                 entity = ParticipantData.class,
-                entityColumn = "participantID",
+                entityColumn = "ID",
                 associateBy = @Junction(
                         value = MeetingWithParticipantData.class,
                         parentColumn = "meetingID",
                         entityColumn = "participantID")
         )
         List<ParticipantData> participants;
+
+        public MeetingData getMeeting() {
+                return meeting;
+        }
+
+        public void setMeeting(MeetingData meeting) {
+                this.meeting = meeting;
+        }
+
+        public List<ParticipantData> getParticipants() {
+                return participants;
+        }
+
+        public void setParticipants(List<ParticipantData> participants) {
+                this.participants = participants;
+        }
 }

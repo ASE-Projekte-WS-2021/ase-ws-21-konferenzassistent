@@ -15,6 +15,10 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.myapplication.data.MeetingData;
+import com.example.myapplication.data.MeetingWithParticipantData;
+import com.example.myapplication.data.ParticipantData;
+import com.example.myapplication.data.RoomDB;
 import com.example.myapplication.meetingwizard.MeetingWizardActivity;
 import com.example.myapplication.meetingwizard.Participant;
 import com.example.myapplication.meetingwizard.RecyclerViewAdvancedCountdownAdapter;
@@ -28,6 +32,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.TimeZone;
 
 public class CountdownActivity extends AppCompatActivity implements Serializable,CustomAlertBottomSheetAdapter.onLeaveListener{
@@ -291,13 +296,26 @@ public class CountdownActivity extends AppCompatActivity implements Serializable
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
         dateFormat.setTimeZone(TimeZone.getDefault());
 
-        MettingDatabase database = new MettingDatabase(this);
-        database.addMeeting("" + dateFormat.format(startDate),
-                dateFormat.format(endDate),
-                ort,
-                title,
-                "" + seconds,
-                "" + participantCount);
+        RoomDB database = RoomDB.getInstance(getBaseContext());
+        MeetingData meetingData = new MeetingData();
+        meetingData.setStartDate(dateFormat.format(startDate));
+        meetingData.setEndDate(dateFormat.format(endDate));
+        if(ort != null)
+            meetingData.setLocation(ort);
+        else
+            meetingData.setLocation("<Keinen Ort angegeben>");
+        meetingData.setTitle(title);
+        meetingData.setDuration(seconds);
+
+        long ID = database.meetingDao().insert(meetingData);
+
+        participants.forEach(participant -> {
+            MeetingWithParticipantData meetingWithParticipantData = new
+                    MeetingWithParticipantData();
+            meetingWithParticipantData.setMeetingID((int) ID);
+            meetingWithParticipantData.setParticipantID(participant.getId());
+            database.meetingWithParticipantDao().insert(meetingWithParticipantData);
+        });
     }
 
     /*

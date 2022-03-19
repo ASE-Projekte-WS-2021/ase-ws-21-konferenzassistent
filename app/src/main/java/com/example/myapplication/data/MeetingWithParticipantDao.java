@@ -10,13 +10,13 @@ import androidx.room.Transaction;
 import java.util.List;
 
 @Dao
-interface MeetingWithParticipantDao {
+public interface MeetingWithParticipantDao {
 
     @Insert(onConflict = IGNORE)
     void insert(MeetingWithParticipantData join);
 
     @Transaction
     @Query("SELECT * FROM table_meeting_data")
-    List<MeetingParticipantPair> getMeeting();
+    List<MeetingParticipantPair> getMeetings();
 
 }

@@ -13,7 +13,7 @@ import java.util.List;
 public interface MeetingDao {
 
     @Insert(onConflict = REPLACE)
-    void insert(MeetingData meetingData);
+    long insert(MeetingData meetingData);
 
     @Delete
     void delete(MeetingData meetingData);
@@ -22,10 +22,14 @@ public interface MeetingDao {
     void reset(List<MeetingData> meetingDataList);
 
     @Query("Update table_meeting_data SET title = :sTitle," +
-            "date = :sDate," +
+            "start_date = :sStartDate," +
+            "end_date = :sEndDate," +
             "duration = :sDuration," +
             "location = :sLocation")
-    void update(String sTitle, String sDate, Integer sDuration, String sLocation);
+    void update(String sTitle,  String sStartDate, String sEndDate, Integer sDuration, String sLocation);
+
+    @Query("SELECT DISTINCT location FROM table_meeting_data")
+    List<String> getLocations();
 
     @Query("SELECT * FROM table_meeting_data")
     List<MeetingData> getAll();
