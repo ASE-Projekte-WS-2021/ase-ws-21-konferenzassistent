@@ -14,9 +14,11 @@ import com.example.myapplication.checklist.OnAdapterItemClickListener;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
 
@@ -27,6 +29,8 @@ public class MeetingWizardActivity extends AppCompatActivity implements OnAdapte
 
     // Position in the Wizard
     private int wizardPosition = 0;
+
+    private Button wizardButton;
 
     // State Constants
     final static int STATE_IS_COUNTDOWN = 0;
@@ -182,6 +186,8 @@ public class MeetingWizardActivity extends AppCompatActivity implements OnAdapte
         participants.add(participant8);
         // TODO: END OF DEBUG
 
+        wizardButton = (Button)findViewById(R.id.wizard_continue);
+
         // Loads the first Fragment
         loadFragment(0);
     }
@@ -265,12 +271,18 @@ public class MeetingWizardActivity extends AppCompatActivity implements OnAdapte
         switch(wizardPosition){
             case STATE_IS_COUNTDOWN:
                 stageText.setText("Countdown einstellen");
+                wizardButton.setClickable(true);
+                wizardButton.setText("WEITER");
                 break;
             case STATE_IS_PARTICIPANT:
                 stageText.setText("TEILNEHMER HINZUFÜGEN");
+                wizardButton.setClickable(true);
+                wizardButton.setText("WEITER");
                 break;
             case STATE_IS_CHECKLIST:
                 stageText.setText("CHECKLISTE ABARBEITEN");
+                wizardButton.setText("STARTE MEETING");
+
                 break;
         }
     }
