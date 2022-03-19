@@ -19,7 +19,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_margin="8dp"
-                    android:textSize="10sp"
+                    android:textSize="32sp"
                     android:textColor="@color/dark_gray"
                     android:text="Die wichtigsten Funktionen"/>
 
@@ -51,7 +51,7 @@
                             android:layout_marginStart="16dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Interaktionsmöglichkeit 1"
+                            android:text="Erinnerung ans Lüften"
                             android:textStyle="bold"
                             android:textSize="16dp"
                             android:textColor="@color/black"/>
@@ -65,7 +65,7 @@
                         android:layout_margin="16dp"
                         android:layout_marginTop="8dp"
                         android:justificationMode="inter_word"
-                        android:text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
+                        android:text="Das richtige Lüften von Innenräumen kann helfen, das Risiko einer Ansteckung mit dem Coronavirus SARS-CoV-2 über Aerosole zu verringern. Aerosole (feinste luftgetragene Flüssigkeitspartikel und Tröpfchenkerne) sind ein möglicher Übertragungsweg des Coronavirus SARS-CoV-2. Um nicht zu vergessen zu Lüften erinnert dich die App regelmäßig daran, die Fenster aufzumachen. Du kannst einstellen, wie oft das passieren soll."
                         android:textColor="@color/black" />
                 </LinearLayout>
 
@@ -91,7 +91,7 @@
                             android:layout_marginStart="16dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Interaktionsmöglichkeit 2"
+                            android:text="Erinnerung an das Einhalten von Abständen"
                             android:textStyle="bold"
                             android:textSize="16dp"
                             android:textColor="@color/black"/>
@@ -107,7 +107,7 @@
                         android:textColor="@color/black"
                         android:justificationMode="inter_word"
 
-                        android:text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
+                        android:text="Die Wahrscheinlichkeit, mit virushaltigen Tröpfchen und Aerosolen in Kontakt zu kommen, ist insbesondere im Umkreis von ein bis zwei Metern um eine mit dem Coronavirus SARS-CoV-2 infizierte Person erhöht. Abstand halten reduziert daher das Risiko, sich und andere anzustecken. Um nicht zu vergessen, die nötigen Abstände einzuhalten, erinnert dich die App regelmäßig daran, die Fenster aufzumachen. Du kannst einstellen, wie oft das passieren soll."
                         />
                 </LinearLayout>
 
@@ -133,7 +133,7 @@
                             android:layout_marginStart="16dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Interaktionsmöglichkeit 2"
+                            android:text="Ein Timer für eigene Erinnerungen"
                             android:textStyle="bold"
                             android:textSize="16dp"
                             android:textColor="@color/black"/>
@@ -148,7 +148,7 @@
                         android:layout_marginTop="8dp"
                         android:justificationMode="inter_word"
                         android:textColor="@color/black"
-                        android:text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
+                        android:text="Wenn du noch in regelmäßigen Abständen an etwas anderes, wie an das Desinfizieren von Oberflächen erinnert werden willst, kannst du dir auch dafür einen eigenen Timer stellen."
                         />
                 </LinearLayout>
             </LinearLayout>

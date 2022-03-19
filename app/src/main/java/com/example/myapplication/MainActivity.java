@@ -101,7 +101,7 @@ public class MainActivity extends AppCompatActivity{
 
         // Give it the title and location
         intent.putExtra("meeting_wizard_title", title);
-        intent.putExtra("meeting_wizard_location", location);
+        intent.putExtra(MeetingWizardActivity.MEETING_LOCATION, location);
         startActivity(intent);
     }
 
