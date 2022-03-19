@@ -19,6 +19,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.myapplication.checklist.ChecklistActivity;
+import com.example.myapplication.data.RoomDB;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.util.ArrayList;
@@ -42,7 +43,7 @@ public class LocationParticipantsActivity extends AppCompatActivity implements A
     private List<String> participantsArrayList;
     private ArrayAdapter<String> participantsArrayAdapter;
 
-    private MettingDatabase dbHelper;
+    private RoomDB database;
     private PersonDatabase dbPersonHelper;
 
 
@@ -57,7 +58,7 @@ public class LocationParticipantsActivity extends AppCompatActivity implements A
             actionBar.setDisplayHomeAsUpEnabled(true); // sets up back button in action bar
         }
 
-        dbHelper = new MettingDatabase(this);
+        database = RoomDB.getInstance(getBaseContext());
 
         // Get extras
         maxCountdownTime = getIntent().getLongExtra("maxCountdownTime", 0);
@@ -70,9 +71,11 @@ public class LocationParticipantsActivity extends AppCompatActivity implements A
 
         locationsSpinner = findViewById(R.id.locations_spinner);
 
-        List<String> locations = dbHelper.getLocations();
 
+        List<String> locations = database.meetingDao().getLocations();
         spinnerArrayList = new ArrayList<String>(locations);
+
+        spinnerArrayList = new ArrayList<String>();
         spinnerArrayList.add(0, "<leer>");
         spinnerArrayList.add("<Neuen Ort hinzufügen...>");
 
