@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity{
 
     // Edits the custom actionbar for every Fragment
     private void rebuildActionBar(){
-        actionBarText.setText(Objects.requireNonNull(getSupportActionBar()).getTitle());
+        actionBarText.setText(Objects.requireNonNull(getSupportActionBar()).getTitle().toString().toUpperCase());
     }
 
     // Opens the Meeting Wizard

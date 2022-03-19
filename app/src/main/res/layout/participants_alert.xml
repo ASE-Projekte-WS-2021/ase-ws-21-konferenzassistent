@@ -33,6 +33,7 @@
                     android:layout_height="48dp"
                     android:ems="10"
                     android:hint="Neue Person eingeben..."
+                    android:textSize="16sp"
                     android:inputType="textPersonName"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/participants_alert_addbutton"

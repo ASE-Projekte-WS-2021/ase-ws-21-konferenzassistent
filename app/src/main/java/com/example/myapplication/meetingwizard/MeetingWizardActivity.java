@@ -16,13 +16,16 @@ import com.example.myapplication.checklist.OnAdapterItemClickListener;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
+import android.widget.ProgressBar;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
 import java.util.Objects;
 
 public class MeetingWizardActivity extends AppCompatActivity implements OnAdapterItemClickListener, CustomAlertBottomSheetAdapter.onLeaveListener {
@@ -38,6 +41,8 @@ public class MeetingWizardActivity extends AppCompatActivity implements OnAdapte
 
     // Position in the Wizard
     private int wizardPosition = 0;
+
+    private Button wizardButton;
 
     // State Constants
     final static int STATE_IS_COUNTDOWN = 0;
@@ -104,8 +109,9 @@ public class MeetingWizardActivity extends AppCompatActivity implements OnAdapte
     // Views
     TextView titleText;
     TextView stageText;
+    ProgressBar progressBar;
     Button continueButton;
-
+  
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -297,8 +303,10 @@ public class MeetingWizardActivity extends AppCompatActivity implements OnAdapte
     private void setupViews() {
         titleText = findViewById(R.id.wizard_meeting_title);
         stageText = findViewById(R.id.wizard_stage_title);
+        progressBar = findViewById(R.id.progress_wizart_bar);
+        progressBar.setProgress(33);
+        progressBar.setMax(100);
         continueButton = findViewById(R.id.wizard_continue);
-
     }
 
     // Gets the Extras from the intent
@@ -322,21 +330,26 @@ public class MeetingWizardActivity extends AppCompatActivity implements OnAdapte
     private void setForm() {
         switch (wizardPosition) {
             case STATE_IS_COUNTDOWN:
-                stageText.setText("Countdown einstellen");
+                stageText.setText("COUNTDOWN EINSTELLEN");
+                wizardButton.setClickable(true);
+                wizardButton.setText("WEITER");
+                progressBar.setProgress(33);
                 break;
             case STATE_IS_PARTICIPANT:
-                stageText.setText("Teilnehmer hinzufügen");
+                stageText.setText("TEILNEHMER HINZUFÜGEN");
                 continueButton.setEnabled(true);
                 continueButton.setBackground(ContextCompat.getDrawable(getBaseContext(), R.drawable.btn_round));
                 continueButton.setTextColor(getColor(R.color.white));
-                continueButton.setText("Weiter");
+                continueButton.setText("WEITER");
+                progressBar.setProgress(66);
                 break;
             case STATE_IS_CHECKLIST:
-                stageText.setText("Checkliste abarbeiten");
+                stageText.setText("CHECKLISTE ABARBEITEN");
                 continueButton.setEnabled(false);
                 continueButton.setBackground(ContextCompat.getDrawable(getBaseContext(), R.drawable.btn_round_disabled));
                 continueButton.setTextColor(getColor(R.color.dark_gray));
-                continueButton.setText("Meeting Starten");
+                continueButton.setText("MEETING STARTEN");
+                progressBar.setProgress(100);
                 break;
         }
     }

@@ -278,7 +278,7 @@ public class CreateMeetingBottomSheetAdapter extends BottomSheetDialogFragment i
         // if title is set enable button and set color to red
         if(title != null){
             bi.dialogCreateButton.setClickable(true);
-            bi.dialogCreateButton.setTextColor(getResources().getColor(R.color.red, null));
+            bi.dialogCreateButton.setTextColor(getResources().getColor(R.color.white, null));
             cancelable = false;
         }
         // if title is not set disable button and set color to gray
