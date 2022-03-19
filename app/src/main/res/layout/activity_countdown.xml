@@ -18,7 +18,7 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/wizard_meeting_title"
+                android:id="@+id/meeting_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Vorlesung Nachbesprechung H25"

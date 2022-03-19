@@ -23,8 +23,6 @@ import java.util.ArrayList;
 public class RecyclerViewAdvancedCountdownAdapter
         extends RecyclerView.Adapter<RecyclerViewAdvancedCountdownAdapter.ViewHolder>{
 
-    public static Object AdvancedCountdownObject;
-
     public static class AdvancedCountdownObject implements Serializable {
         String mCountdownName;
         Boolean mEnabled;

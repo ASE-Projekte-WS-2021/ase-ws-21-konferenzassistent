@@ -173,8 +173,6 @@ public class MeetingWizardActivity extends AppCompatActivity implements OnAdapte
 
         advancedCountdownObjects.add(advancedCountdownObject);
         advancedCountdownObjects.add(advancedCountdownObject2);
-        advancedCountdownObjects.add(advancedCountdownObject);
-        advancedCountdownObjects.add(advancedCountdownObject2);
 
         // TODO: LOAD OBJECTS
 
@@ -392,6 +390,5 @@ public class MeetingWizardActivity extends AppCompatActivity implements OnAdapte
             continueButton.setTextColor(getColor(R.color.dark_gray));
         }
     }
-
 
 }

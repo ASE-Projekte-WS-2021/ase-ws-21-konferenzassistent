@@ -19,25 +19,27 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.myapplication.databinding.FragmentCountdownTimerBinding;
+import com.example.myapplication.meetingwizard.MeetingWizardActivity;
 import com.example.myapplication.meetingwizard.RecycleViewContactList;
 import com.example.myapplication.meetingwizard.RecyclerViewAdvancedCountdownAdapter;
+import com.example.myapplication.meetingwizard.cdServiceObject;
 import com.google.android.material.timepicker.TimeFormat;
 
 import java.util.ArrayList;
 
 
-public class CountdownTimerFragment extends Fragment {
+public class CountdownTimerFragment extends Fragment implements RecycleViewCountdownAdapter.countDownButtonPressed {
 
     FragmentCountdownTimerBinding bi;
     RecycleViewCountdownAdapter recycleViewCountdownAdapter;
-    ArrayList<RecyclerViewAdvancedCountdownAdapter.AdvancedCountdownObject> advancedCountdownObjects;
+    ArrayList<cdServiceObject> advancedCountdownObjects;
 
     public static CountdownTimerFragment newInstance(
-            ArrayList<RecyclerViewAdvancedCountdownAdapter.AdvancedCountdownObject> advancedCountdownObjects){
+            ArrayList<cdServiceObject> advancedCountdownObjects){
         return new CountdownTimerFragment(advancedCountdownObjects);
     }
 
-    public CountdownTimerFragment(ArrayList<RecyclerViewAdvancedCountdownAdapter.AdvancedCountdownObject> advancedCountdownObjects) {
+    public CountdownTimerFragment(ArrayList<cdServiceObject> advancedCountdownObjects) {
         this.advancedCountdownObjects = advancedCountdownObjects;
     }
 
@@ -63,35 +65,7 @@ public class CountdownTimerFragment extends Fragment {
         bi = DataBindingUtil.bind(view);
 
         buildRecyclerView();
-        /*
-        // Get Views
-        initiateComponents(view);
-
-        // Hide UI
-        hideUI(lueftungactive, abstandactive);
-
-        // Set Progress bar
-        setupProgressBars(maxAbstandsTime,maxWindowClosedTime);
-
-        // Set countdown titles
-        lueftungsTimer.setTimerName("Lüftungs Timer");
-        abstandsTimer.setTimerName("Abstands Timer");
-         */
     }
-
-    // Gets the Views by Id
-    /*
-    private void initiateComponents(View view){
-        if(mView != null) {
-            getChildFragmentManager().beginTransaction().
-                    replace(R.id.fragment_container_lueftung, lueftungsTimer)
-                    .replace(R.id.fragmet_container_abstand, abstandsTimer)
-                    .commit();
-
-           windowStatus = mView.findViewById(R.id.window_status_text);
-        }
-
-     */
 
     // Build and fills the recycler view
     private void buildRecyclerView(){
@@ -99,99 +73,34 @@ public class CountdownTimerFragment extends Fragment {
         RecyclerView recyclerView = bi.countdownRecycleViewContainer;
         recycleViewCountdownAdapter = new RecycleViewCountdownAdapter(
                 advancedCountdownObjects,
+                this,
                 this.getContext()
         );
         recyclerView.setAdapter(recycleViewCountdownAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
 
-    }
-    }
 
-
-    /*
-    // Sets the Ui to Invisible if not used
-    public void hideUI(boolean lueftungsSwitchStatus, boolean abstandsSwitchStatus){
-        // Makes sure the view is not null
-        if(mView != null) {
-
-            // If "Lüftung" is disabled
-            if (!lueftungsSwitchStatus) {
-               mView.findViewById(R.id.fragment_container_lueftung).setVisibility(View.GONE);
-            }
-            // If "Abstand" is disabled
-            if (!abstandsSwitchStatus) {
-                mView.findViewById(R.id.fragmet_container_abstand).setVisibility(View.GONE);
-            }
-        }
-        else
-        {
-            // If view is null save the status for later
-            abstandactive = abstandsSwitchStatus;
-            lueftungactive = lueftungsSwitchStatus;
-        }
     }
 
-    public void UpdateUI(boolean isOpen, boolean lueftungIsFinished, boolean abstandIsFinished, long abstandsMilliS, long lueftungsMilliS){
-        // Check if View is null
-        if(mView != null) {
-            // Change the Information Text depending on the window status
-
-            if (isOpen)
-                windowStatus.setText("Fenster sollte geöffnet sein!");
-            else
-                windowStatus.setText("Fenster sollte geschlossen sein!");
-
-            // Check if Lüftungstimer is done to Enable the Buttons
-            if (lueftungIsFinished)
-                lueftungsTimer.setReplayButtonEnabled(true);
-            else
-                lueftungsTimer.setReplayButtonEnabled(false);
-
-            // Check if Abstandstimer is done to Enable the Buttons
-            if (abstandIsFinished)
-                abstandsTimer.setReplayButtonEnabled(true);
-            else
-                abstandsTimer.setReplayButtonEnabled(false);
-
-            // Build the Text String
-            String lueftungsTimeLeft = timeStringBuilder(lueftungsMilliS);
-            String abstandsTimeLeft = timeStringBuilder(abstandsMilliS);
-
-            // Set the countdown text
-            lueftungsTimer.updateTimer(lueftungsTimeLeft);
-            abstandsTimer.updateTimer(abstandsTimeLeft);
-
-            // Update the Progress Bars
-            lueftungsTimer.setSpinnerProgress((int) (lueftungsMilliS / 1000));
-            abstandsTimer.setSpinnerProgress((int) (abstandsMilliS / 1000));
-        }
+    public void updateView(ArrayList<cdServiceObject> objects){
+        advancedCountdownObjects.clear();
+        advancedCountdownObjects.addAll(objects);
+        recycleViewCountdownAdapter.notifyDataSetChanged();
     }
 
+    @Override
+    public void pausePressed(int id) {
+        CountdownActivity activity = ((CountdownActivity)getActivity());
 
-    // Builds a String to show the Timer
-    private String timeStringBuilder(long timer){
-        // Convert to minutes and seconds
-        int minutes = (int) timer/60000;
-        int seconds = (int) timer%60000/1000;
-
-        // Build a string
-        String timeLeft;
-
-        timeLeft = "" + minutes;
-        timeLeft += ":";
-        // Add a leading 0 to seconds
-        if(seconds < 10) timeLeft += "0";
-        timeLeft += seconds;
-
-        return timeLeft;
+        assert activity != null;
+        activity.pauseCountdown(id);
     }
 
-    // Toggles the pause Buttons
-    public void pauseButtonToggle(boolean paused, int id){
-        if(id == PAUSE_ABSTAND_BUTTON)
-            abstandsTimer.setPauseButton(paused);
-        else
-            lueftungsTimer.setPauseButton(paused);
-    }
+    @Override
+    public void restartPressed(int id) {
+        CountdownActivity activity = ((CountdownActivity)getActivity());
 
-     */
+        assert activity != null;
+        activity.startCountdown(id);
+    }
+}

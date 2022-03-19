@@ -2,6 +2,7 @@ package com.example.myapplication;
 
 import android.content.Context;
 import android.content.res.ColorStateList;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -16,25 +17,38 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.core.view.ViewCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.meetingwizard.RecyclerViewAdvancedCountdownAdapter;
 import com.example.myapplication.meetingwizard.RecyclerViewAdvancedCountdownItemAdapter;
+import com.example.myapplication.meetingwizard.cdServiceObject;
 
 import java.util.ArrayList;
 
 public class RecycleViewCountdownAdapter extends  RecyclerView.Adapter<RecycleViewCountdownAdapter.ViewHolder> {
 
-    private final ArrayList<RecyclerViewAdvancedCountdownAdapter.AdvancedCountdownObject> mCountdowns;
+    interface countDownButtonPressed{
+        void pausePressed(int id);
+        void restartPressed(int id);
+    }
+
+    private final ArrayList<cdServiceObject> mCountdowns;
     private final Context mContext;
     private Integer pastColor;
+    private ViewHolder lastItem;
+    private countDownButtonPressed listener;
+
+
 
     public RecycleViewCountdownAdapter(
-            ArrayList<RecyclerViewAdvancedCountdownAdapter.AdvancedCountdownObject> mCountdowns,
+            ArrayList<cdServiceObject> mCountdowns,
+            countDownButtonPressed listener,
             Context mContext) {
         this.mCountdowns = mCountdowns;
         this.mContext = mContext;
+        this.listener = listener;
         this.pastColor = mContext.getResources().getColor(R.color.corona_blue); // Start color
     }
 
@@ -48,29 +62,75 @@ public class RecycleViewCountdownAdapter extends  RecyclerView.Adapter<RecycleVi
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+
+        cdServiceObject countdownObject = mCountdowns.get(position);
+
         RecyclerViewAdvancedCountdownAdapter.AdvancedCountdownObject countdown =
-                mCountdowns.get(holder.getAdapterPosition());
+                countdownObject.getTimer();
 
         RecyclerViewAdvancedCountdownItemAdapter.AdvancedCountdownItem timer =
-                countdown.getmItems().get(0);
+                countdown.getmItems().get(countdownObject.getCountdownPosition());
 
-        ViewCompat.setBackgroundTintList(holder.countdownContainer, ColorStateList.valueOf(pastColor));
-        pastColor = modifyBrightness(pastColor, 0.8f);
-        if(position < getItemCount() -1)
-            holder.countdownPastContainer.setBackgroundColor(pastColor);
-        else{
-            holder.countdownPastContainer.setBackgroundColor(mContext.getColor(R.color.transparent));
+        // Ignore if Timer is disabled
+        if(countdown.getmEnabled()) {
+            ViewCompat.setBackgroundTintList(holder.countdownContainer, ColorStateList.valueOf(pastColor));
+
+            pastColor = modifyBrightness(pastColor, 0.8f);
+            if(position < getItemCount() -1)
+                holder.countdownPastContainer.setBackgroundColor(pastColor);
+            else{
+                holder.countdownPastContainer.setBackgroundColor(mContext.getColor(R.color.transparent));
+            }
+
+            holder.countdownName.setText(countdown.getmCountdownName());
+            holder.countdownTimer.setText(timeStringBuilder(countdownObject.getCurrentTime()));
+            holder.countdownDescription.setText(timer.getSubCountdownDescription());
+            // Mark this as the last item
+            lastItem = holder;
+
+        }
+        else {
+            // check if there is an item before and if its the last entry
+            if(lastItem != null && position == getItemCount() -1){
+                lastItem.countdownPastContainer.setBackgroundColor(mContext.getColor(R.color.transparent));
+            }
+            holder.countdownPastContainer.setVisibility(View.GONE);
         }
 
-        holder.countdownName.setText(countdown.getmCountdownName());
-        holder.countdownTimer.setText("" + timer.getSubCountdown());
-        holder.countdownDescription.setText(timer.getSubCountdownDescription());
+        holder.replayButton.setEnabled(false);
+        holder.pauseButton.setEnabled(true);
+        ViewCompat.setBackgroundTintList(holder.replayButton, ColorStateList.valueOf( mContext.getResources().getColor(R.color.dark_gray)));
+        if(countdownObject.getTimerDone()){
+            ViewCompat.setBackgroundTintList(holder.replayButton, ColorStateList.valueOf( mContext.getResources().getColor(R.color.white)));
+            holder.replayButton.setEnabled(true);
+            holder.pauseButton.setEnabled(false);
+        }
 
+        holder.pauseButton.setOnClickListener(view -> {
+            listener.pausePressed(holder.getAdapterPosition());
+            pauseButtonToggle(holder.pauseButton, countdownObject.getTimerRunning());
+        });
+
+        holder.replayButton.setOnClickListener(view -> {
+            listener.restartPressed(holder.getAdapterPosition());
+        });
+
+
+        if(position == getItemCount()-1){
+            pastColor = mContext.getResources().getColor(R.color.corona_blue); // reset color
+        }
     }
 
     @Override
     public int getItemCount() {
         return mCountdowns.size();
+    }
+
+    private void pauseButtonToggle(ImageButton button, boolean enabled){
+        if(enabled)
+            button.setBackground(ResourcesCompat.getDrawable(mContext.getResources(), R.drawable.ic_baseline_play_arrow_24, null));
+        else
+            button.setBackground(ResourcesCompat.getDrawable(mContext.getResources(), R.drawable.ic_baseline_pause_24, null));
     }
 
     // View holder Class
@@ -106,5 +166,23 @@ public class RecycleViewCountdownAdapter extends  RecyclerView.Adapter<RecycleVi
         hsv[2] *= factor;
         return Color.HSVToColor(hsv);
 
+    }
+
+    // Builds a String to show the Timer
+    private String timeStringBuilder(long timer){
+        // Convert to minutes and seconds
+        int minutes = (int) timer/60000;
+        int seconds = (int) timer%60000/1000;
+
+        // Build a string
+        String timeLeft;
+
+        timeLeft = "" + minutes;
+        timeLeft += ":";
+        // Add a leading 0 to seconds
+        if(seconds < 10) timeLeft += "0";
+        timeLeft += seconds;
+
+        return timeLeft;
     }
 }
