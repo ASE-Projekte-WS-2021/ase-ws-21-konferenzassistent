@@ -35,9 +35,9 @@ import java.util.stream.Stream;
 
 /**
  * Home Fragment Class
-
+ *
  */
-public class HomeFragment extends Fragment  implements OnFilterButtonClickListener, MeetingHistoryAdapter.swiped {
+public class HomeFragment extends Fragment  implements OnFilterButtonClickListener {
 
     public HomeFragment() {
         // Required empty public constructor
@@ -146,7 +146,7 @@ public class HomeFragment extends Fragment  implements OnFilterButtonClickListen
         }
         */
 
-        meetingHistoryAdapter = new MeetingHistoryAdapter(this.getContext(), getParentFragmentManager(), meetingsList, this);
+        meetingHistoryAdapter = new MeetingHistoryAdapter(this.getContext(), getParentFragmentManager(), meetingsList);
         ItemTouchHelper.Callback callback = new CardviewTouchHelper(meetingHistoryAdapter);
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(callback);
         meetingHistoryAdapter.setTouchHelper(itemTouchHelper);
@@ -239,16 +239,6 @@ public class HomeFragment extends Fragment  implements OnFilterButtonClickListen
                 filteredMeetingList)
         );
         */
-    }
-
-    @Override
-    public void onDeleteSwipe(Integer size) {
-        if(size < 1){
-            introText.setVisibility(View.VISIBLE);
-
-        }
-
-        updateRKIandPastMeetingInfo();
     }
     /*
     public void openPastMeeting(View view){
