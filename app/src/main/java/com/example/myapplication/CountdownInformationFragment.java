@@ -4,19 +4,30 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link CountdownInformationFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import com.example.myapplication.databinding.FragmentCountdownInformationBinding;
+import com.example.myapplication.databinding.FragmentCountdownTimerBinding;
+import com.example.myapplication.meetingwizard.Participant;
+import com.example.myapplication.meetingwizard.cdServiceObject;
+
+import java.util.ArrayList;
+
 public class CountdownInformationFragment extends Fragment {
+
+    FragmentCountdownInformationBinding bi;
+    RecycleViewPlaceholderAdapter recycleViewPlaceholderAdapter;
+    ArrayList<cdServiceObject> advancedCountdownObjects;
+    ArrayList<Participant> participants;
 
     private TextView ortTextView;
     private TextView startZeitTextView;
@@ -26,16 +37,13 @@ public class CountdownInformationFragment extends Fragment {
     private String zeit;
     private String teilnehmerZahl;
 
-    public CountdownInformationFragment() {
-        // Required empty public constructor
+    public CountdownInformationFragment(ArrayList<cdServiceObject> advancedCountdownObjects, ArrayList<Participant> participants) {
+        this.advancedCountdownObjects = advancedCountdownObjects;
+        this.participants = participants;
     }
 
-    public static CountdownInformationFragment newInstance() {
-        CountdownInformationFragment fragment = new CountdownInformationFragment();
-        Bundle args = new Bundle();
-
-        fragment.setArguments(args);
-        return fragment;
+    public static CountdownInformationFragment newInstance(ArrayList<cdServiceObject> advancedCountdownObjects, ArrayList<Participant> participants) {
+        return new CountdownInformationFragment(advancedCountdownObjects, participants);
     }
 
     @Override
@@ -46,11 +54,18 @@ public class CountdownInformationFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        // binding views to data binding
+        bi = DataBindingUtil.bind(view);
+
         // init Views
         initViews(view);
 
         // fill Views
         fillViews();
+
+        // build Recycle View
+        buildBackgroundRecyclerView();
+        buildParticipantRecyclerView();
     }
 
     // Gets Views from IDs
@@ -72,6 +87,30 @@ public class CountdownInformationFragment extends Fragment {
         ortTextView.setText(ort);
         startZeitTextView.setText(zeit);
         teilnehmerTextView.setText(teilnehmerZahl);
+    }
+
+    // Build and fills the recycler view
+    private void buildBackgroundRecyclerView(){
+
+        RecyclerView recyclerView = bi.placeholderView;
+        recycleViewPlaceholderAdapter = new RecycleViewPlaceholderAdapter(
+                advancedCountdownObjects,
+                this.getContext()
+        );
+        recyclerView.setAdapter(recycleViewPlaceholderAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
+    }
+
+    // Build and fills the recycler view
+    private void buildParticipantRecyclerView(){
+
+        RecyclerView recyclerView = bi.recyclerViewParticipants;
+        RecycleViewParticipantInfoListAdapter recycleViewParticipantInfoListAdapter = new RecycleViewParticipantInfoListAdapter(
+                participants,
+                this.getContext()
+        );
+        recyclerView.setAdapter(recycleViewParticipantInfoListAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
     }
 
     @Override
