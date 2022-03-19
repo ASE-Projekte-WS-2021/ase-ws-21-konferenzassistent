@@ -35,20 +35,6 @@
 
             </LinearLayout>
 
-            <!-- Stepper -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="100dp"
-                    android:gravity="center"
-                    android:textSize="24sp"
-                    android:text="Hier könnte ihr Stepper stehen!"/>
-
-            </LinearLayout>
 
             <!-- Wizard -->
             <LinearLayout
