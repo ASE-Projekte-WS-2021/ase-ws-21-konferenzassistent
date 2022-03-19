@@ -33,4 +33,7 @@ public interface MeetingDao {
 
     @Query("SELECT * FROM table_meeting_data")
     List<MeetingData> getAll();
+
+    @Query("SELECT * FROM table_meeting_data WHERE ID = :sID")
+    MeetingData getOne(int sID);
 }

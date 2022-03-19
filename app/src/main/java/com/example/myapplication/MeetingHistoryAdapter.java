@@ -18,6 +18,8 @@ import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.myapplication.data.RoomDB;
+
 import org.w3c.dom.Document;
 
 import java.util.List;
@@ -28,7 +30,6 @@ CardviewTouchHelperAdapter{
     private final FragmentManager manager;
     private final List<Meeting> meetingsList;
     private CardviewTouchHelper cTouchHelper;
-    private MettingDatabase database;
     private String meeting_id;
 
     public MeetingHistoryAdapter(Context ct, FragmentManager manager, List<Meeting> meetingsList) {
@@ -47,7 +48,6 @@ CardviewTouchHelperAdapter{
 
     @Override
     public void onBindViewHolder(@NonNull MeetingHistoryViewHolder holder, int position) {
-        database = new MettingDatabase(ct);
         //Get Meeting ID
         meeting_id = meetingsList.get(position).getId();
 
@@ -127,7 +127,9 @@ CardviewTouchHelperAdapter{
     @Override
     public void onItemSwiped(int position) {
             meetingsList.remove(position);
-            database.deleteOne(meeting_id);
+            RoomDB database =
+            RoomDB.getInstance(ct.getApplicationContext());
+            database.meetingDao().delete(database.meetingDao().getOne(Integer.parseInt(meeting_id)));
             notifyItemRemoved(position);
     }
 
