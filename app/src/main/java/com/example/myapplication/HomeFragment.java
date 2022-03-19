@@ -54,6 +54,7 @@ public class HomeFragment extends Fragment  implements OnFilterButtonClickListen
 
     // Meeting List
     private List<Meeting> meetingsList;
+    private List<ParticipantData> participantsList;
 
     private MeetingHistoryAdapter meetingHistoryAdapter;
     private LinearLayoutManager linearLayoutManager;
@@ -69,6 +70,7 @@ public class HomeFragment extends Fragment  implements OnFilterButtonClickListen
         super.onCreate(savedInstanceState);
         database = RoomDB.getInstance(getContext());
 
+        participantsList = database.participantDao().getAll();
     }
 
     @Override
@@ -113,7 +115,7 @@ public class HomeFragment extends Fragment  implements OnFilterButtonClickListen
     private void setupButtonListener() {
         filterButton.setOnClickListener(view -> {
 
-            final MeetingFilterBottomSheet meetingFilterBottomSheet = new MeetingFilterBottomSheet(meetingsList,this);
+            final MeetingFilterBottomSheet meetingFilterBottomSheet = new MeetingFilterBottomSheet(meetingsList,participantsList,this);
             meetingFilterBottomSheet.show(getParentFragmentManager(),meetingFilterBottomSheet.getTag());
 
         });
@@ -122,10 +124,9 @@ public class HomeFragment extends Fragment  implements OnFilterButtonClickListen
     // Creates an ArrayList From the Database entries
     private void createArrayListFromDatabase(){
         meetingsList = new ArrayList<>();
-        List<Participant> participants = new ArrayList<>();
+        // List<Participant> participants = new ArrayList<>(); // never used
 
-        List<MeetingParticipantPair> d = new ArrayList<>();
-        d = database.meetingWithParticipantDao().getMeetings();
+        List<MeetingParticipantPair> d = database.meetingWithParticipantDao().getMeetings();
 
         d.forEach(data ->{
 
