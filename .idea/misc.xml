@@ -68,9 +68,20 @@
         <entry key="..\:/Users/erdi/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/fragment_home.xml" value="0.16979166666666667" />
         <entry key="..\:/Users/erdi/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/fragment_settings.xml" value="0.16979166666666667" />
         <entry key="..\:/Users/erdi/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/fragment_timer.xml" value="0.16979166666666667" />
+        <entry key="..\:/Users/erdi/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/fragment_wizard_checklist.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/erdi/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/fragment_wizard_countdown.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/erdi/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/fragment_wizard_participant.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/erdi/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/meeting_bottom_sheet.xml" value="0.16979166666666667" />
         <entry key="..\:/Users/erdi/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/meeting_history_row.xml" value="0.16979166666666667" />
+        <entry key="..\:/Users/erdi/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/onboarding_carousel_page.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/erdi/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/participants_alert.xml" value="0.16979166666666667" />
+        <entry key="..\:/Users/erdi/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/recycler_advanced_countdown_picker.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/erdi/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/recycler_advanced_countdown_picker_items.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/erdi/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/recycler_contact_item.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/erdi/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/recycler_countdown_picker.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/erdi/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/recycler_location_item.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/erdi/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/recycler_participant_item.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/erdi/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/recycler_preset_item.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/erdi/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/rv_row_checklist.xml" value="0.16979166666666667" />
         <entry key="..\:/xuexiiii/UniRegensburg/2021WS/Advanced Software Engineering/projekt/app/src/main/res/layout/activity_checklist.xml" value="0.22" />
         <entry key="..\:/xuexiiii/UniRegensburg/2021WS/Advanced Software Engineering/projekt/app/src/main/res/layout/activity_countdown.xml" value="0.22" />
