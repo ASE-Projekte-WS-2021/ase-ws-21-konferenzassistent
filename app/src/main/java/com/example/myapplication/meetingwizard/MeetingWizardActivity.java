@@ -48,6 +48,7 @@ public class MeetingWizardActivity extends AppCompatActivity implements OnAdapte
 
     RoomDB database;
 
+    private Button wizardButton;
 
     // State Constants
     final static int STATE_IS_COUNTDOWN = 0;
@@ -120,6 +121,7 @@ public class MeetingWizardActivity extends AppCompatActivity implements OnAdapte
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_meeting_wizard);
 
         // Hide default action Bar
         Objects.requireNonNull(getSupportActionBar()).hide();
@@ -326,6 +328,8 @@ public class MeetingWizardActivity extends AppCompatActivity implements OnAdapte
         switch (wizardPosition) {
             case STATE_IS_COUNTDOWN:
                 stageText.setText("COUNTDOWN EINSTELLEN");
+                wizardButton.setClickable(true);
+                wizardButton.setText("WEITER");
                 progressBar.setProgress(33);
                 break;
             case STATE_IS_PARTICIPANT:
