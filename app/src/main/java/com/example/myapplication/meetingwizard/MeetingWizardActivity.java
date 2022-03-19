@@ -15,6 +15,7 @@ import com.example.myapplication.checklist.OnAdapterItemClickListener;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -92,6 +93,7 @@ public class MeetingWizardActivity extends AppCompatActivity implements OnAdapte
     // Views
     TextView titleText;
     TextView stageText;
+    ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -248,6 +250,8 @@ public class MeetingWizardActivity extends AppCompatActivity implements OnAdapte
     private void setupViews(){
         titleText = findViewById(R.id.wizard_meeting_title);
         stageText = findViewById(R.id.wizard_stage_title);
+        progressBar = findViewById(R.id.progress_wizart_bar);
+        progressBar.setMax(100);
     }
 
     // Gets the Extras from the intent
