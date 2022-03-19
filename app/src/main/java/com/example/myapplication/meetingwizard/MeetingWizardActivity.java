@@ -123,15 +123,15 @@ public class MeetingWizardActivity extends AppCompatActivity implements OnAdapte
         participants = new ArrayList<>();
 
         // TODO: Give real Countdown Data
-        mCountdownNames.add("Lüftungstimer");
+        mCountdownNames.add("Lüftungs Timer");
         mCountdownTime.add((long) 15);
         mEnabled.add(true);
 
-        mCountdownNames.add("Abstandstimer");
+        mCountdownNames.add("Abstands Timer");
         mCountdownTime.add((long) 15);
         mEnabled.add(true);
 
-        mCountdownNames.add("Third Timer");
+        mCountdownNames.add("Eigener Timer");
         mCountdownTime.add((long) 28);
         mEnabled.add(false);
 
@@ -143,14 +143,19 @@ public class MeetingWizardActivity extends AppCompatActivity implements OnAdapte
         RecyclerViewAdvancedCountdownItemAdapter.AdvancedCountdownItem child1 =
                 new RecyclerViewAdvancedCountdownItemAdapter.AdvancedCountdownItem(
                         (long) 15,
-                        "Fenster sollte geöffnet sein");
+                        "Fenster sollten geöffnet sein");
 
         RecyclerViewAdvancedCountdownItemAdapter.AdvancedCountdownItem child2 =
                 new RecyclerViewAdvancedCountdownItemAdapter.AdvancedCountdownItem(
                         (long) 15,
-                        "Fenster sollte geschlossen sein");
+                        "Fenster sollten geschlossen sein");
 
         RecyclerViewAdvancedCountdownItemAdapter.AdvancedCountdownItem child3 =
+                new RecyclerViewAdvancedCountdownItemAdapter.AdvancedCountdownItem(
+                        (long) 15,
+                        "");
+
+        RecyclerViewAdvancedCountdownItemAdapter.AdvancedCountdownItem child4 =
                 new RecyclerViewAdvancedCountdownItemAdapter.AdvancedCountdownItem(
                         (long) 15,
                         "");
@@ -165,14 +170,23 @@ public class MeetingWizardActivity extends AppCompatActivity implements OnAdapte
 
         children2.add(child3);
 
+        ArrayList<RecyclerViewAdvancedCountdownItemAdapter.AdvancedCountdownItem> children3 =
+                new ArrayList<>();
+
+        children3.add(child4);
+
         RecyclerViewAdvancedCountdownAdapter.AdvancedCountdownObject advancedCountdownObject =
-                new RecyclerViewAdvancedCountdownAdapter.AdvancedCountdownObject("Lüftungstimer", true, children);
+                new RecyclerViewAdvancedCountdownAdapter.AdvancedCountdownObject("Lüftungs Timer", true, children);
 
         RecyclerViewAdvancedCountdownAdapter.AdvancedCountdownObject advancedCountdownObject2 =
-                new RecyclerViewAdvancedCountdownAdapter.AdvancedCountdownObject("Abstandstimer", false, children2);
+                new RecyclerViewAdvancedCountdownAdapter.AdvancedCountdownObject("Abstands Timer", true, children2);
+
+        RecyclerViewAdvancedCountdownAdapter.AdvancedCountdownObject advancedCountdownObject3 =
+                new RecyclerViewAdvancedCountdownAdapter.AdvancedCountdownObject("Custom Timer", false, children3);
 
         advancedCountdownObjects.add(advancedCountdownObject);
         advancedCountdownObjects.add(advancedCountdownObject2);
+        advancedCountdownObjects.add(advancedCountdownObject3);
 
         // TODO: LOAD OBJECTS
 
