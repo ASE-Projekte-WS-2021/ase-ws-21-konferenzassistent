@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import androidx.databinding.ViewDataBinding;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -74,10 +75,10 @@ public class HomeFragment extends Fragment  implements OnFilterButtonClickListen
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         initialiseView();
         setupButtonListener();
     }
+
 
     @Override
     public void onResume() {
@@ -135,6 +136,11 @@ public class HomeFragment extends Fragment  implements OnFilterButtonClickListen
         */
 
         meetingHistoryAdapter = new MeetingHistoryAdapter(this.getContext(), getParentFragmentManager(), meetingsList);
+        ItemTouchHelper.Callback callback = new CardviewTouchHelper(meetingHistoryAdapter);
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(callback);
+        meetingHistoryAdapter.setTouchHelper(itemTouchHelper);
+        itemTouchHelper.attachToRecyclerView(rvMeetings);
+
         rvMeetings.setAdapter(meetingHistoryAdapter);
         linearLayoutManager = new LinearLayoutManager(this.getContext());
         linearLayoutManager.setReverseLayout(true);
