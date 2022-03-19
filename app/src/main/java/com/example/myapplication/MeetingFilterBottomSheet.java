@@ -12,6 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.core.view.ViewCompat;
 import androidx.core.util.Pair;
 
+import com.example.myapplication.data.ParticipantData;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
@@ -22,10 +23,12 @@ import com.google.android.material.textfield.TextInputEditText;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class MeetingFilterBottomSheet extends BottomSheetDialogFragment {
 
     private List<Meeting> meetingList;
+    private List<ParticipantData> participantList;
     private OnFilterButtonClickListener listener;
 
     private Button resetButton, filterButton;
@@ -33,10 +36,11 @@ public class MeetingFilterBottomSheet extends BottomSheetDialogFragment {
     private TextInputEditText countMinEditText, countMaxEditText, dateStartEditText, dateEndEditText;
     private Long dateStart, dateEnd;
 
-    public MeetingFilterBottomSheet(List<Meeting> meetingList, OnFilterButtonClickListener listener) {
+    public MeetingFilterBottomSheet(List<Meeting> meetingList, List<ParticipantData> participantList, OnFilterButtonClickListener listener) {
         super();
 
         this.meetingList = meetingList;
+        this.participantList = participantList;
         this.listener = listener;
     }
 
@@ -77,21 +81,15 @@ public class MeetingFilterBottomSheet extends BottomSheetDialogFragment {
     private void populateChipGroups() {
         List<String> peopleList, locationList;
 
-        // Acquire list of people and locations, based on the MeetingsList
-        // Placeholder for now TODO
-        peopleList = new ArrayList<>();
-        peopleList.add("Max Mustermann");
-        peopleList.add("Max Mustermann");
-        peopleList.add("Max Mustermann");
-        peopleList.add("Max Mustermann");
-        peopleList.add("Max Mustermann");
-        locationList = new ArrayList<>();
-        locationList.add("Sauna");
-        locationList.add("Sauna");
-        locationList.add("Sauna");
-        locationList.add("Sauna");
-        locationList.add("Sauna");
-        // End of Placeholder
+        peopleList = participantList.stream()
+                .map(ParticipantData::getName)
+                .collect(Collectors.toList());
+
+        locationList = meetingList.stream()
+                .map(Meeting::getLocation)
+                .distinct()
+                .collect(Collectors.toList());
+        locationList.remove(getString(R.string.meeting_data_no_location));
 
         for (String person : peopleList) {
             generateChipAndAppend(person, peopleChipGroup);
