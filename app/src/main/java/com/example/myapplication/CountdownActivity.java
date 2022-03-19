@@ -303,7 +303,7 @@ public class CountdownActivity extends AppCompatActivity implements Serializable
         if(ort != null)
             meetingData.setLocation(ort);
         else
-            meetingData.setLocation("<Keinen Ort angegeben>");
+            meetingData.setLocation(getString(R.string.meeting_data_no_location));
         meetingData.setTitle(title);
         meetingData.setDuration(seconds);
 
