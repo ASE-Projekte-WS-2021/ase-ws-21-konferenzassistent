@@ -31,7 +31,7 @@ public class RecycleViewContactList extends RecyclerView.Adapter<RecycleViewCont
         mContactCopy.addAll(mContact);
     }
 
-    interface contactListener{
+    public interface contactListener{
             void onContactSelected(String name);
     }
 
