@@ -24,9 +24,8 @@ public interface MeetingDao {
     @Query("Update table_meeting_data SET title = :sTitle," +
             "date = :sDate," +
             "duration = :sDuration," +
-            "location = :sLocation," +
-            "participants = :sParticipants")
-    void update(String sTitle, String sDate, Integer sDuration, String sLocation, ParticipantData sParticipants);
+            "location = :sLocation")
+    void update(String sTitle, String sDate, Integer sDuration, String sLocation);
 
     @Query("SELECT * FROM table_meeting_data")
     List<MeetingData> getAll();

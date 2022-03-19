@@ -23,9 +23,6 @@ public class MeetingData implements Serializable {
     @ColumnInfo(name = "location")
     private String location;
 
-    @ColumnInfo(name = "participants")
-    private ParticipantData participant;
-
     public int getID() {
         return ID;
     }
@@ -66,11 +63,4 @@ public class MeetingData implements Serializable {
         this.location = location;
     }
 
-    public ParticipantData getParticipant() {
-        return participant;
-    }
-
-    public void setParticipant(ParticipantData participant) {
-        this.participant = participant;
-    }
 }

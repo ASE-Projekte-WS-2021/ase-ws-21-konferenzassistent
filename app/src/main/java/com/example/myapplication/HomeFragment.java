@@ -132,17 +132,6 @@ public class HomeFragment extends Fragment  implements OnFilterButtonClickListen
             meetingsList.add(new Meeting(mId,mDate,mDateEnd,mLocation,mNTitle, mDuration, mNumberParticipants));
         }
 
-
-
-        List<ParticipantData> d = new ArrayList<>();
-        RoomDB database = RoomDB.getInstance(getContext());
-        ParticipantData participantData = new ParticipantData();
-        participantData.setName("Baum");
-        participantData.setStatus("Schule");
-        database.participantDao().insert(participantData);
-        d = database.participantDao().getAll();
-
-        Log.i("TAG", "createArrayListFromDatabase: " + d.get(0).getStatus());;
         /* Log.d("database", Arrays.toString(cursor.getColumnNames()));
         for (Meeting m:  meetingsList) {
             Log.d("database", m.toString());

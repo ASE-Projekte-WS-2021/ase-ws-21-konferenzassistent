@@ -13,6 +13,8 @@ import com.example.myapplication.InformationBottomSheetAdapter;
 import com.example.myapplication.R;
 import com.example.myapplication.checklist.ChecklistItem;
 import com.example.myapplication.checklist.OnAdapterItemClickListener;
+import com.example.myapplication.data.ParticipantData;
+import com.example.myapplication.data.RoomDB;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -23,6 +25,7 @@ import android.widget.TextView;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class MeetingWizardActivity extends AppCompatActivity implements OnAdapterItemClickListener, CustomAlertBottomSheetAdapter.onLeaveListener {
@@ -38,7 +41,7 @@ public class MeetingWizardActivity extends AppCompatActivity implements OnAdapte
 
     // Position in the Wizard
     private int wizardPosition = 0;
-
+    RoomDB database;
     // State Constants
     final static int STATE_IS_COUNTDOWN = 0;
     final static int STATE_IS_PARTICIPANT = 1;
@@ -176,23 +179,15 @@ public class MeetingWizardActivity extends AppCompatActivity implements OnAdapte
 
         // TODO: LOAD OBJECTS
 
-        Participant participant1 = new Participant("Klaus Müller", "Ungeimpft", false);
-        Participant participant2 = new Participant("Peter Meier", "Geimpft", false);
-        Participant participant3 = new Participant("Karl Heinz", "Genesen", false);
-        Participant participant4 = new Participant("Otto Peters", "Ungeimpft", false);
-        Participant participant5 = new Participant("Max Mustermann", "Geimpft", false);
-        Participant participant6 = new Participant("Tobias Bauer", "Ungeimpft", false);
-        Participant participant7 = new Participant("Helmut Hartmann", "Ungeimpft", false);
-        Participant participant8 = new Participant("Sabrina Hering", "Genesen", false);
+        List<ParticipantData> d = new ArrayList<>();
+        database = RoomDB.getInstance(getBaseContext());
+        d = database.participantDao().getAll();
 
-        participants.add(participant1);
-        participants.add(participant2);
-        participants.add(participant3);
-        participants.add(participant4);
-        participants.add(participant5);
-        participants.add(participant6);
-        participants.add(participant7);
-        participants.add(participant8);
+        d.forEach(participantData -> {
+            Participant participant = new Participant(participantData.getName(), participantData.getStatus(), false);
+            participants.add(participant);
+        });
+
 
         // TODO: LOAD CHECKLISTS
         // initialize checklist and recyclerview
@@ -317,6 +312,12 @@ public class MeetingWizardActivity extends AppCompatActivity implements OnAdapte
         Participant participant = new Participant(name, status, true);
         participants.add(participant);
         WizardParticipantFragment fragment = (WizardParticipantFragment) fragmentArrayList.get(STATE_IS_PARTICIPANT);
+
+        ParticipantData participantData = new ParticipantData();
+        participantData.setName(participant.getName());
+        participantData.setStatus(participant.getStatus());
+        database.participantDao().insert(participantData);
+
         fragment.onParticipentUpdate();
     }
 
