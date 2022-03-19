@@ -103,6 +103,7 @@ public class CreateMeetingBottomSheetAdapter extends BottomSheetDialogFragment i
         List<String> location = database.meetingDao().getLocations();
 
         locationNames.addAll(location);
+        locationNames.remove(getString(R.string.meeting_data_no_location));
         Log.i("TAG", "onCreate: " + locationNames);
 
     }
