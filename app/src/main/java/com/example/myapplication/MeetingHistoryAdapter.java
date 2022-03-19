@@ -31,11 +31,17 @@ CardviewTouchHelperAdapter{
     private final List<Meeting> meetingsList;
     private CardviewTouchHelper cTouchHelper;
     private String meeting_id;
+    swiped swipedListener;
 
-    public MeetingHistoryAdapter(Context ct, FragmentManager manager, List<Meeting> meetingsList) {
+    public MeetingHistoryAdapter(Context ct, FragmentManager manager, List<Meeting> meetingsList, swiped swipedListener) {
         this.ct = ct;
         this.manager = manager;
         this.meetingsList = meetingsList;
+        this.swipedListener = swipedListener;
+    }
+
+    interface swiped{
+        void onDeleteSwipe(Integer size);
     }
 
     @NonNull
@@ -131,6 +137,9 @@ CardviewTouchHelperAdapter{
             RoomDB.getInstance(ct.getApplicationContext());
             database.meetingDao().delete(database.meetingDao().getOne(Integer.parseInt(meeting_id)));
             notifyItemRemoved(position);
+
+            swipedListener.onDeleteSwipe(meetingsList.size());
+
     }
 
     public static class MeetingHistoryViewHolder extends RecyclerView.ViewHolder implements
