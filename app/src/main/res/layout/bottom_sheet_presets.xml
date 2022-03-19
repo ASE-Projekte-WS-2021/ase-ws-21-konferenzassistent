@@ -37,11 +37,10 @@
 
                     <TextView
                         android:id="@+id/preset_header_text"
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Checklist Preset"
-                        android:textSize="16sp"
+                        android:text="CHECKLIST PRESET"
+                        android:textSize="20sp"
                         android:gravity="center"
                         android:textStyle="bold"
                         android:textColor="@color/black"/>
@@ -52,9 +51,8 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="Abbrechen"
-                        android:textSize="12sp"
-                        android:textStyle="bold"
-                        android:textColor="@android:color/holo_red_dark"
+                        android:textSize="14sp"
+                        android:textColor="@color/break_yellow_btn"
                         android:background="@color/transparent"
                         />
 

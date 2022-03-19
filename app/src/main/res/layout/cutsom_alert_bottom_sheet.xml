@@ -30,7 +30,7 @@
                     android:layout_marginTop="8dp"
                     android:layout_marginBottom="8dp"
                     android:gravity="center"
-                    android:textSize="12dp"/>
+                    android:textSize="14sp"/>
 
                 <View
                     android:layout_width="match_parent"
@@ -42,8 +42,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/corona_white"
-                    android:textColor="@android:color/holo_red_dark"
+                    android:textColor="@color/break_yellow_btn"
                     android:text="Änderungen Verwerfen"
+                    android:textSize="14sp"
                     />
 
             </LinearLayout>
@@ -74,8 +75,9 @@
                 android:layout_height="wrap_content"
                 android:background="@color/corona_white"
                 android:textStyle="bold"
-                android:textColor="@android:color/holo_red_dark"
+                android:textColor="@color/corona_blue"
                 android:text="Weiter bearbeiten"
+                android:textSize="14sp"
                 />
 
         </LinearLayout>

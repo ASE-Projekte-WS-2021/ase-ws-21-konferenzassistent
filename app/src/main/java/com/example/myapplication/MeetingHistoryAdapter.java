@@ -1,24 +1,35 @@
 package com.example.myapplication;
 
 import android.content.Context;
+import android.util.Log;
+import android.view.GestureDetector;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
+import android.view.VelocityTracker;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.FragmentManager;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
+
+import org.w3c.dom.Document;
 
 import java.util.List;
 
-public class MeetingHistoryAdapter extends RecyclerView.Adapter<MeetingHistoryAdapter.MeetingHistoryViewHolder> {
-
+public class MeetingHistoryAdapter extends RecyclerView.Adapter<MeetingHistoryAdapter.MeetingHistoryViewHolder> implements
+CardviewTouchHelperAdapter{
     private final Context ct;
     private final FragmentManager manager;
     private final List<Meeting> meetingsList;
+    private CardviewTouchHelper cTouchHelper;
+    private MettingDatabase database;
+    private String meeting_id;
 
     public MeetingHistoryAdapter(Context ct, FragmentManager manager, List<Meeting> meetingsList) {
         this.ct = ct;
@@ -36,6 +47,10 @@ public class MeetingHistoryAdapter extends RecyclerView.Adapter<MeetingHistoryAd
 
     @Override
     public void onBindViewHolder(@NonNull MeetingHistoryViewHolder holder, int position) {
+        database = new MettingDatabase(ct);
+        //Get Meeting ID
+        meeting_id = meetingsList.get(position).getId();
+
         // Get the Values from the meeting List
         String duration = Integer.parseInt(meetingsList.get(position).getDuration())/60 + "";
         String startTime = meetingsList.get(position).getDate().substring(11);
@@ -72,6 +87,36 @@ public class MeetingHistoryAdapter extends RecyclerView.Adapter<MeetingHistoryAd
             ct.startActivity(intent);
             */
         });
+        //set onLONGclick listener on the cardView
+    /*    holder.cardView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                // create a new bottom sheet and set the values for the view
+                MeetingBottomSheetAdapter meetingBottomSheetAdapter = new MeetingBottomSheetAdapter();
+                meetingBottomSheetAdapter.show(manager , meetingBottomSheetAdapter.getTag());
+                meetingBottomSheetAdapter.setValues(
+                        String.format(ct.getString(R.string.meeting_history_minutes_long),duration),
+                        date,
+                        startTime,
+                        endTime,
+                        participants,
+                        ort);
+                return false;
+            }
+        });*/
+/*
+        holder.cardView.setOnTouchListener(new OnSwipeTouchListener(ct) {
+            public void onSwipeLeft() {
+                Toast.makeText(ct, "left-swipe-test", Toast.LENGTH_LONG).show();
+                database.deleteOne(meeting_id);
+                holder.cardView.setVisibility(View.GONE);
+            }
+        });
+*/
+    }
+
+    public void setTouchHelper(ItemTouchHelper touchHelper){
+        this.cTouchHelper = cTouchHelper;
     }
 
     @Override
@@ -79,10 +124,20 @@ public class MeetingHistoryAdapter extends RecyclerView.Adapter<MeetingHistoryAd
         return meetingsList.size();
     }
 
-    public static class MeetingHistoryViewHolder extends RecyclerView.ViewHolder {
+    @Override
+    public void onItemSwiped(int position) {
+            meetingsList.remove(position);
+            database.deleteOne(meeting_id);
+            notifyItemRemoved(position);
+    }
+
+    public static class MeetingHistoryViewHolder extends RecyclerView.ViewHolder implements
+    /*View.OnClickListener,*/ View.OnTouchListener, GestureDetector.OnGestureListener {
 
         CardView cardView;
         TextView tvDate, tvTime, tvLocation, tvDuration, tvNumParticipants, tvTitle;
+
+        GestureDetector cGestureDetector;
 
         public MeetingHistoryViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -92,8 +147,50 @@ public class MeetingHistoryAdapter extends RecyclerView.Adapter<MeetingHistoryAd
             tvLocation = itemView.findViewById(R.id.tvLocationRow);
             tvDuration = itemView.findViewById(R.id.tvDurationRow);
             tvNumParticipants = itemView.findViewById(R.id.tvParticipantsRow);
+            cGestureDetector = new GestureDetector(itemView.getContext(), this);
+            itemView.setOnTouchListener(this);
             tvTitle = itemView.findViewById(R.id.tvTitle);
         }
 
+        @Override
+        public boolean onDown(MotionEvent motionEvent) {
+            return false;
+        }
+
+        @Override
+        public void onShowPress(MotionEvent motionEvent) {
+
+        }
+
+        @Override
+        public boolean onSingleTapUp(MotionEvent motionEvent) {
+            return true;
+        }
+
+        @Override
+        public boolean onScroll(MotionEvent motionEvent, MotionEvent motionEvent1, float v, float v1) {
+            return false;
+        }
+
+        @Override
+        public void onLongPress(MotionEvent motionEvent) {
+
+        }
+
+        @Override
+        public boolean onFling(MotionEvent motionEvent, MotionEvent motionEvent1, float v, float v1) {
+            return true;
+        }
+/*
+        @Override
+        public void onClick(View view) {
+
+        }
+*/
+        @Override
+        public boolean onTouch(View view, MotionEvent motionEvent) {
+            cGestureDetector.onTouchEvent(motionEvent);
+            return true;
+        }
     }
 }

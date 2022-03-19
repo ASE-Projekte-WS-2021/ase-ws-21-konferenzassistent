@@ -35,8 +35,8 @@
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
-                        android:text="Teilnehmer"
-                        android:textSize="16sp"
+                        android:text="TEILNEHMER"
+                        android:textSize="20sp"
                         android:gravity="center"
                         android:textStyle="bold"
                         android:textColor="@color/black"/>
@@ -109,6 +109,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="left"
+                            android:textSize="14sp"
                             android:layout_marginStart="16dp"
                             android:layout_marginTop="8dp"
                             android:textStyle="bold"

@@ -16,7 +16,8 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:text="@string/countdown_participant_description"
-            android:textAlignment="viewStart" />
+            android:textAlignment="viewStart"
+            android:textSize="14sp"/>
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"

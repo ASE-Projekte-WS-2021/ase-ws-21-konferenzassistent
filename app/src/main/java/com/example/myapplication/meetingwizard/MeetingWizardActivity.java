@@ -18,14 +18,18 @@ import com.example.myapplication.data.RoomDB;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
+import android.widget.ProgressBar;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
+
+import java.util.Locale;
+
 import java.util.Objects;
 
 public class MeetingWizardActivity extends AppCompatActivity implements OnAdapterItemClickListener, CustomAlertBottomSheetAdapter.onLeaveListener {
@@ -41,7 +45,11 @@ public class MeetingWizardActivity extends AppCompatActivity implements OnAdapte
 
     // Position in the Wizard
     private int wizardPosition = 0;
+
     RoomDB database;
+
+    private Button wizardButton;
+
     // State Constants
     final static int STATE_IS_COUNTDOWN = 0;
     final static int STATE_IS_PARTICIPANT = 1;
@@ -107,8 +115,9 @@ public class MeetingWizardActivity extends AppCompatActivity implements OnAdapte
     // Views
     TextView titleText;
     TextView stageText;
+    ProgressBar progressBar;
     Button continueButton;
-
+  
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -126,34 +135,44 @@ public class MeetingWizardActivity extends AppCompatActivity implements OnAdapte
         participants = new ArrayList<>();
 
         // TODO: Give real Countdown Data
-        mCountdownNames.add("Lüftungstimer");
+        mCountdownNames.add("Lüftungs Timer");
         mCountdownTime.add((long) 15);
         mEnabled.add(true);
 
-        mCountdownNames.add("Abstandstimer");
+        mCountdownNames.add("Abstands Timer");
         mCountdownTime.add((long) 15);
         mEnabled.add(true);
 
-        mCountdownNames.add("Third Timer");
+        mCountdownNames.add("Eigener Timer 1");
         mCountdownTime.add((long) 28);
         mEnabled.add(false);
 
-        mCountdownNames.add("Testtimer");
-        mCountdownTime.add((long) 55);
+        mCountdownNames.add("Eigener Timer 2");
+        mCountdownTime.add((long) 28);
         mEnabled.add(false);
 
         // TODO: LOAD OBJECTS
         RecyclerViewAdvancedCountdownItemAdapter.AdvancedCountdownItem child1 =
                 new RecyclerViewAdvancedCountdownItemAdapter.AdvancedCountdownItem(
                         (long) 15,
-                        "Fenster sollte geöffnet sein");
+                        "Fenster sollten geöffnet sein");
 
         RecyclerViewAdvancedCountdownItemAdapter.AdvancedCountdownItem child2 =
                 new RecyclerViewAdvancedCountdownItemAdapter.AdvancedCountdownItem(
                         (long) 15,
-                        "Fenster sollte geschlossen sein");
+                        "Fenster sollten geschlossen sein");
 
         RecyclerViewAdvancedCountdownItemAdapter.AdvancedCountdownItem child3 =
+                new RecyclerViewAdvancedCountdownItemAdapter.AdvancedCountdownItem(
+                        (long) 15,
+                        "");
+
+        RecyclerViewAdvancedCountdownItemAdapter.AdvancedCountdownItem child4 =
+                new RecyclerViewAdvancedCountdownItemAdapter.AdvancedCountdownItem(
+                        (long) 15,
+                        "");
+
+        RecyclerViewAdvancedCountdownItemAdapter.AdvancedCountdownItem child5 =
                 new RecyclerViewAdvancedCountdownItemAdapter.AdvancedCountdownItem(
                         (long) 15,
                         "");
@@ -168,14 +187,33 @@ public class MeetingWizardActivity extends AppCompatActivity implements OnAdapte
 
         children2.add(child3);
 
+        ArrayList<RecyclerViewAdvancedCountdownItemAdapter.AdvancedCountdownItem> children3 =
+                new ArrayList<>();
+
+        children3.add(child4);
+
+        ArrayList<RecyclerViewAdvancedCountdownItemAdapter.AdvancedCountdownItem> children4 =
+                new ArrayList<>();
+
+        children3.add(child5);
+
+
         RecyclerViewAdvancedCountdownAdapter.AdvancedCountdownObject advancedCountdownObject =
-                new RecyclerViewAdvancedCountdownAdapter.AdvancedCountdownObject("Lüftungstimer", true, children);
+                new RecyclerViewAdvancedCountdownAdapter.AdvancedCountdownObject("Lüftungs Timer", true, children);
 
         RecyclerViewAdvancedCountdownAdapter.AdvancedCountdownObject advancedCountdownObject2 =
-                new RecyclerViewAdvancedCountdownAdapter.AdvancedCountdownObject("Abstandstimer", false, children2);
+                new RecyclerViewAdvancedCountdownAdapter.AdvancedCountdownObject("Abstands Timer", true, children2);
+
+        RecyclerViewAdvancedCountdownAdapter.AdvancedCountdownObject advancedCountdownObject3 =
+                new RecyclerViewAdvancedCountdownAdapter.AdvancedCountdownObject("Custom Timer 1", false, children3);
+
+        RecyclerViewAdvancedCountdownAdapter.AdvancedCountdownObject advancedCountdownObject4 =
+                new RecyclerViewAdvancedCountdownAdapter.AdvancedCountdownObject("Custom Timer 2", false, children3);
 
         advancedCountdownObjects.add(advancedCountdownObject);
         advancedCountdownObjects.add(advancedCountdownObject2);
+        advancedCountdownObjects.add(advancedCountdownObject3);
+        advancedCountdownObjects.add(advancedCountdownObject4);
 
         // Load Participants Objects
         List<ParticipantData> d = new ArrayList<>();
@@ -262,8 +300,10 @@ public class MeetingWizardActivity extends AppCompatActivity implements OnAdapte
     private void setupViews() {
         titleText = findViewById(R.id.wizard_meeting_title);
         stageText = findViewById(R.id.wizard_stage_title);
+        progressBar = findViewById(R.id.progress_wizart_bar);
+        progressBar.setProgress(33);
+        progressBar.setMax(100);
         continueButton = findViewById(R.id.wizard_continue);
-
     }
 
     // Gets the Extras from the intent
@@ -287,21 +327,26 @@ public class MeetingWizardActivity extends AppCompatActivity implements OnAdapte
     private void setForm() {
         switch (wizardPosition) {
             case STATE_IS_COUNTDOWN:
-                stageText.setText("Countdown einstellen");
+                stageText.setText("COUNTDOWN EINSTELLEN");
+                wizardButton.setClickable(true);
+                wizardButton.setText("WEITER");
+                progressBar.setProgress(33);
                 break;
             case STATE_IS_PARTICIPANT:
-                stageText.setText("Teilnehmer hinzufügen");
+                stageText.setText("TEILNEHMER HINZUFÜGEN");
                 continueButton.setEnabled(true);
                 continueButton.setBackground(ContextCompat.getDrawable(getBaseContext(), R.drawable.btn_round));
                 continueButton.setTextColor(getColor(R.color.white));
-                continueButton.setText("Weiter");
+                continueButton.setText("WEITER");
+                progressBar.setProgress(66);
                 break;
             case STATE_IS_CHECKLIST:
-                stageText.setText("Checkliste abarbeiten");
+                stageText.setText("CHECKLISTE ABARBEITEN");
                 continueButton.setEnabled(false);
                 continueButton.setBackground(ContextCompat.getDrawable(getBaseContext(), R.drawable.btn_round_disabled));
                 continueButton.setTextColor(getColor(R.color.dark_gray));
-                continueButton.setText("Meeting Starten");
+                continueButton.setText("MEETING STARTEN");
+                progressBar.setProgress(100);
                 break;
         }
     }
