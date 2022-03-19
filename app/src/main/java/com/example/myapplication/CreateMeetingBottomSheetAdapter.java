@@ -8,6 +8,7 @@ import android.text.TextWatcher;
 import android.view.View;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 
 import com.example.myapplication.databinding.CreateMeetingBottomSheetBinding;
@@ -279,12 +280,15 @@ public class CreateMeetingBottomSheetAdapter extends BottomSheetDialogFragment i
         if(title != null){
             bi.dialogCreateButton.setClickable(true);
             bi.dialogCreateButton.setTextColor(getResources().getColor(R.color.white, null));
+            bi.dialogCreateButton.setBackground(getResources().getDrawable(R.drawable.btn_round));
             cancelable = false;
         }
         // if title is not set disable button and set color to gray
         else{
             bi.dialogCreateButton.setClickable(false);
-            bi.dialogCreateButton.setTextColor(getResources().getColor(R.color.gray, null));
+            //bi.dialogCreateButton.setTextColor(getResources().getColor(R.color.gray, null));
+            bi.dialogCreateButton.setBackground(getResources().getDrawable(R.drawable.btn_round_disabled));
+            bi.dialogCreateButton.setTextColor(getResources().getColor(R.color.dark_gray));
             cancelable = true;
         }
     }
