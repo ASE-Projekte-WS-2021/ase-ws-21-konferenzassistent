@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import androidx.databinding.DataBindingUtil;
+import androidx.room.Room;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,6 +19,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.myapplication.data.MeetingData;
+import com.example.myapplication.data.MeetingParticipantPair;
+import com.example.myapplication.data.ParticipantData;
+import com.example.myapplication.data.RoomDB;
+import com.example.myapplication.meetingwizard.Participant;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
@@ -40,7 +46,7 @@ public class HomeFragment extends Fragment  implements OnFilterButtonClickListen
     ViewDataBinding bi;
 
     // Meeting database
-    private MettingDatabase dbHelper;
+    private RoomDB database;
 
     // Components
     private RecyclerView rvMeetings;
@@ -61,7 +67,7 @@ public class HomeFragment extends Fragment  implements OnFilterButtonClickListen
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        dbHelper = new MettingDatabase(this.getContext());
+        database = RoomDB.getInstance(getContext());
 
     }
 
@@ -116,18 +122,23 @@ public class HomeFragment extends Fragment  implements OnFilterButtonClickListen
     // Creates an ArrayList From the Database entries
     private void createArrayListFromDatabase(){
         meetingsList = new ArrayList<>();
-        Cursor cursor = dbHelper.readAllData();
+        List<Participant> participants = new ArrayList<>();
 
-        while (cursor.moveToNext()) {
-            String mId = cursor.getString(cursor.getColumnIndexOrThrow("_id"));
-            String mDate = cursor.getString(cursor.getColumnIndexOrThrow("meeting_date"));
-            String mDateEnd = cursor.getString(cursor.getColumnIndexOrThrow("meeting_date_end"));
-            String mDuration = cursor.getString(cursor.getColumnIndexOrThrow("meeting_duration"));
-            String mLocation = cursor.getString(cursor.getColumnIndexOrThrow("meeting_position"));
-            String mNumberParticipants = cursor.getString(cursor.getColumnIndexOrThrow("meeting_number_participants"));
-            String mNTitle = cursor.getString(cursor.getColumnIndexOrThrow("meeting_title"));
-            meetingsList.add(new Meeting(mId,mDate,mDateEnd,mLocation,mNTitle, mDuration, mNumberParticipants));
-        }
+        List<MeetingParticipantPair> d = new ArrayList<>();
+        d = database.meetingWithParticipantDao().getMeetings();
+
+        d.forEach(data ->{
+
+            meetingsList.add(new Meeting(
+                    "" +data.getMeeting().getID(),
+                    data.getMeeting().getStartDate(),
+                    data.getMeeting().getEndDate(),
+                    data.getMeeting().getLocation(),
+                    data.getMeeting().getTitle(),
+                    "" + data.getMeeting().getDuration(),
+                    "" +data.getParticipants().size()));
+        });
+
 
         /* Log.d("database", Arrays.toString(cursor.getColumnNames()));
         for (Meeting m:  meetingsList) {

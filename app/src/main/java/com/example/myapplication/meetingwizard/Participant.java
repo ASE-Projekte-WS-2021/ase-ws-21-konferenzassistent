@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 public class Participant implements Serializable {
 
+    Integer id;
     String Name;
     String Status;
     Boolean isSelected;
@@ -33,7 +34,16 @@ public class Participant implements Serializable {
         isSelected = selected;
     }
 
-    public Participant(String name, String status, Boolean isSelected) {
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Participant(String name, String status, Boolean isSelected, Integer id) {
+        this.id = id;
         Name = name;
         Status = status;
         this.isSelected = isSelected;

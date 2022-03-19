@@ -20,6 +20,7 @@ import android.view.View;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.example.myapplication.data.RoomDB;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.time.LocalDateTime;
@@ -44,7 +45,7 @@ public class PastMeetingInfoActivity extends AppCompatActivity {
     private String meeting_id,meeting_date,meeting_date_end,meeting_position,meeting_duration,meeting_number_participants;
 
     private int dataBaseID;
-    private MettingDatabase database;
+    private RoomDB database;
 
     private ArrayList<String> participantList;
 
@@ -62,7 +63,10 @@ public class PastMeetingInfoActivity extends AppCompatActivity {
             actionBar.setDisplayHomeAsUpEnabled(true); // sets up back button in action bar
         }
         dataBaseID = getIntent().getIntExtra("Database_ID", 0);
-        database = new MettingDatabase(this);
+        database = RoomDB.getInstance(getBaseContext());
+
+        //database.meetingDao().getAll();
+        /*
         Cursor data = database.readAllData();
 
         if (dataBaseID == -1) {
@@ -73,6 +77,7 @@ public class PastMeetingInfoActivity extends AppCompatActivity {
             data.moveToLast();
         }
         // Get Data From database
+
         meeting_id = data.getString(data.getColumnIndexOrThrow("_id"));
         meeting_date = data.getString(data.getColumnIndexOrThrow("meeting_date"));
         meeting_date_end = data.getString(data.getColumnIndexOrThrow("meeting_date_end"));
@@ -80,12 +85,16 @@ public class PastMeetingInfoActivity extends AppCompatActivity {
         meeting_duration = data.getString(data.getColumnIndexOrThrow("meeting_duration"));
         meeting_number_participants = data.getString(data.getColumnIndexOrThrow("meeting_number_participants"));
 
+
+
         Log.d("database",meeting_id);
 
         findTextViews();
         updateData();
         updateView();
         setParticipantListAndAlert();
+
+         */
     }
 
     private void setParticipantListAndAlert() {
@@ -178,7 +187,7 @@ public class PastMeetingInfoActivity extends AppCompatActivity {
             AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.dialogAlertStyle)
                     .setMessage("Meeting wird gelöscht. Dieser Schritt kann nicht rückgängig gemacht werden. Fortfahren?")
                     .setPositiveButton("OK",(dialogInterface, i) -> {
-                        database.deleteOne(meeting_id);
+                        //database.deleteOne(meeting_id);
                         openHomeScreen();
                     })
                     .setNegativeButton("CANCEL",(dialogInterface, i) -> {

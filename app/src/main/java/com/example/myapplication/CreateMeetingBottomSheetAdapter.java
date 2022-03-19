@@ -5,23 +5,28 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 
+import com.example.myapplication.data.RoomDB;
 import com.example.myapplication.databinding.CreateMeetingBottomSheetBinding;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class CreateMeetingBottomSheetAdapter extends BottomSheetDialogFragment implements CustomAlertBottomSheetAdapter.onLeaveListener
 {
 
     CreateMeetingBottomSheetBinding bi;
     BottomSheetBehavior<View> bottomSheetBehavior;
+
+    RoomDB database;
 
     // Input fields
     String title;
@@ -61,6 +66,8 @@ public class CreateMeetingBottomSheetAdapter extends BottomSheetDialogFragment i
         // Set the style so the background is Transparent
         setStyle(BottomSheetDialogFragment.STYLE_NORMAL, R.style.CustomBottomSheetDialogTheme);
 
+        database = RoomDB.getInstance(getContext());
+
         // TODO: Remove debug Data
         checklistItemNames.add("Standard");
         checklistSelectValues.add(View.VISIBLE);
@@ -90,6 +97,12 @@ public class CreateMeetingBottomSheetAdapter extends BottomSheetDialogFragment i
         timerItemNames.add("Weiterer Timer");
         timerSelectValues.add(View.INVISIBLE);
 
+        // Load locations
+        locationNames = new ArrayList<>();
+        List<String> location = database.meetingDao().getLocations();
+
+        locationNames.addAll(location);
+        Log.i("TAG", "onCreate: " + locationNames);
 
     }
 
@@ -163,14 +176,6 @@ public class CreateMeetingBottomSheetAdapter extends BottomSheetDialogFragment i
             // Open the Location Sheet
             locationSelectBottomSheet = new LocationSelectBottomSheet();
 
-            // TODO: Load locations
-            // TODO: Remove debug Data
-            locationNames = new ArrayList<>();
-            locationNames.add("Regensburg");
-            locationNames.add("Passau");
-            locationNames.add("Schwandorf");
-            locationNames.add("München");
-            locationNames.add("Hörsaal H2");
 
             // feeds the locations into the checklist recycler view
             locationSelectBottomSheet.initLocation(locationNames);
