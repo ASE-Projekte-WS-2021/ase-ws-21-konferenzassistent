@@ -173,6 +173,8 @@ public class MeetingWizardActivity extends AppCompatActivity implements OnAdapte
 
         advancedCountdownObjects.add(advancedCountdownObject);
         advancedCountdownObjects.add(advancedCountdownObject2);
+        advancedCountdownObjects.add(advancedCountdownObject);
+        advancedCountdownObjects.add(advancedCountdownObject2);
 
         // TODO: LOAD OBJECTS
 
@@ -297,6 +299,10 @@ public class MeetingWizardActivity extends AppCompatActivity implements OnAdapte
                 break;
             case STATE_IS_PARTICIPANT:
                 stageText.setText("Teilnehmer hinzufügen");
+                continueButton.setEnabled(true);
+                continueButton.setBackground(ContextCompat.getDrawable(getBaseContext(), R.drawable.btn_round));
+                continueButton.setTextColor(getColor(R.color.white));
+                continueButton.setText("Weiter");
                 break;
             case STATE_IS_CHECKLIST:
                 stageText.setText("Checkliste abarbeiten");

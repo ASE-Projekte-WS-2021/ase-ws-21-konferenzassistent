@@ -61,6 +61,7 @@ public class CountdownActivity extends AppCompatActivity implements Serializable
 
     ArrayList<RecyclerViewAdvancedCountdownAdapter.AdvancedCountdownObject> countdownObjects;
     ArrayList<cdServiceObject> serviceObjectArrayList = new ArrayList<>();
+    ArrayList<Participant> participants = new ArrayList<>();
 
     // Object used to Create Timer in the Service
 
@@ -138,7 +139,7 @@ public class CountdownActivity extends AppCompatActivity implements Serializable
 
         // Create Views
         timer = CountdownTimerFragment.newInstance(serviceObjectArrayList);
-        information = CountdownInformationFragment.newInstance();
+        information = CountdownInformationFragment.newInstance(serviceObjectArrayList, participants);
 
         tabAdapter = new TabAdapter(getSupportFragmentManager(), getLifecycle());
         // Add fragments
@@ -184,16 +185,14 @@ public class CountdownActivity extends AppCompatActivity implements Serializable
                 (ArrayList<RecyclerViewAdvancedCountdownAdapter.AdvancedCountdownObject>)
                         getIntent().getSerializableExtra(MeetingWizardActivity.COUNTDOWN_ARRAY);
 
-        ArrayList<Participant> participants32 =
+        participants =
                 (ArrayList<Participant>)
                         getIntent().getSerializableExtra(MeetingWizardActivity.PARTICIPANT_ARRAY);
 
         ort = getIntent().getStringExtra(MeetingWizardActivity.MEETING_LOCATION);
         title = getIntent().getStringExtra(MeetingWizardActivity.MEETING_TITLE);
 
-        ArrayList<Participant> newAList = new ArrayList<>();
-        newAList.addAll(participants32);
-        participantCount = "" + participants32.size();
+        participantCount = "" + participants.size();
 
         // TODO: Rework that part :YIKERS:
         // Create an Array List with all the active Countdowns
