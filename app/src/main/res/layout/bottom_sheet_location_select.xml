@@ -40,13 +40,13 @@
 
                     <TextView
                         android:layout_width="0dp"
-                        android:layout_weight="1"
                         android:layout_height="wrap_content"
-                        android:text="Ort"
-                        android:textSize="16sp"
+                        android:layout_weight="1"
                         android:gravity="center"
-                        android:textStyle="bold"
-                        android:textColor="@color/black"/>
+                        android:text="ORT"
+                        android:textColor="@color/black"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
 
                     <Button
                         android:id="@+id/button_dismiss"
@@ -54,9 +54,8 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="Abbrechen"
-                        android:textSize="12sp"
-                        android:textStyle="bold"
-                        android:textColor="@android:color/holo_red_dark"
+                        android:textSize="14sp"
+                        android:textColor="@color/break_yellow_btn"
                         android:background="@color/transparent"
                         />
 
@@ -105,7 +104,8 @@
                             android:layout_marginTop="8dp"
                             android:textStyle="bold"
                             android:layout_marginEnd="16dp"
-                            android:text="Vorherigen Orte"/>
+                            android:text="Vorherigen Orte"
+                            android:textSize="14sp"/>
 
                         <View
                             android:layout_width="match_parent"

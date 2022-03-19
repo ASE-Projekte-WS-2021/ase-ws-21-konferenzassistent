@@ -17,6 +17,7 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Objects;
 
 public class MeetingWizardActivity extends AppCompatActivity implements OnAdapterItemClickListener, CustomAlertBottomSheetAdapter.onLeaveListener {
@@ -266,10 +267,10 @@ public class MeetingWizardActivity extends AppCompatActivity implements OnAdapte
                 stageText.setText("Countdown einstellen");
                 break;
             case STATE_IS_PARTICIPANT:
-                stageText.setText("Teilnehmer hinzufügen");
+                stageText.setText("TEILNEHMER HINZUFÜGEN");
                 break;
             case STATE_IS_CHECKLIST:
-                stageText.setText("Checkliste abarbeiten");
+                stageText.setText("CHECKLISTE ABARBEITEN");
                 break;
         }
     }

@@ -33,7 +33,7 @@
                 android:gravity="center|center_vertical"
                 android:text="@string/fenOffen"
                 android:textColor="@color/corona_white"
-                android:textSize="25sp" />
+                android:textSize="24sp" />
         </com.google.android.material.card.MaterialCardView>
 
         <androidx.fragment.app.FragmentContainerView
