@@ -73,12 +73,15 @@ public class PastMeetingInfoActivity extends AppCompatActivity {
             data.moveToLast();
         }
         // Get Data From database
+
         meeting_id = data.getString(data.getColumnIndexOrThrow("_id"));
         meeting_date = data.getString(data.getColumnIndexOrThrow("meeting_date"));
         meeting_date_end = data.getString(data.getColumnIndexOrThrow("meeting_date_end"));
         meeting_position = data.getString(data.getColumnIndexOrThrow("meeting_position"));
         meeting_duration = data.getString(data.getColumnIndexOrThrow("meeting_duration"));
         meeting_number_participants = data.getString(data.getColumnIndexOrThrow("meeting_number_participants"));
+
+
 
         Log.d("database",meeting_id);
 

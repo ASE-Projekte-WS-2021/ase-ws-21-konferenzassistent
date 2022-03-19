@@ -17,6 +17,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.myapplication.data.MeetingData;
+import com.example.myapplication.data.ParticipantData;
+import com.example.myapplication.data.RoomDB;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
@@ -117,6 +120,7 @@ public class HomeFragment extends Fragment  implements OnFilterButtonClickListen
         meetingsList = new ArrayList<>();
         Cursor cursor = dbHelper.readAllData();
 
+
         while (cursor.moveToNext()) {
             String mId = cursor.getString(cursor.getColumnIndexOrThrow("_id"));
             String mDate = cursor.getString(cursor.getColumnIndexOrThrow("meeting_date"));
@@ -128,6 +132,17 @@ public class HomeFragment extends Fragment  implements OnFilterButtonClickListen
             meetingsList.add(new Meeting(mId,mDate,mDateEnd,mLocation,mNTitle, mDuration, mNumberParticipants));
         }
 
+
+
+        List<ParticipantData> d = new ArrayList<>();
+        RoomDB database = RoomDB.getInstance(getContext());
+        ParticipantData participantData = new ParticipantData();
+        participantData.setName("Baum");
+        participantData.setStatus("Schule");
+        database.participantDao().insert(participantData);
+        d = database.participantDao().getAll();
+
+        Log.i("TAG", "createArrayListFromDatabase: " + d.get(0).getStatus());;
         /* Log.d("database", Arrays.toString(cursor.getColumnNames()));
         for (Meeting m:  meetingsList) {
             Log.d("database", m.toString());
