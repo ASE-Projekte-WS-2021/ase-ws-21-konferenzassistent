@@ -251,6 +251,7 @@ public class MeetingWizardActivity extends AppCompatActivity implements OnAdapte
         titleText = findViewById(R.id.wizard_meeting_title);
         stageText = findViewById(R.id.wizard_stage_title);
         progressBar = findViewById(R.id.progress_wizart_bar);
+        progressBar.setProgress(33);
         progressBar.setMax(100);
     }
 
@@ -274,19 +275,21 @@ public class MeetingWizardActivity extends AppCompatActivity implements OnAdapte
     private void setForm(){
         switch(wizardPosition){
             case STATE_IS_COUNTDOWN:
-                stageText.setText("Countdown einstellen");
+                stageText.setText("COUNTDOWN EINSTELLEN");
                 wizardButton.setClickable(true);
                 wizardButton.setText("WEITER");
+                progressBar.setProgress(33);
                 break;
             case STATE_IS_PARTICIPANT:
                 stageText.setText("TEILNEHMER HINZUFÜGEN");
                 wizardButton.setClickable(true);
                 wizardButton.setText("WEITER");
+                progressBar.setProgress(66);
                 break;
             case STATE_IS_CHECKLIST:
                 stageText.setText("CHECKLISTE ABARBEITEN");
                 wizardButton.setText("STARTE MEETING");
-
+                progressBar.setProgress(100);
                 break;
         }
     }
