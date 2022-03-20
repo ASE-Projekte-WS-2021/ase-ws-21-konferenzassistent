@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_marginTop="48dp"
+            app:cardCornerRadius="16dp"
+            android:backgroundTint="@color/corona_white"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/corona_white"
+                android:orientation="vertical">
+
+                <!-- Header -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <androidx.constraintlayout.widget.Placeholder
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="match_parent"
+                        android:textSize="12sp"
+                        android:textColor="@android:color/holo_red_dark"
+                        android:background="@color/transparent"
+                        />
+
+                    <TextView
+                        android:id="@+id/preset_header_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="CHECKLIST PRESET"
+                        android:textSize="20sp"
+                        android:gravity="center"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"/>
+
+                    <Button
+                        android:id="@+id/button_dismiss"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="ÜBERNEHMEN"
+                        android:textSize="14sp"
+                        android:textColor="@color/break_yellow_btn"
+                        android:background="@color/transparent"
+                        />
+
+                </LinearLayout>
+
+                <!-- Scroll View -->
+                <androidx.core.widget.NestedScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    >
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="match_parent"
+                            app:cardCornerRadius="16dp"
+                            android:layout_margin="16dp"
+                            android:background="@color/corona_white"
+                            android:layout_height="wrap_content">
+
+
+                            <androidx.core.widget.NestedScrollView
+                                android:layout_width="match_parent"
+                                android:layout_marginStart="16dp"
+                                android:layout_marginEnd="16dp"
+                                android:layout_height="wrap_content">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical">
+
+                                <androidx.recyclerview.widget.RecyclerView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:id="@+id/preset_recycler_view"/>
+
+                                </LinearLayout>
+                            </androidx.core.widget.NestedScrollView>
+
+                        </androidx.cardview.widget.CardView>
+
+
+
+
+
+
+                    </LinearLayout>
+
+                </androidx.core.widget.NestedScrollView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    app:cardCornerRadius="16dp"
+                    android:layout_margin="16dp"
+                    android:background="@color/corona_white"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <!-- Status Text Edit -->
+
+                        <LinearLayout
+                            android:id="@+id/button_create"
+                            style="@style/Widget.AppCompat.Button"
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:minHeight="48dp"
+                            android:gravity="left"
+                            android:background="@color/transparent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:id="@+id/button_create_text"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:textSize="14sp"
+                                android:layout_marginStart="16dp"
+                                android:textColor="@color/black"
+                                android:textStyle="bold"
+                                android:text="Neue Checkliste erstellen"/>
+
+                            <androidx.constraintlayout.widget.Placeholder
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"/>
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="16dp"
+                                android:layout_gravity="center"
+                                android:layout_marginEnd="16dp"
+                                android:background="@drawable/ic_baseline_arrow_forward_ios_24"/>
+
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+            </LinearLayout>
+
+
+            as
+            <View
+                android:id="@+id/extraSpace"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </androidx.cardview.widget.CardView>
+    </LinearLayout>
+</layout>

@@ -2,6 +2,7 @@ package com.example.myapplication;
 
 import android.app.Dialog;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -9,25 +10,26 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.myapplication.data.presets.countdown.CountdownPresetPair;
+import com.example.myapplication.databinding.BottomSheetCreateItemBinding;
 import com.example.myapplication.databinding.BottomSheetPresetsBinding;
+import com.example.myapplication.meetingwizard.RecyclerViewAdvancedCountdownItemAdapter;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 import java.util.ArrayList;
-import java.util.List;
 
-public class PresetSelectBottomSheet extends BottomSheetDialogFragment {
-    BottomSheetPresetsBinding bi;
+public class EditItemBottomSheet extends BottomSheetDialogFragment {
+    BottomSheetCreateItemBinding bi;
     BottomSheetBehavior<View> bottomSheetBehavior;
-    RecyclerViewPresetAdapter recyclerViewPresetAdapter;
-    private String headerText;
+timerEdit listener;
+Integer position;
 
-    // Preset Lists
-    private ArrayList<String> itemNames = new ArrayList<>();
-    private ArrayList<Integer> selectIndicators = new ArrayList<>();
+    interface timerEdit{
+        void onEditFinish(RecyclerViewAdvancedCountdownItemAdapter.AdvancedCountdownItem mItem, int position);
+    }
 
+    RecyclerViewAdvancedCountdownItemAdapter.AdvancedCountdownItem mItem;
     // Make the background Transparent
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -41,7 +43,7 @@ public class PresetSelectBottomSheet extends BottomSheetDialogFragment {
         BottomSheetDialog bottomSheet = (BottomSheetDialog) super.onCreateDialog(savedInstanceState);
 
         // inflating Layout
-        View view = View.inflate(bottomSheet.getContext(), R.layout.bottom_sheet_presets, null);
+        View view = View.inflate(bottomSheet.getContext(), R.layout.bottom_sheet_create_item, null);
 
         // binding views to data binding
         bi = DataBindingUtil.bind(view);
@@ -74,66 +76,40 @@ public class PresetSelectBottomSheet extends BottomSheetDialogFragment {
             }
         });
 
-
         // cancel button clicked
-        bi.buttonDismiss.setOnClickListener(viewListener -> dismiss());
+        bi.dialogCancelButton.setOnClickListener(viewListener -> dismiss());
+
+        bi.dialogCreateButton.setOnClickListener(viewListener ->
+        {
+            mItem.setSubCountdown((long)bi.itemNumberPicker.getValue());
+            mItem.setSubCountdownDescription(bi.itemDescription.getText().toString());
+            listener.onEditFinish(mItem, position);
+        });
+
+        Log.i("TAG", "initTimer: " +mItem);
+        bi.itemNumberPicker.setValue(mItem.getSubCountdown().intValue());
+        bi.itemDescription.setText(mItem.getSubCountdownDescription());
 
         setStyle(CustomAlertBottomSheetAdapter.STYLE_NORMAL, R.style.CustomBottomSheetDialogTheme);
 
-        // Builds the View with the right content
-        configView();
-        buildRecyclerView();
-
         return bottomSheet;
-    }
-    
-    // Configs the view to match the right Preset
-    private void configView(){
-        bi.presetHeaderText.setText(headerText);
-    }
-    
-    // Set the text of the header
-    public void setTitle(String headerText){
-        this.headerText = headerText;
-    }
-
-    // Build and fills the recycler view
-    private void buildRecyclerView(){
-        RecyclerView recyclerView = bi.presetRecyclerView;
-        recyclerViewPresetAdapter = new RecyclerViewPresetAdapter(
-                itemNames,
-                selectIndicators,
-                this.getContext()
-                );
-        recyclerView.setAdapter(recyclerViewPresetAdapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
     }
 
     // Initializes the Presets
-    public void initPreset(ArrayList<String> itemNames, ArrayList<Integer> selectIndicators){
-        this.itemNames = itemNames;
-        this.selectIndicators = selectIndicators;
-    }
-
-    public void initPreset(List<CountdownPresetPair> presetPairs, ArrayList<Integer> selectIndicators){
-
-        presetPairs.forEach(preset ->{
-            preset.getPresets().getTitle();
-            itemNames.add(preset.getPresets().getTitle());
-        });
-
-        this.selectIndicators = selectIndicators;
+    public void initTimer(RecyclerViewAdvancedCountdownItemAdapter.AdvancedCountdownItem mItem, timerEdit listener, int position){
+        this.mItem = mItem;
+        this.listener = listener;
+        this.position = position;
     }
 
     // Closes the Sheet
-    public void closePresets(){
+    public void closeCreation(){
         dismiss();
     }
 
     @Override
     public void onStart(){
         super.onStart();
-        //bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
     }
 
 }

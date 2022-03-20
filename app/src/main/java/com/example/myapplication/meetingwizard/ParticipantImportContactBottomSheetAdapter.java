@@ -174,6 +174,7 @@ public class ParticipantImportContactBottomSheetAdapter extends BottomSheetDialo
         // check if cursor is empty
         if(cursor.getCount() > 0){
             // iterate through the cursor
+            Log.i("TAG", "getContactList: " + cursor.getCount());
             while(cursor.moveToNext()){
                 // get values
                 String id = cursor.getString(cursor.getColumnIndexOrThrow(ContactsContract.Contacts._ID));
@@ -190,11 +191,14 @@ public class ParticipantImportContactBottomSheetAdapter extends BottomSheetDialo
                             ContactsContract.CommonDataKinds.Phone.NUMBER
                     ));
 
-                    // Maybe add number
-                    Contact contact = new Contact(name);
-                    mContacts.add(contact);
-                    phoneCursor.close();
+
                 }
+
+                // Maybe add number
+                Log.i("TAG", "getContactList: " +mContacts);
+                Contact contact = new Contact(name);
+                mContacts.add(contact);
+                phoneCursor.close();
             }
         }
         cursor.close();

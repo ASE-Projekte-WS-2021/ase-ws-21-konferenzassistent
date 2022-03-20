@@ -39,6 +39,8 @@ public class MeetingWizardActivity extends AppCompatActivity implements OnAdapte
     public static final String PARTICIPANT_ARRAY = "PARTICIPANT_ARRAY";
     public static final String MEETING_TITLE = "MEETING_TITLE";
     public static final String MEETING_LOCATION = "MEETING_LOCATION";
+    public static final String MEETING_COUNTDOWN = "MEETING_COUNTDOWN";
+
 
     // Array List of all Wizard Fragments
     private final ArrayList<Fragment> fragmentArrayList = new ArrayList<>();
@@ -132,6 +134,7 @@ public class MeetingWizardActivity extends AppCompatActivity implements OnAdapte
         advancedCountdownObjects = new ArrayList<>();
         participants = new ArrayList<>();
 
+        /*
         // TODO: Give real Countdown Data
         mCountdownNames.add("Lüftungs Timer");
         mCountdownTime.add((long) 15);
@@ -212,6 +215,9 @@ public class MeetingWizardActivity extends AppCompatActivity implements OnAdapte
         advancedCountdownObjects.add(advancedCountdownObject2);
         advancedCountdownObjects.add(advancedCountdownObject3);
         advancedCountdownObjects.add(advancedCountdownObject4);
+*/
+
+
 
         // Load Participants Objects
         List<ParticipantData> d = new ArrayList<>();
@@ -308,6 +314,9 @@ public class MeetingWizardActivity extends AppCompatActivity implements OnAdapte
     private void getExtras() {
         titleText.setText(getIntent().getStringExtra("meeting_wizard_title"));
         location = getIntent().getStringExtra(MEETING_LOCATION);
+        advancedCountdownObjects =
+                (ArrayList<RecyclerViewAdvancedCountdownAdapter.AdvancedCountdownObject>)
+                getIntent().getSerializableExtra(MEETING_COUNTDOWN);
     }
 
     // Loads a Fragment at the specified position
@@ -372,18 +381,6 @@ public class MeetingWizardActivity extends AppCompatActivity implements OnAdapte
 
         intent = putExtras(intent);
         // only get Attending Participants
-
-        /*
-        intent.putExtra("maxCountdownTime", (long)15);
-        intent.putExtra("maxLueftungsTimer",(long) 10);
-        intent.putExtra("maxAbstandsTimer", (long)5);
-
-        intent.putExtra("lueftungsSwitchStatus", true);
-        intent.putExtra("abstandsSwitchStatus", true);
-
-        intent.putExtra("location", "Regensburg");
-        intent.putExtra("participantCount", "24");
-           */
 
         // start next activity
         startActivity(intent);

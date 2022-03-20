@@ -126,6 +126,7 @@
                                         android:background="@color/transparent"
                                         android:hint="Meeting Titel"
                                         android:inputType="text"
+                                        android:imeOptions="actionDone"
                                         android:maxLines="1"
                                         android:textSize="16sp"
                                         app:layout_constraintBottom_toTopOf="@+id/view"

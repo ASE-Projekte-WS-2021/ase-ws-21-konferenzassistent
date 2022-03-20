@@ -36,7 +36,6 @@
                         android:layout_height="wrap_content"
                         android:text="Abbrechen"
                         android:textSize="14sp"
-                        android:layout_marginStart="8dp"
                         android:textColor="@color/break_yellow_btn"
                         android:background="@color/transparent"
                         />
@@ -45,7 +44,7 @@
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
-                        android:text="Teilnehmer erstellen"
+                        android:text="Countdown erstelen"
                         android:textSize="18sp"
                         android:gravity="center"
                         android:textStyle="bold"
@@ -57,7 +56,6 @@
                         android:layout_height="wrap_content"
                         android:text="Erstellen"
                         android:textSize="14sp"
-                        android:layout_marginEnd="8dp"
                         android:textStyle="bold"
                         android:textColor="@color/corona_blue"
                         android:background="@color/transparent"
@@ -91,55 +89,19 @@
                                 <!-- Name Text Edit -->
 
                                 <EditText
-                                    android:id="@+id/participant_input_name"
+                                    android:id="@+id/preset_name"
                                     android:layout_width="match_parent"
-                                    android:hint="Name"
+                                    android:hint="Preset Name"
                                     android:textSize="14sp"
                                     android:inputType="text"
                                     android:maxLines="1"
-                                    android:imeOptions="actionDone"
                                     android:layout_margin="16dp"
                                     android:background="@color/transparent"
                                     android:layout_height="wrap_content"/>
 
-
-                                <View
-                                    android:layout_width="match_parent"
-                                    android:layout_marginStart="16dp"
-                                    android:layout_marginEnd="16dp"
-                                    android:layout_height="1dp"
-                                    android:background="#e6e6e6" />
-
-
-
-                                <!-- Status Text Edit -->
-
-                                <LinearLayout
-                                    android:id="@+id/button_ort"
-                                    style="@style/Widget.AppCompat.Button"
-                                    android:orientation="horizontal"
-                                    android:layout_width="match_parent"
-                                    android:minHeight="48dp"
-                                    android:gravity="left"
-                                    android:background="@color/transparent"
-                                    android:layout_height="wrap_content">
-
-                                    <EditText
-                                        android:id="@+id/participant_input_status"
-                                        android:layout_width="match_parent"
-                                        android:hint="Status"
-                                        android:textSize="14sp"
-                                        android:inputType="text"
-                                        android:maxLines="1"
-                                        android:layout_margin="16dp"
-                                        android:imeOptions="actionDone"
-                                        android:background="@color/transparent"
-                                        android:layout_height="wrap_content"/>
-
-                                </LinearLayout>
-
                             </LinearLayout>
                         </androidx.cardview.widget.CardView>
+
 
                         <androidx.cardview.widget.CardView
                             android:layout_width="match_parent"
@@ -156,7 +118,7 @@
                                 <!-- Status Text Edit -->
 
                                 <LinearLayout
-                                    android:id="@+id/button_import_participant"
+                                    android:id="@+id/button_add_countdown"
                                     style="@style/Widget.AppCompat.Button"
                                     android:orientation="horizontal"
                                     android:layout_width="match_parent"
@@ -173,7 +135,7 @@
                                         android:layout_marginStart="16dp"
                                         android:textColor="@color/black"
                                         android:textStyle="bold"
-                                        android:text="Aus Kontakten Importieren"/>
+                                        android:text="Countdown hinzufügen"/>
 
                                     <androidx.constraintlayout.widget.Placeholder
                                         android:layout_width="0dp"
@@ -181,14 +143,26 @@
                                         android:layout_weight="1"/>
 
                                     <ImageView
+                                        android:id="@+id/add_countdown"
                                         android:layout_width="wrap_content"
                                         android:layout_height="16dp"
                                         android:layout_gravity="center"
                                         android:layout_marginEnd="16dp"
-                                        android:background="@drawable/ic_baseline_arrow_forward_ios_24"/>
+                                        android:background="@drawable/ic_baseline_add_24_blue"/>
 
 
                                 </LinearLayout>
+
+                                <View
+                                    android:layout_width="match_parent"
+                                    android:layout_height="1dp"
+                                    android:background="#e6e6e6" />
+
+                                <androidx.recyclerview.widget.RecyclerView
+                                    android:id="@+id/add_recycleview"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent">
+                                </androidx.recyclerview.widget.RecyclerView>
 
                             </LinearLayout>
                         </androidx.cardview.widget.CardView>
