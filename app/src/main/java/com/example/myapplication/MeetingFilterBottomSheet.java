@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -160,6 +161,13 @@ public class MeetingFilterBottomSheet extends BottomSheetDialogFragment {
             filterData.setMaxCount(-1);
         } else {
             filterData.setMaxCount(Integer.parseInt(countMaxString));
+        }
+
+        if(!countMaxString.equals("") && !countMinString.equals("")){
+            if(Integer.parseInt(countMaxString)<Integer.parseInt(countMinString)){
+                Toast toast = Toast.makeText(getContext(), "IDIOT", Toast.LENGTH_LONG);
+                toast.show();
+            }
         }
 
         Chip chip = getView().findViewById(locationChipGroup.getCheckedChipId());
