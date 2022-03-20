@@ -201,6 +201,7 @@ CardviewTouchHelperAdapter, CustomAlertBottomSheetAdapter.onLeaveListener{
 */
         @Override
         public boolean onTouch(View view, MotionEvent motionEvent) {
+            view.performClick();
             cGestureDetector.onTouchEvent(motionEvent);
             return true;
         }
