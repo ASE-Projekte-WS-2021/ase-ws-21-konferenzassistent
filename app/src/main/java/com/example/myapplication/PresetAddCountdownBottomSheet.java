@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.myapplication.databinding.BottomSheetCountdownAddNewBinding;
 import com.example.myapplication.databinding.BottomSheetEditPresetsBinding;
 import com.example.myapplication.meetingwizard.RecyclerViewAdvancedCountdownAdapter;
+import com.example.myapplication.meetingwizard.RecyclerViewAdvancedCountdownItemAdapter;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
@@ -100,7 +101,10 @@ public class PresetAddCountdownBottomSheet extends BottomSheetDialogFragment imp
         bi.dialogCancelButton.setOnClickListener(viewListener -> openWarning());
 
         bi.addCountdown.setOnClickListener(viewListener -> {
-            advancedCountdownObjects.add(new RecyclerViewAdvancedCountdownAdapter.AdvancedCountdownObject("", true, new ArrayList<>()));
+            ArrayList<RecyclerViewAdvancedCountdownItemAdapter.AdvancedCountdownItem> children = new ArrayList<>();
+            children.add( new RecyclerViewAdvancedCountdownItemAdapter.AdvancedCountdownItem((long)15, ""));
+
+            advancedCountdownObjects.add(new RecyclerViewAdvancedCountdownAdapter.AdvancedCountdownObject("", true, children));
             recyclerViewCreatedCountdownElementsAdapter.notifyItemInserted(advancedCountdownObjects.size());
         });
 
