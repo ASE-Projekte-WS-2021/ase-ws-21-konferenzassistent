@@ -23,7 +23,7 @@
                     android:layout_width="91dp"
                     android:layout_height="50dp"
                     android:background="@color/transparent"
-                    android:text="Reset"
+                    android:text="@string/reset"
                     android:textColor="@color/break_yellow_btn"
                     android:textSize="14sp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -33,7 +33,7 @@
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
-                    android:text="FILTEROPTIONEN"
+                    android:text="@string/filteroptionen"
                     android:gravity="center"
                     android:textColor="@color/white"
                     android:textSize="20sp"
@@ -47,7 +47,7 @@
                     style="@style/Widget.MaterialComponents.Button.TextButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Filter"
+                    android:text="@string/filter"
                     android:textColor="@color/corona_white"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -69,7 +69,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Personen"
+                        android:text="@string/personen"
                         android:textAllCaps="true"
                         android:textSize="16sp"
                         android:textStyle="bold"
@@ -94,7 +94,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Teilnehmeranzahl"
+                        android:text="@string/teilnehmeranzahl"
                         android:textAllCaps="true"
                         android:textSize="16sp"
                         android:textStyle="bold"
@@ -114,7 +114,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginRight="8dp"
                             android:layout_weight="1"
-                            android:hint="Minimalanzahl"
+                            android:hint="@string/minimalanzahl"
                             app:boxStrokeColor="@color/corona_blue"
                             app:hintTextColor="@color/corona_blue">
 
@@ -134,7 +134,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="8dp"
                             android:layout_weight="1"
-                            android:hint="Maximalanzahl"
+                            android:hint="@string/maximalanzahl"
                             app:boxStrokeColor="@color/corona_blue"
                             app:hintTextColor="@color/corona_blue">
 
@@ -185,7 +185,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Zeitfenster"
+                        android:text="@string/zeitfenster"
                         android:textAllCaps="true"
                         android:textSize="16sp"
                         android:textStyle="bold"
@@ -205,7 +205,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginRight="8dp"
                             android:layout_weight="1"
-                            android:hint="Startdatum"
+                            android:hint="@string/startdatum"
                             app:boxStrokeColor="@color/corona_blue"
                             app:hintTextColor="@color/corona_blue"
                             app:startIconDrawable="@drawable/ic_baseline_calendar_month_24">
@@ -229,7 +229,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="8dp"
                             android:layout_weight="1"
-                            android:hint="Enddatum"
+                            android:hint="@string/enddatum"
                             app:boxStrokeColor="@color/corona_blue"
                             app:hintTextColor="@color/corona_blue"
                             app:startIconDrawable="@drawable/ic_baseline_calendar_month_24">

@@ -34,7 +34,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@color/transparent"
-                        android:text="Abbrechen"
+                        android:text="@string/abbrechen"
                         android:textColor="@color/break_yellow_btn"
                         android:textSize="14sp" />
 
@@ -43,7 +43,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="Checklist Item erstellen"
+                        android:text="@string/checklist_item_erstellen"
                         android:textColor="@color/black"
                         android:textSize="18sp"
                         android:textStyle="bold" />
@@ -53,7 +53,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@color/transparent"
-                        android:text="Erstellen"
+                        android:text="@string/erstellen"
                         android:textColor="@color/corona_blue"
                         android:textSize="14sp"
                         android:textStyle="bold" />
@@ -91,7 +91,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_margin="16dp"
                                     android:background="@color/transparent"
-                                    android:hint="Preset Name"
+                                    android:hint="@string/preset_name"
                                     android:imeOptions="actionDone"
                                     android:inputType="text"
                                     android:maxLines="1"
@@ -133,7 +133,7 @@
                                         android:layout_marginStart="16dp"
                                         android:textColor="@color/black"
                                         android:textStyle="bold"
-                                        android:text="Checklist item hinzufügen"/>
+                                        android:text="@string/checklist_item_hinzuf_gen"/>
 
                                     <androidx.constraintlayout.widget.Placeholder
                                         android:layout_width="0dp"

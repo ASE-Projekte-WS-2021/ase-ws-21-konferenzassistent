@@ -34,7 +34,7 @@
                         android:id="@+id/dialog_cancel_button"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Abbrechen"
+                        android:text="@string/abbrechen"
                         android:textSize="14sp"
                         android:layout_marginStart="8dp"
                         android:textColor="@color/break_yellow_btn"
@@ -45,7 +45,7 @@
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
-                        android:text="Teilnehmer erstellen"
+                        android:text="@string/teilnehmer_erstellen"
                         android:textSize="18sp"
                         android:gravity="center"
                         android:textStyle="bold"
@@ -55,7 +55,7 @@
                         android:id="@+id/dialog_create_button"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Erstellen"
+                        android:text="@string/erstellen"
                         android:textSize="14sp"
                         android:layout_marginEnd="8dp"
                         android:textStyle="bold"
@@ -127,7 +127,7 @@
                                     <EditText
                                         android:id="@+id/participant_input_status"
                                         android:layout_width="match_parent"
-                                        android:hint="Status"
+                                        android:hint="@string/status"
                                         android:textSize="14sp"
                                         android:inputType="text"
                                         android:maxLines="1"
@@ -173,7 +173,7 @@
                                         android:layout_marginStart="16dp"
                                         android:textColor="@color/black"
                                         android:textStyle="bold"
-                                        android:text="Aus Kontakten Importieren"/>
+                                        android:text="@string/aus_kontakten_importieren"/>
 
                                     <androidx.constraintlayout.widget.Placeholder
                                         android:layout_width="0dp"

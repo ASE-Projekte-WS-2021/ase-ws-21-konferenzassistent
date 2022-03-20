@@ -31,7 +31,6 @@ CardviewTouchHelperAdapter, CustomAlertBottomSheetAdapter.onLeaveListener{
     private final FragmentManager manager;
     private final List<Meeting> meetingsList;
     private CardviewTouchHelper cTouchHelper;
-    private List<String> meeting_id = new ArrayList<>();
     swiped swipedListener;
     private int swipedItemPosition = -1;
 
@@ -56,8 +55,6 @@ CardviewTouchHelperAdapter, CustomAlertBottomSheetAdapter.onLeaveListener{
 
     @Override
     public void onBindViewHolder(@NonNull MeetingHistoryViewHolder holder, int position) {
-        //Get Meeting ID
-        meeting_id.add(meetingsList.get(position).getId());
 
         // Get the Values from the meeting List
         String duration = Integer.parseInt(meetingsList.get(position).getDuration())/60 + "";
@@ -209,14 +206,12 @@ CardviewTouchHelperAdapter, CustomAlertBottomSheetAdapter.onLeaveListener{
 
     @Override
     public void onLeaving() {
-        meetingsList.remove(swipedItemPosition);
         RoomDB database = RoomDB.getInstance(ct.getApplicationContext());
-        database.meetingDao().delete(database.meetingDao().getOne(Integer.parseInt(meeting_id.get(swipedItemPosition))));
+        database.meetingDao().delete(database.meetingDao().getOne(Integer.parseInt(meetingsList.get(swipedItemPosition).getId())));
+
         notifyItemRemoved(swipedItemPosition);
-
+        meetingsList.remove(swipedItemPosition);
         swipedListener.onDeleteSwipe(meetingsList.size());
-
-        meeting_id.clear();
 
         swipedItemPosition = -1;
     }
