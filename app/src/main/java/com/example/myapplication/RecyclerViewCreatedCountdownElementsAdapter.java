@@ -96,6 +96,7 @@ public class RecyclerViewCreatedCountdownElementsAdapter
 
         // Deletes Countdown
         holder.buttonDelete.setOnClickListener(view -> {
+            holder.countdownName.clearFocus();
             contentHidden.remove(holder.getAdapterPosition());
             mAdvancedCountdownObjects.remove(holder.getAdapterPosition());
             notifyItemRemoved(holder.getAdapterPosition());
