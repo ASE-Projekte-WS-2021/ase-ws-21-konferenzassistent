@@ -119,7 +119,6 @@ public class CountdownService extends Service {
     }
 
     // Sends a Notification to the user
-    // TODO: FIX BUGS
     private void notifyNotification(String text) {
         // Create a new spannable string
         SpannableString htmlText = new SpannableString(Html.fromHtml(text, Html.FROM_HTML_MODE_LEGACY));
@@ -215,8 +214,17 @@ public class CountdownService extends Service {
 
     // Builds the Notification Text
     private String NotificationTextBuilder(){
-        String notificationText = "Timer sind aktiv";
-        return notificationText;
+        final String[] notificationText = new String[1];
+        countdownServiceObjects.forEach(countdown ->{
+
+            long currentTime = countdown.getCurrentTime();
+            String description = countdown.getTimer().getmItems().get(countdown.getCountdownPosition()).getSubCountdownDescription();
+
+            notificationText[0] = notificationText[0]!=null?notificationText[0]: "";
+            description = description!=null?description:" Endet " + countdown.getTimer().getmCountdownName();
+            notificationText[0] = notificationText[0] + "<br>" + "In " + LongToStringForTime(currentTime) + ": " + description;
+        });
+        return notificationText[0];
     }
 
     // returns the Long time as a String in minutes and seconds
@@ -227,7 +235,7 @@ public class CountdownService extends Service {
         int minutes = (int) time/60000;
         int seconds = (int) time%60000/1000;
 
-        text += "Noch " + minutes;
+        text += "" + minutes;
         text += ":";
         // Add a leading 0 to seconds
         if(seconds < 10) text += "0";
