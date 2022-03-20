@@ -34,6 +34,8 @@ public class ChecklistActivity extends AppCompatActivity implements OnAdapterIte
 
     private int checkedItems;
 
+    private ArrayList<String> checklistContent = new ArrayList<String>();
+
     private RecyclerView rvChecklist;
     private List<ChecklistItem> checklistItems;
     private ChecklistAdapter checklistAdapter;
@@ -66,13 +68,18 @@ public class ChecklistActivity extends AppCompatActivity implements OnAdapterIte
 
         rvChecklist = findViewById(R.id.rv_checklist);
 
-        // initialize checklist and recyclerview
+                // initialize checklist and recyclerview
         checklistItems = new ArrayList<>();
-        checklistItems.add(new ChecklistItem("Desinfektionsmittel bereit"));
-        checklistItems.add(new ChecklistItem("3G-Regelung o.ä. geprüft"));
-        checklistItems.add(new ChecklistItem("Masken / Plexiglas geprüft"));
-        checklistItems.add(new ChecklistItem("Abstände gewährleistet"));
 
+        checklistContent.add("Desinfektionsmittel bereit");
+        checklistContent.add("3G-Regelung o.ä. geprüft");
+        checklistContent.add("Masken / Plexiglas geprüft");
+        checklistContent.add("Abstände gewährleistet");
+
+        for (int i = 0; i < checklistContent.size(); i++) {
+            checklistItems.add(new ChecklistItem(checklistContent.get(i)));
+        }
+        
         checklistAdapter = new ChecklistAdapter(this, this, checklistItems);
         rvChecklist.setAdapter(checklistAdapter);
         linearLayoutManager = new LinearLayoutManager(this);
