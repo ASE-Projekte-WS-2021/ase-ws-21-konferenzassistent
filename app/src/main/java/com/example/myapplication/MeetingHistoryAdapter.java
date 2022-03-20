@@ -215,6 +215,8 @@ CardviewTouchHelperAdapter, CustomAlertBottomSheetAdapter.onLeaveListener{
 
         swipedListener.onDeleteSwipe(meetingsList.size());
 
+        meeting_id.clear();
+
         swipedItemPosition = -1;
     }
 
