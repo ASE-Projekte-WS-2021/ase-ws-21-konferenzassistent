@@ -57,4 +57,91 @@
 
     <string name="home_fragment_isFiltered_true">Gefiltert</string>
     <string name="home_fragment_isFiltered_false">Insgesamt</string>
+<<<<<<< Updated upstream
+=======
+
+
+    <string name="addParticipant">Teilnehmer hinzufügen</string>
+    <string name="neuen_kontak_hinzuf_gen">Neuen Kontak hinzufügen</string>
+    <string name="teilnehmer">Teilnehmer</string>
+    <string name="anwesendeteilnehmer">AnwesendeTeilnehmer</string>
+    <string name="personen">Personen</string>
+    <string name="teilnehmeranzahl">Teilnehmeranzahl</string>
+    <string name="minimalanzahl">Minimalanzahl</string>
+    <string name="maximalanzahl">Maximalanzahl</string>
+    <string name="aus_kontakten_importieren">Aus Kontakten Importieren</string>
+    <string name="teilnehmer2">TEILNEHMER</string>
+    <string name="teilnehmer_suchen">Teilnehmer Suchen</string>
+    <string name="bekannte_teilnehmer">Bekannte Teilnehmer</string>
+    <string name="neuen_teilnehmer_hinzuf_gen">Neuen Teilnehmer hinzufügen</string>
+    <string name="keine_teilnehmer_ausgew_hlt">Keine Teilnehmer ausgewählt.</string>
+    <string name="teilnehmer_erstellen">Teilnehmer erstellen</string>
+
+    <string name="checklistitem">ChecklistItem</string>
+    <string name="eigene_checklisten_verwalten">Eigene Checklisten verwalten</string>
+    <string name="checkliste_preset">Checkliste Preset</string>
+    <string name="checklist_item_hinzuf_gen">Checklist item hinzufügen</string>
+    <string name="checklist_item_erstellen">Checklist Item erstellen</string>
+    <string name="checklist_preset">CHECKLIST PRESET</string>
+
+    <string name="timer_hinzuf_gen">Timer hinzufügen</string>
+    <string name="timer_dieses_countdowns">Timer dieses Countdowns</string>
+    <string name="eigene_timer_verwalten">Eigene Timer verwalten</string>
+    <string name="timer_bearbeiten">Timer bearbeiten</string>
+    <string name="timer_beschreibung">Timer Beschreibung</string>
+    <string name="timer_einstellen">Timer einstellen</string>
+    <string name="timer_preset">Timer Preset</string>
+
+    <string name="countdown_entfernen">Countdown Entfernen</string>
+    <string name="countdown_erstellen">Countdown erstellen</string>
+    <string name="countdown_hinzuf_gen">Countdown hinzufügen</string>
+
+    <string name="lufttimer">Lüftungstimer</string>
+    <string name="l_ftungs_countdown">Lüftungs Countdown</string>
+    <string name="timeLuftenLeft">Bis zum nächsten Lüften.</string>
+        <string name="l_ftungstimer">LÜFTUNGSTIMER</string>
+
+    <string name="vergangene_meetings">Vergangene Meetings</string>
+    <string name="abgeschlossene_meetings">Abgeschlossene Meetings</string>
+    <string name="meeting_ort">Meeting Ort</string>
+    <string name="meeting_startzeit">Meeting Startzeit</string>
+    <string name="neues_meeting">NEUES MEETING</string>
+    <string name="meeting_titel">Meeting Titel</string>
+    <string name="solle_dieses_neue_meeting_wirlich_gel_scht_werden">Solle dieses neue Meeting wirlich gelöscht werden?</string>
+    <string name="meeting_starten">Meeting Starten</string>
+
+    <string name="nderungen_verwerfen">Änderungen Verwerfen</string>
+    <string name="standard">Standard</string>
+    <string name="status">Status</string>
+    <string name="informationen">INFORMATIONEN</string>
+    <string name="reset">Reset</string>
+    <string name="erstellen">Erstellen</string>
+    <string name="preset_name">Preset Name</string>
+    <string name="abbrechen">Abbrechen</string>
+    <string name="bernehmen">ÜBERNEHMEN</string>
+
+    <string name="ort">ORT</string>
+    <string name="ortklein">Ort</string>
+    <string name="standort_eingeben">Standort eingeben</string>
+    <string name="vorherigen_orte">Vorherigen Orte</string>
+    <string name="standort">Standort</string>
+
+    <string name="zeitfenster">Zeitfenster</string>
+    <string name="startdatum">Startdatum</string>
+    <string name="enddatum">Enddatum</string>
+    <string name="start_time">start_time</string>
+    <string name="end_time">end_time</string>
+    <string name="dauer">Dauer</string>
+
+    <string name="filteroptionen">FILTEROPTIONEN</string>
+    <string name="filter">Filter</string>
+
+    <string name="erinnerung_ans_l_ften">Erinnerung ans Lüften</string>
+    <string name="erinnerung_an_das_einhalten_von_abst_nden">Erinnerung an das Einhalten von Abständen</string>
+    <string name="ein_timer_f_r_eigene_erinnerungen">Ein Timer für eigene Erinnerungen</string>
+    <string name="lueftenTips">Das richtige Lüften von Innenräumen kann helfen, das Risiko einer Ansteckung mit dem Coronavirus SARS-CoV-2 über Aerosole zu verringern. Aerosole (feinste luftgetragene Flüssigkeitspartikel und Tröpfchenkerne) sind ein möglicher Übertragungsweg des Coronavirus SARS-CoV-2. Um nicht zu vergessen zu Lüften erinnert dich die App regelmäßig daran, die Fenster aufzumachen. Du kannst einstellen, wie oft das passieren soll.</string>
+    <string name="abstandeTips">Die Wahrscheinlichkeit, mit virushaltigen Tröpfchen und Aerosolen in Kontakt zu kommen, ist insbesondere im Umkreis von ein bis zwei Metern um eine mit dem Coronavirus SARS-CoV-2 infizierte Person erhöht. Abstand halten reduziert daher das Risiko, sich und andere anzustecken. Um nicht zu vergessen, die nötigen Abstände einzuhalten, erinnert dich die App regelmäßig daran, die Fenster aufzumachen. Du kannst einstellen, wie oft das passieren soll.</string>
+    <string name="TipsCustom"><![CDATA[Wenn du noch in regelmäßigen Abständen an etwas anderes, wie an das Desinfizieren von Oberflächen erinnert werden willst, kannst du dir auch dafür einen eigenen Timer stellen.]]></string>
+
+>>>>>>> Stashed changes
 </resources>
