@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/transparent_background"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <androidx.cardview.widget.CardView
@@ -53,6 +54,7 @@
                             android:layout_height="?attr/actionBarSize"
                             android:background="?attr/selectableItemBackgroundBorderless"
                             android:src="@drawable/ic_baseline_edit_24"
+                            android:visibility="gone"
                             android:tint="@android:color/white" />
 
                         <ImageButton
@@ -61,6 +63,7 @@
                             android:layout_height="?attr/actionBarSize"
                             android:background="?attr/selectableItemBackgroundBorderless"
                             android:src="@drawable/ic_baseline_more_vert_24"
+                            android:visibility="gone"
                             android:tint="@android:color/white" />
                     </LinearLayout>
                 </com.google.android.material.appbar.AppBarLayout>
