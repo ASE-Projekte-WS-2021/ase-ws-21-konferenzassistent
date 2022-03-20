@@ -1,6 +1,5 @@
 package com.example.myapplication;
 
-import android.database.Cursor;
 import android.os.Bundle;
 
 import androidx.databinding.ViewDataBinding;
@@ -9,9 +8,6 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import androidx.databinding.DataBindingUtil;
-import androidx.room.Room;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,15 +15,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.myapplication.data.MeetingData;
 import com.example.myapplication.data.MeetingParticipantPair;
 import com.example.myapplication.data.ParticipantData;
 import com.example.myapplication.data.RoomDB;
-import com.example.myapplication.meetingwizard.Participant;
-import com.google.android.material.bottomsheet.BottomSheetDialog;
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
-import java.time.Clock;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -50,7 +41,7 @@ public class HomeFragment extends Fragment  implements OnFilterButtonClickListen
 
     // Components
     private RecyclerView rvMeetings;
-    private TextView introText, pastMeetingCountText;
+    private TextView introText, isFilteredTextView ,pastMeetingCountText;
 
     // Meeting List
     private List<Meeting> meetingsList;
@@ -69,8 +60,6 @@ public class HomeFragment extends Fragment  implements OnFilterButtonClickListen
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         database = RoomDB.getInstance(getContext());
-
-        participantsList = database.participantDao().getAll();
     }
 
     @Override
@@ -91,6 +80,8 @@ public class HomeFragment extends Fragment  implements OnFilterButtonClickListen
     @Override
     public void onResume() {
         super.onResume();
+
+        participantsList = database.participantDao().getAll();
         createArrayListFromDatabase();
         updateRKIandPastMeetingInfo();
     }
@@ -100,13 +91,19 @@ public class HomeFragment extends Fragment  implements OnFilterButtonClickListen
         // todo
 
         // update past meeting counter
-        pastMeetingCountText.setText(Integer.toString(meetingsList.size()));
+        pastMeetingCountText.setText(Integer.toString(rvMeetings.getAdapter().getItemCount()));
+        if (dataIsFiltered) {
+            isFilteredTextView.setText(R.string.home_fragment_isFiltered_true);
+        } else {
+            isFilteredTextView.setText(R.string.home_fragment_isFiltered_false);
+        }
     }
 
     // Initialises the Components
     private void initialiseView() {
         rvMeetings = getView().findViewById(R.id.rv_history);
         introText = getView().findViewById(R.id.introText);
+        isFilteredTextView = getView().findViewById(R.id.home_fragment_isFiltered_textView);
 
         pastMeetingCountText = getView().findViewById(R.id.fragment_home_past_meet_count);
         filterButton = getView().findViewById(R.id.main_fragment_filter_button);
@@ -184,62 +181,62 @@ public class HomeFragment extends Fragment  implements OnFilterButtonClickListen
     @Override
     public void onFilterButtonClicked(FilterData filterData) {
         // TODO filter meetingsList based on filterData
-        Log.d("test",filterData.toString());
+        Log.d("filterData",filterData.toString());
 
-        /*
         // early return if reset-button instead of filter button clicked
         if (!filterData.isShouldFilter()) {
             if (!dataIsFiltered) {
                 return;
             }
-            // TODO duplicate code from createArrayFromDatabase
-            meetingHistoryAdapter = new MeetingHistoryAdapter(this.getContext(), getParentFragmentManager(), meetingsList);
-            rvMeetings.setAdapter(meetingHistoryAdapter);
             dataIsFiltered = false;
+            // TODO duplicate code from createArrayFromDatabase
+            meetingHistoryAdapter = new MeetingHistoryAdapter(this.getContext(), getParentFragmentManager(), meetingsList, this);
+            rvMeetings.setAdapter(meetingHistoryAdapter);
+            updateRKIandPastMeetingInfo();
             return;
         }
         Stream<Meeting> filteredMeetingsStream = meetingsList.stream();
-        */
         // for every person in peopleList
         // get list of meetings person was in from ConnectionDatabase
         // filter meetings with this person
-        /*
-        filteredMeetingsStream.filter(meeting -> personMeetingIds.contains(meeting.getId()));
-        */
+        List<String> personIds = filterData.getPeopleList().stream()
+                .map(person -> Integer.toString(database.participantDao().getIDbyName(person)))
+                .collect(Collectors.toList());
+        for (String personId : personIds) {
+            List<Integer> personMeetingIds = database.meetingWithParticipantDao().getMeetingIDsByParticipantID(personId);
+            filteredMeetingsStream = filteredMeetingsStream.filter(meeting -> personMeetingIds.contains(Integer.parseInt(meeting.getId())));
+        }
         // if minCount not -1: filter meetings where numParticipants >= mincount
-        /*
         if (filterData.getMinCount() != -1) {
-            filteredMeetingsStream.filter(meeting -> Integer.parseInt(meeting.getNumberParticipants()) >= filterData.getMinCount());
+            filteredMeetingsStream = filteredMeetingsStream.filter(meeting -> Integer.parseInt(meeting.getNumberParticipants()) >= filterData.getMinCount());
         }
-        */
         // same respectively for maxCount
-        /*
         if (filterData.getMaxCount() != -1) {
-            filteredMeetingsStream.filter(meeting -> Integer.parseInt(meeting.getNumberParticipants()) <= filterData.getMaxCount());
+            filteredMeetingsStream = filteredMeetingsStream.filter(meeting -> Integer.parseInt(meeting.getNumberParticipants()) <= filterData.getMaxCount());
         }
-        */
         // filter meetings with same location
-        /*
-        if (!filterData.getLocation().equals("null")) {
-            filteredMeetingsStream.filter(meeting -> meeting.getLocation() == filterData.getLocation());
+        if (filterData.getLocation() != null) {
+            filteredMeetingsStream = filteredMeetingsStream.filter(meeting -> meeting.getLocation().equals(filterData.getLocation()));
         }
-        */
         // Convert start or end time to millis (probably add method to Meeting class), filter where time >= filterData.dateStart and <= filterData.dateEnd
-        /*
-        if (!filterData.getDateStart() == null || !filterData.getDateEnd() == null) {
-            filteredMeetingsStream.filter(meeting -> meeting.asMilli() >= filterData.getDateStart() && meeting.asMilli() <= filterData.getDateEnd()
+        if (filterData.getDateStart() != null && filterData.getDateEnd() != null) {
+            filteredMeetingsStream = filteredMeetingsStream.filter(meeting ->
+                    meeting.getLongDateStart() >= filterData.getDateStart() &&
+                            meeting.getLongDateEnd() <= filterData.getDateEnd()
+            );
         }
-        */
-        // Collect stream as list, sort by id if necessary, change dataIsFiltered, set filtered list to adapter
-        /*
+        // Collect stream as list, sort by id if necessary, change dataIsFiltered, set filtered list to adapter, update view elements
         List<Meeting> filteredMeetingList = filteredMeetingsStream.collect(Collectors.toList());
-        dataIsFiltered = true;
+        Log.d("filteredMeetingList",filteredMeetingList.toString());
+        dataIsFiltered = filteredMeetingList.size() != meetingsList.size();
         rvMeetings.setAdapter(new MeetingHistoryAdapter(
                 this.getContext(),
                 getParentFragmentManager(),
-                filteredMeetingList)
+                filteredMeetingList,
+                this)
         );
-        */
+        updateRKIandPastMeetingInfo();
+
     }
 
     @Override

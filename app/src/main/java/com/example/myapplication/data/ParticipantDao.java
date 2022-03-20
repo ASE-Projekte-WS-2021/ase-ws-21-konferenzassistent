@@ -27,4 +27,7 @@ public interface ParticipantDao {
 
     @Query("SELECT * FROM table_participant_data")
     List<ParticipantData> getAll();
+
+    @Query("SELECT ID FROM table_participant_data WHERE name = :sName")
+    int getIDbyName(String sName);
 }
