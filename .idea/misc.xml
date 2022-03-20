@@ -73,11 +73,13 @@
         <entry key="..\:/Users/erdi/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/activity_past_meeting_info.xml" value="0.16979166666666667" />
         <entry key="..\:/Users/erdi/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/activity_preset.xml" value="0.16979166666666667" />
         <entry key="..\:/Users/erdi/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/activity_settings.xml" value="0.16979166666666667" />
+        <entry key="..\:/Users/erdi/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/bottom_sheet_checklist_add_new.xml" value="0.2667572463768116" />
+        <entry key="..\:/Users/erdi/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/bottom_sheet_countdown_add_new.xml" value="0.2667572463768116" />
         <entry key="..\:/Users/erdi/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/example_layout.xml" value="0.33" />
         <entry key="..\:/Users/erdi/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/fragment_countdown_information.xml" value="0.1" />
         <entry key="..\:/Users/erdi/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/fragment_countdown_timer.xml" value="0.16979166666666667" />
         <entry key="..\:/Users/erdi/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/fragment_home.xml" value="0.16979166666666667" />
-        <entry key="..\:/Users/erdi/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/fragment_settings.xml" value="0.16979166666666667" />
+        <entry key="..\:/Users/erdi/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/fragment_settings.xml" value="0.33" />
         <entry key="..\:/Users/erdi/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/fragment_timer.xml" value="0.16979166666666667" />
         <entry key="..\:/Users/erdi/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/meeting_bottom_sheet.xml" value="0.16979166666666667" />
         <entry key="..\:/Users/erdi/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/meeting_history_row.xml" value="0.16979166666666667" />

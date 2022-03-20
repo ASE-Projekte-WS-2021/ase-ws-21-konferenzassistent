@@ -79,7 +79,7 @@ public class ChecklistActivity extends AppCompatActivity implements OnAdapterIte
         for (int i = 0; i < checklistContent.size(); i++) {
             checklistItems.add(new ChecklistItem(checklistContent.get(i)));
         }
-        
+
         checklistAdapter = new ChecklistAdapter(this, this, checklistItems);
         rvChecklist.setAdapter(checklistAdapter);
         linearLayoutManager = new LinearLayoutManager(this);
