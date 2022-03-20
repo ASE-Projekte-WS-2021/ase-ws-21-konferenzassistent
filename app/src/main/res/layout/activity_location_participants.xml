@@ -25,7 +25,7 @@
                 android:id="@+id/textViewLocationsHeader"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Ort"
+                android:text="@string/ort2"
                 android:textSize="16sp" />
 
             <Spinner
@@ -44,7 +44,7 @@
                     android:id="@+id/textViewParticipantsHeader"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Teilnehmer"
+                    android:text="@string/teilnehmer"
                     android:textSize="16sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -68,7 +68,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
-                android:text="Keine Teilnehmer ausgewählt."
+                android:text="@string/keine_teilnehmer_ausgew_hlt"
                 android:visibility="gone" />
 
             <ListView

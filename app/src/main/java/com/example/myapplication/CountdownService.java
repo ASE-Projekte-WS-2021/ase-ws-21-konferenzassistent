@@ -97,8 +97,7 @@ public class CountdownService extends Service {
                 Uri alert = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
                 if(!mp.isPlaying()){
                     mp = MediaPlayer.create(getApplicationContext(), alert);
-                    mp.start();
-                }
+                    mp.start(); }
 
             }
 
@@ -120,7 +119,6 @@ public class CountdownService extends Service {
     }
 
     // Sends a Notification to the user
-    // TODO: FIX BUGS
     private void notifyNotification(String text) {
         // Create a new spannable string
         SpannableString htmlText = new SpannableString(Html.fromHtml(text, Html.FROM_HTML_MODE_LEGACY));
@@ -211,102 +209,22 @@ public class CountdownService extends Service {
                 startSpecificTimer(restart_id);
                 }
             }
-            /*
-            // Check if its a user Interaction and what button got pressed or if the app got resumed
-            if(lueftungsUserInteraction){
-                // Stop the alert
-                if(mp.isPlaying())mp.stop();
-
-                  // If open set to closed and restart timer
-                  if(isOpen){
-                      StartLueftungsTimer(maxLueftungsTime);
-                      isOpen = false;
-                  }
-                  else{
-                      StartLueftungsTimer(maxlueftenTime);
-                      isOpen = true;
-                  }
-            }
-            else if(abstandsUserInteraction) {
-                // Stop the alert
-                if (mp.isPlaying()) mp.stop();
-
-                StartAbstandsTimer(maxAbstandsTime);
-            }
-            else if(lueftungsPauseUserInteraction){
-                toggleLueftungsCountdown();
-
-            }
-            else if(abstandsPauseUserInteraction){
-                toggleAbstandsCountdown();
-            }
-
-            // if app got resumed send timer data
-            else{
-                // Data for Lueftung
-                bi.putExtra("lueftungsMilliS", lueftungsObject.currentTime);
-                bi.putExtra("windowOpen", isOpen);
-                bi.putExtra("lueftungDone", lueftungsObject.timerDone);
-
-                // Data for Abstand
-                bi.putExtra("abstandsMilliS", abstandsObject.currentTime);
-                bi.putExtra("abstandDone", abstandsObject.timerDone);
-
-                sendBroadcast(bi);
-            }
-
-             */
 
     };
 
-    /*
-    private void toggleLueftungsCountdown(){
-        if(lueftungsCountdownRunning){
-            lueftungsCountdownRunning = false;
-            pauseTimer(lueftungsCountdown);
-            return;
-        }
-        lueftungsCountdown = resumeTimer(lueftungsCountdown, lueftungsObject);
-        lueftungsCountdownRunning = true;
-    }
-
-
-*/
-
     // Builds the Notification Text
     private String NotificationTextBuilder(){
-        String notificationText = "Timer sind aktiv";
-        /*
-        // If "Lueftung" is activated
-        if(lueftungsSwitchStatus){
-            // add the lueftungstimer as text
-            notificationText += LongToStringForTime(lueftungsObject.currentTime);
+        final String[] notificationText = new String[1];
+        countdownServiceObjects.forEach(countdown ->{
 
-            // Add the description
-            if(isOpen) {
-                notificationText += " bis zum schließen des Fensters!";
-            }
-            else{
-                notificationText += " bis zum öffnen des Fensters!";
-            }
-        }
-        // IF "Abstand" is activated
-        if(abstandsSwitchStatus){
-            // add a line break
-            notificationText += "<br>";
+            long currentTime = countdown.getCurrentTime();
+            String description = countdown.getTimer().getmItems().get(countdown.getCountdownPosition()).getSubCountdownDescription();
 
-            // add the abstands timer as text
-            notificationText += LongToStringForTime(abstandsObject.currentTime);
-            notificationText += " bis zum nächsten Abstands check!";
-        }
-
-        if(!abstandsSwitchStatus && !lueftungsSwitchStatus){
-            notificationText += "Keine Timer ausgewählt!";
-        }
-        */
-
-
-        return notificationText;
+            notificationText[0] = notificationText[0]!=null?notificationText[0]: "";
+            description = description!=null?description:" Endet " + countdown.getTimer().getmCountdownName();
+            notificationText[0] = notificationText[0] + "<br>" + "In " + LongToStringForTime(currentTime) + ": " + description;
+        });
+        return notificationText[0];
     }
 
     // returns the Long time as a String in minutes and seconds
@@ -317,7 +235,7 @@ public class CountdownService extends Service {
         int minutes = (int) time/60000;
         int seconds = (int) time%60000/1000;
 
-        text += "Noch " + minutes;
+        text += "" + minutes;
         text += ":";
         // Add a leading 0 to seconds
         if(seconds < 10) text += "0";
@@ -326,9 +244,12 @@ public class CountdownService extends Service {
         return text;
     }
 
-    // Starts the lueftungstimer
-
+    // Starts the Specific Timer
     private void startSpecificTimer(Integer id){
+        // Stop the Media Player if it still is playing
+        if(mp.isPlaying()){
+            mp.stop();
+        }
         cdServiceObject object = countdownServiceObjects.get(id);
         startTimer(object, object.getTimer().getmItems().get(object.getCountdownPosition()).getSubCountdown() * 60000);
         object.setTimerRunning(true);
@@ -341,20 +262,7 @@ public class CountdownService extends Service {
             object.setTimerRunning(true);
 
         });
-        Log.i(TAG, "startTimers: ");
-
-        // create a CountDownObject for lueftung
-        /*
-
-        lueftungsObject.timerDone = false;
-        lueftungsObject.currentTime = maxLueftungsTime;
-
-        // start timer with countdown timer
-        lueftungsCountdown = startTimer(startingTimer, lueftungsCountdown, lueftungsObject);
-         */
     }
-
-
 }
 
 

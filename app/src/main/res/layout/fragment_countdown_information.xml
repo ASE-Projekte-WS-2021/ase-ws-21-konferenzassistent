@@ -60,7 +60,7 @@
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="Meeting Ort"
+                                android:text="@string/meeting_ort"
                                 android:gravity="center"
                                 android:textColor="#90ffffff"
                                 android:textSize="16dp" />
@@ -117,7 +117,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Meeting Startzeit"
+                                android:text="@string/meeting_startzeit"
                                 android:textColor="#90ffffff"
                                 android:textSize="16dp" />
 
@@ -148,7 +148,7 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="Teilnehmer"
+                                    android:text="@string/teilnehmer"
                                     android:textColor="#90ffffff"
                                     android:textSize="16dp" />
 
@@ -169,7 +169,7 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="AnwesendeTeilnehmer"
+                            android:text="@string/anwesendeteilnehmer"
                             android:gravity="center"
                             android:textColor="#90ffffff"
                             android:textSize="16dp" />
