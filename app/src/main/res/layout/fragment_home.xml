@@ -14,7 +14,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-
+<!--
             <Button
                 android:id="@+id/main_fragment_filter_button"
                 android:layout_width="match_parent"
@@ -28,7 +28,7 @@
                 app:icon="@drawable/ic_outline_filter_list_24"
                 app:iconPadding="8dp"
                 app:iconSize="18dp" />
-
+-->
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

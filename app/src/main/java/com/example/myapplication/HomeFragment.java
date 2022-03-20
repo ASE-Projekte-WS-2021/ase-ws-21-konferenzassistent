@@ -107,7 +107,7 @@ public class HomeFragment extends Fragment  implements OnFilterButtonClickListen
         isFilteredTextView = getView().findViewById(R.id.home_fragment_isFiltered_textView);
 
         pastMeetingCountText = getView().findViewById(R.id.fragment_home_past_meet_count);
-        filterButton = getView().findViewById(R.id.main_fragment_filter_button);
+       // filterButton = getView().findViewById(R.id.main_fragment_filter_button);
     }
 
     private void setupButtonListener() {
