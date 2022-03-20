@@ -36,15 +36,16 @@
 
                 </androidx.recyclerview.widget.RecyclerView>
 
+                <!-- Offset for the Button -->
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="140dp"/>
 
             </LinearLayout>
 
         </androidx.core.widget.NestedScrollView>
 
-        <!-- Offset for the Button -->
-        <View
-            android:layout_width="wrap_content"
-            android:layout_height="80dp"/>
+
 
 
 
