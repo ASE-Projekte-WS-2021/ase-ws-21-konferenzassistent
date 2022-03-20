@@ -31,7 +31,7 @@
                 android:checked="false"
                 android:clickable="false"
                 android:paddingLeft="8dp"
-                android:text="ChecklistItem"
+                android:text="@string/checklistitem"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/rv_row_checklist_info"

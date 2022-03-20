@@ -43,7 +43,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="ORT"
+                        android:text="@string/ort"
                         android:textColor="@color/black"
                         android:textSize="20sp"
                         android:textStyle="bold" />
@@ -53,7 +53,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Abbrechen"
+                        android:text="@string/abbrechen"
                         android:textSize="14sp"
                         android:textColor="@color/break_yellow_btn"
                         android:background="@color/transparent"
@@ -83,7 +83,7 @@
                                 <EditText
                                     android:id="@+id/text_input_search"
                                     android:layout_width="match_parent"
-                                    android:hint="Standort eingeben"
+                                    android:hint="@string/standort_eingeben"
                                     android:textSize="16sp"
                                     android:inputType="text"
                                     android:maxLines="1"
@@ -104,7 +104,7 @@
                             android:layout_marginTop="8dp"
                             android:textStyle="bold"
                             android:layout_marginEnd="16dp"
-                            android:text="Vorherigen Orte"
+                            android:text="@string/vorherigen_orte"
                             android:textSize="14sp"/>
 
                         <View

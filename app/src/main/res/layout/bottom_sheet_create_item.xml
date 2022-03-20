@@ -33,7 +33,7 @@
                         android:id="@+id/dialog_cancel_button"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Abbrechen"
+                        android:text="@string/abbrechen"
                         android:textSize="14sp"
                         android:textColor="@color/break_yellow_btn"
                         android:background="@color/transparent"
@@ -43,7 +43,7 @@
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
-                        android:text="Timer bearbeiten"
+                        android:text="@string/timer_bearbeiten"
                         android:textSize="18sp"
                         android:gravity="center"
                         android:textStyle="bold"
@@ -86,7 +86,7 @@
                                 <EditText
                                     android:id="@+id/item_description"
                                     android:layout_width="match_parent"
-                                    android:hint="Timer Beschreibung"
+                                    android:hint="@string/timer_beschreibung"
                                     android:textSize="14sp"
                                     android:imeOptions="actionDone"
                                     android:inputType="text"
@@ -107,7 +107,7 @@
                             android:layout_marginTop="8dp"
                             android:textStyle="bold"
                             android:layout_marginEnd="16dp"
-                            android:text="Timer einstellen"
+                            android:text="@string/timer_einstellen"
                             android:textSize="14sp"/>
 
                         <View

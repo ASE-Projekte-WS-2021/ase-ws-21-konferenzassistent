@@ -35,7 +35,7 @@
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
-                        android:text="TEILNEHMER"
+                        android:text="@string/teilnehmer2"
                         android:textSize="20sp"
                         android:gravity="center"
                         android:textStyle="bold"
@@ -79,7 +79,7 @@
                                 <EditText
                                     android:id="@+id/text_input_search"
                                     android:layout_width="0dp"
-                                    android:hint="Teilnehmer Suchen"
+                                    android:hint="@string/teilnehmer_suchen"
                                     android:layout_weight="1"
                                     android:textSize="16sp"
                                     android:inputType="text"
@@ -114,7 +114,7 @@
                             android:layout_marginTop="8dp"
                             android:textStyle="bold"
                             android:layout_marginEnd="16dp"
-                            android:text="Bekannte Teilnehmer"/>
+                            android:text="@string/bekannte_teilnehmer"/>
 
                         <View
                             android:layout_width="match_parent"
@@ -183,7 +183,7 @@
                                                 android:textColor="@color/black"
                                                 android:gravity="center"
                                                 android:textSize="16sp"
-                                                android:text="Neuen Teilnehmer hinzufügen"/>
+                                                android:text="@string/neuen_teilnehmer_hinzuf_gen"/>
 
 
 

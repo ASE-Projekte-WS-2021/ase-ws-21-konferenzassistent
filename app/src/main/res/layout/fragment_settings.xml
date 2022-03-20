@@ -43,7 +43,7 @@
                         android:layout_marginStart="16dp"
                         android:textColor="@color/black"
                         android:textStyle="bold"
-                        android:text="Neuen Kontak hinzufügen"/>
+                        android:text="@string/neuen_kontak_hinzuf_gen"/>
 
                     <androidx.constraintlayout.widget.Placeholder
                         android:layout_width="0dp"
@@ -96,7 +96,7 @@
                         android:layout_marginStart="16dp"
                         android:textColor="@color/black"
                         android:textStyle="bold"
-                        android:text="Eigene Timer verwalten"/>
+                        android:text="@string/eigene_timer_verwalten"/>
 
                     <androidx.constraintlayout.widget.Placeholder
                         android:layout_width="0dp"
@@ -136,7 +136,7 @@
                         android:layout_marginStart="16dp"
                         android:textColor="@color/black"
                         android:textStyle="bold"
-                        android:text="Eigene Checklisten verwalten"/>
+                        android:text="@string/eigene_checklisten_verwalten"/>
 
                     <androidx.constraintlayout.widget.Placeholder
                         android:layout_width="0dp"
