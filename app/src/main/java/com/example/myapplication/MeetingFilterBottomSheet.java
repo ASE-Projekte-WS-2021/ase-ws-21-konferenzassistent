@@ -114,8 +114,10 @@ public class MeetingFilterBottomSheet extends BottomSheetDialogFragment {
             dismiss();
         });
         filterButton.setOnClickListener(view -> {
-            onFilterButtonClicked();
-            dismiss();
+            boolean isValid = onFilterButtonClicked();
+            if(isValid){
+                dismiss();
+            }
         });
 
         MaterialDatePicker picker = MaterialDatePicker.Builder.dateRangePicker()
@@ -140,7 +142,7 @@ public class MeetingFilterBottomSheet extends BottomSheetDialogFragment {
         dateEndEditText.setOnClickListener(view -> picker.show(getParentFragmentManager(),getTag()));
     }
 
-    private void onFilterButtonClicked() {
+    private boolean onFilterButtonClicked() {
         FilterData filterData = new FilterData(true);
 
         List<String> filterDataPeople = new ArrayList<>();
@@ -167,7 +169,7 @@ public class MeetingFilterBottomSheet extends BottomSheetDialogFragment {
             if(Integer.parseInt(countMaxString)<Integer.parseInt(countMinString)){
                 Toast toast = Toast.makeText(getContext(), "Du kannst nicht mehr Leute im Minimum haben wie Leute im Maximum", Toast.LENGTH_LONG);
                 toast.show();
-                return;
+                return false;
             }
         }
 
@@ -182,5 +184,6 @@ public class MeetingFilterBottomSheet extends BottomSheetDialogFragment {
         filterData.setDateEnd(dateEnd);
 
         listener.onFilterButtonClicked(filterData);
+        return true;
     }
 }
