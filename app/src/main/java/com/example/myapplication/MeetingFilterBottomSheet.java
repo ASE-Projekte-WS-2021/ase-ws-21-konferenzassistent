@@ -165,8 +165,9 @@ public class MeetingFilterBottomSheet extends BottomSheetDialogFragment {
 
         if(!countMaxString.equals("") && !countMinString.equals("")){
             if(Integer.parseInt(countMaxString)<Integer.parseInt(countMinString)){
-                Toast toast = Toast.makeText(getContext(), "IDIOT", Toast.LENGTH_LONG);
+                Toast toast = Toast.makeText(getContext(), "Du kannst nicht mehr Leute im Minimum haben wie Leute im Maximum", Toast.LENGTH_LONG);
                 toast.show();
+                return;
             }
         }
 
