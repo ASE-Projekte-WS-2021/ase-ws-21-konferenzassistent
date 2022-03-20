@@ -1,5 +1,7 @@
 package com.example.myapplication;
 
+import static com.example.myapplication.CountdownPreset.convertToDatabaseEntry;
+
 import android.app.Dialog;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,6 +12,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.myapplication.data.RoomDB;
 import com.example.myapplication.databinding.BottomSheetEditPresetsBinding;
 import com.example.myapplication.databinding.BottomSheetPresetsBinding;
 import com.example.myapplication.meetingwizard.RecyclerViewAdvancedCountdownAdapter;
@@ -19,7 +22,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 import java.util.ArrayList;
 
-public class PresetEditBottomSheet extends BottomSheetDialogFragment {
+public class PresetEditBottomSheet extends BottomSheetDialogFragment  implements PresetAddCountdownBottomSheet.editingDone {
     BottomSheetEditPresetsBinding bi;
     BottomSheetBehavior<View> bottomSheetBehavior;
 
@@ -86,8 +89,10 @@ public class PresetEditBottomSheet extends BottomSheetDialogFragment {
         // cancel button clicked
         bi.buttonDismiss.setOnClickListener(viewListener -> dismiss());
 
+        // createa button event
         bi.buttonCreate.setOnClickListener(viewListener ->{
             PresetAddCountdownBottomSheet presetAddCountdownBottomSheet = new PresetAddCountdownBottomSheet();
+            presetAddCountdownBottomSheet.getListener(this);
             presetAddCountdownBottomSheet.show(getParentFragmentManager(), presetAddCountdownBottomSheet.getTag());
         });
 
@@ -117,7 +122,6 @@ public class PresetEditBottomSheet extends BottomSheetDialogFragment {
         this.viewType = viewType;
         countdownObjects = new ArrayList<>();
         countdownObjects.addAll(object);
-        Log.i("TAG", "setupView: " + object);
     }
 
 
@@ -138,5 +142,17 @@ public class PresetEditBottomSheet extends BottomSheetDialogFragment {
         super.onStart();
         //bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
     }
+
+    @Override
+    public void onEditingDone(CountdownPreset preset) {
+        countdownObjects.add(preset);
+        recyclerViewPresetAdapter.notifyItemInserted(countdownObjects.size());
+        writePresetToDatabase(preset);
+    }
+
+    private void writePresetToDatabase(CountdownPreset preset){
+        convertToDatabaseEntry(RoomDB.getInstance(getContext()), preset);
+    }
+
 
 }

@@ -10,36 +10,31 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.myapplication.databinding.BottomSheetCountdownAddNewBinding;
-import com.example.myapplication.databinding.BottomSheetEditPresetsBinding;
-import com.example.myapplication.meetingwizard.RecyclerViewAdvancedCountdownAdapter;
+import com.example.myapplication.databinding.BottomSheetCreateItemBinding;
+import com.example.myapplication.databinding.BottomSheetPresetsBinding;
+import com.example.myapplication.meetingwizard.RecyclerViewAdvancedCountdownItemAdapter;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 import java.util.ArrayList;
 
-public class PresetAddCountdownBottomSheet extends BottomSheetDialogFragment {
-    BottomSheetCountdownAddNewBinding bi;
+public class EditItemBottomSheet extends BottomSheetDialogFragment {
+    BottomSheetCreateItemBinding bi;
     BottomSheetBehavior<View> bottomSheetBehavior;
+timerEdit listener;
+Integer position;
 
-    RecyclerViewCreatedCountdownElementsAdapter recyclerViewCreatedCountdownElementsAdapter;
-    editingDone listener;
-
-    interface editingDone{
-        void onEditingDone(CountdownPreset preset);
+    interface timerEdit{
+        void onEditFinish(RecyclerViewAdvancedCountdownItemAdapter.AdvancedCountdownItem mItem, int position);
     }
 
-    // Preset Lists
-    private final ArrayList<CountdownPreset> countdownObjects = new ArrayList<>();
-    private ArrayList<RecyclerViewAdvancedCountdownAdapter.AdvancedCountdownObject> advancedCountdownObjects;
-
+    RecyclerViewAdvancedCountdownItemAdapter.AdvancedCountdownItem mItem;
     // Make the background Transparent
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setStyle(BottomSheetDialogFragment.STYLE_NORMAL, R.style.CustomBottomSheetDialogTheme);
-        advancedCountdownObjects = new ArrayList<>();
     }
 
     @NonNull
@@ -48,7 +43,7 @@ public class PresetAddCountdownBottomSheet extends BottomSheetDialogFragment {
         BottomSheetDialog bottomSheet = (BottomSheetDialog) super.onCreateDialog(savedInstanceState);
 
         // inflating Layout
-        View view = View.inflate(bottomSheet.getContext(), R.layout.bottom_sheet_countdown_add_new, null);
+        View view = View.inflate(bottomSheet.getContext(), R.layout.bottom_sheet_create_item, null);
 
         // binding views to data binding
         bi = DataBindingUtil.bind(view);
@@ -81,50 +76,40 @@ public class PresetAddCountdownBottomSheet extends BottomSheetDialogFragment {
             }
         });
 
-
         // cancel button clicked
         bi.dialogCancelButton.setOnClickListener(viewListener -> dismiss());
 
-        bi.addCountdown.setOnClickListener(viewListener -> {
-            advancedCountdownObjects.add(new RecyclerViewAdvancedCountdownAdapter.AdvancedCountdownObject("", true, new ArrayList<>()));
-            recyclerViewCreatedCountdownElementsAdapter.notifyItemInserted(advancedCountdownObjects.size());
+        bi.dialogCreateButton.setOnClickListener(viewListener ->
+        {
+            mItem.setSubCountdown((long)bi.itemNumberPicker.getValue());
+            mItem.setSubCountdownDescription(bi.itemDescription.getText().toString());
+            listener.onEditFinish(mItem, position);
         });
 
-        bi.dialogCreateButton.setOnClickListener(viewListener ->{
-                    listener.onEditingDone(new CountdownPreset(bi.presetName.getText().toString(), advancedCountdownObjects));
-                    dismiss();
-                });
+        Log.i("TAG", "initTimer: " +mItem);
+        bi.itemNumberPicker.setValue(mItem.getSubCountdown().intValue());
+        bi.itemDescription.setText(mItem.getSubCountdownDescription());
 
         setStyle(CustomAlertBottomSheetAdapter.STYLE_NORMAL, R.style.CustomBottomSheetDialogTheme);
 
-        buildRecyclerView();
-
         return bottomSheet;
     }
-    
-    // Configs the view to match the right Preset
 
-    // Build and fills the recycler view
-    private void buildRecyclerView(){
-
-        RecyclerView recyclerView = bi.addRecycleview;
-        recyclerViewCreatedCountdownElementsAdapter = new RecyclerViewCreatedCountdownElementsAdapter(
-                advancedCountdownObjects,
-                this.getContext()
-                );
-        recyclerView.setAdapter(recyclerViewCreatedCountdownElementsAdapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
-
+    // Initializes the Presets
+    public void initTimer(RecyclerViewAdvancedCountdownItemAdapter.AdvancedCountdownItem mItem, timerEdit listener, int position){
+        this.mItem = mItem;
+        this.listener = listener;
+        this.position = position;
     }
 
-    public void getListener(editingDone listener){
-        this.listener = listener;
+    // Closes the Sheet
+    public void closeCreation(){
+        dismiss();
     }
 
     @Override
     public void onStart(){
         super.onStart();
-        //bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
     }
 
 }

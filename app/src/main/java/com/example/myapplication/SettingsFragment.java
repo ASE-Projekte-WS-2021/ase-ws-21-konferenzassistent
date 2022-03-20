@@ -1,6 +1,6 @@
 package com.example.myapplication;
 
-import static com.example.myapplication.CountdownPreset.convertToAdvancedCowntdownList;
+import static com.example.myapplication.CountdownPreset.convertToAdvancedCountdownList;
 
 import android.os.Bundle;
 
@@ -13,22 +13,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.myapplication.data.MeetingData;
-import com.example.myapplication.data.MeetingWithParticipantData;
-import com.example.myapplication.data.ParticipantData;
 import com.example.myapplication.data.RoomDB;
 import com.example.myapplication.data.presets.countdown.CountdownItemData;
-import com.example.myapplication.data.presets.countdown.CountdownItemPair;
 import com.example.myapplication.data.presets.countdown.CountdownParentData;
 import com.example.myapplication.data.presets.countdown.CountdownParentWithItemData;
 import com.example.myapplication.data.presets.countdown.CountdownPresetData;
 import com.example.myapplication.data.presets.countdown.CountdownPresetPair;
 import com.example.myapplication.data.presets.countdown.CountdownPresetWithParentData;
 import com.example.myapplication.databinding.FragmentSettingsBinding;
-import com.example.myapplication.meetingwizard.Participant;
-import com.example.myapplication.meetingwizard.ParticipantCreationBottomSheetAdapter;
-import com.example.myapplication.meetingwizard.RecyclerViewAdvancedCountdownAdapter;
-import com.example.myapplication.meetingwizard.RecyclerViewAdvancedCountdownItemAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -109,10 +101,11 @@ public class SettingsFragment extends Fragment {
 
         d.forEach(preset ->{
             String presetName = preset.getPresets().getTitle();
-            countdownPresets.add(new CountdownPreset(presetName, convertToAdvancedCowntdownList(database, preset)));
+            countdownPresets.add(new CountdownPreset(presetName, convertToAdvancedCountdownList(database, preset)));
         });
     }
 
+    // TODO: simplify
     private void createStandard(){
 
         CountdownPresetData preset = new CountdownPresetData();

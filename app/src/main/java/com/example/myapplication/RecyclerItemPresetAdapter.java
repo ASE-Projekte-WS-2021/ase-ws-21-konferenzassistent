@@ -1,14 +1,19 @@
 package com.example.myapplication;
 
 import android.content.Context;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.meetingwizard.RecyclerViewAdvancedCountdownItemAdapter;
@@ -16,8 +21,10 @@ import com.example.myapplication.meetingwizard.RecyclerViewAdvancedCountdownItem
 import java.util.ArrayList;
 
 public class RecyclerItemPresetAdapter
-        extends RecyclerView.Adapter<RecyclerItemPresetAdapter.ViewHolder> {
+        extends RecyclerView.Adapter<RecyclerItemPresetAdapter.ViewHolder>
+implements EditItemBottomSheet.timerEdit {
 
+    EditItemBottomSheet editItemBottomSheet;
     private final Context mContext;
     private final ArrayList<RecyclerViewAdvancedCountdownItemAdapter.AdvancedCountdownItem> countdownItem;
 
@@ -44,7 +51,9 @@ public class RecyclerItemPresetAdapter
 
         holder.itemContainer.setOnClickListener(view -> {
             // Open Editor
-
+            editItemBottomSheet = new EditItemBottomSheet();
+            editItemBottomSheet.initTimer(countdownItem.get(position), this, position);
+            editItemBottomSheet.show(((AppCompatActivity)mContext).getSupportFragmentManager(), editItemBottomSheet.getTag());
         });
     }
 
@@ -52,6 +61,17 @@ public class RecyclerItemPresetAdapter
     public int getItemCount() {
         return countdownItem.size();
     }
+
+    @Override
+    public void onEditFinish(RecyclerViewAdvancedCountdownItemAdapter.AdvancedCountdownItem mItem, int position) {
+        countdownItem.get(position).setSubCountdown(mItem.getSubCountdown());
+        countdownItem.get(position).setSubCountdownDescription(mItem.getSubCountdownDescription());
+        editItemBottomSheet.closeCreation();
+        notifyDataSetChanged();
+    }
+
+
+
 
     // View holder Class
     public static class ViewHolder extends RecyclerView.ViewHolder{
