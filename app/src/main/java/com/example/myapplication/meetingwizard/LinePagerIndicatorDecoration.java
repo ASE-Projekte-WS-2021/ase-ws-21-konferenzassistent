@@ -19,8 +19,8 @@ import com.example.myapplication.R;
 // https://blog.davidmedenjak.com/android/2017/06/24/viewpager-recyclerview.html
 public class LinePagerIndicatorDecoration extends RecyclerView.ItemDecoration {
 
-    private int colorActive = R.color.corona_blue;;
-    private int colorInactive = R.color.gray;;
+    private int colorActive;
+    private int colorInactive;
 
     private static final float DP = Resources.getSystem().getDisplayMetrics().density;
 
@@ -60,6 +60,9 @@ public class LinePagerIndicatorDecoration extends RecyclerView.ItemDecoration {
     @Override
     public void onDrawOver(Canvas c, RecyclerView parent, RecyclerView.State state) {
         super.onDrawOver(c, parent, state);
+
+        colorActive = parent.getResources().getColor(R.color.corona_blue,null);
+        colorInactive = parent.getResources().getColor(R.color.heller_corona_blue,null);
 
         int itemCount = parent.getAdapter().getItemCount();
 
