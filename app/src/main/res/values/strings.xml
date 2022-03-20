@@ -52,4 +52,6 @@
     <string name="contacts_search_hint">Kontakte suchen</string>
     <string name="cancel_text">Abbrechen</string>
     <string name="contacts_header_text">Kontakte</string>
+    
+    <string name="meeting_data_no_location"><![CDATA[<Keinen Ort angegeben>]]></string>
 </resources>
