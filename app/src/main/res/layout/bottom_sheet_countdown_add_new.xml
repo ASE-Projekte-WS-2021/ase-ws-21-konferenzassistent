@@ -26,40 +26,37 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="8dp"
+                    android:layout_margin="8dp"
                     android:orientation="horizontal">
 
                     <Button
                         android:id="@+id/dialog_cancel_button"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Abbrechen"
-                        android:textSize="14sp"
-                        android:textColor="@color/break_yellow_btn"
                         android:background="@color/transparent"
-                        />
+                        android:text="Abbrechen"
+                        android:textColor="@color/break_yellow_btn"
+                        android:textSize="14sp" />
 
                     <TextView
                         android:layout_width="0dp"
-                        android:layout_weight="1"
                         android:layout_height="wrap_content"
-                        android:text="Countdown erstelen"
-                        android:textSize="18sp"
+                        android:layout_weight="1"
                         android:gravity="center"
-                        android:textStyle="bold"
-                        android:textColor="@color/black"/>
+                        android:text="Countdown erstellen"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
 
                     <Button
                         android:id="@+id/dialog_create_button"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Erstellen"
-                        android:textSize="14sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/corona_blue"
                         android:background="@color/transparent"
-                        />
+                        android:text="Erstellen"
+                        android:textColor="@color/corona_blue"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
 
                 </LinearLayout>
 
@@ -91,13 +88,14 @@
                                 <EditText
                                     android:id="@+id/preset_name"
                                     android:layout_width="match_parent"
-                                    android:hint="Preset Name"
-                                    android:textSize="14sp"
-                                    android:inputType="text"
-                                    android:maxLines="1"
+                                    android:layout_height="wrap_content"
                                     android:layout_margin="16dp"
                                     android:background="@color/transparent"
-                                    android:layout_height="wrap_content"/>
+                                    android:hint="Preset Name"
+                                    android:imeOptions="actionDone"
+                                    android:inputType="text"
+                                    android:maxLines="1"
+                                    android:textSize="14sp" />
 
                             </LinearLayout>
                         </androidx.cardview.widget.CardView>
@@ -144,11 +142,11 @@
 
                                     <ImageView
                                         android:id="@+id/add_countdown"
-                                        android:layout_width="wrap_content"
+                                        android:layout_width="16dp"
                                         android:layout_height="16dp"
                                         android:layout_gravity="center"
                                         android:layout_marginEnd="16dp"
-                                        android:background="@drawable/ic_baseline_add_24_blue"/>
+                                        android:background="@drawable/ic_baseline_add_24_blue" />
 
 
                                 </LinearLayout>

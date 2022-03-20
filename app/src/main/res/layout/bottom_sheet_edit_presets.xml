@@ -24,37 +24,36 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
                     android:orientation="horizontal">
 
                     <androidx.constraintlayout.widget.Placeholder
                         android:layout_width="0dp"
-                        android:layout_weight="1"
                         android:layout_height="match_parent"
-                        android:textSize="12sp"
-                        android:textColor="@android:color/holo_red_dark"
+                        android:layout_weight="1"
                         android:background="@color/transparent"
-                        />
+                        android:textColor="@android:color/holo_red_dark"
+                        android:textSize="12sp" />
 
                     <TextView
                         android:id="@+id/preset_header_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="CHECKLIST PRESET"
-                        android:textSize="20sp"
                         android:gravity="center"
-                        android:textStyle="bold"
-                        android:textColor="@color/black"/>
+                        android:text="CHECKLIST PRESET"
+                        android:textColor="@color/black"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
 
                     <Button
                         android:id="@+id/button_dismiss"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="ÜBERNEHMEN"
-                        android:textSize="14sp"
-                        android:textColor="@color/break_yellow_btn"
                         android:background="@color/transparent"
-                        />
+                        android:text="ÜBERNEHMEN"
+                        android:textColor="@color/break_yellow_btn"
+                        android:textSize="14sp" />
 
                 </LinearLayout>
 
@@ -148,11 +147,11 @@
                                 android:layout_weight="1"/>
 
                             <ImageView
-                                android:layout_width="wrap_content"
+                                android:layout_width="16dp"
                                 android:layout_height="16dp"
                                 android:layout_gravity="center"
                                 android:layout_marginEnd="16dp"
-                                android:background="@drawable/ic_baseline_arrow_forward_ios_24"/>
+                                android:background="@drawable/ic_baseline_arrow_forward_ios_24" />
 
 
                         </LinearLayout>
