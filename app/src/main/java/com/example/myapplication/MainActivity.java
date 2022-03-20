@@ -31,6 +31,16 @@ public class MainActivity extends AppCompatActivity{
     private TextView actionBarText;
     private CreateMeetingBottomSheetAdapter meetingAdapter;
 
+    public interface FilterButtonListener {
+        void onFilterButtonClicked();
+    }
+
+    public MainActivity.FilterButtonListener filterButtonListener;
+
+    public void setOnFilterButtonClickedListener(MainActivity.FilterButtonListener filterButtonListener) {
+        this.filterButtonListener = filterButtonListener;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,6 +87,12 @@ public class MainActivity extends AppCompatActivity{
         NavController.OnDestinationChangedListener listener =
                 ((controller, navDestination, bundle) -> rebuildActionBar());
         navController.addOnDestinationChangedListener(listener);
+
+        findViewById(R.id.main_activity_filter_button).setOnClickListener(view -> {
+            if (filterButtonListener != null) {
+                filterButtonListener.onFilterButtonClicked();
+            }
+        });
 
     }
 

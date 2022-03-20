@@ -1,19 +1,18 @@
 package com.example.myapplication;
 
 import android.os.Bundle;
-
-import androidx.databinding.ViewDataBinding;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.ItemTouchHelper;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+
+import androidx.databinding.ViewDataBinding;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.ItemTouchHelper;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.data.MeetingParticipantPair;
 import com.example.myapplication.data.ParticipantData;
@@ -28,7 +27,7 @@ import java.util.stream.Stream;
  * Home Fragment Class
 
  */
-public class HomeFragment extends Fragment  implements OnFilterButtonClickListener, MeetingHistoryAdapter.swiped {
+public class HomeFragment extends Fragment  implements OnFilterButtonClickListener, MeetingHistoryAdapter.swiped, MainActivity.FilterButtonListener {
 
     public HomeFragment() {
         // Required empty public constructor
@@ -60,6 +59,8 @@ public class HomeFragment extends Fragment  implements OnFilterButtonClickListen
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         database = RoomDB.getInstance(getContext());
+
+        ((MainActivity) getActivity()).setOnFilterButtonClickedListener(HomeFragment.this);
     }
 
     @Override
@@ -110,12 +111,15 @@ public class HomeFragment extends Fragment  implements OnFilterButtonClickListen
     }
 
     private void setupButtonListener() {
+        /*
         filterButton.setOnClickListener(view -> {
 
-            final MeetingFilterBottomSheet meetingFilterBottomSheet = new MeetingFilterBottomSheet(meetingsList,participantsList,this);
-            meetingFilterBottomSheet.show(getParentFragmentManager(),meetingFilterBottomSheet.getTag());
+            final MeetingFilterBottomSheet meetingFilterBottomSheet = new MeetingFilterBottomSheet(meetingsList, participantsList, this);
+            meetingFilterBottomSheet.show(getParentFragmentManager(), meetingFilterBottomSheet.getTag());
 
         });
+        */
+
     }
 
     // Creates an ArrayList From the Database entries
@@ -247,6 +251,12 @@ public class HomeFragment extends Fragment  implements OnFilterButtonClickListen
         }
 
         updateRKIandPastMeetingInfo();
+    }
+
+    @Override
+    public void onFilterButtonClicked() {
+        final MeetingFilterBottomSheet meetingFilterBottomSheet = new MeetingFilterBottomSheet(meetingsList, participantsList, this);
+        meetingFilterBottomSheet.show(getParentFragmentManager(), meetingFilterBottomSheet.getTag());
     }
     /*
     public void openPastMeeting(View view){
