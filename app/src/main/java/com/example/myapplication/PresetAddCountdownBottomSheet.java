@@ -105,7 +105,7 @@ public class PresetAddCountdownBottomSheet extends BottomSheetDialogFragment imp
         });
 
         bi.dialogCreateButton.setOnClickListener(viewListener ->{
-                    listener.onEditingDone(new CountdownPreset(bi.presetName.getText().toString(), advancedCountdownObjects));
+                    listener.onEditingDone(new CountdownPreset(bi.presetName.getText().toString(), advancedCountdownObjects, -1));
                     dismiss();
                 });
 

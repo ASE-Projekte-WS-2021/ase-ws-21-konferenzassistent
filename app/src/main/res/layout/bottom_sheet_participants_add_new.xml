@@ -36,6 +36,7 @@
                         android:layout_height="wrap_content"
                         android:text="Abbrechen"
                         android:textSize="14sp"
+                        android:layout_marginStart="8dp"
                         android:textColor="@color/break_yellow_btn"
                         android:background="@color/transparent"
                         />
@@ -44,7 +45,7 @@
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
-                        android:text="TEILNEHMER ERSTELLEN"
+                        android:text="Teilnehmer erstellen"
                         android:textSize="18sp"
                         android:gravity="center"
                         android:textStyle="bold"
@@ -56,6 +57,7 @@
                         android:layout_height="wrap_content"
                         android:text="Erstellen"
                         android:textSize="14sp"
+                        android:layout_marginEnd="8dp"
                         android:textStyle="bold"
                         android:textColor="@color/corona_blue"
                         android:background="@color/transparent"
@@ -95,6 +97,7 @@
                                     android:textSize="14sp"
                                     android:inputType="text"
                                     android:maxLines="1"
+                                    android:imeOptions="actionDone"
                                     android:layout_margin="16dp"
                                     android:background="@color/transparent"
                                     android:layout_height="wrap_content"/>

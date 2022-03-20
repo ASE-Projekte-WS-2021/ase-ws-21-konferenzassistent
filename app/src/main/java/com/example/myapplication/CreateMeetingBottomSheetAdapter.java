@@ -147,9 +147,14 @@ public class CreateMeetingBottomSheetAdapter extends BottomSheetDialogFragment i
                 openWarning();
         });
 
-        // edit button clicked
+        // Start button clicked
         bi.dialogCreateButton.setOnClickListener(viewListener -> {
             dismiss();
+
+            // if nothing got selected
+            if(selectedPair == null){
+                selectedPair = presetPairs.get(0);
+            }
 
             // Open the Meeting wizard
             if(((MainActivity)getActivity()) != null)

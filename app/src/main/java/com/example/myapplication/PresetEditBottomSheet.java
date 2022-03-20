@@ -1,6 +1,7 @@
 package com.example.myapplication;
 
 import static com.example.myapplication.CountdownPreset.convertToDatabaseEntry;
+import static com.example.myapplication.CountdownPreset.removeFromDatabase;
 
 import android.app.Dialog;
 import android.os.Bundle;
@@ -22,7 +23,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 import java.util.ArrayList;
 
-public class PresetEditBottomSheet extends BottomSheetDialogFragment  implements PresetAddCountdownBottomSheet.editingDone {
+public class PresetEditBottomSheet extends BottomSheetDialogFragment  implements PresetAddCountdownBottomSheet.editingDone, RecyclerViewCountdownPresetAdapter.onDeletionListener {
     BottomSheetEditPresetsBinding bi;
     BottomSheetBehavior<View> bottomSheetBehavior;
 
@@ -34,6 +35,15 @@ public class PresetEditBottomSheet extends BottomSheetDialogFragment  implements
     public static final int PRESET_TYPE_CHECKLIST = 1;
 
     Integer viewType;
+
+    @Override
+    public void onDelete(int position) {
+        int id = countdownObjects.get(position).id;
+        Log.i("TAG", "onDelete: " +id);
+        countdownObjects.remove(position);
+        recyclerViewPresetAdapter.notifyItemRemoved(countdownObjects.size());
+        removeFromDatabase(RoomDB.getInstance(getContext()),id);
+    }
 
     interface onCloseListener{
         void onClose();
@@ -95,7 +105,7 @@ public class PresetEditBottomSheet extends BottomSheetDialogFragment  implements
         // cancel button clicked
         bi.buttonDismiss.setOnClickListener(viewListener -> dismiss());
 
-        // createa button event
+        // create button event
         bi.buttonCreate.setOnClickListener(viewListener ->{
             PresetAddCountdownBottomSheet presetAddCountdownBottomSheet = new PresetAddCountdownBottomSheet();
             presetAddCountdownBottomSheet.getListener(this);
@@ -137,6 +147,7 @@ public class PresetEditBottomSheet extends BottomSheetDialogFragment  implements
         RecyclerView recyclerView = bi.presetRecyclerView;
         recyclerViewPresetAdapter = new RecyclerViewCountdownPresetAdapter(
                 countdownObjects,
+                this,
                 this.getContext()
                 );
         recyclerView.setAdapter(recyclerViewPresetAdapter);

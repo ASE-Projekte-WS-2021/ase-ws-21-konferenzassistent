@@ -16,10 +16,12 @@ import java.util.ArrayList;
 public class CountdownPreset {
     String title;
     ArrayList<RecyclerViewAdvancedCountdownAdapter.AdvancedCountdownObject> advancedCountdownObject;
+    Integer id;
 
-    public CountdownPreset(String title, ArrayList<RecyclerViewAdvancedCountdownAdapter.AdvancedCountdownObject> advancedCountdownObject) {
+    public CountdownPreset(String title, ArrayList<RecyclerViewAdvancedCountdownAdapter.AdvancedCountdownObject> advancedCountdownObject, int id) {
         this.title = title;
         this.advancedCountdownObject = advancedCountdownObject;
+        this.id = id;
     }
 
     public String getTitle() {
@@ -36,6 +38,10 @@ public class CountdownPreset {
 
     public void setAdvancedCountdownObject(ArrayList<RecyclerViewAdvancedCountdownAdapter.AdvancedCountdownObject> advancedCountdownObject) {
         this.advancedCountdownObject = advancedCountdownObject;
+    }
+
+    public static void removeFromDatabase(RoomDB database, Integer id){
+        database.countdownPresetDao().delete(database.countdownPresetDao().getOne(id));
     }
 
     public static void convertToDatabaseEntry(RoomDB database, CountdownPreset preset){

@@ -67,7 +67,7 @@ public class SettingsFragment extends Fragment implements PresetEditBottomSheet.
             contactCreationBottomSheetAdapter.show(getParentFragmentManager(), contactCreationBottomSheetAdapter.getTag());
         });
 
-        // on new participant button
+        // on new checklist button
         bi.buttonAddChecklist.setOnClickListener(viewListener ->{
             /*
             PresetEditBottomSheet presetEditBottomSheet = new PresetEditBottomSheet();
@@ -76,9 +76,9 @@ public class SettingsFragment extends Fragment implements PresetEditBottomSheet.
              */
         });
 
-
-        // on new participant button
+        // on new countdown button
         bi.buttonAddCountdown.setOnClickListener(viewListener ->{
+            createCountdownList();
             PresetEditBottomSheet presetEditBottomSheet = new PresetEditBottomSheet();
             presetEditBottomSheet.setupView(countdownPresets, PresetEditBottomSheet.PRESET_TYPE_COUNTDOWN, this);
             presetEditBottomSheet.show(getParentFragmentManager(), presetEditBottomSheet.getTag());
@@ -100,8 +100,9 @@ public class SettingsFragment extends Fragment implements PresetEditBottomSheet.
         countdownPresets.clear();
         d.forEach(preset ->{
             String presetName = preset.getPresets().getTitle();
+            Integer presetId = preset.getPresets().getID();
 
-            countdownPresets.add(new CountdownPreset(presetName, convertToAdvancedCountdownList(database, preset)));
+            countdownPresets.add(new CountdownPreset(presetName, convertToAdvancedCountdownList(database, preset), presetId));
         });
     }
 
