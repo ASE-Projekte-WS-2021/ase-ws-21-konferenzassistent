@@ -118,13 +118,14 @@
                     android:layout_height="1dp"
                     android:background="#e6e6e6" />
 
-                <LinearLayout
+                 <LinearLayout
                     android:id="@+id/button_add_checklist"
                     style="@style/Widget.AppCompat.Button"
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:minHeight="48dp"
                     android:gravity="left"
+                     android:visibility="gone"
                     android:background="@color/transparent"
                     android:layout_height="wrap_content">
 
