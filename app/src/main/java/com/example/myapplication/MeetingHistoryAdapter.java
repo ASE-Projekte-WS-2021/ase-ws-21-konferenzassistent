@@ -22,16 +22,18 @@ import com.example.myapplication.data.RoomDB;
 
 import org.w3c.dom.Document;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MeetingHistoryAdapter extends RecyclerView.Adapter<MeetingHistoryAdapter.MeetingHistoryViewHolder> implements
-CardviewTouchHelperAdapter{
+CardviewTouchHelperAdapter, CustomAlertBottomSheetAdapter.onLeaveListener{
     private final Context ct;
     private final FragmentManager manager;
     private final List<Meeting> meetingsList;
     private CardviewTouchHelper cTouchHelper;
-    private String meeting_id;
+    private List<String> meeting_id = new ArrayList<>();
     swiped swipedListener;
+    private int swipedItemPosition = -1;
 
     public MeetingHistoryAdapter(Context ct, FragmentManager manager, List<Meeting> meetingsList, swiped swipedListener) {
         this.ct = ct;
@@ -55,7 +57,7 @@ CardviewTouchHelperAdapter{
     @Override
     public void onBindViewHolder(@NonNull MeetingHistoryViewHolder holder, int position) {
         //Get Meeting ID
-        meeting_id = meetingsList.get(position).getId();
+        meeting_id.add(meetingsList.get(position).getId());
 
         // Get the Values from the meeting List
         String duration = Integer.parseInt(meetingsList.get(position).getDuration())/60 + "";
@@ -132,14 +134,13 @@ CardviewTouchHelperAdapter{
 
     @Override
     public void onItemSwiped(int position) {
-            meetingsList.remove(position);
-            RoomDB database =
-            RoomDB.getInstance(ct.getApplicationContext());
-            database.meetingDao().delete(database.meetingDao().getOne(Integer.parseInt(meeting_id)));
-            notifyItemRemoved(position);
+        swipedItemPosition = position;
 
-            swipedListener.onDeleteSwipe(meetingsList.size());
-
+        CustomAlertBottomSheetAdapter customAlertBottomSheetAdapter = new CustomAlertBottomSheetAdapter(this);
+        customAlertBottomSheetAdapter.setWarningText("Soll dieses Meeting gelöscht werden?");
+        customAlertBottomSheetAdapter.setAcceptText("Löschen");
+        customAlertBottomSheetAdapter.setDeclineText("Beibehalten");
+        customAlertBottomSheetAdapter.show(manager, customAlertBottomSheetAdapter.getTag());
     }
 
     public static class MeetingHistoryViewHolder extends RecyclerView.ViewHolder implements
@@ -203,5 +204,22 @@ CardviewTouchHelperAdapter{
             cGestureDetector.onTouchEvent(motionEvent);
             return true;
         }
+    }
+
+    @Override
+    public void onLeaving() {
+        meetingsList.remove(swipedItemPosition);
+        RoomDB database = RoomDB.getInstance(ct.getApplicationContext());
+        database.meetingDao().delete(database.meetingDao().getOne(Integer.parseInt(meeting_id.get(swipedItemPosition))));
+        notifyItemRemoved(swipedItemPosition);
+
+        swipedListener.onDeleteSwipe(meetingsList.size());
+
+        swipedItemPosition = -1;
+    }
+
+    @Override
+    public void clearWarnings() {
+        notifyDataSetChanged();
     }
 }
