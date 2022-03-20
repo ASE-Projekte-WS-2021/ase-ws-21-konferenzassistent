@@ -13,7 +13,7 @@ import java.util.List;
 public interface ParticipantDao {
 
     @Insert(onConflict = REPLACE)
-    void insert(ParticipantData participantData);
+    long insert(ParticipantData participantData);
 
     @Delete
     void delete(ParticipantData participantData);
