@@ -9,7 +9,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="48dp"
         android:layout_gravity="top"
         android:background="@color/corona_blue"
         app:layout_constraintEnd_toEndOf="parent"
@@ -35,8 +35,8 @@
 
             <ImageButton
                 android:id="@+id/main_activity_filter_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
                 android:tint="@color/corona_white"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -51,9 +51,9 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="48dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="40dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -65,25 +65,23 @@
             android:orientation="vertical">
 
 
-                <RelativeLayout
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/main_layout_card"
+                android:paddingBottom="5dp">
+
+                <fragment
+                    android:id="@+id/fragment"
+                    android:name="androidx.navigation.fragment.NavHostFragment"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:paddingBottom="5dp"
-                    android:background="@drawable/main_layout_card"
-                    >
-
-                    <fragment
-                        android:id="@+id/fragment"
-                        android:name="androidx.navigation.fragment.NavHostFragment"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        app:defaultNavHost="true"
-                        app:navGraph="@navigation/konferzen_nav" />
+                    app:defaultNavHost="true"
+                    app:navGraph="@navigation/konferzen_nav" />
 
 
-                </RelativeLayout>
-            </LinearLayout>
-
+            </RelativeLayout>
+        </LinearLayout>
 
 
     </ScrollView>
