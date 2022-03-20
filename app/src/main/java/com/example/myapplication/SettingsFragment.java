@@ -25,7 +25,7 @@ import com.example.myapplication.databinding.FragmentSettingsBinding;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SettingsFragment extends Fragment {
+public class SettingsFragment extends Fragment implements PresetEditBottomSheet.onCloseListener {
     FragmentSettingsBinding bi;
     RoomDB database;
     ArrayList<CountdownPreset> countdownPresets = new ArrayList<>();
@@ -43,7 +43,6 @@ public class SettingsFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         database = RoomDB.getInstance(getContext());
-        getDatabaseData();
         createCountdownList();
     }
 
@@ -70,21 +69,20 @@ public class SettingsFragment extends Fragment {
 
         // on new participant button
         bi.buttonAddChecklist.setOnClickListener(viewListener ->{
+            /*
             PresetEditBottomSheet presetEditBottomSheet = new PresetEditBottomSheet();
             presetEditBottomSheet.show(getParentFragmentManager(), presetEditBottomSheet.getTag());
+
+             */
         });
 
 
         // on new participant button
         bi.buttonAddCountdown.setOnClickListener(viewListener ->{
             PresetEditBottomSheet presetEditBottomSheet = new PresetEditBottomSheet();
-            presetEditBottomSheet.setupView(countdownPresets, PresetEditBottomSheet.PRESET_TYPE_COUNTDOWN);
+            presetEditBottomSheet.setupView(countdownPresets, PresetEditBottomSheet.PRESET_TYPE_COUNTDOWN, this);
             presetEditBottomSheet.show(getParentFragmentManager(), presetEditBottomSheet.getTag());
         });
-    }
-
-    private void getDatabaseData(){
-
     }
 
     private void createCountdownList(){
@@ -99,8 +97,10 @@ public class SettingsFragment extends Fragment {
             d = database.countdownPresetWIthParentDao().getCountdowns();
         }
 
+        countdownPresets.clear();
         d.forEach(preset ->{
             String presetName = preset.getPresets().getTitle();
+
             countdownPresets.add(new CountdownPreset(presetName, convertToAdvancedCountdownList(database, preset)));
         });
     }
@@ -163,6 +163,11 @@ public class SettingsFragment extends Fragment {
         database.countdownParentWIthItemDao().insert(countdownParentWithItemData1);
         database.countdownParentWIthItemDao().insert(countdownParentWithItemData2);
         database.countdownParentWIthItemDao().insert(countdownParentWithItemData3);
+    }
+
+    @Override
+    public void onClose() {
+        createCountdownList();
     }
 }
 

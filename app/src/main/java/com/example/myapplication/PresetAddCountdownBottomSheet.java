@@ -19,9 +19,13 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 import java.util.ArrayList;
 
-public class PresetAddCountdownBottomSheet extends BottomSheetDialogFragment {
+public class PresetAddCountdownBottomSheet extends BottomSheetDialogFragment implements CustomAlertBottomSheetAdapter.onLeaveListener{
     BottomSheetCountdownAddNewBinding bi;
     BottomSheetBehavior<View> bottomSheetBehavior;
+
+    Boolean warning = false;
+    // max scroll before it counts as attempt to close
+    final static float MIN_SCROLL_FOR_CLOSURE = 0.5f;
 
     RecyclerViewCreatedCountdownElementsAdapter recyclerViewCreatedCountdownElementsAdapter;
     editingDone listener;
@@ -73,17 +77,27 @@ public class PresetAddCountdownBottomSheet extends BottomSheetDialogFragment {
         bottomSheetBehavior.addBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
             @Override
             public void onStateChanged(@NonNull View bottomSheet, int newState) {
+                // check if the state is collapsed while its not cancelable
+                if(newState == BottomSheetBehavior.STATE_COLLAPSED){
+                    bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+                }
             }
 
             @Override
             public void onSlide(@NonNull View bottomSheet, float slideOffset) {
+                // if its not cancelable open the warning
+                if(slideOffset < MIN_SCROLL_FOR_CLOSURE){
+                    openWarning();
+                }
 
+                // only allows the user to close if its cancelable
+                bottomSheetBehavior.setHideable(false);
             }
         });
 
 
         // cancel button clicked
-        bi.dialogCancelButton.setOnClickListener(viewListener -> dismiss());
+        bi.dialogCancelButton.setOnClickListener(viewListener -> openWarning());
 
         bi.addCountdown.setOnClickListener(viewListener -> {
             advancedCountdownObjects.add(new RecyclerViewAdvancedCountdownAdapter.AdvancedCountdownObject("", true, new ArrayList<>()));
@@ -126,5 +140,33 @@ public class PresetAddCountdownBottomSheet extends BottomSheetDialogFragment {
         super.onStart();
         //bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
     }
+    // open the warning dialog
+    private void openWarning(){
+        // check if warning alrady open
+        if(!warning){
+            // set warning as true
+            warning = true;
+            // creates a Bottom sheet to create a meeting
+            CustomAlertBottomSheetAdapter customAlertBottomSheetAdapter = new CustomAlertBottomSheetAdapter(this);
+            customAlertBottomSheetAdapter.setWarningText("Soll dieses neue Preset verworfen werden?");
+            customAlertBottomSheetAdapter.setAcceptText("Änderungen Verwerfen");
+            customAlertBottomSheetAdapter.setDeclineText("Weiter Bearbeiten");
+            customAlertBottomSheetAdapter.show(getParentFragmentManager() , customAlertBottomSheetAdapter.getTag());
+        }
+    }
 
+    // resets the warning dialog so it can get opened again
+    public void resetWarning(){
+        warning = false;
+    }
+
+    @Override
+    public void onLeaving() {
+        dismiss();
+    }
+
+    @Override
+    public void clearWarnings() {
+        resetWarning();
+    }
 }

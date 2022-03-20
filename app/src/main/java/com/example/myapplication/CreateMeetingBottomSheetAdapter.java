@@ -13,6 +13,7 @@ import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 
 import com.example.myapplication.data.RoomDB;
+import com.example.myapplication.data.presets.countdown.CountdownPresetPair;
 import com.example.myapplication.databinding.CreateMeetingBottomSheetBinding;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
@@ -32,17 +33,19 @@ public class CreateMeetingBottomSheetAdapter extends BottomSheetDialogFragment i
     // Input fields
     String title;
     String location;
+    ArrayList<Integer> timerSelectValues = new ArrayList<>();
+
+    CountdownPresetPair selectedPair;
 
     // Preset lists
     ArrayList<String> itemNames = new ArrayList<>();
     ArrayList<Integer> selectValues = new ArrayList<>();
-
+    List<CountdownPresetPair> presetPairs;
     // Location list
     ArrayList<String> locationNames = new ArrayList<>();
 
     // TODO: remove Debug
-    ArrayList<String> timerItemNames = new ArrayList<>();
-    ArrayList<Integer> timerSelectValues = new ArrayList<>();
+
     ArrayList<String> checklistItemNames = new ArrayList<>();
     ArrayList<Integer> checklistSelectValues = new ArrayList<>();
 
@@ -73,37 +76,18 @@ public class CreateMeetingBottomSheetAdapter extends BottomSheetDialogFragment i
         checklistItemNames.add("Standard");
         checklistSelectValues.add(View.VISIBLE);
 
-        checklistItemNames.add("Uni Konzept");
-        checklistSelectValues.add(View.INVISIBLE);
-
-        checklistItemNames.add("Web Meeting");
-        checklistSelectValues.add(View.INVISIBLE);
-
-        checklistItemNames.add("Arbeits Konzept");
-        checklistSelectValues.add(View.INVISIBLE);
-
-        // TODO: Remove debug Data
-        timerItemNames.add("Standard");
-        timerSelectValues.add(View.VISIBLE);
-
-        timerItemNames.add("uni Timer");
-        timerSelectValues.add(View.INVISIBLE);
-
-        timerItemNames.add("Arbeits Timer");
-        timerSelectValues.add(View.INVISIBLE);
-
-        timerItemNames.add("Test Timer");
-        timerSelectValues.add(View.INVISIBLE);
-
-        timerItemNames.add("Weiterer Timer");
-        timerSelectValues.add(View.INVISIBLE);
+        // preset pairs
+        presetPairs = database.countdownPresetWIthParentDao().getCountdowns();
+        presetPairs.forEach(preset ->{
+            timerSelectValues.add(View.INVISIBLE);
+        });
+            timerSelectValues.set(0, View.VISIBLE);
 
         // Load locations
         locationNames = new ArrayList<>();
         List<String> location = database.meetingDao().getLocations();
 
         locationNames.addAll(location);
-        Log.i("TAG", "onCreate: " + locationNames);
 
     }
 
@@ -169,7 +153,7 @@ public class CreateMeetingBottomSheetAdapter extends BottomSheetDialogFragment i
 
             // Open the Meeting wizard
             if(((MainActivity)getActivity()) != null)
-                ((MainActivity)getActivity()).startMeetingWizard(title, location);
+                ((MainActivity)getActivity()).startMeetingWizard(title, location, selectedPair);
         });
 
         // location button clicked
@@ -206,12 +190,8 @@ public class CreateMeetingBottomSheetAdapter extends BottomSheetDialogFragment i
             presetSelectBottomSheet = new PresetSelectBottomSheet();
             presetSelectBottomSheet.setTitle("Timer Preset");
 
-            // TODO: Load all Presets
-            itemNames = timerItemNames;
-            selectValues = timerSelectValues;
-
             // feeds the presets into the checklist recycler view
-            presetSelectBottomSheet.initPreset(itemNames, selectValues);
+            presetSelectBottomSheet.initPreset(presetPairs, timerSelectValues);
             presetSelectBottomSheet.show(getParentFragmentManager(), presetSelectBottomSheet.getTag());
 
             presetOpen = IS_TIMER;
@@ -317,8 +297,10 @@ public class CreateMeetingBottomSheetAdapter extends BottomSheetDialogFragment i
         // Checks what screen was open
         if(presetOpen == IS_TIMER){
             // Sets the Text to the chosen one
-            bi.timerSelectedName.setText(itemNames.get(adapterPosition));
-            // TODO: save changes
+            bi.timerSelectedName.setText(presetPairs.get(adapterPosition).getPresets().getTitle());
+            selectedPair = presetPairs.get(adapterPosition);
+
+
             timerSelectValues.replaceAll(integer -> View.INVISIBLE);
             timerSelectValues.set(adapterPosition, View.VISIBLE);
         }

@@ -28,10 +28,16 @@ public class PresetEditBottomSheet extends BottomSheetDialogFragment  implements
 
     RecyclerViewCountdownPresetAdapter recyclerViewPresetAdapter;
 
+    onCloseListener listener;
+
     public static final int PRESET_TYPE_COUNTDOWN = 0;
     public static final int PRESET_TYPE_CHECKLIST = 1;
 
     Integer viewType;
+
+    interface onCloseListener{
+        void onClose();
+    }
 
     // Preset Lists
     private ArrayList<CountdownPreset> countdownObjects = new ArrayList<>();
@@ -118,10 +124,11 @@ public class PresetEditBottomSheet extends BottomSheetDialogFragment  implements
     }
     
     // Set the text of the header
-    public void setupView(ArrayList<CountdownPreset> object, int viewType){
+    public void setupView(ArrayList<CountdownPreset> object, int viewType, onCloseListener listener){
         this.viewType = viewType;
         countdownObjects = new ArrayList<>();
         countdownObjects.addAll(object);
+        this.listener = listener;
     }
 
 
@@ -148,6 +155,7 @@ public class PresetEditBottomSheet extends BottomSheetDialogFragment  implements
         countdownObjects.add(preset);
         recyclerViewPresetAdapter.notifyItemInserted(countdownObjects.size());
         writePresetToDatabase(preset);
+        listener.onClose();
     }
 
     private void writePresetToDatabase(CountdownPreset preset){

@@ -9,12 +9,14 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.myapplication.data.presets.countdown.CountdownPresetPair;
 import com.example.myapplication.databinding.BottomSheetPresetsBinding;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class PresetSelectBottomSheet extends BottomSheetDialogFragment {
     BottomSheetPresetsBinding bi;
@@ -110,6 +112,16 @@ public class PresetSelectBottomSheet extends BottomSheetDialogFragment {
     // Initializes the Presets
     public void initPreset(ArrayList<String> itemNames, ArrayList<Integer> selectIndicators){
         this.itemNames = itemNames;
+        this.selectIndicators = selectIndicators;
+    }
+
+    public void initPreset(List<CountdownPresetPair> presetPairs, ArrayList<Integer> selectIndicators){
+
+        presetPairs.forEach(preset ->{
+            preset.getPresets().getTitle();
+            itemNames.add(preset.getPresets().getTitle());
+        });
+
         this.selectIndicators = selectIndicators;
     }
 
