@@ -128,7 +128,7 @@
         android:layout_marginBottom="16dp"
         android:background="@drawable/btn_default"
         android:onClick="openLocationParticipantsActivity"
-        android:text="WEITER"
+        android:text="@string/weiter"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

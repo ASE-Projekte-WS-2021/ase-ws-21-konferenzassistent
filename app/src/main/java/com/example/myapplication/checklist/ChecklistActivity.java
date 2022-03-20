@@ -1,28 +1,30 @@
-package com.example.myapplication;
+package com.example.myapplication.checklist;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-import android.annotation.SuppressLint;
-import android.content.Intent;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.Switch;
+import com.example.myapplication.CountdownActivity;
+import com.example.myapplication.R;
 
-public class ChecklistActivity extends AppCompatActivity {
+import java.util.ArrayList;
+import java.util.List;
+
+public class ChecklistActivity extends AppCompatActivity implements OnAdapterItemClickListener {
     private long maxCountdownTime;
     private long maxLueftungsTime;
 
     private long maxAbstandsTime;
 
-    //checklist Checkbox
-    private Switch sw1, sw2, sw3, sw4;
-    //start Meeting Button
+    // start Meeting Button
     private Button startMeetingButton;
 
     private boolean lueftungsSwitchStatus;
@@ -31,6 +33,13 @@ public class ChecklistActivity extends AppCompatActivity {
     private String location, participantCount;
 
     private int checkedItems;
+
+    private ArrayList<String> checklistContent = new ArrayList<String>();
+
+    private RecyclerView rvChecklist;
+    private List<ChecklistItem> checklistItems;
+    private ChecklistAdapter checklistAdapter;
+    private LinearLayoutManager linearLayoutManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,9 +50,6 @@ public class ChecklistActivity extends AppCompatActivity {
             getSupportActionBar().setTitle("Pre-Meeting-Checkliste");
             actionBar.setDisplayHomeAsUpEnabled(true); // sets up back button in action bar
         }
-
-        sw1 = (Switch) findViewById(R.id.switch1); sw2 = (Switch) findViewById(R.id.switch2);
-        sw3 = (Switch) findViewById(R.id.switch3); sw4 = (Switch) findViewById(R.id.switch4);
 
         startMeetingButton = findViewById(R.id.startMeetingButton);
         startMeetingButton.setBackgroundResource(R.drawable.btn_disable);
@@ -60,7 +66,24 @@ public class ChecklistActivity extends AppCompatActivity {
         location = getIntent().getStringExtra("location");
         participantCount = getIntent().getStringExtra("participantCount");
 
+        rvChecklist = findViewById(R.id.rv_checklist);
 
+                // initialize checklist and recyclerview
+        checklistItems = new ArrayList<>();
+
+        checklistContent.add("Desinfektionsmittel bereit");
+        checklistContent.add("3G-Regelung o.ä. geprüft");
+        checklistContent.add("Masken / Plexiglas geprüft");
+        checklistContent.add("Abstände gewährleistet");
+
+        for (int i = 0; i < checklistContent.size(); i++) {
+            checklistItems.add(new ChecklistItem(checklistContent.get(i)));
+        }
+
+        checklistAdapter = new ChecklistAdapter(this, this, checklistItems);
+        rvChecklist.setAdapter(checklistAdapter);
+        linearLayoutManager = new LinearLayoutManager(this);
+        rvChecklist.setLayoutManager(linearLayoutManager);
 
         super.onCreate(savedInstanceState);
     }
@@ -69,10 +92,10 @@ public class ChecklistActivity extends AppCompatActivity {
     public void openCountdownActivity(View view) {
         Intent intent = new Intent(this, CountdownActivity.class);
         //if(checkedItems == 4/*cb1.isChecked() && cb2.isChecked() && cb3.isChecked() && cb4.isChecked()*/){//Meeting will only start if checklist items are selected
-          // send to next activity
-          intent.putExtra("maxCountdownTime", maxCountdownTime);
-          intent.putExtra("maxLueftungsTimer", maxLueftungsTime);
-          intent.putExtra("maxAbstandsTimer", maxAbstandsTime);
+        // send to next activity
+        intent.putExtra("maxCountdownTime", maxCountdownTime);
+        intent.putExtra("maxLueftungsTimer", maxLueftungsTime);
+        intent.putExtra("maxAbstandsTimer", maxAbstandsTime);
 
         intent.putExtra("lueftungsSwitchStatus", lueftungsSwitchStatus);
         intent.putExtra("abstandsSwitchStatus", abstandsSwitchStatus);
@@ -80,30 +103,23 @@ public class ChecklistActivity extends AppCompatActivity {
         intent.putExtra("location", location);
         intent.putExtra("participantCount", participantCount);
 
-          // start next activity
-          startActivity(intent);
+        // start next activity
+        startActivity(intent);
         //}
     }
 
     //check checklist
-    public void checkItem(View view){
+    public void checkItem() {
         checkedItems = 0;
-        if(sw1.isChecked()){
-            checkedItems++;
+        for (ChecklistItem item : checklistItems) {
+            if (item.isChecked()) {
+                checkedItems++;
+            }
         }
-        if(sw2.isChecked()){
-            checkedItems++;
-        }
-        if(sw3.isChecked()){
-            checkedItems++;
-        }
-        if(sw4.isChecked()){
-            checkedItems++;
-        }
-        if(checkedItems == 4){//change startMeetingButton color
+        if (checkedItems == checklistItems.size()) { //change startMeetingButton color
             startMeetingButton.setBackgroundResource(R.drawable.btn_default);
             startMeetingButton.setClickable(true);
-        }else{
+        } else {
             startMeetingButton.setBackgroundResource(R.drawable.btn_disable);
             startMeetingButton.setClickable(false);
         }
@@ -116,5 +132,10 @@ public class ChecklistActivity extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onAdapterItemClick() {
+        checkItem();
     }
 }

@@ -1,51 +1,78 @@
 package com.example.myapplication;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.view.menu.MenuBuilder;
 import androidx.core.view.MenuItemCompat;
+import androidx.databinding.DataBindingUtil;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Resources;
+import android.content.res.TypedArray;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.util.AttributeSet;
 import android.util.Log;
+import android.view.ContextThemeWrapper;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.myapplication.data.MeetingData;
+import com.example.myapplication.data.MeetingParticipantPair;
+import com.example.myapplication.data.MeetingWithParticipantDao;
+import com.example.myapplication.data.MeetingWithParticipantData;
+import com.example.myapplication.data.RoomDB;
+import com.example.myapplication.databinding.MeetingBottomSheetBinding;
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.List;
 
 
 @SuppressLint("NewApi")
 public class PastMeetingInfoActivity extends AppCompatActivity {
 
-    private TextView tvMinutes, tvStartTime, tvEndTime,
-            tvNumOfParticipants,
-            tvLocation,
-            tvWindowInterval, tvWindowTime, tvDistanceInterval;
+    private String title;
+    private String duration;
+    private String startTime;
+    private String endTime;
+    private String participants;
+    private String ort;
+    private String date;
 
-    private String minutes;
-    private String startTime, endTime;
-    private String numOfParticipants;
-    private String location;
-    private int windowInterval, windowTime, distanceInterval;
-
-    private String meeting_id,meeting_date,meeting_date_end,meeting_position,meeting_duration,meeting_number_participants;
-
+    TextView meeting;
+    TextView meetingDate;
+    TextView meetingDuration;
+    TextView meetingStartTime;
+    TextView meetingEndTime;
+    TextView meetingParticipantCount;
+    TextView meetingOrt;
+    ImageButton cancelButton;
+    ImageButton moreButton;
     private int dataBaseID;
-    private MettingDatabase database;
+    private RoomDB database;
 
-    private ArrayList<String> participantList;
+    private List<MeetingParticipantPair> meetingList;
 
     private DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
 
@@ -53,104 +80,64 @@ public class PastMeetingInfoActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_past_meeting_info);
+        setContentView(R.layout.meeting_bottom_sheet);
+
+        database = RoomDB.getInstance(getBaseContext());
+        meetingList = database.meetingWithParticipantDao().getMeetings();
 
         ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            getSupportActionBar().setTitle("Meeting");
-            actionBar.setDisplayHomeAsUpEnabled(true); // sets up back button in action bar
-        }
+        actionBar.hide();
+
+        findViewById(R.id.transparent_background).setBackgroundColor(getColor(R.color.corona_blue));
+        getView();
+        setView();
+
+        setupListeners();
         dataBaseID = getIntent().getIntExtra("Database_ID", 0);
-        database = new MettingDatabase(this);
-        Cursor data = database.readAllData();
+        database = RoomDB.getInstance(getBaseContext());
 
-        if (dataBaseID == -1) {
-            data.moveToLast();
-        }
-        else {
-            data = database.findDataById(Integer.toString(dataBaseID));
-            data.moveToLast();
-        }
-        // Get Data From database
-        meeting_id = data.getString(data.getColumnIndexOrThrow("_id"));
-        meeting_date = data.getString(data.getColumnIndexOrThrow("meeting_date"));
-        meeting_date_end = data.getString(data.getColumnIndexOrThrow("meeting_date_end"));
-        meeting_position = data.getString(data.getColumnIndexOrThrow("meeting_position"));
-        meeting_duration = data.getString(data.getColumnIndexOrThrow("meeting_duration"));
-        meeting_number_participants = data.getString(data.getColumnIndexOrThrow("meeting_number_participants"));
-
-        Log.d("database",meeting_id);
-
-        findTextViews();
-        updateData();
-        updateView();
-        setParticipantListAndAlert();
+        //database.meetingDao().getAll();
     }
 
-    private void setParticipantListAndAlert() {
-        participantList = new ArrayList<>();
-        participantList.add("test1");
-        participantList.add("test2");
-        participantList.add("test3");
-        participantList.add("test4");
-        participantList.add("test5");
-        String[] participantArray = new String[participantList.size()];
-        participantArray = participantList.toArray(participantArray);
+    private void getView() {
+        meeting = findViewById(R.id.nameToolbar);
+        meetingDate = findViewById(R.id.meetingDate);
+        meetingDuration = findViewById(R.id.duration);
+        meetingStartTime = findViewById(R.id.startTime);
+        meetingEndTime = findViewById(R.id.endTime);
+        meetingParticipantCount = findViewById(R.id.participantCount);
+        meetingOrt = findViewById(R.id.ort);
 
-        MaterialAlertDialogBuilder materialAlertDialogBuilder = new MaterialAlertDialogBuilder(PastMeetingInfoActivity.this)
-                .setItems(participantArray, (dialogInterface, i) -> {
-                    // do nothing
-                })
-                .setPositiveButton("OK", ((dialogInterface, i) -> {
-                    // do nothing
-                }));
-        final AlertDialog a = materialAlertDialogBuilder.create();
-        // findViewById(R.id.cardViewParticipants).setOnClickListener(view -> a.show());
+        cancelButton = findViewById(R.id.cancelBtn);
+        moreButton = findViewById(R.id.moreBtn);
     }
 
-    private void updateView() {
-        tvMinutes.setText(minutes + " Minuten");
-        tvStartTime.setText(startTime);
-        tvEndTime.setText(endTime);
+    private void setView() {
+        MeetingParticipantPair meetingData = meetingList.get(meetingList.size()-1);
 
-        tvNumOfParticipants.setText(numOfParticipants + " Teilnehmer");
+        duration = meetingData.getMeeting().getDuration()/60 + "";
+        startTime = meetingData.getMeeting().getStartDate().substring(11);
+        date = meetingData.getMeeting().getStartDate().substring(0,10);
+        endTime = meetingData.getMeeting().getEndDate().substring(11);
 
-        tvLocation.setText(location);
-
-        tvWindowInterval.setText(windowInterval + " Minuten");
-        tvWindowTime.setText(windowTime + " Minuten");
-        tvDistanceInterval.setText(distanceInterval + " Minuten");
+        meeting.setText(meetingData.getMeeting().getTitle());
+        meetingDuration.setText(String.format(getBaseContext().getString(R.string.meeting_history_minutes_long), ""+
+                duration));
+        meetingDate.setText(date);
+        meetingStartTime.setText(startTime);
+        meetingEndTime.setText(endTime);
+        meetingParticipantCount.setText("" + meetingData.getParticipants().size());
+        meetingOrt.setText(meetingData.getMeeting().getLocation());
     }
 
-    private void updateData() {
-        minutes = "" + Integer.parseInt(meeting_duration)/60;
-        startTime = meeting_date;
-        endTime = meeting_date_end;
-        numOfParticipants = meeting_number_participants;
-        location = meeting_position;
-        windowInterval = 15;
-        windowTime = 5;
-        distanceInterval = 10;
-    }
 
-    private void findTextViews() {
-        tvMinutes = findViewById(R.id.tvMinutes);
-        tvStartTime = findViewById(R.id.tvStartTime);
-        tvEndTime = findViewById(R.id.tvEndTime);
-
-        tvNumOfParticipants = findViewById(R.id.tvNumOfParticipants);
-
-        tvLocation = findViewById(R.id.tvLocation);
-
-        tvWindowInterval = findViewById(R.id.tvWindowInterval);
-        tvWindowTime = findViewById(R.id.tvWindowTime);
-        tvDistanceInterval = findViewById(R.id.tvDistanceInterval);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.past_meeting_info_options,menu);
-        return super.onCreateOptionsMenu(menu);
+    private void setupListeners() {
+        cancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openHomeScreen();
+            }
+        });
     }
 
     @Override
@@ -167,25 +154,4 @@ public class PastMeetingInfoActivity extends AppCompatActivity {
         finish();
     }
 
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        int id = item.getItemId();
-
-        if (id == android.R.id.home) {
-            openHomeScreen();
-        } else if (id == R.id.past_meeting_info_options_delete) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(this)
-                    .setMessage("Meeting wird gelöscht. Dieser Schritt kann nicht rückgängig gemacht werden. Fortfahren?")
-                    .setPositiveButton("OK",(dialogInterface, i) -> {
-                        database.deleteOne(meeting_id);
-                        openHomeScreen();
-                    })
-                    .setNegativeButton("CANCEL",(dialogInterface, i) -> {
-                        // do nothing
-                    });
-            builder.create().show();
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 }

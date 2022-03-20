@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:layout_marginTop="16dp"
+        android:orientation="vertical">
+
+
+        <!-- Recycle View für Countdowns -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            app:cardCornerRadius="16dp"
+            android:backgroundTint="@color/corona_white"
+            android:layout_height="wrap_content">
+
+            <!-- Countdown Template -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <!-- Countdown Header -->
+                <LinearLayout
+                    style="@style/Widget.AppCompat.Button"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:minHeight="42dp"
+                    android:gravity="left"
+                    android:background="@color/transparent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/countdown_advanced_recycler_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:textSize="20sp"
+                        android:layout_marginStart="16dp"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        android:text="@string/l_ftungstimer"/>
+
+
+
+                    <androidx.constraintlayout.widget.Placeholder
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"/>
+
+                    <com.google.android.material.switchmaterial.SwitchMaterial
+                        android:id="@+id/countdown_advanced_recycler_switch"
+                        android:layout_width="wrap_content"
+                        android:layout_height="24dp"
+                        android:checked="true"
+                        android:layout_gravity="center"
+                        android:layout_marginEnd="16dp" />
+
+
+                </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_height="1dp"
+                    android:background="#e6e6e6" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:id="@+id/countdown_advanced_recycle_container"
+                    android:orientation="vertical"
+                    android:layout_height="wrap_content">
+
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/countdown_child_recycle_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+
+                </androidx.recyclerview.widget.RecyclerView>
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+    </LinearLayout>
+
+
+</layout>

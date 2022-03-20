@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout  xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/transparent"
+        android:orientation="vertical">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="16dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:background="@color/corona_white">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/corona_white"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/alert_warning_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/solle_dieses_neue_meeting_wirlich_gel_scht_werden"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:gravity="center"
+                    android:textSize="14sp"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#e6e6e6" />
+
+                <Button
+                    android:id="@+id/button_dismiss_changes"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/corona_white"
+                    android:textColor="@color/break_yellow_btn"
+                    android:text="@string/nderungen_verwerfen"
+                    android:textSize="14sp"
+                    />
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="16dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+        android:background="@color/corona_white">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/corona_white"
+
+            android:orientation="vertical">
+
+
+            <Button
+                android:id="@+id/button_dismiss"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/corona_white"
+                android:textStyle="bold"
+                android:textColor="@color/corona_blue"
+                android:text="Weiter bearbeiten"
+                android:textSize="14sp"
+                />
+
+        </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+    </LinearLayout>
+
+</layout >

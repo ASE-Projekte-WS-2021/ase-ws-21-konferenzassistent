@@ -8,7 +8,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -19,13 +18,12 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.myapplication.checklist.ChecklistActivity;
+import com.example.myapplication.data.RoomDB;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Random;
 
 public class LocationParticipantsActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
@@ -45,7 +43,7 @@ public class LocationParticipantsActivity extends AppCompatActivity implements A
     private List<String> participantsArrayList;
     private ArrayAdapter<String> participantsArrayAdapter;
 
-    private MettingDatabase dbHelper;
+    private RoomDB database;
     private PersonDatabase dbPersonHelper;
 
 
@@ -60,7 +58,7 @@ public class LocationParticipantsActivity extends AppCompatActivity implements A
             actionBar.setDisplayHomeAsUpEnabled(true); // sets up back button in action bar
         }
 
-        dbHelper = new MettingDatabase(this);
+        database = RoomDB.getInstance(getBaseContext());
 
         // Get extras
         maxCountdownTime = getIntent().getLongExtra("maxCountdownTime", 0);
@@ -73,9 +71,11 @@ public class LocationParticipantsActivity extends AppCompatActivity implements A
 
         locationsSpinner = findViewById(R.id.locations_spinner);
 
-        List<String> locations = dbHelper.getLocations();
 
+        List<String> locations = database.meetingDao().getLocations();
         spinnerArrayList = new ArrayList<String>(locations);
+
+        spinnerArrayList = new ArrayList<String>();
         spinnerArrayList.add(0, "<leer>");
         spinnerArrayList.add("<Neuen Ort hinzufügen...>");
 
@@ -123,7 +123,7 @@ public class LocationParticipantsActivity extends AppCompatActivity implements A
         ImageButton participantsAlertAddButton = participantsAlertView.findViewById(R.id.participants_alert_addbutton);
 
         MaterialAlertDialogBuilder participantInputDialog =
-                new MaterialAlertDialogBuilder(LocationParticipantsActivity.this)
+                new MaterialAlertDialogBuilder(LocationParticipantsActivity.this, R.style.dialogAlertStyle)
                         .setTitle("Teilnehmer")
                         .setMessage("Wähle eine*n bestehende*n Teilnehmer*in -oder- Gib einen Namen für den oder die neu anzulegende*n Teilnehmer*in ein.")
                         .setView(participantsAlertView);
@@ -160,7 +160,7 @@ public class LocationParticipantsActivity extends AppCompatActivity implements A
             EditText locationInput = new EditText(LocationParticipantsActivity.this);
             locationInput.setInputType(InputType.TYPE_CLASS_TEXT);
             MaterialAlertDialogBuilder locationInputDialog =
-                    new MaterialAlertDialogBuilder(LocationParticipantsActivity.this)
+                    new MaterialAlertDialogBuilder(LocationParticipantsActivity.this, R.style.dialogAlertStyle)
                     .setTitle("Ort")
                     .setMessage("Gib einen Namen für den neu anzulegenden Ort ein.")
                     .setView(locationInput)

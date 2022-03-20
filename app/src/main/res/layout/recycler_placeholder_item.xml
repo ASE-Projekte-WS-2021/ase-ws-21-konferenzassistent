@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/countdown_last_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/heller_corona_blue"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/countdown_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/placeholder_background"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="80dp"
+                android:orientation="vertical">
+
+                <!-- Countdown Name -->
+                <androidx.constraintlayout.widget.Placeholder
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:textStyle="bold"
+                    android:textSize="16sp"/>
+
+                <!-- Countdown Timer -->
+                <androidx.constraintlayout.widget.Placeholder
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/countdown_name"
+                    app:layout_constraintStart_toStartOf="@+id/countdown_name"
+                    app:layout_constraintTop_toBottomOf="@+id/countdown_name"
+                    app:layout_constraintVertical_bias="0.407" />
+
+                <!-- Countdown Description -->
+                <androidx.constraintlayout.widget.Placeholder
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:text="Bis zum nächsten Lüften."
+                    android:textColor="@color/gray"
+                    android:textSize="12sp"
+                    android:layout_marginBottom="16dp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toStartOf="@+id/replay_button"
+                    app:layout_constraintHorizontal_bias="0.64"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>
+
+

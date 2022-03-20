@@ -11,5 +11,11 @@
     <color name="dark_gray">#666666</color>
     <color name="corona_blue">#004DBA</color>
     <color name="corona_white">#f4f3f8</color>
+    <color name="break_yellow_btn">#DDAF00</color>
+    <color name="next_green_btn">#00FFC6</color>
     <color name="heller_corona_blue">#5878ed</color>
+    <color name="super_dark_corona_blue">#011736</color>
+    <color name="transparent_corona_blue">#DD004DBA</color>
+    <color name="transparent">#00FFFFFF</color>
+    <color name="red">#FFCC0000</color>
 </resources>
