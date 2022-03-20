@@ -1,8 +1,13 @@
 package com.example.myapplication;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 public class Meeting {
 
     private String id, date, dateEnd, location, duration, numberParticipants, title;
+
+    private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 
     public Meeting(String id, String date, String dateEnd, String location,String title, String duration, String numberParticipants) {
         this.id = id;
@@ -68,6 +73,26 @@ public class Meeting {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public long getLongDateStart() {
+        long milliseconds = -1;
+        try {
+            milliseconds = simpleDateFormat.parse(getDate()).getTime();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return milliseconds;
+    }
+
+    public long getLongDateEnd() {
+        long milliseconds = -1;
+        try {
+            milliseconds = simpleDateFormat.parse(getDateEnd()).getTime();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return milliseconds;
     }
 
     @Override

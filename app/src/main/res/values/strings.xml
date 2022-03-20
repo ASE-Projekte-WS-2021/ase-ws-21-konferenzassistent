@@ -54,4 +54,7 @@
     <string name="contacts_header_text">Kontakte</string>
     
     <string name="meeting_data_no_location"><![CDATA[<Keinen Ort angegeben>]]></string>
+
+    <string name="home_fragment_isFiltered_true">Gefiltert</string>
+    <string name="home_fragment_isFiltered_false">Insgesamt</string>
 </resources>
