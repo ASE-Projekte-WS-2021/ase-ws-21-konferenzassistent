@@ -55,16 +55,20 @@ public class RecyclerViewCreatedCountdownElementsAdapter
         Log.i("TAG", "onBindViewHolder: " +contentHidden.size() + position);
         buildRecyclerView(holder, position);
 
+
         if(contentHidden.size() -1 < position){
             contentHidden.add(true);
         }
         holder.countdownContainer.setVisibility(!contentHidden.get(position)? View.VISIBLE: View.GONE);
 
+
         // Create new Item
         holder.buttonCreate.setOnClickListener(view -> {
-            mAdvancedCountdownObjects.get(position).getmItems().add(
+            Log.i("TAG", "onBindViewHolder: " + mAdvancedCountdownObjects);
+            Log.i("TAG", "onBindViewHolder: " + holder.getAdapterPosition());
+            mAdvancedCountdownObjects.get(holder.getAdapterPosition()).getmItems().add(
                     new RecyclerViewAdvancedCountdownItemAdapter.AdvancedCountdownItem((long)5, ""));
-            presetAdapters.get(position).notifyItemInserted(mAdvancedCountdownObjects.get(position).getmItems().size());
+            presetAdapters.get(position).notifyItemInserted(mAdvancedCountdownObjects.get(holder.getAdapterPosition()).getmItems().size()-1);
         });
 
         // Hides the ui
@@ -98,7 +102,9 @@ public class RecyclerViewCreatedCountdownElementsAdapter
         holder.buttonDelete.setOnClickListener(view -> {
             holder.countdownName.clearFocus();
             contentHidden.remove(holder.getAdapterPosition());
+            presetAdapters.remove(holder.getAdapterPosition());
             mAdvancedCountdownObjects.remove(holder.getAdapterPosition());
+            Log.i("TAG", "onBindViewHolder: " + mAdvancedCountdownObjects);
             notifyItemRemoved(holder.getAdapterPosition());
         });
 

@@ -11,10 +11,14 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.example.myapplication.data.RoomDB;
 import com.example.myapplication.databinding.MeetingBottomSheetBinding;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
+import com.google.android.material.chip.Chip;
+
+import java.util.List;
 
 /**
     https://betterprogramming.pub/bottom-sheet-android-340703e114d2
@@ -23,12 +27,17 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 public class MeetingBottomSheetAdapter extends  BottomSheetDialogFragment{
     BottomSheetBehavior bottomSheetBehavior;
     MeetingBottomSheetBinding bi;
+    private int id;
     private String duration;
     private String startTime;
     private String endTime;
     private String participants;
     private String ort;
     private String meetingDate;
+
+    private boolean participantDropDownOpened = false;
+
+    private RoomDB database;
 
     // Make the background Transparent
     @Override
@@ -42,6 +51,8 @@ public class MeetingBottomSheetAdapter extends  BottomSheetDialogFragment{
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState){
         BottomSheetDialog bottomSheet = (BottomSheetDialog) super.onCreateDialog(savedInstanceState);
+
+        database = RoomDB.getInstance(getContext());
 
         // inflating Layout
         View view = View.inflate(bottomSheet.getContext(), R.layout.meeting_bottom_sheet, null);
@@ -112,7 +123,7 @@ public class MeetingBottomSheetAdapter extends  BottomSheetDialogFragment{
         hideAppBar(bi.appBarLayout);
 
         // setup the View
-        setView(duration, meetingDate, startTime,endTime,participants,ort);
+        setView(id, duration, meetingDate, startTime,endTime,participants,ort);
 
         return bottomSheet;
     }
@@ -141,16 +152,38 @@ public class MeetingBottomSheetAdapter extends  BottomSheetDialogFragment{
         return (int) array.getDimension(0, 0);
     }
 
-    private void setView(String duration, String meetingDate, String startTime, String endTime, String participants, String ort){
+    private void setView(int id, String duration, String meetingDate, String startTime, String endTime, String participants, String ort){
         bi.duration.setText(duration);
         bi.meetingDate.setText(meetingDate);
         bi.startTime.setText(startTime);
         bi.endTime.setText(endTime);
         bi.participantCount.setText(participants);
         bi.ort.setText(ort);
+
+        List<String> participantNameList = database.meetingWithParticipantDao().getParticipantNamesByMeetingID(id);
+        for (String p : participantNameList) {
+            Chip chip = new Chip(requireContext());
+            chip.setClickable(false);
+            chip.setFocusable(false);
+            chip.setText(p);
+            bi.meetingBottomSheetParticipantChipgroup.addView(chip);
+        }
+
+        bi.meetingBottomSheetParticipantsContainer.setOnClickListener(view -> {
+            if (!participantDropDownOpened) {
+                participantDropDownOpened = true;
+                bi.meetingBottomSheetParticipantChipgroup.setVisibility(View.VISIBLE);
+                bi.meetingBottomSheetParticipantsDropdownIndicator.setRotation(180);
+            } else {
+                participantDropDownOpened = false;
+                bi.meetingBottomSheetParticipantChipgroup.setVisibility(View.GONE);
+                bi.meetingBottomSheetParticipantsDropdownIndicator.setRotation(0);
+            }
+        });
     }
 
-    public void setValues(String duration, String meetingDate, String startTime, String endTime, String participants, String ort){
+    public void setValues(int id, String duration, String meetingDate, String startTime, String endTime, String participants, String ort){
+        this.id = id;
         this.duration = duration;
         this.meetingDate = meetingDate;
         this.startTime = startTime;

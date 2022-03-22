@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -113,8 +114,10 @@ public class MeetingFilterBottomSheet extends BottomSheetDialogFragment {
             dismiss();
         });
         filterButton.setOnClickListener(view -> {
-            onFilterButtonClicked();
-            dismiss();
+            boolean isValid = onFilterButtonClicked();
+            if(isValid){
+                dismiss();
+            }
         });
 
         MaterialDatePicker picker = MaterialDatePicker.Builder.dateRangePicker()
@@ -139,7 +142,7 @@ public class MeetingFilterBottomSheet extends BottomSheetDialogFragment {
         dateEndEditText.setOnClickListener(view -> picker.show(getParentFragmentManager(),getTag()));
     }
 
-    private void onFilterButtonClicked() {
+    private boolean onFilterButtonClicked() {
         FilterData filterData = new FilterData(true);
 
         List<String> filterDataPeople = new ArrayList<>();
@@ -162,6 +165,14 @@ public class MeetingFilterBottomSheet extends BottomSheetDialogFragment {
             filterData.setMaxCount(Integer.parseInt(countMaxString));
         }
 
+        if(!countMaxString.equals("") && !countMinString.equals("")){
+            if(Integer.parseInt(countMaxString)<Integer.parseInt(countMinString)){
+                Toast toast = Toast.makeText(getContext(), "Du kannst nicht mehr Leute im Minimum haben wie Leute im Maximum", Toast.LENGTH_LONG);
+                toast.show();
+                return false;
+            }
+        }
+
         Chip chip = getView().findViewById(locationChipGroup.getCheckedChipId());
         if (chip == null) {
             filterData.setLocation(null);
@@ -173,5 +184,6 @@ public class MeetingFilterBottomSheet extends BottomSheetDialogFragment {
         filterData.setDateEnd(dateEnd);
 
         listener.onFilterButtonClicked(filterData);
+        return true;
     }
 }

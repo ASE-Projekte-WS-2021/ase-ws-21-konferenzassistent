@@ -366,7 +366,8 @@ public class MeetingWizardActivity extends AppCompatActivity implements OnAdapte
         participant.setId(participantData.getID());
         participants.add(participant);
 
-        database.participantDao().insert(participantData);
+        long participantId = database.participantDao().insert(participantData);
+        participants.get(participants.size()-1).setId((int)participantId);
 
         fragment.onParticipentUpdate();
     }
