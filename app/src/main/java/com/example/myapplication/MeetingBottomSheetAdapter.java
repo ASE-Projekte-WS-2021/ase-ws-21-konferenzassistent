@@ -33,6 +33,8 @@ public class MeetingBottomSheetAdapter extends  BottomSheetDialogFragment{
     private String ort;
     private String meetingDate;
 
+    private boolean participantDropDownOpened = false;
+
     private RoomDB database;
 
     // Make the background Transparent
@@ -157,6 +159,18 @@ public class MeetingBottomSheetAdapter extends  BottomSheetDialogFragment{
         bi.ort.setText(ort);
 
         Log.d("getParticipantNamesByMeetingID",database.meetingWithParticipantDao().getParticipantNamesByMeetingID(id).toString());
+
+        bi.meetingBottomSheetParticipantsContainer.setOnClickListener(view -> {
+            if (!participantDropDownOpened) {
+                participantDropDownOpened = true;
+                bi.meetingBottomSheetParticipantChipgroup.setVisibility(View.VISIBLE);
+                bi.meetingBottomSheetParticipantsDropdownIndicator.setRotation(180);
+            } else {
+                participantDropDownOpened = false;
+                bi.meetingBottomSheetParticipantChipgroup.setVisibility(View.GONE);
+                bi.meetingBottomSheetParticipantsDropdownIndicator.setRotation(0);
+            }
+        });
     }
 
     public void setValues(int id, String duration, String meetingDate, String startTime, String endTime, String participants, String ort){

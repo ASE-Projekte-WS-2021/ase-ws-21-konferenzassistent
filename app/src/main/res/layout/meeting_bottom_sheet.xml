@@ -254,7 +254,9 @@
                                     android:background="#e6e6e6" />
 
                             </LinearLayout>
+
                             <LinearLayout
+                                android:id="@+id/meeting_bottom_sheet_participants_container"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:orientation="horizontal">
@@ -267,14 +269,15 @@
                                     app:tint="@color/corona_blue" />
 
                                 <LinearLayout
-                                    android:layout_width="match_parent"
+                                    android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_marginStart="10dp"
+                                    android:layout_weight="1"
                                     android:orientation="vertical">
 
                                     <LinearLayout
                                         android:layout_width="match_parent"
-                                        android:layout_height="?attr/actionBarSize"
+                                        android:layout_height="wrap_content"
                                         android:orientation="vertical">
 
                                         <TextView
@@ -291,9 +294,33 @@
                                             android:text="Teilnehmer"
                                             android:textAppearance="@style/TextAppearance.AppCompat.Small" />
 
+                                        <com.google.android.material.chip.ChipGroup
+                                            android:id="@+id/meeting_bottom_sheet_participant_chipgroup"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:visibility="gone">
+
+                                            <com.google.android.material.chip.Chip
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:text="test1" />
+
+                                            <com.google.android.material.chip.Chip
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:text="test2" />
+                                        </com.google.android.material.chip.ChipGroup>
+
 
                                     </LinearLayout>
                                 </LinearLayout>
+
+                                <ImageView
+                                    android:id="@+id/meeting_bottom_sheet_participants_dropdown_indicator"
+                                    android:layout_width="24dp"
+                                    android:layout_height="?attr/actionBarSize"
+                                    android:layout_gravity="top"
+                                    app:srcCompat="@drawable/ic_baseline_keyboard_arrow_down_24" />
                             </LinearLayout>
 
                             <LinearLayout
