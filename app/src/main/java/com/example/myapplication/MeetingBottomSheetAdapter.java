@@ -5,12 +5,14 @@ import android.content.res.Resources;
 import android.content.res.TypedArray;
 import androidx.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.example.myapplication.data.RoomDB;
 import com.example.myapplication.databinding.MeetingBottomSheetBinding;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
@@ -23,12 +25,15 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 public class MeetingBottomSheetAdapter extends  BottomSheetDialogFragment{
     BottomSheetBehavior bottomSheetBehavior;
     MeetingBottomSheetBinding bi;
+    private int id;
     private String duration;
     private String startTime;
     private String endTime;
     private String participants;
     private String ort;
     private String meetingDate;
+
+    private RoomDB database;
 
     // Make the background Transparent
     @Override
@@ -42,6 +47,8 @@ public class MeetingBottomSheetAdapter extends  BottomSheetDialogFragment{
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState){
         BottomSheetDialog bottomSheet = (BottomSheetDialog) super.onCreateDialog(savedInstanceState);
+
+        database = RoomDB.getInstance(getContext());
 
         // inflating Layout
         View view = View.inflate(bottomSheet.getContext(), R.layout.meeting_bottom_sheet, null);
@@ -112,7 +119,7 @@ public class MeetingBottomSheetAdapter extends  BottomSheetDialogFragment{
         hideAppBar(bi.appBarLayout);
 
         // setup the View
-        setView(duration, meetingDate, startTime,endTime,participants,ort);
+        setView(id, duration, meetingDate, startTime,endTime,participants,ort);
 
         return bottomSheet;
     }
@@ -141,16 +148,19 @@ public class MeetingBottomSheetAdapter extends  BottomSheetDialogFragment{
         return (int) array.getDimension(0, 0);
     }
 
-    private void setView(String duration, String meetingDate, String startTime, String endTime, String participants, String ort){
+    private void setView(int id, String duration, String meetingDate, String startTime, String endTime, String participants, String ort){
         bi.duration.setText(duration);
         bi.meetingDate.setText(meetingDate);
         bi.startTime.setText(startTime);
         bi.endTime.setText(endTime);
         bi.participantCount.setText(participants);
         bi.ort.setText(ort);
+
+        Log.d("getParticipantNamesByMeetingID",database.meetingWithParticipantDao().getParticipantNamesByMeetingID(id).toString());
     }
 
-    public void setValues(String duration, String meetingDate, String startTime, String endTime, String participants, String ort){
+    public void setValues(int id, String duration, String meetingDate, String startTime, String endTime, String participants, String ort){
+        this.id = id;
         this.duration = duration;
         this.meetingDate = meetingDate;
         this.startTime = startTime;
