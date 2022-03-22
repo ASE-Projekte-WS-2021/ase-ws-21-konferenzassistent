@@ -22,4 +22,11 @@ public interface MeetingWithParticipantDao {
     @Query("SELECT meetingID FROM table_meeting_with_participant_data WHERE participantID = :sID")
     List<Integer> getMeetingIDsByParticipantID(String sID);
 
+    @Query("SELECT table_participant_data.name " +
+            "FROM table_meeting_with_participant_data " +
+            "LEFT JOIN table_participant_data " +
+            "ON table_meeting_with_participant_data.participantID = table_participant_data.ID " +
+            "WHERE meetingID = :mID")
+    List<String> getParticipantNamesByMeetingID(int mID);
+
 }
