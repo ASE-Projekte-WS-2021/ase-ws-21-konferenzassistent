@@ -5,7 +5,6 @@ import android.content.res.Resources;
 import android.content.res.TypedArray;
 import androidx.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
@@ -17,6 +16,9 @@ import com.example.myapplication.databinding.MeetingBottomSheetBinding;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
+import com.google.android.material.chip.Chip;
+
+import java.util.List;
 
 /**
     https://betterprogramming.pub/bottom-sheet-android-340703e114d2
@@ -158,7 +160,14 @@ public class MeetingBottomSheetAdapter extends  BottomSheetDialogFragment{
         bi.participantCount.setText(participants);
         bi.ort.setText(ort);
 
-        Log.d("getParticipantNamesByMeetingID",database.meetingWithParticipantDao().getParticipantNamesByMeetingID(id).toString());
+        List<String> participantNameList = database.meetingWithParticipantDao().getParticipantNamesByMeetingID(id);
+        for (String p : participantNameList) {
+            Chip chip = new Chip(requireContext());
+            chip.setClickable(false);
+            chip.setFocusable(false);
+            chip.setText(p);
+            bi.meetingBottomSheetParticipantChipgroup.addView(chip);
+        }
 
         bi.meetingBottomSheetParticipantsContainer.setOnClickListener(view -> {
             if (!participantDropDownOpened) {
