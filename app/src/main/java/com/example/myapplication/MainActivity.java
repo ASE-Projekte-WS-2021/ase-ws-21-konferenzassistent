@@ -4,18 +4,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
-import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-import androidx.appcompat.app.AppCompatDelegate;
-
-import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -50,7 +45,6 @@ public class MainActivity extends AppCompatActivity{
         this.filterButtonListener = filterButtonListener;
     }
 
-    private NavHostFragment navHostFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,6 +72,7 @@ public class MainActivity extends AppCompatActivity{
             startActivity(new Intent(this, OnboardingActivity.class));
         }
         // startActivity(new Intent(this, OnboardingActivity.class));
+
     }
 
     // Setup the Bottom Menu
@@ -91,7 +86,7 @@ public class MainActivity extends AppCompatActivity{
 
         // Configure App Bar to Change
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration
-                .Builder(R.id.miHome, R.id.miSettings).build();
+                .Builder(R.id.miStartseite, R.id.miVerlauf, R.id.miTeilnehmerverwaltung, R.id.miPresets).build();
 
         // Setup the App Bar with the Navigation Controller
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
@@ -99,11 +94,9 @@ public class MainActivity extends AppCompatActivity{
         // initialize the custom action bar header
         actionBarText = findViewById(R.id.main_bar_title);
 
-        navHostFragment = (NavHostFragment)getSupportFragmentManager().findFragmentById(R.id.fragment);
-
         // add listener for fragment change
         NavController.OnDestinationChangedListener listener =
-                ((controller, navDestination, bundle) -> rebuildActionBar());
+                ((controller, navDestination, bundle) -> rebuildActionBar(navController));
         navController.addOnDestinationChangedListener(listener);
 
         findViewById(R.id.main_activity_filter_button).setOnClickListener(view -> {
@@ -111,16 +104,17 @@ public class MainActivity extends AppCompatActivity{
                 filterButtonListener.onFilterButtonClicked();
             }
         });
-
-
     }
 
     // Edits the custom actionbar for every Fragment
-    private void rebuildActionBar(){
-        actionBarText.setText(Objects.requireNonNull(getSupportActionBar()).getTitle().toString().toUpperCase());
+    private void rebuildActionBar(NavController navController){
+        actionBarText.setText(Objects.requireNonNull(
+                Objects.requireNonNull(getSupportActionBar()).getTitle()).toString().toUpperCase());
 
-        // Check if the last Page was the Home Fragment
-        if(navHostFragment.getChildFragmentManager().getFragments().get(0).getClass() == HomeFragment.class){
+
+        // Check if the destination is the Verlauf Fragmnet
+        if(!Objects.requireNonNull(navController.getCurrentDestination()).getDisplayName()
+                .equals("com.example.myapplication:id/miVerlauf")){
             findViewById(R.id.main_activity_filter_button).setVisibility(View.GONE);
         }
         else
@@ -133,7 +127,6 @@ public class MainActivity extends AppCompatActivity{
         CreateMeetingBottomSheetAdapter createMeetingBottomSheetAdapter = new CreateMeetingBottomSheetAdapter();
         meetingAdapter = createMeetingBottomSheetAdapter;
         createMeetingBottomSheetAdapter.show(getSupportFragmentManager() , createMeetingBottomSheetAdapter.getTag());
-
     }
 
     public CreateMeetingBottomSheetAdapter getMeetingAdapter(){
@@ -156,14 +149,13 @@ public class MainActivity extends AppCompatActivity{
     private void checkDatabaseEntries(){
         // Load Countdowns Objects
         RoomDB database = RoomDB.getInstance(getBaseContext());
-        List<CountdownPresetPair> d = new ArrayList<>();
+        List<CountdownPresetPair> d;
         d = database.countdownPresetWIthParentDao().getCountdowns();
 
         // If no preset exists create standard countdown
         if(d.size() < 1){
             createStandard(database);
         }
-
     }
 
     // TODO: simplify
