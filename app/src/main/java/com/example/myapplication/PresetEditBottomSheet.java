@@ -124,8 +124,8 @@ public class PresetEditBottomSheet extends BottomSheetDialogFragment  implements
     // Configs the view to match the right Preset
     private void configView(){
         if(viewType == PRESET_TYPE_COUNTDOWN){
-            bi.presetHeaderText.setText("Timer bearbeiten");
-            bi.buttonCreateText.setText("Neuen Timer erstellen");
+            bi.presetHeaderText.setText("Deine Custon Countdownsets");
+            bi.buttonCreateText.setText("Neues Countdownset erstellen");
         }
         else{
             bi.presetHeaderText.setText("Checkliste bearbeiten");

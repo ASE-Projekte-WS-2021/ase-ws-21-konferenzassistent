@@ -19,6 +19,10 @@ public interface MeetingWithParticipantDao {
     @Query("SELECT * FROM table_meeting_data")
     List<MeetingParticipantPair> getMeetings();
 
+    @Transaction
+    @Query("SELECT * FROM table_meeting_data WHERE ID = :mID")
+    MeetingParticipantPair getMeetingByID(int mID);
+
     @Query("SELECT meetingID FROM table_meeting_with_participant_data WHERE participantID = :sID")
     List<Integer> getMeetingIDsByParticipantID(String sID);
 

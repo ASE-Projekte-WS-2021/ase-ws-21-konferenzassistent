@@ -46,4 +46,8 @@
         <item name="colorPrimary">@color/corona_blue</item>
         <item name="colorOnPrimary">@color/corona_white</item>
     </style>
+
+    <style name="TextAppearance">
+        <item name="android:lines">2</item>
+    </style>
 </resources>

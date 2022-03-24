@@ -19,9 +19,6 @@ public class TabAdapter extends FragmentStateAdapter {
         super(fragmentManager, lifecycle);
     }
 
-    public CountdownTimerFragment countdownTimerFragment;
-    CountdownInformationFragment countdownInformationFragment;
-
     @NonNull
     @Override
     public Fragment createFragment(int position) {
