@@ -46,7 +46,7 @@
 
     <string name="bottom_nav_menu_home">Startseite</string>
     <string name="bottom_nav_menu_start_meeting">Meeting starten</string>
-    <string name="bottom_nav_menu_settings">Einstellungen</string>
+    <string name="bottom_nav_menu_settings">Presets</string>
     <string name="countdown_main_description">Wählen Sie zunächst welche Timer sie aktivieren wollen und setzen Sie diese im Anschluss auf die von ihnen gewünschte Zeit.</string>
     <string name="countdown_participant_description">Fügen Sie nun alle Teilnehmer ihres Meetings hinzu </string>
     <string name="contacts_search_hint">Kontakte suchen</string>
@@ -67,7 +67,7 @@
     <string name="l_ftungstimer">LÜFTUNGSTIMER</string>
     <string name="addParticipant">Teilnehmer hinzufügen</string>
     <string name="neuen_kontak_hinzuf_gen">Neuen Kontakt hinzufügen</string>
-    <string name="eigene_timer_verwalten">Eigene Timer verwalten</string>
+    <string name="eigene_timer_verwalten">Eigene Countdownsets verwalten</string>
     <string name="eigene_checklisten_verwalten">Eigene Checklisten verwalten</string>
     <string name="vergangene_meetings">Vergangene Meetings</string>
     <string name="abgeschlossene_meetings">Abgeschlossene Meetings</string>
@@ -121,10 +121,10 @@
     <string name="erstellen">Erstellen</string>
     <string name="preset_name">Preset Name</string>
     <string name="checklist_item_hinzuf_gen">Checklist Item hinzufügen</string>
-    <string name="countdown_erstellen">Countdown erstellen</string>
+    <string name="countdown_countdown_Erstellen">Custom Countdownset erstellen</string>
     <string name="countdown_hinzuf_gen">Countdown hinzufügen</string>
     <string name="checklist_preset">CHECKLIST PRESET</string>
-    <string name="bernehmen">ÜBERNEHMEN</string>
+    <string name="bernehmen">Speichern</string>
     <string name="timer_bearbeiten">Timer bearbeiten</string>
     <string name="timer_beschreibung">Timer Beschreibung</string>
     <string name="timer_einstellen">Timer einstellen</string>

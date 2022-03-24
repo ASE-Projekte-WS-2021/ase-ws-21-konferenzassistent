@@ -13,6 +13,6 @@
     <fragment
         android:id="@+id/miSettings"
         android:name="com.example.myapplication.SettingsFragment"
-        android:label="Einstellungen"
+        android:label="Presets"
         tools:layout="@layout/fragment_settings" />
 </navigation>

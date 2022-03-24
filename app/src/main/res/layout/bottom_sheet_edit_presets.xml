@@ -22,7 +22,7 @@
 
                 <!-- Header -->
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:orientation="horizontal">
@@ -42,7 +42,7 @@
                         android:gravity="center"
                         android:text="@string/checklist_preset"
                         android:textColor="@color/black"
-                        android:textSize="20sp"
+                        android:textSize="18sp"
                         android:textStyle="bold" />
 
                     <Button
@@ -53,7 +53,7 @@
                         android:background="@color/transparent"
                         android:text="@string/bernehmen"
                         android:textColor="@color/break_yellow_btn"
-                        android:textSize="14sp" />
+                        android:textSize="10sp" />
 
                 </LinearLayout>
 

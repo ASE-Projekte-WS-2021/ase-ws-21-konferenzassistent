@@ -24,7 +24,7 @@
 
                 <!-- Header -->
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
                     android:orientation="horizontal">
@@ -39,11 +39,12 @@
                         android:textSize="14sp" />
 
                     <TextView
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="@string/countdown_erstellen"
+                        android:text="@string/countdown_countdown_Erstellen"
                         android:textColor="@color/black"
                         android:textSize="18sp"
                         android:textStyle="bold" />
