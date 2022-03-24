@@ -52,7 +52,7 @@
     <string name="contacts_search_hint">Kontakte suchen</string>
     <string name="cancel_text">Abbrechen</string>
     <string name="contacts_header_text">Kontakte</string>
-    
+
     <string name="meeting_data_no_location"><![CDATA[<Keinen Ort angegeben>]]></string>
 
     <string name="home_fragment_isFiltered_true">Gefiltert</string>
@@ -128,4 +128,9 @@
     <string name="timer_bearbeiten">Timer bearbeiten</string>
     <string name="timer_beschreibung">Timer Beschreibung</string>
     <string name="timer_einstellen">Timer einstellen</string>
+    <string name="verlauf">Verlauf</string>
+    <string name="startseite">Startseite</string>
+    <string name="presets">Presets</string>
+    <string name="teilnehmerverwaltung">Teilnehmerverwaltung</string>
+    <string name="starten">starten</string>
 </resources>

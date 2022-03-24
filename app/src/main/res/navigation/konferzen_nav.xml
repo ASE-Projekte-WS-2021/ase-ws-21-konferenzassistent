@@ -3,16 +3,26 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/konferzen_nav"
-    app:startDestination="@id/miHome">
+    app:startDestination="@id/miStartseite">
 
     <fragment
-        android:id="@+id/miHome"
-        android:name="com.example.myapplication.HomeFragment"
+        android:id="@+id/miVerlauf"
+        android:name="com.example.myapplication.VerlaufFragment"
         android:label="Meine Meetings"
         tools:layout="@layout/fragment_home" />
     <fragment
-        android:id="@+id/miSettings"
+        android:id="@+id/miPresets"
         android:name="com.example.myapplication.SettingsFragment"
-        android:label="Einstellungen"
+        android:label="Preset Verwaltung"
         tools:layout="@layout/fragment_settings" />
+    <fragment
+        android:id="@+id/miStartseite"
+        android:name="com.example.myapplication.StartseiteFragment"
+        android:label="Startseite"
+        tools:layout="@layout/fragment_mi_startseite" />
+    <fragment
+        android:id="@+id/miTeilnehmerverwaltung"
+        android:name="com.example.myapplication.TeilnehmerverwaltungFragment"
+        android:label="Teilnehmerverwaltung"
+        tools:layout="@layout/fragment_mi_teilnehmerverwaltung" />
 </navigation>
