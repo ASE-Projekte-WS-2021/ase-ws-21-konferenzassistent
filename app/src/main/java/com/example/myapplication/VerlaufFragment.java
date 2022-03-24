@@ -27,9 +27,9 @@ import java.util.stream.Stream;
  * Home Fragment Class
 
  */
-public class HomeFragment extends Fragment  implements OnFilterButtonClickListener, MeetingHistoryAdapter.swiped, MainActivity.FilterButtonListener {
+public class VerlaufFragment extends Fragment  implements OnFilterButtonClickListener, MeetingHistoryAdapter.swiped, MainActivity.FilterButtonListener {
 
-    public HomeFragment() {
+    public VerlaufFragment() {
         // Required empty public constructor
     }
 
@@ -60,7 +60,7 @@ public class HomeFragment extends Fragment  implements OnFilterButtonClickListen
         super.onCreate(savedInstanceState);
         database = RoomDB.getInstance(getContext());
 
-        ((MainActivity) getActivity()).setOnFilterButtonClickedListener(HomeFragment.this);
+        ((MainActivity) getActivity()).setOnFilterButtonClickedListener(VerlaufFragment.this);
     }
 
     @Override

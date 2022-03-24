@@ -1,17 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
+
     <item
-        android:id="@+id/miHome"
+        android:id="@+id/miStartseite"
         android:icon="@drawable/ic_baseline_home_24"
-        android:title="@string/bottom_nav_menu_home" />
+        android:title="@string/startseite" />
+
+    <item
+        android:id="@+id/miVerlauf"
+        android:icon="@drawable/ic_outline_filter_list_24"
+        android:title="@string/verlauf" />
+
 
     <item
         android:id="@+id/placeholder"
         android:enabled="false"
-        android:title="@string/bottom_nav_menu_start_meeting" />
+        android:title="@string/starten" />
+
     <item
-        android:id="@+id/miSettings"
+        android:id="@+id/miTeilnehmerverwaltung"
+        android:icon="@drawable/ic_outline_people_24"
+        android:title="@string/teilnehmer" />
+
+    <item
+        android:id="@+id/miPresets"
         android:icon="@drawable/ic_baseline_settings_24"
-        android:title="@string/bottom_nav_menu_settings" />
+        android:title="@string/presets" />
+
+
 </menu>
