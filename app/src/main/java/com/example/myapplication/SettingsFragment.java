@@ -91,12 +91,6 @@ public class SettingsFragment extends Fragment implements PresetEditBottomSheet.
         List<CountdownPresetPair> d = new ArrayList<>();
         d = database.countdownPresetWIthParentDao().getCountdowns();
 
-        // Create Standard Countdown
-        if(d.size() < 1){
-            createStandard();
-            d = database.countdownPresetWIthParentDao().getCountdowns();
-        }
-
         countdownPresets.clear();
         d.forEach(preset ->{
             String presetName = preset.getPresets().getTitle();
@@ -106,65 +100,6 @@ public class SettingsFragment extends Fragment implements PresetEditBottomSheet.
         });
     }
 
-    // TODO: simplify
-    private void createStandard(){
-
-        CountdownPresetData preset = new CountdownPresetData();
-            preset.setTitle("Standard");
-
-        CountdownParentData parentData1 = new CountdownParentData();
-            parentData1.setTitle("Lüftungs Timer");
-
-        CountdownParentData parentData2 = new CountdownParentData();
-            parentData2.setTitle("AbstandsTimer");
-
-        CountdownItemData countdownItemData1 = new CountdownItemData();
-            countdownItemData1.setCountdown((long)15);
-            countdownItemData1.setDescription("Fenster sollte geöffnet sein");
-
-        CountdownItemData countdownItemData2 = new CountdownItemData();
-            countdownItemData2.setCountdown((long)10);
-            countdownItemData2.setDescription("Fenster sollte geschlossen sein");
-
-        CountdownItemData countdownItemData3 = new CountdownItemData();
-            countdownItemData3.setCountdown((long)30);
-
-        long presetId = database.countdownPresetDao().insert(preset);
-
-        long parent1Id = database.countdownParentDao().insert(parentData1);
-        long parent2Id = database.countdownParentDao().insert(parentData2);
-
-        long child1Id = database.countdownItemDao().insert(countdownItemData1);
-        long child2Id = database.countdownItemDao().insert(countdownItemData2);
-        long child3Id = database.countdownItemDao().insert(countdownItemData3);
-
-        CountdownPresetWithParentData standardData1 = new CountdownPresetWithParentData();
-            standardData1.setPresetID((int)presetId);
-            standardData1.setCountdownParentID((int)parent1Id);
-
-        CountdownPresetWithParentData standardData2 = new CountdownPresetWithParentData();
-            standardData2.setPresetID((int)presetId);
-            standardData2.setCountdownParentID((int)parent2Id);
-
-        database.countdownPresetWIthParentDao().insert(standardData1);
-        database.countdownPresetWIthParentDao().insert(standardData2);
-
-        CountdownParentWithItemData countdownParentWithItemData1  = new CountdownParentWithItemData();
-            countdownParentWithItemData1.setCountdownParentID((int)parent1Id);
-            countdownParentWithItemData1.setCountdownItemID((int)child1Id);
-
-        CountdownParentWithItemData countdownParentWithItemData2  = new CountdownParentWithItemData();
-        countdownParentWithItemData2.setCountdownParentID((int)parent1Id);
-        countdownParentWithItemData2.setCountdownItemID((int)child2Id);
-
-        CountdownParentWithItemData countdownParentWithItemData3  = new CountdownParentWithItemData();
-        countdownParentWithItemData3.setCountdownParentID((int)parent2Id);
-        countdownParentWithItemData3.setCountdownItemID((int)child3Id);
-
-        database.countdownParentWIthItemDao().insert(countdownParentWithItemData1);
-        database.countdownParentWIthItemDao().insert(countdownParentWithItemData2);
-        database.countdownParentWIthItemDao().insert(countdownParentWithItemData3);
-    }
 
     @Override
     public void onClose() {
