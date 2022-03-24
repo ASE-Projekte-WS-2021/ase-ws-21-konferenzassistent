@@ -20,13 +20,19 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.myapplication.data.RoomDB;
+import com.example.myapplication.data.presets.countdown.CountdownItemData;
+import com.example.myapplication.data.presets.countdown.CountdownParentData;
+import com.example.myapplication.data.presets.countdown.CountdownParentWithItemData;
+import com.example.myapplication.data.presets.countdown.CountdownPresetData;
 import com.example.myapplication.data.presets.countdown.CountdownPresetPair;
+import com.example.myapplication.data.presets.countdown.CountdownPresetWithParentData;
 import com.example.myapplication.meetingwizard.MeetingWizardActivity;
 import com.example.myapplication.meetingwizard.RecyclerViewAdvancedCountdownAdapter;
 import com.example.myapplication.onboarding.OnboardingActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity{
@@ -57,6 +63,9 @@ public class MainActivity extends AppCompatActivity{
         Objects.requireNonNull(getSupportActionBar()).hide();
 
         setUpMenu();
+
+        // Check if Database has default values
+        checkDatabaseEntries();
 
         // Set the Button to Visible on the Home Screen
         findViewById(R.id.main_activity_filter_button).setVisibility(View.VISIBLE);
@@ -142,6 +151,79 @@ public class MainActivity extends AppCompatActivity{
         intent.putExtra(MeetingWizardActivity.MEETING_LOCATION, location);
         intent.putExtra(MeetingWizardActivity.MEETING_COUNTDOWN, object);
         startActivity(intent);
+    }
+
+    private void checkDatabaseEntries(){
+        // Load Countdowns Objects
+        RoomDB database = RoomDB.getInstance(getBaseContext());
+        List<CountdownPresetPair> d = new ArrayList<>();
+        d = database.countdownPresetWIthParentDao().getCountdowns();
+
+        // If no preset exists create standard countdown
+        if(d.size() < 1){
+            createStandard(database);
+        }
+
+    }
+
+    // TODO: simplify
+    private void createStandard(RoomDB database){
+
+        CountdownPresetData preset = new CountdownPresetData();
+        preset.setTitle("Standard");
+
+        CountdownParentData parentData1 = new CountdownParentData();
+        parentData1.setTitle("Lüftungs Timer");
+
+        CountdownParentData parentData2 = new CountdownParentData();
+        parentData2.setTitle("AbstandsTimer");
+
+        CountdownItemData countdownItemData1 = new CountdownItemData();
+        countdownItemData1.setCountdown((long)15);
+        countdownItemData1.setDescription("Fenster sollte geöffnet sein");
+
+        CountdownItemData countdownItemData2 = new CountdownItemData();
+        countdownItemData2.setCountdown((long)10);
+        countdownItemData2.setDescription("Fenster sollte geschlossen sein");
+
+        CountdownItemData countdownItemData3 = new CountdownItemData();
+        countdownItemData3.setCountdown((long)30);
+
+        long presetId = database.countdownPresetDao().insert(preset);
+
+        long parent1Id = database.countdownParentDao().insert(parentData1);
+        long parent2Id = database.countdownParentDao().insert(parentData2);
+
+        long child1Id = database.countdownItemDao().insert(countdownItemData1);
+        long child2Id = database.countdownItemDao().insert(countdownItemData2);
+        long child3Id = database.countdownItemDao().insert(countdownItemData3);
+
+        CountdownPresetWithParentData standardData1 = new CountdownPresetWithParentData();
+        standardData1.setPresetID((int)presetId);
+        standardData1.setCountdownParentID((int)parent1Id);
+
+        CountdownPresetWithParentData standardData2 = new CountdownPresetWithParentData();
+        standardData2.setPresetID((int)presetId);
+        standardData2.setCountdownParentID((int)parent2Id);
+
+        database.countdownPresetWIthParentDao().insert(standardData1);
+        database.countdownPresetWIthParentDao().insert(standardData2);
+
+        CountdownParentWithItemData countdownParentWithItemData1  = new CountdownParentWithItemData();
+        countdownParentWithItemData1.setCountdownParentID((int)parent1Id);
+        countdownParentWithItemData1.setCountdownItemID((int)child1Id);
+
+        CountdownParentWithItemData countdownParentWithItemData2  = new CountdownParentWithItemData();
+        countdownParentWithItemData2.setCountdownParentID((int)parent1Id);
+        countdownParentWithItemData2.setCountdownItemID((int)child2Id);
+
+        CountdownParentWithItemData countdownParentWithItemData3  = new CountdownParentWithItemData();
+        countdownParentWithItemData3.setCountdownParentID((int)parent2Id);
+        countdownParentWithItemData3.setCountdownItemID((int)child3Id);
+
+        database.countdownParentWIthItemDao().insert(countdownParentWithItemData1);
+        database.countdownParentWIthItemDao().insert(countdownParentWithItemData2);
+        database.countdownParentWIthItemDao().insert(countdownParentWithItemData3);
     }
 
     @Override
