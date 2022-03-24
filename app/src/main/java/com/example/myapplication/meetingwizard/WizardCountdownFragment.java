@@ -100,17 +100,6 @@ public class WizardCountdownFragment extends Fragment {
 
     // Build and fills the recycler view
     private void buildRecyclerView(){
-        /* Simple Countdown View
-        RecyclerView recyclerView = bi.countdownRecycleView;
-        recyclerViewCountdownAdapter = new RecyclerViewCountdownAdapter(
-                mCountdownNames,
-                mCountdownTime,
-                mEnabled,
-                this.getContext()
-        );
-        recyclerView.setAdapter(recyclerViewCountdownAdapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
-        */
 
         //
         RecyclerView recyclerView = bi.countdownRecycleView;
