@@ -17,8 +17,10 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.android.material.chip.Chip;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.util.List;
+import java.util.Objects;
 
 /**
     https://betterprogramming.pub/bottom-sheet-android-340703e114d2
@@ -163,10 +165,15 @@ public class MeetingBottomSheetAdapter extends  BottomSheetDialogFragment{
         List<String> participantNameList = database.meetingWithParticipantDao().getParticipantNamesByMeetingID(id);
         for (String p : participantNameList) {
             Chip chip = new Chip(requireContext());
-            chip.setClickable(false);
-            chip.setFocusable(false);
             chip.setText(p);
             bi.meetingBottomSheetParticipantChipgroup.addView(chip);
+
+            chip.setOnClickListener(view -> {
+                View alertDialogView = getLayoutInflater().inflate(R.layout.dialog_user_info,null);
+                new MaterialAlertDialogBuilder(requireContext())
+                        .setView(alertDialogView)
+                        .show();
+            });
         }
 
         bi.meetingBottomSheetParticipantsContainer.setOnClickListener(view -> {
