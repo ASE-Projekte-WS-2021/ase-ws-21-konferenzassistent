@@ -89,6 +89,7 @@ public class PastMeetingInfoActivity extends AppCompatActivity {
         actionBar.hide();
 
         findViewById(R.id.transparent_background).setBackgroundColor(getColor(R.color.corona_blue));
+        findViewById(R.id.meeting_bottom_sheet_participants_dropdown_indicator).setVisibility(View.GONE);
         getView();
         setView();
 
