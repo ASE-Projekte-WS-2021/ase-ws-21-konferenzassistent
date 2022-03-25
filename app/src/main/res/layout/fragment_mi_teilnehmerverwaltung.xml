@@ -12,57 +12,74 @@
         android:background="@color/corona_white"
         android:layout_height="match_parent">
 
-        <androidx.cardview.widget.CardView
+        <ScrollView
             android:layout_width="match_parent"
-            app:cardCornerRadius="16dp"
-            android:background="@color/corona_white"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="vertical" >
 
-                <!-- Status Text Edit -->
-
-                <LinearLayout
-                    android:id="@+id/button_add_contact"
-                    style="@style/Widget.AppCompat.Button"
-                    android:orientation="horizontal"
+                <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
-                    android:minHeight="48dp"
-                    android:gravity="left"
-                    android:background="@color/transparent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:background="@color/corona_white"
+                    app:cardCornerRadius="16dp">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:textSize="14sp"
-                        android:layout_marginStart="16dp"
-                        android:textColor="@color/black"
-                        android:textStyle="bold"
-                        android:text="@string/neuen_kontak_hinzuf_gen"/>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
 
-                    <androidx.constraintlayout.widget.Placeholder
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"/>
+                        <!-- Status Text Edit -->
 
-                    <ImageView
-                        android:layout_width="16dp"
-                        android:layout_height="16dp"
-                        android:layout_gravity="center"
-                        android:layout_marginEnd="16dp"
-                        android:background="@drawable/ic_baseline_arrow_forward_ios_24" />
+                        <LinearLayout
+                            android:id="@+id/button_add_contact"
+                            style="@style/Widget.AppCompat.Button"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/transparent"
+                            android:gravity="left"
+                            android:minHeight="48dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="16dp"
+                                android:gravity="center"
+                                android:text="@string/neuen_kontak_hinzuf_gen"
+                                android:textColor="@color/black"
+                                android:textSize="14sp"
+                                android:textStyle="bold" />
+
+                            <androidx.constraintlayout.widget.Placeholder
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1" />
+
+                            <ImageView
+                                android:layout_width="16dp"
+                                android:layout_height="16dp"
+                                android:layout_gravity="center"
+                                android:layout_marginEnd="16dp"
+                                android:background="@drawable/ic_baseline_arrow_forward_ios_24" />
 
 
-                </LinearLayout>
+                        </LinearLayout>
 
 
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/teilnehmerverwaltung_participant_rv"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="16dp" />
             </LinearLayout>
-        </androidx.cardview.widget.CardView>
+        </ScrollView>
 
     </LinearLayout>
 

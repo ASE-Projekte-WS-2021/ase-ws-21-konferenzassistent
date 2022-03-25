@@ -6,15 +6,24 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.myapplication.data.ParticipantData;
+import com.example.myapplication.data.RoomDB;
 import com.example.myapplication.databinding.FragmentMiTeilnehmerverwaltungBinding;
+import com.example.myapplication.meetingwizard.Participant;
+import com.example.myapplication.meetingwizard.RecycleViewParticipantList;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class TeilnehmerverwaltungFragment extends Fragment {
     FragmentMiTeilnehmerverwaltungBinding bi;
+    private RoomDB db;
 
     public TeilnehmerverwaltungFragment() {
         // Required empty public constructor
@@ -46,5 +55,16 @@ public class TeilnehmerverwaltungFragment extends Fragment {
             contactCreationBottomSheetAdapter.show(getParentFragmentManager(),
                     contactCreationBottomSheetAdapter.getTag());
         });
+
+        db = RoomDB.getInstance(getContext());
+        List<ParticipantData> participantDataList = db.participantDao().getAll();
+        ArrayList<Participant> participants = new ArrayList<>();
+        for (ParticipantData participantData : participantDataList) {
+            participants.add(new Participant(participantData.getName(), participantData.getEmail(), participantData.getStatus(),false, participantData.getID()));
+        }
+
+        RecycleViewParticipantList adapter = new RecycleViewParticipantList(participants,getActivity(),false);
+        bi.teilnehmerverwaltungParticipantRv.setLayoutManager(new LinearLayoutManager(getActivity()));
+        bi.teilnehmerverwaltungParticipantRv.setAdapter(adapter);
     }
 }
