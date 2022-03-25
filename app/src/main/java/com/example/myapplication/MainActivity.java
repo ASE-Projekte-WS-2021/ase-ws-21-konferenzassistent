@@ -7,6 +7,7 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -106,6 +107,8 @@ public class MainActivity extends AppCompatActivity{
         });
     }
 
+    // Suppress lint, as error is only thrown in Github Actions
+    @SuppressLint("RestrictedApi")
     // Edits the custom actionbar for every Fragment
     private void rebuildActionBar(NavController navController){
         actionBarText.setText(Objects.requireNonNull(
