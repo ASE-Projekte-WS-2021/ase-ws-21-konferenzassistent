@@ -22,6 +22,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 public class PresetEditBottomSheet extends BottomSheetDialogFragment  implements PresetAddCountdownBottomSheet.editingDone, RecyclerViewCountdownPresetAdapter.onDeletionListener {
     BottomSheetEditPresetsBinding bi;
@@ -38,11 +39,20 @@ public class PresetEditBottomSheet extends BottomSheetDialogFragment  implements
 
     @Override
     public void onDelete(int position) {
-        int id = countdownObjects.get(position).id;
-        Log.i("TAG", "onDelete: " +id);
-        countdownObjects.remove(position);
-        recyclerViewPresetAdapter.notifyItemRemoved(countdownObjects.size());
-        removeFromDatabase(RoomDB.getInstance(getContext()),id);
+        if(viewType.equals(PRESET_TYPE_COUNTDOWN)){
+            int id = countdownObjects.get(position).id;
+            Log.i("TAG", "onDelete: " +id);
+            countdownObjects.remove(position);
+            recyclerViewPresetAdapter.notifyItemRemoved(countdownObjects.size());
+            removeFromDatabase(RoomDB.getInstance(getContext()),id);
+        }
+        else
+        {
+            int id = checklistPresets.get(position).id;
+            checklistPresets.remove(position);
+            recyclerViewPresetAdapter.notifyItemRemoved(checklistPresets.size());
+            // TODO: remove from database
+        }
     }
 
     interface onCloseListener{
@@ -52,8 +62,7 @@ public class PresetEditBottomSheet extends BottomSheetDialogFragment  implements
     // Preset Lists
     private ArrayList<CountdownPreset> countdownObjects = new ArrayList<>();
 
-    // TODO CHECKLIST
-    //private ArrayList<Checklist> countdownObjects = new ArrayList<>();
+    private ArrayList<ChecklistPreset> checklistPresets = new ArrayList<>();
 
     // Make the background Transparent
     @Override
@@ -109,6 +118,7 @@ public class PresetEditBottomSheet extends BottomSheetDialogFragment  implements
         bi.buttonCreate.setOnClickListener(viewListener ->{
             PresetAddCountdownBottomSheet presetAddCountdownBottomSheet = new PresetAddCountdownBottomSheet();
             presetAddCountdownBottomSheet.getListener(this);
+            presetAddCountdownBottomSheet.getViewType(viewType);
             presetAddCountdownBottomSheet.show(getParentFragmentManager(), presetAddCountdownBottomSheet.getTag());
         });
 
@@ -124,8 +134,8 @@ public class PresetEditBottomSheet extends BottomSheetDialogFragment  implements
     // Configs the view to match the right Preset
     private void configView(){
         if(viewType == PRESET_TYPE_COUNTDOWN){
-            bi.presetHeaderText.setText("Timer bearbeiten");
-            bi.buttonCreateText.setText("Neuen Timer erstellen");
+            bi.presetHeaderText.setText("Deine Custon Countdownsets");
+            bi.buttonCreateText.setText("Neues Countdownset erstellen");
         }
         else{
             bi.presetHeaderText.setText("Checkliste bearbeiten");
@@ -133,20 +143,30 @@ public class PresetEditBottomSheet extends BottomSheetDialogFragment  implements
         }
     }
     
-    // Set the text of the header
-    public void setupView(ArrayList<CountdownPreset> object, int viewType, onCloseListener listener){
+    // Set the text of the header and reads all important information
+    public void setupView(ArrayList<?> object, int viewType, onCloseListener listener){
         this.viewType = viewType;
-        countdownObjects = new ArrayList<>();
-        countdownObjects.addAll(object);
+        if(viewType == PRESET_TYPE_COUNTDOWN){
+            countdownObjects = new ArrayList<>();
+            countdownObjects.addAll((Collection<? extends CountdownPreset>) object);
+        }
+        else
+        {
+            checklistPresets = new ArrayList<>();
+            checklistPresets.addAll((Collection<? extends ChecklistPreset>) object);
+        }
+
         this.listener = listener;
     }
+
 
 
     // Build and fills the recycler view
     private void buildRecyclerView(){
         RecyclerView recyclerView = bi.presetRecyclerView;
+        // Checks what type of view it is and fills it with the right Preset
         recyclerViewPresetAdapter = new RecyclerViewCountdownPresetAdapter(
-                countdownObjects,
+                viewType.equals(PRESET_TYPE_COUNTDOWN)? countdownObjects: checklistPresets,
                 this,
                 this.getContext()
                 );
@@ -154,18 +174,21 @@ public class PresetEditBottomSheet extends BottomSheetDialogFragment  implements
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
     }
 
-
     @Override
-    public void onStart(){
-        super.onStart();
-        //bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
-    }
+    public void onEditingDone(Preset preset) {
+        // Checks what view type is active
+        if(viewType.equals(PRESET_TYPE_COUNTDOWN)){
+            countdownObjects.add((CountdownPreset) preset);
+            recyclerViewPresetAdapter.notifyItemInserted(countdownObjects.size());
+            writePresetToDatabase((CountdownPreset) preset);
+        }
+        else
+        {
+            checklistPresets.add((ChecklistPreset)preset);
+            recyclerViewPresetAdapter.notifyItemInserted(checklistPresets.size());
+            // TODO: SAVE CHECKLIST IN DATABASE
+        }
 
-    @Override
-    public void onEditingDone(CountdownPreset preset) {
-        countdownObjects.add(preset);
-        recyclerViewPresetAdapter.notifyItemInserted(countdownObjects.size());
-        writePresetToDatabase(preset);
         listener.onClose();
     }
 

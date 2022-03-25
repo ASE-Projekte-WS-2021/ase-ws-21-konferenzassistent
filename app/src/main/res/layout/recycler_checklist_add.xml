@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:layout_marginTop="16dp"
+        android:orientation="vertical">
+
+
+        <!-- Checklist Template -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+            <!-- Checklist Name -->
+            <EditText
+                android:id="@+id/checklist_name"
+                android:layout_width="wrap_content"
+                android:hint="Checklist item name..."
+                android:imeOptions="actionDone"
+                android:textSize="14sp"
+                android:inputType="text"
+                android:maxLines="1"
+                android:layout_margin="16dp"
+                android:background="@color/transparent"
+                android:layout_height="wrap_content"
+                android:autofillHints="" />
+
+            <!-- Checklist Hint -->
+            <EditText
+                android:id="@+id/checklist_hint"
+                android:layout_width="wrap_content"
+                android:hint="Checklist item hint..."
+                android:imeOptions="actionDone"
+                android:textSize="14sp"
+                android:inputType="text"
+                android:maxLines="1"
+                android:layout_margin="16dp"
+                android:background="@color/transparent"
+                android:layout_height="wrap_content"
+                android:autofillHints="" />
+            </LinearLayout>
+
+            <!-- delete Button -->
+            <LinearLayout
+                android:id="@+id/remove_item"
+                android:layout_width="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginEnd="16dp"
+                android:layout_gravity="center"
+                android:layout_height="wrap_content">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:backgroundTint="@color/corona_blue"
+                android:background="@drawable/ic_baseline_delete_forever_24"
+                android:minHeight="32dp"
+                android:minWidth="32dp"/>
+            </LinearLayout>
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_marginTop="8dp"
+            android:layout_height="1dp"
+            android:background="#e6e6e6" />
+    </LinearLayout>
+
+
+</layout>

@@ -1,20 +1,32 @@
 package com.example.myapplication;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
+
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.databinding.DataBindingUtil;
+
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.example.myapplication.data.ParticipantData;
+import com.example.myapplication.data.RoomDB;
 import com.example.myapplication.databinding.MeetingBottomSheetBinding;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
+import com.google.android.material.chip.Chip;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+
+import java.util.List;
 
 /**
     https://betterprogramming.pub/bottom-sheet-android-340703e114d2
@@ -23,12 +35,17 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 public class MeetingBottomSheetAdapter extends  BottomSheetDialogFragment{
     BottomSheetBehavior bottomSheetBehavior;
     MeetingBottomSheetBinding bi;
+    private int id;
     private String duration;
     private String startTime;
     private String endTime;
     private String participants;
     private String ort;
     private String meetingDate;
+
+    private boolean participantDropDownOpened = false;
+
+    private RoomDB database;
 
     // Make the background Transparent
     @Override
@@ -42,6 +59,8 @@ public class MeetingBottomSheetAdapter extends  BottomSheetDialogFragment{
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState){
         BottomSheetDialog bottomSheet = (BottomSheetDialog) super.onCreateDialog(savedInstanceState);
+
+        database = RoomDB.getInstance(getContext());
 
         // inflating Layout
         View view = View.inflate(bottomSheet.getContext(), R.layout.meeting_bottom_sheet, null);
@@ -112,7 +131,7 @@ public class MeetingBottomSheetAdapter extends  BottomSheetDialogFragment{
         hideAppBar(bi.appBarLayout);
 
         // setup the View
-        setView(duration, meetingDate, startTime,endTime,participants,ort);
+        setView(id, duration, meetingDate, startTime,endTime,participants,ort);
 
         return bottomSheet;
     }
@@ -141,16 +160,44 @@ public class MeetingBottomSheetAdapter extends  BottomSheetDialogFragment{
         return (int) array.getDimension(0, 0);
     }
 
-    private void setView(String duration, String meetingDate, String startTime, String endTime, String participants, String ort){
+    private void setView(int id, String duration, String meetingDate, String startTime, String endTime, String participants, String ort){
         bi.duration.setText(duration);
         bi.meetingDate.setText(meetingDate);
         bi.startTime.setText(startTime);
         bi.endTime.setText(endTime);
         bi.participantCount.setText(participants);
         bi.ort.setText(ort);
+
+        List<ParticipantData> participantList = database.meetingWithParticipantDao().getMeetingByID(id).getParticipants();
+
+        for (ParticipantData p : participantList) {
+            Chip chip = new Chip(requireContext());
+            chip.setText(p.getName());
+            bi.meetingBottomSheetParticipantChipgroup.addView(chip);
+
+            chip.setOnClickListener(view -> {
+                View alertDialogView = DialogUserInfoViewCreator.createView(requireContext(), p, false);
+                new MaterialAlertDialogBuilder(requireContext())
+                        .setView(alertDialogView)
+                        .show();
+            });
+        }
+
+        bi.meetingBottomSheetParticipantsContainer.setOnClickListener(view -> {
+            if (!participantDropDownOpened) {
+                participantDropDownOpened = true;
+                bi.meetingBottomSheetParticipantChipgroup.setVisibility(View.VISIBLE);
+                bi.meetingBottomSheetParticipantsDropdownIndicator.setRotation(180);
+            } else {
+                participantDropDownOpened = false;
+                bi.meetingBottomSheetParticipantChipgroup.setVisibility(View.GONE);
+                bi.meetingBottomSheetParticipantsDropdownIndicator.setRotation(0);
+            }
+        });
     }
 
-    public void setValues(String duration, String meetingDate, String startTime, String endTime, String participants, String ort){
+    public void setValues(int id, String duration, String meetingDate, String startTime, String endTime, String participants, String ort){
+        this.id = id;
         this.duration = duration;
         this.meetingDate = meetingDate;
         this.startTime = startTime;

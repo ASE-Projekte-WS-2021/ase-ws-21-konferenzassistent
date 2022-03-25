@@ -24,7 +24,7 @@
 
                 <!-- Header -->
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
                     android:orientation="horizontal">
@@ -39,11 +39,13 @@
                         android:textSize="14sp" />
 
                     <TextView
+                        android:id="@+id/create_top_text"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="@string/countdown_erstellen"
+                        android:text="@string/countdown_countdown_Erstellen"
                         android:textColor="@color/black"
                         android:textSize="18sp"
                         android:textStyle="bold" />
@@ -126,6 +128,7 @@
                                     android:layout_height="wrap_content">
 
                                     <TextView
+                                        android:id="@+id/create_new_text"
                                         android:layout_width="wrap_content"
                                         android:layout_height="match_parent"
                                         android:gravity="center"
@@ -162,6 +165,8 @@
                                     android:layout_height="match_parent">
                                 </androidx.recyclerview.widget.RecyclerView>
 
+
+
                             </LinearLayout>
                         </androidx.cardview.widget.CardView>
 
@@ -174,7 +179,6 @@
                 android:id="@+id/extraSpace"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
-
         </androidx.cardview.widget.CardView>
 
 

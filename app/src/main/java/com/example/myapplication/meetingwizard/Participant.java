@@ -6,6 +6,7 @@ public class Participant implements Serializable {
 
     Integer id;
     String Name;
+    String email;
     String Status;
     Boolean isSelected;
 
@@ -16,6 +17,14 @@ public class Participant implements Serializable {
 
     public void setName(String name) {
         Name = name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getStatus() {
@@ -42,8 +51,9 @@ public class Participant implements Serializable {
         this.id = id;
     }
 
-    public Participant(String name, String status, Boolean isSelected, Integer id) {
+    public Participant(String name, String email, String status, Boolean isSelected, Integer id) {
         this.id = id;
+        this.email = email;
         Name = name;
         Status = status;
         this.isSelected = isSelected;

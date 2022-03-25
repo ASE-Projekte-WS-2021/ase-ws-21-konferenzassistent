@@ -14,6 +14,9 @@ public class ParticipantData implements Serializable {
     @ColumnInfo(name = "name")
     private String name;
 
+    @ColumnInfo(name = "email")
+    private String email;
+
     @ColumnInfo(name = "status")
     private String status;
 
@@ -32,6 +35,10 @@ public class ParticipantData implements Serializable {
     public void setName(String name) {
         this.name = name;
     }
+
+    public String getEmail() { return email; }
+
+    public void setEmail(String email) { this.email = email; }
 
     public String getStatus() {
         return status;

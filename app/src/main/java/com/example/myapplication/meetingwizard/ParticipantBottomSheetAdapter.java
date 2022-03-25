@@ -141,7 +141,8 @@ public class ParticipantBottomSheetAdapter extends BottomSheetDialogFragment {
         RecyclerView recyclerView = bi.participantRecycleView;
         recycleViewParticipantList = new RecycleViewParticipantList(
                 participants,
-                this.getContext()
+                this.getContext(),
+                true
         );
         recyclerView.setAdapter(recycleViewParticipantList);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));

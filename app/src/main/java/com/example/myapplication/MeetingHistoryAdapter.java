@@ -57,6 +57,7 @@ CardviewTouchHelperAdapter, CustomAlertBottomSheetAdapter.onLeaveListener{
     public void onBindViewHolder(@NonNull MeetingHistoryViewHolder holder, int position) {
 
         // Get the Values from the meeting List
+        int id = Integer.parseInt(meetingsList.get(position).getId());
         String duration = Integer.parseInt(meetingsList.get(position).getDuration())/60 + "";
         String startTime = meetingsList.get(position).getDate().substring(11);
         String endTime = meetingsList.get(position).getDateEnd().substring(11);
@@ -79,6 +80,7 @@ CardviewTouchHelperAdapter, CustomAlertBottomSheetAdapter.onLeaveListener{
             MeetingBottomSheetAdapter meetingBottomSheetAdapter = new MeetingBottomSheetAdapter();
             meetingBottomSheetAdapter.show(manager , meetingBottomSheetAdapter.getTag());
             meetingBottomSheetAdapter.setValues(
+                    id,
                     String.format(ct.getString(R.string.meeting_history_minutes_long),duration),
                     date,
                     startTime,
