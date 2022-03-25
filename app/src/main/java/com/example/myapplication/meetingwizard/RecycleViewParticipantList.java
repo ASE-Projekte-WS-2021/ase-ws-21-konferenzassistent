@@ -22,11 +22,13 @@ public class RecycleViewParticipantList extends RecyclerView.Adapter<RecycleView
     private final ArrayList<Participant> mParticipants;
     private ArrayList<Participant> mParticipantsCopy = new ArrayList<>();
     private final Context mContext;
+    private boolean openedFromWizard;
 
-    public RecycleViewParticipantList(ArrayList<Participant> mParticipants, Context mContext) {
+    public RecycleViewParticipantList(ArrayList<Participant> mParticipants, Context mContext, boolean openedFromWizard) {
         this.mParticipants = mParticipants;
         this.mContext = mContext;
         mParticipantsCopy.addAll(mParticipants);
+        this.openedFromWizard = openedFromWizard;
     }
 
     @Override
@@ -36,17 +38,18 @@ public class RecycleViewParticipantList extends RecyclerView.Adapter<RecycleView
             holder.isParticipant.setVisibility(participant.getSelected()? View.VISIBLE : View.GONE);
             holder.participantStatus.setText(participant.getStatus());
 
+            if (openedFromWizard){
+                // Set on click listener on the container
+                holder.participantContainer.setOnClickListener(containerView -> {
+                    // Invert the status
+                    Boolean wasSelected = participant.getSelected();
+                    participant.setSelected(!wasSelected);
 
-            // Set on click listener on the container
-            holder.participantContainer.setOnClickListener(containerView -> {
-                // Invert the status
-                Boolean wasSelected = participant.getSelected();
-                participant.setSelected(!wasSelected);
-
-                // Set visibility on indicator
-                holder.isParticipant.setVisibility(!wasSelected? View.VISIBLE : View.GONE);
-            });
+                    // Set visibility on indicator
+                    holder.isParticipant.setVisibility(!wasSelected? View.VISIBLE : View.GONE);
+                });
             }
+    }
 
     @Override
     public int getItemCount() {
