@@ -225,7 +225,7 @@ public class MeetingWizardActivity extends AppCompatActivity implements OnAdapte
         d = database.participantDao().getAll();
 
         d.forEach(participantData -> {
-            Participant participant = new Participant(participantData.getName(), participantData.getStatus(), false, participantData.getID());
+            Participant participant = new Participant(participantData.getName(), participantData.getEmail(), participantData.getStatus(), false, participantData.getID());
             participants.add(participant);
         });
 
@@ -356,12 +356,13 @@ public class MeetingWizardActivity extends AppCompatActivity implements OnAdapte
         }
     }
 
-    public void addNewParticipant(String name, String status) {
-        Participant participant = new Participant(name, status, true, 0);
+    public void addNewParticipant(String name, String email, String status) {
+        Participant participant = new Participant(name, email ,status, true, 0);
         WizardParticipantFragment fragment = (WizardParticipantFragment) fragmentArrayList.get(STATE_IS_PARTICIPANT);
 
         ParticipantData participantData = new ParticipantData();
         participantData.setName(participant.getName());
+        participantData.setEmail(participant.getEmail());
         participantData.setStatus(participant.getStatus());
         participant.setId(participantData.getID());
         participants.add(participant);

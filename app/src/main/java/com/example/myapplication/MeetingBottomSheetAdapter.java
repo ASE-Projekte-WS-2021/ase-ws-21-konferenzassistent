@@ -185,17 +185,15 @@ public class MeetingBottomSheetAdapter extends  BottomSheetDialogFragment{
                 tvEmail = alertDialogView.findViewById(R.id.dialog_user_info_content_email_text);
                 tvStatus = alertDialogView.findViewById(R.id.dialog_user_info_content_status_text);
                 emailContainer = alertDialogView.findViewById(R.id.dialog_user_info_content_email);
-
-                String mail = "johannes-maximilian.hoffmann@student.ur.de";
                 tvName.setText(p.getName());
-                tvEmail.setText(mail); // TODO when Email implemented in database
+                tvEmail.setText(p.getEmail());
                 tvStatus.setText(p.getStatus());
                 // Open Mail App
                 emailContainer.setOnClickListener(v -> {
                     try {
                         final Intent intent = new Intent(Intent.ACTION_SEND);
                         intent.setType("plain/text");
-                        intent.putExtra(Intent.EXTRA_EMAIL, new String[]{mail});
+                        intent.putExtra(Intent.EXTRA_EMAIL, new String[]{p.getEmail()});
                         requireContext().startActivity(Intent.createChooser(intent, "Sende Mail..."));
                     } catch (Exception e) {
                         Toast.makeText(requireContext(),"Kein unterstützter Email-Client gefunden...",Toast.LENGTH_SHORT).show();
