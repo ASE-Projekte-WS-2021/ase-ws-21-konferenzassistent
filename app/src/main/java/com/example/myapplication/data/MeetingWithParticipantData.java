@@ -1,7 +1,6 @@
 package com.example.myapplication.data;
 
 import androidx.room.Entity;
-import androidx.room.PrimaryKey;
 
 @Entity(primaryKeys = {"meetingID", "participantID"},tableName = "table_meeting_with_participant_data")
 public class MeetingWithParticipantData {

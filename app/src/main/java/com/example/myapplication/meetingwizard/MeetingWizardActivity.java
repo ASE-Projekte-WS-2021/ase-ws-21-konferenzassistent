@@ -7,7 +7,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.myapplication.CountdownActivity;
-import com.example.myapplication.CreateMeetingBottomSheetAdapter;
 import com.example.myapplication.CustomAlertBottomSheetAdapter;
 import com.example.myapplication.InformationBottomSheetAdapter;
 import com.example.myapplication.R;
@@ -20,15 +19,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ProgressBar;
-import android.util.Log;
-import android.view.View;
 import android.widget.TextView;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
-
-import java.util.Locale;
 
 import java.util.Objects;
 

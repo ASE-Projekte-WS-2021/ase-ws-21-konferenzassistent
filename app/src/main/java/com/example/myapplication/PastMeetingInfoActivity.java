@@ -1,51 +1,19 @@
 package com.example.myapplication;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.view.menu.MenuBuilder;
-import androidx.core.view.MenuItemCompat;
-import androidx.databinding.DataBindingUtil;
 
 import android.annotation.SuppressLint;
-import android.app.Dialog;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.res.Resources;
-import android.content.res.TypedArray;
-import android.database.Cursor;
 import android.os.Bundle;
-import android.util.AttributeSet;
-import android.util.Log;
-import android.view.ContextThemeWrapper;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.myapplication.data.MeetingData;
 import com.example.myapplication.data.MeetingParticipantPair;
-import com.example.myapplication.data.MeetingWithParticipantDao;
-import com.example.myapplication.data.MeetingWithParticipantData;
 import com.example.myapplication.data.RoomDB;
-import com.example.myapplication.databinding.MeetingBottomSheetBinding;
-import com.google.android.material.bottomsheet.BottomSheetBehavior;
-import com.google.android.material.bottomsheet.BottomSheetDialog;
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
-import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.List;
 
 

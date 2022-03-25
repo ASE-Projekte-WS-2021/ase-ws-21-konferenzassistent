@@ -8,7 +8,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -17,12 +16,10 @@ import android.widget.Toast;
 
 import com.example.myapplication.data.MeetingData;
 import com.example.myapplication.data.MeetingWithParticipantData;
-import com.example.myapplication.data.ParticipantData;
 import com.example.myapplication.data.RoomDB;
 import com.example.myapplication.meetingwizard.MeetingWizardActivity;
 import com.example.myapplication.meetingwizard.Participant;
 import com.example.myapplication.meetingwizard.RecyclerViewAdvancedCountdownAdapter;
-import com.example.myapplication.meetingwizard.RecyclerViewAdvancedCountdownItemAdapter;
 import com.example.myapplication.meetingwizard.cdServiceObject;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
@@ -32,7 +29,6 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.TimeZone;
 
 public class CountdownActivity extends AppCompatActivity implements Serializable,CustomAlertBottomSheetAdapter.onLeaveListener{

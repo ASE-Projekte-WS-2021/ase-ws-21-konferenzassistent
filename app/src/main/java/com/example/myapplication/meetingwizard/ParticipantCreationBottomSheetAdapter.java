@@ -8,19 +8,13 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.CustomAlertBottomSheetAdapter;
-import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
 import com.example.myapplication.databinding.BottomSheetParticipantsAddNewBinding;
-import com.example.myapplication.databinding.BottomSheetParticipantsBinding;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
-
-import java.util.ArrayList;
 
 public class ParticipantCreationBottomSheetAdapter extends BottomSheetDialogFragment implements CustomAlertBottomSheetAdapter.onLeaveListener, RecycleViewContactList.contactListener{
     BottomSheetParticipantsAddNewBinding bi;

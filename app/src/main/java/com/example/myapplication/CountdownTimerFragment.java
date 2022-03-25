@@ -4,26 +4,17 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.content.res.ResourcesCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 
 import com.example.myapplication.databinding.FragmentCountdownTimerBinding;
-import com.example.myapplication.meetingwizard.MeetingWizardActivity;
-import com.example.myapplication.meetingwizard.RecycleViewContactList;
-import com.example.myapplication.meetingwizard.RecyclerViewAdvancedCountdownAdapter;
 import com.example.myapplication.meetingwizard.cdServiceObject;
-import com.google.android.material.timepicker.TimeFormat;
 
 import java.util.ArrayList;
 

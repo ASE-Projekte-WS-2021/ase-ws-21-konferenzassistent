@@ -9,26 +9,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.widget.SwitchCompat;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.core.view.ViewCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.LinearSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.recyclerview.widget.SnapHelper;
 
-import com.example.myapplication.meetingwizard.LinePagerIndicatorDecoration;
 import com.example.myapplication.meetingwizard.RecyclerViewAdvancedCountdownAdapter;
 import com.example.myapplication.meetingwizard.RecyclerViewAdvancedCountdownItemAdapter;
-import com.google.android.material.textfield.TextInputEditText;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
 public class RecyclerViewCreatedCountdownElementsAdapter

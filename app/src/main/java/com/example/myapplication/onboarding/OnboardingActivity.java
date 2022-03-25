@@ -1,7 +1,6 @@
 package com.example.myapplication.onboarding;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 import androidx.core.content.res.ResourcesCompat;
 
 import android.os.Bundle;

@@ -4,8 +4,6 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-import java.io.Serializable;
-
 @Entity(tableName = "table_timer_preset_data")
 public class TimerPresetData {
     @PrimaryKey(autoGenerate = true)

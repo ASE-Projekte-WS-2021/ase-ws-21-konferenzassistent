@@ -1,7 +1,6 @@
 package com.example.myapplication.data.presets.countdown;
 
 import androidx.room.Entity;
-import androidx.room.PrimaryKey;
 
 @Entity(primaryKeys = {"countdownItemID", "countdownParentID"},tableName = "table_countdown_join")
 public class CountdownParentWithItemData {

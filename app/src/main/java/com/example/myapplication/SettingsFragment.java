@@ -15,12 +15,7 @@ import android.view.ViewGroup;
 
 import com.example.myapplication.checklist.ChecklistItem;
 import com.example.myapplication.data.RoomDB;
-import com.example.myapplication.data.presets.countdown.CountdownItemData;
-import com.example.myapplication.data.presets.countdown.CountdownParentData;
-import com.example.myapplication.data.presets.countdown.CountdownParentWithItemData;
-import com.example.myapplication.data.presets.countdown.CountdownPresetData;
 import com.example.myapplication.data.presets.countdown.CountdownPresetPair;
-import com.example.myapplication.data.presets.countdown.CountdownPresetWithParentData;
 import com.example.myapplication.databinding.FragmentSettingsBinding;
 
 import java.util.ArrayList;

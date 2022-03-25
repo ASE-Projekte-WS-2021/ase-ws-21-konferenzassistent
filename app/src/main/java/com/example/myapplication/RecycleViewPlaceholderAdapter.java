@@ -9,16 +9,13 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.core.view.ViewCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.myapplication.meetingwizard.Contact;
 import com.example.myapplication.meetingwizard.RecyclerViewAdvancedCountdownAdapter;
-import com.example.myapplication.meetingwizard.RecyclerViewAdvancedCountdownItemAdapter;
 import com.example.myapplication.meetingwizard.cdServiceObject;
 
 import java.util.ArrayList;

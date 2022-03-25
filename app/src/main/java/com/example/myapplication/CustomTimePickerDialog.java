@@ -4,12 +4,8 @@ import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.Resources;
-import android.view.View;
 import android.widget.NumberPicker;
 import android.widget.TimePicker;
-
-import java.lang.reflect.Field;
-import java.sql.Time;
 
 // Custom Time Picker Dialog to remove the hours
 //https://stackoverflow.com/questions/20214547/show-timepicker-with-minutes-intervals-in-android/20396673#20396673

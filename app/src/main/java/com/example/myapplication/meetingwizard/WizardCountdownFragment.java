@@ -14,9 +14,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.myapplication.CountdownActivity;
-import com.example.myapplication.MainActivity;
-import com.example.myapplication.RecyclerViewLocationAdapter;
 import com.example.myapplication.databinding.FragmentWizardCountdownBinding;
 import com.example.myapplication.R;
 

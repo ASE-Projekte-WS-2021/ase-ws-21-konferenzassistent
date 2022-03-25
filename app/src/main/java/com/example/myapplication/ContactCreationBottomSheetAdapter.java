@@ -12,7 +12,6 @@ import androidx.databinding.DataBindingUtil;
 import com.example.myapplication.data.ParticipantData;
 import com.example.myapplication.data.RoomDB;
 import com.example.myapplication.databinding.BottomSheetParticipantsAddNewBinding;
-import com.example.myapplication.meetingwizard.MeetingWizardActivity;
 import com.example.myapplication.meetingwizard.ParticipantImportContactBottomSheetAdapter;
 import com.example.myapplication.meetingwizard.RecycleViewContactList;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;

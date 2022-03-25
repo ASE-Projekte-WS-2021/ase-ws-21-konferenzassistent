@@ -1,15 +1,12 @@
 package com.example.myapplication;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
-import android.view.VelocityTracker;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
@@ -20,9 +17,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.data.RoomDB;
 
-import org.w3c.dom.Document;
-
-import java.util.ArrayList;
 import java.util.List;
 
 public class MeetingHistoryAdapter extends RecyclerView.Adapter<MeetingHistoryAdapter.MeetingHistoryViewHolder> implements

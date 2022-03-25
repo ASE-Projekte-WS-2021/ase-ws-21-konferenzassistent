@@ -9,7 +9,6 @@ import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 
 import com.example.myapplication.data.RoomDB;

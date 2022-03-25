@@ -2,26 +2,18 @@ package com.example.myapplication;
 
 import android.app.Dialog;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.EditorInfo;
 import android.widget.RelativeLayout;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.databinding.BottomSheetInformationDisplayBinding;
-import com.example.myapplication.databinding.BottomSheetLocationSelectBinding;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
-
-import java.util.ArrayList;
 
 public class InformationBottomSheetAdapter extends BottomSheetDialogFragment {
     private static final float MIN_SCROLL_FOR_CLOSURE = 0.1f;

@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
-import android.view.inputmethod.EditorInfo;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
@@ -13,10 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.CustomAlertBottomSheetAdapter;
-import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
-import com.example.myapplication.RecyclerViewLocationAdapter;
-import com.example.myapplication.databinding.BottomSheetLocationSelectBinding;
 import com.example.myapplication.databinding.BottomSheetParticipantsBinding;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;

@@ -1,7 +1,6 @@
 package com.example.myapplication.checklist;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +10,6 @@ import android.widget.ImageButton;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.cardview.widget.CardView;
-import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.R;
@@ -68,7 +66,7 @@ public class ChecklistAdapter extends RecyclerView.Adapter<ChecklistAdapter.Chec
         return checklistItems.size();
     }
 
-    public class ChecklistViewHolder extends RecyclerView.ViewHolder {
+    public static class ChecklistViewHolder extends RecyclerView.ViewHolder {
 
         CardView cardViewItem;
         CheckBox checkBoxItem;

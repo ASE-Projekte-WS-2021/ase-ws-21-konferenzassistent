@@ -15,8 +15,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.data.RoomDB;
 import com.example.myapplication.databinding.BottomSheetEditPresetsBinding;
-import com.example.myapplication.databinding.BottomSheetPresetsBinding;
-import com.example.myapplication.meetingwizard.RecyclerViewAdvancedCountdownAdapter;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;

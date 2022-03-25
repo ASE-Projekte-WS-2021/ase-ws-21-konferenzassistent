@@ -17,7 +17,6 @@ import androidx.recyclerview.widget.SnapHelper;
 import com.example.myapplication.R;
 
 import java.io.Serializable;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class RecyclerViewAdvancedCountdownAdapter

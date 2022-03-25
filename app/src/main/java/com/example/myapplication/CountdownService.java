@@ -16,11 +16,9 @@ import android.content.IntentFilter;
 import android.media.MediaPlayer;
 import android.media.RingtoneManager;
 import android.net.Uri;
-import android.os.Build;
 import android.os.CountDownTimer;
 import android.os.IBinder;
 import android.text.Html;
-import android.text.Spannable;
 import android.text.SpannableString;
 import android.util.Log;
 
@@ -30,7 +28,6 @@ import androidx.core.app.NotificationCompat;
 import com.example.myapplication.meetingwizard.cdServiceObject;
 
 import java.util.ArrayList;
-import java.util.Timer;
 
 public class CountdownService extends Service {
 
