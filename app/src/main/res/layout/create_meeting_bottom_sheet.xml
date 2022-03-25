@@ -169,7 +169,6 @@
                                     android:background="@color/transparent"
                                     android:gravity="left"
                                     android:minHeight="48dp"
-                                    android:visibility="gone"
                                     android:orientation="horizontal"
                                     app:layout_constraintEnd_toEndOf="parent"
                                     app:layout_constraintStart_toStartOf="parent"
