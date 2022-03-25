@@ -61,12 +61,6 @@ public class SettingsFragment extends Fragment implements PresetEditBottomSheet.
         // binding views to data binding
         bi = DataBindingUtil.bind(view);
 
-        // on new participant button
-        bi.buttonAddContact.setOnClickListener(viewListener ->{
-            ContactCreationBottomSheetAdapter contactCreationBottomSheetAdapter = new ContactCreationBottomSheetAdapter();
-            contactCreationBottomSheetAdapter.show(getParentFragmentManager(), contactCreationBottomSheetAdapter.getTag());
-        });
-
         // on new checklist button
         bi.buttonAddChecklist.setOnClickListener(viewListener ->{
             /*
