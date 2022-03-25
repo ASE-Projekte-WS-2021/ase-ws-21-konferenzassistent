@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.myapplication.checklist.ChecklistItem;
 import com.example.myapplication.data.RoomDB;
 import com.example.myapplication.data.presets.countdown.CountdownItemData;
 import com.example.myapplication.data.presets.countdown.CountdownParentData;
@@ -29,14 +30,10 @@ public class SettingsFragment extends Fragment implements PresetEditBottomSheet.
     FragmentSettingsBinding bi;
     RoomDB database;
     ArrayList<CountdownPreset> countdownPresets = new ArrayList<>();
+    ArrayList<ChecklistPreset> checklistPreset = new ArrayList<>();
 
     public SettingsFragment() {
         // Required empty public constructor
-    }
-
-    // TODO: Rename and change types and number of parameters
-    public static SettingsFragment newInstance() {
-        return new SettingsFragment();
     }
 
     @Override
@@ -44,6 +41,7 @@ public class SettingsFragment extends Fragment implements PresetEditBottomSheet.
         super.onCreate(savedInstanceState);
         database = RoomDB.getInstance(getContext());
         createCountdownList();
+        createChecklistList();
     }
 
     @Override
@@ -63,11 +61,10 @@ public class SettingsFragment extends Fragment implements PresetEditBottomSheet.
 
         // on new checklist button
         bi.buttonAddChecklist.setOnClickListener(viewListener ->{
-            /*
             PresetEditBottomSheet presetEditBottomSheet = new PresetEditBottomSheet();
+            presetEditBottomSheet.setupView(checklistPreset, PresetEditBottomSheet.PRESET_TYPE_CHECKLIST, this);
             presetEditBottomSheet.show(getParentFragmentManager(), presetEditBottomSheet.getTag());
 
-             */
         });
 
         // on new countdown button
@@ -94,10 +91,19 @@ public class SettingsFragment extends Fragment implements PresetEditBottomSheet.
         });
     }
 
+    private void createChecklistList(){
+
+        ArrayList<ChecklistItem> items = new ArrayList<>();
+        items.add(new ChecklistItem("Checklistitem1", "hint", false));
+
+        checklistPreset.add(new ChecklistPreset("Test", items,0));
+    }
+
 
     @Override
     public void onClose() {
         createCountdownList();
+        createChecklistList();
     }
 }
 
