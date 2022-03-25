@@ -12,7 +12,10 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.myapplication.DialogUserInfoViewCreator;
 import com.example.myapplication.R;
+import com.example.myapplication.data.ParticipantData;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.util.ArrayList;
 
@@ -38,6 +41,12 @@ public class RecycleViewParticipantList extends RecyclerView.Adapter<RecycleView
             holder.isParticipant.setVisibility(participant.getSelected()? View.VISIBLE : View.GONE);
             holder.participantStatus.setText(participant.getStatus());
 
+            ParticipantData asParticipantData = new ParticipantData();
+            asParticipantData.setID(participant.getId());
+            asParticipantData.setName(participant.getName());
+            asParticipantData.setEmail(participant.getEmail());
+            asParticipantData.setStatus(participant.getStatus());
+
             if (openedFromWizard){
                 // Set on click listener on the container
                 holder.participantContainer.setOnClickListener(containerView -> {
@@ -48,8 +57,15 @@ public class RecycleViewParticipantList extends RecyclerView.Adapter<RecycleView
                     // Set visibility on indicator
                     holder.isParticipant.setVisibility(!wasSelected? View.VISIBLE : View.GONE);
                 });
+            } else {
+                holder.participantContainer.setOnClickListener(containerView -> {
+                    View alertDialogView = DialogUserInfoViewCreator.createView(mContext, asParticipantData, false); // TODO make button open participant edit sheet
+                    new MaterialAlertDialogBuilder(mContext)
+                            .setView(alertDialogView)
+                            .show();
+                });
             }
-    }
+        }
 
     @Override
     public int getItemCount() {
