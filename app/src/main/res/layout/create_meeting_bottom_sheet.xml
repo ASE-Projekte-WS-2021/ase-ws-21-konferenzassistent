@@ -159,7 +159,7 @@
                                 android:layout_height="wrap_content"
                                 android:orientation="vertical">
 
-                                <!-- Checklist Button -->
+
                                 <androidx.constraintlayout.widget.ConstraintLayout
                                     android:id="@+id/button_checklist_preset"
                                     style="@style/Widget.AppCompat.Button"
@@ -169,6 +169,7 @@
                                     android:background="@color/transparent"
                                     android:gravity="left"
                                     android:minHeight="48dp"
+                                    android:visibility="gone"
                                     android:orientation="horizontal"
                                     app:layout_constraintEnd_toEndOf="parent"
                                     app:layout_constraintStart_toStartOf="parent"
@@ -228,7 +229,6 @@
 
 
                                 </androidx.constraintlayout.widget.ConstraintLayout>
-
                                 <!-- Timer Button -->
                                 <androidx.constraintlayout.widget.ConstraintLayout
                                     android:id="@+id/button_timer_preset"
@@ -241,8 +241,7 @@
                                     android:orientation="horizontal"
                                     app:layout_constraintBottom_toBottomOf="parent"
                                     app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toBottomOf="@+id/button_checklist_preset">
+                                    app:layout_constraintStart_toStartOf="parent">
 
                                     <TextView
                                         android:id="@+id/textView4"
