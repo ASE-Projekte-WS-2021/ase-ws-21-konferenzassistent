@@ -52,7 +52,10 @@ public class RecyclerViewCreatedCountdownElementsAdapter
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Log.i("TAG", "onBindViewHolder: " +contentHidden.size() + position);
+        // Fixes Android using old values
+        holder.countdownName.setText(
+                mAdvancedCountdownObjects.get(holder.getAdapterPosition()).getmCountdownName());
+
         buildRecyclerView(holder, position);
 
 

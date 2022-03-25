@@ -26,65 +26,12 @@
                 <!-- Status Text Edit -->
 
                 <LinearLayout
-                    android:id="@+id/button_add_contact"
-                    style="@style/Widget.AppCompat.Button"
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:minHeight="48dp"
-                    android:gravity="left"
-                    android:background="@color/transparent"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:textSize="14sp"
-                        android:layout_marginStart="16dp"
-                        android:textColor="@color/black"
-                        android:textStyle="bold"
-                        android:text="@string/neuen_kontak_hinzuf_gen"/>
-
-                    <androidx.constraintlayout.widget.Placeholder
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"/>
-
-                    <ImageView
-                        android:layout_width="16dp"
-                        android:layout_height="16dp"
-                        android:layout_gravity="center"
-                        android:layout_marginEnd="16dp"
-                        android:background="@drawable/ic_baseline_arrow_forward_ios_24" />
-
-
-                </LinearLayout>
-
-
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            app:cardCornerRadius="16dp"
-            android:layout_marginTop="32dp"
-            android:background="@color/corona_white"
-            android:layout_height="wrap_content">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <!-- Status Text Edit -->
-
-                <LinearLayout
                     android:id="@+id/button_add_countdown"
                     style="@style/Widget.AppCompat.Button"
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:minHeight="48dp"
-                    android:gravity="left"
+                    android:gravity="start"
                     android:background="@color/transparent"
                     android:layout_height="wrap_content">
 
@@ -108,7 +55,8 @@
                         android:layout_height="16dp"
                         android:layout_gravity="center"
                         android:layout_marginEnd="16dp"
-                        android:background="@drawable/ic_baseline_arrow_forward_ios_24" />
+                        android:background="@drawable/ic_baseline_arrow_forward_ios_24"
+                        android:contentDescription="@string/next" />
 
 
                 </LinearLayout>
@@ -124,7 +72,7 @@
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:minHeight="48dp"
-                    android:gravity="left"
+                    android:gravity="start"
                     android:background="@color/transparent"
                     android:layout_height="wrap_content">
 
@@ -148,7 +96,8 @@
                         android:layout_height="16dp"
                         android:layout_gravity="center"
                         android:layout_marginEnd="16dp"
-                        android:background="@drawable/ic_baseline_arrow_forward_ios_24" />
+                        android:background="@drawable/ic_baseline_arrow_forward_ios_24"
+                        android:contentDescription="@string/next" />
 
 
                 </LinearLayout>

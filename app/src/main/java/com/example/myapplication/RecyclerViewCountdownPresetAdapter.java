@@ -18,9 +18,9 @@ import java.util.ArrayList;
 public class RecyclerViewCountdownPresetAdapter
         extends RecyclerView.Adapter<RecyclerViewCountdownPresetAdapter.ViewHolder> implements CustomAlertBottomSheetAdapter.onLeaveListener {
 
-    private final ArrayList<CountdownPreset> countdownPresets;
+    private final ArrayList<? extends Preset> preset;
     private final Context mContext;
-    private onDeletionListener listener;
+    private final onDeletionListener listener;
 
     int selectedPosition;
     @Override
@@ -38,11 +38,11 @@ public class RecyclerViewCountdownPresetAdapter
     }
 
     public RecyclerViewCountdownPresetAdapter(
-            ArrayList<CountdownPreset> countdownPresets,
+            ArrayList<? extends Preset> preset,
             onDeletionListener listener,
             Context mContext)
     {
-        this.countdownPresets = countdownPresets;
+        this.preset = preset;
         this.mContext = mContext;
         this.listener = listener;
     }
@@ -57,19 +57,19 @@ public class RecyclerViewCountdownPresetAdapter
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.presetName.setText(countdownPresets.get(holder.getAdapterPosition()).getTitle());
+        holder.presetName.setText(preset.get(holder.getAdapterPosition()).getTitle());
 
         holder.selectIndicator.setVisibility(View.VISIBLE);
         holder.selectIndicator.setBackground(ResourcesCompat.getDrawable(mContext.getResources(), R.drawable.ic_baseline_delete_forever_24, null));
         holder.itemContainer.setOnClickListener(view -> {
-            createAlert(countdownPresets.get(holder.getAdapterPosition()).getTitle());
+            createAlert(preset.get(holder.getAdapterPosition()).getTitle());
             selectedPosition = holder.getAdapterPosition();
         });
     }
 
     @Override
     public int getItemCount() {
-        return countdownPresets.size();
+        return preset.size();
     }
 
     private void createAlert(String title){

@@ -1,5 +1,6 @@
 package com.example.myapplication;
 
+import com.example.myapplication.checklist.ChecklistItem;
 import com.example.myapplication.data.RoomDB;
 import com.example.myapplication.data.presets.countdown.CountdownItemData;
 import com.example.myapplication.data.presets.countdown.CountdownItemPair;
@@ -13,23 +14,14 @@ import com.example.myapplication.meetingwizard.RecyclerViewAdvancedCountdownItem
 
 import java.util.ArrayList;
 
-public class CountdownPreset implements Preset {
+public class ChecklistPreset implements Preset {
     String title;
-    ArrayList<RecyclerViewAdvancedCountdownAdapter.AdvancedCountdownObject> advancedCountdownObject;
-    int id;
+    ArrayList<ChecklistItem> checklistItems;
+    Integer id;
 
-    public CountdownPreset(String title, ArrayList<RecyclerViewAdvancedCountdownAdapter.AdvancedCountdownObject> advancedCountdownObject, int id) {
+    public ChecklistPreset(String title, ArrayList<ChecklistItem> checklistItems, Integer id) {
         this.title = title;
-        this.advancedCountdownObject = advancedCountdownObject;
-        this.id = id;
-    }
-
-    @Override
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
+        this.checklistItems = checklistItems;
         this.id = id;
     }
 
@@ -41,19 +33,28 @@ public class CountdownPreset implements Preset {
         this.title = title;
     }
 
-    public ArrayList<RecyclerViewAdvancedCountdownAdapter.AdvancedCountdownObject> getAdvancedCountdownObject() {
-        return advancedCountdownObject;
+    public ArrayList<ChecklistItem> getChecklistItems() {
+        return checklistItems;
     }
 
-    public void setAdvancedCountdownObject(ArrayList<RecyclerViewAdvancedCountdownAdapter.AdvancedCountdownObject> advancedCountdownObject) {
-        this.advancedCountdownObject = advancedCountdownObject;
+    public void setChecklistItems(ArrayList<ChecklistItem> checklistItems) {
+        this.checklistItems = checklistItems;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    /*
     public static void removeFromDatabase(RoomDB database, Integer id){
         database.countdownPresetDao().delete(database.countdownPresetDao().getOne(id));
     }
 
-    public static void convertToDatabaseEntry(RoomDB database, CountdownPreset preset){
+    public static void convertToDatabaseEntry(RoomDB database, ChecklistPreset preset){
         String title = preset.getTitle();
 
         // create new preset
@@ -126,5 +127,5 @@ public class CountdownPreset implements Preset {
 
         return list;
     }
-
+    */
 }

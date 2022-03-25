@@ -84,13 +84,10 @@ public class VerlaufFragment extends Fragment  implements OnFilterButtonClickLis
 
         participantsList = database.participantDao().getAll();
         createArrayListFromDatabase();
-        updateRKIandPastMeetingInfo();
+        updatePastMeetingInfo();
     }
 
-    private void updateRKIandPastMeetingInfo() {
-        // update RKI info
-        // todo
-
+    private void updatePastMeetingInfo() {
         // update past meeting counter
         pastMeetingCountText.setText(Integer.toString(rvMeetings.getAdapter().getItemCount()));
         if (dataIsFiltered) {
@@ -196,7 +193,7 @@ public class VerlaufFragment extends Fragment  implements OnFilterButtonClickLis
             // TODO duplicate code from createArrayFromDatabase
             meetingHistoryAdapter = new MeetingHistoryAdapter(this.getContext(), getParentFragmentManager(), meetingsList, this);
             rvMeetings.setAdapter(meetingHistoryAdapter);
-            updateRKIandPastMeetingInfo();
+            updatePastMeetingInfo();
             return;
         }
         Stream<Meeting> filteredMeetingsStream = meetingsList.stream();
@@ -239,7 +236,7 @@ public class VerlaufFragment extends Fragment  implements OnFilterButtonClickLis
                 filteredMeetingList,
                 this)
         );
-        updateRKIandPastMeetingInfo();
+        updatePastMeetingInfo();
 
     }
 
@@ -250,7 +247,7 @@ public class VerlaufFragment extends Fragment  implements OnFilterButtonClickLis
 
         }
 
-        updateRKIandPastMeetingInfo();
+        updatePastMeetingInfo();
     }
 
     @Override
