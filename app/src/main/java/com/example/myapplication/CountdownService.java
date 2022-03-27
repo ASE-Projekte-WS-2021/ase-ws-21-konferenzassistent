@@ -195,7 +195,6 @@ public class CountdownService extends Service {
             }
 
             Integer restart_id = intent.getIntExtra(REPLAY_BUTTON_PRESSED_ID, -1);
-            Log.i(TAG, "onReceive: " + restart_id);
 
             if(restart_id != -1){
                 cdServiceObject cdObject = countdownServiceObjects.get(restart_id);

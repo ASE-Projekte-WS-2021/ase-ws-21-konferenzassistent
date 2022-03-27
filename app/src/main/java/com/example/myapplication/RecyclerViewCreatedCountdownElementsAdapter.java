@@ -67,8 +67,6 @@ public class RecyclerViewCreatedCountdownElementsAdapter
 
         // Create new Item
         holder.buttonCreate.setOnClickListener(view -> {
-            Log.i("TAG", "onBindViewHolder: " + mAdvancedCountdownObjects);
-            Log.i("TAG", "onBindViewHolder: " + holder.getAdapterPosition());
             mAdvancedCountdownObjects.get(holder.getAdapterPosition()).getmItems().add(
                     new RecyclerViewAdvancedCountdownItemAdapter.AdvancedCountdownItem((long)5, ""));
             presetAdapters.get(position).notifyItemInserted(mAdvancedCountdownObjects.get(holder.getAdapterPosition()).getmItems().size()-1);
@@ -107,7 +105,6 @@ public class RecyclerViewCreatedCountdownElementsAdapter
             contentHidden.remove(holder.getAdapterPosition());
             presetAdapters.remove(holder.getAdapterPosition());
             mAdvancedCountdownObjects.remove(holder.getAdapterPosition());
-            Log.i("TAG", "onBindViewHolder: " + mAdvancedCountdownObjects);
             notifyItemRemoved(holder.getAdapterPosition());
         });
 
@@ -139,7 +136,6 @@ public class RecyclerViewCreatedCountdownElementsAdapter
                 mContext
                 );
         presetAdapters.add(adapter);
-        Log.i("TAG", "buildRecyclerView: " + presetAdapters);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
 

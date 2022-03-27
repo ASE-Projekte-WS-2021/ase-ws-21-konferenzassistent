@@ -2,7 +2,6 @@ package com.example.myapplication;
 
 import android.app.Dialog;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.NonNull;

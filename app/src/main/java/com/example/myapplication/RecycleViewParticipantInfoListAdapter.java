@@ -32,7 +32,6 @@ public class RecycleViewParticipantInfoListAdapter extends RecyclerView.Adapter<
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
             Participant participant = mParticipants.get(holder.getAdapterPosition());
-            Log.i("TAG", "AB DER FISCH: ");
             holder.participantName.setText(participant.getName());
             holder.participantStatus.setText(participant.getStatus());
 

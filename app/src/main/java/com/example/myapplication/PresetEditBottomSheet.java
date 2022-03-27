@@ -41,7 +41,6 @@ public class PresetEditBottomSheet extends BottomSheetDialogFragment  implements
     public void onDelete(int position) {
         if(viewType.equals(PRESET_TYPE_COUNTDOWN)){
             int id = countdownObjects.get(position).id;
-            Log.i("TAG", "onDelete: " +id);
             countdownObjects.remove(position);
             recyclerViewPresetAdapter.notifyItemRemoved(countdownObjects.size());
             removeFromDatabase(RoomDB.getInstance(getContext()),id);

@@ -139,11 +139,6 @@ public class VerlaufFragment extends Fragment  implements OnFilterButtonClickLis
         });
 
 
-        /* Log.d("database", Arrays.toString(cursor.getColumnNames()));
-        for (Meeting m:  meetingsList) {
-            Log.d("database", m.toString());
-        }
-        */
 
         meetingHistoryAdapter = new MeetingHistoryAdapter(this.getContext(), getParentFragmentManager(), meetingsList, this);
         ItemTouchHelper.Callback callback = new CardviewTouchHelper(meetingHistoryAdapter);
@@ -182,7 +177,6 @@ public class VerlaufFragment extends Fragment  implements OnFilterButtonClickLis
     @Override
     public void onFilterButtonClicked(FilterData filterData) {
         // TODO filter meetingsList based on filterData
-        Log.d("filterData",filterData.toString());
 
         // early return if reset-button instead of filter button clicked
         if (!filterData.isShouldFilter()) {
@@ -228,7 +222,6 @@ public class VerlaufFragment extends Fragment  implements OnFilterButtonClickLis
         }
         // Collect stream as list, sort by id if necessary, change dataIsFiltered, set filtered list to adapter, update view elements
         List<Meeting> filteredMeetingList = filteredMeetingsStream.collect(Collectors.toList());
-        Log.d("filteredMeetingList",filteredMeetingList.toString());
         dataIsFiltered = filteredMeetingList.size() != meetingsList.size();
         rvMeetings.setAdapter(new MeetingHistoryAdapter(
                 this.getContext(),

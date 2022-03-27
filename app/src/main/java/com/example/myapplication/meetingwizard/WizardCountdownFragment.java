@@ -115,7 +115,6 @@ public class WizardCountdownFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
 
-        Log.i("TAG", "onDetach: ");
         // Set the Countdowns once User leaves the Fragment
         setCountdowns();
     }

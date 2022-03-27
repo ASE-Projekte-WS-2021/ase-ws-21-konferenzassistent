@@ -104,7 +104,6 @@ public class StartseiteFragment extends Fragment {
                         bi.hospitalisiertungText.setText(cutDecimals(Float.toString(newInfect)));
                         bi.hospitalisiertungText.setText(cutDecimals(Float.toString(hospital)));
 
-                        Log.i("TAG", "fetchData: Ausgeführt");
                         // Save the values in shared pref
                         saveRKIData(newInfect, hospital, new Date());
                     } catch (JSONException e) {
