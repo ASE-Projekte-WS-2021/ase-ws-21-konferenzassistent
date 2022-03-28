@@ -54,7 +54,7 @@ public class StartseiteFragment extends Fragment {
             // creates a Bottom sheet to display Information
             InformationBottomSheetAdapter informationBottomSheetAdapter = new InformationBottomSheetAdapter();
             // Set the layout
-            informationBottomSheetAdapter.setmLayout(R.layout.rki_information);
+            informationBottomSheetAdapter.setmLayout(R.layout.start_information);
             informationBottomSheetAdapter.show(getParentFragmentManager(), informationBottomSheetAdapter.getTag());
         });
         // load RKI data
