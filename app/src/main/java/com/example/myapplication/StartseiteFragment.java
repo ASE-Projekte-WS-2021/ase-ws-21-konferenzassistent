@@ -101,7 +101,7 @@ public class StartseiteFragment extends Fragment {
 
 
                         // Set the text
-                        bi.hospitalisiertungText.setText(cutDecimals(Float.toString(newInfect)));
+                        bi.neuinfektionenText.setText(cutDecimals(Float.toString(newInfect)));
                         bi.hospitalisiertungText.setText(cutDecimals(Float.toString(hospital)));
 
                         // Save the values in shared pref
