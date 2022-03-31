@@ -13,15 +13,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.myapplication.checklist.ChecklistItem;
 import com.example.myapplication.data.RoomDB;
 import com.example.myapplication.data.presets.checklist.ChecklistPresetPair;
-import com.example.myapplication.data.presets.countdown.CountdownItemData;
-import com.example.myapplication.data.presets.countdown.CountdownParentData;
-import com.example.myapplication.data.presets.countdown.CountdownParentWithItemData;
-import com.example.myapplication.data.presets.countdown.CountdownPresetData;
 import com.example.myapplication.data.presets.countdown.CountdownPresetPair;
-import com.example.myapplication.data.presets.countdown.CountdownPresetWithParentData;
 import com.example.myapplication.databinding.FragmentSettingsBinding;
 
 import java.util.ArrayList;
@@ -61,6 +55,7 @@ public class SettingsFragment extends Fragment implements PresetEditBottomSheet.
         bi = DataBindingUtil.bind(view);
 
         // on new checklist button
+        assert bi != null;
         bi.buttonAddChecklist.setOnClickListener(viewListener ->{
             PresetEditBottomSheet presetEditBottomSheet = new PresetEditBottomSheet();
             presetEditBottomSheet.setupView(checklistPreset, PresetEditBottomSheet.PRESET_TYPE_CHECKLIST, this);
@@ -79,20 +74,20 @@ public class SettingsFragment extends Fragment implements PresetEditBottomSheet.
 
     private void createCountdownList(){
         // Load Countdowns Objects
-        List<CountdownPresetPair> d = new ArrayList<>();
+        List<CountdownPresetPair> d;
         d = database.countdownPresetWIthParentDao().getCountdowns();
 
         countdownPresets.clear();
         d.forEach(preset ->{
             String presetName = preset.getPresets().getTitle();
-            Integer presetId = preset.getPresets().getID();
+            int presetId = preset.getPresets().getID();
 
             countdownPresets.add(new CountdownPreset(presetName, convertToAdvancedCountdownList(database, preset), presetId));
         });
     }
 
     private void createChecklistList(){
-        List<ChecklistPresetPair> d = new ArrayList<>();
+        List<ChecklistPresetPair> d;
         d = database.checklistPresetWithItemDao().getPresets();
 
         checklistPreset.clear();
@@ -100,7 +95,7 @@ public class SettingsFragment extends Fragment implements PresetEditBottomSheet.
             String presetName = preset.getPresets().getTitle();
             Integer presetId = preset.getPresets().getID();
 
-            checklistPreset.add(new ChecklistPreset(presetName, ChecklistPreset.convertToChecklistItems(database, preset), presetId ));
+            checklistPreset.add(new ChecklistPreset(presetName, ChecklistPreset.convertToChecklistItems(preset), presetId ));
         });
     }
 
@@ -111,9 +106,3 @@ public class SettingsFragment extends Fragment implements PresetEditBottomSheet.
         createChecklistList();
     }
 }
-
-/*
-
-
-
- */

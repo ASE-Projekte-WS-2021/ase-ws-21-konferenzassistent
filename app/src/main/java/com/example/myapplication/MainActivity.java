@@ -143,15 +143,18 @@ public class MainActivity extends AppCompatActivity{
     }
 
     // Start the Meeting Creation Wizard
-    public void startMeetingWizard(String title, String location, CountdownPresetPair pair){
+    public void startMeetingWizard(String title, String location, CountdownPresetPair pair, ChecklistPresetPair checklistPresetPair){
         Intent intent = new Intent(this, MeetingWizardActivity.class);
         ArrayList<RecyclerViewAdvancedCountdownAdapter.AdvancedCountdownObject> object =
                 CountdownPreset.convertToAdvancedCountdownList(RoomDB.getInstance(getBaseContext()), pair);
 
+        ArrayList<ChecklistItem> items =
+                ChecklistPreset.convertToChecklistItems(checklistPresetPair);
         // Give it the title and location
         intent.putExtra("meeting_wizard_title", title);
         intent.putExtra(MeetingWizardActivity.MEETING_LOCATION, location);
         intent.putExtra(MeetingWizardActivity.MEETING_COUNTDOWN, object);
+        intent.putExtra(MeetingWizardActivity.MEETING_CHECKLIST, items);
         startActivity(intent);
     }
 

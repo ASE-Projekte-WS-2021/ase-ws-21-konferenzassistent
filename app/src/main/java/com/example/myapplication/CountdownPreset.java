@@ -25,7 +25,7 @@ public class CountdownPreset implements Preset {
     }
 
     @Override
-    public int getId() {
+    public int getID() {
         return id;
     }
 

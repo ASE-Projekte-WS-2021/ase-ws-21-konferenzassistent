@@ -4,10 +4,12 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import com.example.myapplication.Preset;
+
 import java.io.Serializable;
 
 @Entity(tableName = "table_preset_checklist_data")
-public class ChecklistPresetData implements  Serializable{
+public class ChecklistPresetData implements  Serializable, Preset {
     @PrimaryKey(autoGenerate = true)
     private int ID;
 

@@ -8,7 +8,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -17,7 +16,6 @@ import android.widget.Toast;
 
 import com.example.myapplication.data.MeetingData;
 import com.example.myapplication.data.MeetingWithParticipantData;
-import com.example.myapplication.data.ParticipantData;
 import com.example.myapplication.data.RoomDB;
 import com.example.myapplication.meetingwizard.MeetingWizardActivity;
 import com.example.myapplication.meetingwizard.Participant;
@@ -65,6 +63,7 @@ public class CountdownActivity extends AppCompatActivity implements Serializable
     ArrayList<RecyclerViewAdvancedCountdownAdapter.AdvancedCountdownObject> countdownObjects;
     ArrayList<cdServiceObject> serviceObjectArrayList = new ArrayList<>();
     ArrayList<Participant> participants = new ArrayList<>();
+
 
     // Object used to Create Timer in the Service
 

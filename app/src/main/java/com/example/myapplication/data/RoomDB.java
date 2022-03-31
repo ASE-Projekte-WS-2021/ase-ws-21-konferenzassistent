@@ -9,7 +9,9 @@ import androidx.room.RoomDatabase;
 import com.example.myapplication.data.presets.checklist.ChecklistItemDao;
 import com.example.myapplication.data.presets.checklist.ChecklistItemData;
 import com.example.myapplication.data.presets.checklist.ChecklistPresetDao;
+import com.example.myapplication.data.presets.checklist.ChecklistPresetData;
 import com.example.myapplication.data.presets.checklist.ChecklistPresetWithItemDao;
+import com.example.myapplication.data.presets.checklist.ChecklistPresetWithItemData;
 import com.example.myapplication.data.presets.countdown.CountdownItemDao;
 import com.example.myapplication.data.presets.countdown.CountdownItemData;
 import com.example.myapplication.data.presets.countdown.CountdownParentDao;
@@ -21,7 +23,7 @@ import com.example.myapplication.data.presets.countdown.CountdownPresetData;
 import com.example.myapplication.data.presets.countdown.CountdownPresetWIthParentDao;
 import com.example.myapplication.data.presets.countdown.CountdownPresetWithParentData;
 
-@Database(entities = {MeetingData.class, ParticipantData.class, CountdownPresetWithParentData.class, MeetingWithParticipantData.class, CountdownPresetData.class, CountdownItemData.class, CountdownParentData.class, CountdownParentWithItemData.class}, version = 2, exportSchema = false)
+@Database(entities = {ChecklistPresetData.class, ChecklistItemData.class, ChecklistPresetWithItemData.class, MeetingData.class, ParticipantData.class, CountdownPresetWithParentData.class, MeetingWithParticipantData.class, CountdownPresetData.class, CountdownItemData.class, CountdownParentData.class, CountdownParentWithItemData.class}, version = 3, exportSchema = false)
 public abstract class RoomDB extends RoomDatabase {
     private static RoomDB database;
     private static String DATABASE_NAME = "database";

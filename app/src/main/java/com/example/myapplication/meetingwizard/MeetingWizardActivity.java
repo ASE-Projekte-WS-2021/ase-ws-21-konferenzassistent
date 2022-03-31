@@ -40,6 +40,7 @@ public class MeetingWizardActivity extends AppCompatActivity implements OnAdapte
     public static final String MEETING_TITLE = "MEETING_TITLE";
     public static final String MEETING_LOCATION = "MEETING_LOCATION";
     public static final String MEETING_COUNTDOWN = "MEETING_COUNTDOWN";
+    public static final String MEETING_CHECKLIST = "MEETING_CHECKLIST";
 
 
     // Array List of all Wizard Fragments
@@ -145,16 +146,6 @@ public class MeetingWizardActivity extends AppCompatActivity implements OnAdapte
             participants.add(participant);
         });
 
-
-        // TODO: LOAD CHECKLISTS
-        // initialize checklist and recyclerview
-        checklistItems = new ArrayList<>();
-        checklistItems.add(new ChecklistItem("Desinfektionsmittel bereit"));
-        checklistItems.add(new ChecklistItem("3G-Regelung o.ä. geprüft"));
-        checklistItems.add(new ChecklistItem("Masken / Plexiglas geprüft"));
-        checklistItems.add(new ChecklistItem("Abstände gewährleistet"));
-        // TODO: END OF DEBUG
-
         setupViews();
         getExtras();
 
@@ -233,6 +224,7 @@ public class MeetingWizardActivity extends AppCompatActivity implements OnAdapte
         advancedCountdownObjects =
                 (ArrayList<RecyclerViewAdvancedCountdownAdapter.AdvancedCountdownObject>)
                 getIntent().getSerializableExtra(MEETING_COUNTDOWN);
+        checklistItems = (ArrayList<ChecklistItem>) getIntent().getSerializableExtra(MEETING_CHECKLIST);
     }
 
     // Loads a Fragment at the specified position

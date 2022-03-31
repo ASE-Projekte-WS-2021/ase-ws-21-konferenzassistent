@@ -4,9 +4,11 @@ import androidx.room.Embedded;
 import androidx.room.Junction;
 import androidx.room.Relation;
 
+import com.example.myapplication.PresetPair;
+
 import java.util.List;
 
-public class ChecklistPresetPair {
+public class ChecklistPresetPair implements PresetPair {
     @Embedded
     ChecklistPresetData presets;
     @Relation(
