@@ -1,5 +1,7 @@
 package com.example.myapplication;
 
+import static com.example.myapplication.ChecklistPreset.convertToChecklistDatabaseEntry;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.navigation.NavController;
@@ -15,7 +17,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import com.example.myapplication.checklist.ChecklistItem;
 import com.example.myapplication.data.RoomDB;
+import com.example.myapplication.data.presets.checklist.ChecklistPresetData;
+import com.example.myapplication.data.presets.checklist.ChecklistPresetPair;
 import com.example.myapplication.data.presets.countdown.CountdownItemData;
 import com.example.myapplication.data.presets.countdown.CountdownParentData;
 import com.example.myapplication.data.presets.countdown.CountdownParentWithItemData;
@@ -160,6 +165,24 @@ public class MainActivity extends AppCompatActivity{
         if(d.size() < 1){
             createStandard(database);
         }
+
+        List<ChecklistPresetPair> checklistPresetPairs;
+        checklistPresetPairs = database.checklistPresetWithItemDao().getPresets();
+
+        if(checklistPresetPairs.size() < 1){
+            createStandardChecklist(database);
+        }
+    }
+
+    private void createStandardChecklist(RoomDB database) {
+        ArrayList<ChecklistItem> items = new ArrayList<>();
+        items.add(new ChecklistItem("Desinfektionsmittel bereit"));
+        items.add(new ChecklistItem("3G-Regelung o.ä. geprüft"));
+        items.add(new ChecklistItem("Masken / Plexiglas geprüft"));
+        items.add(new ChecklistItem("Abstände gewährleistet"));
+
+        ChecklistPreset preset = new ChecklistPreset("Standard", items, 1);
+        convertToChecklistDatabaseEntry(database, preset);
     }
 
     // TODO: simplify

@@ -6,6 +6,10 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
+import com.example.myapplication.data.presets.checklist.ChecklistItemDao;
+import com.example.myapplication.data.presets.checklist.ChecklistItemData;
+import com.example.myapplication.data.presets.checklist.ChecklistPresetDao;
+import com.example.myapplication.data.presets.checklist.ChecklistPresetWithItemDao;
 import com.example.myapplication.data.presets.countdown.CountdownItemDao;
 import com.example.myapplication.data.presets.countdown.CountdownItemData;
 import com.example.myapplication.data.presets.countdown.CountdownParentDao;
@@ -43,5 +47,7 @@ public abstract class RoomDB extends RoomDatabase {
     public abstract CountdownPresetDao countdownPresetDao();
     public abstract CountdownPresetWIthParentDao countdownPresetWIthParentDao();
 
-
+    public abstract ChecklistItemDao checklistItemDao();
+    public abstract ChecklistPresetDao checklistPresetDao();
+    public abstract ChecklistPresetWithItemDao checklistPresetWithItemDao();
 }

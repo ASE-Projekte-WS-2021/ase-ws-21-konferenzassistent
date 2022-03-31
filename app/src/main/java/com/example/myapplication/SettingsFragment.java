@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 
 import com.example.myapplication.checklist.ChecklistItem;
 import com.example.myapplication.data.RoomDB;
+import com.example.myapplication.data.presets.checklist.ChecklistPresetPair;
 import com.example.myapplication.data.presets.countdown.CountdownItemData;
 import com.example.myapplication.data.presets.countdown.CountdownParentData;
 import com.example.myapplication.data.presets.countdown.CountdownParentWithItemData;
@@ -77,7 +78,6 @@ public class SettingsFragment extends Fragment implements PresetEditBottomSheet.
     }
 
     private void createCountdownList(){
-
         // Load Countdowns Objects
         List<CountdownPresetPair> d = new ArrayList<>();
         d = database.countdownPresetWIthParentDao().getCountdowns();
@@ -92,11 +92,16 @@ public class SettingsFragment extends Fragment implements PresetEditBottomSheet.
     }
 
     private void createChecklistList(){
+        List<ChecklistPresetPair> d = new ArrayList<>();
+        d = database.checklistPresetWithItemDao().getPresets();
 
-        ArrayList<ChecklistItem> items = new ArrayList<>();
-        items.add(new ChecklistItem("Checklistitem1", "hint", false));
+        checklistPreset.clear();
+        d.forEach(preset ->{
+            String presetName = preset.getPresets().getTitle();
+            Integer presetId = preset.getPresets().getID();
 
-        checklistPreset.add(new ChecklistPreset("Test", items,0));
+            checklistPreset.add(new ChecklistPreset(presetName, ChecklistPreset.convertToChecklistItems(database, preset), presetId ));
+        });
     }
 
 
