@@ -40,6 +40,7 @@ public class MeetingWizardActivity extends AppCompatActivity implements OnAdapte
     public static final String MEETING_TITLE = "MEETING_TITLE";
     public static final String MEETING_LOCATION = "MEETING_LOCATION";
     public static final String MEETING_COUNTDOWN = "MEETING_COUNTDOWN";
+    public static final String MEETING_CHECKLIST = "MEETING_CHECKLIST";
 
 
     // Array List of all Wizard Fragments
@@ -134,90 +135,6 @@ public class MeetingWizardActivity extends AppCompatActivity implements OnAdapte
         advancedCountdownObjects = new ArrayList<>();
         participants = new ArrayList<>();
 
-        /*
-        // TODO: Give real Countdown Data
-        mCountdownNames.add("Lüftungs Timer");
-        mCountdownTime.add((long) 15);
-        mEnabled.add(true);
-
-        mCountdownNames.add("Abstands Timer");
-        mCountdownTime.add((long) 15);
-        mEnabled.add(true);
-
-        mCountdownNames.add("Eigener Timer 1");
-        mCountdownTime.add((long) 28);
-        mEnabled.add(false);
-
-        mCountdownNames.add("Eigener Timer 2");
-        mCountdownTime.add((long) 28);
-        mEnabled.add(false);
-
-        // TODO: LOAD OBJECTS
-        RecyclerViewAdvancedCountdownItemAdapter.AdvancedCountdownItem child1 =
-                new RecyclerViewAdvancedCountdownItemAdapter.AdvancedCountdownItem(
-                        (long) 15,
-                        "Fenster sollten geöffnet sein");
-
-        RecyclerViewAdvancedCountdownItemAdapter.AdvancedCountdownItem child2 =
-                new RecyclerViewAdvancedCountdownItemAdapter.AdvancedCountdownItem(
-                        (long) 15,
-                        "Fenster sollten geschlossen sein");
-
-        RecyclerViewAdvancedCountdownItemAdapter.AdvancedCountdownItem child3 =
-                new RecyclerViewAdvancedCountdownItemAdapter.AdvancedCountdownItem(
-                        (long) 15,
-                        "");
-
-        RecyclerViewAdvancedCountdownItemAdapter.AdvancedCountdownItem child4 =
-                new RecyclerViewAdvancedCountdownItemAdapter.AdvancedCountdownItem(
-                        (long) 15,
-                        "");
-
-        RecyclerViewAdvancedCountdownItemAdapter.AdvancedCountdownItem child5 =
-                new RecyclerViewAdvancedCountdownItemAdapter.AdvancedCountdownItem(
-                        (long) 15,
-                        "");
-
-        ArrayList<RecyclerViewAdvancedCountdownItemAdapter.AdvancedCountdownItem> children =
-                new ArrayList<>();
-        children.add(child1);
-        children.add(child2);
-
-        ArrayList<RecyclerViewAdvancedCountdownItemAdapter.AdvancedCountdownItem> children2 =
-                new ArrayList<>();
-
-        children2.add(child3);
-
-        ArrayList<RecyclerViewAdvancedCountdownItemAdapter.AdvancedCountdownItem> children3 =
-                new ArrayList<>();
-
-        children3.add(child4);
-
-        ArrayList<RecyclerViewAdvancedCountdownItemAdapter.AdvancedCountdownItem> children4 =
-                new ArrayList<>();
-
-        children3.add(child5);
-
-
-        RecyclerViewAdvancedCountdownAdapter.AdvancedCountdownObject advancedCountdownObject =
-                new RecyclerViewAdvancedCountdownAdapter.AdvancedCountdownObject("Lüftungs Timer", true, children);
-
-        RecyclerViewAdvancedCountdownAdapter.AdvancedCountdownObject advancedCountdownObject2 =
-                new RecyclerViewAdvancedCountdownAdapter.AdvancedCountdownObject("Abstands Timer", true, children2);
-
-        RecyclerViewAdvancedCountdownAdapter.AdvancedCountdownObject advancedCountdownObject3 =
-                new RecyclerViewAdvancedCountdownAdapter.AdvancedCountdownObject("Custom Timer 1", false, children3);
-
-        RecyclerViewAdvancedCountdownAdapter.AdvancedCountdownObject advancedCountdownObject4 =
-                new RecyclerViewAdvancedCountdownAdapter.AdvancedCountdownObject("Custom Timer 2", false, children3);
-
-        advancedCountdownObjects.add(advancedCountdownObject);
-        advancedCountdownObjects.add(advancedCountdownObject2);
-        advancedCountdownObjects.add(advancedCountdownObject3);
-        advancedCountdownObjects.add(advancedCountdownObject4);
-*/
-
-
 
         // Load Participants Objects
         List<ParticipantData> d = new ArrayList<>();
@@ -228,16 +145,6 @@ public class MeetingWizardActivity extends AppCompatActivity implements OnAdapte
             Participant participant = new Participant(participantData.getName(), participantData.getEmail(), participantData.getStatus(), false, participantData.getID());
             participants.add(participant);
         });
-
-
-        // TODO: LOAD CHECKLISTS
-        // initialize checklist and recyclerview
-        checklistItems = new ArrayList<>();
-        checklistItems.add(new ChecklistItem("Desinfektionsmittel bereit"));
-        checklistItems.add(new ChecklistItem("3G-Regelung o.ä. geprüft"));
-        checklistItems.add(new ChecklistItem("Masken / Plexiglas geprüft"));
-        checklistItems.add(new ChecklistItem("Abstände gewährleistet"));
-        // TODO: END OF DEBUG
 
         setupViews();
         getExtras();
@@ -317,6 +224,7 @@ public class MeetingWizardActivity extends AppCompatActivity implements OnAdapte
         advancedCountdownObjects =
                 (ArrayList<RecyclerViewAdvancedCountdownAdapter.AdvancedCountdownObject>)
                 getIntent().getSerializableExtra(MEETING_COUNTDOWN);
+        checklistItems = (ArrayList<ChecklistItem>) getIntent().getSerializableExtra(MEETING_CHECKLIST);
     }
 
     // Loads a Fragment at the specified position

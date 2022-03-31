@@ -1,6 +1,8 @@
 package com.example.myapplication.checklist;
 
-public class ChecklistItem {
+import java.io.Serializable;
+
+public class ChecklistItem implements Serializable {
 
     private String title, hint;
     private boolean isChecked;

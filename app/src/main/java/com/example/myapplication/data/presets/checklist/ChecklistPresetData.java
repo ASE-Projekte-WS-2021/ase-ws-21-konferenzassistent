@@ -1,4 +1,4 @@
-package com.example.myapplication.data.presets.countdown;
+package com.example.myapplication.data.presets.checklist;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
@@ -8,8 +8,8 @@ import com.example.myapplication.Preset;
 
 import java.io.Serializable;
 
-@Entity(tableName = "table_preset_countdown_data")
-public class CountdownPresetData implements Serializable, Preset {
+@Entity(tableName = "table_preset_checklist_data")
+public class ChecklistPresetData implements  Serializable, Preset {
     @PrimaryKey(autoGenerate = true)
     private int ID;
 
