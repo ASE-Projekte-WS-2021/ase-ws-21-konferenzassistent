@@ -35,13 +35,23 @@ public class RecyclerViewCreatedChecklistAdapter
             return false;
         });
 
+        // Makes sure the ChecklistName gets changed
+        holder.checklistName.setOnFocusChangeListener((view, b) ->
+                checklistItems.get(holder.getAdapterPosition()).setTitle(
+                        holder.checklistName.getText().toString()));
+
+        // Makes sure the ChecklistHint gets changed
+        holder.checklistHint.setOnFocusChangeListener((view, b) ->
+                checklistItems.get(holder.getAdapterPosition()).setHint(
+                        holder.checklistHint.getText().toString()));
+
         // Sets the Title of the checklist item
         holder.checklistName.setOnEditorActionListener((textView, i, keyEvent) -> {
             checklistItems.get(holder.getAdapterPosition()).setTitle(textView.getText().toString());
             return false;
         });
 
-        // Deletes Countdown
+        // Deletes Checklist
         holder.buttonDelete.setOnClickListener(view -> {
             holder.checklistName.clearFocus();
             holder.checklistHint.clearFocus();
@@ -75,8 +85,5 @@ public class RecyclerViewCreatedChecklistAdapter
             checklistName = view.findViewById(R.id.checklist_name);
             checklistHint = view.findViewById(R.id.checklist_hint);
         }
-
     }
-
-
 }
