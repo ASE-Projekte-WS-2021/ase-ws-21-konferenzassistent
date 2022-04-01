@@ -22,8 +22,9 @@ public interface ParticipantDao {
     void reset(List<ParticipantData> participantDataList);
 
     @Query("Update table_participant_data SET name = :sName," +
-            "email = :sEmail, status = :sStatus")
-    void update(String sName, String sEmail, String sStatus);
+            "email = :sEmail, status = :sStatus " +
+            "WHERE ID = :sID")
+    void update(String sName, String sEmail, String sStatus, int sID);
 
     @Query("SELECT * FROM table_participant_data")
     List<ParticipantData> getAll();

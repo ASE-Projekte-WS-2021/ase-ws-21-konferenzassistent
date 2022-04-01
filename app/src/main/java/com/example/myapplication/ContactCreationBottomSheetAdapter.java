@@ -31,8 +31,12 @@ public class ContactCreationBottomSheetAdapter extends BottomSheetDialogFragment
     boolean warning = false;
     ContactCreationBottomSheetAdapter.OnParticipantCreatedListener listener;
 
-    public ContactCreationBottomSheetAdapter(ContactCreationBottomSheetAdapter.OnParticipantCreatedListener listener) {
+    ParticipantData updatableParticipantData;
+
+    public ContactCreationBottomSheetAdapter(ContactCreationBottomSheetAdapter.OnParticipantCreatedListener listener, ParticipantData updatableParticipantData) {
+        super();
         this.listener = listener;
+        this.updatableParticipantData = updatableParticipantData;
     }
 
     // Make the background Transparent
@@ -115,14 +119,21 @@ public class ContactCreationBottomSheetAdapter extends BottomSheetDialogFragment
             // Create new Entry
             RoomDB database = RoomDB.getInstance(getContext());
 
-            ParticipantData participantData = new ParticipantData();
-            participantData.setName(pName);
-            participantData.setEmail(pEmail);
-            participantData.setStatus(pStatus);
+            if (updatableParticipantData != null) {
+                database.participantDao().update(pName, pEmail, pStatus, updatableParticipantData.getID());
+            } else {
+                ParticipantData participantData = new ParticipantData();
 
-            database.participantDao().insert(participantData);
+                participantData.setName(pName);
+                participantData.setEmail(pEmail);
+                participantData.setStatus(pStatus);
 
-            listener.onParticipantCreated();
+                database.participantDao().insert(participantData);
+            }
+
+            if (listener != null) {
+                listener.onParticipantCreated();
+            }
 
             dismiss();
         });
@@ -162,6 +173,14 @@ public class ContactCreationBottomSheetAdapter extends BottomSheetDialogFragment
 
         isCreateable(false);
         setStyle(CustomAlertBottomSheetAdapter.STYLE_NORMAL, R.style.CustomBottomSheetDialogTheme);
+
+        if (updatableParticipantData != null) {
+            isCreateable(true);
+            bi.participantInputName.setText(updatableParticipantData.getName());
+            bi.participantInputEmail.setText(updatableParticipantData.getEmail());
+            bi.participantInputStatus.setText(updatableParticipantData.getStatus());
+            bi.dialogCreateButton.setText(R.string.Speichern);
+        }
 
         return bottomSheet;
     }
