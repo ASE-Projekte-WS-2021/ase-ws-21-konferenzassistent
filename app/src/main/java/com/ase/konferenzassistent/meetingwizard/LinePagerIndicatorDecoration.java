@@ -8,10 +8,13 @@ import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.Interpolator;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ase.konferenzassistent.R;
+
+import java.util.Objects;
 
 // https://stackoverflow.com/a/46084182
 // with link to following blogpost
@@ -23,10 +26,6 @@ public class LinePagerIndicatorDecoration extends RecyclerView.ItemDecoration {
      * Height of the space the indicator takes up at the bottom of the view.
      */
     private final int mIndicatorHeight = (int) (DP * 16);
-    /**
-     * Indicator stroke width.
-     */
-    private final float mIndicatorStrokeWidth = DP * 2;
     /**
      * Indicator width.
      */
@@ -45,19 +44,20 @@ public class LinePagerIndicatorDecoration extends RecyclerView.ItemDecoration {
 
     public LinePagerIndicatorDecoration() {
         mPaint.setStrokeCap(Paint.Cap.ROUND);
+        float mIndicatorStrokeWidth = DP * 2;
         mPaint.setStrokeWidth(mIndicatorStrokeWidth);
         mPaint.setStyle(Paint.Style.STROKE);
         mPaint.setAntiAlias(true);
     }
 
     @Override
-    public void onDrawOver(Canvas c, RecyclerView parent, RecyclerView.State state) {
+    public void onDrawOver(@NonNull Canvas c, @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
         super.onDrawOver(c, parent, state);
       
         colorActive = parent.getResources().getColor(R.color.corona_blue, null);
         colorInactive = parent.getResources().getColor(R.color.gray, null);
 
-        int itemCount = parent.getAdapter().getItemCount();
+        int itemCount = Objects.requireNonNull(parent.getAdapter()).getItemCount();
 
         // center horizontally, calculate width and subtract half from center
         float totalLength = mIndicatorItemLength * itemCount;
@@ -73,14 +73,14 @@ public class LinePagerIndicatorDecoration extends RecyclerView.ItemDecoration {
 
         // find active page (which should be highlighted)
         LinearLayoutManager layoutManager = (LinearLayoutManager) parent.getLayoutManager();
-        int activePosition = layoutManager.findFirstVisibleItemPosition();
+        int activePosition = Objects.requireNonNull(layoutManager).findFirstVisibleItemPosition();
         if (activePosition == RecyclerView.NO_POSITION) {
             return;
         }
 
         // find offset of active page (if the user is scrolling)
         final View activeChild = layoutManager.findViewByPosition(activePosition);
-        int left = activeChild.getLeft();
+        int left = Objects.requireNonNull(activeChild).getLeft();
         int width = activeChild.getWidth();
 
         // on swipe the active item will be positioned from [-width, 0]
@@ -135,7 +135,7 @@ public class LinePagerIndicatorDecoration extends RecyclerView.ItemDecoration {
     }
 
     @Override
-    public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
+    public void getItemOffsets(@NonNull Rect outRect, @NonNull View view, @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
         super.getItemOffsets(outRect, view, parent, state);
         outRect.bottom = mIndicatorHeight;
     }

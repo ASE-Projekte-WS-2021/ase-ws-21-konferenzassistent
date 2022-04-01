@@ -26,8 +26,8 @@ public class CountdownInformationFragment extends Fragment {
 
     FragmentCountdownInformationBinding bi;
     RecycleViewPlaceholderAdapter recycleViewPlaceholderAdapter;
-    ArrayList<cdServiceObject> advancedCountdownObjects;
-    ArrayList<Participant> participants;
+    final ArrayList<cdServiceObject> advancedCountdownObjects;
+    final ArrayList<Participant> participants;
 
     private TextView ortTextView;
     private TextView startZeitTextView;
@@ -95,7 +95,7 @@ public class CountdownInformationFragment extends Fragment {
         RecyclerView recyclerView = bi.placeholderView;
         recycleViewPlaceholderAdapter = new RecycleViewPlaceholderAdapter(
                 advancedCountdownObjects,
-                this.getContext()
+                this.requireContext()
         );
         recyclerView.setAdapter(recycleViewPlaceholderAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));

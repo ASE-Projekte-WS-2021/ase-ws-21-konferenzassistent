@@ -1,5 +1,7 @@
 package com.ase.konferenzassistent.onboarding;
 
+import androidx.annotation.NonNull;
+
 public class OnboardingPageData {
 
     private String headline, subhead;
@@ -35,6 +37,7 @@ public class OnboardingPageData {
         this.drawableID = drawableID;
     }
 
+    @NonNull
     @Override
     public String toString() {
         return "OnboardingPageData{" +

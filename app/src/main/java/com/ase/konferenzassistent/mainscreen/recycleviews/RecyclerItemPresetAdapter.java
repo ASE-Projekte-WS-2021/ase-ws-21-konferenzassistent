@@ -69,8 +69,8 @@ public class RecyclerItemPresetAdapter
 
     // View holder Class
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView presetName;
-        RelativeLayout itemContainer;
+        final TextView presetName;
+        final RelativeLayout itemContainer;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);

@@ -42,10 +42,10 @@ public class RecycleViewCountdownAdapter extends RecyclerView.Adapter<RecycleVie
 
     // For color change effect
     //https://stackoverflow.com/a/37667578
-    private static int modifyBrightness(int color, float factor) {
+    private static int modifyBrightness(int color) {
         float[] hsv = new float[3];
         Color.colorToHSV(color, hsv);
-        hsv[2] *= factor;
+        hsv[2] *= (float) 0.8;
         return Color.HSVToColor(hsv);
 
     }
@@ -73,7 +73,7 @@ public class RecycleViewCountdownAdapter extends RecyclerView.Adapter<RecycleVie
         if (countdown.getmEnabled()) {
             ViewCompat.setBackgroundTintList(holder.countdownContainer, ColorStateList.valueOf(pastColor));
 
-            pastColor = modifyBrightness(pastColor, 0.8f);
+            pastColor = modifyBrightness(pastColor);
             if (position < getItemCount() - 1)
                 holder.countdownPastContainer.setBackgroundColor(pastColor);
             else {
@@ -108,9 +108,7 @@ public class RecycleViewCountdownAdapter extends RecyclerView.Adapter<RecycleVie
             pauseButtonToggle(holder.pauseButton, countdownObject.getTimerRunning());
         });
 
-        holder.replayButton.setOnClickListener(view -> {
-            listener.restartPressed(holder.getAdapterPosition());
-        });
+        holder.replayButton.setOnClickListener(view -> listener.restartPressed(holder.getAdapterPosition()));
 
 
         if (position == getItemCount() - 1) {
@@ -156,15 +154,14 @@ public class RecycleViewCountdownAdapter extends RecyclerView.Adapter<RecycleVie
 
     // View holder Class
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        LinearLayout countdownPastContainer;
-        LinearLayout countdownContainer;
-        TextView countdownName;
-        TextView countdownTimer;
-        TextView countdownDescription;
-        ImageButton replayButton;
-        ImageButton pauseButton;
+        final LinearLayout countdownPastContainer;
+        final LinearLayout countdownContainer;
+        final TextView countdownName;
+        final TextView countdownTimer;
+        final TextView countdownDescription;
+        final ImageButton replayButton;
+        final ImageButton pauseButton;
 
-        RelativeLayout locationContainer;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);

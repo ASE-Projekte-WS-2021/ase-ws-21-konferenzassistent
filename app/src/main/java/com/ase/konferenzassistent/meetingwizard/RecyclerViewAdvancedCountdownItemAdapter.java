@@ -21,18 +21,14 @@ public class RecyclerViewAdvancedCountdownItemAdapter
 
     // Content
     private final ArrayList<AdvancedCountdownItem> mAdvancedCountdownItem;
-    private final Context mContext;
 
     public RecyclerViewAdvancedCountdownItemAdapter(
             ArrayList<AdvancedCountdownItem> mAdvancedCountdownItem,
             Context mContext) {
         this.mAdvancedCountdownItem = mAdvancedCountdownItem;
-        this.mContext = mContext;
     }
 
-    public ArrayList<AdvancedCountdownItem> getmAdvancedCountdownItem() {
-        return mAdvancedCountdownItem;
-    }
+
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
@@ -89,9 +85,9 @@ public class RecyclerViewAdvancedCountdownItemAdapter
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView subCountdownDescription;
-        LinearLayout descriptionContainer;
-        CustomNumberPicker subCountdownPicker;
+        final TextView subCountdownDescription;
+        final LinearLayout descriptionContainer;
+        final CustomNumberPicker subCountdownPicker;
 
         public ViewHolder(View countdownView) {
             super(countdownView);

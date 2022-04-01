@@ -9,6 +9,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.ase.konferenzassistent.shared.Interfaces.CardviewTouchHelperAdapter;
 import com.ase.konferenzassistent.R;
 
+import java.util.Objects;
+
 //Tutorial: https://www.youtube.com/watch?v=uvzP8KTz4Fg
 public class CardviewTouchHelper extends ItemTouchHelper.Callback {
 
@@ -16,11 +18,6 @@ public class CardviewTouchHelper extends ItemTouchHelper.Callback {
 
     public CardviewTouchHelper(CardviewTouchHelperAdapter cAdapter) {
         this.cAdapter = cAdapter;
-    }
-
-    @Override
-    public boolean isItemViewSwipeEnabled() {
-        return super.isItemViewSwipeEnabled();
     }
 
     @Override
@@ -33,7 +30,7 @@ public class CardviewTouchHelper extends ItemTouchHelper.Callback {
     public void onSelectedChanged(@Nullable RecyclerView.ViewHolder viewHolder, int actionState) {
         super.onSelectedChanged(viewHolder, actionState);
         if (actionState == ItemTouchHelper.ACTION_STATE_SWIPE) {
-            viewHolder.itemView.setBackgroundColor(ContextCompat.getColor(viewHolder.itemView.getContext(), R.color.corona_blue));
+            Objects.requireNonNull(viewHolder).itemView.setBackgroundColor(ContextCompat.getColor(viewHolder.itemView.getContext(), R.color.corona_blue));
         }
     }
 

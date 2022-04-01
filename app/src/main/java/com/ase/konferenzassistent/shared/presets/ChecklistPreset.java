@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 public class ChecklistPreset implements Preset {
     String title;
-    ArrayList<ChecklistItem> checklistItems;
+    final ArrayList<ChecklistItem> checklistItems;
     Integer id;
 
     public ChecklistPreset(String title, ArrayList<ChecklistItem> checklistItems, Integer id) {

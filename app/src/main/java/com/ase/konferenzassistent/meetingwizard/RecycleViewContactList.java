@@ -19,12 +19,10 @@ public class RecycleViewContactList extends RecyclerView.Adapter<RecycleViewCont
     // Content
     private final ArrayList<Contact> mContact;
     private final ArrayList<Contact> mContactCopy = new ArrayList<>();
-    private final Context mContext;
-    contactListener listener;
+    final contactListener listener;
 
     public RecycleViewContactList(ArrayList<Contact> mContact, contactListener listener, Context mContext) {
         this.mContact = mContact;
-        this.mContext = mContext;
         this.listener = listener;
         mContactCopy.addAll(mContact);
     }
@@ -35,9 +33,7 @@ public class RecycleViewContactList extends RecyclerView.Adapter<RecycleViewCont
         holder.contactName.setText(contact.getName());
 
         // Set on click listener on the container
-        holder.contactContainer.setOnClickListener(containerView -> {
-            listener.onContactSelected(contact.getName());
-        });
+        holder.contactContainer.setOnClickListener(containerView -> listener.onContactSelected(contact.getName()));
     }
 
     @Override
@@ -75,8 +71,8 @@ public class RecycleViewContactList extends RecyclerView.Adapter<RecycleViewCont
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView contactName;
-        RelativeLayout contactContainer;
+        final TextView contactName;
+        final RelativeLayout contactContainer;
 
         public ViewHolder(View view) {
             super(view);

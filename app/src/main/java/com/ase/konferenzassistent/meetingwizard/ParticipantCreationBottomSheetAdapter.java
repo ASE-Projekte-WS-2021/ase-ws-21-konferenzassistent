@@ -171,10 +171,7 @@ public class ParticipantCreationBottomSheetAdapter extends BottomSheetDialogFrag
         }
     }
 
-    // Closes the Sheet
-    public void closeLocation() {
-        dismiss();
-    }
+
 
     // open the warning dialog
     private void openWarning() {
@@ -194,12 +191,6 @@ public class ParticipantCreationBottomSheetAdapter extends BottomSheetDialogFrag
     // resets the warning dialog so it can get opened again
     public void resetWarning() {
         warning = false;
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        //bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
     }
 
     // Dismisses the newly created Meeting

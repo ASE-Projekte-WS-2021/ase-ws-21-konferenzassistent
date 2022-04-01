@@ -169,6 +169,7 @@ public class PresetEditBottomSheet extends BottomSheetDialogFragment implements 
     }
 
     // Set the text of the header and reads all important information
+    @SuppressWarnings("unchecked")
     public void setupView(ArrayList<?> object, int viewType, onCloseListener listener) {
         this.viewType = viewType;
         if (viewType == PRESET_TYPE_COUNTDOWN) {

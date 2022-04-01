@@ -12,7 +12,6 @@ import androidx.databinding.DataBindingUtil;
 
 import com.ase.konferenzassistent.R;
 import com.ase.konferenzassistent.databinding.BottomSheetInformationDisplayBinding;
-import com.ase.konferenzassistent.mainscreen.recycleviews.RecyclerViewLocationAdapter;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
@@ -22,7 +21,7 @@ public class InformationBottomSheetAdapter extends BottomSheetDialogFragment {
     BottomSheetInformationDisplayBinding bi;
     BottomSheetBehavior<View> bottomSheetBehavior;
 
-    RelativeLayout relativeLayout;
+
     private Integer mLayout;
 
     public void setmLayout(Integer mLayout) {
@@ -94,11 +93,6 @@ public class InformationBottomSheetAdapter extends BottomSheetDialogFragment {
         LayoutInflater layoutInflater = (LayoutInflater)
                 this.getLayoutInflater();
         bi.informationLayout.addView(layoutInflater.inflate(mLayout, (ViewGroup) getView(), false), 0);
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
     }
 
 }

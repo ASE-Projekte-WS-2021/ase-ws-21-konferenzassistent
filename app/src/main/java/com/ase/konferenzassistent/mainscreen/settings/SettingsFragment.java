@@ -26,8 +26,8 @@ import java.util.List;
 public class SettingsFragment extends Fragment implements PresetEditBottomSheet.onCloseListener {
     FragmentSettingsBinding bi;
     RoomDB database;
-    ArrayList<CountdownPreset> countdownPresets = new ArrayList<>();
-    ArrayList<ChecklistPreset> checklistPreset = new ArrayList<>();
+    final ArrayList<CountdownPreset> countdownPresets = new ArrayList<>();
+    final ArrayList<ChecklistPreset> checklistPreset = new ArrayList<>();
 
     public SettingsFragment() {
         // Required empty public constructor

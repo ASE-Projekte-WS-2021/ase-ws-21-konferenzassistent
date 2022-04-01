@@ -17,11 +17,7 @@ import com.ase.konferenzassistent.databinding.FragmentWizardCountdownBinding;
 
 import java.util.ArrayList;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link WizardCountdownFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class WizardCountdownFragment extends Fragment {
 
     FragmentWizardCountdownBinding bi;
@@ -37,10 +33,6 @@ public class WizardCountdownFragment extends Fragment {
 
     public WizardCountdownFragment() {
         // Required empty public constructor
-    }
-
-    public static WizardCountdownFragment newInstance() {
-        return new WizardCountdownFragment();
     }
 
     @Override
@@ -80,11 +72,6 @@ public class WizardCountdownFragment extends Fragment {
         MeetingWizardActivity activity = ((MeetingWizardActivity) getActivity());
 
         // get the data from the adapter
-        /*
-        mCountdownNames = recyclerViewCountdownAdapter.getmCountdownNames();
-        mCountdownTime = recyclerViewCountdownAdapter.getmCountdownTime();
-        mEnabled = recyclerViewCountdownAdapter.getmEnabled();
-        */
         mCountdown = recyclerViewCountdownAdapter.getmAdvancedCountdownObjects();
 
         assert activity != null;

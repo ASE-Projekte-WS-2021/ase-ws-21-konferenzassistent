@@ -30,10 +30,6 @@ public class WizardParticipantFragment extends Fragment {
         // Required empty public constructor
     }
 
-    public static WizardParticipantFragment newInstance(String param1, String param2) {
-        return new WizardParticipantFragment();
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

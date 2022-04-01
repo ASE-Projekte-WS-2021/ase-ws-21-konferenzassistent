@@ -23,7 +23,7 @@ public class CountdownTimerFragment extends Fragment implements RecycleViewCount
 
     FragmentCountdownTimerBinding bi;
     RecycleViewCountdownAdapter recycleViewCountdownAdapter;
-    ArrayList<cdServiceObject> advancedCountdownObjects;
+    final ArrayList<cdServiceObject> advancedCountdownObjects;
 
     public CountdownTimerFragment(ArrayList<cdServiceObject> advancedCountdownObjects) {
         this.advancedCountdownObjects = advancedCountdownObjects;
@@ -44,8 +44,7 @@ public class CountdownTimerFragment extends Fragment implements RecycleViewCount
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_countdown_timer, container, false);
-        return view;
+        return inflater.inflate(R.layout.fragment_countdown_timer, container, false);
     }
 
     @Override
@@ -65,7 +64,7 @@ public class CountdownTimerFragment extends Fragment implements RecycleViewCount
         recycleViewCountdownAdapter = new RecycleViewCountdownAdapter(
                 advancedCountdownObjects,
                 this,
-                this.getContext()
+                this.requireContext()
         );
         recyclerView.setAdapter(recycleViewCountdownAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));

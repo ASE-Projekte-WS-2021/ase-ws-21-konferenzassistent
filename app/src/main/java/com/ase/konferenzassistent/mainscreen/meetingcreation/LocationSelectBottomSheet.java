@@ -150,10 +150,4 @@ public class LocationSelectBottomSheet extends BottomSheetDialogFragment {
         dismiss();
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        //bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
-    }
-
 }

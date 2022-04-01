@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -33,6 +32,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Objects;
 import java.util.TimeZone;
 
 public class CountdownActivity extends AppCompatActivity implements Serializable, CustomAlertBottomSheetAdapter.onLeaveListener {
@@ -40,7 +40,6 @@ public class CountdownActivity extends AppCompatActivity implements Serializable
 
     public static final String COUNTDOWN_BUTTONS = "my.action.COUNTDOWN_BUTTONS";
     public static final String COUNTDOWN_OBJECTS = "COUNTDOWN_OBJECTS";
-    public static final String PAUSE_BUTTON_PRESSED_BOOL = "PAUSE_BUTTON_PRESSED_BOOL";
     public static final String PAUSE_BUTTON_PRESSED_ID = "PAUSE_BUTTON_PRESSED_ID";
     public static final String REPLAY_BUTTON_PRESSED_ID = "REPLAY_BUTTON_PRESSED_ID";
     TextView meetingTitle;
@@ -55,8 +54,6 @@ public class CountdownActivity extends AppCompatActivity implements Serializable
     private String title = "Test Meeting";
     private String participantCount = "0";
     private String ort;
-    // Meeting end Button
-    private Button endMeetingButton;
     // Fragments
     private CountdownTimerFragment timer;
     private CountdownInformationFragment information;
@@ -65,6 +62,7 @@ public class CountdownActivity extends AppCompatActivity implements Serializable
     // Object used to Create Timer in the Service
     // Broadcast Receiver to receive updates on the countdown
     private final BroadcastReceiver br = new BroadcastReceiver() {
+        @SuppressWarnings("unchecked")
         @Override
         public void onReceive(Context context, Intent intent) {
             // send Update to the UI
@@ -82,7 +80,7 @@ public class CountdownActivity extends AppCompatActivity implements Serializable
         setContentView(R.layout.activity_countdown);
 
         // Hide the action bar
-        getSupportActionBar().hide();
+        Objects.requireNonNull(getSupportActionBar()).hide();
         getIntents();
 
         // Get the Starting Time of the Meeting
@@ -145,7 +143,8 @@ public class CountdownActivity extends AppCompatActivity implements Serializable
 
         tabLayout = findViewById(R.id.tab_layout);
         viewPager = findViewById(R.id.view_pager);
-        endMeetingButton = findViewById(R.id.end_meeting);
+        // Meeting end Button
+        Button endMeetingButton = findViewById(R.id.end_meeting);
 
         // Create Views
         timer = CountdownTimerFragment.newInstance(serviceObjectArrayList);
@@ -162,21 +161,13 @@ public class CountdownActivity extends AppCompatActivity implements Serializable
         tabLayoutMediator.attach();
 
         // Set listeners for End Button
-        endMeetingButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(getApplicationContext(),
-                        "Butten gedrückt halten um Meeting zu beenden", Toast.LENGTH_SHORT).show();
-            }
-        });
+        endMeetingButton.setOnClickListener(view -> Toast.makeText(getApplicationContext(),
+                "Butten gedrückt halten um Meeting zu beenden", Toast.LENGTH_SHORT).show());
 
-        endMeetingButton.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View view) {
-                // Warn user about leaving
-                onLeaveWarning();
-                return true;
-            }
+        endMeetingButton.setOnLongClickListener(view -> {
+            // Warn user about leaving
+            onLeaveWarning();
+            return true;
         });
     }
 
@@ -190,6 +181,7 @@ public class CountdownActivity extends AppCompatActivity implements Serializable
     }
 
     // Get the Data from the Intents
+    @SuppressWarnings("unchecked")
     protected void getIntents() {
         countdownObjects =
                 (ArrayList<RecyclerViewAdvancedCountdownAdapter.AdvancedCountdownObject>)
@@ -234,9 +226,7 @@ public class CountdownActivity extends AppCompatActivity implements Serializable
         startService(countdownIntent);
     }
 
-    private void updateTimer(long time) {
-        Log.i("TAG", "updateTimer: " + time);
-    }
+
 
     // Pauses the lueftungsCountdown
     public void pauseCountdown(Integer id) {
@@ -259,23 +249,7 @@ public class CountdownActivity extends AppCompatActivity implements Serializable
     // Update Countdown Timer and sends UI updates to the Fragment
     private void updateTime(Intent intent) {
         // Check if the Intent has Extras
-        if (intent.getExtras() != null) {
-            // TODO: implement new logic
-            /*
-            // get the countdowns and if window is open
-            long lueftungsMilliS = intent.getLongExtra("lueftungsMilliS", 0);
-            isOpen = intent.getBooleanExtra("windowOpen", false);
-
-            long abstandsMilliS = intent.getLongExtra("abstandsMilliS", 0);
-
-            // Get if timer is finished
-            lueftungIsFinished = intent.getBooleanExtra("lueftungDone", false);
-            abstandIsFinished = intent.getBooleanExtra("abstandDone", false);
-
-            // Update the UI of the timer
-            //timer.UpdateUI(isOpen, lueftungIsFinished, abstandIsFinished, abstandsMilliS, lueftungsMilliS);
-             */
-        }
+        intent.getExtras();// TODO: implement new logic
     }
 
     private void saveToDatabase() {
@@ -309,43 +283,6 @@ public class CountdownActivity extends AppCompatActivity implements Serializable
             database.meetingWithParticipantDao().insert(meetingWithParticipantData);
         });
     }
-
-    /*
-    // Starts the lueftungs countdown
-    public void startLueftung(View view){
-        // Send a Broadcast to the Service if button is pressed
-        Intent intent = new Intent(COUNTDOWN_BUTTONS);
-        intent.putExtra("lueftungsUserInteraction", true);
-        sendBroadcast(intent);
-
-        // Check if Window is open and reset progressbars in the UI
-       if(!isOpen)timer.resetLueftungsProgressBar(maxWindowOpenTime);
-       else timer.resetLueftungsProgressBar(maxWindowClosedTime);
-    }
-
-    // Starts the abstands countdown
-    public void startAbstand(View view){
-        // Send a Broadcast to the Service if button is pressed
-        Intent intent = new Intent(COUNTDOWN_BUTTONS);
-        intent.putExtra("abstandsUserInteraction", true);
-        sendBroadcast(intent);
-    }
-
-
-
-    // Paused the abstands countdown
-    public void pauseAbstand(View view){
-        // Send a Broadcast to the Service if button is pressed
-        Intent intent = new Intent(COUNTDOWN_BUTTONS);
-        intent.putExtra("abstandsPauseUserInteraction", true);
-        sendBroadcast(intent);
-        abstandPaused = !abstandPaused;
-
-        timer.pauseButtonToggle(abstandPaused, CountdownTimerFragment.PAUSE_ABSTAND_BUTTON);
-    }
-
-
-    */
 
     /* finishMeeting method code by Kimmi Dhingra:
      * https://stackoverflow.com/questions/18442328/how-to-finish-all-activities-except-the-first-activity

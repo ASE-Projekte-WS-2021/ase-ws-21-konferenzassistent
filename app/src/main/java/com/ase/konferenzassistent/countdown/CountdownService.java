@@ -34,7 +34,6 @@ public class CountdownService extends Service {
 
     public static final String COUNTDOWN_SERVICE = "com.example.myapplication.countdown_service";
     // Service Tag
-    private final static String TAG = "CountdownService";
     private final Intent bi = new Intent(COUNTDOWN_SERVICE);
     // Countdown Object that save the current states of the Countdowns
     ArrayList<cdServiceObject> countdownServiceObjects;
@@ -44,7 +43,7 @@ public class CountdownService extends Service {
     private final BroadcastReceiver br = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            Integer id = intent.getIntExtra(PAUSE_BUTTON_PRESSED_ID, -1);
+            int id = intent.getIntExtra(PAUSE_BUTTON_PRESSED_ID, -1);
 
             if (id != -1) {
                 cdServiceObject timer = countdownServiceObjects.get(id);
@@ -58,7 +57,7 @@ public class CountdownService extends Service {
                 sendBroadcast(bi);
             }
 
-            Integer restart_id = intent.getIntExtra(REPLAY_BUTTON_PRESSED_ID, -1);
+            int restart_id = intent.getIntExtra(REPLAY_BUTTON_PRESSED_ID, -1);
 
             if (restart_id != -1) {
                 cdServiceObject cdObject = countdownServiceObjects.get(restart_id);
@@ -84,9 +83,7 @@ public class CountdownService extends Service {
     @Override
     public void onDestroy() {
         // Stop all timers
-        countdownServiceObjects.forEach(object -> {
-            object.getCountDownTimer().cancel();
-        });
+        countdownServiceObjects.forEach(object -> object.getCountDownTimer().cancel());
 
         // Stop the Media Player if it still is playing
         if (mp.isPlaying()) {
@@ -169,6 +166,7 @@ public class CountdownService extends Service {
         mNotificationManager.notify(1, notification);
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         // Get extra

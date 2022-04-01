@@ -31,9 +31,9 @@ public class ContactCreationBottomSheetAdapter extends BottomSheetDialogFragment
     // should the sheet be leave able
     boolean cancelable = true;
     boolean warning = false;
-    OnParticipantModifiedListener listener;
+    final OnParticipantModifiedListener listener;
 
-    ParticipantData updatableParticipantData;
+    final ParticipantData updatableParticipantData;
 
     public ContactCreationBottomSheetAdapter(OnParticipantModifiedListener listener, ParticipantData updatableParticipantData) {
         super();
@@ -247,12 +247,6 @@ public class ContactCreationBottomSheetAdapter extends BottomSheetDialogFragment
     // resets the warning dialog so it can get opened again
     public void resetWarning() {
         warning = false;
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        //bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
     }
 
     // Dismisses the newly created Meeting

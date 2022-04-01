@@ -1,7 +1,10 @@
 package com.ase.konferenzassistent.mainscreen.history;
 
+import androidx.annotation.NonNull;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Objects;
 
 public class Meeting {
 
@@ -78,7 +81,7 @@ public class Meeting {
     public long getLongDateStart() {
         long milliseconds = -1;
         try {
-            milliseconds = simpleDateFormat.parse(getDate()).getTime();
+            milliseconds = Objects.requireNonNull(simpleDateFormat.parse(getDate())).getTime();
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -88,13 +91,14 @@ public class Meeting {
     public long getLongDateEnd() {
         long milliseconds = -1;
         try {
-            milliseconds = simpleDateFormat.parse(getDateEnd()).getTime();
+            milliseconds = Objects.requireNonNull(simpleDateFormat.parse(getDateEnd())).getTime();
         } catch (ParseException e) {
             e.printStackTrace();
         }
         return milliseconds;
     }
 
+    @NonNull
     @Override
     public String toString() {
         return "Meeting{" +

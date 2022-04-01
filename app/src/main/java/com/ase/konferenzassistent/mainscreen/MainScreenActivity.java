@@ -244,11 +244,6 @@ public class MainScreenActivity extends AppCompatActivity {
         database.countdownParentWIthItemDao().insert(countdownParentWithItemData3);
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-    }
-
     public interface FilterButtonListener {
         void onFilterButtonClicked();
     }

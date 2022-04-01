@@ -62,9 +62,7 @@ public class cdServiceObject implements Serializable {
         this.countdownPosition = countdownPosition;
     }
 
-    public Integer getCountdownID() {
-        return countdownID;
-    }
+
 
     public void setCountdownID(Integer countdownID) {
         this.countdownID = countdownID;

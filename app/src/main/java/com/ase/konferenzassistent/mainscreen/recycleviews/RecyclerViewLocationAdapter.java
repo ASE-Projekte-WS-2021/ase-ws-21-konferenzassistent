@@ -74,8 +74,8 @@ public class RecyclerViewLocationAdapter
 
     // View holder Class
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView locationName;
-        RelativeLayout locationContainer;
+        final TextView locationName;
+        final RelativeLayout locationContainer;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);

@@ -19,13 +19,9 @@ public class RecycleViewAttendingParticipantList extends RecyclerView.Adapter<Re
 
     // Content
     private final ArrayList<Participant> mParticipants;
-    private final Context mContext;
-    private final ArrayList<Participant> mParticipantsCopy = new ArrayList<>();
 
     public RecycleViewAttendingParticipantList(ArrayList<Participant> mParticipants, Context mContext) {
         this.mParticipants = mParticipants;
-        this.mContext = mContext;
-        mParticipantsCopy.addAll(mParticipants);
     }
 
     @Override
@@ -52,10 +48,10 @@ public class RecycleViewAttendingParticipantList extends RecyclerView.Adapter<Re
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView participantName;
-        TextView participantStatus;
-        ImageView isParticipant;
-        LinearLayout participantContainer;
+        final TextView participantName;
+        final TextView participantStatus;
+        final ImageView isParticipant;
+        final LinearLayout participantContainer;
 
         public ViewHolder(View countdownView) {
             super(countdownView);

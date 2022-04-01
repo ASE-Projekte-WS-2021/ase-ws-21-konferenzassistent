@@ -31,7 +31,7 @@ public class RecyclerViewParticipantListAdapter extends RecyclerView.Adapter<Rec
     private final Context mContext;
     private final ArrayList<Participant> mParticipantsCopy = new ArrayList<>();
     private final boolean openedFromWizard;
-    private ContactCreationBottomSheetAdapter.OnParticipantModifiedListener listener;
+    private final ContactCreationBottomSheetAdapter.OnParticipantModifiedListener listener;
 
     public RecyclerViewParticipantListAdapter(ArrayList<Participant> mParticipants, Context mContext, boolean openedFromWizard) {
         this.mParticipants = mParticipants;
@@ -135,10 +135,10 @@ public class RecyclerViewParticipantListAdapter extends RecyclerView.Adapter<Rec
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView participantName;
-        TextView participantStatus;
-        ImageView isParticipant;
-        LinearLayout participantContainer;
+        final TextView participantName;
+        final TextView participantStatus;
+        final ImageView isParticipant;
+        final LinearLayout participantContainer;
 
         public ViewHolder(View countdownView) {
             super(countdownView);

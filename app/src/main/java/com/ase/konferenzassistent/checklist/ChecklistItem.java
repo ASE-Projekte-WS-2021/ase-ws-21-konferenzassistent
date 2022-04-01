@@ -1,5 +1,7 @@
 package com.ase.konferenzassistent.checklist;
 
+import androidx.annotation.NonNull;
+
 import java.io.Serializable;
 
 public class ChecklistItem implements Serializable {
@@ -53,6 +55,7 @@ public class ChecklistItem implements Serializable {
         isChecked = !isChecked;
     }
 
+    @NonNull
     @Override
     public String toString() {
         return "ChecklistItem{" +

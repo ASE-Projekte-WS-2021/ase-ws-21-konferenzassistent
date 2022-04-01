@@ -114,9 +114,7 @@ public class ParticipantBottomSheetAdapter extends BottomSheetDialogFragment {
         });
 
         // Listener to clear Text
-        bi.clearTextButton.setOnClickListener(view1 -> {
-            bi.textInputSearch.setText("");
-        });
+        bi.clearTextButton.setOnClickListener(view1 -> bi.textInputSearch.setText(""));
         setStyle(CustomAlertBottomSheetAdapter.STYLE_NORMAL, R.style.CustomBottomSheetDialogTheme);
         buildRecyclerView();
 
@@ -137,15 +135,8 @@ public class ParticipantBottomSheetAdapter extends BottomSheetDialogFragment {
 
     }
 
-    // Initializes the Presets
-    public void initParticipants(ArrayList<Participant> participants) {
-        this.participants = participants;
-    }
 
-    // Closes the Sheet
-    public void closeLocation() {
-        dismiss();
-    }
+
 
     public void onParticipentAdded() {
         // get the MeetingWizardActivity
@@ -167,12 +158,6 @@ public class ParticipantBottomSheetAdapter extends BottomSheetDialogFragment {
         assert activity != null;
 
         activity.updateDataSet();
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        //bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
     }
 
 }

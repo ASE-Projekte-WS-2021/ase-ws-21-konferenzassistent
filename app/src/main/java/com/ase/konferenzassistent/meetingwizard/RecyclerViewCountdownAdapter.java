@@ -1,6 +1,5 @@
 package com.ase.konferenzassistent.meetingwizard;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,29 +22,14 @@ public class RecyclerViewCountdownAdapter
     private final ArrayList<String> mCountdownNames;
     private final ArrayList<Long> mCountdownTime;
     private final ArrayList<Boolean> mEnabled;
-    private final Context mContext;
 
     public RecyclerViewCountdownAdapter(
             ArrayList<String> mCountdownNames,
             ArrayList<Long> mCountdownTime,
-            ArrayList<Boolean> mEnabled,
-            Context mContext) {
+            ArrayList<Boolean> mEnabled) {
         this.mCountdownNames = mCountdownNames;
         this.mCountdownTime = mCountdownTime;
         this.mEnabled = mEnabled;
-        this.mContext = mContext;
-    }
-
-    public ArrayList<String> getmCountdownNames() {
-        return mCountdownNames;
-    }
-
-    public ArrayList<Long> getmCountdownTime() {
-        return mCountdownTime;
-    }
-
-    public ArrayList<Boolean> getmEnabled() {
-        return mEnabled;
     }
 
     @Override
@@ -86,10 +70,10 @@ public class RecyclerViewCountdownAdapter
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView countdownName;
-        CustomNumberPicker timePicker;
-        SwitchCompat aSwitch;
-        LinearLayout countdownContainer;
+        final TextView countdownName;
+        final CustomNumberPicker timePicker;
+        final SwitchCompat aSwitch;
+        final LinearLayout countdownContainer;
 
         public ViewHolder(View countdownView) {
             super(countdownView);

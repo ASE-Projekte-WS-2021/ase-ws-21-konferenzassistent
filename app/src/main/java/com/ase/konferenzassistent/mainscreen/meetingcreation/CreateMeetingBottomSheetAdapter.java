@@ -37,14 +37,14 @@ public class CreateMeetingBottomSheetAdapter extends BottomSheetDialogFragment i
     // Input fields
     String title;
     String location;
-    ArrayList<Integer> timerSelectValues = new ArrayList<>();
+    final ArrayList<Integer> timerSelectValues = new ArrayList<>();
     CountdownPresetPair selectedPair;
     ChecklistPresetPair selectedChecklist;
     List<CountdownPresetPair> presetPairs;
     List<ChecklistPresetPair> checklistPresetPairs;
     // Location list
     ArrayList<String> locationNames = new ArrayList<>();
-    ArrayList<Integer> checklistSelectValues = new ArrayList<>();
+    final ArrayList<Integer> checklistSelectValues = new ArrayList<>();
     PresetSelectBottomSheet presetSelectBottomSheet;
     LocationSelectBottomSheet locationSelectBottomSheet;
     // should the sheet be leave able
@@ -224,11 +224,6 @@ public class CreateMeetingBottomSheetAdapter extends BottomSheetDialogFragment i
         // Setup the create Button
         isCreateable();
         return bottomSheet;
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
     }
 
     // open the warning dialog

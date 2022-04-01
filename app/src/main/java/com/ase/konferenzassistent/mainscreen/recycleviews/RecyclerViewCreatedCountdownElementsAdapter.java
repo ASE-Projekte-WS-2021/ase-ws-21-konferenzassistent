@@ -2,7 +2,6 @@ package com.ase.konferenzassistent.mainscreen.recycleviews;
 
 import android.content.Context;
 import android.content.res.ColorStateList;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,7 +9,6 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.res.ResourcesCompat;
@@ -31,7 +29,6 @@ public class RecyclerViewCreatedCountdownElementsAdapter
     private final ArrayList<RecyclerViewAdvancedCountdownAdapter.AdvancedCountdownObject> mAdvancedCountdownObjects;
 
     private final ArrayList<RecyclerItemPresetAdapter> presetAdapters = new ArrayList<>();
-    private final ArrayList<RecyclerViewAdvancedCountdownItemAdapter.AdvancedCountdownItem> advancedCountdownItems = new ArrayList();
     private final ArrayList<Boolean> contentHidden = new ArrayList<>();
 
     public RecyclerViewCreatedCountdownElementsAdapter(
@@ -79,14 +76,11 @@ public class RecyclerViewCreatedCountdownElementsAdapter
 
         });
 
-        holder.countdownName.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
-                if (i == EditorInfo.IME_ACTION_DONE) {
-                    mAdvancedCountdownObjects.get(holder.getAdapterPosition()).setmCountdownName(textView.getText().toString());
-                }
-                return false;
+        holder.countdownName.setOnEditorActionListener((textView, i, keyEvent) -> {
+            if (i == EditorInfo.IME_ACTION_DONE) {
+                mAdvancedCountdownObjects.get(holder.getAdapterPosition()).setmCountdownName(textView.getText().toString());
             }
+            return false;
         });
 
         // Deletes Countdown
@@ -131,12 +125,12 @@ public class RecyclerViewCreatedCountdownElementsAdapter
 
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        EditText countdownName;
-        LinearLayout countdownContainer;
-        RecyclerView recyclerView;
-        ImageView buttonHide;
-        LinearLayout buttonCreate;
-        LinearLayout buttonDelete;
+        final EditText countdownName;
+        final LinearLayout countdownContainer;
+        final RecyclerView recyclerView;
+        final ImageView buttonHide;
+        final LinearLayout buttonCreate;
+        final LinearLayout buttonDelete;
 
         public ViewHolder(View countdownView) {
             super(countdownView);

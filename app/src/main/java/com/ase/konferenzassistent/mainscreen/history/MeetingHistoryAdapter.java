@@ -26,7 +26,7 @@ public class MeetingHistoryAdapter extends RecyclerView.Adapter<MeetingHistoryAd
     private final Context ct;
     private final FragmentManager manager;
     private final List<Meeting> meetingsList;
-    swiped swipedListener;
+    final swiped swipedListener;
     private int swipedItemPosition = -1;
 
     public MeetingHistoryAdapter(Context ct, FragmentManager manager, List<Meeting> meetingsList, swiped swipedListener) {
@@ -122,10 +122,15 @@ public class MeetingHistoryAdapter extends RecyclerView.Adapter<MeetingHistoryAd
     public static class MeetingHistoryViewHolder extends RecyclerView.ViewHolder implements
             View.OnTouchListener, GestureDetector.OnGestureListener {
 
-        CardView cardView;
-        TextView tvDate, tvTime, tvLocation, tvDuration, tvNumParticipants, tvTitle;
+        final CardView cardView;
+        final TextView tvDate;
+        final TextView tvTime;
+        final TextView tvLocation;
+        final TextView tvDuration;
+        final TextView tvNumParticipants;
+        final TextView tvTitle;
 
-        GestureDetector cGestureDetector;
+        final GestureDetector cGestureDetector;
 
         public MeetingHistoryViewHolder(@NonNull View itemView) {
             super(itemView);

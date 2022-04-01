@@ -17,7 +17,7 @@ public class CustomAlertBottomSheetAdapter extends BottomSheetDialogFragment {
 
     CutsomAlertBottomSheetBinding bi;
     BottomSheetBehavior<View> bottomSheetBehavior;
-    onLeaveListener listener;
+    final onLeaveListener listener;
     String warningText = "";
     String acceptText = "";
     String declineText = "";
@@ -86,25 +86,17 @@ public class CustomAlertBottomSheetAdapter extends BottomSheetDialogFragment {
 
 
         // cancel buttun clicked
-        bi.buttonDismiss.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        bi.buttonDismiss.setOnClickListener(view12 -> dismiss());
+
+        bi.buttonDismissChanges.setOnClickListener(view1 -> {
+            try {
+                listener.onLeaving();
+
+                // dismiss the alert
                 dismiss();
             }
-        });
-
-        bi.buttonDismissChanges.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                try {
-                    listener.onLeaving();
-
-                    // dismiss the alert
-                    dismiss();
-                }
-                catch(Exception e) {
-                    //  Block of code to handle errors
-                }
+            catch(Exception e) {
+                //  Block of code to handle errors
             }
         });
 
@@ -121,13 +113,6 @@ public class CustomAlertBottomSheetAdapter extends BottomSheetDialogFragment {
         bi.buttonDismiss.setText(declineText);
         bi.buttonDismissChanges.setText(acceptText);
         bi.alertWarningText.setText(warningText);
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-
-        //bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
     }
 
     @Override

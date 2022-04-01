@@ -76,9 +76,9 @@ public class RecyclerViewCreatedChecklistAdapter
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        EditText checklistName;
-        EditText checklistHint;
-        LinearLayout buttonDelete;
+        final EditText checklistName;
+        final EditText checklistHint;
+        final LinearLayout buttonDelete;
 
         public ViewHolder(View view) {
             super(view);

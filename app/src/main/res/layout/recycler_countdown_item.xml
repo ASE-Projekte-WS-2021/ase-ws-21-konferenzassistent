@@ -86,7 +86,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/ic_baseline_replay_24"
-                    app:backgroundTint="@color/gray" />
+                    app:backgroundTint="@color/gray"
+                    android:contentDescription="TODO" />
 
                 <ImageButton
                     android:id="@+id/pause_button"
@@ -96,7 +97,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/ic_baseline_pause_24"
-                    app:backgroundTint ="@color/white" />
+                    app:backgroundTint ="@color/white"
+                    android:contentDescription="TODO" />
 
             </LinearLayout>
 

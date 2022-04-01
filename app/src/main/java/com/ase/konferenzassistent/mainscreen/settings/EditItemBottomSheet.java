@@ -99,11 +99,6 @@ public class EditItemBottomSheet extends BottomSheetDialogFragment {
         dismiss();
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-    }
-
     public interface timerEdit {
         void onEditFinish(RecyclerViewAdvancedCountdownItemAdapter.AdvancedCountdownItem mItem, int position);
     }

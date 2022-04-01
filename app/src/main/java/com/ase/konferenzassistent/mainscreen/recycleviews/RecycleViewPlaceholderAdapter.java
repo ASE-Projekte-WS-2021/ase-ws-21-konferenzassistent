@@ -25,7 +25,7 @@ public class RecycleViewPlaceholderAdapter extends RecyclerView.Adapter<RecycleV
 
     private final ArrayList<cdServiceObject> mCountdowns;
     Integer pastColor;
-    Context mContext;
+    final Context mContext;
     private RecycleViewPlaceholderAdapter.ViewHolder lastItem;
 
     public RecycleViewPlaceholderAdapter(
@@ -38,10 +38,10 @@ public class RecycleViewPlaceholderAdapter extends RecyclerView.Adapter<RecycleV
 
     // For color change effect
     //https://stackoverflow.com/a/37667578
-    private static int modifyBrightness(int color, float factor) {
+    private static int modifyBrightness(int color) {
         float[] hsv = new float[3];
         Color.colorToHSV(color, hsv);
-        hsv[2] *= factor;
+        hsv[2] *= (float) 0.8;
         return Color.HSVToColor(hsv);
 
     }
@@ -67,7 +67,7 @@ public class RecycleViewPlaceholderAdapter extends RecyclerView.Adapter<RecycleV
         if (countdown.getmEnabled()) {
             ViewCompat.setBackgroundTintList(holder.countdownContainer, ColorStateList.valueOf(pastColor));
 
-            pastColor = modifyBrightness(pastColor, 0.8f);
+            pastColor = modifyBrightness(pastColor);
             if (position < getItemCount() - 1)
                 holder.countdownPastContainer.setBackgroundColor(pastColor);
             else {
@@ -95,19 +95,12 @@ public class RecycleViewPlaceholderAdapter extends RecyclerView.Adapter<RecycleV
         return mCountdowns.size();
     }
 
-    private void pauseButtonToggle(ImageButton button, boolean enabled) {
-        if (enabled)
-            button.setBackground(ResourcesCompat.getDrawable(mContext.getResources(), R.drawable.ic_baseline_play_arrow_24, null));
-        else
-            button.setBackground(ResourcesCompat.getDrawable(mContext.getResources(), R.drawable.ic_baseline_pause_24, null));
-    }
 
     // View holder Class
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        LinearLayout countdownPastContainer;
-        LinearLayout countdownContainer;
+        final LinearLayout countdownPastContainer;
+        final LinearLayout countdownContainer;
 
-        RelativeLayout locationContainer;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);

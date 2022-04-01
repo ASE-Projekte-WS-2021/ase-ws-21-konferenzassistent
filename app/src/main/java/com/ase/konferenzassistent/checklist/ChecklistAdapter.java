@@ -20,7 +20,7 @@ public class ChecklistAdapter extends RecyclerView.Adapter<ChecklistAdapter.Chec
 
     private final Context ct;
     private final List<ChecklistItem> checklistItems;
-    private OnAdapterItemClickListener adapterItemClickListener = null;
+    private final OnAdapterItemClickListener adapterItemClickListener;
 
     public ChecklistAdapter(Context ct, OnAdapterItemClickListener listener, List<ChecklistItem> checklistItems) {
         this.ct = ct;
@@ -68,9 +68,9 @@ public class ChecklistAdapter extends RecyclerView.Adapter<ChecklistAdapter.Chec
 
     public static class ChecklistViewHolder extends RecyclerView.ViewHolder {
 
-        CardView cardViewItem;
-        CheckBox checkBoxItem;
-        ImageButton infoButtonItem;
+        final CardView cardViewItem;
+        final CheckBox checkBoxItem;
+        final ImageButton infoButtonItem;
 
         public ChecklistViewHolder(@NonNull View itemView) {
             super(itemView);

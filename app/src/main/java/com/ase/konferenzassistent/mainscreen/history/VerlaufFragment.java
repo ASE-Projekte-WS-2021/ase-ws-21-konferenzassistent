@@ -286,6 +286,7 @@ public class VerlaufFragment extends Fragment implements OnFilterButtonClickList
             this.dateEnd = dateEnd;
         }
 
+        @NonNull
         @Override
         public String toString() {
             return "FilterData{" +

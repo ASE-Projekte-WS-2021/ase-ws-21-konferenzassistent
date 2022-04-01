@@ -125,10 +125,10 @@ public class RecyclerViewAdvancedCountdownAdapter
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView countdownName;
-        SwitchCompat aSwitch;
-        LinearLayout countdownContainer;
-        RecyclerView recyclerView;
+        final TextView countdownName;
+        final SwitchCompat aSwitch;
+        final LinearLayout countdownContainer;
+        final RecyclerView recyclerView;
 
         public ViewHolder(View countdownView) {
             super(countdownView);

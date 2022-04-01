@@ -27,6 +27,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class ParticipantImportContactBottomSheetAdapter extends BottomSheetDialogFragment {
     final static float MIN_SCROLL_FOR_CLOSURE = 0.5f;
@@ -35,19 +36,18 @@ public class ParticipantImportContactBottomSheetAdapter extends BottomSheetDialo
     RecycleViewContactList recycleViewContactList;
     RecycleViewContactList.contactListener listener;
     // Participant List
-    ArrayList<Contact> mContacts = new ArrayList<>();
+    final ArrayList<Contact> mContacts = new ArrayList<>();
     // https://stackoverflow.com/a/63546099
     private final ActivityResultLauncher<String> requestPermissionLauncher =
             registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted -> {
                 if (isGranted) {
                     getContactList();
-                } else {
-                    // Explain to the user that the feature is unavailable because the
-                    // features requires a permission that the user has denied. At the
-                    // same time, respect the user's decision. Don't link to system
-                    // settings in an effort to convince the user to change their
-                    // decision.
-                }
+                }  // Explain to the user that the feature is unavailable because the
+                // features requires a permission that the user has denied. At the
+                // same time, respect the user's decision. Don't link to system
+                // settings in an effort to convince the user to change their
+                // decision.
+
             });
 
     public RecycleViewContactList.contactListener getListener() {
@@ -176,7 +176,7 @@ public class ParticipantImportContactBottomSheetAdapter extends BottomSheetDialo
         Uri uri = ContactsContract.Contacts.CONTENT_URI;
         // sort by asc
         String sort = ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME + " ASC";
-        Cursor cursor = getActivity().getApplicationContext().getContentResolver().query(uri, null, null, null, sort);
+        Cursor cursor = requireActivity().getApplicationContext().getContentResolver().query(uri, null, null, null, sort);
 
         // check if cursor is empty
         if (cursor.getCount() > 0) {
@@ -190,7 +190,7 @@ public class ParticipantImportContactBottomSheetAdapter extends BottomSheetDialo
                 String selection = ContactsContract.CommonDataKinds.Phone.CONTACT_ID +
                         " =?";
 
-                Cursor phoneCursor = getActivity().getApplicationContext().getContentResolver().query(
+                Cursor phoneCursor = requireActivity().getApplicationContext().getContentResolver().query(
                         uriPhone, null, selection, new String[]{id}, null);
 
                 if (phoneCursor.moveToNext()) {
@@ -213,9 +213,4 @@ public class ParticipantImportContactBottomSheetAdapter extends BottomSheetDialo
         buildRecyclerView();
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        //bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
-    }
 }

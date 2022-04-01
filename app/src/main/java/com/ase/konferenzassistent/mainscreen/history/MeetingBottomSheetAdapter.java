@@ -29,6 +29,7 @@ import java.util.List;
  */
 
 public class MeetingBottomSheetAdapter extends BottomSheetDialogFragment {
+    @SuppressWarnings("rawtypes")
     BottomSheetBehavior bottomSheetBehavior;
     MeetingBottomSheetBinding bi;
     private int id;

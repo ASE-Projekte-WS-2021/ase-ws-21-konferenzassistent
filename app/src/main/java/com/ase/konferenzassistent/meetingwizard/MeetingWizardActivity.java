@@ -118,7 +118,7 @@ public class MeetingWizardActivity extends AppCompatActivity implements OnAdapte
 
 
         // Load Participants Objects
-        List<ParticipantData> d = new ArrayList<>();
+        List<ParticipantData> d;
         database = RoomDB.getInstance(getBaseContext());
         d = database.participantDao().getAll();
 
@@ -199,6 +199,7 @@ public class MeetingWizardActivity extends AppCompatActivity implements OnAdapte
     }
 
     // Gets the Extras from the intent
+    @SuppressWarnings("unchecked")
     private void getExtras() {
         titleText.setText(getIntent().getStringExtra("meeting_wizard_title"));
         location = getIntent().getStringExtra(MEETING_LOCATION);
@@ -270,7 +271,7 @@ public class MeetingWizardActivity extends AppCompatActivity implements OnAdapte
     private void startCountdownActivity() {
         Intent intent = new Intent(this, CountdownActivity.class);
 
-        intent = putExtras(intent);
+        putExtras(intent);
         // only get Attending Participants
 
         // start next activity
@@ -279,7 +280,7 @@ public class MeetingWizardActivity extends AppCompatActivity implements OnAdapte
     }
 
     // Sends the data to the Countdown
-    private Intent putExtras(Intent intent) {
+    private void putExtras(Intent intent) {
         ArrayList<Participant> attendingParticipants = new ArrayList<>();
         participants.forEach(participant -> {
             if (participant.getSelected()) {
@@ -293,7 +294,6 @@ public class MeetingWizardActivity extends AppCompatActivity implements OnAdapte
         intent.putExtra(MEETING_LOCATION, location);
         intent.putExtra(MEETING_TITLE, titleText.getText());
 
-        return intent;
     }
 
     @Override
@@ -310,7 +310,7 @@ public class MeetingWizardActivity extends AppCompatActivity implements OnAdapte
     @Override
     public void onAdapterItemClick() {
         WizardChecklistFragment fragment = (WizardChecklistFragment) fragmentArrayList.get(STATE_IS_CHECKLIST);
-        Integer checklistItemsChecked = fragment.checkItem();
+        int checklistItemsChecked = fragment.checkItem();
 
         if (checklistItemsChecked == checklistItems.size()) {
             continueButton.setEnabled(true);

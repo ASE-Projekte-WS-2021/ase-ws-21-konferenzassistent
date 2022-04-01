@@ -18,20 +18,12 @@ import com.ase.konferenzassistent.checklist.OnAdapterItemClickListener;
 
 import java.util.ArrayList;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link WizardChecklistFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class WizardChecklistFragment extends Fragment {
 
     private final ArrayList<ChecklistItem> checklistItems = new ArrayList<>();
     OnAdapterItemClickListener listener;
     private int checkedItems;
 
-    private RecyclerView rvChecklist;
-    private ChecklistAdapter checklistAdapter;
-    private LinearLayoutManager linearLayoutManager;
     public WizardChecklistFragment() {
         // Required empty public constructor
     }
@@ -41,27 +33,22 @@ public class WizardChecklistFragment extends Fragment {
         this.listener = listener;
     }
 
-    public int getCheckedItems() {
-        return checkedItems;
-    }
+
 
     public void setCheckedItems(int checkedItems) {
         this.checkedItems = checkedItems;
     }
 
-    public WizardChecklistFragment newInstance() {
-        return new WizardChecklistFragment();
-    }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        rvChecklist = view.findViewById(R.id.rv_checklist_wizard);
+        RecyclerView rvChecklist = view.findViewById(R.id.rv_checklist_wizard);
 
-        checklistAdapter = new ChecklistAdapter(this.getContext(), listener, checklistItems);
+        ChecklistAdapter checklistAdapter = new ChecklistAdapter(this.getContext(), listener, checklistItems);
         rvChecklist.setAdapter(checklistAdapter);
-        linearLayoutManager = new LinearLayoutManager(this.getContext());
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this.getContext());
         rvChecklist.setLayoutManager(linearLayoutManager);
     }
 
