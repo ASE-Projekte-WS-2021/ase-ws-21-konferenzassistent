@@ -27,6 +27,11 @@ public class ContactCreationBottomSheetAdapter extends BottomSheetDialogFragment
     // should the sheet be leave able
     boolean cancelable = true;
     boolean warning = false;
+    ContactCreationBottomSheetAdapter.OnParticipantCreatedListener listener;
+
+    public ContactCreationBottomSheetAdapter(ContactCreationBottomSheetAdapter.OnParticipantCreatedListener listener) {
+        this.listener = listener;
+    }
 
     // Make the background Transparent
     @Override
@@ -105,6 +110,8 @@ public class ContactCreationBottomSheetAdapter extends BottomSheetDialogFragment
             participantData.setStatus(bi.participantInputStatus.getText().toString());
 
             database.participantDao().insert(participantData);
+
+            listener.onParticipantCreated();
 
             dismiss();
         });
@@ -215,6 +222,10 @@ public class ContactCreationBottomSheetAdapter extends BottomSheetDialogFragment
     public void onContactSelected(String name) {
         bi.participantInputName.setText(name);
         participantImportContactBottomSheetAdapter.dismiss();
+    }
+
+    public interface OnParticipantCreatedListener {
+        void onParticipantCreated();
     }
 
 }

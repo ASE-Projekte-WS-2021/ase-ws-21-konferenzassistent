@@ -24,7 +24,7 @@ public class ParticipantBottomSheetAdapter extends BottomSheetDialogFragment {
     final static float MIN_SCROLL_FOR_CLOSURE = 0.5f;
     BottomSheetParticipantsBinding bi;
     BottomSheetBehavior<View> bottomSheetBehavior;
-    RecycleViewParticipantList recycleViewParticipantList;
+    RecyclerViewParticipantListAdapter recycleViewParticipantList;
     // Participant List
     ArrayList<Participant> participants;
 
@@ -127,7 +127,7 @@ public class ParticipantBottomSheetAdapter extends BottomSheetDialogFragment {
     private void buildRecyclerView() {
 
         RecyclerView recyclerView = bi.participantRecycleView;
-        recycleViewParticipantList = new RecycleViewParticipantList(
+        recycleViewParticipantList = new RecyclerViewParticipantListAdapter(
                 participants,
                 this.getContext(),
                 true

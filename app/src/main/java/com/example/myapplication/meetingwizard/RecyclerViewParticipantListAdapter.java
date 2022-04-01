@@ -19,7 +19,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.util.ArrayList;
 
-public class RecycleViewParticipantList extends RecyclerView.Adapter<RecycleViewParticipantList.ViewHolder> {
+public class RecyclerViewParticipantListAdapter extends RecyclerView.Adapter<RecyclerViewParticipantListAdapter.ViewHolder> {
 
     // Content
     private final ArrayList<Participant> mParticipants;
@@ -27,7 +27,7 @@ public class RecycleViewParticipantList extends RecyclerView.Adapter<RecycleView
     private final ArrayList<Participant> mParticipantsCopy = new ArrayList<>();
     private final boolean openedFromWizard;
 
-    public RecycleViewParticipantList(ArrayList<Participant> mParticipants, Context mContext, boolean openedFromWizard) {
+    public RecyclerViewParticipantListAdapter(ArrayList<Participant> mParticipants, Context mContext, boolean openedFromWizard) {
         this.mParticipants = mParticipants;
         this.mContext = mContext;
         mParticipantsCopy.addAll(mParticipants);
