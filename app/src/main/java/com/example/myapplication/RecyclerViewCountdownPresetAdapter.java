@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -69,6 +70,11 @@ public class RecyclerViewCountdownPresetAdapter
     }
 
     private void createAlert(String title) {
+        if(title.equals("Standard")){
+            Toast.makeText(mContext, "Die Standardeinstellungen können nicht gelöscht werden",
+                    Toast.LENGTH_LONG).show();
+            return;
+        }
         CustomAlertBottomSheetAdapter customAlertBottomSheetAdapter = new CustomAlertBottomSheetAdapter(this);
         customAlertBottomSheetAdapter.setWarningText("Soll das Preset \"" + title + "\" wirklich gelöscht werden."); // Mitteilung
         customAlertBottomSheetAdapter.setAcceptText("Preset löschen"); // Positives Feedback

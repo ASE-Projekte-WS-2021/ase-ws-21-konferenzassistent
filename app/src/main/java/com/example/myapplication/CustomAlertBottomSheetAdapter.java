@@ -95,10 +95,15 @@ public class CustomAlertBottomSheetAdapter extends BottomSheetDialogFragment {
         bi.buttonDismissChanges.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                listener.onLeaving();
+                try {
+                    listener.onLeaving();
 
-                // dismiss the alert
-                dismiss();
+                    // dismiss the alert
+                    dismiss();
+                }
+                catch(Exception e) {
+                    //  Block of code to handle errors
+                }
             }
         });
 

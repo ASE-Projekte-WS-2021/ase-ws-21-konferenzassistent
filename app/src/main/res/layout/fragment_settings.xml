@@ -69,7 +69,6 @@
                  <LinearLayout
                     android:id="@+id/button_add_checklist"
                     style="@style/Widget.AppCompat.Button"
-                    android:visibility="gone"
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:minHeight="48dp"
