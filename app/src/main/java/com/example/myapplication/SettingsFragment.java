@@ -3,24 +3,18 @@ package com.example.myapplication;
 import static com.example.myapplication.CountdownPreset.convertToAdvancedCountdownList;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
-import com.example.myapplication.checklist.ChecklistItem;
 import com.example.myapplication.data.RoomDB;
-import com.example.myapplication.data.presets.countdown.CountdownItemData;
-import com.example.myapplication.data.presets.countdown.CountdownParentData;
-import com.example.myapplication.data.presets.countdown.CountdownParentWithItemData;
-import com.example.myapplication.data.presets.countdown.CountdownPresetData;
+import com.example.myapplication.data.presets.checklist.ChecklistPresetPair;
 import com.example.myapplication.data.presets.countdown.CountdownPresetPair;
-import com.example.myapplication.data.presets.countdown.CountdownPresetWithParentData;
 import com.example.myapplication.databinding.FragmentSettingsBinding;
 
 import java.util.ArrayList;
@@ -60,7 +54,8 @@ public class SettingsFragment extends Fragment implements PresetEditBottomSheet.
         bi = DataBindingUtil.bind(view);
 
         // on new checklist button
-        bi.buttonAddChecklist.setOnClickListener(viewListener ->{
+        assert bi != null;
+        bi.buttonAddChecklist.setOnClickListener(viewListener -> {
             PresetEditBottomSheet presetEditBottomSheet = new PresetEditBottomSheet();
             presetEditBottomSheet.setupView(checklistPreset, PresetEditBottomSheet.PRESET_TYPE_CHECKLIST, this);
             presetEditBottomSheet.show(getParentFragmentManager(), presetEditBottomSheet.getTag());
@@ -68,7 +63,7 @@ public class SettingsFragment extends Fragment implements PresetEditBottomSheet.
         });
 
         // on new countdown button
-        bi.buttonAddCountdown.setOnClickListener(viewListener ->{
+        bi.buttonAddCountdown.setOnClickListener(viewListener -> {
             createCountdownList();
             PresetEditBottomSheet presetEditBottomSheet = new PresetEditBottomSheet();
             presetEditBottomSheet.setupView(countdownPresets, PresetEditBottomSheet.PRESET_TYPE_COUNTDOWN, this);
@@ -76,27 +71,31 @@ public class SettingsFragment extends Fragment implements PresetEditBottomSheet.
         });
     }
 
-    private void createCountdownList(){
-
+    private void createCountdownList() {
         // Load Countdowns Objects
-        List<CountdownPresetPair> d = new ArrayList<>();
+        List<CountdownPresetPair> d;
         d = database.countdownPresetWIthParentDao().getCountdowns();
 
         countdownPresets.clear();
-        d.forEach(preset ->{
+        d.forEach(preset -> {
             String presetName = preset.getPresets().getTitle();
-            Integer presetId = preset.getPresets().getID();
+            int presetId = preset.getPresets().getID();
 
             countdownPresets.add(new CountdownPreset(presetName, convertToAdvancedCountdownList(database, preset), presetId));
         });
     }
 
-    private void createChecklistList(){
+    private void createChecklistList() {
+        List<ChecklistPresetPair> d;
+        d = database.checklistPresetWithItemDao().getPresets();
 
-        ArrayList<ChecklistItem> items = new ArrayList<>();
-        items.add(new ChecklistItem("Checklistitem1", "hint", false));
+        checklistPreset.clear();
+        d.forEach(preset -> {
+            String presetName = preset.getPresets().getTitle();
+            Integer presetId = preset.getPresets().getID();
 
-        checklistPreset.add(new ChecklistPreset("Test", items,0));
+            checklistPreset.add(new ChecklistPreset(presetName, ChecklistPreset.convertToChecklistItems(preset), presetId));
+        });
     }
 
 
@@ -106,9 +105,3 @@ public class SettingsFragment extends Fragment implements PresetEditBottomSheet.
         createChecklistList();
     }
 }
-
-/*
-
-
-
- */

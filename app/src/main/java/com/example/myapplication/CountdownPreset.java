@@ -24,36 +24,11 @@ public class CountdownPreset implements Preset {
         this.id = id;
     }
 
-    @Override
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public ArrayList<RecyclerViewAdvancedCountdownAdapter.AdvancedCountdownObject> getAdvancedCountdownObject() {
-        return advancedCountdownObject;
-    }
-
-    public void setAdvancedCountdownObject(ArrayList<RecyclerViewAdvancedCountdownAdapter.AdvancedCountdownObject> advancedCountdownObject) {
-        this.advancedCountdownObject = advancedCountdownObject;
-    }
-
-    public static void removeFromDatabase(RoomDB database, Integer id){
+    public static void removeFromDatabase(RoomDB database, Integer id) {
         database.countdownPresetDao().delete(database.countdownPresetDao().getOne(id));
     }
 
-    public static void convertToDatabaseEntry(RoomDB database, CountdownPreset preset){
+    public static void convertToDatabaseEntry(RoomDB database, CountdownPreset preset) {
         String title = preset.getTitle();
 
         // create new preset
@@ -62,7 +37,7 @@ public class CountdownPreset implements Preset {
         long presetId = database.countdownPresetDao().insert(presetData);
 
         // Write Countdown into database and link with preset
-        preset.advancedCountdownObject.forEach(advancedCountdownObject ->{
+        preset.advancedCountdownObject.forEach(advancedCountdownObject -> {
             String countdownName = advancedCountdownObject.getmCountdownName();
             // create new countdown Parent
             CountdownParentData parentData = new CountdownParentData();
@@ -71,14 +46,14 @@ public class CountdownPreset implements Preset {
 
             // Link Parent to Preset
             CountdownPresetWithParentData presetWithParentData = new CountdownPresetWithParentData();
-            presetWithParentData.setPresetID((int)presetId);
-            presetWithParentData.setCountdownParentID((int)parentId);
+            presetWithParentData.setPresetID((int) presetId);
+            presetWithParentData.setCountdownParentID((int) parentId);
             database.countdownPresetWIthParentDao().insert(presetWithParentData);
 
             // Write Timer into database and link with parent
-            advancedCountdownObject.getmItems().forEach(items ->{
+            advancedCountdownObject.getmItems().forEach(items -> {
                 String description = items.getSubCountdownDescription();
-                Long timer =  items.getSubCountdown();
+                Long timer = items.getSubCountdown();
 
                 // new timer
                 CountdownItemData countdownItemData = new CountdownItemData();
@@ -87,18 +62,18 @@ public class CountdownPreset implements Preset {
                 long childId = database.countdownItemDao().insert(countdownItemData);
 
                 // Link child to parent
-                CountdownParentWithItemData countdownParentWithItemData  = new CountdownParentWithItemData();
-                countdownParentWithItemData.setCountdownParentID((int)parentId);
-                countdownParentWithItemData.setCountdownItemID((int)childId);
+                CountdownParentWithItemData countdownParentWithItemData = new CountdownParentWithItemData();
+                countdownParentWithItemData.setCountdownParentID((int) parentId);
+                countdownParentWithItemData.setCountdownItemID((int) childId);
                 database.countdownParentWIthItemDao().insert(countdownParentWithItemData);
 
             });
-        } );
+        });
     }
 
-    public static ArrayList<RecyclerViewAdvancedCountdownAdapter.AdvancedCountdownObject> convertToAdvancedCountdownList(RoomDB database, CountdownPresetPair presetPair){
-        ArrayList<RecyclerViewAdvancedCountdownAdapter.AdvancedCountdownObject>  list = new ArrayList<>();
-        presetPair.getParents().forEach(parents ->{
+    public static ArrayList<RecyclerViewAdvancedCountdownAdapter.AdvancedCountdownObject> convertToAdvancedCountdownList(RoomDB database, CountdownPresetPair presetPair) {
+        ArrayList<RecyclerViewAdvancedCountdownAdapter.AdvancedCountdownObject> list = new ArrayList<>();
+        presetPair.getParents().forEach(parents -> {
             String countdownName = parents.getTitle();
 
             ArrayList<RecyclerViewAdvancedCountdownItemAdapter.AdvancedCountdownItem> children =
@@ -125,6 +100,31 @@ public class CountdownPreset implements Preset {
         });
 
         return list;
+    }
+
+    @Override
+    public int getID() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public ArrayList<RecyclerViewAdvancedCountdownAdapter.AdvancedCountdownObject> getAdvancedCountdownObject() {
+        return advancedCountdownObject;
+    }
+
+    public void setAdvancedCountdownObject(ArrayList<RecyclerViewAdvancedCountdownAdapter.AdvancedCountdownObject> advancedCountdownObject) {
+        this.advancedCountdownObject = advancedCountdownObject;
     }
 
 }

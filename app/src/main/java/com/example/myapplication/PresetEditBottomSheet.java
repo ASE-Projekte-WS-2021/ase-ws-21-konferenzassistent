@@ -1,11 +1,13 @@
 package com.example.myapplication;
 
+import static com.example.myapplication.ChecklistPreset.convertToChecklistDatabaseEntry;
+import static com.example.myapplication.ChecklistPreset.removeChecklistFromDatabase;
+import static com.example.myapplication.CountdownPreset.convertToAdvancedCountdownList;
 import static com.example.myapplication.CountdownPreset.convertToDatabaseEntry;
 import static com.example.myapplication.CountdownPreset.removeFromDatabase;
 
 import android.app.Dialog;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -14,9 +16,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.data.RoomDB;
+import com.example.myapplication.data.presets.checklist.ChecklistPresetPair;
+import com.example.myapplication.data.presets.countdown.CountdownPresetPair;
 import com.example.myapplication.databinding.BottomSheetEditPresetsBinding;
-import com.example.myapplication.databinding.BottomSheetPresetsBinding;
-import com.example.myapplication.meetingwizard.RecyclerViewAdvancedCountdownAdapter;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
@@ -24,45 +26,64 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import java.util.ArrayList;
 import java.util.Collection;
 
-public class PresetEditBottomSheet extends BottomSheetDialogFragment  implements PresetAddCountdownBottomSheet.editingDone, RecyclerViewCountdownPresetAdapter.onDeletionListener {
-    BottomSheetEditPresetsBinding bi;
-    BottomSheetBehavior<View> bottomSheetBehavior;
-
-    RecyclerViewCountdownPresetAdapter recyclerViewPresetAdapter;
-
-    onCloseListener listener;
-
+public class PresetEditBottomSheet extends BottomSheetDialogFragment implements PresetAddCountdownBottomSheet.editingDone, RecyclerViewCountdownPresetAdapter.onDeletionListener {
     public static final int PRESET_TYPE_COUNTDOWN = 0;
     public static final int PRESET_TYPE_CHECKLIST = 1;
-
+    BottomSheetEditPresetsBinding bi;
+    BottomSheetBehavior<View> bottomSheetBehavior;
+    RecyclerViewCountdownPresetAdapter recyclerViewPresetAdapter;
+    onCloseListener listener;
     Integer viewType;
+    // Preset Lists
+    private ArrayList<CountdownPreset> countdownObjects = new ArrayList<>();
+    private ArrayList<ChecklistPreset> checklistPresets = new ArrayList<>();
 
     @Override
     public void onDelete(int position) {
-        if(viewType.equals(PRESET_TYPE_COUNTDOWN)){
+        RoomDB database = RoomDB.getInstance(getContext());
+
+        if (viewType.equals(PRESET_TYPE_COUNTDOWN)) {
+            // Get database entries to prevent null ids
+            countdownObjects.clear();
+            ArrayList<CountdownPresetPair> d = new ArrayList<>();
+            d.addAll(database.countdownPresetWIthParentDao().getCountdowns());
+            d.forEach(preset -> {
+                String presetName = preset.getPresets().getTitle();
+                int presetId = preset.getPresets().getID();
+
+                countdownObjects.add(
+                        new CountdownPreset(presetName,
+                                convertToAdvancedCountdownList(database, preset), presetId));
+            });
+
             int id = countdownObjects.get(position).id;
-            Log.i("TAG", "onDelete: " +id);
             countdownObjects.remove(position);
             recyclerViewPresetAdapter.notifyItemRemoved(countdownObjects.size());
-            removeFromDatabase(RoomDB.getInstance(getContext()),id);
-        }
-        else
-        {
+            removeFromDatabase(RoomDB.getInstance(getContext()), id);
+
+            recyclerViewPresetAdapter.notifyDataSetChanged();
+        } else {
+            // Get database entries to prevent null ids
+            checklistPresets.clear();
+            ArrayList<ChecklistPresetPair> d = new ArrayList<>();
+            d.addAll(database.checklistPresetWithItemDao().getPresets());
+            d.forEach(preset -> {
+                String presetName = preset.getPresets().getTitle();
+                Integer presetId = preset.getPresets().getID();
+
+                checklistPresets.add(
+                        new ChecklistPreset(presetName,
+                                ChecklistPreset.convertToChecklistItems(preset), presetId));
+            });
+
             int id = checklistPresets.get(position).id;
             checklistPresets.remove(position);
             recyclerViewPresetAdapter.notifyItemRemoved(checklistPresets.size());
-            // TODO: remove from database
+            removeChecklistFromDatabase(RoomDB.getInstance(getContext()), id);
+
+            recyclerViewPresetAdapter.notifyDataSetChanged();
         }
     }
-
-    interface onCloseListener{
-        void onClose();
-    }
-
-    // Preset Lists
-    private ArrayList<CountdownPreset> countdownObjects = new ArrayList<>();
-
-    private ArrayList<ChecklistPreset> checklistPresets = new ArrayList<>();
 
     // Make the background Transparent
     @Override
@@ -73,7 +94,7 @@ public class PresetEditBottomSheet extends BottomSheetDialogFragment  implements
 
     @NonNull
     @Override
-    public Dialog onCreateDialog(Bundle savedInstanceState){
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
         BottomSheetDialog bottomSheet = (BottomSheetDialog) super.onCreateDialog(savedInstanceState);
 
         // inflating Layout
@@ -115,7 +136,7 @@ public class PresetEditBottomSheet extends BottomSheetDialogFragment  implements
         bi.buttonDismiss.setOnClickListener(viewListener -> dismiss());
 
         // create button event
-        bi.buttonCreate.setOnClickListener(viewListener ->{
+        bi.buttonCreate.setOnClickListener(viewListener -> {
             PresetAddCountdownBottomSheet presetAddCountdownBottomSheet = new PresetAddCountdownBottomSheet();
             presetAddCountdownBottomSheet.getListener(this);
             presetAddCountdownBottomSheet.getViewType(viewType);
@@ -130,28 +151,25 @@ public class PresetEditBottomSheet extends BottomSheetDialogFragment  implements
 
         return bottomSheet;
     }
-    
+
     // Configs the view to match the right Preset
-    private void configView(){
-        if(viewType == PRESET_TYPE_COUNTDOWN){
+    private void configView() {
+        if (viewType == PRESET_TYPE_COUNTDOWN) {
             bi.presetHeaderText.setText("Deine Custon Countdownsets");
             bi.buttonCreateText.setText("Neues Countdownset erstellen");
-        }
-        else{
+        } else {
             bi.presetHeaderText.setText("Checkliste bearbeiten");
             bi.buttonCreateText.setText("Neue Checkliste erstellen");
         }
     }
-    
+
     // Set the text of the header and reads all important information
-    public void setupView(ArrayList<?> object, int viewType, onCloseListener listener){
+    public void setupView(ArrayList<?> object, int viewType, onCloseListener listener) {
         this.viewType = viewType;
-        if(viewType == PRESET_TYPE_COUNTDOWN){
+        if (viewType == PRESET_TYPE_COUNTDOWN) {
             countdownObjects = new ArrayList<>();
             countdownObjects.addAll((Collection<? extends CountdownPreset>) object);
-        }
-        else
-        {
+        } else {
             checklistPresets = new ArrayList<>();
             checklistPresets.addAll((Collection<? extends ChecklistPreset>) object);
         }
@@ -159,17 +177,15 @@ public class PresetEditBottomSheet extends BottomSheetDialogFragment  implements
         this.listener = listener;
     }
 
-
-
     // Build and fills the recycler view
-    private void buildRecyclerView(){
+    private void buildRecyclerView() {
         RecyclerView recyclerView = bi.presetRecyclerView;
         // Checks what type of view it is and fills it with the right Preset
         recyclerViewPresetAdapter = new RecyclerViewCountdownPresetAdapter(
-                viewType.equals(PRESET_TYPE_COUNTDOWN)? countdownObjects: checklistPresets,
+                viewType.equals(PRESET_TYPE_COUNTDOWN) ? countdownObjects : checklistPresets,
                 this,
                 this.getContext()
-                );
+        );
         recyclerView.setAdapter(recyclerViewPresetAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
     }
@@ -177,23 +193,28 @@ public class PresetEditBottomSheet extends BottomSheetDialogFragment  implements
     @Override
     public void onEditingDone(Preset preset) {
         // Checks what view type is active
-        if(viewType.equals(PRESET_TYPE_COUNTDOWN)){
+        if (viewType.equals(PRESET_TYPE_COUNTDOWN)) {
             countdownObjects.add((CountdownPreset) preset);
             recyclerViewPresetAdapter.notifyItemInserted(countdownObjects.size());
-            writePresetToDatabase((CountdownPreset) preset);
-        }
-        else
-        {
-            checklistPresets.add((ChecklistPreset)preset);
+            writeCountdownPresetToDatabase((CountdownPreset) preset);
+        } else {
+            checklistPresets.add((ChecklistPreset) preset);
             recyclerViewPresetAdapter.notifyItemInserted(checklistPresets.size());
-            // TODO: SAVE CHECKLIST IN DATABASE
+            writeChecklistPresetToDatabase((ChecklistPreset) preset);
         }
-
         listener.onClose();
     }
 
-    private void writePresetToDatabase(CountdownPreset preset){
+    private void writeCountdownPresetToDatabase(CountdownPreset preset) {
         convertToDatabaseEntry(RoomDB.getInstance(getContext()), preset);
+    }
+
+    private void writeChecklistPresetToDatabase(ChecklistPreset preset) {
+        convertToChecklistDatabaseEntry(RoomDB.getInstance(getContext()), preset);
+    }
+
+    interface onCloseListener {
+        void onClose();
     }
 
 

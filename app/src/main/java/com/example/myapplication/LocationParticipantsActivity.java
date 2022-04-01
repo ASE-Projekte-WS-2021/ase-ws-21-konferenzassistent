@@ -1,10 +1,5 @@
 package com.example.myapplication;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
@@ -17,6 +12,11 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.myapplication.checklist.ChecklistActivity;
 import com.example.myapplication.data.RoomDB;
@@ -98,7 +98,7 @@ public class LocationParticipantsActivity extends AppCompatActivity implements A
 
         participantsArrayList = new ArrayList<String>();
 
-        participantsArrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, participantsArrayList);
+        participantsArrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, participantsArrayList);
         participantsView.setAdapter(participantsArrayAdapter);
         UIUtils.setListViewHeightBasedOnItems(participantsView);
 
@@ -113,9 +113,9 @@ public class LocationParticipantsActivity extends AppCompatActivity implements A
 
     public void onAddParticipantButtonClicked(View view) {
 
-        View participantsAlertView = this.getLayoutInflater().inflate(R.layout.participants_alert,null);
+        View participantsAlertView = this.getLayoutInflater().inflate(R.layout.participants_alert, null);
         ListView participantsAlertListView = participantsAlertView.findViewById(R.id.participants_alert_listview);
-        ArrayAdapter<String> participantsAlertViewAdapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1, dbPersonHelper.getParticipants());
+        ArrayAdapter<String> participantsAlertViewAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, dbPersonHelper.getParticipants());
         participantsAlertListView.setAdapter(participantsAlertViewAdapter);
         UIUtils.setListViewHeightBasedOnItems(participantsAlertListView);
 
@@ -139,7 +139,7 @@ public class LocationParticipantsActivity extends AppCompatActivity implements A
         participantsAlertAddButton.setOnClickListener(view1 -> {
             String value = participantsAlertEditText.getText().toString();
             if (value.length() == 0) {
-                Toast.makeText(this,"Bitte einen Namen eingeben.",Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Bitte einen Namen eingeben.", Toast.LENGTH_SHORT).show();
             } else {
                 participantsArrayList.add(value);
                 dbPersonHelper.addPerson(value);
@@ -161,24 +161,24 @@ public class LocationParticipantsActivity extends AppCompatActivity implements A
             locationInput.setInputType(InputType.TYPE_CLASS_TEXT);
             MaterialAlertDialogBuilder locationInputDialog =
                     new MaterialAlertDialogBuilder(LocationParticipantsActivity.this, R.style.dialogAlertStyle)
-                    .setTitle("Ort")
-                    .setMessage("Gib einen Namen für den neu anzulegenden Ort ein.")
-                    .setView(locationInput)
-                    .setPositiveButton("OK",((dialogInterface, i) -> {
-                        String s = locationInput.getText().toString();
-                        if (s.length() == 0) {
-                            Toast.makeText(getApplicationContext(),"Bitte einen Ort eingeben.", Toast.LENGTH_SHORT).show();
-                        } else {
-                            spinnerArrayList.remove(spinnerArrayList.size() - 1);
-                            spinnerArrayList.add(s);
-                            spinnerArrayList.add("<Neuen Ort hinzufügen...>");
+                            .setTitle("Ort")
+                            .setMessage("Gib einen Namen für den neu anzulegenden Ort ein.")
+                            .setView(locationInput)
+                            .setPositiveButton("OK", ((dialogInterface, i) -> {
+                                String s = locationInput.getText().toString();
+                                if (s.length() == 0) {
+                                    Toast.makeText(getApplicationContext(), "Bitte einen Ort eingeben.", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    spinnerArrayList.remove(spinnerArrayList.size() - 1);
+                                    spinnerArrayList.add(s);
+                                    spinnerArrayList.add("<Neuen Ort hinzufügen...>");
 
-                            locationsSpinner.setSelection(spinnerArrayList.size() - 2);
-                        }
-                    }))
-                    .setNegativeButton("CANCEL",((dialogInterface, i) -> {
-                        // do nothing
-                    }));
+                                    locationsSpinner.setSelection(spinnerArrayList.size() - 2);
+                                }
+                            }))
+                            .setNegativeButton("CANCEL", ((dialogInterface, i) -> {
+                                // do nothing
+                            }));
             final AlertDialog a = locationInputDialog.create();
             a.show();
         }
@@ -202,10 +202,10 @@ public class LocationParticipantsActivity extends AppCompatActivity implements A
         } else {
             location = spinnerSelection;
         }
-        intent.putExtra("location",location);
+        intent.putExtra("location", location);
 
         participantCount = Integer.toString(participantsArrayList.size());
-        intent.putExtra("participantCount",participantCount);
+        intent.putExtra("participantCount", participantCount);
 
         // Start next Activity
         startActivity(intent);

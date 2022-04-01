@@ -16,13 +16,10 @@ import android.content.IntentFilter;
 import android.media.MediaPlayer;
 import android.media.RingtoneManager;
 import android.net.Uri;
-import android.os.Build;
 import android.os.CountDownTimer;
 import android.os.IBinder;
 import android.text.Html;
-import android.text.Spannable;
 import android.text.SpannableString;
-import android.util.Log;
 
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
@@ -30,21 +27,50 @@ import androidx.core.app.NotificationCompat;
 import com.example.myapplication.meetingwizard.cdServiceObject;
 
 import java.util.ArrayList;
-import java.util.Timer;
 
 public class CountdownService extends Service {
 
+    public static final String COUNTDOWN_SERVICE = "com.example.myapplication.countdown_service";
     // Service Tag
     private final static String TAG = "CountdownService";
-    public static final String COUNTDOWN_SERVICE = "com.example.myapplication.countdown_service";
-
+    private final Intent bi = new Intent(COUNTDOWN_SERVICE);
     // Countdown Object that save the current states of the Countdowns
     ArrayList<cdServiceObject> countdownServiceObjects;
-
-    private final Intent bi = new Intent(COUNTDOWN_SERVICE);
-
     // Media Player for audible alerts
     private MediaPlayer mp = new MediaPlayer();
+    // Receives the button press on the Countdown activity
+    private final BroadcastReceiver br = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            Integer id = intent.getIntExtra(PAUSE_BUTTON_PRESSED_ID, -1);
+
+            if (id != -1) {
+                cdServiceObject timer = countdownServiceObjects.get(id);
+                timer.setTimerRunning(!timer.getTimerRunning());
+
+                if (!timer.getTimerRunning()) {
+                    pauseTimer(timer.getCountDownTimer());
+                } else {
+                    resumeTimer(timer);
+                }
+                sendBroadcast(bi);
+            }
+
+            Integer restart_id = intent.getIntExtra(REPLAY_BUTTON_PRESSED_ID, -1);
+
+            if (restart_id != -1) {
+                cdServiceObject cdObject = countdownServiceObjects.get(restart_id);
+                if (cdObject.getCountdownPosition() < cdObject.getTimer().getmItems().size() - 1) {
+                    cdObject.setCountdownPosition(cdObject.getCountdownPosition() + 1);
+                } else {
+                    cdObject.setCountdownPosition(0);
+                }
+
+                startSpecificTimer(restart_id);
+            }
+        }
+
+    };
 
     @Override
     public void onCreate() {
@@ -56,12 +82,12 @@ public class CountdownService extends Service {
     @Override
     public void onDestroy() {
         // Stop all timers
-        countdownServiceObjects.forEach(object ->{
+        countdownServiceObjects.forEach(object -> {
             object.getCountDownTimer().cancel();
         });
 
         // Stop the Media Player if it still is playing
-        if(mp.isPlaying()){
+        if (mp.isPlaying()) {
             mp.stop();
         }
 
@@ -70,7 +96,7 @@ public class CountdownService extends Service {
     }
 
     // Start a Countdown Timer and returns the CountdownTimer object
-    private void startTimer(cdServiceObject cdObject, long maxTime){
+    private void startTimer(cdServiceObject cdObject, long maxTime) {
         // Create a new Countdown Timer
         cdObject.setCountDownTimer(new CountDownTimer(maxTime, 1000) {
             @Override
@@ -95,9 +121,10 @@ public class CountdownService extends Service {
                 sendBroadcast(bi);
                 // activate the alert
                 Uri alert = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
-                if(!mp.isPlaying()){
+                if (!mp.isPlaying()) {
                     mp = MediaPlayer.create(getApplicationContext(), alert);
-                    mp.start(); }
+                    mp.start();
+                }
 
             }
 
@@ -107,14 +134,14 @@ public class CountdownService extends Service {
         cdObject.getCountDownTimer().start();
     }
 
+    // Resumes the Timer
+
     // Pauses the Timer
-    private void pauseTimer(CountDownTimer timer){
+    private void pauseTimer(CountDownTimer timer) {
         timer.cancel();
     }
 
-    // Resumes the Timer
-
-    private void resumeTimer(cdServiceObject cdObject){
+    private void resumeTimer(cdServiceObject cdObject) {
         startTimer(cdObject, cdObject.getCurrentTime());
     }
 
@@ -176,78 +203,42 @@ public class CountdownService extends Service {
         return null;
     }
 
-    // Receives the button press on the Countdown activity
-    private BroadcastReceiver br = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent){
-            Integer id = intent.getIntExtra(PAUSE_BUTTON_PRESSED_ID, -1);
-
-            if(id != -1){
-                cdServiceObject timer = countdownServiceObjects.get(id);
-                timer.setTimerRunning(!timer.getTimerRunning());
-
-                if(!timer.getTimerRunning()){
-                    pauseTimer(timer.getCountDownTimer());
-                }else{
-                    resumeTimer(timer);
-                }
-                sendBroadcast(bi);
-            }
-
-            Integer restart_id = intent.getIntExtra(REPLAY_BUTTON_PRESSED_ID, -1);
-            Log.i(TAG, "onReceive: " + restart_id);
-
-            if(restart_id != -1){
-                cdServiceObject cdObject = countdownServiceObjects.get(restart_id);
-                if(cdObject.getCountdownPosition() < cdObject.getTimer().getmItems().size() -1){
-                    cdObject.setCountdownPosition(cdObject.getCountdownPosition()+1);
-                }
-                else{
-                    cdObject.setCountdownPosition(0);
-                }
-
-                startSpecificTimer(restart_id);
-                }
-            }
-
-    };
-
     // Builds the Notification Text
-    private String NotificationTextBuilder(){
+    private String NotificationTextBuilder() {
         final String[] notificationText = new String[1];
-        countdownServiceObjects.forEach(countdown ->{
+        countdownServiceObjects.forEach(countdown -> {
 
             long currentTime = countdown.getCurrentTime();
             String description = countdown.getTimer().getmItems().get(countdown.getCountdownPosition()).getSubCountdownDescription();
 
-            notificationText[0] = notificationText[0]!=null?notificationText[0]: "";
-            description = description!=null?description:" Endet " + countdown.getTimer().getmCountdownName();
+            notificationText[0] = notificationText[0] != null ? notificationText[0] : "";
+            description = description != null ? description : " Endet " + countdown.getTimer().getmCountdownName();
             notificationText[0] = notificationText[0] + "<br>" + "In " + LongToStringForTime(currentTime) + ": " + description;
         });
         return notificationText[0];
     }
 
     // returns the Long time as a String in minutes and seconds
-    private String LongToStringForTime(long time){
+    private String LongToStringForTime(long time) {
         String text = "";
 
         // Convert to minutes and seconds Lueftung
-        int minutes = (int) time/60000;
-        int seconds = (int) time%60000/1000;
+        int minutes = (int) time / 60000;
+        int seconds = (int) time % 60000 / 1000;
 
         text += "" + minutes;
         text += ":";
         // Add a leading 0 to seconds
-        if(seconds < 10) text += "0";
+        if (seconds < 10) text += "0";
         text += seconds;
 
         return text;
     }
 
     // Starts the Specific Timer
-    private void startSpecificTimer(Integer id){
+    private void startSpecificTimer(Integer id) {
         // Stop the Media Player if it still is playing
-        if(mp.isPlaying()){
+        if (mp.isPlaying()) {
             mp.stop();
         }
         cdServiceObject object = countdownServiceObjects.get(id);
@@ -255,9 +246,9 @@ public class CountdownService extends Service {
         object.setTimerRunning(true);
     }
 
-    private void startTimers(){
+    private void startTimers() {
         // For every Countdow do the same
-        countdownServiceObjects.forEach(object ->{
+        countdownServiceObjects.forEach(object -> {
             startTimer(object, object.getTimer().getmItems().get(object.getCountdownPosition()).getSubCountdown() * 60000);
             object.setTimerRunning(true);
 

@@ -1,19 +1,14 @@
 package com.example.myapplication;
 
 import android.content.Context;
-import android.util.Log;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.EditorInfo;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.meetingwizard.RecyclerViewAdvancedCountdownItemAdapter;
@@ -22,16 +17,15 @@ import java.util.ArrayList;
 
 public class RecyclerItemPresetAdapter
         extends RecyclerView.Adapter<RecyclerItemPresetAdapter.ViewHolder>
-implements EditItemBottomSheet.timerEdit {
+        implements EditItemBottomSheet.timerEdit {
 
-    EditItemBottomSheet editItemBottomSheet;
     private final Context mContext;
     private final ArrayList<RecyclerViewAdvancedCountdownItemAdapter.AdvancedCountdownItem> countdownItem;
+    EditItemBottomSheet editItemBottomSheet;
 
     public RecyclerItemPresetAdapter(
             ArrayList<RecyclerViewAdvancedCountdownItemAdapter.AdvancedCountdownItem> countdownItem,
-            Context mContext)
-    {
+            Context mContext) {
         this.countdownItem = countdownItem;
         this.mContext = mContext;
     }
@@ -53,7 +47,7 @@ implements EditItemBottomSheet.timerEdit {
             // Open Editor
             editItemBottomSheet = new EditItemBottomSheet();
             editItemBottomSheet.initTimer(countdownItem.get(position), this, position);
-            editItemBottomSheet.show(((AppCompatActivity)mContext).getSupportFragmentManager(), editItemBottomSheet.getTag());
+            editItemBottomSheet.show(((AppCompatActivity) mContext).getSupportFragmentManager(), editItemBottomSheet.getTag());
         });
     }
 
@@ -71,10 +65,8 @@ implements EditItemBottomSheet.timerEdit {
     }
 
 
-
-
     // View holder Class
-    public static class ViewHolder extends RecyclerView.ViewHolder{
+    public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView presetName;
         RelativeLayout itemContainer;
 

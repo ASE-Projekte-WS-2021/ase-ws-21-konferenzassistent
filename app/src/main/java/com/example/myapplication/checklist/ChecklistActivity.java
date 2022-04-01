@@ -19,23 +19,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ChecklistActivity extends AppCompatActivity implements OnAdapterItemClickListener {
+    private final ArrayList<String> checklistContent = new ArrayList<String>();
     private long maxCountdownTime;
     private long maxLueftungsTime;
-
     private long maxAbstandsTime;
-
     // start Meeting Button
     private Button startMeetingButton;
-
     private boolean lueftungsSwitchStatus;
     private boolean abstandsSwitchStatus;
-
     private String location, participantCount;
-
     private int checkedItems;
-
-    private ArrayList<String> checklistContent = new ArrayList<String>();
-
     private RecyclerView rvChecklist;
     private List<ChecklistItem> checklistItems;
     private ChecklistAdapter checklistAdapter;
@@ -68,7 +61,7 @@ public class ChecklistActivity extends AppCompatActivity implements OnAdapterIte
 
         rvChecklist = findViewById(R.id.rv_checklist);
 
-                // initialize checklist and recyclerview
+        // initialize checklist and recyclerview
         checklistItems = new ArrayList<>();
 
         checklistContent.add("Desinfektionsmittel bereit");

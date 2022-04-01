@@ -1,28 +1,25 @@
 package com.example.myapplication;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.viewpager2.widget.ViewPager2;
-
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager2.widget.ViewPager2;
+
 import com.example.myapplication.data.MeetingData;
 import com.example.myapplication.data.MeetingWithParticipantData;
-import com.example.myapplication.data.ParticipantData;
 import com.example.myapplication.data.RoomDB;
 import com.example.myapplication.meetingwizard.MeetingWizardActivity;
 import com.example.myapplication.meetingwizard.Participant;
 import com.example.myapplication.meetingwizard.RecyclerViewAdvancedCountdownAdapter;
-import com.example.myapplication.meetingwizard.RecyclerViewAdvancedCountdownItemAdapter;
 import com.example.myapplication.meetingwizard.cdServiceObject;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
@@ -32,11 +29,9 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.TimeZone;
 
-public class CountdownActivity extends AppCompatActivity implements Serializable,CustomAlertBottomSheetAdapter.onLeaveListener{
-
+public class CountdownActivity extends AppCompatActivity implements Serializable, CustomAlertBottomSheetAdapter.onLeaveListener {
 
 
     public static final String COUNTDOWN_BUTTONS = "my.action.COUNTDOWN_BUTTONS";
@@ -44,31 +39,37 @@ public class CountdownActivity extends AppCompatActivity implements Serializable
     public static final String PAUSE_BUTTON_PRESSED_BOOL = "PAUSE_BUTTON_PRESSED_BOOL";
     public static final String PAUSE_BUTTON_PRESSED_ID = "PAUSE_BUTTON_PRESSED_ID";
     public static final String REPLAY_BUTTON_PRESSED_ID = "REPLAY_BUTTON_PRESSED_ID";
-
-    private Date startDate;
-    private String title = "Test Meeting";
-
-    private String participantCount = "0";
-    private String ort;
-
-    // Meeting end Button
-    private Button endMeetingButton;
-
     TextView meetingTitle;
-    // Fragments
-    private CountdownTimerFragment timer;
-    private CountdownInformationFragment information;
-
     // Tabs Layout
     TabLayout tabLayout;
     ViewPager2 viewPager;
     TabAdapter tabAdapter;
-
     ArrayList<RecyclerViewAdvancedCountdownAdapter.AdvancedCountdownObject> countdownObjects;
     ArrayList<cdServiceObject> serviceObjectArrayList = new ArrayList<>();
     ArrayList<Participant> participants = new ArrayList<>();
+    private Date startDate;
+    private String title = "Test Meeting";
+    private String participantCount = "0";
+    private String ort;
+    // Meeting end Button
+    private Button endMeetingButton;
+    // Fragments
+    private CountdownTimerFragment timer;
+    private CountdownInformationFragment information;
+
 
     // Object used to Create Timer in the Service
+    // Broadcast Receiver to receive updates on the countdown
+    private final BroadcastReceiver br = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            // send Update to the UI
+            updateTime(intent);
+            serviceObjectArrayList.clear();
+            serviceObjectArrayList = (ArrayList<cdServiceObject>) intent.getSerializableExtra(COUNTDOWN_OBJECTS);
+            timer.updateView(serviceObjectArrayList);
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,7 +104,7 @@ public class CountdownActivity extends AppCompatActivity implements Serializable
         DateFormat dateFormat = new SimpleDateFormat("HH:mm");
         dateFormat.setTimeZone(TimeZone.getDefault());
 
-        information.getValuesForTextViews(ort,"" + dateFormat.format(startDate),participantCount);
+        information.getValuesForTextViews(ort, "" + dateFormat.format(startDate), participantCount);
     }
 
     @Override
@@ -135,7 +136,7 @@ public class CountdownActivity extends AppCompatActivity implements Serializable
     }
 
     // Finds Views
-    protected void initViews(){
+    protected void initViews() {
         meetingTitle = findViewById(R.id.meeting_title);
 
         tabLayout = findViewById(R.id.tab_layout);
@@ -176,16 +177,16 @@ public class CountdownActivity extends AppCompatActivity implements Serializable
     }
 
     // Warning when user clicks on the leave button
-    private void onLeaveWarning(){
+    private void onLeaveWarning() {
         CustomAlertBottomSheetAdapter customAlertBottomSheetAdapter = new CustomAlertBottomSheetAdapter(this);
         customAlertBottomSheetAdapter.setWarningText("Solle das Meeting wirklich Beendet werden?");
         customAlertBottomSheetAdapter.setAcceptText("Meeting Beenden");
         customAlertBottomSheetAdapter.setDeclineText("Meeting Fortfahren");
-        customAlertBottomSheetAdapter.show(getSupportFragmentManager() , customAlertBottomSheetAdapter.getTag());
+        customAlertBottomSheetAdapter.show(getSupportFragmentManager(), customAlertBottomSheetAdapter.getTag());
     }
 
     // Get the Data from the Intents
-    protected void getIntents(){
+    protected void getIntents() {
         countdownObjects =
                 (ArrayList<RecyclerViewAdvancedCountdownAdapter.AdvancedCountdownObject>)
                         getIntent().getSerializableExtra(MeetingWizardActivity.COUNTDOWN_ARRAY);
@@ -219,7 +220,7 @@ public class CountdownActivity extends AppCompatActivity implements Serializable
     }
 
     // Start the Countdown Service
-    private void startCountDownService(){
+    private void startCountDownService() {
         Intent countdownIntent = new Intent(this, CountdownService.class);
 
         // Put the countdown timers as Extra
@@ -229,25 +230,12 @@ public class CountdownActivity extends AppCompatActivity implements Serializable
         startService(countdownIntent);
     }
 
-    private void updateTimer(long time){
+    private void updateTimer(long time) {
         Log.i("TAG", "updateTimer: " + time);
     }
 
-    // Broadcast Receiver to receive updates on the countdown
-    private BroadcastReceiver br = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            // send Update to the UI
-            updateTime(intent);
-            serviceObjectArrayList.clear();
-            serviceObjectArrayList = (ArrayList<cdServiceObject>) intent.getSerializableExtra(COUNTDOWN_OBJECTS);
-            timer.updateView(serviceObjectArrayList);
-        }
-    };
-
-
     // Pauses the lueftungsCountdown
-    public void pauseCountdown(Integer id){
+    public void pauseCountdown(Integer id) {
         // Send a Broadcast to the Service if button is pressed
         Intent intent = new Intent(COUNTDOWN_BUTTONS);
         intent.putExtra(PAUSE_BUTTON_PRESSED_ID, id);
@@ -255,7 +243,7 @@ public class CountdownActivity extends AppCompatActivity implements Serializable
         sendBroadcast(intent);
     }
 
-    public void startCountdown(Integer id){
+    public void startCountdown(Integer id) {
         // Send a Broadcast to the Service if button is pressed
         Intent intent = new Intent(COUNTDOWN_BUTTONS);
         intent.putExtra(REPLAY_BUTTON_PRESSED_ID, id);
@@ -265,9 +253,9 @@ public class CountdownActivity extends AppCompatActivity implements Serializable
 
 
     // Update Countdown Timer and sends UI updates to the Fragment
-    private void updateTime(Intent intent){
+    private void updateTime(Intent intent) {
         // Check if the Intent has Extras
-        if(intent.getExtras() != null){
+        if (intent.getExtras() != null) {
             // TODO: implement new logic
             /*
             // get the countdowns and if window is open
@@ -286,7 +274,7 @@ public class CountdownActivity extends AppCompatActivity implements Serializable
         }
     }
 
-    private void saveToDatabase(){
+    private void saveToDatabase() {
         Date endDate = new Date();
         long diff = endDate.getTime() - startDate.getTime();
         long seconds = diff / 1000;
@@ -300,7 +288,7 @@ public class CountdownActivity extends AppCompatActivity implements Serializable
         MeetingData meetingData = new MeetingData();
         meetingData.setStartDate(dateFormat.format(startDate));
         meetingData.setEndDate(dateFormat.format(endDate));
-        if(ort != null)
+        if (ort != null)
             meetingData.setLocation(ort);
         else
             meetingData.setLocation(getString(R.string.meeting_data_no_location));
@@ -364,8 +352,8 @@ public class CountdownActivity extends AppCompatActivity implements Serializable
     public void finishMeeting() {
         Intent intent = new Intent(this, PastMeetingInfoActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK
-        | Intent.FLAG_ACTIVITY_CLEAR_TOP
-        | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                | Intent.FLAG_ACTIVITY_CLEAR_TOP
+                | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
         saveToDatabase();
 

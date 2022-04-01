@@ -6,13 +6,21 @@ import java.io.Serializable;
 
 public class cdServiceObject implements Serializable {
 
- RecyclerViewAdvancedCountdownAdapter.AdvancedCountdownObject timer;
- Long currentTime;
- Boolean timerDone;
- Boolean timerRunning;
- Integer countdownPosition;
- Integer countdownID;
- transient CountDownTimer countDownTimer;
+    RecyclerViewAdvancedCountdownAdapter.AdvancedCountdownObject timer;
+    Long currentTime;
+    Boolean timerDone;
+    Boolean timerRunning;
+    Integer countdownPosition;
+    Integer countdownID;
+    transient CountDownTimer countDownTimer;
+
+    public cdServiceObject(RecyclerViewAdvancedCountdownAdapter.AdvancedCountdownObject timer, Long currentTime, Boolean timerDone, Integer countdownPosition, Integer countdownID) {
+        this.timer = timer;
+        this.currentTime = currentTime;
+        this.timerDone = timerDone;
+        this.countdownPosition = countdownPosition;
+        this.countdownID = countdownID;
+    }
 
     public RecyclerViewAdvancedCountdownAdapter.AdvancedCountdownObject getTimer() {
         return timer;
@@ -68,14 +76,6 @@ public class cdServiceObject implements Serializable {
 
     public void setCountDownTimer(CountDownTimer countDownTimer) {
         this.countDownTimer = countDownTimer;
-    }
-
-    public cdServiceObject(RecyclerViewAdvancedCountdownAdapter.AdvancedCountdownObject timer, Long currentTime, Boolean timerDone, Integer countdownPosition, Integer countdownID) {
-        this.timer = timer;
-        this.currentTime = currentTime;
-        this.timerDone = timerDone;
-        this.countdownPosition = countdownPosition;
-        this.countdownID = countdownID;
     }
 
 

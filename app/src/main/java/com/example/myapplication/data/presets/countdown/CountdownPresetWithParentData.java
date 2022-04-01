@@ -2,7 +2,7 @@ package com.example.myapplication.data.presets.countdown;
 
 import androidx.room.Entity;
 
-@Entity(primaryKeys = {"presetID", "countdownParentID"},tableName = "table_countdown_preset_with_parent")
+@Entity(primaryKeys = {"presetID", "countdownParentID"}, tableName = "table_countdown_preset_with_parent")
 public class CountdownPresetWithParentData {
 
     private int presetID;

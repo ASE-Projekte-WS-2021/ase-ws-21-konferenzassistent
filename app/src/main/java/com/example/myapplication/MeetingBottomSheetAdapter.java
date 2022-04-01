@@ -1,21 +1,15 @@
 package com.example.myapplication;
 
 import android.app.Dialog;
-import android.content.Intent;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
-
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.databinding.DataBindingUtil;
-
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.databinding.DataBindingUtil;
 
 import com.example.myapplication.data.ParticipantData;
 import com.example.myapplication.data.RoomDB;
@@ -29,10 +23,10 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import java.util.List;
 
 /**
-    https://betterprogramming.pub/bottom-sheet-android-340703e114d2
+ * https://betterprogramming.pub/bottom-sheet-android-340703e114d2
  */
 
-public class MeetingBottomSheetAdapter extends  BottomSheetDialogFragment{
+public class MeetingBottomSheetAdapter extends BottomSheetDialogFragment {
     BottomSheetBehavior bottomSheetBehavior;
     MeetingBottomSheetBinding bi;
     private int id;
@@ -57,7 +51,7 @@ public class MeetingBottomSheetAdapter extends  BottomSheetDialogFragment{
 
     @NonNull
     @Override
-    public Dialog onCreateDialog(Bundle savedInstanceState){
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
         BottomSheetDialog bottomSheet = (BottomSheetDialog) super.onCreateDialog(savedInstanceState);
 
         database = RoomDB.getInstance(getContext());
@@ -84,15 +78,15 @@ public class MeetingBottomSheetAdapter extends  BottomSheetDialogFragment{
 
             @Override
             public void onStateChanged(@NonNull View bottomSheet, int newState) {
-                if(BottomSheetBehavior.STATE_EXPANDED == newState){
+                if (BottomSheetBehavior.STATE_EXPANDED == newState) {
                     showView(bi.appBarLayout, getActionBarSize());
                 }
 
-                if(BottomSheetBehavior.STATE_COLLAPSED == newState){
+                if (BottomSheetBehavior.STATE_COLLAPSED == newState) {
                     hideAppBar(bi.appBarLayout);
                 }
 
-                if(BottomSheetBehavior.STATE_HIDDEN == newState){
+                if (BottomSheetBehavior.STATE_HIDDEN == newState) {
                     dismiss();
                 }
             }
@@ -104,9 +98,9 @@ public class MeetingBottomSheetAdapter extends  BottomSheetDialogFragment{
         });
 
         // cancel buttun clicked
-        bi.cancelBtn.setOnClickListener(new View.OnClickListener(){
+        bi.cancelBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view){
+            public void onClick(View view) {
                 dismiss();
             }
         });
@@ -131,25 +125,25 @@ public class MeetingBottomSheetAdapter extends  BottomSheetDialogFragment{
         hideAppBar(bi.appBarLayout);
 
         // setup the View
-        setView(id, duration, meetingDate, startTime,endTime,participants,ort);
+        setView(id, duration, meetingDate, startTime, endTime, participants, ort);
 
         return bottomSheet;
     }
 
     @Override
-    public void onStart(){
+    public void onStart() {
         super.onStart();
 
         bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
     }
 
-    private void hideAppBar(View view){
+    private void hideAppBar(View view) {
         ViewGroup.LayoutParams params = view.getLayoutParams();
         params.height = 0;
         view.setLayoutParams(params);
     }
 
-    private void showView(View view, int size){
+    private void showView(View view, int size) {
         ViewGroup.LayoutParams params = view.getLayoutParams();
         params.height = size;
         view.setLayoutParams(params);
@@ -160,7 +154,7 @@ public class MeetingBottomSheetAdapter extends  BottomSheetDialogFragment{
         return (int) array.getDimension(0, 0);
     }
 
-    private void setView(int id, String duration, String meetingDate, String startTime, String endTime, String participants, String ort){
+    private void setView(int id, String duration, String meetingDate, String startTime, String endTime, String participants, String ort) {
         bi.duration.setText(duration);
         bi.meetingDate.setText(meetingDate);
         bi.startTime.setText(startTime);
@@ -176,7 +170,7 @@ public class MeetingBottomSheetAdapter extends  BottomSheetDialogFragment{
             bi.meetingBottomSheetParticipantChipgroup.addView(chip);
 
             chip.setOnClickListener(view -> {
-                View alertDialogView = DialogUserInfoViewCreator.createView(requireContext(), p, false);
+                View alertDialogView = DialogUserInfoViewCreator.createView(requireContext(), p, false, getParentFragmentManager());
                 new MaterialAlertDialogBuilder(requireContext())
                         .setView(alertDialogView)
                         .show();
@@ -196,7 +190,7 @@ public class MeetingBottomSheetAdapter extends  BottomSheetDialogFragment{
         });
     }
 
-    public void setValues(int id, String duration, String meetingDate, String startTime, String endTime, String participants, String ort){
+    public void setValues(int id, String duration, String meetingDate, String startTime, String endTime, String participants, String ort) {
         this.id = id;
         this.duration = duration;
         this.meetingDate = meetingDate;

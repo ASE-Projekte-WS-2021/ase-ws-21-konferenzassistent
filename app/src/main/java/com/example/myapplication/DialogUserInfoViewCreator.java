@@ -9,12 +9,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.fragment.app.FragmentManager;
 
 import com.example.myapplication.data.ParticipantData;
 
 public class DialogUserInfoViewCreator {
 
-    public static View createView(Context context, ParticipantData p, boolean editButtonVisible) {
+    public static View createView(Context context, ParticipantData p, boolean editButtonVisible, FragmentManager manager) {
         View alertDialogView = LayoutInflater.from(context).inflate(R.layout.dialog_user_info, null);
 
         // Probably can be simplified with Databinding
@@ -33,6 +34,13 @@ public class DialogUserInfoViewCreator {
         }
         tvEmail.setText(p.getEmail());
         tvStatus.setText(p.getStatus());
+
+/*        btnEdit.setOnClickListener((View.OnClickListener) view -> {
+            ContactCreationBottomSheetAdapter contactCreationBottomSheetAdapter =
+                    new ContactCreationBottomSheetAdapter(p);
+            contactCreationBottomSheetAdapter.show(manager,
+                    contactCreationBottomSheetAdapter.getTag());
+        });*/
         // Open Mail App
         emailContainer.setOnClickListener(v -> {
             try {
@@ -41,7 +49,7 @@ public class DialogUserInfoViewCreator {
                 intent.putExtra(Intent.EXTRA_EMAIL, new String[]{p.getEmail()});
                 context.startActivity(Intent.createChooser(intent, "Sende Mail..."));
             } catch (Exception e) {
-                Toast.makeText(context,"Kein unterstützter Email-Client gefunden...",Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Kein unterstützter Email-Client gefunden...", Toast.LENGTH_SHORT).show();
             }
         });
         return alertDialogView;

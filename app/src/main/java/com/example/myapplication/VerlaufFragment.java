@@ -1,7 +1,6 @@
 package com.example.myapplication;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,35 +24,27 @@ import java.util.stream.Stream;
 
 /**
  * Home Fragment Class
-
  */
-public class VerlaufFragment extends Fragment  implements OnFilterButtonClickListener, MeetingHistoryAdapter.swiped, MainActivity.FilterButtonListener {
+public class VerlaufFragment extends Fragment implements OnFilterButtonClickListener, MeetingHistoryAdapter.swiped, MainActivity.FilterButtonListener {
+
+    ViewDataBinding bi;
+    // Meeting database
+    private RoomDB database;
+    // Components
+    private RecyclerView rvMeetings;
+    private TextView introText, isFilteredTextView, pastMeetingCountText;
+    // Meeting List
+    private List<Meeting> meetingsList;
+    private List<ParticipantData> participantsList;
+    private MeetingHistoryAdapter meetingHistoryAdapter;
+    private LinearLayoutManager linearLayoutManager;
+    // Filter Button
+    private Button filterButton;
+    private boolean dataIsFiltered = false;
 
     public VerlaufFragment() {
         // Required empty public constructor
     }
-
-    ViewDataBinding bi;
-
-    // Meeting database
-    private RoomDB database;
-
-    // Components
-    private RecyclerView rvMeetings;
-    private TextView introText, isFilteredTextView ,pastMeetingCountText;
-
-    // Meeting List
-    private List<Meeting> meetingsList;
-    private List<ParticipantData> participantsList;
-
-    private MeetingHistoryAdapter meetingHistoryAdapter;
-    private LinearLayoutManager linearLayoutManager;
-
-    // Filter Button
-    private Button filterButton;
-
-    private boolean dataIsFiltered = false;
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -104,7 +95,7 @@ public class VerlaufFragment extends Fragment  implements OnFilterButtonClickLis
         isFilteredTextView = getView().findViewById(R.id.home_fragment_isFiltered_textView);
 
         pastMeetingCountText = getView().findViewById(R.id.fragment_home_past_meet_count);
-       // filterButton = getView().findViewById(R.id.main_fragment_filter_button);
+        // filterButton = getView().findViewById(R.id.main_fragment_filter_button);
     }
 
     private void setupButtonListener() {
@@ -120,30 +111,24 @@ public class VerlaufFragment extends Fragment  implements OnFilterButtonClickLis
     }
 
     // Creates an ArrayList From the Database entries
-    private void createArrayListFromDatabase(){
+    private void createArrayListFromDatabase() {
         meetingsList = new ArrayList<>();
         // List<Participant> participants = new ArrayList<>(); // never used
 
         List<MeetingParticipantPair> d = database.meetingWithParticipantDao().getMeetings();
 
-        d.forEach(data ->{
+        d.forEach(data -> {
 
             meetingsList.add(new Meeting(
-                    "" +data.getMeeting().getID(),
+                    "" + data.getMeeting().getID(),
                     data.getMeeting().getStartDate(),
                     data.getMeeting().getEndDate(),
                     data.getMeeting().getLocation(),
                     data.getMeeting().getTitle(),
                     "" + data.getMeeting().getDuration(),
-                    "" +data.getParticipants().size()));
+                    "" + data.getParticipants().size()));
         });
 
-
-        /* Log.d("database", Arrays.toString(cursor.getColumnNames()));
-        for (Meeting m:  meetingsList) {
-            Log.d("database", m.toString());
-        }
-        */
 
         meetingHistoryAdapter = new MeetingHistoryAdapter(this.getContext(), getParentFragmentManager(), meetingsList, this);
         ItemTouchHelper.Callback callback = new CardviewTouchHelper(meetingHistoryAdapter);
@@ -182,7 +167,6 @@ public class VerlaufFragment extends Fragment  implements OnFilterButtonClickLis
     @Override
     public void onFilterButtonClicked(FilterData filterData) {
         // TODO filter meetingsList based on filterData
-        Log.d("filterData",filterData.toString());
 
         // early return if reset-button instead of filter button clicked
         if (!filterData.isShouldFilter()) {
@@ -228,7 +212,6 @@ public class VerlaufFragment extends Fragment  implements OnFilterButtonClickLis
         }
         // Collect stream as list, sort by id if necessary, change dataIsFiltered, set filtered list to adapter, update view elements
         List<Meeting> filteredMeetingList = filteredMeetingsStream.collect(Collectors.toList());
-        Log.d("filteredMeetingList",filteredMeetingList.toString());
         dataIsFiltered = filteredMeetingList.size() != meetingsList.size();
         rvMeetings.setAdapter(new MeetingHistoryAdapter(
                 this.getContext(),
@@ -242,7 +225,7 @@ public class VerlaufFragment extends Fragment  implements OnFilterButtonClickLis
 
     @Override
     public void onDeleteSwipe(Integer size) {
-        if(size < 1){
+        if (size < 1) {
             introText.setVisibility(View.VISIBLE);
 
         }

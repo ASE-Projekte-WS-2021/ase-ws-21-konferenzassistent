@@ -9,7 +9,6 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.myapplication.data.presets.countdown.CountdownPresetPair;
 import com.example.myapplication.databinding.BottomSheetPresetsBinding;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
@@ -25,7 +24,7 @@ public class PresetSelectBottomSheet extends BottomSheetDialogFragment {
     private String headerText;
 
     // Preset Lists
-    private ArrayList<String> itemNames = new ArrayList<>();
+    private final ArrayList<String> itemNames = new ArrayList<>();
     private ArrayList<Integer> selectIndicators = new ArrayList<>();
 
     // Make the background Transparent
@@ -37,7 +36,7 @@ public class PresetSelectBottomSheet extends BottomSheetDialogFragment {
 
     @NonNull
     @Override
-    public Dialog onCreateDialog(Bundle savedInstanceState){
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
         BottomSheetDialog bottomSheet = (BottomSheetDialog) super.onCreateDialog(savedInstanceState);
 
         // inflating Layout
@@ -86,38 +85,33 @@ public class PresetSelectBottomSheet extends BottomSheetDialogFragment {
 
         return bottomSheet;
     }
-    
+
     // Configs the view to match the right Preset
-    private void configView(){
+    private void configView() {
         bi.presetHeaderText.setText(headerText);
     }
-    
+
     // Set the text of the header
-    public void setTitle(String headerText){
+    public void setTitle(String headerText) {
         this.headerText = headerText;
     }
 
     // Build and fills the recycler view
-    private void buildRecyclerView(){
+    private void buildRecyclerView() {
         RecyclerView recyclerView = bi.presetRecyclerView;
         recyclerViewPresetAdapter = new RecyclerViewPresetAdapter(
                 itemNames,
                 selectIndicators,
                 this.getContext()
-                );
+        );
         recyclerView.setAdapter(recyclerViewPresetAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
     }
 
-    // Initializes the Presets
-    public void initPreset(ArrayList<String> itemNames, ArrayList<Integer> selectIndicators){
-        this.itemNames = itemNames;
-        this.selectIndicators = selectIndicators;
-    }
 
-    public void initPreset(List<CountdownPresetPair> presetPairs, ArrayList<Integer> selectIndicators){
+    public void initPreset(List<? extends PresetPair> presetPairs, ArrayList<Integer> selectIndicators) {
 
-        presetPairs.forEach(preset ->{
+        presetPairs.forEach(preset -> {
             preset.getPresets().getTitle();
             itemNames.add(preset.getPresets().getTitle());
         });
@@ -126,12 +120,12 @@ public class PresetSelectBottomSheet extends BottomSheetDialogFragment {
     }
 
     // Closes the Sheet
-    public void closePresets(){
+    public void closePresets() {
         dismiss();
     }
 
     @Override
-    public void onStart(){
+    public void onStart() {
         super.onStart();
         //bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
     }

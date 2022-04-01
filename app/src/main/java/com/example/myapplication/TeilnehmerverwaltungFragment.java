@@ -1,6 +1,9 @@
 package com.example.myapplication;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -8,22 +11,20 @@ import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
 import com.example.myapplication.data.ParticipantData;
 import com.example.myapplication.data.RoomDB;
 import com.example.myapplication.databinding.FragmentMiTeilnehmerverwaltungBinding;
 import com.example.myapplication.meetingwizard.Participant;
-import com.example.myapplication.meetingwizard.RecycleViewParticipantList;
+import com.example.myapplication.meetingwizard.RecyclerViewParticipantListAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class TeilnehmerverwaltungFragment extends Fragment {
+public class TeilnehmerverwaltungFragment extends Fragment implements ContactCreationBottomSheetAdapter.OnParticipantModifiedListener {
     FragmentMiTeilnehmerverwaltungBinding bi;
     private RoomDB db;
+    private RecyclerViewParticipantListAdapter adapter;
+    private ArrayList<Participant> participants;
 
     public TeilnehmerverwaltungFragment() {
         // Required empty public constructor
@@ -49,22 +50,34 @@ public class TeilnehmerverwaltungFragment extends Fragment {
         bi = DataBindingUtil.bind(view);
 
         // on new participant button
-        bi.buttonAddContact.setOnClickListener(viewListener ->{
+        bi.buttonAddContact.setOnClickListener(viewListener -> {
             ContactCreationBottomSheetAdapter contactCreationBottomSheetAdapter =
-                    new ContactCreationBottomSheetAdapter();
+                    new ContactCreationBottomSheetAdapter(this, null);
             contactCreationBottomSheetAdapter.show(getParentFragmentManager(),
                     contactCreationBottomSheetAdapter.getTag());
         });
 
         db = RoomDB.getInstance(getContext());
-        List<ParticipantData> participantDataList = db.participantDao().getAll();
-        ArrayList<Participant> participants = new ArrayList<>();
-        for (ParticipantData participantData : participantDataList) {
-            participants.add(new Participant(participantData.getName(), participantData.getEmail(), participantData.getStatus(),false, participantData.getID()));
-        }
+        participants = new ArrayList<>();
 
-        RecycleViewParticipantList adapter = new RecycleViewParticipantList(participants,getActivity(),false);
+        adapter = new RecyclerViewParticipantListAdapter(participants, getActivity(), false, this);
         bi.teilnehmerverwaltungParticipantRv.setLayoutManager(new LinearLayoutManager(getActivity()));
         bi.teilnehmerverwaltungParticipantRv.setAdapter(adapter);
+
+        populateParticipantList();
+    }
+
+    private void populateParticipantList() {
+        List<ParticipantData> participantDataList = db.participantDao().getAll();
+        participants.clear();
+        for (ParticipantData participantData : participantDataList) {
+            participants.add(new Participant(participantData.getName(), participantData.getEmail(), participantData.getStatus(), false, participantData.getID()));
+        }
+        adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onParticipantModified() {
+        populateParticipantList();
     }
 }

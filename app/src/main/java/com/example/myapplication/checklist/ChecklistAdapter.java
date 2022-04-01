@@ -1,7 +1,6 @@
 package com.example.myapplication.checklist;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +10,6 @@ import android.widget.ImageButton;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.cardview.widget.CardView;
-import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.R;
@@ -20,8 +18,8 @@ import java.util.List;
 
 public class ChecklistAdapter extends RecyclerView.Adapter<ChecklistAdapter.ChecklistViewHolder> {
 
-    private Context ct;
-    private List<ChecklistItem> checklistItems;
+    private final Context ct;
+    private final List<ChecklistItem> checklistItems;
     private OnAdapterItemClickListener adapterItemClickListener = null;
 
     public ChecklistAdapter(Context ct, OnAdapterItemClickListener listener, List<ChecklistItem> checklistItems) {
@@ -52,7 +50,7 @@ public class ChecklistAdapter extends RecyclerView.Adapter<ChecklistAdapter.Chec
             holder.infoButtonItem.setVisibility(View.GONE);
         } else {
             holder.infoButtonItem.setOnClickListener(view -> {
-                AlertDialog.Builder builder = new AlertDialog.Builder(ct,R.style.dialogAlertStyle)
+                AlertDialog.Builder builder = new AlertDialog.Builder(ct, R.style.dialogAlertStyle)
                         .setMessage(hint)
                         .setPositiveButton("OK", (dialogInterface, i) -> {
                             // do nothing
@@ -68,7 +66,7 @@ public class ChecklistAdapter extends RecyclerView.Adapter<ChecklistAdapter.Chec
         return checklistItems.size();
     }
 
-    public class ChecklistViewHolder extends RecyclerView.ViewHolder {
+    public static class ChecklistViewHolder extends RecyclerView.ViewHolder {
 
         CardView cardViewItem;
         CheckBox checkBoxItem;

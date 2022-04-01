@@ -1,6 +1,5 @@
 package com.example.myapplication;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,13 +14,12 @@ import com.example.myapplication.checklist.ChecklistItem;
 import java.util.ArrayList;
 
 public class RecyclerViewCreatedChecklistAdapter
-        extends RecyclerView.Adapter<RecyclerViewCreatedChecklistAdapter.ViewHolder>{
+        extends RecyclerView.Adapter<RecyclerViewCreatedChecklistAdapter.ViewHolder> {
 
     private final ArrayList<ChecklistItem> checklistItems;
 
     public RecyclerViewCreatedChecklistAdapter(
-            ArrayList<ChecklistItem> checklistItems)
-    {
+            ArrayList<ChecklistItem> checklistItems) {
         this.checklistItems = checklistItems;
     }
 
@@ -33,17 +31,27 @@ public class RecyclerViewCreatedChecklistAdapter
 
         // Sets the Hint of the checklist item
         holder.checklistHint.setOnEditorActionListener((textView, i, keyEvent) -> {
-                checklistItems.get(holder.getAdapterPosition()).setHint(textView.getText().toString());
+            checklistItems.get(holder.getAdapterPosition()).setHint(textView.getText().toString());
             return false;
         });
+
+        // Makes sure the ChecklistName gets changed
+        holder.checklistName.setOnFocusChangeListener((view, b) ->
+                checklistItems.get(holder.getAdapterPosition()).setTitle(
+                        holder.checklistName.getText().toString()));
+
+        // Makes sure the ChecklistHint gets changed
+        holder.checklistHint.setOnFocusChangeListener((view, b) ->
+                checklistItems.get(holder.getAdapterPosition()).setHint(
+                        holder.checklistHint.getText().toString()));
 
         // Sets the Title of the checklist item
         holder.checklistName.setOnEditorActionListener((textView, i, keyEvent) -> {
-                checklistItems.get(holder.getAdapterPosition()).setTitle(textView.getText().toString());
+            checklistItems.get(holder.getAdapterPosition()).setTitle(textView.getText().toString());
             return false;
         });
 
-        // Deletes Countdown
+        // Deletes Checklist
         holder.buttonDelete.setOnClickListener(view -> {
             holder.checklistName.clearFocus();
             holder.checklistHint.clearFocus();
@@ -60,7 +68,7 @@ public class RecyclerViewCreatedChecklistAdapter
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType){
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_checklist_add,
                 parent, false);
         return new ViewHolder(view);
@@ -71,14 +79,11 @@ public class RecyclerViewCreatedChecklistAdapter
         EditText checklistHint;
         LinearLayout buttonDelete;
 
-        public ViewHolder(View view){
+        public ViewHolder(View view) {
             super(view);
             buttonDelete = view.findViewById(R.id.remove_item);
             checklistName = view.findViewById(R.id.checklist_name);
             checklistHint = view.findViewById(R.id.checklist_hint);
+        }
     }
-
-}
-
-
 }

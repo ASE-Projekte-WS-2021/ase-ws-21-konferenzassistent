@@ -7,9 +7,9 @@ public class Meeting {
 
     private String id, date, dateEnd, location, duration, numberParticipants, title;
 
-    private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+    private final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 
-    public Meeting(String id, String date, String dateEnd, String location,String title, String duration, String numberParticipants) {
+    public Meeting(String id, String date, String dateEnd, String location, String title, String duration, String numberParticipants) {
         this.id = id;
         this.date = date;
         this.dateEnd = dateEnd;
