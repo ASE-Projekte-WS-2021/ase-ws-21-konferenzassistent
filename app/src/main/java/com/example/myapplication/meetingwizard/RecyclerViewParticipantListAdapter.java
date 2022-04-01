@@ -1,12 +1,10 @@
 package com.example.myapplication.meetingwizard;
 
-import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -33,7 +31,7 @@ public class RecyclerViewParticipantListAdapter extends RecyclerView.Adapter<Rec
     private final Context mContext;
     private final ArrayList<Participant> mParticipantsCopy = new ArrayList<>();
     private final boolean openedFromWizard;
-    private ContactCreationBottomSheetAdapter.OnParticipantCreatedListener listener;
+    private ContactCreationBottomSheetAdapter.OnParticipantModifiedListener listener;
 
     public RecyclerViewParticipantListAdapter(ArrayList<Participant> mParticipants, Context mContext, boolean openedFromWizard) {
         this.mParticipants = mParticipants;
@@ -43,7 +41,7 @@ public class RecyclerViewParticipantListAdapter extends RecyclerView.Adapter<Rec
         this.listener = null;
     }
 
-    public RecyclerViewParticipantListAdapter(ArrayList<Participant> mParticipants, Context mContext, boolean openedFromWizard, ContactCreationBottomSheetAdapter.OnParticipantCreatedListener listener) {
+    public RecyclerViewParticipantListAdapter(ArrayList<Participant> mParticipants, Context mContext, boolean openedFromWizard, ContactCreationBottomSheetAdapter.OnParticipantModifiedListener listener) {
         this.mParticipants = mParticipants;
         this.mContext = mContext;
         mParticipantsCopy.addAll(mParticipants);

@@ -29,11 +29,11 @@ public class ContactCreationBottomSheetAdapter extends BottomSheetDialogFragment
     // should the sheet be leave able
     boolean cancelable = true;
     boolean warning = false;
-    ContactCreationBottomSheetAdapter.OnParticipantCreatedListener listener;
+    OnParticipantModifiedListener listener;
 
     ParticipantData updatableParticipantData;
 
-    public ContactCreationBottomSheetAdapter(ContactCreationBottomSheetAdapter.OnParticipantCreatedListener listener, ParticipantData updatableParticipantData) {
+    public ContactCreationBottomSheetAdapter(OnParticipantModifiedListener listener, ParticipantData updatableParticipantData) {
         super();
         this.listener = listener;
         this.updatableParticipantData = updatableParticipantData;
@@ -132,11 +132,37 @@ public class ContactCreationBottomSheetAdapter extends BottomSheetDialogFragment
             }
 
             if (listener != null) {
-                listener.onParticipantCreated();
+                listener.onParticipantModified();
             }
 
             dismiss();
         });
+
+        if (updatableParticipantData != null) {
+            bi.containerDeleteParticipant.setVisibility(View.VISIBLE);
+            bi.buttonDeleteParticipant.setOnClickListener(view1 -> {
+                CustomAlertBottomSheetAdapter customAlertBottomSheetAdapter = new CustomAlertBottomSheetAdapter(new CustomAlertBottomSheetAdapter.onLeaveListener() {
+                    @Override
+                    public void onLeaving() {
+                        RoomDB database = RoomDB.getInstance(getContext());
+                        database.participantDao().delete(updatableParticipantData);
+                        if (listener != null) {
+                            listener.onParticipantModified();
+                        }
+                        dismiss();
+                    }
+
+                    @Override
+                    public void clearWarnings() {
+
+                    }
+                });
+                customAlertBottomSheetAdapter.setWarningText("Wollen Sie diesen Teilnehmer wirklich löschen?");
+                customAlertBottomSheetAdapter.setAcceptText("Ja");
+                customAlertBottomSheetAdapter.setDeclineText("Nein");
+                customAlertBottomSheetAdapter.show(getParentFragmentManager(), customAlertBottomSheetAdapter.getTag());
+            });
+        }
 
         // open Contacts
         bi.buttonImportParticipant.setOnClickListener(viewListener -> {
@@ -254,8 +280,8 @@ public class ContactCreationBottomSheetAdapter extends BottomSheetDialogFragment
         participantImportContactBottomSheetAdapter.dismiss();
     }
 
-    public interface OnParticipantCreatedListener {
-        void onParticipantCreated();
+    public interface OnParticipantModifiedListener {
+        void onParticipantModified();
     }
 
 }
