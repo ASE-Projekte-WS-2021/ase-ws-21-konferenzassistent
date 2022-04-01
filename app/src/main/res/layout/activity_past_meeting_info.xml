@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="8dp"
-    tools:context=".PastMeetingInfoActivity">
+    tools:context=".mainscreen.history.PastMeetingInfoActivity">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardViewDuration"

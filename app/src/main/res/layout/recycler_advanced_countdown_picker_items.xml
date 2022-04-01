@@ -34,7 +34,7 @@
         </LinearLayout>
 
         <!-- Time Picker -->
-        <com.example.myapplication.meetingwizard.CustomNumberPicker
+        <com.ase.konferenzassistent.shared.CustomNumberPicker
             android:id="@+id/countdown_recycler_picker_item"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

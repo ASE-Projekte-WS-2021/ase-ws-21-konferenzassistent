@@ -118,7 +118,7 @@
                             android:background="#e6e6e6" />
 
                         <!-- Time Picker -->
-                        <com.example.myapplication.meetingwizard.CustomNumberPicker
+                        <com.ase.konferenzassistent.shared.CustomNumberPicker
                             android:id="@+id/item_number_picker"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
