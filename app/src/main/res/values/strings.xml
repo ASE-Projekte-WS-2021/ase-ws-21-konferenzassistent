@@ -143,4 +143,5 @@
     <string name="hospit_info">Die Hospitalisierungsrate, auch als Hospitalisierungsinzidenz bezeichnet, ist die Zahl der Krankenhauseinweisungen pro 100.000 Einwohner in einem bestimmten Zeitraum.</string>
     <string name="neuinfektion_def">Die Neuinfektionen beschreiben die Anzahl von neuen, erstmaligen Ansteckungen durch Covid-19</string>
     <string name="begriffserkl_rung">Begriffserklärung</string>
+    <string name="Speichern">Speichern</string>
 </resources>

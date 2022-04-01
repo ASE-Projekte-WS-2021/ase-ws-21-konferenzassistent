@@ -29,10 +29,14 @@ public class ContactCreationBottomSheetAdapter extends BottomSheetDialogFragment
     // should the sheet be leave able
     boolean cancelable = true;
     boolean warning = false;
-    ContactCreationBottomSheetAdapter.OnParticipantCreatedListener listener;
+    OnParticipantModifiedListener listener;
 
-    public ContactCreationBottomSheetAdapter(ContactCreationBottomSheetAdapter.OnParticipantCreatedListener listener) {
+    ParticipantData updatableParticipantData;
+
+    public ContactCreationBottomSheetAdapter(OnParticipantModifiedListener listener, ParticipantData updatableParticipantData) {
+        super();
         this.listener = listener;
+        this.updatableParticipantData = updatableParticipantData;
     }
 
     // Make the background Transparent
@@ -115,17 +119,50 @@ public class ContactCreationBottomSheetAdapter extends BottomSheetDialogFragment
             // Create new Entry
             RoomDB database = RoomDB.getInstance(getContext());
 
-            ParticipantData participantData = new ParticipantData();
-            participantData.setName(pName);
-            participantData.setEmail(pEmail);
-            participantData.setStatus(pStatus);
+            if (updatableParticipantData != null) {
+                database.participantDao().update(pName, pEmail, pStatus, updatableParticipantData.getID());
+            } else {
+                ParticipantData participantData = new ParticipantData();
 
-            database.participantDao().insert(participantData);
+                participantData.setName(pName);
+                participantData.setEmail(pEmail);
+                participantData.setStatus(pStatus);
 
-            listener.onParticipantCreated();
+                database.participantDao().insert(participantData);
+            }
+
+            if (listener != null) {
+                listener.onParticipantModified();
+            }
 
             dismiss();
         });
+
+        if (updatableParticipantData != null) {
+            bi.containerDeleteParticipant.setVisibility(View.VISIBLE);
+            bi.buttonDeleteParticipant.setOnClickListener(view1 -> {
+                CustomAlertBottomSheetAdapter customAlertBottomSheetAdapter = new CustomAlertBottomSheetAdapter(new CustomAlertBottomSheetAdapter.onLeaveListener() {
+                    @Override
+                    public void onLeaving() {
+                        RoomDB database = RoomDB.getInstance(getContext());
+                        database.participantDao().delete(updatableParticipantData);
+                        if (listener != null) {
+                            listener.onParticipantModified();
+                        }
+                        dismiss();
+                    }
+
+                    @Override
+                    public void clearWarnings() {
+
+                    }
+                });
+                customAlertBottomSheetAdapter.setWarningText("Wollen Sie diesen Teilnehmer wirklich löschen?");
+                customAlertBottomSheetAdapter.setAcceptText("Ja");
+                customAlertBottomSheetAdapter.setDeclineText("Nein");
+                customAlertBottomSheetAdapter.show(getParentFragmentManager(), customAlertBottomSheetAdapter.getTag());
+            });
+        }
 
         // open Contacts
         bi.buttonImportParticipant.setOnClickListener(viewListener -> {
@@ -162,6 +199,14 @@ public class ContactCreationBottomSheetAdapter extends BottomSheetDialogFragment
 
         isCreateable(false);
         setStyle(CustomAlertBottomSheetAdapter.STYLE_NORMAL, R.style.CustomBottomSheetDialogTheme);
+
+        if (updatableParticipantData != null) {
+            isCreateable(true);
+            bi.participantInputName.setText(updatableParticipantData.getName());
+            bi.participantInputEmail.setText(updatableParticipantData.getEmail());
+            bi.participantInputStatus.setText(updatableParticipantData.getStatus());
+            bi.dialogCreateButton.setText(R.string.Speichern);
+        }
 
         return bottomSheet;
     }
@@ -235,8 +280,8 @@ public class ContactCreationBottomSheetAdapter extends BottomSheetDialogFragment
         participantImportContactBottomSheetAdapter.dismiss();
     }
 
-    public interface OnParticipantCreatedListener {
-        void onParticipantCreated();
+    public interface OnParticipantModifiedListener {
+        void onParticipantModified();
     }
 
 }

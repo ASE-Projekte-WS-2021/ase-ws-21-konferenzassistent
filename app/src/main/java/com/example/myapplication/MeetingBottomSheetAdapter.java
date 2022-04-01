@@ -170,7 +170,7 @@ public class MeetingBottomSheetAdapter extends BottomSheetDialogFragment {
             bi.meetingBottomSheetParticipantChipgroup.addView(chip);
 
             chip.setOnClickListener(view -> {
-                View alertDialogView = DialogUserInfoViewCreator.createView(requireContext(), p, false);
+                View alertDialogView = DialogUserInfoViewCreator.createView(requireContext(), p, false, getParentFragmentManager());
                 new MaterialAlertDialogBuilder(requireContext())
                         .setView(alertDialogView)
                         .show();

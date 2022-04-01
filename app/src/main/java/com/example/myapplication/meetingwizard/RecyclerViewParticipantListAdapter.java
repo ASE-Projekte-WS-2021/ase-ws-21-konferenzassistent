@@ -5,13 +5,18 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.myapplication.ContactCreationBottomSheetAdapter;
 import com.example.myapplication.DialogUserInfoViewCreator;
 import com.example.myapplication.R;
 import com.example.myapplication.data.ParticipantData;
@@ -26,12 +31,22 @@ public class RecyclerViewParticipantListAdapter extends RecyclerView.Adapter<Rec
     private final Context mContext;
     private final ArrayList<Participant> mParticipantsCopy = new ArrayList<>();
     private final boolean openedFromWizard;
+    private ContactCreationBottomSheetAdapter.OnParticipantModifiedListener listener;
 
     public RecyclerViewParticipantListAdapter(ArrayList<Participant> mParticipants, Context mContext, boolean openedFromWizard) {
         this.mParticipants = mParticipants;
         this.mContext = mContext;
         mParticipantsCopy.addAll(mParticipants);
         this.openedFromWizard = openedFromWizard;
+        this.listener = null;
+    }
+
+    public RecyclerViewParticipantListAdapter(ArrayList<Participant> mParticipants, Context mContext, boolean openedFromWizard, ContactCreationBottomSheetAdapter.OnParticipantModifiedListener listener) {
+        this.mParticipants = mParticipants;
+        this.mContext = mContext;
+        mParticipantsCopy.addAll(mParticipants);
+        this.openedFromWizard = openedFromWizard;
+        this.listener = listener;
     }
 
     @Override
@@ -58,11 +73,21 @@ public class RecyclerViewParticipantListAdapter extends RecyclerView.Adapter<Rec
                 holder.isParticipant.setVisibility(!wasSelected ? View.VISIBLE : View.GONE);
             });
         } else {
+            FragmentManager manager = ((AppCompatActivity) mContext).getSupportFragmentManager();
             holder.participantContainer.setOnClickListener(containerView -> {
-                View alertDialogView = DialogUserInfoViewCreator.createView(mContext, asParticipantData, false); // TODO make button open participant edit sheet
-                new MaterialAlertDialogBuilder(mContext)
-                        .setView(alertDialogView)
-                        .show();
+                View alertDialogView = DialogUserInfoViewCreator.createView(mContext, asParticipantData, true, manager);
+                MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(mContext);
+                builder.setView(alertDialogView);
+                ImageButton editBtn = alertDialogView.findViewById(R.id.dialog_user_info_topbar_edit_button);
+                AlertDialog dialog = builder.create();
+                dialog.show();
+                editBtn.setOnClickListener(view -> {
+                    ContactCreationBottomSheetAdapter contactCreationBottomSheetAdapter =
+                            new ContactCreationBottomSheetAdapter(listener, asParticipantData);
+                    contactCreationBottomSheetAdapter.show(manager,
+                            contactCreationBottomSheetAdapter.getTag());
+                    dialog.dismiss();
+                });
             });
         }
     }

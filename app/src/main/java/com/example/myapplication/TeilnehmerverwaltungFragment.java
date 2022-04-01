@@ -20,7 +20,7 @@ import com.example.myapplication.meetingwizard.RecyclerViewParticipantListAdapte
 import java.util.ArrayList;
 import java.util.List;
 
-public class TeilnehmerverwaltungFragment extends Fragment implements ContactCreationBottomSheetAdapter.OnParticipantCreatedListener {
+public class TeilnehmerverwaltungFragment extends Fragment implements ContactCreationBottomSheetAdapter.OnParticipantModifiedListener {
     FragmentMiTeilnehmerverwaltungBinding bi;
     private RoomDB db;
     private RecyclerViewParticipantListAdapter adapter;
@@ -52,7 +52,7 @@ public class TeilnehmerverwaltungFragment extends Fragment implements ContactCre
         // on new participant button
         bi.buttonAddContact.setOnClickListener(viewListener -> {
             ContactCreationBottomSheetAdapter contactCreationBottomSheetAdapter =
-                    new ContactCreationBottomSheetAdapter(this);
+                    new ContactCreationBottomSheetAdapter(this, null);
             contactCreationBottomSheetAdapter.show(getParentFragmentManager(),
                     contactCreationBottomSheetAdapter.getTag());
         });
@@ -60,7 +60,7 @@ public class TeilnehmerverwaltungFragment extends Fragment implements ContactCre
         db = RoomDB.getInstance(getContext());
         participants = new ArrayList<>();
 
-        adapter = new RecyclerViewParticipantListAdapter(participants, getActivity(), false);
+        adapter = new RecyclerViewParticipantListAdapter(participants, getActivity(), false, this);
         bi.teilnehmerverwaltungParticipantRv.setLayoutManager(new LinearLayoutManager(getActivity()));
         bi.teilnehmerverwaltungParticipantRv.setAdapter(adapter);
 
@@ -77,7 +77,7 @@ public class TeilnehmerverwaltungFragment extends Fragment implements ContactCre
     }
 
     @Override
-    public void onParticipantCreated() {
+    public void onParticipantModified() {
         populateParticipantList();
     }
 }
