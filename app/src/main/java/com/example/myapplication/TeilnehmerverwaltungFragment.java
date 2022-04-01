@@ -1,16 +1,15 @@
 package com.example.myapplication;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
-
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.example.myapplication.data.ParticipantData;
 import com.example.myapplication.data.RoomDB;
@@ -49,7 +48,7 @@ public class TeilnehmerverwaltungFragment extends Fragment {
         bi = DataBindingUtil.bind(view);
 
         // on new participant button
-        bi.buttonAddContact.setOnClickListener(viewListener ->{
+        bi.buttonAddContact.setOnClickListener(viewListener -> {
             ContactCreationBottomSheetAdapter contactCreationBottomSheetAdapter =
                     new ContactCreationBottomSheetAdapter();
             contactCreationBottomSheetAdapter.show(getParentFragmentManager(),
@@ -60,10 +59,10 @@ public class TeilnehmerverwaltungFragment extends Fragment {
         List<ParticipantData> participantDataList = db.participantDao().getAll();
         ArrayList<Participant> participants = new ArrayList<>();
         for (ParticipantData participantData : participantDataList) {
-            participants.add(new Participant(participantData.getName(), participantData.getEmail(), participantData.getStatus(),false, participantData.getID()));
+            participants.add(new Participant(participantData.getName(), participantData.getEmail(), participantData.getStatus(), false, participantData.getID()));
         }
 
-        RecycleViewParticipantList adapter = new RecycleViewParticipantList(participants,getActivity(),false);
+        RecycleViewParticipantList adapter = new RecycleViewParticipantList(participants, getActivity(), false);
         bi.teilnehmerverwaltungParticipantRv.setLayoutManager(new LinearLayoutManager(getActivity()));
         bi.teilnehmerverwaltungParticipantRv.setAdapter(adapter);
     }

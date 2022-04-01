@@ -1,7 +1,6 @@
 package com.example.myapplication;
 
 import android.app.Dialog;
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.View;
 
@@ -9,7 +8,6 @@ import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 
 import com.example.myapplication.databinding.CutsomAlertBottomSheetBinding;
-
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
@@ -19,6 +17,13 @@ public class CustomAlertBottomSheetAdapter extends BottomSheetDialogFragment {
     CutsomAlertBottomSheetBinding bi;
     BottomSheetBehavior<View> bottomSheetBehavior;
     onLeaveListener listener;
+    String warningText = "";
+    String acceptText = "";
+    String declineText = "";
+
+    public CustomAlertBottomSheetAdapter(onLeaveListener listener) {
+        this.listener = listener;
+    }
 
     public void setWarningText(String warningText) {
         this.warningText = warningText;
@@ -32,19 +37,6 @@ public class CustomAlertBottomSheetAdapter extends BottomSheetDialogFragment {
         this.declineText = declineText;
     }
 
-    String warningText = "";
-    String acceptText = "";
-    String declineText = "";
-
-    public CustomAlertBottomSheetAdapter(onLeaveListener listener){
-        this.listener = listener;
-    }
-
-    public interface onLeaveListener{
-        public void onLeaving();
-        public void clearWarnings();
-    }
-
     // Make the background Transparent
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -54,7 +46,7 @@ public class CustomAlertBottomSheetAdapter extends BottomSheetDialogFragment {
 
     @NonNull
     @Override
-    public Dialog onCreateDialog(Bundle savedInstanceState){
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
         BottomSheetDialog bottomSheet = (BottomSheetDialog) super.onCreateDialog(savedInstanceState);
 
         // inflating Layout
@@ -93,9 +85,9 @@ public class CustomAlertBottomSheetAdapter extends BottomSheetDialogFragment {
 
 
         // cancel buttun clicked
-        bi.buttonDismiss.setOnClickListener(new View.OnClickListener(){
+        bi.buttonDismiss.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view){
+            public void onClick(View view) {
                 dismiss();
             }
         });
@@ -119,14 +111,14 @@ public class CustomAlertBottomSheetAdapter extends BottomSheetDialogFragment {
     }
 
     // Sets up the Dialog text
-    private void setupDialogText(){
+    private void setupDialogText() {
         bi.buttonDismiss.setText(declineText);
         bi.buttonDismissChanges.setText(acceptText);
         bi.alertWarningText.setText(warningText);
     }
 
     @Override
-    public void onStart(){
+    public void onStart() {
         super.onStart();
 
         //bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
@@ -136,6 +128,12 @@ public class CustomAlertBottomSheetAdapter extends BottomSheetDialogFragment {
     public void onDestroy() {
         super.onDestroy();
         listener.clearWarnings();
+    }
+
+    public interface onLeaveListener {
+        void onLeaving();
+
+        void clearWarnings();
     }
 }
 

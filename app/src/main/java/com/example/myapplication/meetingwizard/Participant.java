@@ -10,6 +10,14 @@ public class Participant implements Serializable {
     String Status;
     Boolean isSelected;
 
+    public Participant(String name, String email, String status, Boolean isSelected, Integer id) {
+        this.id = id;
+        this.email = email;
+        Name = name;
+        Status = status;
+        this.isSelected = isSelected;
+    }
+
     // TODO: Add more things ?
     public String getName() {
         return Name;
@@ -49,13 +57,5 @@ public class Participant implements Serializable {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public Participant(String name, String email, String status, Boolean isSelected, Integer id) {
-        this.id = id;
-        this.email = email;
-        Name = name;
-        Status = status;
-        this.isSelected = isSelected;
     }
 }

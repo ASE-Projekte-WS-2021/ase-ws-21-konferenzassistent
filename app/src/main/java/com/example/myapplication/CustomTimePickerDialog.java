@@ -4,38 +4,34 @@ import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.Resources;
-import android.view.View;
 import android.widget.NumberPicker;
 import android.widget.TimePicker;
-
-import java.lang.reflect.Field;
-import java.sql.Time;
 
 // Custom Time Picker Dialog to remove the hours
 //https://stackoverflow.com/questions/20214547/show-timepicker-with-minutes-intervals-in-android/20396673#20396673
 public class CustomTimePickerDialog extends TimePickerDialog {
 
     private final static int TIME_PICKER_INTERVAL = 1; // Time Picker interval
-    private TimePicker timePicker;
     private final OnTimeSetListener timeSetListener;
+    private TimePicker timePicker;
 
-    public CustomTimePickerDialog(Context context, OnTimeSetListener listener, int hourOfDay, int minute, boolean is24HourView){
-        super(context, TimePickerDialog.THEME_HOLO_LIGHT, null, hourOfDay, minute/TIME_PICKER_INTERVAL, is24HourView);
+    public CustomTimePickerDialog(Context context, OnTimeSetListener listener, int hourOfDay, int minute, boolean is24HourView) {
+        super(context, TimePickerDialog.THEME_HOLO_LIGHT, null, hourOfDay, minute / TIME_PICKER_INTERVAL, is24HourView);
         timeSetListener = listener;
     }
 
     @Override
-    public void updateTime(int hoursOfDay, int minutesOfHour){
+    public void updateTime(int hoursOfDay, int minutesOfHour) {
         timePicker.setHour(hoursOfDay);
         timePicker.setMinute(minutesOfHour);
     }
 
     @Override
-    public void onClick(DialogInterface dialog, int which){
-        switch(which){
+    public void onClick(DialogInterface dialog, int which) {
+        switch (which) {
             case BUTTON_POSITIVE:
-                if(timeSetListener != null){
-                    timeSetListener.onTimeSet(timePicker, timePicker.getHour(),timePicker.getMinute() * TIME_PICKER_INTERVAL);
+                if (timeSetListener != null) {
+                    timeSetListener.onTimeSet(timePicker, timePicker.getHour(), timePicker.getMinute() * TIME_PICKER_INTERVAL);
                 }
                 break;
             case BUTTON_NEGATIVE:
@@ -45,9 +41,9 @@ public class CustomTimePickerDialog extends TimePickerDialog {
     }
 
     @Override
-    public void onAttachedToWindow(){
+    public void onAttachedToWindow() {
         super.onAttachedToWindow();
-        try{
+        try {
             timePicker = (TimePicker) findViewById(Resources.getSystem().getIdentifier("timePicker", "id", "android"));
             NumberPicker hourPicker = (NumberPicker) timePicker.findViewById(Resources.getSystem().getIdentifier("hour", "id", "android"));
 

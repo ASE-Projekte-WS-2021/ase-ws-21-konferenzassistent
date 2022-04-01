@@ -22,13 +22,14 @@ public class CustomNumberPicker extends NumberPicker {
         super(context, attrs, defStyle);
         processAttributeSet(attrs);
     }
+
     private void processAttributeSet(AttributeSet attrs) {
         //This method reads the parameters given in the xml file and sets the properties according to it
         this.setMinValue(attrs.getAttributeIntValue(null, "min", 0));
         this.setMaxValue(attrs.getAttributeIntValue(null, "max", 0));
 
         // Sets the Prefix, makes sure to differentiate between plural and singular
-        this.setFormatter(i -> i > 1? i + " Minuten" : i +" Minute");
+        this.setFormatter(i -> i > 1 ? i + " Minuten" : i + " Minute");
 
         // Fix for bug in Android Picker where the first element is not shown
         // https://stackoverflow.com/a/44949069

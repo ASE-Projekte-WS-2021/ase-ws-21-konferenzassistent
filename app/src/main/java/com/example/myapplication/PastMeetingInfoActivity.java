@@ -1,64 +1,24 @@
 package com.example.myapplication;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.view.menu.MenuBuilder;
-import androidx.core.view.MenuItemCompat;
-import androidx.databinding.DataBindingUtil;
-
 import android.annotation.SuppressLint;
-import android.app.Dialog;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.res.Resources;
-import android.content.res.TypedArray;
-import android.database.Cursor;
 import android.os.Bundle;
-import android.util.AttributeSet;
-import android.util.Log;
-import android.view.ContextThemeWrapper;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.myapplication.data.MeetingData;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.myapplication.data.MeetingParticipantPair;
-import com.example.myapplication.data.MeetingWithParticipantDao;
-import com.example.myapplication.data.MeetingWithParticipantData;
 import com.example.myapplication.data.RoomDB;
-import com.example.myapplication.databinding.MeetingBottomSheetBinding;
-import com.google.android.material.bottomsheet.BottomSheetBehavior;
-import com.google.android.material.bottomsheet.BottomSheetDialog;
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
-import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.List;
 
 
 @SuppressLint("NewApi")
 public class PastMeetingInfoActivity extends AppCompatActivity {
-
-    private String title;
-    private String duration;
-    private String startTime;
-    private String endTime;
-    private String participants;
-    private String ort;
-    private String date;
 
     TextView meeting;
     TextView meetingDate;
@@ -69,12 +29,19 @@ public class PastMeetingInfoActivity extends AppCompatActivity {
     TextView meetingOrt;
     ImageButton cancelButton;
     ImageButton moreButton;
+    private String title;
+    private String duration;
+    private String startTime;
+    private String endTime;
+    private String participants;
+    private String ort;
+    private String date;
     private int dataBaseID;
     private RoomDB database;
 
     private List<MeetingParticipantPair> meetingList;
 
-    private DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
+    private final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
 
 
     @Override
@@ -114,15 +81,15 @@ public class PastMeetingInfoActivity extends AppCompatActivity {
     }
 
     private void setView() {
-        MeetingParticipantPair meetingData = meetingList.get(meetingList.size()-1);
+        MeetingParticipantPair meetingData = meetingList.get(meetingList.size() - 1);
 
-        duration = meetingData.getMeeting().getDuration()/60 + "";
+        duration = meetingData.getMeeting().getDuration() / 60 + "";
         startTime = meetingData.getMeeting().getStartDate().substring(11);
-        date = meetingData.getMeeting().getStartDate().substring(0,10);
+        date = meetingData.getMeeting().getStartDate().substring(0, 10);
         endTime = meetingData.getMeeting().getEndDate().substring(11);
 
         meeting.setText(meetingData.getMeeting().getTitle());
-        meetingDuration.setText(String.format(getBaseContext().getString(R.string.meeting_history_minutes_long), ""+
+        meetingDuration.setText(String.format(getBaseContext().getString(R.string.meeting_history_minutes_long), "" +
                 duration));
         meetingDate.setText(date);
         meetingStartTime.setText(startTime);

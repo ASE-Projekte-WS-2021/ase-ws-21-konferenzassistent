@@ -9,7 +9,7 @@ import com.example.myapplication.Preset;
 import java.io.Serializable;
 
 @Entity(tableName = "table_preset_checklist_data")
-public class ChecklistPresetData implements  Serializable, Preset {
+public class ChecklistPresetData implements Serializable, Preset {
     @PrimaryKey(autoGenerate = true)
     private int ID;
 

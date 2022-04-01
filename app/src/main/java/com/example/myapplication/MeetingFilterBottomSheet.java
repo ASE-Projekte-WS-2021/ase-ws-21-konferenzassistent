@@ -1,7 +1,6 @@
 package com.example.myapplication;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,8 +9,8 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.view.ViewCompat;
 import androidx.core.util.Pair;
+import androidx.core.view.ViewCompat;
 
 import com.example.myapplication.data.ParticipantData;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
@@ -28,9 +27,9 @@ import java.util.stream.Collectors;
 
 public class MeetingFilterBottomSheet extends BottomSheetDialogFragment {
 
-    private List<Meeting> meetingList;
-    private List<ParticipantData> participantList;
-    private OnFilterButtonClickListener listener;
+    private final List<Meeting> meetingList;
+    private final List<ParticipantData> participantList;
+    private final OnFilterButtonClickListener listener;
 
     private Button resetButton, filterButton;
     private ChipGroup peopleChipGroup, locationChipGroup;
@@ -55,7 +54,7 @@ public class MeetingFilterBottomSheet extends BottomSheetDialogFragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.bottom_sheet_filter_meetings,container,false);
+        View view = inflater.inflate(R.layout.bottom_sheet_filter_meetings, container, false);
 
         findViews(view);
         populateChipGroups();
@@ -115,7 +114,7 @@ public class MeetingFilterBottomSheet extends BottomSheetDialogFragment {
         });
         filterButton.setOnClickListener(view -> {
             boolean isValid = onFilterButtonClicked();
-            if(isValid){
+            if (isValid) {
                 dismiss();
             }
         });
@@ -138,8 +137,8 @@ public class MeetingFilterBottomSheet extends BottomSheetDialogFragment {
             dateEndEditText.setText("");
         });
 
-        dateStartEditText.setOnClickListener(view -> picker.show(getParentFragmentManager(),getTag()));
-        dateEndEditText.setOnClickListener(view -> picker.show(getParentFragmentManager(),getTag()));
+        dateStartEditText.setOnClickListener(view -> picker.show(getParentFragmentManager(), getTag()));
+        dateEndEditText.setOnClickListener(view -> picker.show(getParentFragmentManager(), getTag()));
     }
 
     private boolean onFilterButtonClicked() {
@@ -165,8 +164,8 @@ public class MeetingFilterBottomSheet extends BottomSheetDialogFragment {
             filterData.setMaxCount(Integer.parseInt(countMaxString));
         }
 
-        if(!countMaxString.equals("") && !countMinString.equals("")){
-            if(Integer.parseInt(countMaxString)<Integer.parseInt(countMinString)){
+        if (!countMaxString.equals("") && !countMinString.equals("")) {
+            if (Integer.parseInt(countMaxString) < Integer.parseInt(countMinString)) {
                 Toast toast = Toast.makeText(getContext(), "Du kannst nicht mehr Leute im Minimum haben wie Leute im Maximum", Toast.LENGTH_LONG);
                 toast.show();
                 return false;

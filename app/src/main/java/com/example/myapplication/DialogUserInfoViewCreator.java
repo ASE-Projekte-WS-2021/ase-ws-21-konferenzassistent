@@ -41,7 +41,7 @@ public class DialogUserInfoViewCreator {
                 intent.putExtra(Intent.EXTRA_EMAIL, new String[]{p.getEmail()});
                 context.startActivity(Intent.createChooser(intent, "Sende Mail..."));
             } catch (Exception e) {
-                Toast.makeText(context,"Kein unterstützter Email-Client gefunden...",Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Kein unterstützter Email-Client gefunden...", Toast.LENGTH_SHORT).show();
             }
         });
         return alertDialogView;

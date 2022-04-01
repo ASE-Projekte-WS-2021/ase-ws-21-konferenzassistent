@@ -23,6 +23,16 @@ public class RecyclerViewCountdownPresetAdapter
     private final onDeletionListener listener;
 
     int selectedPosition;
+
+    public RecyclerViewCountdownPresetAdapter(
+            ArrayList<? extends Preset> preset,
+            onDeletionListener listener,
+            Context mContext) {
+        this.preset = preset;
+        this.mContext = mContext;
+        this.listener = listener;
+    }
+
     @Override
     public void onLeaving() {
         listener.onDelete(selectedPosition);
@@ -31,20 +41,6 @@ public class RecyclerViewCountdownPresetAdapter
     @Override
     public void clearWarnings() {
 
-    }
-
-    interface onDeletionListener{
-        void onDelete(int position);
-    }
-
-    public RecyclerViewCountdownPresetAdapter(
-            ArrayList<? extends Preset> preset,
-            onDeletionListener listener,
-            Context mContext)
-    {
-        this.preset = preset;
-        this.mContext = mContext;
-        this.listener = listener;
     }
 
     @NonNull
@@ -72,16 +68,20 @@ public class RecyclerViewCountdownPresetAdapter
         return preset.size();
     }
 
-    private void createAlert(String title){
+    private void createAlert(String title) {
         CustomAlertBottomSheetAdapter customAlertBottomSheetAdapter = new CustomAlertBottomSheetAdapter(this);
         customAlertBottomSheetAdapter.setWarningText("Soll das Preset \"" + title + "\" wirklich gelöscht werden."); // Mitteilung
         customAlertBottomSheetAdapter.setAcceptText("Preset löschen"); // Positives Feedback
         customAlertBottomSheetAdapter.setDeclineText("Preset behalten"); // Negatives Feedback
-        customAlertBottomSheetAdapter.show(((AppCompatActivity)mContext).getSupportFragmentManager() , customAlertBottomSheetAdapter.getTag());
+        customAlertBottomSheetAdapter.show(((AppCompatActivity) mContext).getSupportFragmentManager(), customAlertBottomSheetAdapter.getTag());
+    }
+
+    interface onDeletionListener {
+        void onDelete(int position);
     }
 
     // View holder Class
-    public static class ViewHolder extends RecyclerView.ViewHolder{
+    public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView presetName;
         ImageView selectIndicator;
         RelativeLayout itemContainer;

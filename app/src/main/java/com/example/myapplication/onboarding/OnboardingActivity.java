@@ -1,13 +1,12 @@
 package com.example.myapplication.onboarding;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
-import androidx.core.content.res.ResourcesCompat;
-
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.res.ResourcesCompat;
 
 import com.example.myapplication.R;
 import com.synnapps.carouselview.CarouselView;
@@ -54,7 +53,7 @@ public class OnboardingActivity extends AppCompatActivity {
             OnboardingPageData onboardingPage = onboardingPages.get(position);
             textViewHeadline.setText(onboardingPage.getHeadline());
             textViewSubhead.setText(onboardingPage.getSubhead());
-            imageView.setImageDrawable(ResourcesCompat.getDrawable(getResources(),onboardingPage.getDrawableID(),getTheme()));
+            imageView.setImageDrawable(ResourcesCompat.getDrawable(getResources(), onboardingPage.getDrawableID(), getTheme()));
 
             return view;
         });

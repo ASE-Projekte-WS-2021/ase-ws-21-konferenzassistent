@@ -4,38 +4,36 @@ import androidx.room.Embedded;
 import androidx.room.Junction;
 import androidx.room.Relation;
 
-import com.example.myapplication.data.MeetingWithParticipantData;
-
 import java.util.List;
 
 public class CountdownItemPair {
-        @Embedded
-        CountdownParentData parentCountdown;
-        @Relation(
-                parentColumn = "ID",
-                entity = CountdownItemData.class,
-                entityColumn = "ID",
-                associateBy = @Junction(
-                        value = CountdownParentWithItemData.class,
-                        parentColumn = "countdownParentID",
-                        entityColumn = "countdownItemID")
-        )
+    @Embedded
+    CountdownParentData parentCountdown;
+    @Relation(
+            parentColumn = "ID",
+            entity = CountdownItemData.class,
+            entityColumn = "ID",
+            associateBy = @Junction(
+                    value = CountdownParentWithItemData.class,
+                    parentColumn = "countdownParentID",
+                    entityColumn = "countdownItemID")
+    )
 
-        List<CountdownItemData> countdownItems;
+    List<CountdownItemData> countdownItems;
 
-        public CountdownParentData getParentCountdown() {
-                return parentCountdown;
-        }
+    public CountdownParentData getParentCountdown() {
+        return parentCountdown;
+    }
 
-        public void setParentCountdown(CountdownParentData parentCountdown) {
-                this.parentCountdown = parentCountdown;
-        }
+    public void setParentCountdown(CountdownParentData parentCountdown) {
+        this.parentCountdown = parentCountdown;
+    }
 
-        public List<CountdownItemData> getCountdownItems() {
-                return countdownItems;
-        }
+    public List<CountdownItemData> getCountdownItems() {
+        return countdownItems;
+    }
 
-        public void setCountdownItems(List<CountdownItemData> countdownItems) {
-                this.countdownItems = countdownItems;
-        }
+    public void setCountdownItems(List<CountdownItemData> countdownItems) {
+        this.countdownItems = countdownItems;
+    }
 }

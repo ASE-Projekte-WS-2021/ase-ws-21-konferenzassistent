@@ -4,7 +4,6 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -22,8 +21,7 @@ public class RecyclerViewLocationAdapter
 
     public RecyclerViewLocationAdapter(
             ArrayList<String> mLocationNames,
-            Context mContext)
-    {
+            Context mContext) {
         this.mLocationNames = mLocationNames;
         this.mContext = mContext;
         mLocationNamesCopy.addAll(mLocationNames);
@@ -42,8 +40,8 @@ public class RecyclerViewLocationAdapter
         holder.locationName.setText(mLocationNames.get(holder.getAdapterPosition()));
 
         holder.locationContainer.setOnClickListener(view -> {
-            if(mContext instanceof MainActivity){
-                ((MainActivity)mContext).getMeetingAdapter().signalLocationChange(holder.getAdapterPosition());
+            if (mContext instanceof MainActivity) {
+                ((MainActivity) mContext).getMeetingAdapter().signalLocationChange(holder.getAdapterPosition());
             }
 
         });
@@ -53,12 +51,12 @@ public class RecyclerViewLocationAdapter
     // https://stackoverflow.com/a/37562572
     public void filter(String text) {
         mLocationNames.clear();
-        if(text.isEmpty()){
+        if (text.isEmpty()) {
             mLocationNames.addAll(mLocationNamesCopy);
-        } else{
+        } else {
             text = text.toLowerCase();
-            for(String item: mLocationNamesCopy){
-                if(item.toLowerCase().contains(text)){
+            for (String item : mLocationNamesCopy) {
+                if (item.toLowerCase().contains(text)) {
                     mLocationNames.add(item);
                 }
             }
@@ -72,7 +70,7 @@ public class RecyclerViewLocationAdapter
     }
 
     // View holder Class
-    public static class ViewHolder extends RecyclerView.ViewHolder{
+    public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView locationName;
         RelativeLayout locationContainer;
 

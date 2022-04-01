@@ -20,27 +20,11 @@ public class ChecklistPreset implements Preset {
         this.id = id;
     }
 
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public int getID() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public static void removeChecklistFromDatabase(RoomDB database, Integer id){
+    public static void removeChecklistFromDatabase(RoomDB database, Integer id) {
         database.checklistPresetDao().delete(database.checklistPresetDao().getOne(id));
     }
 
-    public static void convertToChecklistDatabaseEntry(RoomDB database, ChecklistPreset preset){
+    public static void convertToChecklistDatabaseEntry(RoomDB database, ChecklistPreset preset) {
         String title = preset.getTitle();
 
         // create new preset
@@ -59,21 +43,37 @@ public class ChecklistPreset implements Preset {
 
             // Link Items to Preset
             ChecklistPresetWithItemData presetWithItemData = new ChecklistPresetWithItemData();
-            presetWithItemData.setPresetID((int)presetId);
-            presetWithItemData.setItemID((int)itemId);
+            presetWithItemData.setPresetID((int) presetId);
+            presetWithItemData.setItemID((int) itemId);
             database.checklistPresetWithItemDao().insert(presetWithItemData);
         });
     }
 
-    public static ArrayList<ChecklistItem> convertToChecklistItems(ChecklistPresetPair checklistPresetPair){
+    public static ArrayList<ChecklistItem> convertToChecklistItems(ChecklistPresetPair checklistPresetPair) {
         ArrayList<ChecklistItem> list = new ArrayList<>();
-        checklistPresetPair.getItems().forEach(items ->{
+        checklistPresetPair.getItems().forEach(items -> {
             String itemName = items.getTitle();
             String hint = items.getHint();
 
             list.add(new ChecklistItem(itemName, hint));
         });
         return list;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public int getID() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
 }
