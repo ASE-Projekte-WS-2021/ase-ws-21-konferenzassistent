@@ -11,6 +11,7 @@ import androidx.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -175,34 +176,7 @@ public class MeetingBottomSheetAdapter extends  BottomSheetDialogFragment{
             bi.meetingBottomSheetParticipantChipgroup.addView(chip);
 
             chip.setOnClickListener(view -> {
-                View alertDialogView = getLayoutInflater().inflate(R.layout.dialog_user_info,null);
-
-                // Probably can be simplified with Databinding
-                TextView tvName, tvEmail, tvStatus;
-                ConstraintLayout emailContainer;
-
-                tvName = alertDialogView.findViewById(R.id.dialog_user_info_topbar_text);
-                tvEmail = alertDialogView.findViewById(R.id.dialog_user_info_content_email_text);
-                tvStatus = alertDialogView.findViewById(R.id.dialog_user_info_content_status_text);
-                emailContainer = alertDialogView.findViewById(R.id.dialog_user_info_content_email);
-
-                String mail = "johannes-maximilian.hoffmann@student.ur.de";
-                tvName.setText(p.getName());
-                tvEmail.setText(mail); // TODO when Email implemented in database
-                tvStatus.setText(p.getStatus());
-                // Open Mail App
-                emailContainer.setOnClickListener(v -> {
-                    try {
-                        final Intent intent = new Intent(Intent.ACTION_SEND);
-                        intent.setType("plain/text");
-                        intent.putExtra(Intent.EXTRA_EMAIL, new String[]{mail});
-                        requireContext().startActivity(Intent.createChooser(intent, "Sende Mail..."));
-                    } catch (Exception e) {
-                        Toast.makeText(requireContext(),"Kein unterstützter Email-Client gefunden...",Toast.LENGTH_SHORT).show();
-                    }
-                });
-
-
+                View alertDialogView = DialogUserInfoViewCreator.createView(requireContext(), p, false);
                 new MaterialAlertDialogBuilder(requireContext())
                         .setView(alertDialogView)
                         .show();

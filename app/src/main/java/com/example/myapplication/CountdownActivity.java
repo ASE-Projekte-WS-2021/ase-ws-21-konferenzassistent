@@ -64,6 +64,7 @@ public class CountdownActivity extends AppCompatActivity implements Serializable
     ArrayList<cdServiceObject> serviceObjectArrayList = new ArrayList<>();
     ArrayList<Participant> participants = new ArrayList<>();
 
+
     // Object used to Create Timer in the Service
 
     @Override

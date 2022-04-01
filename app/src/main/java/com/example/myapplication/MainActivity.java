@@ -1,5 +1,7 @@
 package com.example.myapplication;
 
+import static com.example.myapplication.ChecklistPreset.convertToChecklistDatabaseEntry;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.navigation.NavController;
@@ -7,6 +9,7 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -14,7 +17,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import com.example.myapplication.checklist.ChecklistItem;
 import com.example.myapplication.data.RoomDB;
+import com.example.myapplication.data.presets.checklist.ChecklistPresetData;
+import com.example.myapplication.data.presets.checklist.ChecklistPresetPair;
 import com.example.myapplication.data.presets.countdown.CountdownItemData;
 import com.example.myapplication.data.presets.countdown.CountdownParentData;
 import com.example.myapplication.data.presets.countdown.CountdownParentWithItemData;
@@ -106,6 +112,9 @@ public class MainActivity extends AppCompatActivity{
         });
     }
 
+    // Suppress lint, as error is only thrown in Github Actions
+    // Potientially gradle bug, see similar: https://stackoverflow.com/questions/41150995/appcompatactivity-oncreate-can-only-be-called-from-within-the-same-library-group
+    @SuppressLint("RestrictedApi")
     // Edits the custom actionbar for every Fragment
     private void rebuildActionBar(NavController navController){
         actionBarText.setText(Objects.requireNonNull(
@@ -134,15 +143,18 @@ public class MainActivity extends AppCompatActivity{
     }
 
     // Start the Meeting Creation Wizard
-    public void startMeetingWizard(String title, String location, CountdownPresetPair pair){
+    public void startMeetingWizard(String title, String location, CountdownPresetPair pair, ChecklistPresetPair checklistPresetPair){
         Intent intent = new Intent(this, MeetingWizardActivity.class);
         ArrayList<RecyclerViewAdvancedCountdownAdapter.AdvancedCountdownObject> object =
                 CountdownPreset.convertToAdvancedCountdownList(RoomDB.getInstance(getBaseContext()), pair);
 
+        ArrayList<ChecklistItem> items =
+                ChecklistPreset.convertToChecklistItems(checklistPresetPair);
         // Give it the title and location
         intent.putExtra("meeting_wizard_title", title);
         intent.putExtra(MeetingWizardActivity.MEETING_LOCATION, location);
         intent.putExtra(MeetingWizardActivity.MEETING_COUNTDOWN, object);
+        intent.putExtra(MeetingWizardActivity.MEETING_CHECKLIST, items);
         startActivity(intent);
     }
 
@@ -156,6 +168,24 @@ public class MainActivity extends AppCompatActivity{
         if(d.size() < 1){
             createStandard(database);
         }
+
+        List<ChecklistPresetPair> checklistPresetPairs;
+        checklistPresetPairs = database.checklistPresetWithItemDao().getPresets();
+
+        if(checklistPresetPairs.size() < 1){
+            createStandardChecklist(database);
+        }
+    }
+
+    private void createStandardChecklist(RoomDB database) {
+        ArrayList<ChecklistItem> items = new ArrayList<>();
+        items.add(new ChecklistItem("Desinfektionsmittel bereit"));
+        items.add(new ChecklistItem("3G-Regelung o.ä. geprüft"));
+        items.add(new ChecklistItem("Masken / Plexiglas geprüft"));
+        items.add(new ChecklistItem("Abstände gewährleistet"));
+
+        ChecklistPreset preset = new ChecklistPreset("Standard", items, 1);
+        convertToChecklistDatabaseEntry(database, preset);
     }
 
     // TODO: simplify

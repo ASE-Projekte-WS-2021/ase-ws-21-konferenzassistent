@@ -1,5 +1,7 @@
 package com.example.myapplication;
 
+import static com.example.myapplication.ChecklistPreset.convertToChecklistDatabaseEntry;
+import static com.example.myapplication.ChecklistPreset.removeChecklistFromDatabase;
 import static com.example.myapplication.CountdownPreset.convertToDatabaseEntry;
 import static com.example.myapplication.CountdownPreset.removeFromDatabase;
 
@@ -39,7 +41,6 @@ public class PresetEditBottomSheet extends BottomSheetDialogFragment  implements
     public void onDelete(int position) {
         if(viewType.equals(PRESET_TYPE_COUNTDOWN)){
             int id = countdownObjects.get(position).id;
-            Log.i("TAG", "onDelete: " +id);
             countdownObjects.remove(position);
             recyclerViewPresetAdapter.notifyItemRemoved(countdownObjects.size());
             removeFromDatabase(RoomDB.getInstance(getContext()),id);
@@ -49,7 +50,7 @@ public class PresetEditBottomSheet extends BottomSheetDialogFragment  implements
             int id = checklistPresets.get(position).id;
             checklistPresets.remove(position);
             recyclerViewPresetAdapter.notifyItemRemoved(checklistPresets.size());
-            // TODO: remove from database
+            removeChecklistFromDatabase(RoomDB.getInstance(getContext()), id);
         }
     }
 
@@ -178,20 +179,24 @@ public class PresetEditBottomSheet extends BottomSheetDialogFragment  implements
         if(viewType.equals(PRESET_TYPE_COUNTDOWN)){
             countdownObjects.add((CountdownPreset) preset);
             recyclerViewPresetAdapter.notifyItemInserted(countdownObjects.size());
-            writePresetToDatabase((CountdownPreset) preset);
+            writeCountdownPresetToDatabase((CountdownPreset) preset);
         }
         else
         {
             checklistPresets.add((ChecklistPreset)preset);
             recyclerViewPresetAdapter.notifyItemInserted(checklistPresets.size());
-            // TODO: SAVE CHECKLIST IN DATABASE
+            writeChecklistPresetToDatabase((ChecklistPreset) preset);
         }
 
         listener.onClose();
     }
 
-    private void writePresetToDatabase(CountdownPreset preset){
+    private void writeCountdownPresetToDatabase(CountdownPreset preset){
         convertToDatabaseEntry(RoomDB.getInstance(getContext()), preset);
+    }
+
+    private void writeChecklistPresetToDatabase(ChecklistPreset preset){
+        convertToChecklistDatabaseEntry(RoomDB.getInstance(getContext()), preset);
     }
 
 

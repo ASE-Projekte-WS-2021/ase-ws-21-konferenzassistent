@@ -12,6 +12,8 @@ import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 
 import com.example.myapplication.data.RoomDB;
+import com.example.myapplication.data.presets.checklist.ChecklistPresetPair;
+import com.example.myapplication.data.presets.checklist.ChecklistPresetWithItemData;
 import com.example.myapplication.data.presets.countdown.CountdownPresetPair;
 import com.example.myapplication.databinding.CreateMeetingBottomSheetBinding;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
@@ -35,17 +37,15 @@ public class CreateMeetingBottomSheetAdapter extends BottomSheetDialogFragment i
     ArrayList<Integer> timerSelectValues = new ArrayList<>();
 
     CountdownPresetPair selectedPair;
+    ChecklistPresetPair selectedChecklist;
 
     // Preset lists
     ArrayList<String> itemNames = new ArrayList<>();
-    ArrayList<Integer> selectValues = new ArrayList<>();
     List<CountdownPresetPair> presetPairs;
+    List<ChecklistPresetPair> checklistPresetPairs;
     // Location list
     ArrayList<String> locationNames = new ArrayList<>();
 
-    // TODO: remove Debug
-
-    ArrayList<String> checklistItemNames = new ArrayList<>();
     ArrayList<Integer> checklistSelectValues = new ArrayList<>();
 
     PresetSelectBottomSheet presetSelectBottomSheet;
@@ -71,11 +71,14 @@ public class CreateMeetingBottomSheetAdapter extends BottomSheetDialogFragment i
 
         database = RoomDB.getInstance(getContext());
 
-        // TODO: Remove debug Data
-        checklistItemNames.add("Standard");
-        checklistSelectValues.add(View.VISIBLE);
+        // Checklists
+        checklistPresetPairs = database.checklistPresetWithItemDao().getPresets();
+        checklistPresetPairs.forEach(preset ->{
+            checklistSelectValues.add(View.INVISIBLE);
+        });
+        checklistSelectValues.set(0, View.VISIBLE);
 
-        // preset pairs
+        // Countdowns
         presetPairs = database.countdownPresetWIthParentDao().getCountdowns();
         presetPairs.forEach(preset ->{
             timerSelectValues.add(View.INVISIBLE);
@@ -158,9 +161,13 @@ public class CreateMeetingBottomSheetAdapter extends BottomSheetDialogFragment i
                 selectedPair = presetPairs.get(0);
             }
 
+            if(selectedChecklist == null){
+                selectedChecklist = checklistPresetPairs.get(0);
+            }
+
             // Open the Meeting wizard
             if(((MainActivity)getActivity()) != null)
-                ((MainActivity)getActivity()).startMeetingWizard(title, location, selectedPair);
+                ((MainActivity)getActivity()).startMeetingWizard(title, location, selectedPair, selectedChecklist);
         });
 
         // location button clicked
@@ -180,12 +187,8 @@ public class CreateMeetingBottomSheetAdapter extends BottomSheetDialogFragment i
             presetSelectBottomSheet = new PresetSelectBottomSheet();
             presetSelectBottomSheet.setTitle("Checklist Preset");
 
-            // TODO: Load all Presets
-            itemNames = checklistItemNames;
-            selectValues = checklistSelectValues;
-
             // feeds the presets into the checklist recycler view
-            presetSelectBottomSheet.initPreset(itemNames, selectValues);
+            presetSelectBottomSheet.initPreset(checklistPresetPairs, checklistSelectValues);
             presetSelectBottomSheet.show(getParentFragmentManager(), presetSelectBottomSheet.getTag());
 
             presetOpen = IS_CHECKLIST;
@@ -295,8 +298,9 @@ public class CreateMeetingBottomSheetAdapter extends BottomSheetDialogFragment i
         // Checks what screen was open
         if(presetOpen == IS_CHECKLIST){
             // Sets the Text to the chosen one
-            bi.checklistSelectedName.setText(itemNames.get(adapterPosition));
-            // TODO: save changes
+            bi.checklistSelectedName.setText(checklistPresetPairs.get(adapterPosition).getPresets().getTitle());
+            selectedChecklist =  checklistPresetPairs.get(adapterPosition);
+
             checklistSelectValues.replaceAll(integer -> View.INVISIBLE);
             checklistSelectValues.set(adapterPosition, View.VISIBLE);
         }
@@ -314,10 +318,6 @@ public class CreateMeetingBottomSheetAdapter extends BottomSheetDialogFragment i
 
         // Set preset open to -1 before closing the sheet
         presetOpen = -1;
-
-        // Reset the arrays to prevent double entries
-        itemNames = new ArrayList<>();
-        selectValues = new ArrayList<>();
 
         // close the sheet
         presetSelectBottomSheet.closePresets();

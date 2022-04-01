@@ -14,6 +14,7 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
+
 public class EditItemBottomSheet extends BottomSheetDialogFragment {
     BottomSheetCreateItemBinding bi;
     BottomSheetBehavior<View> bottomSheetBehavior;
@@ -81,7 +82,6 @@ Integer position;
             listener.onEditFinish(mItem, position);
         });
 
-        Log.i("TAG", "initTimer: " +mItem);
         bi.itemNumberPicker.setValue(mItem.getSubCountdown().intValue());
         bi.itemDescription.setText(mItem.getSubCountdownDescription());
 

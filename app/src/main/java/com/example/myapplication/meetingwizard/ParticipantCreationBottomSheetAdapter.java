@@ -103,6 +103,7 @@ public class ParticipantCreationBottomSheetAdapter extends BottomSheetDialogFrag
             assert activity != null;
             activity.addNewParticipant(
                     bi.participantInputName.getText().toString(),
+                    bi.participantInputEmail.getText().toString(),
                     bi.participantInputStatus.getText().toString());
             dismiss();
         });

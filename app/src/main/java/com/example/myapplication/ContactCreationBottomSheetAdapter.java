@@ -104,6 +104,7 @@ public class ContactCreationBottomSheetAdapter extends BottomSheetDialogFragment
 
             ParticipantData participantData = new ParticipantData();
             participantData.setName(bi.participantInputName.getText().toString());
+            participantData.setEmail(bi.participantInputEmail.getText().toString());
             participantData.setStatus(bi.participantInputStatus.getText().toString());
 
             database.participantDao().insert(participantData);
