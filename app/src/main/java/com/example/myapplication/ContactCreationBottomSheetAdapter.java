@@ -4,7 +4,9 @@ import android.app.Dialog;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Patterns;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
@@ -101,13 +103,22 @@ public class ContactCreationBottomSheetAdapter extends BottomSheetDialogFragment
 
         // edit button clicked
         bi.dialogCreateButton.setOnClickListener(viewListener -> {
+
+            String pName = bi.participantInputName.getText().toString();
+            String pEmail = bi.participantInputEmail.getText().toString();
+            String pStatus = bi.participantInputStatus.getText().toString();
+            // Check for valid email address
+            if (pEmail.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(pEmail).matches()) {
+                Toast.makeText(getContext(), "Bitte eine valide Email-Adresse eingeben.", Toast.LENGTH_SHORT).show();
+                return;
+            }
             // Create new Entry
             RoomDB database = RoomDB.getInstance(getContext());
 
             ParticipantData participantData = new ParticipantData();
-            participantData.setName(bi.participantInputName.getText().toString());
-            participantData.setEmail(bi.participantInputEmail.getText().toString());
-            participantData.setStatus(bi.participantInputStatus.getText().toString());
+            participantData.setName(pName);
+            participantData.setEmail(pEmail);
+            participantData.setStatus(pStatus);
 
             database.participantDao().insert(participantData);
 

@@ -4,7 +4,9 @@ import android.app.Dialog;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Patterns;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
@@ -94,14 +96,23 @@ public class ParticipantCreationBottomSheetAdapter extends BottomSheetDialogFrag
 
         // edit button clicked
         bi.dialogCreateButton.setOnClickListener(viewListener -> {
+            String pName = bi.participantInputName.getText().toString();
+            String pEmail = bi.participantInputEmail.getText().toString();
+            String pStatus = bi.participantInputStatus.getText().toString();
+            // check for valid email
+            if (!pEmail.isEmpty() && !Patterns.EMAIL_ADDRESS.matcher(pEmail).matches()) {
+                Toast.makeText(getContext(), "Bitte eine gültige Email-Adresse eingeben.", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
             // Create new Entry
             MeetingWizardActivity activity = ((MeetingWizardActivity) getActivity());
 
             assert activity != null;
             activity.addNewParticipant(
-                    bi.participantInputName.getText().toString(),
-                    bi.participantInputEmail.getText().toString(),
-                    bi.participantInputStatus.getText().toString());
+                    pName,
+                    pEmail,
+                    pStatus);
             dismiss();
         });
 
