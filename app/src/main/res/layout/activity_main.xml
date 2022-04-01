@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:background="@color/corona_white"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".mainscreen.MainScreenActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -41,7 +41,8 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_outline_filter_list_24" />
+                app:srcCompat="@drawable/ic_outline_filter_list_24"
+                android:contentDescription="TODO" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

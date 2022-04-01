@@ -72,7 +72,8 @@
                                 android:layout_marginEnd="8dp"
 
                                 android:src="@drawable/ic_baseline_calendar_month_24"
-                                app:tint="@color/corona_blue" />
+                                app:tint="@color/corona_blue"
+                                android:contentDescription="TODO" />
 
                             <TextView
                                 android:id="@+id/tvDateRow"
@@ -96,7 +97,8 @@
                                 android:layout_height="match_parent"
                                 android:layout_gravity="center"
                                 android:src="@drawable/ic_baseline_schedule_24"
-                                app:tint="@color/corona_blue" />
+                                app:tint="@color/corona_blue"
+                                android:contentDescription="TODO" />
 
                             <TextView
                                 android:id="@+id/tvTimeRow"
@@ -143,7 +145,8 @@
                                     app:layout_constraintStart_toEndOf="@+id/linearLayout2"
                                     app:layout_constraintTop_toTopOf="parent"
                                     app:srcCompat="@drawable/ic_outline_place_24"
-                                    app:tint="@color/corona_blue" />
+                                    app:tint="@color/corona_blue"
+                                    android:contentDescription="TODO" />
 
                                 <TextView
                                     android:id="@+id/tvLocationRow"
@@ -201,7 +204,8 @@
                                         app:tint="@color/corona_blue"
                                         app:layout_constraintEnd_toEndOf="parent"
                                         app:layout_constraintTop_toTopOf="parent"
-                                        app:srcCompat="@drawable/ic_outline_people_24" />
+                                        app:srcCompat="@drawable/ic_outline_people_24"
+                                        android:contentDescription="TODO" />
 
                                     <TextView
                                         android:id="@+id/tvParticipantsRow"

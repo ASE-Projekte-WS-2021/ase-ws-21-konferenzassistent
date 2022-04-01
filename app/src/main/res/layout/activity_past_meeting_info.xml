@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="8dp"
-    tools:context=".PastMeetingInfoActivity">
+    tools:context=".mainscreen.history.PastMeetingInfoActivity">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardViewDuration"
@@ -30,7 +30,8 @@
                 app:layout_constraintBottom_toTopOf="@+id/tvDuration"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_baseline_schedule_24" />
+                app:srcCompat="@drawable/ic_baseline_schedule_24"
+                android:contentDescription="TODO" />
 
             <TextView
                 android:id="@+id/tvDuration"
@@ -106,7 +107,8 @@
                 app:layout_constraintBottom_toTopOf="@+id/tvParticipants"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_outline_people_24" />
+                app:srcCompat="@drawable/ic_outline_people_24"
+                android:contentDescription="TODO" />
 
             <TextView
                 android:id="@+id/tvParticipants"
@@ -152,7 +154,8 @@
                 android:scaleType="fitXY"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_outline_place_24" />
+                app:srcCompat="@drawable/ic_outline_place_24"
+                android:contentDescription="TODO" />
 
             <TextView
                 android:id="@+id/tvLocationSubtitle"
@@ -199,7 +202,8 @@
                 android:scaleType="fitXY"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_outline_settings_24" />
+                app:srcCompat="@drawable/ic_outline_settings_24"
+                android:contentDescription="TODO" />
 
             <TextView
                 android:id="@+id/tvSettings"
