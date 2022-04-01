@@ -2,6 +2,7 @@ package com.example.myapplication;
 
 import static com.example.myapplication.ChecklistPreset.convertToChecklistDatabaseEntry;
 import static com.example.myapplication.ChecklistPreset.removeChecklistFromDatabase;
+import static com.example.myapplication.CountdownPreset.convertToAdvancedCountdownList;
 import static com.example.myapplication.CountdownPreset.convertToDatabaseEntry;
 import static com.example.myapplication.CountdownPreset.removeFromDatabase;
 
@@ -15,6 +16,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.data.RoomDB;
+import com.example.myapplication.data.presets.checklist.ChecklistPresetPair;
+import com.example.myapplication.data.presets.countdown.CountdownPresetPair;
 import com.example.myapplication.databinding.BottomSheetEditPresetsBinding;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
@@ -37,16 +40,48 @@ public class PresetEditBottomSheet extends BottomSheetDialogFragment implements 
 
     @Override
     public void onDelete(int position) {
+        RoomDB database = RoomDB.getInstance(getContext());
+
         if (viewType.equals(PRESET_TYPE_COUNTDOWN)) {
+            // Get database entries to prevent null ids
+            countdownObjects.clear();
+            ArrayList<CountdownPresetPair> d = new ArrayList<>();
+            d.addAll(database.countdownPresetWIthParentDao().getCountdowns());
+            d.forEach(preset -> {
+                String presetName = preset.getPresets().getTitle();
+                int presetId = preset.getPresets().getID();
+
+                countdownObjects.add(
+                        new CountdownPreset(presetName,
+                                convertToAdvancedCountdownList(database, preset), presetId));
+            });
+
             int id = countdownObjects.get(position).id;
             countdownObjects.remove(position);
             recyclerViewPresetAdapter.notifyItemRemoved(countdownObjects.size());
             removeFromDatabase(RoomDB.getInstance(getContext()), id);
+
+            recyclerViewPresetAdapter.notifyDataSetChanged();
         } else {
+            // Get database entries to prevent null ids
+            checklistPresets.clear();
+            ArrayList<ChecklistPresetPair> d = new ArrayList<>();
+            d.addAll(database.checklistPresetWithItemDao().getPresets());
+            d.forEach(preset -> {
+                String presetName = preset.getPresets().getTitle();
+                Integer presetId = preset.getPresets().getID();
+
+                checklistPresets.add(
+                        new ChecklistPreset(presetName,
+                                ChecklistPreset.convertToChecklistItems(preset), presetId));
+            });
+
             int id = checklistPresets.get(position).id;
             checklistPresets.remove(position);
             recyclerViewPresetAdapter.notifyItemRemoved(checklistPresets.size());
             removeChecklistFromDatabase(RoomDB.getInstance(getContext()), id);
+
+            recyclerViewPresetAdapter.notifyDataSetChanged();
         }
     }
 
@@ -167,7 +202,6 @@ public class PresetEditBottomSheet extends BottomSheetDialogFragment implements 
             recyclerViewPresetAdapter.notifyItemInserted(checklistPresets.size());
             writeChecklistPresetToDatabase((ChecklistPreset) preset);
         }
-
         listener.onClose();
     }
 
