@@ -1,7 +1,6 @@
 package com.example.myapplication;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,12 +15,12 @@ import com.example.myapplication.meetingwizard.Participant;
 
 import java.util.ArrayList;
 
-public class RecycleViewParticipantInfoListAdapter extends RecyclerView.Adapter<RecycleViewParticipantInfoListAdapter.ViewHolder>{
+public class RecycleViewParticipantInfoListAdapter extends RecyclerView.Adapter<RecycleViewParticipantInfoListAdapter.ViewHolder> {
 
     // Content
     private final ArrayList<Participant> mParticipants;
-    private ArrayList<Participant> mParticipantsCopy = new ArrayList<>();
     private final Context mContext;
+    private final ArrayList<Participant> mParticipantsCopy = new ArrayList<>();
 
     public RecycleViewParticipantInfoListAdapter(ArrayList<Participant> mParticipants, Context mContext) {
         this.mParticipants = mParticipants;
@@ -31,16 +30,16 @@ public class RecycleViewParticipantInfoListAdapter extends RecyclerView.Adapter<
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-            Participant participant = mParticipants.get(holder.getAdapterPosition());
-            holder.participantName.setText(participant.getName());
-            holder.participantStatus.setText(participant.getStatus());
+        Participant participant = mParticipants.get(holder.getAdapterPosition());
+        holder.participantName.setText(participant.getName());
+        holder.participantStatus.setText(participant.getStatus());
 
-            }
+    }
 
     @Override
     public int getItemCount() {
-            return mParticipants.size();
-            }
+        return mParticipants.size();
+    }
 
     // Filter the Participants
     // https://stackoverflow.com/a/37562572
@@ -62,11 +61,11 @@ public class RecycleViewParticipantInfoListAdapter extends RecyclerView.Adapter<
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType){
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_participant_information_item,
-            parent, false);
-            return new ViewHolder(view);
-            }
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_participant_information_item,
+                parent, false);
+        return new ViewHolder(view);
+    }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView participantName;
@@ -74,7 +73,7 @@ public class RecycleViewParticipantInfoListAdapter extends RecyclerView.Adapter<
         ImageView isParticipant;
         LinearLayout participantContainer;
 
-        public ViewHolder(View countdownView){
+        public ViewHolder(View countdownView) {
             super(countdownView);
             participantName = countdownView.findViewById(R.id.participant_name);
             participantStatus = countdownView.findViewById(R.id.participant_status);

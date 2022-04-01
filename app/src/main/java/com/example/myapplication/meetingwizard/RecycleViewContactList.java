@@ -14,7 +14,7 @@ import com.example.myapplication.R;
 
 import java.util.ArrayList;
 
-public class RecycleViewContactList extends RecyclerView.Adapter<RecycleViewContactList.ViewHolder>{
+public class RecycleViewContactList extends RecyclerView.Adapter<RecycleViewContactList.ViewHolder> {
 
     // Content
     private final ArrayList<Contact> mContact;
@@ -29,25 +29,21 @@ public class RecycleViewContactList extends RecyclerView.Adapter<RecycleViewCont
         mContactCopy.addAll(mContact);
     }
 
-    public interface contactListener{
-            void onContactSelected(String name);
+    @Override
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        Contact contact = mContact.get(holder.getAdapterPosition());
+        holder.contactName.setText(contact.getName());
+
+        // Set on click listener on the container
+        holder.contactContainer.setOnClickListener(containerView -> {
+            listener.onContactSelected(contact.getName());
+        });
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-            Contact contact = mContact.get(holder.getAdapterPosition());
-            holder.contactName.setText(contact.getName());
-
-            // Set on click listener on the container
-            holder.contactContainer.setOnClickListener(containerView -> {
-                listener.onContactSelected(contact.getName());
-            });
-            }
-
-    @Override
     public int getItemCount() {
-            return mContact.size();
-            }
+        return mContact.size();
+    }
 
     // Filter the Contacts
     // https://stackoverflow.com/a/37562572
@@ -68,17 +64,21 @@ public class RecycleViewContactList extends RecyclerView.Adapter<RecycleViewCont
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType){
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_contact_item,
-            parent, false);
-            return new ViewHolder(view);
-            }
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_contact_item,
+                parent, false);
+        return new ViewHolder(view);
+    }
+
+    public interface contactListener {
+        void onContactSelected(String name);
+    }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView contactName;
         RelativeLayout contactContainer;
 
-        public ViewHolder(View view){
+        public ViewHolder(View view) {
             super(view);
             contactName = view.findViewById(R.id.contact_Name);
             contactContainer = view.findViewById(R.id.contact_container);

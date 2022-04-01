@@ -2,7 +2,7 @@ package com.example.myapplication.data;
 
 import androidx.room.Entity;
 
-@Entity(primaryKeys = {"meetingID", "participantID"},tableName = "table_meeting_with_participant_data")
+@Entity(primaryKeys = {"meetingID", "participantID"}, tableName = "table_meeting_with_participant_data")
 public class MeetingWithParticipantData {
 
     private int meetingID;

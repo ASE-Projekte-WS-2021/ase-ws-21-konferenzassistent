@@ -1,6 +1,9 @@
 package com.example.myapplication.meetingwizard;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -9,13 +12,8 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
-import com.example.myapplication.databinding.FragmentWizardCountdownBinding;
 import com.example.myapplication.R;
+import com.example.myapplication.databinding.FragmentWizardCountdownBinding;
 
 import java.util.ArrayList;
 
@@ -40,6 +38,7 @@ public class WizardCountdownFragment extends Fragment {
     public WizardCountdownFragment() {
         // Required empty public constructor
     }
+
     public static WizardCountdownFragment newInstance() {
         return new WizardCountdownFragment();
     }
@@ -64,9 +63,9 @@ public class WizardCountdownFragment extends Fragment {
     }
 
     // Gets the Arrays form the Activity
-    private void getCountdowns(){
+    private void getCountdowns() {
         // get the MeetingWizardActivity
-        MeetingWizardActivity activity = ((MeetingWizardActivity)getActivity());
+        MeetingWizardActivity activity = ((MeetingWizardActivity) getActivity());
 
         assert activity != null;
         mCountdownNames = activity.getmCountdownNames();
@@ -76,9 +75,9 @@ public class WizardCountdownFragment extends Fragment {
     }
 
     // Sets the Arrays in the Activity
-    private void setCountdowns(){
+    private void setCountdowns() {
         // get the MeetingWizardActivity
-        MeetingWizardActivity activity = ((MeetingWizardActivity)getActivity());
+        MeetingWizardActivity activity = ((MeetingWizardActivity) getActivity());
 
         // get the data from the adapter
         /*
@@ -96,7 +95,7 @@ public class WizardCountdownFragment extends Fragment {
     }
 
     // Build and fills the recycler view
-    private void buildRecyclerView(){
+    private void buildRecyclerView() {
 
         //
         RecyclerView recyclerView = bi.countdownRecycleView;

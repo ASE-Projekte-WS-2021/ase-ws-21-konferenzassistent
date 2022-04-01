@@ -1,6 +1,10 @@
 package com.example.myapplication;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -8,11 +12,6 @@ import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.example.myapplication.databinding.FragmentCountdownInformationBinding;
 import com.example.myapplication.meetingwizard.Participant;
@@ -67,28 +66,28 @@ public class CountdownInformationFragment extends Fragment {
     }
 
     // Gets Views from IDs
-    private void initViews(View view){
+    private void initViews(View view) {
         ortTextView = view.findViewById(R.id.meeting_ort_text_view);
         startZeitTextView = view.findViewById(R.id.meeting_start_zeit_text_view);
         teilnehmerTextView = view.findViewById(R.id.meeting_teilnehmer_text_view);
     }
 
     // Get the values for the TextViews
-    public void getValuesForTextViews(String ort, String zeit, String teilnehmerZahl){
+    public void getValuesForTextViews(String ort, String zeit, String teilnehmerZahl) {
         // Save values localy cause TexViews are still null at this point
         this.ort = ort;
         this.zeit = zeit;
         this.teilnehmerZahl = teilnehmerZahl;
     }
 
-    private void fillViews(){
+    private void fillViews() {
         ortTextView.setText(ort);
         startZeitTextView.setText(zeit);
         teilnehmerTextView.setText(teilnehmerZahl);
     }
 
     // Build and fills the recycler view
-    private void buildBackgroundRecyclerView(){
+    private void buildBackgroundRecyclerView() {
 
         RecyclerView recyclerView = bi.placeholderView;
         recycleViewPlaceholderAdapter = new RecycleViewPlaceholderAdapter(
@@ -100,7 +99,7 @@ public class CountdownInformationFragment extends Fragment {
     }
 
     // Build and fills the recycler view
-    private void buildParticipantRecyclerView(){
+    private void buildParticipantRecyclerView() {
 
         RecyclerView recyclerView = bi.recyclerViewParticipants;
         RecycleViewParticipantInfoListAdapter recycleViewParticipantInfoListAdapter = new RecycleViewParticipantInfoListAdapter(

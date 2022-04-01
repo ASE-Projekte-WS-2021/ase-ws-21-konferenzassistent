@@ -4,10 +4,8 @@ import android.app.Dialog;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
-
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
@@ -15,7 +13,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.databinding.BottomSheetLocationSelectBinding;
-
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
@@ -25,10 +22,9 @@ import java.util.ArrayList;
 public class LocationSelectBottomSheet extends BottomSheetDialogFragment {
     BottomSheetLocationSelectBinding bi;
     BottomSheetBehavior<View> bottomSheetBehavior;
-
+    RecyclerViewLocationAdapter recyclerViewLocationAdapter;
     // Location List
     private ArrayList<String> locationNames;
-    RecyclerViewLocationAdapter recyclerViewLocationAdapter;
 
     // Make the background Transparent
     @Override
@@ -39,7 +35,7 @@ public class LocationSelectBottomSheet extends BottomSheetDialogFragment {
 
     @NonNull
     @Override
-    public Dialog onCreateDialog(Bundle savedInstanceState){
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
         BottomSheetDialog bottomSheet = (BottomSheetDialog) super.onCreateDialog(savedInstanceState);
 
         // inflating Layout
@@ -83,22 +79,22 @@ public class LocationSelectBottomSheet extends BottomSheetDialogFragment {
         // Add a setOnEditorActionListener to close the Sheet once the user is done typing
         // https://stackoverflow.com/a/5100007
         bi.textInputSearch.setOnEditorActionListener((textView, i, keyEvent) -> {
-            switch (i){
+            switch (i) {
                 case EditorInfo.IME_ACTION_DONE:
                 case EditorInfo.IME_ACTION_NEXT:
                 case EditorInfo.IME_ACTION_PREVIOUS:
                     // the user is done typing.
-                    if(!bi.textInputSearch.getText().toString().equals("")){
+                    if (!bi.textInputSearch.getText().toString().equals("")) {
 
                         // Send Location to Meeting Adapter
-                        if(((MainActivity)getActivity()) != null)
-                            ((MainActivity)getActivity()).getMeetingAdapter()
+                        if (((MainActivity) getActivity()) != null)
+                            ((MainActivity) getActivity()).getMeetingAdapter()
                                     .setLocation(bi.textInputSearch.getText().toString());
 
                         // Dismiss the Sheet
                         dismiss();
                     }
-                return true;
+                    return true;
             }
 
             return false; // pass on to other listeners.
@@ -130,7 +126,7 @@ public class LocationSelectBottomSheet extends BottomSheetDialogFragment {
     }
 
     // Build and fills the recycler view
-    private void buildRecyclerView(){
+    private void buildRecyclerView() {
         RecyclerView recyclerView = bi.locationRecyclerView;
         recyclerViewLocationAdapter = new RecyclerViewLocationAdapter(
                 locationNames,
@@ -141,17 +137,17 @@ public class LocationSelectBottomSheet extends BottomSheetDialogFragment {
     }
 
     // Initializes the Presets
-    public void initLocation(ArrayList<String> locationNames){
+    public void initLocation(ArrayList<String> locationNames) {
         this.locationNames = locationNames;
     }
 
     // Closes the Sheet
-    public void closeLocation(){
+    public void closeLocation() {
         dismiss();
     }
 
     @Override
-    public void onStart(){
+    public void onStart() {
         super.onStart();
         //bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
     }

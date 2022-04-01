@@ -18,8 +18,8 @@ import java.util.List;
 
 public class ChecklistAdapter extends RecyclerView.Adapter<ChecklistAdapter.ChecklistViewHolder> {
 
-    private Context ct;
-    private List<ChecklistItem> checklistItems;
+    private final Context ct;
+    private final List<ChecklistItem> checklistItems;
     private OnAdapterItemClickListener adapterItemClickListener = null;
 
     public ChecklistAdapter(Context ct, OnAdapterItemClickListener listener, List<ChecklistItem> checklistItems) {
@@ -50,7 +50,7 @@ public class ChecklistAdapter extends RecyclerView.Adapter<ChecklistAdapter.Chec
             holder.infoButtonItem.setVisibility(View.GONE);
         } else {
             holder.infoButtonItem.setOnClickListener(view -> {
-                AlertDialog.Builder builder = new AlertDialog.Builder(ct,R.style.dialogAlertStyle)
+                AlertDialog.Builder builder = new AlertDialog.Builder(ct, R.style.dialogAlertStyle)
                         .setMessage(hint)
                         .setPositiveButton("OK", (dialogInterface, i) -> {
                             // do nothing

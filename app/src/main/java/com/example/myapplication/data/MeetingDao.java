@@ -26,7 +26,7 @@ public interface MeetingDao {
             "end_date = :sEndDate," +
             "duration = :sDuration," +
             "location = :sLocation")
-    void update(String sTitle,  String sStartDate, String sEndDate, Integer sDuration, String sLocation);
+    void update(String sTitle, String sStartDate, String sEndDate, Integer sDuration, String sLocation);
 
     @Query("SELECT DISTINCT location FROM table_meeting_data")
     List<String> getLocations();

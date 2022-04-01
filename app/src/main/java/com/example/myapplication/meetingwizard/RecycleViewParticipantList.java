@@ -19,13 +19,13 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.util.ArrayList;
 
-public class RecycleViewParticipantList extends RecyclerView.Adapter<RecycleViewParticipantList.ViewHolder>{
+public class RecycleViewParticipantList extends RecyclerView.Adapter<RecycleViewParticipantList.ViewHolder> {
 
     // Content
     private final ArrayList<Participant> mParticipants;
-    private ArrayList<Participant> mParticipantsCopy = new ArrayList<>();
     private final Context mContext;
-    private boolean openedFromWizard;
+    private final ArrayList<Participant> mParticipantsCopy = new ArrayList<>();
+    private final boolean openedFromWizard;
 
     public RecycleViewParticipantList(ArrayList<Participant> mParticipants, Context mContext, boolean openedFromWizard) {
         this.mParticipants = mParticipants;
@@ -36,41 +36,41 @@ public class RecycleViewParticipantList extends RecyclerView.Adapter<RecycleView
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-            Participant participant = mParticipants.get(holder.getAdapterPosition());
-            holder.participantName.setText(participant.getName());
-            holder.isParticipant.setVisibility(participant.getSelected()? View.VISIBLE : View.GONE);
-            holder.participantStatus.setText(participant.getStatus());
+        Participant participant = mParticipants.get(holder.getAdapterPosition());
+        holder.participantName.setText(participant.getName());
+        holder.isParticipant.setVisibility(participant.getSelected() ? View.VISIBLE : View.GONE);
+        holder.participantStatus.setText(participant.getStatus());
 
-            ParticipantData asParticipantData = new ParticipantData();
-            asParticipantData.setID(participant.getId());
-            asParticipantData.setName(participant.getName());
-            asParticipantData.setEmail(participant.getEmail());
-            asParticipantData.setStatus(participant.getStatus());
+        ParticipantData asParticipantData = new ParticipantData();
+        asParticipantData.setID(participant.getId());
+        asParticipantData.setName(participant.getName());
+        asParticipantData.setEmail(participant.getEmail());
+        asParticipantData.setStatus(participant.getStatus());
 
-            if (openedFromWizard){
-                // Set on click listener on the container
-                holder.participantContainer.setOnClickListener(containerView -> {
-                    // Invert the status
-                    Boolean wasSelected = participant.getSelected();
-                    participant.setSelected(!wasSelected);
+        if (openedFromWizard) {
+            // Set on click listener on the container
+            holder.participantContainer.setOnClickListener(containerView -> {
+                // Invert the status
+                Boolean wasSelected = participant.getSelected();
+                participant.setSelected(!wasSelected);
 
-                    // Set visibility on indicator
-                    holder.isParticipant.setVisibility(!wasSelected? View.VISIBLE : View.GONE);
-                });
-            } else {
-                holder.participantContainer.setOnClickListener(containerView -> {
-                    View alertDialogView = DialogUserInfoViewCreator.createView(mContext, asParticipantData, false); // TODO make button open participant edit sheet
-                    new MaterialAlertDialogBuilder(mContext)
-                            .setView(alertDialogView)
-                            .show();
-                });
-            }
+                // Set visibility on indicator
+                holder.isParticipant.setVisibility(!wasSelected ? View.VISIBLE : View.GONE);
+            });
+        } else {
+            holder.participantContainer.setOnClickListener(containerView -> {
+                View alertDialogView = DialogUserInfoViewCreator.createView(mContext, asParticipantData, false); // TODO make button open participant edit sheet
+                new MaterialAlertDialogBuilder(mContext)
+                        .setView(alertDialogView)
+                        .show();
+            });
         }
+    }
 
     @Override
     public int getItemCount() {
-            return mParticipants.size();
-            }
+        return mParticipants.size();
+    }
 
     // Filter the Participants
     // https://stackoverflow.com/a/37562572
@@ -89,7 +89,7 @@ public class RecycleViewParticipantList extends RecyclerView.Adapter<RecycleView
         notifyDataSetChanged();
     }
 
-    public void updateCopy(ArrayList<Participant> participants){
+    public void updateCopy(ArrayList<Participant> participants) {
         mParticipantsCopy.clear();
         Log.i("TAG", "updateCopy: " + participants);
         mParticipantsCopy.addAll(participants);
@@ -103,11 +103,11 @@ public class RecycleViewParticipantList extends RecyclerView.Adapter<RecycleView
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType){
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_participant_item,
-            parent, false);
-            return new ViewHolder(view);
-            }
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_participant_item,
+                parent, false);
+        return new ViewHolder(view);
+    }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView participantName;
@@ -115,7 +115,7 @@ public class RecycleViewParticipantList extends RecyclerView.Adapter<RecycleView
         ImageView isParticipant;
         LinearLayout participantContainer;
 
-        public ViewHolder(View countdownView){
+        public ViewHolder(View countdownView) {
             super(countdownView);
             participantName = countdownView.findViewById(R.id.participant_name);
             participantStatus = countdownView.findViewById(R.id.participant_status);

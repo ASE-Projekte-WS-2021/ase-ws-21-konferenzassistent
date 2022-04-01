@@ -5,16 +5,15 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
-
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.android.volley.Request;
 import com.android.volley.toolbox.JsonObjectRequest;
@@ -32,9 +31,10 @@ public class StartseiteFragment extends Fragment {
     private static final String RKI_HOSPITALISIERUNG = "RKI_HOSPITALISIERUNG";
     private static final String RKI_LAST_UPDATE = "RKI_LAST_UPDATE";
 
-    private static final double DAY_TO_MILLISEC =  86400000;
+    private static final double DAY_TO_MILLISEC = 86400000;
 
     FragmentMiStartseiteBinding bi;
+
     public StartseiteFragment() {
         // Required empty public constructor
     }
@@ -46,7 +46,7 @@ public class StartseiteFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        bi =  DataBindingUtil.bind(view);
+        bi = DataBindingUtil.bind(view);
 
         // Open information for RKI
         assert bi != null;
@@ -82,16 +82,15 @@ public class StartseiteFragment extends Fragment {
                 bi.hospitalisiertungText.setText(cutDecimals(Float.toString(hospital())));
                 bi.neuinfektionenText.setText(cutDecimals(Float.toString(newInfect())));
             }
-        }
-        else{
+        } else {
             // No connection
-          netWorkFailed();
+            netWorkFailed();
         }
 
     }
 
     // Fetches the data from the RKI api
-    private void fetchData(){
+    private void fetchData() {
         @SuppressLint("SetTextI18n") JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
                 (Request.Method.GET, RKI_API_URL, null, response -> {
                     try {
@@ -99,8 +98,6 @@ public class StartseiteFragment extends Fragment {
 
                         float newInfect = Float.parseFloat(response.get("weekIncidence").toString());
                         float hospital = Float.parseFloat(object.get("incidence7Days").toString());
-
-
 
 
                         // Set the text
@@ -120,8 +117,8 @@ public class StartseiteFragment extends Fragment {
         VolleySingleton.getInstance(this.getContext()).addToRequestQueue(jsonObjectRequest);
     }
 
-    private String cutDecimals(String floatNumber){
-        return floatNumber.substring(0,floatNumber.indexOf(".")+2);
+    private String cutDecimals(String floatNumber) {
+        return floatNumber.substring(0, floatNumber.indexOf(".") + 2);
     }
 
     @Override
@@ -133,7 +130,7 @@ public class StartseiteFragment extends Fragment {
     }
 
     // Saves the RKI data into shared pref
-    private void saveRKIData (float newInfect, float hospital, Date date){
+    private void saveRKIData(float newInfect, float hospital, Date date) {
         if (!isAdded()) {
             Log.d("fragment not added debug", "saveRKIData: fragment not added");
             return;
@@ -152,16 +149,15 @@ public class StartseiteFragment extends Fragment {
 
     // If the Network fails to load new data
     @SuppressLint("SetTextI18n")
-    private void netWorkFailed(){
+    private void netWorkFailed() {
         SharedPreferences sharedPreferences = this.requireActivity().
                 getSharedPreferences("RKI", Context.MODE_PRIVATE);
         // if no internet check if there is a shared pref
-        if(sharedPreferences.contains(RKI_LAST_UPDATE)){
+        if (sharedPreferences.contains(RKI_LAST_UPDATE)) {
             // if shared pref exists load it
             bi.hospitalisiertungText.setText(cutDecimals(Float.toString(hospital())));
             bi.neuinfektionenText.setText(cutDecimals(Float.toString(newInfect())));
-        }
-        else{
+        } else {
             // if no pref shared pref show N/A
             bi.hospitalisiertungText.setText("N/A");
             bi.neuinfektionenText.setText("N/A");
@@ -169,21 +165,21 @@ public class StartseiteFragment extends Fragment {
     }
 
     // Load Infected from Shared Pref
-    private float newInfect(){
+    private float newInfect() {
         SharedPreferences sharedPreferences = this.requireActivity().
                 getSharedPreferences("RKI", Context.MODE_PRIVATE);
         return sharedPreferences.getFloat(RKI_NEU_INFEKTIONEN, 0);
     }
 
     // Load hospitalisation from Shared Pref
-    private float hospital(){
+    private float hospital() {
         SharedPreferences sharedPreferences = this.requireActivity().
                 getSharedPreferences("RKI", Context.MODE_PRIVATE);
         return sharedPreferences.getFloat(RKI_HOSPITALISIERUNG, 0);
     }
 
     // Load Infected from Shared Pref
-    private long lastUpdated(){
+    private long lastUpdated() {
         SharedPreferences sharedPreferences = this.requireActivity().
                 getSharedPreferences("RKI", Context.MODE_PRIVATE);
         return sharedPreferences.getLong(RKI_LAST_UPDATE, 0);

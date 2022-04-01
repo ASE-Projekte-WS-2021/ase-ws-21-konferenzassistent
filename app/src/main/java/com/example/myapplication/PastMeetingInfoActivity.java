@@ -1,14 +1,14 @@
 package com.example.myapplication;
 
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
+
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.myapplication.data.MeetingParticipantPair;
 import com.example.myapplication.data.RoomDB;
@@ -20,14 +20,6 @@ import java.util.List;
 @SuppressLint("NewApi")
 public class PastMeetingInfoActivity extends AppCompatActivity {
 
-    private String title;
-    private String duration;
-    private String startTime;
-    private String endTime;
-    private String participants;
-    private String ort;
-    private String date;
-
     TextView meeting;
     TextView meetingDate;
     TextView meetingDuration;
@@ -37,12 +29,19 @@ public class PastMeetingInfoActivity extends AppCompatActivity {
     TextView meetingOrt;
     ImageButton cancelButton;
     ImageButton moreButton;
+    private String title;
+    private String duration;
+    private String startTime;
+    private String endTime;
+    private String participants;
+    private String ort;
+    private String date;
     private int dataBaseID;
     private RoomDB database;
 
     private List<MeetingParticipantPair> meetingList;
 
-    private DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
+    private final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
 
 
     @Override
@@ -82,15 +81,15 @@ public class PastMeetingInfoActivity extends AppCompatActivity {
     }
 
     private void setView() {
-        MeetingParticipantPair meetingData = meetingList.get(meetingList.size()-1);
+        MeetingParticipantPair meetingData = meetingList.get(meetingList.size() - 1);
 
-        duration = meetingData.getMeeting().getDuration()/60 + "";
+        duration = meetingData.getMeeting().getDuration() / 60 + "";
         startTime = meetingData.getMeeting().getStartDate().substring(11);
-        date = meetingData.getMeeting().getStartDate().substring(0,10);
+        date = meetingData.getMeeting().getStartDate().substring(0, 10);
         endTime = meetingData.getMeeting().getEndDate().substring(11);
 
         meeting.setText(meetingData.getMeeting().getTitle());
-        meetingDuration.setText(String.format(getBaseContext().getString(R.string.meeting_history_minutes_long), ""+
+        meetingDuration.setText(String.format(getBaseContext().getString(R.string.meeting_history_minutes_long), "" +
                 duration));
         meetingDate.setText(date);
         meetingStartTime.setText(startTime);

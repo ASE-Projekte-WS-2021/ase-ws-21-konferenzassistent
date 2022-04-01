@@ -2,7 +2,7 @@ package com.example.myapplication.data.presets.checklist;
 
 import androidx.room.Entity;
 
-@Entity(primaryKeys = {"presetID", "itemID"},tableName = "table_checklist_preset_with_item")
+@Entity(primaryKeys = {"presetID", "itemID"}, tableName = "table_checklist_preset_with_item")
 public class ChecklistPresetWithItemData {
     private int presetID;
     private int itemID;

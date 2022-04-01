@@ -21,10 +21,9 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import java.util.ArrayList;
 
 public class ParticipantBottomSheetAdapter extends BottomSheetDialogFragment {
+    final static float MIN_SCROLL_FOR_CLOSURE = 0.5f;
     BottomSheetParticipantsBinding bi;
     BottomSheetBehavior<View> bottomSheetBehavior;
-    final static float MIN_SCROLL_FOR_CLOSURE = 0.5f;
-
     RecycleViewParticipantList recycleViewParticipantList;
     // Participant List
     ArrayList<Participant> participants;
@@ -38,7 +37,7 @@ public class ParticipantBottomSheetAdapter extends BottomSheetDialogFragment {
 
     @NonNull
     @Override
-    public Dialog onCreateDialog(Bundle savedInstanceState){
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
         BottomSheetDialog bottomSheet = (BottomSheetDialog) super.onCreateDialog(savedInstanceState);
 
         // inflating Layout
@@ -67,20 +66,14 @@ public class ParticipantBottomSheetAdapter extends BottomSheetDialogFragment {
         bottomSheetBehavior.addBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
             @Override
             public void onStateChanged(@NonNull View bottomSheet, int newState) {
-                if(newState == BottomSheetBehavior.STATE_COLLAPSED ){
+                if (newState == BottomSheetBehavior.STATE_COLLAPSED) {
                     bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
                 }
             }
 
             @Override
             public void onSlide(@NonNull View bottomSheet, float slideOffset) {
-                if(slideOffset < MIN_SCROLL_FOR_CLOSURE){
-                    setCancelable(true);
-                }
-                else
-                {
-                    setCancelable(false);
-                }
+                setCancelable(slideOffset < MIN_SCROLL_FOR_CLOSURE);
             }
         });
 
@@ -90,7 +83,7 @@ public class ParticipantBottomSheetAdapter extends BottomSheetDialogFragment {
         bi.buttonDismiss.setOnClickListener(viewListener -> dismiss());
 
         // on new participant button
-        bi.participantAddNew.setOnClickListener(viewListener ->{
+        bi.participantAddNew.setOnClickListener(viewListener -> {
             ParticipantCreationBottomSheetAdapter participantCreationBottomSheetAdapter = new ParticipantCreationBottomSheetAdapter();
             participantCreationBottomSheetAdapter.show(getParentFragmentManager(), participantCreationBottomSheetAdapter.getTag());
         });
@@ -106,10 +99,9 @@ public class ParticipantBottomSheetAdapter extends BottomSheetDialogFragment {
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 // Filter locations
                 recycleViewParticipantList.filter(charSequence.toString());
-                if(charSequence == ""){
+                if (charSequence == "") {
                     bi.clearTextButton.setVisibility(View.INVISIBLE);
-                }
-                else{
+                } else {
                     bi.clearTextButton.setVisibility(View.VISIBLE);
                 }
 
@@ -132,7 +124,7 @@ public class ParticipantBottomSheetAdapter extends BottomSheetDialogFragment {
     }
 
     // Build and fills the recycler view
-    private void buildRecyclerView(){
+    private void buildRecyclerView() {
 
         RecyclerView recyclerView = bi.participantRecycleView;
         recycleViewParticipantList = new RecycleViewParticipantList(
@@ -146,18 +138,18 @@ public class ParticipantBottomSheetAdapter extends BottomSheetDialogFragment {
     }
 
     // Initializes the Presets
-    public void initParticipants(ArrayList<Participant> participants){
-       this.participants = participants;
+    public void initParticipants(ArrayList<Participant> participants) {
+        this.participants = participants;
     }
 
     // Closes the Sheet
-    public void closeLocation(){
+    public void closeLocation() {
         dismiss();
     }
 
     public void onParticipentAdded() {
         // get the MeetingWizardActivity
-        MeetingWizardActivity activity = ((MeetingWizardActivity)getActivity());
+        MeetingWizardActivity activity = ((MeetingWizardActivity) getActivity());
 
         assert activity != null;
         participants = activity.getParticipants();
@@ -171,14 +163,14 @@ public class ParticipantBottomSheetAdapter extends BottomSheetDialogFragment {
         recycleViewParticipantList.onDestroy();
 
         // udate view
-        MeetingWizardActivity activity = ((MeetingWizardActivity)getActivity());
+        MeetingWizardActivity activity = ((MeetingWizardActivity) getActivity());
         assert activity != null;
 
         activity.updateDataSet();
     }
 
     @Override
-    public void onStart(){
+    public void onStart() {
         super.onStart();
         //bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
     }

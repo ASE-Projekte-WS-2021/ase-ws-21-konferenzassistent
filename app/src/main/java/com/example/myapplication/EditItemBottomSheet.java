@@ -2,7 +2,6 @@ package com.example.myapplication;
 
 import android.app.Dialog;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -18,14 +17,10 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 public class EditItemBottomSheet extends BottomSheetDialogFragment {
     BottomSheetCreateItemBinding bi;
     BottomSheetBehavior<View> bottomSheetBehavior;
-timerEdit listener;
-Integer position;
-
-    interface timerEdit{
-        void onEditFinish(RecyclerViewAdvancedCountdownItemAdapter.AdvancedCountdownItem mItem, int position);
-    }
-
+    timerEdit listener;
+    Integer position;
     RecyclerViewAdvancedCountdownItemAdapter.AdvancedCountdownItem mItem;
+
     // Make the background Transparent
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -35,7 +30,7 @@ Integer position;
 
     @NonNull
     @Override
-    public Dialog onCreateDialog(Bundle savedInstanceState){
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
         BottomSheetDialog bottomSheet = (BottomSheetDialog) super.onCreateDialog(savedInstanceState);
 
         // inflating Layout
@@ -77,7 +72,7 @@ Integer position;
 
         bi.dialogCreateButton.setOnClickListener(viewListener ->
         {
-            mItem.setSubCountdown((long)bi.itemNumberPicker.getValue());
+            mItem.setSubCountdown((long) bi.itemNumberPicker.getValue());
             mItem.setSubCountdownDescription(bi.itemDescription.getText().toString());
             listener.onEditFinish(mItem, position);
         });
@@ -91,20 +86,24 @@ Integer position;
     }
 
     // Initializes the Presets
-    public void initTimer(RecyclerViewAdvancedCountdownItemAdapter.AdvancedCountdownItem mItem, timerEdit listener, int position){
+    public void initTimer(RecyclerViewAdvancedCountdownItemAdapter.AdvancedCountdownItem mItem, timerEdit listener, int position) {
         this.mItem = mItem;
         this.listener = listener;
         this.position = position;
     }
 
     // Closes the Sheet
-    public void closeCreation(){
+    public void closeCreation() {
         dismiss();
     }
 
     @Override
-    public void onStart(){
+    public void onStart() {
         super.onStart();
+    }
+
+    interface timerEdit {
+        void onEditFinish(RecyclerViewAdvancedCountdownItemAdapter.AdvancedCountdownItem mItem, int position);
     }
 
 }

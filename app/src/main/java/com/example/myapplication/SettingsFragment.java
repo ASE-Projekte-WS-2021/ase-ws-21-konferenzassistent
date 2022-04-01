@@ -3,15 +3,14 @@ package com.example.myapplication;
 import static com.example.myapplication.CountdownPreset.convertToAdvancedCountdownList;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
-
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.example.myapplication.data.RoomDB;
 import com.example.myapplication.data.presets.checklist.ChecklistPresetPair;
@@ -56,7 +55,7 @@ public class SettingsFragment extends Fragment implements PresetEditBottomSheet.
 
         // on new checklist button
         assert bi != null;
-        bi.buttonAddChecklist.setOnClickListener(viewListener ->{
+        bi.buttonAddChecklist.setOnClickListener(viewListener -> {
             PresetEditBottomSheet presetEditBottomSheet = new PresetEditBottomSheet();
             presetEditBottomSheet.setupView(checklistPreset, PresetEditBottomSheet.PRESET_TYPE_CHECKLIST, this);
             presetEditBottomSheet.show(getParentFragmentManager(), presetEditBottomSheet.getTag());
@@ -64,7 +63,7 @@ public class SettingsFragment extends Fragment implements PresetEditBottomSheet.
         });
 
         // on new countdown button
-        bi.buttonAddCountdown.setOnClickListener(viewListener ->{
+        bi.buttonAddCountdown.setOnClickListener(viewListener -> {
             createCountdownList();
             PresetEditBottomSheet presetEditBottomSheet = new PresetEditBottomSheet();
             presetEditBottomSheet.setupView(countdownPresets, PresetEditBottomSheet.PRESET_TYPE_COUNTDOWN, this);
@@ -72,13 +71,13 @@ public class SettingsFragment extends Fragment implements PresetEditBottomSheet.
         });
     }
 
-    private void createCountdownList(){
+    private void createCountdownList() {
         // Load Countdowns Objects
         List<CountdownPresetPair> d;
         d = database.countdownPresetWIthParentDao().getCountdowns();
 
         countdownPresets.clear();
-        d.forEach(preset ->{
+        d.forEach(preset -> {
             String presetName = preset.getPresets().getTitle();
             int presetId = preset.getPresets().getID();
 
@@ -86,16 +85,16 @@ public class SettingsFragment extends Fragment implements PresetEditBottomSheet.
         });
     }
 
-    private void createChecklistList(){
+    private void createChecklistList() {
         List<ChecklistPresetPair> d;
         d = database.checklistPresetWithItemDao().getPresets();
 
         checklistPreset.clear();
-        d.forEach(preset ->{
+        d.forEach(preset -> {
             String presetName = preset.getPresets().getTitle();
             Integer presetId = preset.getPresets().getID();
 
-            checklistPreset.add(new ChecklistPreset(presetName, ChecklistPreset.convertToChecklistItems(preset), presetId ));
+            checklistPreset.add(new ChecklistPreset(presetName, ChecklistPreset.convertToChecklistItems(preset), presetId));
         });
     }
 

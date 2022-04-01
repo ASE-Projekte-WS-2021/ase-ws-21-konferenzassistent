@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.ItemTouchHelper;
@@ -20,12 +19,12 @@ import com.example.myapplication.data.RoomDB;
 import java.util.List;
 
 public class MeetingHistoryAdapter extends RecyclerView.Adapter<MeetingHistoryAdapter.MeetingHistoryViewHolder> implements
-CardviewTouchHelperAdapter, CustomAlertBottomSheetAdapter.onLeaveListener{
+        CardviewTouchHelperAdapter, CustomAlertBottomSheetAdapter.onLeaveListener {
     private final Context ct;
     private final FragmentManager manager;
     private final List<Meeting> meetingsList;
-    private CardviewTouchHelper cTouchHelper;
     swiped swipedListener;
+    private CardviewTouchHelper cTouchHelper;
     private int swipedItemPosition = -1;
 
     public MeetingHistoryAdapter(Context ct, FragmentManager manager, List<Meeting> meetingsList, swiped swipedListener) {
@@ -35,15 +34,11 @@ CardviewTouchHelperAdapter, CustomAlertBottomSheetAdapter.onLeaveListener{
         this.swipedListener = swipedListener;
     }
 
-    interface swiped{
-        void onDeleteSwipe(Integer size);
-    }
-
     @NonNull
     @Override
     public MeetingHistoryViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(ct);
-        View view = inflater.inflate(R.layout.meeting_history_row,parent,false);
+        View view = inflater.inflate(R.layout.meeting_history_row, parent, false);
         return new MeetingHistoryViewHolder(view);
     }
 
@@ -52,19 +47,19 @@ CardviewTouchHelperAdapter, CustomAlertBottomSheetAdapter.onLeaveListener{
 
         // Get the Values from the meeting List
         int id = Integer.parseInt(meetingsList.get(position).getId());
-        String duration = Integer.parseInt(meetingsList.get(position).getDuration())/60 + "";
+        String duration = Integer.parseInt(meetingsList.get(position).getDuration()) / 60 + "";
         String startTime = meetingsList.get(position).getDate().substring(11);
         String endTime = meetingsList.get(position).getDateEnd().substring(11);
         String participants = meetingsList.get(position).getNumberParticipants();
         String ort = meetingsList.get(position).getLocation();
-        String date = meetingsList.get(position).getDate().substring(0,10);
+        String date = meetingsList.get(position).getDate().substring(0, 10);
         String title = meetingsList.get(position).getTitle();
 
         // set the Text Values of the Holder
         holder.tvDate.setText(date);
-        holder.tvTime.setText(String.format(ct.getString(R.string.meeting_history_minutes_divider),startTime,endTime));
+        holder.tvTime.setText(String.format(ct.getString(R.string.meeting_history_minutes_divider), startTime, endTime));
         holder.tvLocation.setText(ort);
-        holder.tvDuration.setText(String.format(ct.getString(R.string.meeting_history_minutes_short),duration));
+        holder.tvDuration.setText(String.format(ct.getString(R.string.meeting_history_minutes_short), duration));
         holder.tvNumParticipants.setText(participants);
         holder.tvTitle.setText(title);
 
@@ -72,10 +67,10 @@ CardviewTouchHelperAdapter, CustomAlertBottomSheetAdapter.onLeaveListener{
         holder.cardView.setOnClickListener(view -> {
             // create a new bottom sheet and set the values for the view
             MeetingBottomSheetAdapter meetingBottomSheetAdapter = new MeetingBottomSheetAdapter();
-            meetingBottomSheetAdapter.show(manager , meetingBottomSheetAdapter.getTag());
+            meetingBottomSheetAdapter.show(manager, meetingBottomSheetAdapter.getTag());
             meetingBottomSheetAdapter.setValues(
                     id,
-                    String.format(ct.getString(R.string.meeting_history_minutes_long),duration),
+                    String.format(ct.getString(R.string.meeting_history_minutes_long), duration),
                     date,
                     startTime,
                     endTime,
@@ -116,7 +111,7 @@ CardviewTouchHelperAdapter, CustomAlertBottomSheetAdapter.onLeaveListener{
 */
     }
 
-    public void setTouchHelper(ItemTouchHelper touchHelper){
+    public void setTouchHelper(ItemTouchHelper touchHelper) {
         this.cTouchHelper = cTouchHelper;
     }
 
@@ -136,8 +131,29 @@ CardviewTouchHelperAdapter, CustomAlertBottomSheetAdapter.onLeaveListener{
         customAlertBottomSheetAdapter.show(manager, customAlertBottomSheetAdapter.getTag());
     }
 
+    @Override
+    public void onLeaving() {
+        RoomDB database = RoomDB.getInstance(ct.getApplicationContext());
+        database.meetingDao().delete(database.meetingDao().getOne(Integer.parseInt(meetingsList.get(swipedItemPosition).getId())));
+
+        notifyItemRemoved(swipedItemPosition);
+        meetingsList.remove(swipedItemPosition);
+        swipedListener.onDeleteSwipe(meetingsList.size());
+
+        swipedItemPosition = -1;
+    }
+
+    @Override
+    public void clearWarnings() {
+        notifyDataSetChanged();
+    }
+
+    interface swiped {
+        void onDeleteSwipe(Integer size);
+    }
+
     public static class MeetingHistoryViewHolder extends RecyclerView.ViewHolder implements
-    /*View.OnClickListener,*/ View.OnTouchListener, GestureDetector.OnGestureListener {
+            /*View.OnClickListener,*/ View.OnTouchListener, GestureDetector.OnGestureListener {
 
         CardView cardView;
         TextView tvDate, tvTime, tvLocation, tvDuration, tvNumParticipants, tvTitle;
@@ -186,34 +202,18 @@ CardviewTouchHelperAdapter, CustomAlertBottomSheetAdapter.onLeaveListener{
         public boolean onFling(MotionEvent motionEvent, MotionEvent motionEvent1, float v, float v1) {
             return true;
         }
-/*
-        @Override
-        public void onClick(View view) {
 
-        }
-*/
+        /*
+                @Override
+                public void onClick(View view) {
+
+                }
+        */
         @Override
         public boolean onTouch(View view, MotionEvent motionEvent) {
             view.performClick();
             cGestureDetector.onTouchEvent(motionEvent);
             return true;
         }
-    }
-
-    @Override
-    public void onLeaving() {
-        RoomDB database = RoomDB.getInstance(ct.getApplicationContext());
-        database.meetingDao().delete(database.meetingDao().getOne(Integer.parseInt(meetingsList.get(swipedItemPosition).getId())));
-
-        notifyItemRemoved(swipedItemPosition);
-        meetingsList.remove(swipedItemPosition);
-        swipedListener.onDeleteSwipe(meetingsList.size());
-
-        swipedItemPosition = -1;
-    }
-
-    @Override
-    public void clearWarnings() {
-        notifyDataSetChanged();
     }
 }

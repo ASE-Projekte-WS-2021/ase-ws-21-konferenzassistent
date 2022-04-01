@@ -15,12 +15,12 @@ import com.example.myapplication.R;
 
 import java.util.ArrayList;
 
-public class RecycleViewAttendingParticipantList extends RecyclerView.Adapter<RecycleViewAttendingParticipantList.ViewHolder>{
+public class RecycleViewAttendingParticipantList extends RecyclerView.Adapter<RecycleViewAttendingParticipantList.ViewHolder> {
 
     // Content
     private final ArrayList<Participant> mParticipants;
-    private ArrayList<Participant> mParticipantsCopy = new ArrayList<>();
     private final Context mContext;
+    private final ArrayList<Participant> mParticipantsCopy = new ArrayList<>();
 
     public RecycleViewAttendingParticipantList(ArrayList<Participant> mParticipants, Context mContext) {
         this.mParticipants = mParticipants;
@@ -30,26 +30,26 @@ public class RecycleViewAttendingParticipantList extends RecyclerView.Adapter<Re
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-            Participant participant = mParticipants.get(holder.getAdapterPosition());
-            holder.participantName.setText(participant.getName());
-            holder.participantStatus.setText(participant.getStatus());
+        Participant participant = mParticipants.get(holder.getAdapterPosition());
+        holder.participantName.setText(participant.getName());
+        holder.participantStatus.setText(participant.getStatus());
 
-            holder.participantContainer.setVisibility(participant.getSelected()? View.VISIBLE : View.GONE);
+        holder.participantContainer.setVisibility(participant.getSelected() ? View.VISIBLE : View.GONE);
 
-            }
+    }
 
     @Override
     public int getItemCount() {
-            return mParticipants.size();
-            }
+        return mParticipants.size();
+    }
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType){
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_participant_item,
-            parent, false);
-            return new ViewHolder(view);
-            }
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_participant_item,
+                parent, false);
+        return new ViewHolder(view);
+    }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView participantName;
@@ -57,7 +57,7 @@ public class RecycleViewAttendingParticipantList extends RecyclerView.Adapter<Re
         ImageView isParticipant;
         LinearLayout participantContainer;
 
-        public ViewHolder(View countdownView){
+        public ViewHolder(View countdownView) {
             super(countdownView);
             participantName = countdownView.findViewById(R.id.participant_name);
             participantStatus = countdownView.findViewById(R.id.participant_status);

@@ -1,14 +1,12 @@
 package com.example.myapplication;
 
 import android.content.Context;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -25,8 +23,7 @@ public class RecyclerViewPresetAdapter
     public RecyclerViewPresetAdapter(
             ArrayList<String> mPresetNames,
             ArrayList<Integer> mSelectIndicators,
-            Context mContext)
-    {
+            Context mContext) {
         this.mPresetNames = mPresetNames;
         this.mSelectIndicators = mSelectIndicators;
         this.mContext = mContext;
@@ -46,8 +43,8 @@ public class RecyclerViewPresetAdapter
         holder.selectIndicator.setVisibility(mSelectIndicators.get(holder.getAdapterPosition()));
 
         holder.itemContainer.setOnClickListener(view -> {
-            if(mContext instanceof MainActivity){
-                ((MainActivity)mContext).getMeetingAdapter().signalPresetChange(holder.getAdapterPosition());
+            if (mContext instanceof MainActivity) {
+                ((MainActivity) mContext).getMeetingAdapter().signalPresetChange(holder.getAdapterPosition());
             }
 
         });
@@ -59,7 +56,7 @@ public class RecyclerViewPresetAdapter
     }
 
     // View holder Class
-    public static class ViewHolder extends RecyclerView.ViewHolder{
+    public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView presetName;
         ImageView selectIndicator;
         RelativeLayout itemContainer;

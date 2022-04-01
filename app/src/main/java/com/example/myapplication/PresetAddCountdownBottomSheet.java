@@ -19,33 +19,24 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 import java.util.ArrayList;
 
-public class PresetAddCountdownBottomSheet extends BottomSheetDialogFragment implements CustomAlertBottomSheetAdapter.onLeaveListener{
-    BottomSheetCountdownAddNewBinding bi;
-    BottomSheetBehavior<View> bottomSheetBehavior;
-
-    Boolean warning = false;
-
+public class PresetAddCountdownBottomSheet extends BottomSheetDialogFragment implements CustomAlertBottomSheetAdapter.onLeaveListener {
     // max scroll before it counts as attempt to close
     final static float MIN_SCROLL_FOR_CLOSURE = 0.5f;
-
+    BottomSheetCountdownAddNewBinding bi;
+    BottomSheetBehavior<View> bottomSheetBehavior;
+    Boolean warning = false;
     RecyclerViewCreatedCountdownElementsAdapter recyclerViewCreatedCountdownElementsAdapter;
     RecyclerViewCreatedChecklistAdapter recyclerViewCreatedChecklistAdapter;
     editingDone listener;
 
     Integer viewType;
-
+    // Preset Lists
+    private ArrayList<RecyclerViewAdvancedCountdownAdapter.AdvancedCountdownObject> advancedCountdownObjects;
+    private ArrayList<ChecklistItem> checklistItems;
 
     public void getViewType(Integer viewType) {
         this.viewType = viewType;
     }
-
-    interface editingDone{
-        void onEditingDone(Preset preset);
-    }
-
-    // Preset Lists
-    private ArrayList<RecyclerViewAdvancedCountdownAdapter.AdvancedCountdownObject> advancedCountdownObjects;
-    private ArrayList<ChecklistItem> checklistItems;
 
     // Make the background Transparent
     @Override
@@ -58,7 +49,7 @@ public class PresetAddCountdownBottomSheet extends BottomSheetDialogFragment imp
 
     @NonNull
     @Override
-    public Dialog onCreateDialog(Bundle savedInstanceState){
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
         BottomSheetDialog bottomSheet = (BottomSheetDialog) super.onCreateDialog(savedInstanceState);
 
         // inflating Layout
@@ -88,7 +79,7 @@ public class PresetAddCountdownBottomSheet extends BottomSheetDialogFragment imp
             @Override
             public void onStateChanged(@NonNull View bottomSheet, int newState) {
                 // check if the state is collapsed while its not cancelable
-                if(newState == BottomSheetBehavior.STATE_COLLAPSED){
+                if (newState == BottomSheetBehavior.STATE_COLLAPSED) {
                     bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
                 }
             }
@@ -96,7 +87,7 @@ public class PresetAddCountdownBottomSheet extends BottomSheetDialogFragment imp
             @Override
             public void onSlide(@NonNull View bottomSheet, float slideOffset) {
                 // if its not cancelable open the warning
-                if(slideOffset < MIN_SCROLL_FOR_CLOSURE){
+                if (slideOffset < MIN_SCROLL_FOR_CLOSURE) {
                     openWarning();
                 }
 
@@ -106,7 +97,7 @@ public class PresetAddCountdownBottomSheet extends BottomSheetDialogFragment imp
         });
 
         // Change the Layout depending on the ViewType
-        if(viewType.equals(PresetEditBottomSheet.PRESET_TYPE_CHECKLIST)){
+        if (viewType.equals(PresetEditBottomSheet.PRESET_TYPE_CHECKLIST)) {
             bi.createNewText.setText("Checklistenitem hinzufügen");
             bi.createTopText.setText("Custom Checkliste erstellen");
         }
@@ -117,17 +108,15 @@ public class PresetAddCountdownBottomSheet extends BottomSheetDialogFragment imp
         // On the add Button
         bi.addCountdown.setOnClickListener(viewListener -> {
             // If its the Countdown View
-            if(viewType.equals(PresetEditBottomSheet.PRESET_TYPE_COUNTDOWN)){
+            if (viewType.equals(PresetEditBottomSheet.PRESET_TYPE_COUNTDOWN)) {
                 // Create new countdown item
                 ArrayList<RecyclerViewAdvancedCountdownItemAdapter.AdvancedCountdownItem> children = new ArrayList<>();
-                children.add( new RecyclerViewAdvancedCountdownItemAdapter.AdvancedCountdownItem((long)15, ""));
+                children.add(new RecyclerViewAdvancedCountdownItemAdapter.AdvancedCountdownItem((long) 15, ""));
 
                 // add it to the countdown and notify the recyclerView
                 advancedCountdownObjects.add(new RecyclerViewAdvancedCountdownAdapter.AdvancedCountdownObject("", true, children));
                 recyclerViewCreatedCountdownElementsAdapter.notifyItemInserted(advancedCountdownObjects.size());
-            }
-            else
-            {
+            } else {
                 // create new checklist item and add it to the checklist array
                 ChecklistItem item = new ChecklistItem("", "", false);
                 checklistItems.add(item);
@@ -138,25 +127,23 @@ public class PresetAddCountdownBottomSheet extends BottomSheetDialogFragment imp
         });
 
         // On Save Button
-        bi.dialogCreateButton.setOnClickListener(viewListener ->{
-                    // check view
-                    if(viewType.equals(PresetEditBottomSheet.PRESET_TYPE_COUNTDOWN)){
-                        // Create a new Countdown Preset
-                        listener.onEditingDone(
-                            new CountdownPreset(
+        bi.dialogCreateButton.setOnClickListener(viewListener -> {
+            // check view
+            if (viewType.equals(PresetEditBottomSheet.PRESET_TYPE_COUNTDOWN)) {
+                // Create a new Countdown Preset
+                listener.onEditingDone(
+                        new CountdownPreset(
                                 bi.presetName.getText().toString(), advancedCountdownObjects, -1)
-                        );
-                    }
-                    else
-                    {
-                        // Create a new Checklist Preset
-                        listener.onEditingDone(
-                                new ChecklistPreset(
-                                        bi.presetName.getText().toString(), checklistItems, -1)
-                        );
-                    }
-                    dismiss();
-                });
+                );
+            } else {
+                // Create a new Checklist Preset
+                listener.onEditingDone(
+                        new ChecklistPreset(
+                                bi.presetName.getText().toString(), checklistItems, -1)
+                );
+            }
+            dismiss();
+        });
 
         setStyle(CustomAlertBottomSheetAdapter.STYLE_NORMAL, R.style.CustomBottomSheetDialogTheme);
 
@@ -166,17 +153,15 @@ public class PresetAddCountdownBottomSheet extends BottomSheetDialogFragment imp
     }
 
     // Build and fills the recycler view depending on the preset
-    private void buildRecyclerView(){
+    private void buildRecyclerView() {
         RecyclerView recyclerView = bi.addRecycleview;
-        if(viewType.equals(PresetEditBottomSheet.PRESET_TYPE_COUNTDOWN)){
+        if (viewType.equals(PresetEditBottomSheet.PRESET_TYPE_COUNTDOWN)) {
             recyclerViewCreatedCountdownElementsAdapter = new RecyclerViewCreatedCountdownElementsAdapter(
                     advancedCountdownObjects,
                     this.getContext()
             );
             recyclerView.setAdapter(recyclerViewCreatedCountdownElementsAdapter);
-        }
-        else
-        {
+        } else {
             recyclerViewCreatedChecklistAdapter = new RecyclerViewCreatedChecklistAdapter(
                     checklistItems
             );
@@ -185,14 +170,14 @@ public class PresetAddCountdownBottomSheet extends BottomSheetDialogFragment imp
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
     }
 
-    public void getListener(editingDone listener){
+    public void getListener(editingDone listener) {
         this.listener = listener;
     }
 
     // open the warning dialog
-    private void openWarning(){
+    private void openWarning() {
         // check if warning alrady open
-        if(!warning){
+        if (!warning) {
             // set warning as true
             warning = true;
             // creates a Bottom sheet to create a meeting
@@ -200,12 +185,12 @@ public class PresetAddCountdownBottomSheet extends BottomSheetDialogFragment imp
             customAlertBottomSheetAdapter.setWarningText("Soll dieses neue Preset verworfen werden?");
             customAlertBottomSheetAdapter.setAcceptText("Änderungen Verwerfen");
             customAlertBottomSheetAdapter.setDeclineText("Weiter Bearbeiten");
-            customAlertBottomSheetAdapter.show(getParentFragmentManager() , customAlertBottomSheetAdapter.getTag());
+            customAlertBottomSheetAdapter.show(getParentFragmentManager(), customAlertBottomSheetAdapter.getTag());
         }
     }
 
     // resets the warning dialog so it can get opened again
-    public void resetWarning(){
+    public void resetWarning() {
         warning = false;
     }
 
@@ -217,5 +202,9 @@ public class PresetAddCountdownBottomSheet extends BottomSheetDialogFragment imp
     @Override
     public void clearWarnings() {
         resetWarning();
+    }
+
+    interface editingDone {
+        void onEditingDone(Preset preset);
     }
 }

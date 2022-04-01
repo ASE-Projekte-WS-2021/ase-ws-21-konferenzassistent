@@ -18,21 +18,15 @@ import com.example.myapplication.R;
 // https://blog.davidmedenjak.com/android/2017/06/24/viewpager-recyclerview.html
 public class LinePagerIndicatorDecoration extends RecyclerView.ItemDecoration {
 
-    private int colorActive;
-    private int colorInactive;
-
     private static final float DP = Resources.getSystem().getDisplayMetrics().density;
-
     /**
      * Height of the space the indicator takes up at the bottom of the view.
      */
     private final int mIndicatorHeight = (int) (DP * 16);
-
     /**
      * Indicator stroke width.
      */
     private final float mIndicatorStrokeWidth = DP * 2;
-
     /**
      * Indicator width.
      */
@@ -41,13 +35,13 @@ public class LinePagerIndicatorDecoration extends RecyclerView.ItemDecoration {
      * Padding between indicators.
      */
     private final float mIndicatorItemPadding = DP * 4;
-
     /**
      * Some more natural animation interpolation
      */
     private final Interpolator mInterpolator = new AccelerateDecelerateInterpolator();
-
     private final Paint mPaint = new Paint();
+    private int colorActive;
+    private int colorInactive;
 
     public LinePagerIndicatorDecoration() {
         mPaint.setStrokeCap(Paint.Cap.ROUND);
@@ -60,8 +54,8 @@ public class LinePagerIndicatorDecoration extends RecyclerView.ItemDecoration {
     public void onDrawOver(Canvas c, RecyclerView parent, RecyclerView.State state) {
         super.onDrawOver(c, parent, state);
 
-        colorActive = parent.getResources().getColor(R.color.corona_blue,null);
-        colorInactive = parent.getResources().getColor(R.color.gray,null);
+        colorActive = parent.getResources().getColor(R.color.corona_blue, null);
+        colorInactive = parent.getResources().getColor(R.color.gray, null);
 
         int itemCount = parent.getAdapter().getItemCount();
 

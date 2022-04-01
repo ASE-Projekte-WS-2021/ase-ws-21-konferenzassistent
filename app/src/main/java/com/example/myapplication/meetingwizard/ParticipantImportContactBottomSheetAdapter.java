@@ -4,7 +4,6 @@ import android.Manifest;
 import android.app.Dialog;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
-
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
@@ -29,12 +28,27 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 import java.util.ArrayList;
 
-public class ParticipantImportContactBottomSheetAdapter extends BottomSheetDialogFragment{
+public class ParticipantImportContactBottomSheetAdapter extends BottomSheetDialogFragment {
+    final static float MIN_SCROLL_FOR_CLOSURE = 0.5f;
     BottomSheetContactSelectBinding bi;
     BottomSheetBehavior<View> bottomSheetBehavior;
     RecycleViewContactList recycleViewContactList;
-
     RecycleViewContactList.contactListener listener;
+    // Participant List
+    ArrayList<Contact> mContacts = new ArrayList<>();
+    // https://stackoverflow.com/a/63546099
+    private final ActivityResultLauncher<String> requestPermissionLauncher =
+            registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted -> {
+                if (isGranted) {
+                    getContactList();
+                } else {
+                    // Explain to the user that the feature is unavailable because the
+                    // features requires a permission that the user has denied. At the
+                    // same time, respect the user's decision. Don't link to system
+                    // settings in an effort to convince the user to change their
+                    // decision.
+                }
+            });
 
     public RecycleViewContactList.contactListener getListener() {
         return listener;
@@ -43,11 +57,6 @@ public class ParticipantImportContactBottomSheetAdapter extends BottomSheetDialo
     public void setListener(RecycleViewContactList.contactListener listener) {
         this.listener = listener;
     }
-
-    // Participant List
-    ArrayList<Contact> mContacts = new ArrayList<>();
-
-    final static float MIN_SCROLL_FOR_CLOSURE = 0.5f;
 
     // Make the background Transparent
     @Override
@@ -59,7 +68,7 @@ public class ParticipantImportContactBottomSheetAdapter extends BottomSheetDialo
 
     @NonNull
     @Override
-    public Dialog onCreateDialog(Bundle savedInstanceState){
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
         BottomSheetDialog bottomSheet = (BottomSheetDialog) super.onCreateDialog(savedInstanceState);
 
         // inflating Layout
@@ -88,7 +97,7 @@ public class ParticipantImportContactBottomSheetAdapter extends BottomSheetDialo
         bottomSheetBehavior.addBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
             @Override
             public void onStateChanged(@NonNull View bottomSheet, int newState) {
-                if(newState == BottomSheetBehavior.STATE_COLLAPSED ){
+                if (newState == BottomSheetBehavior.STATE_COLLAPSED) {
                     bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
                 }
             }
@@ -113,10 +122,9 @@ public class ParticipantImportContactBottomSheetAdapter extends BottomSheetDialo
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 recycleViewContactList.filter(charSequence.toString());
-                if(charSequence == ""){
+                if (charSequence == "") {
                     bi.clearTextButton.setVisibility(View.INVISIBLE);
-                }
-                else{
+                } else {
                     bi.clearTextButton.setVisibility(View.VISIBLE);
                 }
             }
@@ -136,7 +144,7 @@ public class ParticipantImportContactBottomSheetAdapter extends BottomSheetDialo
     }
 
     // Build and fills the recycler view
-    private void buildRecyclerView(){
+    private void buildRecyclerView() {
 
         RecyclerView recyclerView = bi.contactsRecyclerView;
         recycleViewContactList = new RecycleViewContactList(
@@ -150,13 +158,12 @@ public class ParticipantImportContactBottomSheetAdapter extends BottomSheetDialo
     }
 
     // Check if user gave permission
-    private void checkPermission(){
+    private void checkPermission() {
         if (ContextCompat.checkSelfPermission(
                 requireContext(), Manifest.permission.READ_CONTACTS) ==
                 PackageManager.PERMISSION_GRANTED) {
             getContactList();
-        }
-            else {
+        } else {
             // You can directly ask for the permission.
             // The registered ActivityResultCallback gets the result of this request.
             requestPermissionLauncher.launch(Manifest.permission.READ_CONTACTS);
@@ -164,18 +171,18 @@ public class ParticipantImportContactBottomSheetAdapter extends BottomSheetDialo
     }
 
     // Gets the contact list
-    private void getContactList(){
+    private void getContactList() {
         // Init uri
         Uri uri = ContactsContract.Contacts.CONTENT_URI;
         // sort by asc
-        String sort  = ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME + " ASC";
+        String sort = ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME + " ASC";
         Cursor cursor = getActivity().getApplicationContext().getContentResolver().query(uri, null, null, null, sort);
 
         // check if cursor is empty
-        if(cursor.getCount() > 0){
+        if (cursor.getCount() > 0) {
             // iterate through the cursor
             Log.i("TAG", "getContactList: " + cursor.getCount());
-            while(cursor.moveToNext()){
+            while (cursor.moveToNext()) {
                 // get values
                 String id = cursor.getString(cursor.getColumnIndexOrThrow(ContactsContract.Contacts._ID));
                 String name = cursor.getString(cursor.getColumnIndexOrThrow(ContactsContract.Contacts.DISPLAY_NAME));
@@ -186,7 +193,7 @@ public class ParticipantImportContactBottomSheetAdapter extends BottomSheetDialo
                 Cursor phoneCursor = getActivity().getApplicationContext().getContentResolver().query(
                         uriPhone, null, selection, new String[]{id}, null);
 
-                if(phoneCursor.moveToNext()){
+                if (phoneCursor.moveToNext()) {
                     String number = phoneCursor.getString(phoneCursor.getColumnIndexOrThrow(
                             ContactsContract.CommonDataKinds.Phone.NUMBER
                     ));
@@ -195,7 +202,7 @@ public class ParticipantImportContactBottomSheetAdapter extends BottomSheetDialo
                 }
 
                 // Maybe add number
-                Log.i("TAG", "getContactList: " +mContacts);
+                Log.i("TAG", "getContactList: " + mContacts);
                 Contact contact = new Contact(name);
                 mContacts.add(contact);
                 phoneCursor.close();
@@ -206,22 +213,8 @@ public class ParticipantImportContactBottomSheetAdapter extends BottomSheetDialo
         buildRecyclerView();
     }
 
-    // https://stackoverflow.com/a/63546099
-    private ActivityResultLauncher<String> requestPermissionLauncher =
-            registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted -> {
-                if (isGranted) {
-                    getContactList();
-                } else {
-                    // Explain to the user that the feature is unavailable because the
-                    // features requires a permission that the user has denied. At the
-                    // same time, respect the user's decision. Don't link to system
-                    // settings in an effort to convince the user to change their
-                    // decision.
-                }
-            });
-
     @Override
-    public void onStart(){
+    public void onStart() {
         super.onStart();
         //bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
     }

@@ -9,10 +9,10 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
 import java.util.ArrayList;
 
 /**
-    Tab Adapter for the Countdown Activity
+ * Tab Adapter for the Countdown Activity
  */
 public class TabAdapter extends FragmentStateAdapter {
-    private ArrayList<Fragment> fragmentList = new ArrayList<>();
+    private final ArrayList<Fragment> fragmentList = new ArrayList<>();
 
     public TabAdapter(@NonNull FragmentManager fragmentManager, @NonNull Lifecycle lifecycle) {
         super(fragmentManager, lifecycle);
