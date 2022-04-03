@@ -1,6 +1,9 @@
 package com.ase.konferenzassistent.mainscreen.recycleviews;
 
+import static com.ase.konferenzassistent.mainscreen.settings.PresetEditBottomSheet.PRESET_TYPE_COUNTDOWN;
+
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,27 +18,31 @@ import androidx.core.content.res.ResourcesCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ase.konferenzassistent.R;
+import com.ase.konferenzassistent.data.RoomDB;
+import com.ase.konferenzassistent.mainscreen.settings.PresetAddCountdownBottomSheet;
 import com.ase.konferenzassistent.shared.CustomAlertBottomSheetAdapter;
 import com.ase.konferenzassistent.shared.Interfaces.Preset;
 
 import java.util.ArrayList;
 
 public class RecyclerViewCountdownPresetAdapter
-        extends RecyclerView.Adapter<RecyclerViewCountdownPresetAdapter.ViewHolder> implements CustomAlertBottomSheetAdapter.onLeaveListener {
+        extends RecyclerView.Adapter<RecyclerViewCountdownPresetAdapter.ViewHolder> implements CustomAlertBottomSheetAdapter.onLeaveListener, PresetAddCountdownBottomSheet.editingDone {
 
     private final ArrayList<? extends Preset> preset;
     private final Context mContext;
     private final onDeletionListener listener;
-
+    private final Integer viewType;
     int selectedPosition;
 
     public RecyclerViewCountdownPresetAdapter(
             ArrayList<? extends Preset> preset,
             onDeletionListener listener,
-            Context mContext) {
+            Context mContext,
+            Integer viewType) {
         this.preset = preset;
         this.mContext = mContext;
         this.listener = listener;
+        this.viewType = viewType;
     }
 
     @Override
@@ -62,10 +69,17 @@ public class RecyclerViewCountdownPresetAdapter
 
         holder.selectIndicator.setVisibility(View.VISIBLE);
         holder.selectIndicator.setBackground(ResourcesCompat.getDrawable(mContext.getResources(), R.drawable.ic_baseline_delete_forever_24, null));
-        holder.itemContainer.setOnClickListener(view -> {
-            createAlert(preset.get(holder.getAdapterPosition()).getTitle());
-            selectedPosition = holder.getAdapterPosition();
+
+        // create button event
+        holder.itemContainer.setOnClickListener(viewListener -> {
+            PresetAddCountdownBottomSheet presetAddCountdownBottomSheet = new PresetAddCountdownBottomSheet();
+            presetAddCountdownBottomSheet.getListener(this);
+            presetAddCountdownBottomSheet.getViewType(viewType, preset.get(holder.getAdapterPosition()));
+            presetAddCountdownBottomSheet.show(((AppCompatActivity)mContext).getSupportFragmentManager()
+                    , presetAddCountdownBottomSheet.getTag());
         });
+
+
     }
 
     @Override
@@ -84,6 +98,17 @@ public class RecyclerViewCountdownPresetAdapter
         customAlertBottomSheetAdapter.setAcceptText("Preset löschen"); // Positives Feedback
         customAlertBottomSheetAdapter.setDeclineText("Preset behalten"); // Negatives Feedback
         customAlertBottomSheetAdapter.show(((AppCompatActivity) mContext).getSupportFragmentManager(), customAlertBottomSheetAdapter.getTag());
+    }
+
+    @Override
+    public void onEditingDone(Preset preset) {
+        if(viewType.equals(PRESET_TYPE_COUNTDOWN)){
+            // TODO: update database entry with id
+        }
+        else {
+            // TODO: update database entry with id
+        }
+        Log.i("TAG", "onEditingDone: "+ preset.getID());
     }
 
     public interface onDeletionListener {

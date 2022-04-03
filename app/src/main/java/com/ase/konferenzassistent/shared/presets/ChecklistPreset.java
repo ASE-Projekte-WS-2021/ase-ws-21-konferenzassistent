@@ -77,4 +77,7 @@ public class ChecklistPreset implements Preset {
         this.id = id;
     }
 
+    public ArrayList<ChecklistItem> getChecklistItems() {
+        return checklistItems;
+    }
 }

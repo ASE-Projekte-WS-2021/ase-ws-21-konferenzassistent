@@ -67,7 +67,6 @@ public class PresetEditBottomSheet extends BottomSheetDialogFragment implements 
             countdownObjects.remove(position);
             recyclerViewPresetAdapter.notifyItemRemoved(countdownObjects.size());
             removeFromDatabase(RoomDB.getInstance(getContext()), id);
-
         } else {
             // Get database entries to prevent null ids
             checklistPresets.clear();
@@ -125,18 +124,6 @@ public class PresetEditBottomSheet extends BottomSheetDialogFragment implements 
 
         ((View) view.getParent()).setBackgroundColor(getResources().getColor(android.R.color.transparent, null));
 
-        bottomSheetBehavior.addBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
-            @Override
-            public void onStateChanged(@NonNull View bottomSheet, int newState) {
-            }
-
-            @Override
-            public void onSlide(@NonNull View bottomSheet, float slideOffset) {
-
-            }
-        });
-
-
         // cancel button clicked
         bi.buttonDismiss.setOnClickListener(viewListener -> dismiss());
 
@@ -144,7 +131,7 @@ public class PresetEditBottomSheet extends BottomSheetDialogFragment implements 
         bi.buttonCreate.setOnClickListener(viewListener -> {
             PresetAddCountdownBottomSheet presetAddCountdownBottomSheet = new PresetAddCountdownBottomSheet();
             presetAddCountdownBottomSheet.getListener(this);
-            presetAddCountdownBottomSheet.getViewType(viewType);
+            presetAddCountdownBottomSheet.getViewType(viewType, null);
             presetAddCountdownBottomSheet.show(getParentFragmentManager(), presetAddCountdownBottomSheet.getTag());
         });
 
@@ -190,7 +177,8 @@ public class PresetEditBottomSheet extends BottomSheetDialogFragment implements 
         recyclerViewPresetAdapter = new RecyclerViewCountdownPresetAdapter(
                 viewType.equals(PRESET_TYPE_COUNTDOWN) ? countdownObjects : checklistPresets,
                 this,
-                this.getContext()
+                this.getContext(),
+                this.viewType
         );
         recyclerView.setAdapter(recyclerViewPresetAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));

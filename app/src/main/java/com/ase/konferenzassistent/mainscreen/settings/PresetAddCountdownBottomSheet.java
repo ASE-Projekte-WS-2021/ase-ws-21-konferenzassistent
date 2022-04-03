@@ -1,7 +1,10 @@
 package com.ase.konferenzassistent.mainscreen.settings;
 
+import static com.ase.konferenzassistent.mainscreen.settings.PresetEditBottomSheet.PRESET_TYPE_COUNTDOWN;
+
 import android.app.Dialog;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -35,14 +38,27 @@ public class PresetAddCountdownBottomSheet extends BottomSheetDialogFragment imp
     RecyclerViewCreatedCountdownElementsAdapter recyclerViewCreatedCountdownElementsAdapter;
     RecyclerViewCreatedChecklistAdapter recyclerViewCreatedChecklistAdapter;
     editingDone listener;
+    Preset preset;
 
     Integer viewType;
     // Preset Lists
-    private ArrayList<RecyclerViewAdvancedCountdownAdapter.AdvancedCountdownObject> advancedCountdownObjects;
-    private ArrayList<ChecklistItem> checklistItems;
+    private final ArrayList<RecyclerViewAdvancedCountdownAdapter.AdvancedCountdownObject> advancedCountdownObjects = new ArrayList<>();
+    private final ArrayList<ChecklistItem> checklistItems = new ArrayList<>();;
 
-    public void getViewType(Integer viewType) {
+    public void getViewType(Integer viewType, Preset preset) {
         this.viewType = viewType;
+        // If the preset is not null go into edit mode
+        if(preset != null){
+            if(viewType == PRESET_TYPE_COUNTDOWN){
+                advancedCountdownObjects.addAll(((CountdownPreset)preset).getAdvancedCountdownObject());
+                this.preset = preset;
+            }
+            else
+            {
+                checklistItems.addAll(((ChecklistPreset)preset).getChecklistItems());
+                this.preset = preset;
+            }
+        }
     }
 
     // Make the background Transparent
@@ -50,8 +66,6 @@ public class PresetAddCountdownBottomSheet extends BottomSheetDialogFragment imp
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setStyle(BottomSheetDialogFragment.STYLE_NORMAL, R.style.CustomBottomSheetDialogTheme);
-        advancedCountdownObjects = new ArrayList<>();
-        checklistItems = new ArrayList<>();
     }
 
     @NonNull
@@ -115,7 +129,7 @@ public class PresetAddCountdownBottomSheet extends BottomSheetDialogFragment imp
         // On the add Button
         bi.addCountdown.setOnClickListener(viewListener -> {
             // If its the Countdown View
-            if (viewType.equals(PresetEditBottomSheet.PRESET_TYPE_COUNTDOWN)) {
+            if (viewType.equals(PRESET_TYPE_COUNTDOWN)) {
                 // Create new countdown item
                 ArrayList<RecyclerViewAdvancedCountdownItemAdapter.AdvancedCountdownItem> children = new ArrayList<>();
                 children.add(new RecyclerViewAdvancedCountdownItemAdapter.AdvancedCountdownItem((long) 15, ""));
@@ -136,17 +150,19 @@ public class PresetAddCountdownBottomSheet extends BottomSheetDialogFragment imp
         // On Save Button
         bi.dialogCreateButton.setOnClickListener(viewListener -> {
             // check view
-            if (viewType.equals(PresetEditBottomSheet.PRESET_TYPE_COUNTDOWN)) {
+            if (viewType.equals(PRESET_TYPE_COUNTDOWN)) {
                 // Create a new Countdown Preset
                 listener.onEditingDone(
                         new CountdownPreset(
-                                bi.presetName.getText().toString(), advancedCountdownObjects, -1)
+                                bi.presetName.getText().toString(), advancedCountdownObjects,
+                                preset == null? -1 : preset.getID())
                 );
             } else {
                 // Create a new Checklist Preset
                 listener.onEditingDone(
                         new ChecklistPreset(
-                                bi.presetName.getText().toString(), checklistItems, -1)
+                                bi.presetName.getText().toString(), checklistItems,
+                                preset == null? -1 : preset.getID())
                 );
             }
             dismiss();
@@ -162,7 +178,7 @@ public class PresetAddCountdownBottomSheet extends BottomSheetDialogFragment imp
     // Build and fills the recycler view depending on the preset
     private void buildRecyclerView() {
         RecyclerView recyclerView = bi.addRecycleview;
-        if (viewType.equals(PresetEditBottomSheet.PRESET_TYPE_COUNTDOWN)) {
+        if (viewType.equals(PRESET_TYPE_COUNTDOWN)) {
             recyclerViewCreatedCountdownElementsAdapter = new RecyclerViewCreatedCountdownElementsAdapter(
                     advancedCountdownObjects,
                     this.getContext()
@@ -211,7 +227,7 @@ public class PresetAddCountdownBottomSheet extends BottomSheetDialogFragment imp
         resetWarning();
     }
 
-    interface editingDone {
+    public interface editingDone {
         void onEditingDone(Preset preset);
     }
 }
