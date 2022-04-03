@@ -101,8 +101,6 @@ public class VerlaufFragment extends Fragment implements OnFilterButtonClickList
     // Creates an ArrayList From the Database entries
     private void createArrayListFromDatabase() {
         meetingsList = new ArrayList<>();
-        // List<Participant> participants = new ArrayList<>(); // never used
-
         List<MeetingParticipantPair> d = database.meetingWithParticipantDao().getMeetings();
 
         d.forEach(data -> meetingsList.add(new Meeting(

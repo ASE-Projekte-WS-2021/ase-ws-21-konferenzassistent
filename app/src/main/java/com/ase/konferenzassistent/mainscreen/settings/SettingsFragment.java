@@ -26,6 +26,7 @@ import java.util.List;
 public class SettingsFragment extends Fragment implements PresetEditBottomSheet.onCloseListener {
     FragmentSettingsBinding bi;
     RoomDB database;
+
     final ArrayList<CountdownPreset> countdownPresets = new ArrayList<>();
     final ArrayList<ChecklistPreset> checklistPreset = new ArrayList<>();
 
@@ -37,16 +38,11 @@ public class SettingsFragment extends Fragment implements PresetEditBottomSheet.
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         database = RoomDB.getInstance(getContext());
-        createCountdownList();
-        createChecklistList();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-
-
         return inflater.inflate(R.layout.fragment_settings, container, false);
     }
 
@@ -59,6 +55,7 @@ public class SettingsFragment extends Fragment implements PresetEditBottomSheet.
         // on new checklist button
         assert bi != null;
         bi.buttonAddChecklist.setOnClickListener(viewListener -> {
+            createChecklistList();
             PresetEditBottomSheet presetEditBottomSheet = new PresetEditBottomSheet();
             presetEditBottomSheet.setupView(checklistPreset, PresetEditBottomSheet.PRESET_TYPE_CHECKLIST, this);
             presetEditBottomSheet.show(getParentFragmentManager(), presetEditBottomSheet.getTag());
