@@ -114,46 +114,6 @@
                 </LinearLayout>
 
                 <!-- Paragraph -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_margin="16dp"
-                    android:layout_marginTop="32dp"
-                    >
-                    <!-- Headline -->
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:orientation="horizontal">
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/ic_baseline_looks_two_24"
-                            android:contentDescription="TODO" />
-                        <TextView
-                            android:layout_marginStart="16dp"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/ein_timer_f_r_eigene_erinnerungen"
-                            android:textStyle="bold"
-                            android:textSize="16sp"
-                            android:textColor="@color/black"/>
-
-                    </LinearLayout>
-
-                    <!-- Text -->
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="16dp"
-                        android:layout_marginTop="8dp"
-                        android:justificationMode="inter_word"
-                        android:textColor="@color/black"
-                        android:text="@string/TipsCustom"
-                        />
-                </LinearLayout>
             </LinearLayout>
         </ScrollView>
 

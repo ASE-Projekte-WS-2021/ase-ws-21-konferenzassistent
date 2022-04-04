@@ -18,7 +18,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_margin="8dp"
-                    android:text="Teilnehmer der Meetings"
+                    android:text="@string/teilnehmer_der_meetings"
                     android:textColor="@color/dark_gray"
                     android:textSize="32sp" />
 
@@ -36,7 +36,7 @@
                     android:layout_margin="16dp"
                     android:layout_marginTop="8dp"
                     android:justificationMode="inter_word"
-                    android:text="Hier kannst du alle Leute eintragen, die an deinem Meeting teilnehmen. Das Coronavirus SARS-CoV-2 wird vor allem direkt von Mensch zu Mensch übertragen, z. B. beim Sprechen, Husten oder Niesen. Wenn nach dem Meeting einer der Teilnehmer positiv getestet wird, kann in den vergangenen Meetings nachgesehen werden, wer noch mit in diesem Meeting war, um diese zu benachrichtigen, dass sie sich vielleicht angesteckt haben können. Dadurch können weitere Ausbreitungen verhindert werden."
+                    android:text="@string/leute_erklarung_wofur"
                     android:textColor="@color/black" />
 
                 <!-- Paragraph -->
