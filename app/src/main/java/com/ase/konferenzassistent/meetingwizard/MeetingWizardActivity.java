@@ -276,6 +276,7 @@ public class MeetingWizardActivity extends AppCompatActivity implements OnAdapte
 
         // start next activity
         startActivity(intent);
+        finish();
         //}
     }
 

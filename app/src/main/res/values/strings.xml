@@ -144,4 +144,5 @@
     <string name="neuinfektion_def">Die Neuinfektionen beschreiben die Anzahl von neuen, erstmaligen Ansteckungen durch Covid-19</string>
     <string name="begriffserkl_rung">Begriffserklärung</string>
     <string name="Speichern">Speichern</string>
+    <string name="countdown_activity_back_pressed_message">Meeting beenden, um zurück zum Hauptbildschirm zu gelangen.</string>
 </resources>
