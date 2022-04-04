@@ -21,20 +21,22 @@ Sie wendet sich jede Person, die ihre persönlichen Meetings sicherer gestalten 
 
 ### Johannes Hoffmann ([@jmhoffmann9612](https://github.com/jmhoffmann9612), [@Syhans](https://github.com/Syhans))
 
-- Zuständigkeit 1
-- Zuständigkeit 2
+- Organisation allgemein
+- Meetingsfilter, Layout-Design
+- Implementation RecyclerViews
 
 ### Maximilian Huber ([@MaximilianHuber](https://github.com/MaximilianHuber))
 
-- Zuständigkeit 1
-- Zuständigkeit 2
+- Datenbankaufbau und -struktur
+- Recherche Corona-Maßnahmen und -Informationen
 
 ### Yu Liu ([@Leosssss](https://github.com/Leosssss))
 
-- Zuständigkeit 1
-- Zuständigkeit 2
+- Quality Assurance
+- Layout-Design
 
 ### Tobias Zels ([@TobiasZels](https://github.com/TobiasZels))
 
-- Zuständigkeit 1
-- Zuständigkeit 2
+- Softwarearchitektur
+- Implementation allgemein
+- Countdowns, Services, Custom Checklisten/Countdowns
