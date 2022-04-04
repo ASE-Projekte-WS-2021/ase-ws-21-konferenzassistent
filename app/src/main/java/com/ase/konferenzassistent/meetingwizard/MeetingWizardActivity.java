@@ -184,9 +184,9 @@ public class MeetingWizardActivity extends AppCompatActivity implements OnAdapte
             // Set the layout dependent on the current fragment
 
             String[] posibleFragments = {"Timer", "Teilnehmer", "Checklist"};
-            Random rn = new Random();
+            Random rn = new Random(); //todo
             int pos = rn.nextInt(3);
-            String currentFragment = posibleFragments[3];
+            String currentFragment = posibleFragments[pos];
             switch (currentFragment) {
                 case "Timer":
                     informationBottomSheetAdapter.setmLayout(R.layout.information_timer);
