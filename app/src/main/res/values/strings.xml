@@ -53,7 +53,7 @@
     <string name="cancel_text">Abbrechen</string>
     <string name="contacts_header_text">Kontakte</string>
 
-    <string name="meeting_data_no_location"><![CDATA[<Keinen Ort angegeben>]]></string>
+    <string name="meeting_data_no_location">Keinen Ort angegeben</string>
 
     <string name="home_fragment_isFiltered_true">Gefiltert</string>
     <string name="home_fragment_isFiltered_false">Insgesamt</string>
@@ -80,7 +80,7 @@
     <string name="erinnerung_an_das_einhalten_von_abst_nden">Erinnerung an das Einhalten von Abständen</string>
     <string name="abstandeTips">Die Wahrscheinlichkeit, mit virushaltigen Tröpfchen und Aerosolen in Kontakt zu kommen, ist insbesondere im Umkreis von ein bis zwei Metern um eine mit dem Coronavirus SARS-CoV-2 infizierte Person erhöht. Abstand halten reduziert daher das Risiko, sich und andere anzustecken. Um nicht zu vergessen, die nötigen Abstände einzuhalten, erinnert dich die App regelmäßig daran, die Fenster aufzumachen. Du kannst einstellen, wie oft das passieren soll.</string>
     <string name="ein_timer_f_r_eigene_erinnerungen">Ein Timer für eigene Erinnerungen</string>
-    <string name="TipsCustom"><![CDATA[Wenn du noch in regelmäßigen Abständen an etwas anderes, wie an das Desinfizieren von Oberflächen erinnert werden willst, kannst du dir auch dafür einen eigenen Timer stellen.]]></string>
+    <string name="TipsCustom">Wenn du noch in regelmäßigen Abständen an etwas anderes, wie an das Desinfizieren von Oberflächen erinnert werden willst, kannst du dir auch dafür einen eigenen Timer stellen.</string>
     <string name="solle_dieses_neue_meeting_wirlich_gel_scht_werden">Solle dieses neue Meeting wirlich gelöscht werden?</string>
     <string name="nderungen_verwerfen">Änderungen Verwerfen</string>
     <string name="neues_meeting">NEUES MEETING</string>
@@ -144,5 +144,19 @@
     <string name="neuinfektion_def">Die Neuinfektionen beschreiben die Anzahl von neuen, erstmaligen Ansteckungen durch Covid-19</string>
     <string name="begriffserkl_rung">Begriffserklärung</string>
     <string name="Speichern">Speichern</string>
+    <string name="checkliste_vor_dem_meeting">Checkliste vor dem Meeting</string>
+    <string name="checkliste_beschreibung">Auch vor dem Meeting können schon Maßnahmen getroffen werden, um eine Ansteckungsgefahr zu verhindern. Mithilfe der Checkliste kannst du sicherstellen, dass du keinen der nötigen Schritte vergisst. Die Standardcheckliste sieht dabei folgende Schritte vor:</string>
+    <string name="desinfektionsmittel_bereit">Desinfektionsmittel bereit</string>
+    <string name="info_desinfect">Desinfektionsmittel töten die Coronaviren ab, und helfen somit, eine Ausbreitung zu vermeiden. Darum sollten alle Oberflächen gut desinfiziert sein.</string>
+    <string name="_3g_regelung_o_gepr_ft">3G-Regelung o.ä. geprüft</string>
+    <string name="xg_erklerung">Die 3G-Regel steht für vollständig geimpft, genesen oder negativ getestet, und ist ein Prinzip, um Neuinfektionen zu verringern. Nach der 3G-Regel dürfen nur Personen bestimmte Orte oder Veranstaltungen besuchen, die eine vollständige Impfung oder eine Genesung oder einen negativen Test nachweisen können. Beachte die für das geplante Meeting die momentan geltenden Regeln.</string>
+    <string name="masken_plexiglas_gepr_ft">Masken / Plexiglas geprüft</string>
+    <string name="maske_erklarung">Mit einer OP-Maske oder Alltagsmaske reduziert der Träger die Wahrscheinlichkeit, dass er Menschen in seiner Umgebung ansteckt. Die Maske reduziert den Ausstoß von Tröpfchen und Aerosolen und damit auch von Krankheitserregern aus den Atemwegen. Die Partikel in einem Aerosol sind zwar zu einem großen Teil kleiner als 5 Mikrometer und können daher zwischen den Maschen von Stoffmasken nach außen dringen. Eine Maske bremst aber beim Ausatmen auch das Aerosol, das mit dem Luftstrom aus den Atemwegen kommt. Auf diese Weise kann eine Maske die Konzentration infektiöser Partikel in der unmittelbaren Umgebung des Maskenträgers reduzieren. Auch Plexiglasscheiben können Aerosole blocken und somit die Ausbreitung verhindern.</string>
+    <string name="abst_nde_gew_hrleistet">Abstände gewährleistet</string>
+    <string name="abstand_erklarung">Die Wahrscheinlichkeit, mit virushaltigen Tröpfchen und Aerosolen in Kontakt zu kommen, ist insbesondere im Umkreis von ein bis zwei Metern um eine mit dem Coronavirus SARS-CoV-2 infizierte Person erhöht. Abstand halten reduziert daher das Risiko, sich und andere anzustecken.</string>
+    <string name="teilnehmer_der_meetings">Teilnehmer der Meetings</string>
+    <string name="leute_erklarung_wofur">Hier kannst du alle Leute eintragen, die an deinem Meeting teilnehmen. Das Coronavirus SARS-CoV-2 wird vor allem direkt von Mensch zu Mensch übertragen, z. B. beim Sprechen, Husten oder Niesen. Wenn nach dem Meeting einer der Teilnehmer positiv getestet wird, kann in den vergangenen Meetings nachgesehen werden, wer noch mit in diesem Meeting war, um diese zu benachrichtigen, dass sie sich vielleicht angesteckt haben können. Dadurch können weitere Ausbreitungen verhindert werden.</string>
+    <string name="timer_des_meetings">Timer des Meetings</string>
+    <string name="timer_erklerung">Während dem Meeting laufen verschiedene Timer, die dich in regelmäßigen Abständen an Maßnahmen für ein sicheres Meeting erinnern. Die Dauer zwischen den Timern kannst du hier einstellen. Durch seitlich wischen kommst du zu der Dauer, wie lange die Timer dann gehen sollen. Standardmäßig sind die beiden folgenden Timer implementiert:</string>
     <string name="countdown_activity_back_pressed_message">Meeting beenden, um zurück zum Hauptbildschirm zu gelangen.</string>
 </resources>

@@ -11,6 +11,8 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import com.ase.konferenzassistent.countdown.CountdownActivity;
 import com.ase.konferenzassistent.shared.CustomAlertBottomSheetAdapter;
@@ -24,6 +26,7 @@ import com.ase.konferenzassistent.data.RoomDB;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Random;
 
 public class MeetingWizardActivity extends AppCompatActivity implements OnAdapterItemClickListener, CustomAlertBottomSheetAdapter.onLeaveListener {
 
@@ -176,12 +179,34 @@ public class MeetingWizardActivity extends AppCompatActivity implements OnAdapte
             }
         });
 
+
+        FragmentManager manager = this.getSupportFragmentManager();
         // Information button
         findViewById(R.id.wizard_information_button).setOnClickListener(view -> {
             // creates a Bottom sheet to display Information
             InformationBottomSheetAdapter informationBottomSheetAdapter = new InformationBottomSheetAdapter();
-            // Set the layout
-            informationBottomSheetAdapter.setmLayout(R.layout.example_layout);
+            // Set the layout dependent on the current fragment
+
+            List<Fragment> fragmentList = manager.getFragments();
+
+            String currentFragment = null;
+            currentFragment = fragmentList.get(0).getTag();
+
+            switch (currentFragment) {
+                case "wizard_fragment0":
+                    informationBottomSheetAdapter.setmLayout(R.layout.information_timer);
+                    break;
+                case "wizard_fragment1":
+                    informationBottomSheetAdapter.setmLayout(R.layout.information_teilnehmer);
+                    break;
+                case "wizard_fragment2":
+                    informationBottomSheetAdapter.setmLayout(R.layout.information_checklist);
+                    break;
+                default:
+                    throw new IllegalArgumentException("Invalid fragment");
+            }
+
+            //show the info screen
             informationBottomSheetAdapter.show(getSupportFragmentManager(), informationBottomSheetAdapter.getTag());
 
 
