@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:background="@color/corona_white"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".mainscreen.MainScreenActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -41,7 +41,8 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_outline_filter_list_24" />
+                app:srcCompat="@drawable/ic_outline_filter_list_24"
+                android:contentDescription="TODO" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -63,16 +64,23 @@
             android:layout_height="match_parent"
             android:background="@color/corona_blue"
             android:orientation="vertical">
-
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:scaleType="matrix"
+                android:src="@drawable/main_layout" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/main_layout_card"
+                android:layout_marginBottom="-16dp"
+                android:background="@color/corona_white"
                 android:paddingBottom="5dp">
 
                 <fragment
                     android:id="@+id/fragment"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="8dp"
                     android:name="androidx.navigation.fragment.NavHostFragment"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -81,10 +89,13 @@
 
 
             </RelativeLayout>
+
+
         </LinearLayout>
 
 
     </ScrollView>
+
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"

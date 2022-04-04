@@ -45,7 +45,8 @@
                     android:visibility="invisible"
                     android:backgroundTint="@color/corona_blue"
                     android:background="@drawable/ic_baseline_check_24"
-                    android:textSize="16sp"/>
+                    android:textSize="16sp"
+                    android:contentDescription="TODO" />
 
             </LinearLayout>
 

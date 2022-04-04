@@ -33,11 +33,12 @@
         <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/drawable/ic_outline_people_24.xml" value="0.393" />
         <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/drawable/ic_outline_place_24.xml" value="0.393" />
         <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/drawable/ic_outline_settings_24.xml" value="0.393" />
+        <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/drawable/image2vector.xml" value="0.1" />
         <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/RKI_information.xml" value="0.2536231884057971" />
         <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/activity_checklist.xml" value="0.32653985507246375" />
         <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/activity_countdown.xml" value="0.22" />
         <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/activity_location_participants.xml" value="0.3050397877984085" />
-        <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/activity_main.xml" value="0.16" />
         <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/activity_meeting_wizard.xml" value="0.25" />
         <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/activity_past_meeting_info.xml" value="0.3632246376811594" />
         <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/activity_preset.xml" value="0.3632246376811594" />
@@ -45,24 +46,26 @@
         <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/bottom_sheet_checklist_add_new.xml" value="0.25987841945288753" />
         <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/bottom_sheet_contact_select.xml" value="0.17857142857142858" />
         <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/bottom_sheet_countdown_add_new.xml" value="0.1" />
-        <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/bottom_sheet_edit_presets.xml" value="0.1" />
+        <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/bottom_sheet_create_item.xml" value="0.22" />
+        <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/bottom_sheet_edit_presets.xml" value="0.2" />
         <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/bottom_sheet_filter_meetings.xml" value="0.33" />
         <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/bottom_sheet_information_display.xml" value="0.23961499493414387" />
         <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/bottom_sheet_location_select.xml" value="0.17857142857142858" />
         <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/bottom_sheet_participants.xml" value="0.17857142857142858" />
-        <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/bottom_sheet_participants_add_new.xml" value="0.17857142857142858" />
+        <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/bottom_sheet_participants_add_new.xml" value="0.1" />
         <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/bottom_sheet_presets.xml" value="0.17857142857142858" />
         <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/create_meeting_bottom_sheet.xml" value="0.33" />
         <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/cutsom_alert_bottom_sheet.xml" value="0.11574074074074074" />
+        <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/dialog_user_info.xml" value="0.2619047619047619" />
         <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/example_layout.xml" value="0.1" />
         <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/fragment_bottom_sheet.xml" value="0.371875" />
-        <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/fragment_countdown_information.xml" value="0.30183727034120733" />
+        <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/fragment_countdown_information.xml" value="0.11042944785276074" />
         <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/fragment_countdown_timer.xml" value="0.25" />
         <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/fragment_home.xml" value="0.22" />
         <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/fragment_mi_startseite.xml" value="0.5" />
         <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/fragment_mi_teilnehmerverwaltung.xml" value="0.22" />
         <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/fragment_presets.xml" value="0.39791666666666664" />
-        <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/fragment_settings.xml" value="0.25" />
+        <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/fragment_settings.xml" value="0.1" />
         <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/fragment_timer.xml" value="0.25" />
         <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/fragment_wizard_checklist.xml" value="0.1" />
         <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/fragment_wizard_countdown.xml" value="0.25" />
@@ -72,16 +75,20 @@
         <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/onboarding_carousel_page.xml" value="0.36302083333333335" />
         <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/participants_alert.xml" value="0.36302083333333335" />
         <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/recycler_advanced_countdown_picker.xml" value="0.21" />
-        <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/recycler_countdown_add.xml" value="0.1" />
+        <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/recycler_countdown_add.xml" value="0.25" />
         <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/recycler_countdown_item_creation.xml" value="0.11574074074074074" />
         <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/recycler_countdown_picker.xml" value="0.11574074074074074" />
         <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/recycler_participant_information_item.xml" value="0.33" />
         <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/recycler_participant_item.xml" value="0.2695035460992908" />
         <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/recycler_placeholder_item.xml" value="0.1" />
         <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/recycler_preset_item.xml" value="0.2351851851851852" />
+        <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/rki_information.xml" value="0.2619047619047619" />
+        <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/rv_row_checklist.xml" value="0.2619047619047619" />
         <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/menu/bottom_nav_menu.xml" value="0.39791666666666664" />
         <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/menu/past_meeting_info_options.xml" value="0.39791666666666664" />
         <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/menu/settings_menu.xml" value="0.39791666666666664" />
+        <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1" />
+        <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1" />
         <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/xml/root_preferences.xml" value="0.29393115942028986" />
         <entry key="..\:/Users/erdi/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/activity_checklist.xml" value="0.23641304347826086" />
         <entry key="..\:/Users/erdi/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/activity_countdown.xml" value="0.23641304347826086" />
@@ -119,6 +126,187 @@
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.14361702127659576" />
       </map>
     </option>
+  </component>
+  <component name="EntryPointsManager">
+    <entry_points version="2.0">
+      <entry_point TYPE="field" FQNAME="com.ase.konferenzassistent.meetingwizard.cdServiceObject countdownID" />
+      <entry_point TYPE="field" FQNAME="com.ase.konferenzassistent.data.TimerPresetData description" />
+      <entry_point TYPE="field" FQNAME="com.ase.konferenzassistent.data.TimerPresetData duration" />
+      <entry_point TYPE="field" FQNAME="com.ase.konferenzassistent.data.TimerPresetData ID" />
+      <entry_point TYPE="field" FQNAME="com.ase.konferenzassistent.meetingwizard.RecycleViewAttendingParticipantList.ViewHolder isParticipant" />
+      <entry_point TYPE="field" FQNAME="com.ase.konferenzassistent.mainscreen.recycleviews.RecycleViewParticipantInfoListAdapter.ViewHolder isParticipant" />
+      <entry_point TYPE="field" FQNAME="com.ase.konferenzassistent.meetingwizard.RecyclerViewCountdownAdapter mCountdownNames" />
+      <entry_point TYPE="field" FQNAME="com.ase.konferenzassistent.meetingwizard.RecyclerViewCountdownAdapter mCountdownTime" />
+      <entry_point TYPE="field" FQNAME="com.ase.konferenzassistent.meetingwizard.RecyclerViewCountdownAdapter mEnabled" />
+      <entry_point TYPE="field" FQNAME="com.ase.konferenzassistent.mainscreen.history.PastMeetingInfoActivity moreButton" />
+      <entry_point TYPE="field" FQNAME="com.ase.konferenzassistent.mainscreen.recycleviews.RecycleViewParticipantInfoListAdapter.ViewHolder participantContainer" />
+      <entry_point TYPE="field" FQNAME="com.ase.konferenzassistent.data.TimerPresetData title" />
+    </entry_points>
+    <pattern value="com.ase.konferenzassistent.ExampleUnitTest" method="addition_isCorrect" />
+    <pattern value="com.ase.konferenzassistent.meetingwizard.RecyclerViewAdvancedCountdownAdapter.AdvancedCountdownObject" />
+    <pattern value="com.ase.konferenzassistent.meetingwizard.cdServiceObject" />
+    <pattern value="com.ase.konferenzassistent.checklist.ChecklistItem" />
+    <pattern value="com.ase.konferenzassistent.data.presets.checklist.ChecklistItemDao" />
+    <pattern value="com.ase.konferenzassistent.data.presets.checklist.ChecklistItemData" />
+    <pattern value="com.ase.konferenzassistent.shared.presets.ChecklistPreset" />
+    <pattern value="com.ase.konferenzassistent.data.presets.checklist.ChecklistPresetDao" />
+    <pattern value="com.ase.konferenzassistent.data.presets.checklist.ChecklistPresetData" />
+    <pattern value="com.ase.konferenzassistent.data.presets.checklist.ChecklistPresetPair" />
+    <pattern value="com.ase.konferenzassistent.data.presets.checklist.ChecklistPresetWithItemDao" />
+    <pattern value="com.ase.konferenzassistent.data.presets.checklist.ChecklistPresetWithItemData" />
+    <pattern value="com.ase.konferenzassistent.meetingwizard.Contact" />
+    <pattern value="com.ase.konferenzassistent.countdown.CountdownActivity" />
+    <pattern value="com.ase.konferenzassistent.data.presets.countdown.CountdownItemDao" />
+    <pattern value="com.ase.konferenzassistent.data.presets.countdown.CountdownItemData" />
+    <pattern value="com.ase.konferenzassistent.data.presets.countdown.CountdownItemPair" />
+    <pattern value="com.ase.konferenzassistent.data.presets.countdown.CountdownParentDao" />
+    <pattern value="com.ase.konferenzassistent.data.presets.countdown.CountdownParentData" />
+    <pattern value="com.ase.konferenzassistent.data.presets.countdown.CountdownParentWIthItemDao" />
+    <pattern value="com.ase.konferenzassistent.data.presets.countdown.CountdownParentWithItemData" />
+    <pattern value="com.ase.konferenzassistent.shared.presets.CountdownPreset" />
+    <pattern value="com.ase.konferenzassistent.data.presets.countdown.CountdownPresetDao" />
+    <pattern value="com.ase.konferenzassistent.data.presets.countdown.CountdownPresetData" />
+    <pattern value="com.ase.konferenzassistent.data.presets.countdown.CountdownPresetPair" />
+    <pattern value="com.ase.konferenzassistent.data.presets.countdown.CountdownPresetWIthParentDao" />
+    <pattern value="com.ase.konferenzassistent.data.presets.countdown.CountdownPresetWithParentData" />
+    <pattern value="com.ase.konferenzassistent.countdown.CountdownService" />
+    <pattern value="com.ase.konferenzassistent.shared.CustomNumberPicker" />
+    <pattern value="com.ase.konferenzassistent.shared.CustomNumberPicker" method="CustomNumberPicker" />
+    <pattern value="com.ase.konferenzassistent.data.presets.checklist.ChecklistItemDao" method="delete" />
+    <pattern value="com.ase.konferenzassistent.data.presets.countdown.CountdownItemDao" method="delete" />
+    <pattern value="com.ase.konferenzassistent.data.presets.countdown.CountdownParentDao" method="delete" />
+    <pattern value="com.ase.konferenzassistent.ExampleInstrumentedTest" />
+    <pattern value="com.ase.konferenzassistent.ExampleUnitTest" />
+    <pattern value="com.ase.konferenzassistent.mainscreen.recycleviews.RecycleViewParticipantInfoListAdapter" method="filter" />
+    <pattern value="com.ase.konferenzassistent.mainscreen.history.VerlaufFragment.FilterData" />
+    <pattern value="com.ase.konferenzassistent.shared.presets.CountdownPreset" method="getAdvancedCountdownObject" />
+    <pattern value="com.ase.konferenzassistent.data.presets.checklist.ChecklistItemDao" method="getAll" />
+    <pattern value="com.ase.konferenzassistent.data.presets.checklist.ChecklistPresetDao" method="getAll" />
+    <pattern value="com.ase.konferenzassistent.data.presets.countdown.CountdownItemDao" method="getAll" />
+    <pattern value="com.ase.konferenzassistent.data.presets.countdown.CountdownParentDao" method="getAll" />
+    <pattern value="com.ase.konferenzassistent.data.presets.countdown.CountdownPresetDao" method="getAll" />
+    <pattern value="com.ase.konferenzassistent.data.MeetingDao" method="getAll" />
+    <pattern value="com.ase.konferenzassistent.meetingwizard.ParticipantImportContactBottomSheetAdapter" method="getContactList" />
+    <pattern value="com.ase.konferenzassistent.data.presets.countdown.CountdownParentWithItemData" method="getCountdownItemID" />
+    <pattern value="com.ase.konferenzassistent.data.presets.countdown.CountdownParentWithItemData" method="getCountdownParentID" />
+    <pattern value="com.ase.konferenzassistent.data.presets.countdown.CountdownPresetWithParentData" method="getCountdownParentID" />
+    <pattern value="com.ase.konferenzassistent.data.presets.checklist.ChecklistItemData" method="getID" />
+    <pattern value="com.ase.konferenzassistent.data.presets.countdown.CountdownItemData" method="getID" />
+    <pattern value="com.ase.konferenzassistent.shared.Interfaces.Preset" method="getID" />
+    <pattern value="com.ase.konferenzassistent.data.presets.countdown.CountdownParentWIthItemDao" method="getIemPair" />
+    <pattern value="com.ase.konferenzassistent.data.presets.checklist.ChecklistPresetWithItemData" method="getItemID" />
+    <pattern value="com.ase.konferenzassistent.meetingwizard.ParticipantImportContactBottomSheetAdapter" method="getListener" />
+    <pattern value="com.ase.konferenzassistent.data.MeetingWithParticipantData" method="getMeetingID" />
+    <pattern value="com.ase.konferenzassistent.data.presets.countdown.CountdownParentDao" method="getOne" />
+    <pattern value="com.ase.konferenzassistent.data.presets.countdown.CountdownItemPair" method="getParentCountdown" />
+    <pattern value="com.ase.konferenzassistent.data.MeetingWithParticipantData" method="getParticipantID" />
+    <pattern value="com.ase.konferenzassistent.data.MeetingWithParticipantDao" method="getParticipantNamesByMeetingID" />
+    <pattern value="com.ase.konferenzassistent.data.presets.checklist.ChecklistPresetWithItemData" method="getPresetID" />
+    <pattern value="com.ase.konferenzassistent.data.presets.countdown.CountdownPresetWithParentData" method="getPresetID" />
+    <pattern value="com.ase.konferenzassistent.data.presets.checklist.ChecklistPresetWithItemDao" method="getSingularPreset" />
+    <pattern value="com.ase.konferenzassistent.mainscreen.MainScreenActivity" />
+    <pattern value="com.ase.konferenzassistent.meetingwizard.MeetingWizardActivity" />
+    <pattern value="com.ase.konferenzassistent.onboarding.OnboardingActivity" />
+    <pattern value="com.ase.konferenzassistent.meetingwizard.RecyclerViewCountdownAdapter" />
+    <pattern value="com.ase.konferenzassistent.data.TimerPresetData" />
+    <pattern value="com.ase.konferenzassistent.mainscreen.history.Meeting" />
+    <pattern value="com.ase.konferenzassistent.data.MeetingDao" />
+    <pattern value="com.ase.konferenzassistent.data.MeetingData" />
+    <pattern value="com.ase.konferenzassistent.data.MeetingParticipantPair" />
+    <pattern value="com.ase.konferenzassistent.data.MeetingWithParticipantDao" />
+    <pattern value="com.ase.konferenzassistent.data.MeetingWithParticipantData" />
+    <pattern value="com.ase.konferenzassistent.onboarding.OnboardingPageData" />
+    <pattern value="com.ase.konferenzassistent.onboarding.OnboardingActivity" method="onGetStartedButtonClicked" />
+    <pattern value="com.ase.konferenzassistent.mainscreen.MainScreenActivity" method="openMeetingWizard" />
+    <pattern value="com.ase.konferenzassistent.meetingwizard.Participant" />
+    <pattern value="com.ase.konferenzassistent.data.ParticipantDao" />
+    <pattern value="com.ase.konferenzassistent.meetingwizard.ParticipantImportContactBottomSheetAdapter" />
+    <pattern value="com.ase.konferenzassistent.mainscreen.history.PastMeetingInfoActivity" />
+    <pattern value="com.ase.konferenzassistent.mainscreen.history.PastMeetingInfoActivity" method="PastMeetingInfoActivity" />
+    <pattern value="com.ase.konferenzassistent.shared.Interfaces.Preset" />
+    <pattern value="com.ase.konferenzassistent.meetingwizard.RecyclerViewAdvancedCountdownAdapter" />
+    <pattern value="com.ase.konferenzassistent.meetingwizard.RecyclerViewAdvancedCountdownItemAdapter" />
+    <pattern value="com.ase.konferenzassistent.meetingwizard.RecyclerViewAdvancedCountdownItemAdapter" method="RecyclerViewAdvancedCountdownItemAdapter" />
+    <pattern value="com.ase.konferenzassistent.meetingwizard.RecycleViewAttendingParticipantList" />
+    <pattern value="com.ase.konferenzassistent.meetingwizard.RecycleViewAttendingParticipantList" method="RecycleViewAttendingParticipantList" />
+    <pattern value="com.ase.konferenzassistent.meetingwizard.RecycleViewContactList" />
+    <pattern value="com.ase.konferenzassistent.meetingwizard.RecycleViewContactList" method="RecycleViewContactList" />
+    <pattern value="com.ase.konferenzassistent.mainscreen.recycleviews.RecycleViewParticipantInfoListAdapter" />
+    <pattern value="com.ase.konferenzassistent.mainscreen.recycleviews.RecycleViewParticipantInfoListAdapter" method="RecycleViewParticipantInfoListAdapter" />
+    <pattern value="com.ase.konferenzassistent.data.presets.checklist.ChecklistItemDao" method="reset" />
+    <pattern value="com.ase.konferenzassistent.data.presets.checklist.ChecklistPresetDao" method="reset" />
+    <pattern value="com.ase.konferenzassistent.data.presets.countdown.CountdownItemDao" method="reset" />
+    <pattern value="com.ase.konferenzassistent.data.presets.countdown.CountdownParentDao" method="reset" />
+    <pattern value="com.ase.konferenzassistent.data.presets.countdown.CountdownPresetDao" method="reset" />
+    <pattern value="com.ase.konferenzassistent.data.MeetingDao" method="reset" />
+    <pattern value="com.ase.konferenzassistent.data.ParticipantDao" method="reset" />
+    <pattern value="com.ase.konferenzassistent.countdown.CountdownActivity" method="saveToDatabase" />
+    <pattern value="com.ase.konferenzassistent.shared.presets.CountdownPreset" method="setAdvancedCountdownObject" />
+    <pattern value="com.ase.konferenzassistent.checklist.ChecklistItem" method="setChecked" />
+    <pattern value="com.ase.konferenzassistent.meetingwizard.WizardChecklistFragment" method="setCheckedItems" />
+    <pattern value="com.ase.konferenzassistent.meetingwizard.cdServiceObject" method="setCountdownID" />
+    <pattern value="com.ase.konferenzassistent.data.presets.countdown.CountdownItemPair" method="setCountdownItems" />
+    <pattern value="com.ase.konferenzassistent.mainscreen.history.Meeting" method="setDate" />
+    <pattern value="com.ase.konferenzassistent.mainscreen.history.Meeting" method="setDateEnd" />
+    <pattern value="com.ase.konferenzassistent.onboarding.OnboardingPageData" method="setDrawableID" />
+    <pattern value="com.ase.konferenzassistent.mainscreen.history.Meeting" method="setDuration" />
+    <pattern value="com.ase.konferenzassistent.meetingwizard.Participant" method="setEmail" />
+    <pattern value="com.ase.konferenzassistent.onboarding.OnboardingPageData" method="setHeadline" />
+    <pattern value="com.ase.konferenzassistent.data.presets.checklist.ChecklistItemData" method="setID" />
+    <pattern value="com.ase.konferenzassistent.data.presets.checklist.ChecklistPresetData" method="setID" />
+    <pattern value="com.ase.konferenzassistent.data.presets.countdown.CountdownItemData" method="setID" />
+    <pattern value="com.ase.konferenzassistent.data.presets.countdown.CountdownParentData" method="setID" />
+    <pattern value="com.ase.konferenzassistent.shared.presets.CountdownPreset" method="setId" />
+    <pattern value="com.ase.konferenzassistent.data.presets.countdown.CountdownPresetData" method="setID" />
+    <pattern value="com.ase.konferenzassistent.data.MeetingData" method="setID" />
+    <pattern value="com.ase.konferenzassistent.shared.presets.ChecklistPreset" method="setId" />
+    <pattern value="com.ase.konferenzassistent.mainscreen.history.Meeting" method="setId" />
+    <pattern value="com.ase.konferenzassistent.data.presets.checklist.ChecklistPresetPair" method="setItems" />
+    <pattern value="com.ase.konferenzassistent.mainscreen.history.Meeting" method="setLocation" />
+    <pattern value="com.ase.konferenzassistent.data.MeetingParticipantPair" method="setMeeting" />
+    <pattern value="com.ase.konferenzassistent.meetingwizard.RecyclerViewAdvancedCountdownAdapter.AdvancedCountdownObject" method="setmEnabled" />
+    <pattern value="com.ase.konferenzassistent.meetingwizard.RecyclerViewAdvancedCountdownAdapter.AdvancedCountdownObject" method="setmItems" />
+    <pattern value="com.ase.konferenzassistent.meetingwizard.Contact" method="setName" />
+    <pattern value="com.ase.konferenzassistent.meetingwizard.Participant" method="setName" />
+    <pattern value="com.ase.konferenzassistent.mainscreen.history.Meeting" method="setNumberParticipants" />
+    <pattern value="com.ase.konferenzassistent.data.presets.countdown.CountdownItemPair" method="setParentCountdown" />
+    <pattern value="com.ase.konferenzassistent.data.presets.countdown.CountdownPresetPair" method="setParents" />
+    <pattern value="com.ase.konferenzassistent.meetingwizard.MeetingWizardActivity" method="setParticipants" />
+    <pattern value="com.ase.konferenzassistent.data.MeetingParticipantPair" method="setParticipants" />
+    <pattern value="com.ase.konferenzassistent.data.presets.checklist.ChecklistPresetPair" method="setPresets" />
+    <pattern value="com.ase.konferenzassistent.data.presets.countdown.CountdownPresetPair" method="setPresets" />
+    <pattern value="com.ase.konferenzassistent.mainscreen.history.VerlaufFragment.FilterData" method="setShouldFilter" />
+    <pattern value="com.ase.konferenzassistent.meetingwizard.Participant" method="setStatus" />
+    <pattern value="com.ase.konferenzassistent.onboarding.OnboardingPageData" method="setSubhead" />
+    <pattern value="com.ase.konferenzassistent.meetingwizard.cdServiceObject" method="setTimer" />
+    <pattern value="com.ase.konferenzassistent.mainscreen.settings.SettingsFragment" />
+    <pattern value="com.ase.konferenzassistent.mainscreen.settings.SettingsFragment" method="SettingsFragment" />
+    <pattern value="com.ase.konferenzassistent.shared.presets.ChecklistPreset" method="setTitle" />
+    <pattern value="com.ase.konferenzassistent.shared.presets.CountdownPreset" method="setTitle" />
+    <pattern value="com.ase.konferenzassistent.mainscreen.history.Meeting" method="setTitle" />
+    <pattern value="com.ase.konferenzassistent.mainscreen.home.StartseiteFragment" />
+    <pattern value="com.ase.konferenzassistent.mainscreen.home.StartseiteFragment" method="StartseiteFragment" />
+    <pattern value="com.ase.konferenzassistent.mainscreen.participants.TeilnehmerverwaltungFragment" />
+    <pattern value="com.ase.konferenzassistent.mainscreen.participants.TeilnehmerverwaltungFragment" method="TeilnehmerverwaltungFragment" />
+    <pattern value="com.ase.konferenzassistent.data.presets.countdown.CountdownItemDao" method="update" />
+    <pattern value="com.ase.konferenzassistent.data.presets.checklist.ChecklistPresetDao" method="update" />
+    <pattern value="com.ase.konferenzassistent.data.presets.countdown.CountdownParentDao" method="update" />
+    <pattern value="com.ase.konferenzassistent.data.presets.countdown.CountdownPresetDao" method="update" />
+    <pattern value="com.ase.konferenzassistent.data.presets.checklist.ChecklistItemDao" method="update" />
+    <pattern value="com.ase.konferenzassistent.data.MeetingDao" method="update" />
+    <pattern value="com.ase.konferenzassistent.ExampleInstrumentedTest" method="useAppContext" />
+    <pattern value="com.ase.konferenzassistent.mainscreen.history.VerlaufFragment" />
+    <pattern value="com.ase.konferenzassistent.mainscreen.history.VerlaufFragment" method="VerlaufFragment" />
+    <pattern value="com.ase.konferenzassistent.mainscreen.recycleviews.RecycleViewParticipantInfoListAdapter.ViewHolder" />
+    <pattern value="com.ase.konferenzassistent.meetingwizard.RecyclerViewCountdownAdapter.ViewHolder" />
+    <pattern value="com.ase.konferenzassistent.meetingwizard.RecycleViewAttendingParticipantList.ViewHolder" />
+    <pattern value="com.ase.konferenzassistent.meetingwizard.RecyclerViewCountdownAdapter.ViewHolder" method="ViewHolder" />
+    <pattern value="com.ase.konferenzassistent.meetingwizard.WizardChecklistFragment" />
+    <pattern value="com.ase.konferenzassistent.meetingwizard.WizardChecklistFragment" method="WizardChecklistFragment" />
+    <pattern value="com.ase.konferenzassistent.meetingwizard.WizardCountdownFragment" />
+    <pattern value="com.ase.konferenzassistent.meetingwizard.WizardCountdownFragment" method="WizardCountdownFragment" />
+    <pattern value="com.ase.konferenzassistent.meetingwizard.WizardParticipantFragment" />
+    <pattern value="com.ase.konferenzassistent.meetingwizard.WizardParticipantFragment" method="WizardParticipantFragment" />
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />

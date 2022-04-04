@@ -20,11 +20,11 @@
                 android:id="@+id/item_description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
                 android:gravity="left"
-                android:hint="Timer beschreibung eingeben"
-                android:textSize="16sp"
-                android:text=""/>
+                android:hint="Timer-Beschreibung eingeben"
+                android:text=""
+                android:textColor="@color/black"
+                android:textSize="16sp" />
 
             <androidx.constraintlayout.widget.Placeholder
                 android:layout_width="0dp"
@@ -40,7 +40,8 @@
                 android:visibility="invisible"
                 android:backgroundTint="@color/corona_blue"
                 android:background="@drawable/ic_baseline_check_24"
-                android:textSize="16sp"/>
+                android:textSize="16sp"
+                android:contentDescription="TODO" />
 
             <androidx.constraintlayout.widget.Placeholder
                 android:layout_width="0dp"
@@ -52,7 +53,8 @@
                 android:layout_height="16dp"
                 android:layout_gravity="center"
                 android:layout_marginEnd="16dp"
-                android:background="@drawable/ic_baseline_arrow_forward_ios_24"/>
+                android:background="@drawable/ic_baseline_arrow_forward_ios_24"
+                android:contentDescription="TODO" />
         </LinearLayout>
 
         <View

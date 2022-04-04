@@ -35,7 +35,8 @@
                             android:layout_height="?attr/actionBarSize"
                             android:background="?attr/selectableItemBackgroundBorderless"
                             android:src="@drawable/ic_baseline_close_24"
-                            android:tint="@android:color/white" />
+                            android:tint="@android:color/white"
+                            android:contentDescription="TODO" />
 
                         <TextView
                             android:id="@+id/nameToolbar"
@@ -55,7 +56,8 @@
                             android:background="?attr/selectableItemBackgroundBorderless"
                             android:src="@drawable/ic_baseline_edit_24"
                             android:visibility="gone"
-                            android:tint="@android:color/white" />
+                            android:tint="@android:color/white"
+                            android:contentDescription="TODO" />
 
                         <ImageButton
                             android:id="@+id/moreBtn"
@@ -64,7 +66,8 @@
                             android:background="?attr/selectableItemBackgroundBorderless"
                             android:src="@drawable/ic_baseline_more_vert_24"
                             android:visibility="gone"
-                            android:tint="@android:color/white" />
+                            android:tint="@android:color/white"
+                            android:contentDescription="TODO" />
                     </LinearLayout>
                 </com.google.android.material.appbar.AppBarLayout>
 
@@ -97,7 +100,8 @@
                                     android:layout_width="?attr/actionBarSize"
                                     android:layout_height="?attr/actionBarSize"
                                     android:src="@drawable/ic_baseline_calendar_month_24"
-                                    app:tint="@color/corona_blue" />
+                                    app:tint="@color/corona_blue"
+                                    android:contentDescription="TODO" />
 
                                 <LinearLayout
                                     android:layout_width="match_parent"
@@ -160,7 +164,8 @@
                                     android:layout_height="?attr/actionBarSize"
                                     android:background="?attr/selectableItemBackgroundBorderless"
                                     android:src="@drawable/ic_baseline_schedule_24"
-                                    app:tint="@color/corona_blue" />
+                                    app:tint="@color/corona_blue"
+                                    android:contentDescription="TODO" />
 
                                 <LinearLayout
                                     android:layout_width="match_parent"
@@ -266,7 +271,8 @@
                                     android:layout_width="?attr/actionBarSize"
                                     android:layout_height="?attr/actionBarSize"
                                     android:src="@drawable/ic_outline_people_24"
-                                    app:tint="@color/corona_blue" />
+                                    app:tint="@color/corona_blue"
+                                    android:contentDescription="TODO" />
 
                                 <LinearLayout
                                     android:layout_width="0dp"
@@ -309,7 +315,8 @@
                                     android:layout_width="24dp"
                                     android:layout_height="?attr/actionBarSize"
                                     android:layout_gravity="top"
-                                    app:srcCompat="@drawable/ic_baseline_keyboard_arrow_down_24" />
+                                    app:srcCompat="@drawable/ic_baseline_keyboard_arrow_down_24"
+                                    android:contentDescription="TODO" />
                             </LinearLayout>
 
                             <LinearLayout
@@ -343,7 +350,8 @@
                                     android:layout_width="?attr/actionBarSize"
                                     android:layout_height="?attr/actionBarSize"
                                     android:src="@drawable/ic_outline_place_24"
-                                    app:tint="@color/corona_blue" />
+                                    app:tint="@color/corona_blue"
+                                    android:contentDescription="TODO" />
 
                                 <LinearLayout
                                     android:layout_width="match_parent"

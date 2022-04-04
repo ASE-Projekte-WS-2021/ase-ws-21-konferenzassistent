@@ -2,7 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".SettingsFragment">
+    tools:context=".mainscreen.settings.SettingsFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -13,6 +13,7 @@
         android:layout_height="match_parent">
 
         <androidx.cardview.widget.CardView
+            android:layout_marginBottom="8dp"
             android:layout_width="match_parent"
             app:cardCornerRadius="16dp"
             android:background="@color/corona_white"
@@ -69,7 +70,6 @@
                  <LinearLayout
                     android:id="@+id/button_add_checklist"
                     style="@style/Widget.AppCompat.Button"
-                    android:visibility="gone"
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:minHeight="48dp"

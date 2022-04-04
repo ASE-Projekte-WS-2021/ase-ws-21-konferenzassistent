@@ -7,22 +7,22 @@
 
     <fragment
         android:id="@+id/miVerlauf"
-        android:name="com.example.myapplication.VerlaufFragment"
+        android:name="com.ase.konferenzassistent.mainscreen.history.VerlaufFragment"
         android:label="Meine Meetings"
         tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/miPresets"
-        android:name="com.example.myapplication.SettingsFragment"
+        android:name="com.ase.konferenzassistent.mainscreen.settings.SettingsFragment"
         android:label="Preset Verwaltung"
         tools:layout="@layout/fragment_settings" />
     <fragment
         android:id="@+id/miStartseite"
-        android:name="com.example.myapplication.StartseiteFragment"
+        android:name="com.ase.konferenzassistent.mainscreen.home.StartseiteFragment"
         android:label="Startseite"
         tools:layout="@layout/fragment_mi_startseite" />
     <fragment
         android:id="@+id/miTeilnehmerverwaltung"
-        android:name="com.example.myapplication.TeilnehmerverwaltungFragment"
+        android:name="com.ase.konferenzassistent.mainscreen.participants.TeilnehmerverwaltungFragment"
         android:label="Teilnehmerverwaltung"
         tools:layout="@layout/fragment_mi_teilnehmerverwaltung" />
 </navigation>

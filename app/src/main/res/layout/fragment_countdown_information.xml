@@ -2,7 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".CountdownInformationFragment">
+    tools:context=".countdown.CountdownInformationFragment">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -55,7 +55,7 @@
                                 android:text="Regensburg"
                                 android:gravity="center"
                                 android:textColor="@color/white"
-                                android:textSize="24dp" />
+                                android:textSize="24sp" />
 
                             <TextView
                                 android:layout_width="match_parent"
@@ -63,7 +63,7 @@
                                 android:text="@string/meeting_ort"
                                 android:gravity="center"
                                 android:textColor="#90ffffff"
-                                android:textSize="16dp" />
+                                android:textSize="16sp" />
 
 
                         </LinearLayout>
@@ -98,7 +98,8 @@
                                     android:layout_marginTop="6dp"
                                     android:layout_marginLeft="4dp"
                                     android:src="@drawable/ic_baseline_schedule_24"
-                                    app:tint="@color/white" />
+                                    app:tint="@color/white"
+                                    android:contentDescription="TODO" />
 
                                 <TextView
                                     android:id="@+id/meeting_start_zeit_text_view"
@@ -106,7 +107,7 @@
                                     android:layout_height="wrap_content"
                                     android:text="17:00"
                                     android:textColor="@color/white"
-                                    android:textSize="34dp" />
+                                    android:textSize="34sp" />
 
 
 
@@ -119,7 +120,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="@string/meeting_startzeit"
                                 android:textColor="#90ffffff"
-                                android:textSize="16dp" />
+                                android:textSize="16sp" />
 
 
                         </LinearLayout>
@@ -143,14 +144,14 @@
                                     android:layout_marginTop="5dp"
                                     android:text="5"
                                     android:textColor="@color/white"
-                                    android:textSize="30dp" />
+                                    android:textSize="30sp" />
 
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="@string/teilnehmer"
                                     android:textColor="#90ffffff"
-                                    android:textSize="16dp" />
+                                    android:textSize="16sp" />
 
 
                             </LinearLayout>
@@ -172,7 +173,7 @@
                             android:text="@string/anwesendeteilnehmer"
                             android:gravity="center"
                             android:textColor="#90ffffff"
-                            android:textSize="16dp" />
+                            android:textSize="16sp" />
 
                     </LinearLayout>
 
