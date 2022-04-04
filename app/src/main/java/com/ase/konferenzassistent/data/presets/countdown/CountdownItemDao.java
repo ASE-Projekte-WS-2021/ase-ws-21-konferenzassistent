@@ -22,8 +22,8 @@ public interface CountdownItemDao {
     void reset(List<CountdownItemData> itemDataList);
 
     @Query("Update table_preset_countdown_item SET countdown = :sCountdown," +
-            "description = :sDescription")
-    void update(Long sCountdown, String sDescription);
+            "description = :sDescription WHERE ID = :sID")
+    void update(Long sCountdown, String sDescription, Integer sID);
 
     @Query("SELECT * FROM table_preset_countdown_item")
     List<CountdownItemData> getAll();

@@ -19,4 +19,8 @@ public interface CountdownPresetWIthParentDao {
     @Query("SELECT * FROM table_preset_countdown_data")
     List<CountdownPresetPair> getCountdowns();
 
+    @Transaction
+    @Query("DELETE FROM table_countdown_preset_with_parent WHERE presetID =:sPresetID")
+    void deleteLinking(int sPresetID);
+
 }

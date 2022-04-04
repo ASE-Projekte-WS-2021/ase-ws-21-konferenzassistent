@@ -24,4 +24,8 @@ public interface CountdownParentWIthItemDao {
     @Query("SELECT * FROM table_parent_countdown WHERE ID = :sParentID")
     CountdownItemPair getSingularCountdowns(long sParentID);
 
+    @Transaction
+    @Query("DELETE FROM table_countdown_join WHERE countdownParentID =:sCountdownParentID")
+    void deleteLinking(int sCountdownParentID);
+
 }

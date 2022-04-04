@@ -21,8 +21,8 @@ public interface CountdownParentDao {
     @Delete
     void reset(List<CountdownParentData> parentDataList);
 
-    @Query("Update table_parent_countdown SET title = :sTitle")
-    void update(String sTitle);
+    @Query("Update table_parent_countdown SET title = :sTitle WHERE ID = :sID")
+    void update(String sTitle, Integer sID);
 
     @Query("SELECT * FROM table_parent_countdown")
     List<CountdownParentData> getAll();

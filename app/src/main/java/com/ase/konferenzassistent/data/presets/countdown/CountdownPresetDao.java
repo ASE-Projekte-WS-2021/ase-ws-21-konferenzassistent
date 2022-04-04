@@ -21,8 +21,8 @@ public interface CountdownPresetDao {
     @Delete
     void reset(List<CountdownPresetData> presetDataList);
 
-    @Query("Update table_preset_countdown_data SET title = :sTitle")
-    void update(String sTitle);
+    @Query("Update table_preset_countdown_data SET title = :sTitle WHERE ID = :sID")
+    void update(String sTitle, Integer sID);
 
     @Query("SELECT * FROM table_preset_countdown_data")
     List<CountdownPresetData> getAll();

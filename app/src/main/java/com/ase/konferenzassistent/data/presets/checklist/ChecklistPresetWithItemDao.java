@@ -22,5 +22,7 @@ public interface ChecklistPresetWithItemDao {
     @Query("SELECT * FROM table_preset_checklist_data WHERE ID = :sPresetID")
     ChecklistPresetPair getSingularPreset(long sPresetID);
 
-
+    @Transaction
+    @Query("DELETE FROM table_checklist_preset_with_item WHERE presetID =:sPresetID")
+    void deleteLinking(int sPresetID);
 }
