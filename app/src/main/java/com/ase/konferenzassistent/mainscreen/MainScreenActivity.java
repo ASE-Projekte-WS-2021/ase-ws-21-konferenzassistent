@@ -188,10 +188,10 @@ public class MainScreenActivity extends AppCompatActivity {
         preset.setTitle("Standard");
 
         CountdownParentData parentData1 = new CountdownParentData();
-        parentData1.setTitle("Lüftungs Timer");
+        parentData1.setTitle("Lüftung");
 
         CountdownParentData parentData2 = new CountdownParentData();
-        parentData2.setTitle("AbstandsTimer");
+        parentData2.setTitle("Abstandskontrolle");
 
         CountdownItemData countdownItemData1 = new CountdownItemData();
         countdownItemData1.setCountdown((long) 15);

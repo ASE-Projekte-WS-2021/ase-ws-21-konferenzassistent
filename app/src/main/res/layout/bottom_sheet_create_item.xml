@@ -25,40 +25,37 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="8dp"
+                    android:layout_margin="8dp"
                     android:orientation="horizontal">
 
                     <Button
                         android:id="@+id/dialog_cancel_button"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/abbrechen"
-                        android:textSize="14sp"
-                        android:textColor="@color/break_yellow_btn"
                         android:background="@color/transparent"
-                        />
+                        android:text="@string/abbrechen"
+                        android:textColor="@color/break_yellow_btn"
+                        android:textSize="14sp" />
 
                     <TextView
                         android:layout_width="0dp"
-                        android:layout_weight="1"
                         android:layout_height="wrap_content"
-                        android:text="@string/timer_bearbeiten"
-                        android:textSize="18sp"
+                        android:layout_weight="1"
                         android:gravity="center"
-                        android:textStyle="bold"
-                        android:textColor="@color/black"/>
+                        android:text="@string/timer_bearbeiten"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
 
                     <Button
                         android:id="@+id/dialog_create_button"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Speichern"
-                        android:textSize="14sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/corona_blue"
                         android:background="@color/transparent"
-                        />
+                        android:text="Speichern"
+                        android:textColor="@color/corona_blue"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
 
                 </LinearLayout>
                 <!-- Scroll View -->

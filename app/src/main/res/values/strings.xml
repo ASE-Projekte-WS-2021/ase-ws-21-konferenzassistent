@@ -74,7 +74,7 @@
     <string name="meeting_ort">Meeting Ort</string>
     <string name="meeting_startzeit">Meeting Startzeit</string>
     <string name="teilnehmer">Teilnehmer</string>
-    <string name="anwesendeteilnehmer">AnwesendeTeilnehmer</string>
+    <string name="anwesendeteilnehmer">Anwesende Teilnehmer</string>
     <string name="lueftenTips">Das richtige Lüften von Innenräumen kann helfen, das Risiko einer Ansteckung mit dem Coronavirus SARS-CoV-2 über Aerosole zu verringern. Aerosole (feinste luftgetragene Flüssigkeitspartikel und Tröpfchenkerne) sind ein möglicher Übertragungsweg des Coronavirus SARS-CoV-2. Um nicht zu vergessen zu Lüften erinnert dich die App regelmäßig daran, die Fenster aufzumachen. Du kannst einstellen, wie oft das passieren soll.</string>
     <string name="erinnerung_ans_l_ften">Erinnerung ans Lüften</string>
     <string name="erinnerung_an_das_einhalten_von_abst_nden">Erinnerung an das Einhalten von Abständen</string>
