@@ -132,7 +132,7 @@
     <string name="startseite">Startseite</string>
     <string name="presets">Presets</string>
     <string name="teilnehmerverwaltung">Teilnehmerverwaltung</string>
-    <string name="starten">starten</string>
+    <string name="starten">Starten</string>
     <string name="neuinfektionen">Neuinfektionen</string>
     <string name="bundesweit">Bundesweit</string>
     <string name="_7_tage_inzidenz">7 Tage-Inzidenz</string>
@@ -158,4 +158,5 @@
     <string name="leute_erklarung_wofur"><![CDATA[Hier kannst du alle Leute eintragen, die an deinem Meeting teilnehmen. Das Coronavirus SARS-CoV-2 wird vor allem direkt von Mensch zu Mensch übertragen, z. B. beim Sprechen, Husten oder Niesen. Wenn nach dem Meeting einer der Teilnehmer positiv getestet wird, kann in den vergangenen Meetings nachgesehen werden, wer noch mit in diesem Meeting war, um diese zu benachrichtigen, dass sie sich vielleicht angesteckt haben können. Dadurch können weitere Ausbreitungen verhindert werden.]]></string>
     <string name="timer_des_meetings">Timer des Meetings</string>
     <string name="timer_erklerung">Während dem Meeting laufen verschiedene Timer, die dich in regelmäßigen Abständen an Maßnahmen für ein sicheres Meeting erinnern. Die Dauer zwischen den Timern kannst du hier einstellen. Durch seitlich wischen kommst du zu der Dauer, wie lange die Timer dann gehen sollen. Standardmäßig sind die beiden folgenden Timer implementiert:</string>
+    <string name="countdown_activity_back_pressed_message">Meeting beenden, um zurück zum Hauptbildschirm zu gelangen.</string>
 </resources>

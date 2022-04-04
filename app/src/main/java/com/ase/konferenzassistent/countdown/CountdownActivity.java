@@ -313,4 +313,9 @@ public class CountdownActivity extends AppCompatActivity implements Serializable
     public void clearWarnings() {
 
     }
+
+    @Override
+    public void onBackPressed() {
+        Toast.makeText(this, getString(R.string.countdown_activity_back_pressed_message), Toast.LENGTH_LONG).show();
+    }
 }
