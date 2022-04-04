@@ -1,18 +1,42 @@
 # Corona-Konferenz-Assistent
-## Visionspapier:
-### Zielgruppe:
-Die App richtet sich an Leiter von Arbeitsgruppen mit ca 5-8 Teilnehmern, die sich in Präsenz während Corona oder anderen Pandemien treffen wollen.
 
+## Überblick
 
-### Probleme:
-Ich will als Leiter einer Arbeitsgruppe persönliche Meetings abhalten und von den Vorteilen solcher profitieren, wie der direkte, persönliche Kontakt unter den Arbeitsgruppenmitgliedern. Die App ermöglicht mir sicherzustellen, dass wichtige Hyginemaßnahmen eingehalten werden, so dass meine Mitarbeiter gesund bleiben. Dadurch vergesse ich nicht wichtige Maßnahmen wie Lüften oder Abstand einhalten und kann mich auf den wichtigen Inhalt der Konferenz konzentrieren.
+Mit dem Corona-Konferenz-Assistenten lassen sich Meetings in Person tracken und man wird in der Vorbereitung und dem Abhalten dieser unterstützt. Sie kombiniert Kontakttagebuch mit Checkliste und Erinnerungen für das Corona-Regel-konforme Abhalten persönlicher Meetings.
 
+Mithilfe der App sollen in Zeiten von Corona persönliche Meetings so sicher wie möglich abgehalten werden können.
 
-### Lösungsvorschlag:
-Die App erinnert mich als Arbeitsgruppenleiter an das Lüften des Konferenzraumes, sowie das Sicherstellen anderer Vorschriften, ob von Seiten des Unternehmens oder gesetzlich vorgeschrieben. Hierbei kann eingestellt werden wie und an was alles mich die App erinnern soll. Die App liefert einige Grundparameter auf Basis dieser Vorschriften (Mindestabstand, etc.), welche individuell angepasst werden können. Nachdem zu Beginn des Meetings die App gestartet und mögliche Variablen eingegeben wurden, muss ich nur noch auf Benachrichtigungen über die Vorgaben reagieren und kann mich dadurch voll auf das Meeting konzentrieren. 
+Sie wendet sich jede Person, die ihre persönlichen Meetings sicherer gestalten möchte, empfohlen wird sie besonders für Teamleiter von Arbeitsgruppen.
 
-## MVP
-### Skizze
-![](https://github.com/ASE-Projekte-WS-2021/ase-ws-21-konferenzassistent/blob/main/documentation/mvp_skizze.png)
-### Milestone
-[Link](https://github.com/ASE-Projekte-WS-2021/ase-ws-21-konferenzassistent/milestone/1)
+[**Detailliertere Übersicht über die App und ihre Features**](https://github.com/ASE-Projekte-WS-2021/ase-ws-21-konferenzassistent/blob/readme-update/documentation/folien.pdf)
+
+## Baue App aus Quellcode
+
+- Klone Repository mit `git clone https://github.com/ASE-Projekte-WS-2021/ase-ws-21-konferenzassistent.git`
+- Öffne geklontes Repository mit Android Studio (getestet unter Version Bumblebee | 2021.1.1 Patch 2)
+- Wähle `Build > Build Bundle(s) / APK(s) > Build APK(s)`
+- Gebaute APK befindet sich im Unterordner `app/build/outputs/apk/debug` unter dem Namen `app-debug.apk`
+
+## Team
+
+### Johannes Hoffmann ([@jmhoffmann9612](https://github.com/jmhoffmann9612), [@Syhans](https://github.com/Syhans))
+
+- Organisation allgemein
+- Meetingsfilter, Layout-Design
+- Implementation RecyclerViews
+
+### Maximilian Huber ([@MaximilianHuber](https://github.com/MaximilianHuber))
+
+- Datenbankaufbau und -struktur
+- Recherche Corona-Maßnahmen und -Informationen
+
+### Yu Liu ([@Leosssss](https://github.com/Leosssss))
+
+- Quality Assurance
+- Layout-Design
+
+### Tobias Zels ([@TobiasZels](https://github.com/TobiasZels))
+
+- Softwarearchitektur
+- Implementation allgemein
+- Countdowns, Services, Custom Checklisten/Countdowns
