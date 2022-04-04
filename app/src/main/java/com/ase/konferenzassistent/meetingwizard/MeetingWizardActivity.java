@@ -11,6 +11,8 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import com.ase.konferenzassistent.countdown.CountdownActivity;
 import com.ase.konferenzassistent.shared.CustomAlertBottomSheetAdapter;
@@ -177,24 +179,27 @@ public class MeetingWizardActivity extends AppCompatActivity implements OnAdapte
             }
         });
 
+
+        FragmentManager manager = this.getSupportFragmentManager();
         // Information button
         findViewById(R.id.wizard_information_button).setOnClickListener(view -> {
             // creates a Bottom sheet to display Information
             InformationBottomSheetAdapter informationBottomSheetAdapter = new InformationBottomSheetAdapter();
             // Set the layout dependent on the current fragment
 
-            String[] posibleFragments = {"Timer", "Teilnehmer", "Checklist"};
-            Random rn = new Random(); //todo
-            int pos = rn.nextInt(3);
-            String currentFragment = posibleFragments[pos];
+            List<Fragment> fragmentList = manager.getFragments();
+
+            String currentFragment = null;
+            currentFragment = fragmentList.get(0).getTag();
+
             switch (currentFragment) {
-                case "Timer":
+                case "wizard_fragment0":
                     informationBottomSheetAdapter.setmLayout(R.layout.information_timer);
                     break;
-                case "Teilnehmer":
+                case "wizard_fragment1":
                     informationBottomSheetAdapter.setmLayout(R.layout.information_teilnehmer);
                     break;
-                case "Checkliste":
+                case "wizard_fragment2":
                     informationBottomSheetAdapter.setmLayout(R.layout.information_checklist);
                     break;
                 default:
