@@ -20,8 +20,8 @@ public interface ChecklistPresetDao {
     @Delete
     void reset(List<ChecklistPresetData> presetDataList);
 
-    @Query("Update table_preset_checklist_data SET title = :sTitle")
-    void update(String sTitle);
+    @Query("Update table_preset_checklist_data SET title = :sTitle WHERE ID = :sID")
+    void update(String sTitle, Integer sID);
 
     @Query("SELECT * FROM table_preset_checklist_data")
     List<ChecklistPresetData> getAll();

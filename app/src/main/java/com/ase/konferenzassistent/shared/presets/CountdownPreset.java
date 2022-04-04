@@ -1,5 +1,7 @@
 package com.ase.konferenzassistent.shared.presets;
 
+import com.ase.konferenzassistent.data.presets.checklist.ChecklistItemData;
+import com.ase.konferenzassistent.data.presets.checklist.ChecklistPresetWithItemData;
 import com.ase.konferenzassistent.shared.Interfaces.Preset;
 import com.ase.konferenzassistent.data.RoomDB;
 import com.ase.konferenzassistent.data.presets.countdown.CountdownItemData;
@@ -13,6 +15,7 @@ import com.ase.konferenzassistent.meetingwizard.RecyclerViewAdvancedCountdownAda
 import com.ase.konferenzassistent.meetingwizard.RecyclerViewAdvancedCountdownItemAdapter;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class CountdownPreset implements Preset {
     String title;
@@ -36,6 +39,58 @@ public class CountdownPreset implements Preset {
         CountdownPresetData presetData = new CountdownPresetData();
         presetData.setTitle(title);
         long presetId = database.countdownPresetDao().insert(presetData);
+
+        // Write Countdown into database and link with preset
+        preset.advancedCountdownObject.forEach(advancedCountdownObject -> {
+            String countdownName = advancedCountdownObject.getmCountdownName();
+            // create new countdown Parent
+            CountdownParentData parentData = new CountdownParentData();
+            parentData.setTitle(countdownName);
+            long parentId = database.countdownParentDao().insert(parentData);
+
+            // Link Parent to Preset
+            CountdownPresetWithParentData presetWithParentData = new CountdownPresetWithParentData();
+            presetWithParentData.setPresetID((int) presetId);
+            presetWithParentData.setCountdownParentID((int) parentId);
+            database.countdownPresetWIthParentDao().insert(presetWithParentData);
+
+            // Write Timer into database and link with parent
+            advancedCountdownObject.getmItems().forEach(items -> {
+                String description = items.getSubCountdownDescription();
+                Long timer = items.getSubCountdown();
+
+                // new timer
+                CountdownItemData countdownItemData = new CountdownItemData();
+                countdownItemData.setCountdown(timer);
+                countdownItemData.setDescription(description);
+                long childId = database.countdownItemDao().insert(countdownItemData);
+
+                // Link child to parent
+                CountdownParentWithItemData countdownParentWithItemData = new CountdownParentWithItemData();
+                countdownParentWithItemData.setCountdownParentID((int) parentId);
+                countdownParentWithItemData.setCountdownItemID((int) childId);
+                database.countdownParentWIthItemDao().insert(countdownParentWithItemData);
+
+            });
+        });
+    }
+
+    public static void updateCountdownDatabaseEntry(RoomDB database, CountdownPreset preset){
+        String title = preset.getTitle();
+        Integer presetId = preset.getID();
+
+        // Update preset
+        database.countdownPresetDao().update(title, presetId);
+
+        // delete old countdown items and removes the link
+        List<CountdownParentData> data = database.countdownParentDao().getAll();
+        data.forEach(countdownParentData -> {
+            database.countdownParentWIthItemDao().deleteLinking(countdownParentData.getID());
+            database.countdownParentDao().delete(countdownParentData);
+        });
+
+        // delete the linking entries
+        database.countdownPresetWIthParentDao().deleteLinking(presetId);
 
         // Write Countdown into database and link with preset
         preset.advancedCountdownObject.forEach(advancedCountdownObject -> {

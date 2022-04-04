@@ -9,6 +9,7 @@ import com.ase.konferenzassistent.data.presets.checklist.ChecklistPresetPair;
 import com.ase.konferenzassistent.data.presets.checklist.ChecklistPresetWithItemData;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ChecklistPreset implements Preset {
     String title;
@@ -45,6 +46,41 @@ public class ChecklistPreset implements Preset {
             // Link Items to Preset
             ChecklistPresetWithItemData presetWithItemData = new ChecklistPresetWithItemData();
             presetWithItemData.setPresetID((int) presetId);
+            presetWithItemData.setItemID((int) itemId);
+            database.checklistPresetWithItemDao().insert(presetWithItemData);
+        });
+    }
+
+    public static void updateChecklistDatabaseEntry(RoomDB database, ChecklistPreset preset){
+        String title = preset.getTitle();
+        Integer presetId = preset.getID();
+
+        // Update preset
+        database.checklistPresetDao().update(title, presetId);
+
+        // delete old checklist items
+        List<ChecklistItemData> data = database.checklistPresetWithItemDao().getSingularPreset(presetId).getItems();
+        if(data != null)
+        data.forEach(checklistItemData -> {
+            database.checklistItemDao().delete(checklistItemData);
+        });
+
+        // delete the linking entries
+        database.checklistPresetWithItemDao().deleteLinking(presetId);
+
+        // Update checklist into database
+        preset.checklistItems.forEach(items ->{
+            String itemName = items.getTitle();
+            String hint = items.getHint();
+
+            ChecklistItemData item = new ChecklistItemData();
+            item.setTitle(itemName);
+            item.setHint(hint);
+            long itemId = database.checklistItemDao().insert(item);
+
+            // Link Items to Preset
+            ChecklistPresetWithItemData presetWithItemData = new ChecklistPresetWithItemData();
+            presetWithItemData.setPresetID(presetId);
             presetWithItemData.setItemID((int) itemId);
             database.checklistPresetWithItemDao().insert(presetWithItemData);
         });

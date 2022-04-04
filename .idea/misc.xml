@@ -46,15 +46,16 @@
         <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/bottom_sheet_contact_select.xml" value="0.17857142857142858" />
         <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/bottom_sheet_countdown_add_new.xml" value="0.1" />
         <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/bottom_sheet_create_item.xml" value="0.22" />
-        <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/bottom_sheet_edit_presets.xml" value="0.1" />
+        <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/bottom_sheet_edit_presets.xml" value="0.2" />
         <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/bottom_sheet_filter_meetings.xml" value="0.33" />
         <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/bottom_sheet_information_display.xml" value="0.23961499493414387" />
         <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/bottom_sheet_location_select.xml" value="0.17857142857142858" />
         <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/bottom_sheet_participants.xml" value="0.17857142857142858" />
-        <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/bottom_sheet_participants_add_new.xml" value="0.17857142857142858" />
+        <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/bottom_sheet_participants_add_new.xml" value="0.1" />
         <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/bottom_sheet_presets.xml" value="0.17857142857142858" />
         <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/create_meeting_bottom_sheet.xml" value="0.33" />
         <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/cutsom_alert_bottom_sheet.xml" value="0.11574074074074074" />
+        <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/dialog_user_info.xml" value="0.2619047619047619" />
         <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/example_layout.xml" value="0.1" />
         <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/fragment_bottom_sheet.xml" value="0.371875" />
         <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/fragment_countdown_information.xml" value="0.30183727034120733" />
@@ -73,13 +74,15 @@
         <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/onboarding_carousel_page.xml" value="0.36302083333333335" />
         <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/participants_alert.xml" value="0.36302083333333335" />
         <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/recycler_advanced_countdown_picker.xml" value="0.21" />
-        <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/recycler_countdown_add.xml" value="0.1" />
+        <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/recycler_countdown_add.xml" value="0.25" />
         <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/recycler_countdown_item_creation.xml" value="0.11574074074074074" />
         <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/recycler_countdown_picker.xml" value="0.11574074074074074" />
         <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/recycler_participant_information_item.xml" value="0.33" />
         <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/recycler_participant_item.xml" value="0.2695035460992908" />
         <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/recycler_placeholder_item.xml" value="0.1" />
         <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/recycler_preset_item.xml" value="0.2351851851851852" />
+        <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/rki_information.xml" value="0.2619047619047619" />
+        <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/rv_row_checklist.xml" value="0.2619047619047619" />
         <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/menu/bottom_nav_menu.xml" value="0.39791666666666664" />
         <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/menu/past_meeting_info_options.xml" value="0.39791666666666664" />
         <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/menu/settings_menu.xml" value="0.39791666666666664" />

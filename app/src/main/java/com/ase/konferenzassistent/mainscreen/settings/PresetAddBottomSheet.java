@@ -6,13 +6,16 @@ import android.app.Dialog;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ase.konferenzassistent.R;
+import com.ase.konferenzassistent.data.RoomDB;
 import com.ase.konferenzassistent.databinding.BottomSheetCountdownAddNewBinding;
 import com.ase.konferenzassistent.mainscreen.recycleviews.RecyclerViewCreatedChecklistAdapter;
 import com.ase.konferenzassistent.mainscreen.recycleviews.RecyclerViewCreatedCountdownElementsAdapter;
@@ -28,24 +31,28 @@ import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
-public class PresetAddCountdownBottomSheet extends BottomSheetDialogFragment implements CustomAlertBottomSheetAdapter.onLeaveListener {
+public class PresetAddBottomSheet extends BottomSheetDialogFragment implements CustomAlertBottomSheetAdapter.onLeaveListener {
     // max scroll before it counts as attempt to close
     final static float MIN_SCROLL_FOR_CLOSURE = 0.5f;
+
     BottomSheetCountdownAddNewBinding bi;
     BottomSheetBehavior<View> bottomSheetBehavior;
     Boolean warning = false;
     RecyclerViewCreatedCountdownElementsAdapter recyclerViewCreatedCountdownElementsAdapter;
     RecyclerViewCreatedChecklistAdapter recyclerViewCreatedChecklistAdapter;
-    editingDone listener;
     Preset preset;
+    PresetEditBottomSheet parentSheet;
+    editingDone listener;
+    int itemPosition;
 
     Integer viewType;
     // Preset Lists
     private final ArrayList<RecyclerViewAdvancedCountdownAdapter.AdvancedCountdownObject> advancedCountdownObjects = new ArrayList<>();
     private final ArrayList<ChecklistItem> checklistItems = new ArrayList<>();;
 
-    public void getViewType(Integer viewType, Preset preset) {
+    public void setVariables(Integer viewType, Preset preset, PresetEditBottomSheet parentSheet, int itemPosition) {
         this.viewType = viewType;
         // If the preset is not null go into edit mode
         if(preset != null){
@@ -58,7 +65,9 @@ public class PresetAddCountdownBottomSheet extends BottomSheetDialogFragment imp
                 checklistItems.addAll(((ChecklistPreset)preset).getChecklistItems());
                 this.preset = preset;
             }
+            this.itemPosition = itemPosition;
         }
+        this.parentSheet = parentSheet;
     }
 
     // Make the background Transparent
@@ -123,6 +132,37 @@ public class PresetAddCountdownBottomSheet extends BottomSheetDialogFragment imp
             bi.createTopText.setText("Custom Checkliste erstellen");
         }
 
+        // Set Preset Name and checks if preset already exists
+        if(preset != null){
+            bi.presetName.setText(preset.getTitle());
+            bi.deletePreset.setVisibility(View.VISIBLE);
+            bi.deletePresetButton.setOnClickListener(viewListener ->{
+                Log.i("TAG", "onCreateDialog: ");
+                    if(preset.getTitle().equals("Standard")) {
+                        Toast.makeText(getContext(), "Die Standardeinstellungen können nicht gelöscht werden",
+                                Toast.LENGTH_LONG).show();
+                        return;
+                    }
+                    CustomAlertBottomSheetAdapter customAlertBottomSheetAdapter =
+                            new CustomAlertBottomSheetAdapter(new CustomAlertBottomSheetAdapter.onLeaveListener() {
+                        @Override
+                        public void onLeaving() {
+                            deletePreset();
+                            dismiss();
+                        }
+
+                        @Override
+                        public void clearWarnings() {
+
+                        }
+                    });
+                    customAlertBottomSheetAdapter.setWarningText("Soll das Preset \"" + preset.getTitle() + "\" wirklich gelöscht werden."); // Mitteilung
+                    customAlertBottomSheetAdapter.setAcceptText("Preset löschen"); // Positives Feedback
+                    customAlertBottomSheetAdapter.setDeclineText("Preset behalten"); // Negatives Feedback
+                    customAlertBottomSheetAdapter.show(((AppCompatActivity) requireContext()).getSupportFragmentManager(), customAlertBottomSheetAdapter.getTag());
+
+            });
+        }
         // cancel button clicked
         bi.dialogCancelButton.setOnClickListener(viewListener -> openWarning());
 
@@ -173,6 +213,10 @@ public class PresetAddCountdownBottomSheet extends BottomSheetDialogFragment imp
         buildRecyclerView();
 
         return bottomSheet;
+    }
+
+    private void deletePreset(){
+            parentSheet.deletePreset(itemPosition);
     }
 
     // Build and fills the recycler view depending on the preset

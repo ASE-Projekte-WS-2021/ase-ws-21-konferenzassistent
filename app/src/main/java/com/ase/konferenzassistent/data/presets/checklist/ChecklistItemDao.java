@@ -22,8 +22,8 @@ public interface ChecklistItemDao {
 
 
     @Query("Update table_preset_checklist_item SET title = :sTitle," +
-            "hint = :sHint")
-    void update(String sTitle, String sHint);
+            "hint = :sHint WHERE ID = :sID")
+    void update(String sTitle, String sHint, Integer sID);
 
     @Query("SELECT * FROM table_preset_checklist_item")
     List<ChecklistItemData> getAll();
