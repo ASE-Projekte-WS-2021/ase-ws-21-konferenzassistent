@@ -180,8 +180,24 @@ public class MeetingWizardActivity extends AppCompatActivity implements OnAdapte
         findViewById(R.id.wizard_information_button).setOnClickListener(view -> {
             // creates a Bottom sheet to display Information
             InformationBottomSheetAdapter informationBottomSheetAdapter = new InformationBottomSheetAdapter();
-            // Set the layout
-            informationBottomSheetAdapter.setmLayout(R.layout.example_layout);
+            // Set the layout dependent on the current fragment
+            String currentFragment = "Timer";
+            switch (currentFragment) {
+                case "Timer":
+                    informationBottomSheetAdapter.setmLayout(R.layout.information_timer);
+                    break;
+                case "Teilnehmer":
+                    informationBottomSheetAdapter.setmLayout(R.layout.information_timer);
+                    break;
+                case "Checkliste":
+                    informationBottomSheetAdapter.setmLayout(R.layout.information_timer);
+                    break;
+                default:
+                    throw new IllegalArgumentException("Invalid fragment");
+            }
+
+
+
             informationBottomSheetAdapter.show(getSupportFragmentManager(), informationBottomSheetAdapter.getTag());
 
 
