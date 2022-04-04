@@ -18,9 +18,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_margin="8dp"
-                    android:textSize="32sp"
+                    android:text="@string/checkliste_vor_dem_meeting"
                     android:textColor="@color/dark_gray"
-                    android:text="Die wichtigsten Funktionen"/>
+                    android:textSize="32sp" />
 
                 <ImageView
                     android:src="@drawable/ic_baseline_image_24"
@@ -30,6 +30,98 @@
                     android:contentDescription="TODO" />
 
                 <!-- Paragraph -->
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:layout_marginTop="8dp"
+                    android:justificationMode="inter_word"
+                    android:text="@string/checkliste_beschreibung"
+                    android:textColor="@color/black" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="16dp"
+                    android:layout_marginTop="32dp"
+                    android:orientation="vertical">
+                    <!-- Headline -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:contentDescription="TODO"
+                            android:src="@drawable/ic_baseline_looks_one_24" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:text="@string/desinfektionsmittel_bereit"
+                            android:textColor="@color/black"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+                    <!-- Text -->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="16dp"
+                        android:layout_marginTop="8dp"
+                        android:justificationMode="inter_word"
+                        android:text="@string/info_desinfect"
+                        android:textColor="@color/black" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="16dp"
+                    android:layout_marginTop="32dp"
+                    android:orientation="vertical">
+                    <!-- Headline -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:contentDescription="TODO"
+                            android:src="@drawable/ic_baseline_looks_two_24" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:text="@string/_3g_regelung_o_gepr_ft"
+                            android:textColor="@color/black"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+                    <!-- Text -->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="16dp"
+                        android:layout_marginTop="8dp"
+                        android:justificationMode="inter_word"
+                        android:text="@string/xg_erklerung"
+                        android:textColor="@color/black" />
+                </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -46,16 +138,17 @@
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/ic_baseline_looks_one_24"
+                            android:src="@drawable/ic_baseline_looks_two_24"
                             android:contentDescription="TODO" />
+
                         <TextView
-                            android:layout_marginStart="16dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/erinnerung_ans_l_ften"
-                            android:textStyle="bold"
+                            android:layout_marginStart="16dp"
+                            android:text="@string/masken_plexiglas_gepr_ft"
+                            android:textColor="@color/black"
                             android:textSize="16sp"
-                            android:textColor="@color/black"/>
+                            android:textStyle="bold" />
 
                     </LinearLayout>
 
@@ -66,52 +159,11 @@
                         android:layout_margin="16dp"
                         android:layout_marginTop="8dp"
                         android:justificationMode="inter_word"
-                        android:text="@string/lueftenTips"
+                        android:text="@string/maske_erklarung"
                         android:textColor="@color/black" />
                 </LinearLayout>
 
                 <!-- Paragraph -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_margin="16dp"
-                    android:layout_marginTop="32dp"
-                    >
-                    <!-- Headline -->
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:orientation="horizontal">
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/ic_baseline_looks_two_24"
-                            android:contentDescription="TODO" />
-                        <TextView
-                            android:layout_marginStart="16dp"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/erinnerung_an_das_einhalten_von_abst_nden"
-                            android:textStyle="bold"
-                            android:textSize="16sp"
-                            android:textColor="@color/black"/>
-
-                    </LinearLayout>
-
-                    <!-- Text -->
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="16dp"
-                        android:layout_marginTop="8dp"
-                        android:textColor="@color/black"
-                        android:justificationMode="inter_word"
-
-                        android:text="@string/abstandeTips"
-                        />
-                </LinearLayout>
 
                 <!-- Paragraph -->
                 <LinearLayout
@@ -132,14 +184,15 @@
                             android:layout_height="wrap_content"
                             android:src="@drawable/ic_baseline_looks_two_24"
                             android:contentDescription="TODO" />
+
                         <TextView
-                            android:layout_marginStart="16dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/ein_timer_f_r_eigene_erinnerungen"
-                            android:textStyle="bold"
+                            android:layout_marginStart="16dp"
+                            android:text="@string/abst_nde_gew_hrleistet"
+                            android:textColor="@color/black"
                             android:textSize="16sp"
-                            android:textColor="@color/black"/>
+                            android:textStyle="bold" />
 
                     </LinearLayout>
 
@@ -150,9 +203,8 @@
                         android:layout_margin="16dp"
                         android:layout_marginTop="8dp"
                         android:justificationMode="inter_word"
-                        android:textColor="@color/black"
-                        android:text="@string/TipsCustom"
-                        />
+                        android:text="@string/abstand_erklarung"
+                        android:textColor="@color/black" />
                 </LinearLayout>
             </LinearLayout>
         </ScrollView>
