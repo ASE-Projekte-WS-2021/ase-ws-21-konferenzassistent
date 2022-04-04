@@ -33,11 +33,12 @@
         <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/drawable/ic_outline_people_24.xml" value="0.393" />
         <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/drawable/ic_outline_place_24.xml" value="0.393" />
         <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/drawable/ic_outline_settings_24.xml" value="0.393" />
+        <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/drawable/image2vector.xml" value="0.1" />
         <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/RKI_information.xml" value="0.2536231884057971" />
         <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/activity_checklist.xml" value="0.32653985507246375" />
         <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/activity_countdown.xml" value="0.22" />
         <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/activity_location_participants.xml" value="0.3050397877984085" />
-        <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/activity_meeting_wizard.xml" value="0.25" />
         <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/activity_past_meeting_info.xml" value="0.3632246376811594" />
         <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/activity_preset.xml" value="0.3632246376811594" />
@@ -58,13 +59,13 @@
         <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/dialog_user_info.xml" value="0.2619047619047619" />
         <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/example_layout.xml" value="0.1" />
         <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/fragment_bottom_sheet.xml" value="0.371875" />
-        <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/fragment_countdown_information.xml" value="0.30183727034120733" />
+        <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/fragment_countdown_information.xml" value="0.11042944785276074" />
         <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/fragment_countdown_timer.xml" value="0.25" />
         <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/fragment_home.xml" value="0.22" />
         <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/fragment_mi_startseite.xml" value="0.5" />
         <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/fragment_mi_teilnehmerverwaltung.xml" value="0.22" />
         <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/fragment_presets.xml" value="0.39791666666666664" />
-        <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/fragment_settings.xml" value="0.25" />
+        <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/fragment_settings.xml" value="0.23148148148148148" />
         <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/fragment_timer.xml" value="0.25" />
         <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/fragment_wizard_checklist.xml" value="0.1" />
         <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/fragment_wizard_countdown.xml" value="0.25" />
