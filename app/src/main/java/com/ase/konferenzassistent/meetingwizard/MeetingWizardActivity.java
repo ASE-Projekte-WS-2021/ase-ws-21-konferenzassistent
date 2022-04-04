@@ -24,6 +24,7 @@ import com.ase.konferenzassistent.data.RoomDB;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Random;
 
 public class MeetingWizardActivity extends AppCompatActivity implements OnAdapterItemClickListener, CustomAlertBottomSheetAdapter.onLeaveListener {
 
@@ -181,16 +182,31 @@ public class MeetingWizardActivity extends AppCompatActivity implements OnAdapte
             // creates a Bottom sheet to display Information
             InformationBottomSheetAdapter informationBottomSheetAdapter = new InformationBottomSheetAdapter();
             // Set the layout dependent on the current fragment
+<<<<<<< Updated upstream
+
+            String[] posibleFragments = {"Timer", "Teilnehmer", "Checklist"};
+            Random rn = new Random();
+            int pos = rn.nextInt(3);
+            String currentFragment = posibleFragments[3];
+=======
             String currentFragment = "Timer";
+>>>>>>> Stashed changes
             switch (currentFragment) {
                 case "Timer":
                     informationBottomSheetAdapter.setmLayout(R.layout.information_timer);
                     break;
                 case "Teilnehmer":
+<<<<<<< Updated upstream
+                    informationBottomSheetAdapter.setmLayout(R.layout.information_teilnehmer);
+                    break;
+                case "Checkliste":
+                    informationBottomSheetAdapter.setmLayout(R.layout.information_checklist);
+=======
                     informationBottomSheetAdapter.setmLayout(R.layout.information_timer);
                     break;
                 case "Checkliste":
                     informationBottomSheetAdapter.setmLayout(R.layout.information_timer);
+>>>>>>> Stashed changes
                     break;
                 default:
                     throw new IllegalArgumentException("Invalid fragment");
