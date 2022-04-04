@@ -64,9 +64,6 @@ public class MainScreenActivity extends AppCompatActivity {
         // Check if Database has default values
         checkDatabaseEntries();
 
-        // Set the Button to Visible on the Home Screen
-        findViewById(R.id.main_activity_filter_button).setVisibility(View.VISIBLE);
-
         // Show Onboarding if app opened for the first time
         SharedPreferences preferences = this.getPreferences(Context.MODE_PRIVATE);
         boolean appOpenedFirstTime = preferences.getBoolean(getString(R.string.app_opened_first_time_key), true);
