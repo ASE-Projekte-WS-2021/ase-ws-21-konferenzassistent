@@ -28,8 +28,6 @@ public class RecyclerViewAdvancedCountdownItemAdapter
         this.mAdvancedCountdownItem = mAdvancedCountdownItem;
     }
 
-
-
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.subCountdownDescription.setText(mAdvancedCountdownItem.get(holder.getAdapterPosition()).subCountdownDescription);
@@ -95,8 +93,6 @@ public class RecyclerViewAdvancedCountdownItemAdapter
             subCountdownPicker = countdownView.findViewById(R.id.countdown_recycler_picker_item);
             descriptionContainer = countdownView.findViewById(R.id.countdown_recycler_description_container);
         }
-
     }
-
 
 }

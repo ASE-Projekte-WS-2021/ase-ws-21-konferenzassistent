@@ -61,9 +61,7 @@ public class ChecklistPreset implements Preset {
         // delete old checklist items
         List<ChecklistItemData> data = database.checklistPresetWithItemDao().getSingularPreset(presetId).getItems();
         if(data != null)
-        data.forEach(checklistItemData -> {
-            database.checklistItemDao().delete(checklistItemData);
-        });
+        data.forEach(checklistItemData -> database.checklistItemDao().delete(checklistItemData));
 
         // delete the linking entries
         database.checklistPresetWithItemDao().deleteLinking(presetId);

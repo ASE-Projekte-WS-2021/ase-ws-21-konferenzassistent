@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,7 +21,6 @@ import com.ase.konferenzassistent.data.MeetingWithParticipantData;
 import com.ase.konferenzassistent.data.RoomDB;
 import com.ase.konferenzassistent.meetingwizard.MeetingWizardActivity;
 import com.ase.konferenzassistent.meetingwizard.Participant;
-import com.ase.konferenzassistent.meetingwizard.RecyclerViewAdvancedCountdownAdapter;
 import com.ase.konferenzassistent.meetingwizard.cdServiceObject;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
@@ -47,7 +45,7 @@ public class CountdownActivity extends AppCompatActivity implements Serializable
     TabLayout tabLayout;
     ViewPager2 viewPager;
     TabAdapter tabAdapter;
-    ArrayList<RecyclerViewAdvancedCountdownAdapter.AdvancedCountdownObject> countdownObjects;
+    ArrayList<AdvancedCountdownObject> countdownObjects;
     ArrayList<cdServiceObject> serviceObjectArrayList = new ArrayList<>();
     ArrayList<Participant> participants = new ArrayList<>();
     private Date startDate;
@@ -162,7 +160,7 @@ public class CountdownActivity extends AppCompatActivity implements Serializable
 
         // Set listeners for End Button
         endMeetingButton.setOnClickListener(view -> Toast.makeText(getApplicationContext(),
-                "Butten gedrückt halten um Meeting zu beenden", Toast.LENGTH_SHORT).show());
+                R.string.meeting_exit_button_hint, Toast.LENGTH_SHORT).show());
 
         endMeetingButton.setOnLongClickListener(view -> {
             // Warn user about leaving
@@ -174,9 +172,9 @@ public class CountdownActivity extends AppCompatActivity implements Serializable
     // Warning when user clicks on the leave button
     private void onLeaveWarning() {
         CustomAlertBottomSheetAdapter customAlertBottomSheetAdapter = new CustomAlertBottomSheetAdapter(this);
-        customAlertBottomSheetAdapter.setWarningText("Solle das Meeting wirklich Beendet werden?");
-        customAlertBottomSheetAdapter.setAcceptText("Meeting Beenden");
-        customAlertBottomSheetAdapter.setDeclineText("Meeting Fortfahren");
+        customAlertBottomSheetAdapter.setWarningText(getString(R.string.meeting_exit_warning));
+        customAlertBottomSheetAdapter.setAcceptText(getString(R.string.meeting_exit_warning_yes));
+        customAlertBottomSheetAdapter.setDeclineText(getString(R.string.meeting_exit_warning_no));
         customAlertBottomSheetAdapter.show(getSupportFragmentManager(), customAlertBottomSheetAdapter.getTag());
     }
 
@@ -184,7 +182,7 @@ public class CountdownActivity extends AppCompatActivity implements Serializable
     @SuppressWarnings("unchecked")
     protected void getIntents() {
         countdownObjects =
-                (ArrayList<RecyclerViewAdvancedCountdownAdapter.AdvancedCountdownObject>)
+                (ArrayList<AdvancedCountdownObject>)
                         getIntent().getSerializableExtra(MeetingWizardActivity.COUNTDOWN_ARRAY);
 
         participants =
@@ -226,8 +224,6 @@ public class CountdownActivity extends AppCompatActivity implements Serializable
         startService(countdownIntent);
     }
 
-
-
     // Pauses the lueftungsCountdown
     public void pauseCountdown(Integer id) {
         // Send a Broadcast to the Service if button is pressed
@@ -244,7 +240,6 @@ public class CountdownActivity extends AppCompatActivity implements Serializable
         sendBroadcast(intent);
 
     }
-
 
     // Update Countdown Timer and sends UI updates to the Fragment
     private void updateTime(Intent intent) {
@@ -297,7 +292,6 @@ public class CountdownActivity extends AppCompatActivity implements Serializable
                 | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
         saveToDatabase();
-
         // Send -1 to signal that its the latest entry in the database
         intent.putExtra("Database_ID", -1);
         startActivity(intent);

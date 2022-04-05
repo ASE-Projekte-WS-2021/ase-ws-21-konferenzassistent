@@ -57,7 +57,7 @@ public class StartseiteFragment extends Fragment {
             // creates a Bottom sheet to display Information
             InformationBottomSheetAdapter informationBottomSheetAdapter = new InformationBottomSheetAdapter();
             // Set the layout
-            informationBottomSheetAdapter.setmLayout(R.layout.start_information);
+            informationBottomSheetAdapter.setMLayout(R.layout.start_information);
             informationBottomSheetAdapter.show(getParentFragmentManager(), informationBottomSheetAdapter.getTag());
         });
         // load RKI data
@@ -68,7 +68,6 @@ public class StartseiteFragment extends Fragment {
     // Loads the RKI data from the APi
     @SuppressLint("SetTextI18n")
     private void loadRKIData() {
-        Log.d("fragment not added debug", "loadRKIData: called");
         // check if user is connected to a Network
         if (isNetworkConnected()) {
             // check if data already got fetched today
@@ -77,11 +76,9 @@ public class StartseiteFragment extends Fragment {
             // Check if last update was more then a day ago
             if (date.getTime() - DAY_TO_MILLISEC > lastUpdated()) {
                 // if update is a day ago update
-                Log.d("fragment not added debug", "loadRKIData: Update RKI Data");
                 fetchData();
             } else {
                 // if not load from shared pref
-                Log.d("fragment not added debug", "loadRKIData: Load RKI Data from SharedPref");
                 bi.hospitalisiertungText.setText(cutDecimals(Float.toString(hospital())));
                 bi.neuinfektionenText.setText(cutDecimals(Float.toString(newInfect())));
             }
@@ -89,9 +86,7 @@ public class StartseiteFragment extends Fragment {
             // No connection
             netWorkFailed();
         }
-
     }
-
     // Fetches the data from the RKI api
     private void fetchData() {
         @SuppressLint("SetTextI18n") JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
@@ -101,7 +96,6 @@ public class StartseiteFragment extends Fragment {
 
                         float newInfect = Float.parseFloat(response.get("weekIncidence").toString());
                         float hospital = Float.parseFloat(object.get("incidence7Days").toString());
-
 
                         // Set the text
                         bi.neuinfektionenText.setText(cutDecimals(Float.toString(newInfect)));
@@ -135,13 +129,10 @@ public class StartseiteFragment extends Fragment {
     // Saves the RKI data into shared pref
     private void saveRKIData(float newInfect, float hospital, Date date) {
         if (!isAdded()) {
-            Log.d("fragment not added debug", "saveRKIData: fragment not added");
             return;
         }
         SharedPreferences sharedPreferences = this.requireActivity().
                 getSharedPreferences("RKI", Context.MODE_PRIVATE);
-
-        Log.d("fragment not added debug", "saveRKIData: Save RKI Data");
 
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putFloat(RKI_NEU_INFEKTIONEN, newInfect);
@@ -195,5 +186,4 @@ public class StartseiteFragment extends Fragment {
                 getSystemService(Context.CONNECTIVITY_SERVICE);
         return cm.getActiveNetworkInfo() != null;
     }
-
 }

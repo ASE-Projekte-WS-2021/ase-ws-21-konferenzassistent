@@ -137,7 +137,6 @@ public class ParticipantCreationBottomSheetAdapter extends BottomSheetDialogFrag
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 // check if string is empty
                 // update the create Button
-                // update the create Button
                 isCreateable(charSequence.length() != 0);
             }
 
@@ -146,9 +145,6 @@ public class ParticipantCreationBottomSheetAdapter extends BottomSheetDialogFrag
 
             }
         });
-        // cancel button clicked
-        //bi.buttonDismiss.setOnClickListener(viewListener -> dismiss());
-
         isCreateable(false);
         setStyle(CustomAlertBottomSheetAdapter.STYLE_NORMAL, R.style.CustomBottomSheetDialogTheme);
 

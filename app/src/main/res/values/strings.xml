@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Corona-Konferenz-Assistent</string>
     <string name="settings_info_text">Regelmäßiges Lüften und Einhalten eines Sicherheitsabstandes reduzieren erwiesenermaßen die Verbreitung des Coronavirus. Lege hier fest, ob und in welchen zeitlichen Abständen du ans Lüften und Abstandskontrollen erinnert werden möchtest.</string>
-    <!-- TODO: Remove or change this placeholder text -->
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <!-- Preference Titles -->
     <string name="messages_header">Messages</string>
@@ -159,4 +159,50 @@
     <string name="timer_des_meetings">Timer des Meetings</string>
     <string name="timer_erklerung">Während dem Meeting laufen verschiedene Timer, die dich in regelmäßigen Abständen an Maßnahmen für ein sicheres Meeting erinnern. Die Dauer zwischen den Timern kannst du hier einstellen. Durch seitlich wischen kommst du zu der Dauer, wie lange die Timer dann gehen sollen. Standardmäßig sind die beiden folgenden Timer implementiert:</string>
     <string name="countdown_activity_back_pressed_message">Meeting beenden, um zurück zum Hauptbildschirm zu gelangen.</string>
+    <string name="Standard">Standard</string>
+    <string name="checklist_item_1">Desinfektionsmittel bereit</string>
+    <string name="checklist_item_2">3G-Regelung o.ä. geprüft</string>
+    <string name="checklist_item_3">Masken / Plexiglas geprüft</string>
+    <string name="checklist_item_4">Abstände gewährleistet</string>
+    <string name="countdown_title_1">Lüftung</string>
+    <string name="countdown_title_2">Abstandskontrolle</string>
+    <string name="countdown_description_1_1">Fenster sollte geöffnet sein</string>
+    <string name="countdown_descpription_1_2">Fenster sollte geschlossen sein</string>
+    <string name="add_checklist_item">Checklistenitem hinzufügen</string>
+    <string name="create_custom_checklist">Custom Checkliste erstellen</string>
+    <string name="warning_deleting_standard">Die Standardeinstellungen können nicht gelöscht werden</string>
+    <string name="delete_preset">Preset löschen</string>
+    <string name="keep_preset">Preset behalten</string>
+    <string name="delete_preset_warning_1">Soll das Preset \"</string>
+    <string name="delete_preset_warning_2">\" wirklich gelöscht werden.</string>
+    <string name="delete_preset_warning_general">Soll dieses neue Preset verworfen werden?</string>
+    <string name="delete_preset_warning_general_positiv">Änderungen Verwerfen</string>
+    <string name="delete_preset_warning_general_negativ">Weiter Bearbeiten</string>
+    <string name="custom_countdown_set">Deine Custon Countdownsets</string>
+    <string name="create_custom_countdown_set">Neues Countdownset erstellen</string>
+    <string name="edit_checklist">Checkliste bearbeiten</string>
+    <string name="create_checklist">Neue Checkliste erstellen</string>
+    <string name="no_email_client">Kein unterstützter Email-Client gefunden...</string>
+    <string name="enter_valid_email">Bitte eine valide Email-Adresse eingeben.</string>
+    <string name="warning_text_participant">Soll dieser neue Teilnehmer verworfen werden?</string>
+    <string name="warning_text_participant_yes">Änderungen Verwerfen</string>
+    <string name="warning_text_participant_no">Weiter Bearbeiten</string>
+    <string name="warning_text_delete_participant">Wollen Sie diesen Teilnehmer wirklich löschen?</string>
+    <string name="warning_text_delete_participant_yes">Ja</string>
+    <string name="warning_text_delete_participant_no">Nein</string>
+    <string name="checklist_preset_title">Checklist Preset</string>
+    <string name="timer_preset_title">Timer Preset</string>
+    <string name="warning_delete_meeting">Solle dieses neue Meeting wirlich gelöscht werden?</string>
+    <string name="warning_delete_meeting_yes">Änderungen Verwerfen</string>
+    <string name="warning_delete_meeting_no">Weiter Bearbeiten</string>
+    <string name="meeting_delete_warning">Soll dieses Meeting gelöscht werden?</string>
+    <string name="meeting_delete_warning_yes">Löschen</string>
+    <string name="meeting_delete_warning_no">Beibehalten</string>
+    <string name="more_min_then_max_warning">Du kannst nicht mehr Leute im Minimum haben wie Leute im Maximum</string>
+    <string name="meeting_exit_button_hint">Butten gedrückt halten um Meeting zu beenden</string>
+    <string name="meeting_exit_warning">Solle das Meeting wirklich Beendet werden?</string>
+    <string name="meeting_exit_warning_yes">Meeting Beenden</string>
+    <string name="meeting_exit_warning_no">Meeting Fortfahren</string>
+    <string name="informationen_tab">Informationen</string>
+    <string name="timer_tab">Timer</string>
 </resources>

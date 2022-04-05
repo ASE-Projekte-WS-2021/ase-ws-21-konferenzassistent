@@ -114,9 +114,9 @@ public class RecyclerViewParticipantListAdapter extends RecyclerView.Adapter<Rec
         notifyDataSetChanged();
     }
 
+    // Updates the opy for the search
     public void updateCopy(ArrayList<Participant> participants) {
         mParticipantsCopy.clear();
-        Log.i("TAG", "updateCopy: " + participants);
         mParticipantsCopy.addAll(participants);
     }
 
@@ -148,9 +148,7 @@ public class RecyclerViewParticipantListAdapter extends RecyclerView.Adapter<Rec
             participantContainer = countdownView.findViewById(R.id.participant_container);
 
         }
-
     }
-
 }
 
 

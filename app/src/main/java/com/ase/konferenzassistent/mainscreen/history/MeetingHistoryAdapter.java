@@ -91,9 +91,9 @@ public class MeetingHistoryAdapter extends RecyclerView.Adapter<MeetingHistoryAd
         swipedItemPosition = position;
 
         CustomAlertBottomSheetAdapter customAlertBottomSheetAdapter = new CustomAlertBottomSheetAdapter(this);
-        customAlertBottomSheetAdapter.setWarningText("Soll dieses Meeting gelöscht werden?");
-        customAlertBottomSheetAdapter.setAcceptText("Löschen");
-        customAlertBottomSheetAdapter.setDeclineText("Beibehalten");
+        customAlertBottomSheetAdapter.setWarningText(ct.getString(R.string.meeting_delete_warning));
+        customAlertBottomSheetAdapter.setAcceptText(ct.getString(R.string.meeting_delete_warning_yes));
+        customAlertBottomSheetAdapter.setDeclineText(ct.getString(R.string.meeting_delete_warning_no));
         customAlertBottomSheetAdapter.show(manager, customAlertBottomSheetAdapter.getTag());
     }
 

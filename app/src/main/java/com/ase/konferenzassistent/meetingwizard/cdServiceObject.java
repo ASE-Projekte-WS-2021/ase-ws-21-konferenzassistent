@@ -2,11 +2,13 @@ package com.ase.konferenzassistent.meetingwizard;
 
 import android.os.CountDownTimer;
 
+import com.ase.konferenzassistent.countdown.AdvancedCountdownObject;
+
 import java.io.Serializable;
 
 public class cdServiceObject implements Serializable {
 
-    RecyclerViewAdvancedCountdownAdapter.AdvancedCountdownObject timer;
+    AdvancedCountdownObject timer;
     Long currentTime;
     Boolean timerDone;
     Boolean timerRunning;
@@ -14,7 +16,7 @@ public class cdServiceObject implements Serializable {
     Integer countdownID;
     transient CountDownTimer countDownTimer;
 
-    public cdServiceObject(RecyclerViewAdvancedCountdownAdapter.AdvancedCountdownObject timer, Long currentTime, Boolean timerDone, Integer countdownPosition, Integer countdownID) {
+    public cdServiceObject(AdvancedCountdownObject timer, Long currentTime, Boolean timerDone, Integer countdownPosition, Integer countdownID) {
         this.timer = timer;
         this.currentTime = currentTime;
         this.timerDone = timerDone;
@@ -22,11 +24,11 @@ public class cdServiceObject implements Serializable {
         this.countdownID = countdownID;
     }
 
-    public RecyclerViewAdvancedCountdownAdapter.AdvancedCountdownObject getTimer() {
+    public AdvancedCountdownObject getTimer() {
         return timer;
     }
 
-    public void setTimer(RecyclerViewAdvancedCountdownAdapter.AdvancedCountdownObject timer) {
+    public void setTimer(AdvancedCountdownObject timer) {
         this.timer = timer;
     }
 

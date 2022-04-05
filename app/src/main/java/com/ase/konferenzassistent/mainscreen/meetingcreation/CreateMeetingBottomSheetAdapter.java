@@ -79,8 +79,6 @@ public class CreateMeetingBottomSheetAdapter extends BottomSheetDialogFragment i
         locationNames.addAll(location);
 
         locationNames.remove(getString(R.string.meeting_data_no_location));
-        Log.i("TAG", "onCreate: " + locationNames);
-
     }
 
     @NonNull
@@ -172,7 +170,7 @@ public class CreateMeetingBottomSheetAdapter extends BottomSheetDialogFragment i
         bi.buttonChecklistPreset.setOnClickListener(viewListener -> {
             // Create a new Preset Bottom Sheet and set the title to checklist before showing
             presetSelectBottomSheet = new PresetSelectBottomSheet();
-            presetSelectBottomSheet.setTitle("Checklist Preset");
+            presetSelectBottomSheet.setTitle(getString(R.string.checklist_preset_title));
 
             // feeds the presets into the checklist recycler view
             presetSelectBottomSheet.initPreset(checklistPresetPairs, checklistSelectValues);
@@ -185,7 +183,7 @@ public class CreateMeetingBottomSheetAdapter extends BottomSheetDialogFragment i
         bi.buttonTimerPreset.setOnClickListener(viewListener -> {
             // Create a new Preset Bottom Sheet and set the title to timer before showing
             presetSelectBottomSheet = new PresetSelectBottomSheet();
-            presetSelectBottomSheet.setTitle("Timer Preset");
+            presetSelectBottomSheet.setTitle(getString(R.string.timer_preset_title));
 
             // feeds the presets into the checklist recycler view
             presetSelectBottomSheet.initPreset(presetPairs, timerSelectValues);
@@ -234,9 +232,9 @@ public class CreateMeetingBottomSheetAdapter extends BottomSheetDialogFragment i
             warning = true;
             // creates a Bottom sheet to create a meeting
             CustomAlertBottomSheetAdapter customAlertBottomSheetAdapter = new CustomAlertBottomSheetAdapter(this);
-            customAlertBottomSheetAdapter.setWarningText("Solle dieses neue Meeting wirlich gelöscht werden?");
-            customAlertBottomSheetAdapter.setAcceptText("Änderungen Verwerfen");
-            customAlertBottomSheetAdapter.setDeclineText("Weiter Bearbeiten");
+            customAlertBottomSheetAdapter.setWarningText(getString(R.string.warning_delete_meeting));
+            customAlertBottomSheetAdapter.setAcceptText(getString(R.string.warning_delete_meeting_yes));
+            customAlertBottomSheetAdapter.setDeclineText(getString(R.string.warning_delete_meeting_no));
             customAlertBottomSheetAdapter.show(getParentFragmentManager(), customAlertBottomSheetAdapter.getTag());
         }
     }
@@ -293,7 +291,6 @@ public class CreateMeetingBottomSheetAdapter extends BottomSheetDialogFragment i
             // Sets the Text to the chosen one
             bi.timerSelectedName.setText(presetPairs.get(adapterPosition).getPresets().getTitle());
             selectedPair = presetPairs.get(adapterPosition);
-
 
             timerSelectValues.replaceAll(integer -> View.INVISIBLE);
             timerSelectValues.set(adapterPosition, View.VISIBLE);

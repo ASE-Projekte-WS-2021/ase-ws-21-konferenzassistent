@@ -117,7 +117,6 @@ public class PresetEditBottomSheet extends BottomSheetDialogFragment implements 
         bottomSheetBehavior.setPeekHeight(BottomSheetBehavior.PEEK_HEIGHT_AUTO);
 
         // setting max height of bottom sheet
-        //bi.extraSpace.setMinimumHeight((Resources.getSystem().getDisplayMetrics().heightPixels));
         bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
 
         // skip it being collapsable
@@ -148,11 +147,11 @@ public class PresetEditBottomSheet extends BottomSheetDialogFragment implements 
     // Configs the view to match the right Preset
     private void configView() {
         if (viewType == PRESET_TYPE_COUNTDOWN) {
-            bi.presetHeaderText.setText("Deine Custon Countdownsets");
-            bi.buttonCreateText.setText("Neues Countdownset erstellen");
+            bi.presetHeaderText.setText(R.string.custom_countdown_set);
+            bi.buttonCreateText.setText(R.string.create_custom_countdown_set);
         } else {
-            bi.presetHeaderText.setText("Checkliste bearbeiten");
-            bi.buttonCreateText.setText("Neue Checkliste erstellen");
+            bi.presetHeaderText.setText(R.string.edit_checklist);
+            bi.buttonCreateText.setText(R.string.create_checklist);
         }
     }
 

@@ -17,7 +17,6 @@ import java.util.ArrayList;
 
 public class RecycleViewAttendingParticipantList extends RecyclerView.Adapter<RecycleViewAttendingParticipantList.ViewHolder> {
 
-    // Content
     private final ArrayList<Participant> mParticipants;
 
     public RecycleViewAttendingParticipantList(ArrayList<Participant> mParticipants, Context mContext) {
@@ -31,7 +30,6 @@ public class RecycleViewAttendingParticipantList extends RecyclerView.Adapter<Re
         holder.participantStatus.setText(participant.getStatus());
 
         holder.participantContainer.setVisibility(participant.getSelected() ? View.VISIBLE : View.GONE);
-
     }
 
     @Override
@@ -61,9 +59,7 @@ public class RecycleViewAttendingParticipantList extends RecyclerView.Adapter<Re
             participantContainer = countdownView.findViewById(R.id.participant_container);
 
         }
-
     }
-
 }
 
 

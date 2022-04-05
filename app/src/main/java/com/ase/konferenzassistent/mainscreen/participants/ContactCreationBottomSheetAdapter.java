@@ -68,7 +68,6 @@ public class ContactCreationBottomSheetAdapter extends BottomSheetDialogFragment
         bottomSheetBehavior.setPeekHeight(BottomSheetBehavior.PEEK_HEIGHT_AUTO);
 
         // setting max height of bottom sheet
-        //bi.extraSpace.setMinimumHeight((Resources.getSystem().getDisplayMetrics().heightPixels));
         bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
 
         // skip it being collapsable
@@ -115,7 +114,7 @@ public class ContactCreationBottomSheetAdapter extends BottomSheetDialogFragment
             String pStatus = bi.participantInputStatus.getText().toString();
             // Check for valid email address
             if (pEmail.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(pEmail).matches()) {
-                Toast.makeText(getContext(), "Bitte eine valide Email-Adresse eingeben.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), R.string.enter_valid_email, Toast.LENGTH_SHORT).show();
                 return;
             }
             // Create new Entry
@@ -159,9 +158,9 @@ public class ContactCreationBottomSheetAdapter extends BottomSheetDialogFragment
 
                     }
                 });
-                customAlertBottomSheetAdapter.setWarningText("Wollen Sie diesen Teilnehmer wirklich löschen?");
-                customAlertBottomSheetAdapter.setAcceptText("Ja");
-                customAlertBottomSheetAdapter.setDeclineText("Nein");
+                customAlertBottomSheetAdapter.setWarningText(getString(R.string.warning_text_delete_participant));
+                customAlertBottomSheetAdapter.setAcceptText(getString(R.string.warning_text_delete_participant_yes));
+                customAlertBottomSheetAdapter.setDeclineText(getString(R.string.warning_text_delete_participant_no));
                 customAlertBottomSheetAdapter.show(getParentFragmentManager(), customAlertBottomSheetAdapter.getTag());
             });
         }
@@ -187,7 +186,6 @@ public class ContactCreationBottomSheetAdapter extends BottomSheetDialogFragment
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 // check if string is empty
                 // update the create Button
-                // update the create Button
                 isCreateable(charSequence.length() != 0);
             }
 
@@ -197,7 +195,6 @@ public class ContactCreationBottomSheetAdapter extends BottomSheetDialogFragment
             }
         });
         // cancel button clicked
-        //bi.buttonDismiss.setOnClickListener(viewListener -> dismiss());
 
         isCreateable(false);
         setStyle(CustomAlertBottomSheetAdapter.STYLE_NORMAL, R.style.CustomBottomSheetDialogTheme);
@@ -237,9 +234,9 @@ public class ContactCreationBottomSheetAdapter extends BottomSheetDialogFragment
             warning = true;
             // creates a Bottom sheet to create a meeting
             CustomAlertBottomSheetAdapter customAlertBottomSheetAdapter = new CustomAlertBottomSheetAdapter(this);
-            customAlertBottomSheetAdapter.setWarningText("Soll dieser neue Teilnehmer verworfen werden?");
-            customAlertBottomSheetAdapter.setAcceptText("Änderungen Verwerfen");
-            customAlertBottomSheetAdapter.setDeclineText("Weiter Bearbeiten");
+            customAlertBottomSheetAdapter.setWarningText(getString(R.string.warning_text_participant));
+            customAlertBottomSheetAdapter.setAcceptText(getString(R.string.warning_text_participant_yes));
+            customAlertBottomSheetAdapter.setDeclineText(getString(R.string.warning_text_participant_no));
             customAlertBottomSheetAdapter.show(getParentFragmentManager(), customAlertBottomSheetAdapter.getTag());
         }
     }
