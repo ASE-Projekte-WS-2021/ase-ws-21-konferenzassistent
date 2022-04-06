@@ -1,138 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
-    <string name="Speichern">Speichern</string>
-    <string name="TipsCustom">Wenn du noch in regelmäßigen Abständen an etwas anderes, wie an das Desinfizieren von Oberflächen erinnert werden willst, kannst du dir auch dafür einen eigenen Timer stellen.</string>
-    <string name="_3g_regelung_o_gepr_ft">3G-Regelung o.ä. geprüft</string>
-    <string name="_7_tage_inzidenz">7 Tage-Inzidenz</string>
-    <string name="abbrechen">Abbrechen</string>
-    <string name="abgeschlossene_meetings">Abgeschlossene Meetings</string>
-    <string name="abst_nde_gew_hrleistet">Abstände gewährleistet</string>
-    <string name="abstand_erklarung">Die Wahrscheinlichkeit, mit virushaltigen Tröpfchen und Aerosolen in Kontakt zu kommen, ist insbesondere im Umkreis von ein bis zwei Metern um eine mit dem Coronavirus SARS-CoV-2 infizierte Person erhöht. Abstand halten reduziert daher das Risiko, sich und andere anzustecken.</string>
-    <string name="abstandeTips">Die Wahrscheinlichkeit, mit virushaltigen Tröpfchen und Aerosolen in Kontakt zu kommen, ist insbesondere im Umkreis von ein bis zwei Metern um eine mit dem Coronavirus SARS-CoV-2 infizierte Person erhöht. Abstand halten reduziert daher das Risiko, sich und andere anzustecken. Um nicht zu vergessen, die nötigen Abstände einzuhalten, erinnert dich die App regelmäßig daran, die Fenster aufzumachen. Du kannst einstellen, wie oft das passieren soll.</string>
-    <string name="abstandskontrolle_colon">Abstandskontrolle:</string>
-    <string name="activity_countdown_meeting_title_placeholder">Vorlesung Nachbesprechung H25</string>
-    <string name="addParticipant">Teilnehmer hinzufügen</string>
-    <string name="anwesendeteilnehmer">Anwesende Teilnehmer</string>
     <string name="app_name">Corona-Konferenz-Assistent</string>
-
     <string name="app_opened_first_time_key">app_opened_first_time</string>
-    <string name="attachment_summary_off">Only download attachments when manually requested</string>
 
-    <string name="attachment_summary_on">Automatically download attachments for incoming emails
-    </string>
-    <string name="attachment_title">Download incoming attachments</string>
-    <string name="aus_kontakten_importieren">Aus Kontakten Importieren</string>
-    <string name="begriffserkl_rung">Begriffserklärung</string>
-    <string name="bekannte_teilnehmer">Bekannte Teilnehmer</string>
-    <string name="bernehmen">Speichern</string>
-    <string name="bis_gestern">Bis gestern</string>
-    <string name="bottom_nav_menu_home">Startseite</string>
-    <string name="bottom_nav_menu_settings">Presets</string>
-    <string name="bottom_nav_menu_start_meeting">Meeting starten</string>
-    <string name="bundesweit">Bundesweit</string>
-    <string name="cancel_text">Abbrechen</string>
-    <string name="checklist_item_erstellen">Checklist Item erstellen</string>
-    <string name="checklist_item_hint">Checklist item hint...</string>
-    <string name="checklist_item_hinzuf_gen">Checklist Item hinzufügen</string>
-    <string name="checklist_item_name">Checklist item name...</string>
-    <string name="checklist_preset">CHECKLIST PRESET</string>
-    <string name="checkliste_beschreibung">Auch vor dem Meeting können schon Maßnahmen getroffen werden, um eine Ansteckungsgefahr zu verhindern. Mithilfe der Checkliste kannst du sicherstellen, dass du keinen der nötigen Schritte vergisst. Die Standardcheckliste sieht dabei folgende Schritte vor:</string>
-    <string name="checkliste_preset">Checkliste Preset</string>
-    <string name="checkliste_vor_dem_meeting">Checkliste vor dem Meeting</string>
-    <string name="checklistitem">ChecklistItem</string>
-    <string name="contacts_header_text">Kontakte</string>
-    <string name="contacts_search_hint">Kontakte suchen</string>
-    <string name="countdown_activity_back_pressed_message">Meeting beenden, um zurück zum Hauptbildschirm zu gelangen.</string>
-    <string name="countdown_countdown_Erstellen">Custom Countdownset erstellen</string>
-    <string name="countdown_einstellen">COUNTDOWN EINSTELLEN</string>
-    <string name="countdown_entfernen">Countdown Entfernen</string>
-    <string name="countdown_hinzuf_gen">Countdown hinzufügen</string>
-    <string name="countdown_main_description">Wählen Sie zunächst welche Timer sie aktivieren wollen und setzen Sie diese im Anschluss auf die von ihnen gewünschte Zeit.</string>
-    <string name="countdown_name">Countdown Name...</string>
-    <string name="countdown_participant_description">Fügen Sie nun alle Teilnehmer ihres Meetings hinzu </string>
-    <string name="dash">-</string>
-    <string name="date_placeholder">28/09/1996</string>
-    <string name="dauer">Dauer</string>
-    <string name="dauer_colon">Dauer:</string>
-    <string name="delete_meeting">Meeting löschen</string>
-    <string name="delete_participant">Teilnehmer löschen</string>
-    <string name="delete_preset">Preset löschen</string>
-    <string name="desinfektionsmittel_bereit">Desinfektionsmittel bereit</string>
-    <string name="die_wichtigsten_funktionen">Die wichtigsten Funktionen</string>
-    <string name="duration_placeholder">50 Minuten</string>
-    <string name="eigene_checklisten_verwalten">Eigene Checklisten verwalten</string>
-    <string name="eigene_timer_verwalten">Eigene Countdownsets verwalten</string>
-    <string name="ein_timer_f_r_eigene_erinnerungen">Ein Timer für eigene Erinnerungen</string>
-    <string name="email">Email</string>
-    <string name="empty_history">
-        <!--Herzlich willkommen im Corona-Konferenz-Assistent. Wir unterstützen dich dabei, deine Meetings in Zeiten von Corona so sicher wie möglich abzuhalten. Klicke auf den “+”-Button, um ein Meeting hinzufügen! -->
-                        Sobald Sie ein Meeting abgeschlossen haben können sie dieses hier einsehen.
-    
-    
-    </string>
-    <string name="end">Meeting Beenden</string>
-    <string name="end_time">end_time</string>
-    <string name="end_time_placeholder">15:45</string>
-    <string name="enddatum">Enddatum</string>
-    <string name="enter_new_person">Neue Person eingeben...</string>
-    <string name="enter_timer_desc">Timer-Beschreibung eingeben</string>
-    <string name="erinnerung_an_das_einhalten_von_abst_nden">Erinnerung an das Einhalten von Abständen</string>
-    <string name="erinnerung_ans_l_ften">Erinnerung ans Lüften</string>
-    <string name="erstellen">Erstellen</string>
-    <string name="example_name">Hans Meier</string>
-    <string name="example_status">Ungeimpft</string>
-    <string name="fenOffen"> Fenster sollte offen sein!</string>
-    <string name="filter">Filter</string>
-    <string name="filteroptionen">FILTEROPTIONEN</string>
-    <string name="header_text_placeholder">Header Text</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="home_fragment_isFiltered_false">Insgesamt</string>
-    <string name="home_fragment_isFiltered_true">Gefiltert</string>
-    <string name="hospit_info">Die Hospitalisierungsrate, auch als Hospitalisierungsinzidenz bezeichnet, ist die Zahl der Krankenhauseinweisungen pro 100.000 Einwohner in einem bestimmten Zeitraum.</string>
-    <string name="hospitalisierungen">Hospitalisierungen</string>
-    <string name="info_desinfect">Desinfektionsmittel töten die Coronaviren ab, und helfen somit, eine Ausbreitung zu vermeiden. Darum sollten alle Oberflächen gut desinfiziert sein.</string>
-    <string name="informationen">INFORMATIONEN</string>
-    <string name="interval_between_opening_windows">Intervall zwischen Fensteröffnungen</string>
-    <string name="keep_editing">Weiter bearbeiten</string>
-    <string name="keine_teilnehmer_ausgew_hlt">Keine Teilnehmer ausgewählt.</string>
-    <string name="l_ftungs_countdown">Lüftungscountdown</string>
-    <string name="l_ftungstimer">LÜFTUNGSTIMER</string>
-    <string name="leute_erklarung_wofur">Hier kannst du alle Leute eintragen, die an deinem Meeting teilnehmen. Das Coronavirus SARS-CoV-2 wird vor allem direkt von Mensch zu Mensch übertragen, z. B. beim Sprechen, Husten oder Niesen. Wenn nach dem Meeting einer der Teilnehmer positiv getestet wird, kann in den vergangenen Meetings nachgesehen werden, wer noch mit in diesem Meeting war, um diese zu benachrichtigen, dass sie sich vielleicht angesteckt haben können. Dadurch können weitere Ausbreitungen verhindert werden.</string>
-    <string name="location">Ort</string>
-    <string name="location_placeholder">x_location</string>
-    <string name="lueftenTips">Das richtige Lüften von Innenräumen kann helfen, das Risiko einer Ansteckung mit dem Coronavirus SARS-CoV-2 über Aerosole zu verringern. Aerosole (feinste luftgetragene Flüssigkeitspartikel und Tröpfchenkerne) sind ein möglicher Übertragungsweg des Coronavirus SARS-CoV-2. Um nicht zu vergessen zu Lüften erinnert dich die App regelmäßig daran, die Fenster aufzumachen. Du kannst einstellen, wie oft das passieren soll.</string>
-    <string name="lueftungsdauer_colon">Lüftungsdauer:</string>
-    <string name="lueftungsintervall_colon">Lüftungsintervall:</string>
-    <string name="lufttimer">Lüftungstimer</string>
-    <string name="maske_erklarung">Mit einer OP-Maske oder Alltagsmaske reduziert der Träger die Wahrscheinlichkeit, dass er Menschen in seiner Umgebung ansteckt. Die Maske reduziert den Ausstoß von Tröpfchen und Aerosolen und damit auch von Krankheitserregern aus den Atemwegen. Die Partikel in einem Aerosol sind zwar zu einem großen Teil kleiner als 5 Mikrometer und können daher zwischen den Maschen von Stoffmasken nach außen dringen. Eine Maske bremst aber beim Ausatmen auch das Aerosol, das mit dem Luftstrom aus den Atemwegen kommt. Auf diese Weise kann eine Maske die Konzentration infektiöser Partikel in der unmittelbaren Umgebung des Maskenträgers reduzieren. Auch Plexiglasscheiben können Aerosole blocken und somit die Ausbreitung verhindern.</string>
-    <string name="masken_plexiglas_gepr_ft">Masken / Plexiglas geprüft</string>
-    <string name="maximalanzahl">Maximalanzahl</string>
-    <string name="meeting_data_no_location">Keinen Ort angegeben</string>
-    <string name="meeting_date">Datum des Meetings</string>
-    <string name="meeting_duration">Meeting Dauer</string>
-    <string name="meeting_end">Meeting Ende</string>
-    <string name="meeting_history_minutes_divider">%1$s - %2$s</string>
-    <string name="meeting_history_minutes_long">%1$s Minuten</string>
-    <string name="meeting_history_minutes_short">%1$s min</string>
-    <string name="meeting_ort">Meeting Ort</string>
-    <string name="meeting_start">Meeting Start</string>
-    <string name="meeting_starten">Meeting Starten</string>
-    <string name="meeting_startzeit">Meeting Startzeit</string>
-    <string name="meeting_titel">Meetingtitel</string>
-    <!-- Preference Titles -->
-    <string name="messages_header">Messages</string>
-    <string name="minimalanzahl">Minimalanzahl</string>
-    <string name="minutes_placeholder">x_minutes</string>
-    <string name="name">Name</string>
-    <string name="nderungen_verwerfen">Änderungen Verwerfen</string>
-    <string name="neue_checkliste_erstellen">Neue Checkliste erstellen</string>
-    <string name="neuen_kontak_hinzuf_gen">Neuen Kontakt hinzufügen</string>
-    <string name="neuen_teilnehmer_hinzuf_gen">Neuen Teilnehmer hinzufügen</string>
-    <string name="neues_meeting">NEUES MEETING</string>
-    <string name="neuinfektion_def">Die Neuinfektionen beschreiben die Anzahl von neuen, erstmaligen Ansteckungen durch Covid-19</string>
-    <string name="neuinfektionen">Neuinfektionen</string>
-    <string name="next">Next</string>
+    <!-- Onboarding -->
     <string name="onboarding_get_started">Los gehts!</string>
     <string name="onboarding_page_1_headline">Meetings? Aber sicher!</string>
     <string name="onboarding_page_1_subhead">Trotz Corona sicher persönliche Meetings abhalten können.</string>
@@ -140,67 +11,232 @@
     <string name="onboarding_page_2_subhead">Während des Meetings an regelmäßiges Lüften und Abstandskontrollen erinnert werden.</string>
     <string name="onboarding_page_3_headline">Meetings auf einen Blick</string>
     <string name="onboarding_page_3_subhead">Informationen über vergangene Meetings ermöglichen Kontaktverfolgung.</string>
-    <string name="ort">ORT</string>
-    <string name="ort2">Ort</string>
-    <string name="participants">Teilnehmer</string>
-    <string name="participants_placeholder">x_participants</string>
-    <string name="personen">Personen</string>
-    <string name="placeholder">Platzhalter</string>
-    <string name="placeholder_meeting_location">Regensburg</string>
-    <string name="placeholder_meeting_participants">5</string>
-    <string name="placeholder_meeting_start_time">17:00</string>
-    <string name="placeholder_min">\??? min</string>
-    <string name="preset_name">Preset Name</string>
-    <string name="presets">Presets</string>
-    <string name="question_mark_placeholder">\??</string>
-    <string name="reply_title">Default reply action</string>
-    <string name="reset">Reset</string>
+
+    <!-- RKI Info -->
+    <string name="_3g_regelung_o_gepr_ft">3G-Regelung o.ä. geprüft</string>
+    <string name="_7_tage_inzidenz">7 Tage-Inzidenz</string>
+    <string name="bis_gestern">Bis gestern</string>
+    <string name="bundesweit">Bundesweit</string>
     <string name="rki_informationen">RKI Informationen</string>
-    <string name="settings_info_text">Regelmäßiges Lüften und Einhalten eines Sicherheitsabstandes reduzieren erwiesenermaßen die Verbreitung des Coronavirus. Lege hier fest, ob und in welchen zeitlichen Abständen du ans Lüften und Abstandskontrollen erinnert werden möchtest.</string>
-    <string name="settings_shortened">Einst.</string>
-    <!-- Messages Preferences -->
-    <string name="signature_title">Your signature</string>
-    <string name="solle_dieses_neue_meeting_wirlich_gel_scht_werden">Solle dieses neue Meeting wirlich gelöscht werden?</string>
-    <string name="standard">Standard</string>
-    <string name="standort">Standort</string>
-    <string name="standort_eingeben">Standort eingeben</string>
-    <string name="star"> START</string>
-    <string name="start"> Starte Meeting</string>
-    <string name="start_time">start_time</string>
-    <string name="start_time_placeholder">16:45</string>
-    <string name="startdatum">Startdatum</string>
+    <string name="hospit_info">Die Hospitalisierungsrate, auch als Hospitalisierungsinzidenz bezeichnet, ist die Zahl der Krankenhauseinweisungen pro 100.000 Einwohner in einem bestimmten Zeitraum.</string>
+    <string name="neuinfektion_def">Die Neuinfektionen beschreiben die Anzahl von neuen, erstmaligen Ansteckungen durch Covid-19</string>
+    <string name="neuinfektionen">Neuinfektionen</string>
+    <string name="hospitalisierungen">Hospitalisierungen</string>
+
+    <!-- Misc -->
+    <string name="speichern">Speichern</string>
+    <string name="abbrechen">Abbrechen</string>
+    <string name="weiter"> WEITER</string>
+    <string name="start"> START</string>
+    <string name="start_meeting"> Starte Meeting</string>
+    <string name="dash">-</string>
+    <string name="erstellen">Erstellen</string>
     <string name="starten">Starten</string>
-    <string name="startseite">Startseite</string>
-    <string name="status">Status</string>
-    <string name="sync_header">Sync</string>
-    <!-- Sync Preferences -->
-    <string name="sync_title">Sync email periodically</string>
+    <string name="begriffserkl_rung">Begriffserklärung</string>
+    <string name="end">Meeting Beenden</string>
+    <string name="dauer">Dauer</string>
+    <string name="dauer_colon">Dauer:</string>
+    <string name="meeting_starten">Meeting Starten</string>
+    <string name="reset">Reset</string>
+
+    <!-- Nav Menu -->
+    <string name="bottom_nav_menu_home">Startseite</string>
+    <string name="bottom_nav_menu_settings">Presets</string>
+    <string name="bottom_nav_menu_start_meeting">Meeting starten</string>
+    <string name="settings_shortened">Einst.</string>
+
+    <!-- History -->
+    <string name="empty_history">Sobald Sie ein Meeting abgeschlossen haben können sie dieses hier einsehen.</string>
+    <string name="vergangene_meetings">Vergangene Meetings</string>
+    <string name="verlauf">Verlauf</string>
+    <string name="filter">Filter</string>
+    <string name="filteroptionen">FILTEROPTIONEN</string>
+    <string name="abgeschlossene_meetings">Abgeschlossene Meetings</string>
+    <string name="home_fragment_isFiltered_false">Insgesamt</string>
+    <string name="home_fragment_isFiltered_true">Gefiltert</string>
+    <string name="maximalanzahl">Maximalanzahl</string>
+    <string name="minimalanzahl">Minimalanzahl</string>
+    <string name="meeting_history_minutes_divider">%1$s - %2$s</string>
+    <string name="meeting_history_minutes_long">%1$s Minuten</string>
+    <string name="meeting_history_minutes_short">%1$s min</string>
+    <string name="meeting_startzeit">Meeting Startzeit</string>
+    <string name="meeting_titel">Meetingtitel</string>
+    <string name="meeting_date">Datum des Meetings</string>
+    <string name="meeting_duration">Meeting Dauer</string>
+    <string name="enddatum">Enddatum</string>
+    <string name="startdatum">Startdatum</string>
+    <string name="end_time">end_time</string>
+    <string name="start_time">start_time</string>
+    <string name="meeting_start">Meeting Start</string>
+    <string name="meeting_end">Meeting Ende</string>
+    <string name="zeitfenster">Zeitfenster</string>
+    <string name="more_min_then_max_warning">Du kannst nicht mehr Leute im Minimum haben wie Leute im Maximum</string>
+
+    <!-- Tips -->
+    <string name="abstandeTips">Die Wahrscheinlichkeit, mit virushaltigen Tröpfchen und Aerosolen in Kontakt zu kommen, ist insbesondere im Umkreis von ein bis zwei Metern um eine mit dem Coronavirus SARS-CoV-2 infizierte Person erhöht. Abstand halten reduziert daher das Risiko, sich und andere anzustecken. Um nicht zu vergessen, die nötigen Abstände einzuhalten, erinnert dich die App regelmäßig daran, die Fenster aufzumachen. Du kannst einstellen, wie oft das passieren soll.</string>
+    <string name="abstand_erklarung">Die Wahrscheinlichkeit, mit virushaltigen Tröpfchen und Aerosolen in Kontakt zu kommen, ist insbesondere im Umkreis von ein bis zwei Metern um eine mit dem Coronavirus SARS-CoV-2 infizierte Person erhöht. Abstand halten reduziert daher das Risiko, sich und andere anzustecken.</string>
+    <string name="TipsCustom">Wenn du noch in regelmäßigen Abständen an etwas anderes, wie an das Desinfizieren von Oberflächen erinnert werden willst, kannst du dir auch dafür einen eigenen Timer stellen.</string>
+    <string name="checkliste_beschreibung">Auch vor dem Meeting können schon Maßnahmen getroffen werden, um eine Ansteckungsgefahr zu verhindern. Mithilfe der Checkliste kannst du sicherstellen, dass du keinen der nötigen Schritte vergisst. Die Standardcheckliste sieht dabei folgende Schritte vor:</string>
+    <string name="xg_erklerung">Die 3G-Regel steht für vollständig geimpft, genesen oder negativ getestet, und ist ein Prinzip, um Neuinfektionen zu verringern. Nach der 3G-Regel dürfen nur Personen bestimmte Orte oder Veranstaltungen besuchen, die eine vollständige Impfung oder eine Genesung oder einen negativen Test nachweisen können. Beachte die für das geplante Meeting die momentan geltenden Regeln.</string>
+    <string name="timer_erklerung">Während dem Meeting laufen verschiedene Timer, die dich in regelmäßigen Abständen an Maßnahmen für ein sicheres Meeting erinnern. Die Dauer zwischen den Timern kannst du hier einstellen. Durch seitlich wischen kommst du zu der Dauer, wie lange die Timer dann gehen sollen. Standardmäßig sind die beiden folgenden Timer implementiert:</string>
+    <string name="settings_info_text">Regelmäßiges Lüften und Einhalten eines Sicherheitsabstandes reduzieren erwiesenermaßen die Verbreitung des Coronavirus. Lege hier fest, ob und in welchen zeitlichen Abständen du ans Lüften und Abstandskontrollen erinnert werden möchtest.</string>
+    <string name="lueftenTips">Das richtige Lüften von Innenräumen kann helfen, das Risiko einer Ansteckung mit dem Coronavirus SARS-CoV-2 über Aerosole zu verringern. Aerosole (feinste luftgetragene Flüssigkeitspartikel und Tröpfchenkerne) sind ein möglicher Übertragungsweg des Coronavirus SARS-CoV-2. Um nicht zu vergessen zu Lüften erinnert dich die App regelmäßig daran, die Fenster aufzumachen. Du kannst einstellen, wie oft das passieren soll.</string>
+    <string name="info_desinfect">Desinfektionsmittel töten die Coronaviren ab, und helfen somit, eine Ausbreitung zu vermeiden. Darum sollten alle Oberflächen gut desinfiziert sein.</string>
+    <string name="leute_erklarung_wofur">Hier kannst du alle Leute eintragen, die an deinem Meeting teilnehmen. Das Coronavirus SARS-CoV-2 wird vor allem direkt von Mensch zu Mensch übertragen, z. B. beim Sprechen, Husten oder Niesen. Wenn nach dem Meeting einer der Teilnehmer positiv getestet wird, kann in den vergangenen Meetings nachgesehen werden, wer noch mit in diesem Meeting war, um diese zu benachrichtigen, dass sie sich vielleicht angesteckt haben können. Dadurch können weitere Ausbreitungen verhindert werden.</string>
+    <string name="maske_erklarung">Mit einer OP-Maske oder Alltagsmaske reduziert der Träger die Wahrscheinlichkeit, dass er Menschen in seiner Umgebung ansteckt. Die Maske reduziert den Ausstoß von Tröpfchen und Aerosolen und damit auch von Krankheitserregern aus den Atemwegen. Die Partikel in einem Aerosol sind zwar zu einem großen Teil kleiner als 5 Mikrometer und können daher zwischen den Maschen von Stoffmasken nach außen dringen. Eine Maske bremst aber beim Ausatmen auch das Aerosol, das mit dem Luftstrom aus den Atemwegen kommt. Auf diese Weise kann eine Maske die Konzentration infektiöser Partikel in der unmittelbaren Umgebung des Maskenträgers reduzieren. Auch Plexiglasscheiben können Aerosole blocken und somit die Ausbreitung verhindern.</string>
+    <string name="ein_timer_f_r_eigene_erinnerungen">Ein Timer für eigene Erinnerungen</string>
+    <string name="die_wichtigsten_funktionen">Die wichtigsten Funktionen</string>
+    <string name="informationen">INFORMATIONEN</string>
+    <string name="desinfektionsmittel_bereit">Desinfektionsmittel bereit</string>
+    <string name="masken_plexiglas_gepr_ft">Masken / Plexiglas geprüft</string>
+    <string name="abst_nde_gew_hrleistet">Abstände gewährleistet</string>
+
+    <!-- Checklist -->
+    <string name="checklist_item_erstellen">Checklist Item erstellen</string>
+    <string name="checklist_item_hint">Checklist item hint…</string>
+    <string name="checklist_item_hinzuf_gen">Checklist Item hinzufügen</string>
+    <string name="checklist_item_name">Checklist item name…</string>
+    <string name="checklist_preset">CHECKLIST PRESET</string>
+    <string name="checkliste_preset">Checkliste Preset</string>
+    <string name="checkliste_vor_dem_meeting">Checkliste vor dem Meeting</string>
+    <string name="checklistitem">ChecklistItem</string>
+    <string name="neue_checkliste_erstellen">Neue Checkliste erstellen</string>
+    <string name="eigene_checklisten_verwalten">Eigene Checklisten verwalten</string>
+    <string name="edit_checklist">Checkliste bearbeiten</string>
+    <string name="create_checklist">Neue Checkliste erstellen</string>
+    <string name="add_checklist_item">Checklistenitem hinzufügen</string>
+    <string name="create_custom_checklist">Custom Checkliste erstellen</string>
+    <string name="checklist_preset_title">Checklist Preset</string>
+
+    <!-- Countdown -->
+    <string name="countdown_activity_back_pressed_message">Meeting beenden, um zurück zum Hauptbildschirm zu gelangen.</string>
+    <string name="countdown_countdown_Erstellen">Custom Countdownset erstellen</string>
+    <string name="countdown_einstellen">COUNTDOWN EINSTELLEN</string>
+    <string name="countdown_entfernen">Countdown Entfernen</string>
+    <string name="countdown_hinzuf_gen">Countdown hinzufügen</string>
+    <string name="countdown_main_description">Wählen Sie zunächst welche Timer sie aktivieren wollen und setzen Sie diese im Anschluss auf die von ihnen gewünschte Zeit.</string>
+    <string name="countdown_name">Countdown Name…</string>
+    <string name="countdown_participant_description">Fügen Sie nun alle Teilnehmer ihres Meetings hinzu </string>
+    <string name="eigene_timer_verwalten">Eigene Countdownsets verwalten</string>
+    <string name="enter_timer_desc">Timer-Beschreibung eingeben</string>
+    <string name="custom_countdown_set">Deine Custon Countdownsets</string>
+    <string name="create_custom_countdown_set">Neues Countdownset erstellen</string>
+    <string name="timer_preset_title">Timer Preset</string>
+
+    <!-- Participants -->
+    <string name="contacts_header_text">Kontakte</string>
+    <string name="contacts_search_hint">Kontakte suchen</string>
     <string name="teilnehmer">Teilnehmer</string>
-    <string name="teilnehmer2">TEILNEHMER</string>
+    <string name="personen">Personen</string>
     <string name="teilnehmer_der_meetings">Teilnehmer der Meetings</string>
     <string name="teilnehmer_erstellen">Teilnehmer erstellen</string>
     <string name="teilnehmer_suchen">Teilnehmer Suchen</string>
     <string name="teilnehmeranzahl">Teilnehmeranzahl</string>
     <string name="teilnehmerverwaltung">Teilnehmerverwaltung</string>
-    <string name="timeLuftenLeft">Bis zum nächsten Lüften.</string>
-    <string name="time_from_to_placeholder">\??:?? - ??:??</string>
+    <string name="aus_kontakten_importieren">Aus Kontakten Importieren</string>
+    <string name="bekannte_teilnehmer">Bekannte Teilnehmer</string>
+    <string name="addParticipant">Teilnehmer hinzufügen</string>
+    <string name="delete_participant">Teilnehmer löschen</string>
+    <string name="anwesendeteilnehmer">Anwesende Teilnehmer</string>
+    <string name="status">Status</string>
+    <string name="neuen_kontak_hinzuf_gen">Neuen Kontakt hinzufügen</string>
+    <string name="neuen_teilnehmer_hinzuf_gen">Neuen Teilnehmer hinzufügen</string>
+    <string name="enter_new_person">Neue Person eingeben…</string>
+    <string name="keine_teilnehmer_ausgew_hlt">Keine Teilnehmer ausgewählt.</string>
+    <string name="email">Email</string>
+    <string name="name">Name</string>
+    <string name="no_email_client">Kein unterstützter Email-Client gefunden…</string>
+    <string name="enter_valid_email">Bitte eine valide Email-Adresse eingeben.</string>
+
+    <!-- Location -->
+    <string name="location">Ort</string>
+    <string name="standort">Standort</string>
+    <string name="standort_eingeben">Standort eingeben</string>
+    <string name="meeting_ort">Meeting Ort</string>
+    <string name="vorherigen_orte">Vorherigen Orte</string>
+    <string name="meeting_data_no_location">Keinen Ort angegeben</string>
+
+    <!-- Preset -->
+    <string name="standard">Standard</string>
     <string name="timer_bearbeiten">Timer bearbeiten</string>
     <string name="timer_beschreibung">Timer Beschreibung</string>
     <string name="timer_des_meetings">Timer des Meetings</string>
     <string name="timer_dieses_countdowns">Timer dieses Countdowns</string>
     <string name="timer_einstellen">Timer einstellen</string>
-    <string name="timer_erklerung">Während dem Meeting laufen verschiedene Timer, die dich in regelmäßigen Abständen an Maßnahmen für ein sicheres Meeting erinnern. Die Dauer zwischen den Timern kannst du hier einstellen. Durch seitlich wischen kommst du zu der Dauer, wie lange die Timer dann gehen sollen. Standardmäßig sind die beiden folgenden Timer implementiert:</string>
     <string name="timer_hinzuf_gen">Timer hinzufügen</string>
     <string name="timer_preset">Timer Preset</string>
-    <string name="title_placeholder">\???????</string>
-    <string name="todo">TODO</string>
-    <string name="until_next_airing">Bis zum nächsten Lüften.</string>
-    <string name="vergangene_meetings">Vergangene Meetings</string>
-    <string name="verlauf">Verlauf</string>
-    <string name="vorherigen_orte">Vorherigen Orte</string>
-    <string name="weiter"> WEITER</string>
-    <string name="weiter_all_caps">WEITER</string>
-    <string name="xg_erklerung">Die 3G-Regel steht für vollständig geimpft, genesen oder negativ getestet, und ist ein Prinzip, um Neuinfektionen zu verringern. Nach der 3G-Regel dürfen nur Personen bestimmte Orte oder Veranstaltungen besuchen, die eine vollständige Impfung oder eine Genesung oder einen negativen Test nachweisen können. Beachte die für das geplante Meeting die momentan geltenden Regeln.</string>
+    <string name="preset_name">Preset Name</string>
+    <string name="presets">Presets</string>
 
-    <string name="zeitfenster">Zeitfenster</string>
+    <!-- Meetings -->
+    <string name="meeting_delete">Soll dieses neue Meeting wirlich gelöscht werden?</string>
+    <string name="delete_meeting">Meeting löschen</string>
+    <string name="neues_meeting">NEUES MEETING</string>
+
+    <!-- Standard Preset Countdown -->
+    <string name="timeLuftenLeft">Bis zum nächsten Lüften.</string>
+    <string name="abstandskontrolle_colon">Abstandskontrolle:</string>
+    <string name="fenOffen"> Fenster sollte offen sein!</string>
+    <string name="interval_between_opening_windows">Intervall zwischen Fensteröffnungen</string>
+    <string name="erinnerung_an_das_einhalten_von_abst_nden">Erinnerung an das Einhalten von Abständen</string>
+    <string name="l_ftungs_countdown">Lüftungscountdown</string>
+    <string name="l_ftungstimer">LÜFTUNGSTIMER</string>
+    <string name="lueftungsdauer_colon">Lüftungsdauer:</string>
+    <string name="lueftungsintervall_colon">Lüftungsintervall:</string>
+    <string name="lufttimer">Lüftungstimer</string>
+    <string name="erinnerung_ans_l_ften">Erinnerung ans Lüften</string>
+    <string name="countdown_title_1">Lüftung</string>
+    <string name="countdown_title_2">Abstandskontrolle</string>
+    <string name="countdown_description_1_1">Fenster sollte geöffnet sein</string>
+    <string name="countdown_descpription_1_2">Fenster sollte geschlossen sein</string>
+
+    <!-- Standard Preset Checklist -->
+    <string name="checklist_item_1">Desinfektionsmittel bereit</string>
+    <string name="checklist_item_2">3G-Regelung o.ä. geprüft</string>
+    <string name="checklist_item_3">Masken / Plexiglas geprüft</string>
+    <string name="checklist_item_4">Abstände gewährleistet</string>
+
+    <!-- Placeholder -->
+    <string name="placeholder">\???????</string>
+    <string name="todo">TODO</string>
+
+    <!-- Edit dialog options -->
+    <string name="nderungen_verwerfen">Änderungen Verwerfen</string>
+    <string name="keep_editing">Weiter bearbeiten</string>
+
+    <!-- Warnings -->
+    <string name="meeting_exit_button_hint">Butten gedrückt halten um Meeting zu beenden</string>
+    <string name="meeting_exit_warning">Solle das Meeting wirklich Beendet werden?</string>
+    <string name="meeting_exit_warning_yes">Meeting Beenden</string>
+    <string name="meeting_exit_warning_no">Meeting Fortfahren</string>
+
+    <string name="delete_preset_warning_general">Soll dieses neue Preset verworfen werden?</string>
+    <string name="delete_preset_warning_general_positiv">Änderungen Verwerfen</string>
+    <string name="delete_preset_warning_general_negativ">Weiter Bearbeiten</string>
+
+    <string name="delete_preset_warning_1">Soll das Preset \"</string>
+    <string name="delete_preset_warning_2">\" wirklich gelöscht werden.</string>
+    <string name="warning_deleting_standard">Die Standardeinstellungen können nicht gelöscht werden</string>
+    <string name="delete_preset">Preset löschen</string>
+    <string name="keep_preset">Preset behalten</string>
+
+    <string name="warning_text_participant">Soll dieser neue Teilnehmer verworfen werden?</string>
+    <string name="warning_text_participant_yes">Änderungen Verwerfen</string>
+    <string name="warning_text_participant_no">Weiter Bearbeiten</string>
+    <string name="warning_text_delete_participant">Wollen Sie diesen Teilnehmer wirklich löschen?</string>
+    <string name="warning_text_delete_participant_yes">Ja</string>
+    <string name="warning_text_delete_participant_no">Nein</string>
+
+    <string name="warning_delete_meeting">Solle dieses neue Meeting wirlich gelöscht werden?</string>
+    <string name="warning_delete_meeting_yes">Änderungen Verwerfen</string>
+    <string name="warning_delete_meeting_no">Weiter Bearbeiten</string>
+
+    <string name="meeting_delete_warning">Soll dieses Meeting gelöscht werden?</string>
+    <string name="meeting_delete_warning_yes">Löschen</string>
+    <string name="meeting_delete_warning_no">Beibehalten</string>
+
+    <!-- Meeting Tabs -->
+    <string name="informationen_tab">Informationen</string>
+    <string name="timer_tab">Timer</string>
+
 </resources>

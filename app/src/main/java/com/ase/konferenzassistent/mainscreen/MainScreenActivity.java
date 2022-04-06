@@ -114,7 +114,7 @@ public class MainScreenActivity extends AppCompatActivity {
 
         // Check if the destination is the Verlauf Fragmnet
         if (!Objects.requireNonNull(navController.getCurrentDestination()).getDisplayName()
-                .equals("com.ase.konferenzassistent:id/miVerlauf")) {
+                .equals("com.example.myapplication:id/miVerlauf")) {
             findViewById(R.id.main_activity_filter_button).setVisibility(View.GONE);
         } else
             findViewById(R.id.main_activity_filter_button).setVisibility(View.VISIBLE);
@@ -176,7 +176,7 @@ public class MainScreenActivity extends AppCompatActivity {
         items.add(new ChecklistItem(getString(R.string.checklist_item_3)));
         items.add(new ChecklistItem(getString(R.string.checklist_item_4)));
 
-        ChecklistPreset preset = new ChecklistPreset(getString(R.string.Standard), items, 1);
+        ChecklistPreset preset = new ChecklistPreset(getString(R.string.standard), items, 1);
         convertToChecklistDatabaseEntry(database, preset);
     }
 
@@ -184,7 +184,7 @@ public class MainScreenActivity extends AppCompatActivity {
     private void createStandard(RoomDB database) {
 
         CountdownPresetData preset = new CountdownPresetData();
-        preset.setTitle(getString(R.string.Standard));
+        preset.setTitle(getString(R.string.standard));
 
         CountdownParentData parentData1 = new CountdownParentData();
         parentData1.setTitle(getString(R.string.countdown_title_1));
