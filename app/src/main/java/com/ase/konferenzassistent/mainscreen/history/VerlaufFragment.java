@@ -201,9 +201,7 @@ public class VerlaufFragment extends Fragment implements OnFilterButtonClickList
     public void onDeleteSwipe(Integer size) {
         if (size < 1) {
             introText.setVisibility(View.VISIBLE);
-
         }
-
         updatePastMeetingInfo();
     }
 

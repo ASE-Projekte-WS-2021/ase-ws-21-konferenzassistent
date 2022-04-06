@@ -32,7 +32,6 @@ public class RecycleViewParticipantInfoListAdapter extends RecyclerView.Adapter<
         Participant participant = mParticipants.get(holder.getAdapterPosition());
         holder.participantName.setText(participant.getName());
         holder.participantStatus.setText(participant.getStatus());
-
     }
 
     @Override
@@ -57,7 +56,6 @@ public class RecycleViewParticipantInfoListAdapter extends RecyclerView.Adapter<
         notifyDataSetChanged();
     }
 
-
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -80,9 +78,7 @@ public class RecycleViewParticipantInfoListAdapter extends RecyclerView.Adapter<
             participantContainer = countdownView.findViewById(R.id.participant_container);
 
         }
-
     }
-
 }
 
 

@@ -36,7 +36,6 @@ public class PastMeetingInfoActivity extends AppCompatActivity {
     public PastMeetingInfoActivity() {
     }
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,8 +54,6 @@ public class PastMeetingInfoActivity extends AppCompatActivity {
         setView();
 
         setupListeners();
-
-        //database.meetingDao().getAll();
     }
 
     private void getView() {
@@ -67,14 +64,12 @@ public class PastMeetingInfoActivity extends AppCompatActivity {
         meetingEndTime = findViewById(R.id.endTime);
         meetingParticipantCount = findViewById(R.id.participantCount);
         meetingOrt = findViewById(R.id.ort);
-
         cancelButton = findViewById(R.id.cancelBtn);
         moreButton = findViewById(R.id.moreBtn);
     }
 
     private void setView() {
         MeetingParticipantPair meetingData = meetingList.get(meetingList.size() - 1);
-
         String duration = meetingData.getMeeting().getDuration() / 60 + "";
         String startTime = meetingData.getMeeting().getStartDate().substring(11);
         String date = meetingData.getMeeting().getStartDate().substring(0, 10);
@@ -89,7 +84,6 @@ public class PastMeetingInfoActivity extends AppCompatActivity {
         meetingParticipantCount.setText("" + meetingData.getParticipants().size());
         meetingOrt.setText(meetingData.getMeeting().getLocation());
     }
-
 
     private void setupListeners() {
         cancelButton.setOnClickListener(view -> openHomeScreen());

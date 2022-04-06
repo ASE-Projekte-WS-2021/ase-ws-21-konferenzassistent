@@ -100,9 +100,10 @@ public class MeetingBottomSheetAdapter extends BottomSheetDialogFragment {
             }
         });
 
-        // cancel buttun clicked
+        // cancel button clicked
         bi.cancelBtn.setOnClickListener(view1 -> dismiss());
 
+        // TODO: ?
         // edit button clicked
         bi.editBtn.setOnClickListener(view12 -> Toast.makeText(view12.getContext(), "Edit Funktion fehlt noch", Toast.LENGTH_SHORT).show());
 

@@ -24,7 +24,7 @@ public class InformationBottomSheetAdapter extends BottomSheetDialogFragment {
 
     private Integer mLayout;
 
-    public void setmLayout(Integer mLayout) {
+    public void setMLayout(Integer mLayout) {
         this.mLayout = mLayout;
     }
 

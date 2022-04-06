@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ase.konferenzassistent.R;
+import com.ase.konferenzassistent.countdown.AdvancedCountdownObject;
 import com.ase.konferenzassistent.databinding.FragmentWizardCountdownBinding;
 
 import java.util.ArrayList;
@@ -26,7 +27,7 @@ public class WizardCountdownFragment extends Fragment {
     ArrayList<Long> mCountdownTime = new ArrayList<>();
     ArrayList<Boolean> mEnabled = new ArrayList<>();
 
-    ArrayList<RecyclerViewAdvancedCountdownAdapter.AdvancedCountdownObject> mCountdown =
+    ArrayList<AdvancedCountdownObject> mCountdown =
             new ArrayList<>();
 
     RecyclerViewAdvancedCountdownAdapter recyclerViewCountdownAdapter;
@@ -84,7 +85,6 @@ public class WizardCountdownFragment extends Fragment {
     // Build and fills the recycler view
     private void buildRecyclerView() {
 
-        //
         RecyclerView recyclerView = bi.countdownRecycleView;
         recyclerViewCountdownAdapter = new RecyclerViewAdvancedCountdownAdapter(
                 mCountdown,
@@ -105,8 +105,6 @@ public class WizardCountdownFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_wizard_countdown, container, false);
     }

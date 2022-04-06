@@ -1,7 +1,6 @@
 package com.ase.konferenzassistent.shared.presets;
 
-import com.ase.konferenzassistent.data.presets.checklist.ChecklistItemData;
-import com.ase.konferenzassistent.data.presets.checklist.ChecklistPresetWithItemData;
+import com.ase.konferenzassistent.countdown.AdvancedCountdownObject;
 import com.ase.konferenzassistent.shared.Interfaces.Preset;
 import com.ase.konferenzassistent.data.RoomDB;
 import com.ase.konferenzassistent.data.presets.countdown.CountdownItemData;
@@ -11,7 +10,6 @@ import com.ase.konferenzassistent.data.presets.countdown.CountdownParentWithItem
 import com.ase.konferenzassistent.data.presets.countdown.CountdownPresetData;
 import com.ase.konferenzassistent.data.presets.countdown.CountdownPresetPair;
 import com.ase.konferenzassistent.data.presets.countdown.CountdownPresetWithParentData;
-import com.ase.konferenzassistent.meetingwizard.RecyclerViewAdvancedCountdownAdapter;
 import com.ase.konferenzassistent.meetingwizard.RecyclerViewAdvancedCountdownItemAdapter;
 
 import java.util.ArrayList;
@@ -19,10 +17,10 @@ import java.util.List;
 
 public class CountdownPreset implements Preset {
     String title;
-    ArrayList<RecyclerViewAdvancedCountdownAdapter.AdvancedCountdownObject> advancedCountdownObject;
+    ArrayList<AdvancedCountdownObject> advancedCountdownObject;
     int id;
 
-    public CountdownPreset(String title, ArrayList<RecyclerViewAdvancedCountdownAdapter.AdvancedCountdownObject> advancedCountdownObject, int id) {
+    public CountdownPreset(String title, ArrayList<AdvancedCountdownObject> advancedCountdownObject, int id) {
         this.title = title;
         this.advancedCountdownObject = advancedCountdownObject;
         this.id = id;
@@ -127,16 +125,16 @@ public class CountdownPreset implements Preset {
         });
     }
 
-    public static ArrayList<RecyclerViewAdvancedCountdownAdapter.AdvancedCountdownObject> convertToAdvancedCountdownList(RoomDB database, CountdownPresetPair presetPair) {
-        ArrayList<RecyclerViewAdvancedCountdownAdapter.AdvancedCountdownObject> list = new ArrayList<>();
+    public static ArrayList<AdvancedCountdownObject> convertToAdvancedCountdownList(RoomDB database, CountdownPresetPair presetPair) {
+        ArrayList<AdvancedCountdownObject> list = new ArrayList<>();
         presetPair.getParents().forEach(parents -> {
             String countdownName = parents.getTitle();
 
             ArrayList<RecyclerViewAdvancedCountdownItemAdapter.AdvancedCountdownItem> children =
                     new ArrayList<>();
 
-            RecyclerViewAdvancedCountdownAdapter.AdvancedCountdownObject advancedCountdownObject =
-                    new RecyclerViewAdvancedCountdownAdapter.AdvancedCountdownObject(countdownName, true, children);
+            AdvancedCountdownObject advancedCountdownObject =
+                    new AdvancedCountdownObject(countdownName, true, children);
 
             CountdownItemPair childItems = database.countdownParentWIthItemDao().getSingularCountdowns(parents.getID());
             childItems.getCountdownItems().forEach(itemData -> {
@@ -175,11 +173,11 @@ public class CountdownPreset implements Preset {
         this.title = title;
     }
 
-    public ArrayList<RecyclerViewAdvancedCountdownAdapter.AdvancedCountdownObject> getAdvancedCountdownObject() {
+    public ArrayList<AdvancedCountdownObject> getAdvancedCountdownObject() {
         return advancedCountdownObject;
     }
 
-    public void setAdvancedCountdownObject(ArrayList<RecyclerViewAdvancedCountdownAdapter.AdvancedCountdownObject> advancedCountdownObject) {
+    public void setAdvancedCountdownObject(ArrayList<AdvancedCountdownObject> advancedCountdownObject) {
         this.advancedCountdownObject = advancedCountdownObject;
     }
 

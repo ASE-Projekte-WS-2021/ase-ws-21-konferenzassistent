@@ -16,7 +16,6 @@ import java.util.ArrayList;
 
 public class RecycleViewContactList extends RecyclerView.Adapter<RecycleViewContactList.ViewHolder> {
 
-    // Content
     private final ArrayList<Contact> mContact;
     private final ArrayList<Contact> mContactCopy = new ArrayList<>();
     final contactListener listener;

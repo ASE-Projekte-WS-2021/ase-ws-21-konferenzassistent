@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -17,7 +16,6 @@ import androidx.core.view.ViewCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ase.konferenzassistent.R;
-import com.ase.konferenzassistent.meetingwizard.RecyclerViewAdvancedCountdownAdapter;
 import com.ase.konferenzassistent.meetingwizard.RecyclerViewAdvancedCountdownItemAdapter;
 import com.ase.konferenzassistent.meetingwizard.cdServiceObject;
 
@@ -63,7 +61,7 @@ public class RecycleViewCountdownAdapter extends RecyclerView.Adapter<RecycleVie
 
         cdServiceObject countdownObject = mCountdowns.get(position);
 
-        RecyclerViewAdvancedCountdownAdapter.AdvancedCountdownObject countdown =
+        AdvancedCountdownObject countdown =
                 countdownObject.getTimer();
 
         RecyclerViewAdvancedCountdownItemAdapter.AdvancedCountdownItem timer =
