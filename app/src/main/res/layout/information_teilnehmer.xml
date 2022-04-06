@@ -23,7 +23,7 @@
                     android:textSize="32sp" />
 
                 <ImageView
-                    android:src="@drawable/ic_baseline_image_24"
+                    android:src="@drawable/ic_baseline_group_24"
                     android:minHeight="150dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
