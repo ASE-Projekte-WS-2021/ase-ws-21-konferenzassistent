@@ -54,7 +54,7 @@
                         android:textSize="12sp"
                         android:text="@string/bundesweit"
                         android:textStyle="bold"
-                        android:textColor="#99000000"/>
+                        android:textColor="@color/rki_text_color"/>
 
 
                 </LinearLayout>
@@ -89,7 +89,7 @@
                         android:text="@string/bis_gestern"
                         android:layout_gravity="center"
                         android:textStyle="bold"
-                        android:textColor="#99000000"/>
+                        android:textColor="@color/rki_text_color"/>
 
                     <TextView
                         android:id="@+id/neuinfektionen_text"
@@ -108,7 +108,7 @@
                         android:layout_gravity="center"
                         android:text="@string/neuinfektionen"
                         android:textStyle="bold"
-                        android:textColor="#99000000"/>
+                        android:textColor="@color/rki_text_color"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -124,7 +124,7 @@
                         android:text="@string/bis_gestern"
                         android:layout_gravity="center"
                         android:textStyle="bold"
-                        android:textColor="#99000000"/>
+                        android:textColor="@color/rki_text_color"/>
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -143,7 +143,7 @@
                         android:layout_gravity="center"
                         android:text="@string/hospitalisierungen"
                         android:textStyle="bold"
-                        android:textColor="#99000000"/>
+                        android:textColor="@color/rki_text_color"/>
                 </LinearLayout>
 
             </LinearLayout>

@@ -118,7 +118,7 @@
                                             android:id="@+id/meetingDate"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
-                                            android:text="@string/date_placeholder"
+                                            android:text="@string/placeholder"
                                             android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
 
                                         <TextView
@@ -151,7 +151,7 @@
                                 <View
                                     android:layout_width="match_parent"
                                     android:layout_height="1dp"
-                                    android:background="#e6e6e6" />
+                                    android:background="@color/background_white" />
 
                             </LinearLayout>
                             <LinearLayout
@@ -182,7 +182,7 @@
                                             android:id="@+id/duration"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
-                                            android:text="@string/duration_placeholder"
+                                            android:text="@string/placeholder"
                                             android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
 
                                         <TextView
@@ -202,7 +202,7 @@
                                             android:id="@+id/startTime"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
-                                            android:text="@string/start_time_placeholder"
+                                            android:text="@string/placeholder"
                                             android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
 
                                         <TextView
@@ -223,7 +223,7 @@
                                             android:id="@+id/endTime"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
-                                            android:text="@string/end_time_placeholder"
+                                            android:text="@string/placeholder"
                                             android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
 
                                         <TextView
@@ -256,7 +256,7 @@
                                 <View
                                     android:layout_width="match_parent"
                                     android:layout_height="1dp"
-                                    android:background="#e6e6e6" />
+                                    android:background="@color/background_white" />
 
                             </LinearLayout>
 
@@ -290,7 +290,7 @@
                                             android:id="@+id/participantCount"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
-                                            android:text="@string/placeholder_meeting_participants"
+                                            android:text="@string/placeholder"
                                             android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
 
                                         <TextView
@@ -337,7 +337,7 @@
                                 <View
                                     android:layout_width="match_parent"
                                     android:layout_height="1dp"
-                                    android:background="#e6e6e6" />
+                                    android:background="@color/background_white" />
 
                             </LinearLayout>
                             <LinearLayout
@@ -368,14 +368,14 @@
                                             android:id="@+id/ort"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
-                                            android:text="@string/placeholder_meeting_location"
+                                            android:text="@string/placeholder"
                                             android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
 
                                         <TextView
                                             android:id="@+id/ortType"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
-                                            android:text="@string/ort2"
+                                            android:text="@string/location"
                                             android:textAppearance="@style/TextAppearance.AppCompat.Small" />
 
 

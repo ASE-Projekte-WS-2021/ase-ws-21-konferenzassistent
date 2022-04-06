@@ -34,7 +34,7 @@
                         android:layout_height="wrap_content"
                         android:textStyle="bold"
                         android:textColor="@color/corona_blue"
-                        android:text="@string/title_placeholder"
+                        android:text="@string/placeholder"
                         android:gravity="center"
                         android:layout_margin="8dp"/>
 
@@ -44,7 +44,7 @@
                     android:layout_width="match_parent"
 
                     android:layout_height="1dp"
-                    android:background="#e6e6e6" />
+                    android:background="@color/background_white" />
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -79,7 +79,7 @@
                                 android:id="@+id/tvDateRow"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
-                                android:text="@string/date_placeholder"
+                                android:text="@string/placeholder"
                                 android:textSize="16sp"
                                 android:textStyle="bold" />
 
@@ -104,7 +104,7 @@
                                 android:id="@+id/tvTimeRow"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="@string/time_from_to_placeholder"
+                                android:text="@string/placeholder"
                                 android:textSize="16sp" />
 
                         </LinearLayout>
@@ -153,7 +153,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginStart="8dp"
-                                    android:text="@string/location_placeholder"
+                                    android:text="@string/placeholder"
                                     android:textSize="16sp"
                                     app:layout_constraintBottom_toBottomOf="@+id/ivLocationRow"
                                     app:layout_constraintStart_toEndOf="@+id/ivLocationRow"
@@ -188,7 +188,7 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_marginStart="8dp"
-                                        android:text="@string/placeholder_min"/>
+                                        android:text="@string/placeholder"/>
 
                                 </LinearLayout>
 
@@ -211,7 +211,7 @@
                                         android:id="@+id/tvParticipantsRow"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:text="@string/placeholder_meeting_participants"
+                                        android:text="@string/placeholder"
                                         app:layout_constraintEnd_toEndOf="parent"
                                         app:layout_constraintStart_toStartOf="@+id/ivParticipantsRow"
                                         app:layout_constraintTop_toBottomOf="@+id/ivParticipantsRow" />

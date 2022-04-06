@@ -131,7 +131,7 @@ public class PresetAddBottomSheet extends BottomSheetDialogFragment implements C
             bi.presetName.setText(preset.getTitle());
             bi.deletePreset.setVisibility(View.VISIBLE);
             bi.deletePresetButton.setOnClickListener(viewListener ->{
-                    if(preset.getTitle().equals(getString(R.string.Standard))) {
+                    if(preset.getTitle().equals(getString(R.string.standard))) {
                         Toast.makeText(getContext(), R.string.warning_deleting_standard,
                                 Toast.LENGTH_LONG).show();
                         return;

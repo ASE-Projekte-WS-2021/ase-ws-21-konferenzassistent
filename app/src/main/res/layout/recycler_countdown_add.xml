@@ -63,7 +63,7 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginEnd="16dp"
                     android:layout_height="1dp"
-                    android:background="#e6e6e6" />
+                    android:background="@color/background_white" />
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
@@ -123,7 +123,7 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginEnd="16dp"
                     android:layout_height="1dp"
-                    android:background="#e6e6e6" />
+                    android:background="@color/background_white" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/item_recycle_view"
@@ -178,7 +178,7 @@
             android:layout_width="match_parent"
             android:layout_marginTop="8dp"
             android:layout_height="1dp"
-            android:background="#e6e6e6" />
+            android:background="@color/background_white" />
     </LinearLayout>
 
 
