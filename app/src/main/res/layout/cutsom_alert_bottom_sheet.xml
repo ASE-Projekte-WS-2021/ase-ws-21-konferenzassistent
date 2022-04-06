@@ -26,7 +26,7 @@
                     android:id="@+id/alert_warning_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/solle_dieses_neue_meeting_wirlich_gel_scht_werden"
+                    android:text="@string/meeting_delete"
                     android:layout_marginTop="8dp"
                     android:layout_marginBottom="8dp"
                     android:gravity="center"

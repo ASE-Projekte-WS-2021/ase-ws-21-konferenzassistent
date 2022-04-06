@@ -204,7 +204,7 @@ public class ContactCreationBottomSheetAdapter extends BottomSheetDialogFragment
             bi.participantInputName.setText(updatableParticipantData.getName());
             bi.participantInputEmail.setText(updatableParticipantData.getEmail());
             bi.participantInputStatus.setText(updatableParticipantData.getStatus());
-            bi.dialogCreateButton.setText(R.string.Speichern);
+            bi.dialogCreateButton.setText(R.string.speichern);
         }
 
         return bottomSheet;
