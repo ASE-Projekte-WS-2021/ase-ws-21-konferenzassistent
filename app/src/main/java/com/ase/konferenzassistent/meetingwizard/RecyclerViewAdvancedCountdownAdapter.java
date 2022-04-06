@@ -15,8 +15,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.SnapHelper;
 
 import com.ase.konferenzassistent.R;
+import com.ase.konferenzassistent.countdown.AdvancedCountdownObject;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
 public class RecyclerViewAdvancedCountdownAdapter
@@ -39,22 +39,22 @@ public class RecyclerViewAdvancedCountdownAdapter
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.countdownName.setText(mAdvancedCountdownObjects.get(holder.getAdapterPosition()).mCountdownName);
-        holder.aSwitch.setChecked(mAdvancedCountdownObjects.get(holder.getAdapterPosition()).mEnabled);
+        holder.countdownName.setText(mAdvancedCountdownObjects.get(holder.getAdapterPosition()).getmCountdownName());
+        holder.aSwitch.setChecked(mAdvancedCountdownObjects.get(holder.getAdapterPosition()).getmEnabled());
 
         // Load the Child recycler view
         LinearLayoutManager childView = new LinearLayoutManager(holder.recyclerView.getContext(),
                 RecyclerView.HORIZONTAL, false);
 
         RecyclerViewAdvancedCountdownItemAdapter recyclerViewCountdownAdapter = new RecyclerViewAdvancedCountdownItemAdapter(
-                getmAdvancedCountdownObjects().get(holder.getAdapterPosition()).mItems,
+                getmAdvancedCountdownObjects().get(holder.getAdapterPosition()).getmItems(),
                 mContext);
 
         holder.recyclerView.setAdapter(recyclerViewCountdownAdapter);
         holder.recyclerView.setLayoutManager(childView);
         SnapHelper helper = new LinearSnapHelper();
         helper.attachToRecyclerView(holder.recyclerView);
-        if (getmAdvancedCountdownObjects().get(holder.getAdapterPosition()).mItems.size() > 1)
+        if (getmAdvancedCountdownObjects().get(holder.getAdapterPosition()).getmItems().size() > 1)
             holder.recyclerView.addItemDecoration(new LinePagerIndicatorDecoration());
 
         // Setup the container visibility
@@ -63,10 +63,10 @@ public class RecyclerViewAdvancedCountdownAdapter
         // Set on click listener on the switch
         holder.aSwitch.setOnClickListener(view1 -> {
             if (!holder.aSwitch.isChecked()) {
-                mAdvancedCountdownObjects.get(holder.getAdapterPosition()).mEnabled = false;
+                mAdvancedCountdownObjects.get(holder.getAdapterPosition()).setmEnabled(false);
                 holder.countdownContainer.setVisibility(View.GONE);
             } else {
-                mAdvancedCountdownObjects.get(holder.getAdapterPosition()).mEnabled = true;
+                mAdvancedCountdownObjects.get(holder.getAdapterPosition()).setmEnabled(true);
                 holder.countdownContainer.setVisibility(View.VISIBLE);
             }
         });
@@ -86,44 +86,6 @@ public class RecyclerViewAdvancedCountdownAdapter
         return new ViewHolder(view);
     }
 
-    public static class AdvancedCountdownObject implements Serializable {
-        String mCountdownName;
-        Boolean mEnabled;
-        ArrayList<RecyclerViewAdvancedCountdownItemAdapter.AdvancedCountdownItem> mItems;
-
-        public AdvancedCountdownObject(String mCountdownName,
-                                       Boolean mEnabled,
-                                       ArrayList<RecyclerViewAdvancedCountdownItemAdapter.AdvancedCountdownItem> mItems) {
-            this.mCountdownName = mCountdownName;
-            this.mEnabled = mEnabled;
-            this.mItems = mItems;
-        }
-
-        public String getmCountdownName() {
-            return mCountdownName;
-        }
-
-        public void setmCountdownName(String mCountdownName) {
-            this.mCountdownName = mCountdownName;
-        }
-
-        public Boolean getmEnabled() {
-            return mEnabled;
-        }
-
-        public void setmEnabled(Boolean mEnabled) {
-            this.mEnabled = mEnabled;
-        }
-
-        public ArrayList<RecyclerViewAdvancedCountdownItemAdapter.AdvancedCountdownItem> getmItems() {
-            return mItems;
-        }
-
-        public void setmItems(ArrayList<RecyclerViewAdvancedCountdownItemAdapter.AdvancedCountdownItem> mItems) {
-            this.mItems = mItems;
-        }
-    }
-
     public static class ViewHolder extends RecyclerView.ViewHolder {
         final TextView countdownName;
         final SwitchCompat aSwitch;
@@ -140,6 +102,4 @@ public class RecyclerViewAdvancedCountdownAdapter
         }
 
     }
-
-
 }

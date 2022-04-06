@@ -14,8 +14,10 @@
     <string name="addParticipant">Teilnehmer hinzufügen</string>
     <string name="anwesendeteilnehmer">Anwesende Teilnehmer</string>
     <string name="app_name">Corona-Konferenz-Assistent</string>
+
     <string name="app_opened_first_time_key">app_opened_first_time</string>
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
+
     <string name="attachment_summary_on">Automatically download attachments for incoming emails
     </string>
     <string name="attachment_title">Download incoming attachments</string>
@@ -199,5 +201,6 @@
     <string name="weiter"> WEITER</string>
     <string name="weiter_all_caps">WEITER</string>
     <string name="xg_erklerung">Die 3G-Regel steht für vollständig geimpft, genesen oder negativ getestet, und ist ein Prinzip, um Neuinfektionen zu verringern. Nach der 3G-Regel dürfen nur Personen bestimmte Orte oder Veranstaltungen besuchen, die eine vollständige Impfung oder eine Genesung oder einen negativen Test nachweisen können. Beachte die für das geplante Meeting die momentan geltenden Regeln.</string>
+
     <string name="zeitfenster">Zeitfenster</string>
 </resources>

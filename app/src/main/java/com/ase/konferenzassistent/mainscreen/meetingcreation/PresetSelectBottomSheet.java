@@ -58,7 +58,6 @@ public class PresetSelectBottomSheet extends BottomSheetDialogFragment {
         bottomSheetBehavior.setPeekHeight(BottomSheetBehavior.PEEK_HEIGHT_AUTO);
 
         // setting max height of bottom sheet
-        //bi.extraSpace.setMinimumHeight((Resources.getSystem().getDisplayMetrics().heightPixels));
         bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
 
         // skip it being collapsable
@@ -112,7 +111,6 @@ public class PresetSelectBottomSheet extends BottomSheetDialogFragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
     }
 
-
     public void initPreset(List<? extends PresetPair> presetPairs, ArrayList<Integer> selectIndicators) {
 
         presetPairs.forEach(preset -> {
@@ -127,5 +125,4 @@ public class PresetSelectBottomSheet extends BottomSheetDialogFragment {
     public void closePresets() {
         dismiss();
     }
-
 }

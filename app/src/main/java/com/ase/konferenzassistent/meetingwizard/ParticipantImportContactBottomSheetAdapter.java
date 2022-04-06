@@ -37,17 +37,13 @@ public class ParticipantImportContactBottomSheetAdapter extends BottomSheetDialo
     RecycleViewContactList.contactListener listener;
     // Participant List
     final ArrayList<Contact> mContacts = new ArrayList<>();
+
     // https://stackoverflow.com/a/63546099
     private final ActivityResultLauncher<String> requestPermissionLauncher =
             registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted -> {
                 if (isGranted) {
                     getContactList();
-                }  // Explain to the user that the feature is unavailable because the
-                // features requires a permission that the user has denied. At the
-                // same time, respect the user's decision. Don't link to system
-                // settings in an effort to convince the user to change their
-                // decision.
-
+                }
             });
 
     public RecycleViewContactList.contactListener getListener() {
@@ -63,7 +59,6 @@ public class ParticipantImportContactBottomSheetAdapter extends BottomSheetDialo
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setStyle(BottomSheetDialogFragment.STYLE_NORMAL, R.style.CustomBottomSheetDialogTheme);
-
     }
 
     @NonNull
@@ -85,8 +80,6 @@ public class ParticipantImportContactBottomSheetAdapter extends BottomSheetDialo
         //setting Peek at the 16:9 ratio keyline of its parent
         bottomSheetBehavior.setPeekHeight(BottomSheetBehavior.PEEK_HEIGHT_AUTO);
 
-        // setting max height of bottom sheet
-        //bi.extraSpace.setMinimumHeight((Resources.getSystem().getDisplayMetrics().heightPixels));
         bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
 
         // skip it being collapsable
@@ -181,7 +174,6 @@ public class ParticipantImportContactBottomSheetAdapter extends BottomSheetDialo
         // check if cursor is empty
         if (cursor.getCount() > 0) {
             // iterate through the cursor
-            Log.i("TAG", "getContactList: " + cursor.getCount());
             while (cursor.moveToNext()) {
                 // get values
                 String id = cursor.getString(cursor.getColumnIndexOrThrow(ContactsContract.Contacts._ID));
@@ -193,24 +185,19 @@ public class ParticipantImportContactBottomSheetAdapter extends BottomSheetDialo
                 Cursor phoneCursor = requireActivity().getApplicationContext().getContentResolver().query(
                         uriPhone, null, selection, new String[]{id}, null);
 
+                // Returns phone Number if needed for future versions
                 if (phoneCursor.moveToNext()) {
                     String number = phoneCursor.getString(phoneCursor.getColumnIndexOrThrow(
                             ContactsContract.CommonDataKinds.Phone.NUMBER
                     ));
-
-
                 }
 
-                // Maybe add number
-                Log.i("TAG", "getContactList: " + mContacts);
                 Contact contact = new Contact(name);
                 mContacts.add(contact);
                 phoneCursor.close();
             }
         }
         cursor.close();
-        Log.i("TAG", "getContactList: " + mContacts);
         buildRecyclerView();
     }
-
 }

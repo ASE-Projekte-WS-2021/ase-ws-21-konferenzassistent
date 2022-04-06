@@ -33,7 +33,6 @@ public class WizardParticipantFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
@@ -43,7 +42,6 @@ public class WizardParticipantFragment extends Fragment {
         assert bi != null;
 
         setupListeners();
-
 
         getParticipantList();
 

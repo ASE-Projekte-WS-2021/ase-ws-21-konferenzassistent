@@ -129,7 +129,7 @@ public class MeetingFilterBottomSheet extends BottomSheetDialogFragment {
                 .setTheme(R.style.CustomDatePickerStyle)
                 .build();
 
-        picker.addOnPositiveButtonClickListener((MaterialPickerOnPositiveButtonClickListener<Pair<Long, Long>>) selection -> {
+        picker.addOnPositiveButtonClickListener(selection -> {
             dateStart = selection.first;
             dateEnd = selection.second;
             DateFormat dateFormat = DateFormat.getDateInstance();
@@ -171,7 +171,7 @@ public class MeetingFilterBottomSheet extends BottomSheetDialogFragment {
 
         if (!countMaxString.equals("") && !countMinString.equals("")) {
             if (Integer.parseInt(countMaxString) < Integer.parseInt(countMinString)) {
-                Toast toast = Toast.makeText(getContext(), "Du kannst nicht mehr Leute im Minimum haben wie Leute im Maximum", Toast.LENGTH_LONG);
+                Toast toast = Toast.makeText(getContext(), R.string.more_min_then_max_warning, Toast.LENGTH_LONG);
                 toast.show();
                 return false;
             }

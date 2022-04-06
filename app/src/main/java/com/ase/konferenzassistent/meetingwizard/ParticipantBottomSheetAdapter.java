@@ -92,7 +92,6 @@ public class ParticipantBottomSheetAdapter extends BottomSheetDialogFragment {
         bi.textInputSearch.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
             }
 
             @Override
@@ -104,7 +103,6 @@ public class ParticipantBottomSheetAdapter extends BottomSheetDialogFragment {
                 } else {
                     bi.clearTextButton.setVisibility(View.VISIBLE);
                 }
-
             }
 
             @Override
@@ -123,7 +121,6 @@ public class ParticipantBottomSheetAdapter extends BottomSheetDialogFragment {
 
     // Build and fills the recycler view
     private void buildRecyclerView() {
-
         RecyclerView recyclerView = bi.participantRecycleView;
         recycleViewParticipantList = new RecyclerViewParticipantListAdapter(
                 participants,
@@ -132,11 +129,7 @@ public class ParticipantBottomSheetAdapter extends BottomSheetDialogFragment {
         );
         recyclerView.setAdapter(recycleViewParticipantList);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
-
     }
-
-
-
 
     public void onParticipentAdded() {
         // get the MeetingWizardActivity
@@ -156,8 +149,6 @@ public class ParticipantBottomSheetAdapter extends BottomSheetDialogFragment {
         // udate view
         MeetingWizardActivity activity = ((MeetingWizardActivity) getActivity());
         assert activity != null;
-
         activity.updateDataSet();
     }
-
 }
