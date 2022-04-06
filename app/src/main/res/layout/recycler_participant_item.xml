@@ -53,7 +53,7 @@ android:id="@+id/location_container">
                     android:textColor="@color/black"
                     android:gravity="center"
                     android:textSize="16sp"
-                    android:text="@string/example_name"/>
+                    android:text="@string/placeholder"/>
 
                 <TextView
                     android:id="@+id/participant_status"
@@ -64,7 +64,7 @@ android:id="@+id/location_container">
                     android:textColor="@color/dark_gray"
                     android:gravity="center"
                     android:textSize="10sp"
-                    android:text="@string/example_status"/>
+                    android:text="@string/placeholder"/>
             </LinearLayout>
         </LinearLayout>
 

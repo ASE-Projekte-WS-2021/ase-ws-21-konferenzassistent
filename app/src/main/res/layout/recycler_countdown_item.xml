@@ -42,7 +42,7 @@
                     android:id="@+id/countdown_timer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/start_time_placeholder"
+                    android:text="@string/placeholder"
                     android:layout_marginTop="16dp"
                     android:gravity=""
                     android:textColor="@color/white"

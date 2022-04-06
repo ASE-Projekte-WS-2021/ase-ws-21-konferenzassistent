@@ -51,7 +51,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:background="@color/transparent"
-                        android:text="@string/bernehmen"
+                        android:text="@string/speichern"
                         android:textColor="@color/break_yellow_btn"
                         android:textSize="10sp" />
 

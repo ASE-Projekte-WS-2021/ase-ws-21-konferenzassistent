@@ -31,7 +31,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/ic_baseline_schedule_24"
-                android:contentDescription="@string/todo" />
+                android:contentDescription="" />
 
             <TextView
                 android:id="@+id/tvDuration"
@@ -47,7 +47,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:text="@string/minutes_placeholder"
+                android:text="@string/placeholder"
                 android:textAppearance="@style/TextAppearance.AppCompat.Display1"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/ivTimeIcon"
@@ -108,13 +108,13 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/ic_outline_people_24"
-                android:contentDescription="@string/todo" />
+                android:contentDescription="" />
 
             <TextView
                 android:id="@+id/tvParticipants"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/participants"
+                android:text="@string/teilnehmer"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/ivPartIcon"
                 app:layout_constraintStart_toStartOf="@+id/ivPartIcon" />
@@ -124,7 +124,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:text="@string/participants_placeholder"
+                android:text="@string/placeholder"
                 android:textAppearance="@style/TextAppearance.AppCompat.Display1"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/ivPartIcon"
@@ -155,7 +155,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/ic_outline_place_24"
-                android:contentDescription="@string/todo" />
+                android:contentDescription="" />
 
             <TextView
                 android:id="@+id/tvLocationSubtitle"
@@ -172,7 +172,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:text="@string/location_placeholder"
+                android:text="@string/placeholder"
                 android:textAppearance="@style/TextAppearance.AppCompat.Display1"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/ivLocaIcon"
@@ -203,7 +203,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/ic_outline_settings_24"
-                android:contentDescription="@string/todo" />
+                android:contentDescription="" />
 
             <TextView
                 android:id="@+id/tvSettings"
@@ -229,7 +229,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:text="@string/minutes_placeholder"
+                android:text="@string/placeholder"
                 app:layout_constraintBottom_toBottomOf="@+id/tvWindowInterval_"
                 app:layout_constraintStart_toEndOf="@+id/tvWindowInterval_"
                 app:layout_constraintTop_toTopOf="@+id/tvWindowInterval_" />
@@ -247,7 +247,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:text="@string/minutes_placeholder"
+                android:text="@string/placeholder"
                 app:layout_constraintBottom_toBottomOf="@+id/tvWindowTime_"
                 app:layout_constraintStart_toEndOf="@+id/tvWindowTime_"
                 app:layout_constraintTop_toTopOf="@+id/tvWindowTime_" />
@@ -265,7 +265,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:text="@string/minutes_placeholder"
+                android:text="@string/placeholder"
                 app:layout_constraintBottom_toBottomOf="@+id/tvDistanceInterval_"
                 app:layout_constraintStart_toEndOf="@+id/tvDistanceInterval_"
                 app:layout_constraintTop_toTopOf="@+id/tvDistanceInterval_" />
