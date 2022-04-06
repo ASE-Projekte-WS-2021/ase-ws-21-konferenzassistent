@@ -158,7 +158,7 @@
                                 <View
                                     android:layout_width="match_parent"
                                     android:layout_height="1dp"
-                                    android:background="#e6e6e6" />
+                                    android:background="@color/background_white" />
 
                                 <androidx.recyclerview.widget.RecyclerView
                                     android:id="@+id/add_recycleview"

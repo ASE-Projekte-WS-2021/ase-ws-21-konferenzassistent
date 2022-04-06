@@ -73,7 +73,7 @@
             android:layout_width="match_parent"
             android:layout_marginTop="8dp"
             android:layout_height="1dp"
-            android:background="#e6e6e6" />
+            android:background="@color/background_white" />
     </LinearLayout>
 
 
