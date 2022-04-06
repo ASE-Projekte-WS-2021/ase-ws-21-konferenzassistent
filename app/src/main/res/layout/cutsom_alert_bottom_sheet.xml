@@ -76,7 +76,7 @@
                 android:background="@color/corona_white"
                 android:textStyle="bold"
                 android:textColor="@color/corona_blue"
-                android:text="Weiter bearbeiten"
+                android:text="@string/keep_editing"
                 android:textSize="14sp"
                 />
 

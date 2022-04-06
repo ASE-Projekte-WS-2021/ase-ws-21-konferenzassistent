@@ -49,7 +49,7 @@
                 <androidx.constraintlayout.widget.Placeholder
                     android:layout_width="wrap_content"
                     android:layout_height="20dp"
-                    android:text="Bis zum nächsten Lüften."
+                    android:text="@string/until_next_airing"
                     android:textColor="@color/gray"
                     android:textSize="12sp"
                     android:layout_marginBottom="16dp"

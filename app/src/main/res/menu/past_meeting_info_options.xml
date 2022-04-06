@@ -4,5 +4,5 @@
 
     <item
         android:id="@+id/past_meeting_info_options_delete"
-        android:title="Meeting löschen" />
+        android:title="@string/delete_meeting" />
 </menu>

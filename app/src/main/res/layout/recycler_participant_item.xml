@@ -37,7 +37,7 @@ android:id="@+id/location_container">
                     android:layout_height="wrap_content"
                     android:background="@drawable/ic_outline_people_24"
                     android:backgroundTint="@color/white"
-                    android:contentDescription="TODO" />
+                    android:contentDescription="@string/todo" />
 
             </androidx.cardview.widget.CardView>
 
@@ -53,7 +53,7 @@ android:id="@+id/location_container">
                     android:textColor="@color/black"
                     android:gravity="center"
                     android:textSize="16sp"
-                    android:text="Hans Meier"/>
+                    android:text="@string/example_name"/>
 
                 <TextView
                     android:id="@+id/participant_status"
@@ -64,7 +64,7 @@ android:id="@+id/location_container">
                     android:textColor="@color/dark_gray"
                     android:gravity="center"
                     android:textSize="10sp"
-                    android:text="Ungeimpft"/>
+                    android:text="@string/example_status"/>
             </LinearLayout>
         </LinearLayout>
 
@@ -77,7 +77,7 @@ android:id="@+id/location_container">
             android:visibility="invisible"
             android:backgroundTint="@color/corona_blue"
             android:layout_marginEnd="16dp"
-            android:contentDescription="TODO" />
+            android:contentDescription="@string/todo" />
 
     </LinearLayout>
     <View
