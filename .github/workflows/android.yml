@@ -54,6 +54,9 @@ jobs:
       id: download
       with:
         name: apk  
+        
+    - name: 'Echo download path'
+      run: echo ${{steps.download.outputs.download-path}}
 
     - name: release
       uses: actions/create-release@v1
@@ -71,7 +74,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ${{ steps.download.outputs.download-path }}
+        asset_path: ${{steps.download.outputs.download-path}}
         asset_name: Konferenzassistent.apk
         asset_content_type: application/zip
 
