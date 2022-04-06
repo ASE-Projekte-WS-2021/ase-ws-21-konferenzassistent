@@ -33,8 +33,6 @@ public class WizardChecklistFragment extends Fragment {
         this.listener = listener;
     }
 
-
-
     public void setCheckedItems(int checkedItems) {
         this.checkedItems = checkedItems;
     }

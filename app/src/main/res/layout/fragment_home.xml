@@ -61,7 +61,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/home_fragment_isFiltered_false"
-                            android:textColor="#99000000"
+                            android:textColor="@color/rki_text_color"
                             android:textSize="12sp"
                             android:textStyle="bold" />
 
@@ -75,7 +75,7 @@
                                 android:layout_width="wrap_content"
 
                                 android:layout_height="wrap_content"
-                                android:text="\??"
+                                android:text="@string/placeholder"
                                 android:textColor="@color/black"
                                 android:textSize="52sp"
                                 android:textStyle="bold" />

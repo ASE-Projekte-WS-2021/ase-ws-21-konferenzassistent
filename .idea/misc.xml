@@ -7,8 +7,27 @@
         <entry key="..\:/OneDrive/Uni Dateien/Master Semester 1/Advanced Software Engineering/Projekt/ase-ws-21-konferenzassistent/app/src/main/res/layout/activity_checklist.xml" value="0.36666666666666664" />
         <entry key="..\:/OneDrive/Uni Dateien/Master Semester 1/Advanced Software Engineering/Projekt/ase-ws-21-konferenzassistent/app/src/main/res/layout/activity_countdown.xml" value="0.35260416666666666" />
         <entry key="..\:/OneDrive/Uni Dateien/Master Semester 1/Advanced Software Engineering/Projekt/ase-ws-21-konferenzassistent/app/src/main/res/layout/activity_main.xml" value="0.36666666666666664" />
+        <entry key="..\:/OneDrive/Uni Dateien/Master Semester 1/Advanced Software Engineering/Projekt/ase-ws-21-konferenzassistent/app/src/main/res/layout/activity_meeting_wizard.xml" value="0.18802083333333333" />
         <entry key="..\:/OneDrive/Uni Dateien/Master Semester 1/Advanced Software Engineering/Projekt/ase-ws-21-konferenzassistent/app/src/main/res/layout/activity_onboarding.xml" value="0.36666666666666664" />
+        <entry key="..\:/OneDrive/Uni Dateien/Master Semester 1/Advanced Software Engineering/Projekt/ase-ws-21-konferenzassistent/app/src/main/res/layout/activity_past_meeting_info.xml" value="0.18802083333333333" />
         <entry key="..\:/OneDrive/Uni Dateien/Master Semester 1/Advanced Software Engineering/Projekt/ase-ws-21-konferenzassistent/app/src/main/res/layout/activity_settings.xml" value="0.36666666666666664" />
+        <entry key="..\:/OneDrive/Uni Dateien/Master Semester 1/Advanced Software Engineering/Projekt/ase-ws-21-konferenzassistent/app/src/main/res/layout/bottom_sheet_checklist_add_new.xml" value="0.18802083333333333" />
+        <entry key="..\:/OneDrive/Uni Dateien/Master Semester 1/Advanced Software Engineering/Projekt/ase-ws-21-konferenzassistent/app/src/main/res/layout/bottom_sheet_contact_select.xml" value="0.18802083333333333" />
+        <entry key="..\:/OneDrive/Uni Dateien/Master Semester 1/Advanced Software Engineering/Projekt/ase-ws-21-konferenzassistent/app/src/main/res/layout/bottom_sheet_countdown_add_new.xml" value="0.18802083333333333" />
+        <entry key="..\:/OneDrive/Uni Dateien/Master Semester 1/Advanced Software Engineering/Projekt/ase-ws-21-konferenzassistent/app/src/main/res/layout/bottom_sheet_create_item.xml" value="0.32155797101449274" />
+        <entry key="..\:/OneDrive/Uni Dateien/Master Semester 1/Advanced Software Engineering/Projekt/ase-ws-21-konferenzassistent/app/src/main/res/layout/bottom_sheet_edit_presets.xml" value="0.18802083333333333" />
+        <entry key="..\:/OneDrive/Uni Dateien/Master Semester 1/Advanced Software Engineering/Projekt/ase-ws-21-konferenzassistent/app/src/main/res/layout/bottom_sheet_information_display.xml" value="0.18802083333333333" />
+        <entry key="..\:/OneDrive/Uni Dateien/Master Semester 1/Advanced Software Engineering/Projekt/ase-ws-21-konferenzassistent/app/src/main/res/layout/bottom_sheet_participants.xml" value="0.18802083333333333" />
+        <entry key="..\:/OneDrive/Uni Dateien/Master Semester 1/Advanced Software Engineering/Projekt/ase-ws-21-konferenzassistent/app/src/main/res/layout/bottom_sheet_participants_add_new.xml" value="0.18802083333333333" />
+        <entry key="..\:/OneDrive/Uni Dateien/Master Semester 1/Advanced Software Engineering/Projekt/ase-ws-21-konferenzassistent/app/src/main/res/layout/bottom_sheet_presets.xml" value="0.18802083333333333" />
+        <entry key="..\:/OneDrive/Uni Dateien/Master Semester 1/Advanced Software Engineering/Projekt/ase-ws-21-konferenzassistent/app/src/main/res/layout/create_meeting_bottom_sheet.xml" value="0.18802083333333333" />
+        <entry key="..\:/OneDrive/Uni Dateien/Master Semester 1/Advanced Software Engineering/Projekt/ase-ws-21-konferenzassistent/app/src/main/res/layout/cutsom_alert_bottom_sheet.xml" value="0.18802083333333333" />
+        <entry key="..\:/OneDrive/Uni Dateien/Master Semester 1/Advanced Software Engineering/Projekt/ase-ws-21-konferenzassistent/app/src/main/res/layout/dialog_user_info.xml" value="0.18802083333333333" />
+        <entry key="..\:/OneDrive/Uni Dateien/Master Semester 1/Advanced Software Engineering/Projekt/ase-ws-21-konferenzassistent/app/src/main/res/layout/fragment_countdown_information.xml" value="0.18802083333333333" />
+        <entry key="..\:/OneDrive/Uni Dateien/Master Semester 1/Advanced Software Engineering/Projekt/ase-ws-21-konferenzassistent/app/src/main/res/layout/fragment_home.xml" value="0.18802083333333333" />
+        <entry key="..\:/OneDrive/Uni Dateien/Master Semester 1/Advanced Software Engineering/Projekt/ase-ws-21-konferenzassistent/app/src/main/res/layout/fragment_wizard_participant.xml" value="0.18802083333333333" />
+        <entry key="..\:/OneDrive/Uni Dateien/Master Semester 1/Advanced Software Engineering/Projekt/ase-ws-21-konferenzassistent/app/src/main/res/layout/information_checklist.xml" value="0.18802083333333333" />
+        <entry key="..\:/OneDrive/Uni Dateien/Master Semester 1/Advanced Software Engineering/Projekt/ase-ws-21-konferenzassistent/app/src/main/res/layout/meeting_bottom_sheet.xml" value="0.18802083333333333" />
         <entry key="..\:/OneDrive/Uni Dateien/Master Semester 1/Advanced Software Engineering/Projekt/ase-ws-21-konferenzassistent/app/src/main/res/layout/onboarding_carousel_page.xml" value="0.36666666666666664" />
         <entry key="..\:/Uni/ASE/ase-ws-21-konferenzassistent/app/src/main/res/layout/activity_countdown.xml" value="0.5" />
         <entry key="..\:/Uni/ASE/ase-ws-21-konferenzassistent/app/src/main/res/layout/activity_main.xml" value="0.5541666666666667" />
@@ -70,20 +89,25 @@
         <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/fragment_wizard_checklist.xml" value="0.1" />
         <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/fragment_wizard_countdown.xml" value="0.25" />
         <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/fragment_wizard_participant.xml" value="0.1" />
+        <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/information_checklist.xml" value="0.1527777777777778" />
         <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/meeting_bottom_sheet.xml" value="0.33" />
         <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/meeting_history_row.xml" value="0.25" />
         <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/onboarding_carousel_page.xml" value="0.36302083333333335" />
         <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/participants_alert.xml" value="0.36302083333333335" />
         <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/recycler_advanced_countdown_picker.xml" value="0.21" />
+        <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/recycler_contact_item.xml" value="0.15653495440729484" />
         <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/recycler_countdown_add.xml" value="0.25" />
+        <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/recycler_countdown_item.xml" value="0.1" />
         <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/recycler_countdown_item_creation.xml" value="0.11574074074074074" />
         <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/recycler_countdown_picker.xml" value="0.11574074074074074" />
+        <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/recycler_location_item.xml" value="0.1" />
         <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/recycler_participant_information_item.xml" value="0.33" />
         <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/recycler_participant_item.xml" value="0.2695035460992908" />
         <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/recycler_placeholder_item.xml" value="0.1" />
         <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/recycler_preset_item.xml" value="0.2351851851851852" />
         <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/rki_information.xml" value="0.2619047619047619" />
         <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/rv_row_checklist.xml" value="0.2619047619047619" />
+        <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/layout/start_information.xml" value="0.14629629629629629" />
         <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/menu/bottom_nav_menu.xml" value="0.39791666666666664" />
         <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/menu/past_meeting_info_options.xml" value="0.39791666666666664" />
         <entry key="..\:/Users/Administrator/Documents/GitHub/ase-ws-21-konferenzassistent/app/src/main/res/menu/settings_menu.xml" value="0.39791666666666664" />

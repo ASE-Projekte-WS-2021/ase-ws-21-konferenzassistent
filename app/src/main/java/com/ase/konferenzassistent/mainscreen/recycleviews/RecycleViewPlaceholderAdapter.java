@@ -6,17 +6,14 @@ import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 
 import androidx.annotation.NonNull;
-import androidx.core.content.res.ResourcesCompat;
 import androidx.core.view.ViewCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ase.konferenzassistent.R;
-import com.ase.konferenzassistent.meetingwizard.RecyclerViewAdvancedCountdownAdapter;
+import com.ase.konferenzassistent.countdown.AdvancedCountdownObject;
 import com.ase.konferenzassistent.meetingwizard.cdServiceObject;
 
 import java.util.ArrayList;
@@ -43,7 +40,6 @@ public class RecycleViewPlaceholderAdapter extends RecyclerView.Adapter<RecycleV
         Color.colorToHSV(color, hsv);
         hsv[2] *= (float) 0.8;
         return Color.HSVToColor(hsv);
-
     }
 
     @NonNull
@@ -59,9 +55,8 @@ public class RecycleViewPlaceholderAdapter extends RecyclerView.Adapter<RecycleV
 
         cdServiceObject countdownObject = mCountdowns.get(position);
 
-        RecyclerViewAdvancedCountdownAdapter.AdvancedCountdownObject countdown =
+        AdvancedCountdownObject countdown =
                 countdownObject.getTimer();
-
 
         // Ignore if Timer is disabled
         if (countdown.getmEnabled()) {
@@ -95,12 +90,10 @@ public class RecycleViewPlaceholderAdapter extends RecyclerView.Adapter<RecycleV
         return mCountdowns.size();
     }
 
-
     // View holder Class
     public static class ViewHolder extends RecyclerView.ViewHolder {
         final LinearLayout countdownPastContainer;
         final LinearLayout countdownContainer;
-
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);

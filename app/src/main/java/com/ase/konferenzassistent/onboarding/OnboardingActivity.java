@@ -16,9 +16,6 @@ import java.util.List;
 import java.util.Objects;
 
 public class OnboardingActivity extends AppCompatActivity {
-
-    // private Button getStartedButton;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,7 +37,6 @@ public class OnboardingActivity extends AppCompatActivity {
                 getString(R.string.onboarding_page_3_subhead),
                 R.drawable.ic_outline_history_24));
 
-
         CarouselView carouselView = findViewById(R.id.carouselView);
         carouselView.setPageCount(onboardingPages.size());
         carouselView.setViewListener(position -> {
@@ -57,8 +53,6 @@ public class OnboardingActivity extends AppCompatActivity {
 
             return view;
         });
-
-        // getStartedButton = findViewById(R.id.onboarding_botton_get_started);
     }
 
     public void onGetStartedButtonClicked(View view) {

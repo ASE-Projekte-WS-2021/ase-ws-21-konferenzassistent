@@ -18,6 +18,7 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.ase.konferenzassistent.mainscreen.meetingcreation.CreateMeetingBottomSheetAdapter;
+import com.ase.konferenzassistent.countdown.AdvancedCountdownObject;
 import com.ase.konferenzassistent.shared.presets.ChecklistPreset;
 import com.ase.konferenzassistent.shared.presets.CountdownPreset;
 import com.ase.konferenzassistent.R;
@@ -31,7 +32,6 @@ import com.ase.konferenzassistent.data.presets.countdown.CountdownPresetData;
 import com.ase.konferenzassistent.data.presets.countdown.CountdownPresetPair;
 import com.ase.konferenzassistent.data.presets.countdown.CountdownPresetWithParentData;
 import com.ase.konferenzassistent.meetingwizard.MeetingWizardActivity;
-import com.ase.konferenzassistent.meetingwizard.RecyclerViewAdvancedCountdownAdapter;
 import com.ase.konferenzassistent.onboarding.OnboardingActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -71,8 +71,6 @@ public class MainScreenActivity extends AppCompatActivity {
             preferences.edit().putBoolean(getString(R.string.app_opened_first_time_key), false).apply();
             startActivity(new Intent(this, OnboardingActivity.class));
         }
-        // startActivity(new Intent(this, OnboardingActivity.class));
-
     }
 
     // Setup the Bottom Menu
@@ -114,7 +112,6 @@ public class MainScreenActivity extends AppCompatActivity {
         actionBarText.setText(Objects.requireNonNull(
                 Objects.requireNonNull(getSupportActionBar()).getTitle()).toString().toUpperCase());
 
-
         // Check if the destination is the Verlauf Fragmnet
         if (!Objects.requireNonNull(navController.getCurrentDestination()).getDisplayName()
                 .equals("com.example.myapplication:id/miVerlauf")) {
@@ -138,7 +135,7 @@ public class MainScreenActivity extends AppCompatActivity {
     // Start the Meeting Creation Wizard
     public void startMeetingWizard(String title, String location, CountdownPresetPair pair, ChecklistPresetPair checklistPresetPair) {
         Intent intent = new Intent(this, MeetingWizardActivity.class);
-        ArrayList<RecyclerViewAdvancedCountdownAdapter.AdvancedCountdownObject> object =
+        ArrayList<AdvancedCountdownObject> object =
                 CountdownPreset.convertToAdvancedCountdownList(RoomDB.getInstance(getBaseContext()), pair);
 
         ArrayList<ChecklistItem> items =
@@ -162,9 +159,11 @@ public class MainScreenActivity extends AppCompatActivity {
             createStandard(database);
         }
 
+        // Load Checklist Objects
         List<ChecklistPresetPair> checklistPresetPairs;
         checklistPresetPairs = database.checklistPresetWithItemDao().getPresets();
 
+        // If no preset exists create standard preset
         if (checklistPresetPairs.size() < 1) {
             createStandardChecklist(database);
         }
@@ -172,12 +171,12 @@ public class MainScreenActivity extends AppCompatActivity {
 
     private void createStandardChecklist(RoomDB database) {
         ArrayList<ChecklistItem> items = new ArrayList<>();
-        items.add(new ChecklistItem("Desinfektionsmittel bereit"));
-        items.add(new ChecklistItem("3G-Regelung o.ä. geprüft"));
-        items.add(new ChecklistItem("Masken / Plexiglas geprüft"));
-        items.add(new ChecklistItem("Abstände gewährleistet"));
+        items.add(new ChecklistItem(getString(R.string.checklist_item_1)));
+        items.add(new ChecklistItem(getString(R.string.checklist_item_2)));
+        items.add(new ChecklistItem(getString(R.string.checklist_item_3)));
+        items.add(new ChecklistItem(getString(R.string.checklist_item_4)));
 
-        ChecklistPreset preset = new ChecklistPreset("Standard", items, 1);
+        ChecklistPreset preset = new ChecklistPreset(getString(R.string.standard), items, 1);
         convertToChecklistDatabaseEntry(database, preset);
     }
 
@@ -185,21 +184,21 @@ public class MainScreenActivity extends AppCompatActivity {
     private void createStandard(RoomDB database) {
 
         CountdownPresetData preset = new CountdownPresetData();
-        preset.setTitle("Standard");
+        preset.setTitle(getString(R.string.standard));
 
         CountdownParentData parentData1 = new CountdownParentData();
-        parentData1.setTitle("Lüftung");
+        parentData1.setTitle(getString(R.string.countdown_title_1));
 
         CountdownParentData parentData2 = new CountdownParentData();
-        parentData2.setTitle("Abstandskontrolle");
+        parentData2.setTitle(getString(R.string.countdown_title_2));
 
         CountdownItemData countdownItemData1 = new CountdownItemData();
         countdownItemData1.setCountdown((long) 15);
-        countdownItemData1.setDescription("Fenster sollte geöffnet sein");
+        countdownItemData1.setDescription(getString(R.string.countdown_description_1_1));
 
         CountdownItemData countdownItemData2 = new CountdownItemData();
         countdownItemData2.setCountdown((long) 10);
-        countdownItemData2.setDescription("Fenster sollte geschlossen sein");
+        countdownItemData2.setDescription(getString(R.string.countdown_descpription_1_2));
 
         CountdownItemData countdownItemData3 = new CountdownItemData();
         countdownItemData3.setCountdown((long) 30);

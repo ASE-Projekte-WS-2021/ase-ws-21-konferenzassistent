@@ -5,7 +5,7 @@
     <item
         android:id="@+id/miStartseite"
         android:icon="@drawable/ic_baseline_home_24"
-        android:title="@string/startseite" />
+        android:title="@string/bottom_nav_menu_home" />
 
     <item
         android:id="@+id/miVerlauf"

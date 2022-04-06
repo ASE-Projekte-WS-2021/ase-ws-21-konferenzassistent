@@ -26,7 +26,7 @@
                     android:id="@+id/alert_warning_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/solle_dieses_neue_meeting_wirlich_gel_scht_werden"
+                    android:text="@string/meeting_delete"
                     android:layout_marginTop="8dp"
                     android:layout_marginBottom="8dp"
                     android:gravity="center"
@@ -35,7 +35,7 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="#e6e6e6" />
+                    android:background="@color/background_white" />
 
                 <Button
                     android:id="@+id/button_dismiss_changes"
@@ -76,7 +76,7 @@
                 android:background="@color/corona_white"
                 android:textStyle="bold"
                 android:textColor="@color/corona_blue"
-                android:text="Weiter bearbeiten"
+                android:text="@string/keep_editing"
                 android:textSize="14sp"
                 />
 

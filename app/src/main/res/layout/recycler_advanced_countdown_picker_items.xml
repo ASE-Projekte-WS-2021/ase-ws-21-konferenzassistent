@@ -16,7 +16,7 @@
         <!-- Time Picker Description -->
             <TextView
                 android:id="@+id/countdown_recycler_picker_description"
-                android:text="Intervall zwischen Fensteröffnungen"
+                android:text="@string/interval_between_opening_windows"
                 android:gravity="center"
                 android:textStyle="bold"
                 android:textSize="16sp"
@@ -30,7 +30,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
                 android:layout_height="1dp"
-                android:background="#e6e6e6" />
+                android:background="@color/background_white" />
         </LinearLayout>
 
         <!-- Time Picker -->

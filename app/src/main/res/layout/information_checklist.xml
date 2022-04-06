@@ -23,11 +23,11 @@
                     android:textSize="32sp" />
 
                 <ImageView
-                    android:src="@drawable/ic_baseline_image_24"
+                    android:src="@drawable/ic_baseline_playlist_add_check_24"
                     android:minHeight="150dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:contentDescription="TODO" />
+                    android:contentDescription="@string/todo" />
 
                 <!-- Paragraph -->
                 <TextView
@@ -56,7 +56,7 @@
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:contentDescription="TODO"
+                            android:contentDescription="@string/todo"
                             android:src="@drawable/ic_baseline_looks_one_24" />
 
                         <TextView
@@ -97,7 +97,7 @@
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:contentDescription="TODO"
+                            android:contentDescription="@string/todo"
                             android:src="@drawable/ic_baseline_looks_two_24" />
 
                         <TextView
@@ -138,8 +138,8 @@
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/ic_baseline_looks_two_24"
-                            android:contentDescription="TODO" />
+                            android:src="@drawable/ic_baseline_looks_three_24"
+                            android:contentDescription="@string/todo" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -182,8 +182,8 @@
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/ic_baseline_looks_two_24"
-                            android:contentDescription="TODO" />
+                            android:src="@drawable/ic_baseline_looks_four_24"
+                            android:contentDescription="@string/todo" />
 
                         <TextView
                             android:layout_width="wrap_content"

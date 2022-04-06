@@ -57,7 +57,6 @@ public class LocationSelectBottomSheet extends BottomSheetDialogFragment {
         bottomSheetBehavior.setPeekHeight(BottomSheetBehavior.PEEK_HEIGHT_AUTO);
 
         // setting max height of bottom sheet
-        //bi.extraSpace.setMinimumHeight((Resources.getSystem().getDisplayMetrics().heightPixels));
         bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
 
         // skip it being collapsable
@@ -75,7 +74,6 @@ public class LocationSelectBottomSheet extends BottomSheetDialogFragment {
 
             }
         });
-
 
         // cancel button clicked
         bi.buttonDismiss.setOnClickListener(viewListener -> dismiss());

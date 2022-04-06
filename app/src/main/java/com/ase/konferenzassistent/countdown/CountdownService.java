@@ -133,13 +133,12 @@ public class CountdownService extends Service {
         cdObject.getCountDownTimer().start();
     }
 
-    // Resumes the Timer
-
     // Pauses the Timer
     private void pauseTimer(CountDownTimer timer) {
         timer.cancel();
     }
 
+    // Resumes the Timer
     private void resumeTimer(cdServiceObject cdObject) {
         startTimer(cdObject, cdObject.getCurrentTime());
     }

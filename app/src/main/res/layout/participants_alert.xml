@@ -31,7 +31,7 @@
                     android:layout_width="0dp"
                     android:layout_height="48dp"
                     android:ems="10"
-                    android:hint="Neue Person eingeben..."
+                    android:hint="@string/enter_new_person"
                     android:textSize="16sp"
                     android:inputType="textPersonName"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -50,7 +50,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/participants_alert_edittext"
                     app:srcCompat="@drawable/ic_baseline_add_24"
-                    android:contentDescription="TODO" />
+                    android:contentDescription="@string/todo" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

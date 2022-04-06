@@ -42,7 +42,7 @@
                     android:id="@+id/countdown_timer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="30:00"
+                    android:text="@string/placeholder"
                     android:layout_marginTop="16dp"
                     android:gravity=""
                     android:textColor="@color/white"
@@ -87,7 +87,7 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/ic_baseline_replay_24"
                     app:backgroundTint="@color/gray"
-                    android:contentDescription="TODO" />
+                    android:contentDescription="@string/todo" />
 
                 <ImageButton
                     android:id="@+id/pause_button"
@@ -98,7 +98,7 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/ic_baseline_pause_24"
                     app:backgroundTint ="@color/white"
-                    android:contentDescription="TODO" />
+                    android:contentDescription="@string/todo" />
 
             </LinearLayout>
 

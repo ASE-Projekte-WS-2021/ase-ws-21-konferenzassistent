@@ -29,7 +29,7 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/ic_outline_place_24"
                     android:backgroundTint="@color/white"
-                    android:contentDescription="TODO" />
+                    android:contentDescription="@string/todo" />
 
             </androidx.cardview.widget.CardView>
 
@@ -41,7 +41,7 @@
                 android:textColor="@color/black"
                 android:gravity="center"
                 android:textSize="16sp"
-                android:text="Regensburg"/>
+                android:text="@string/placeholder"/>
 
         </LinearLayout>
 
@@ -49,7 +49,7 @@
             android:layout_width="match_parent"
             android:layout_marginTop="8dp"
             android:layout_height="1dp"
-            android:background="#e6e6e6" />
+            android:background="@color/background_white" />
 
     </LinearLayout>
 

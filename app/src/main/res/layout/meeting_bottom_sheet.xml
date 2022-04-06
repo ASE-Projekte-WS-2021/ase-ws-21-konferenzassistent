@@ -36,7 +36,7 @@
                             android:background="?attr/selectableItemBackgroundBorderless"
                             android:src="@drawable/ic_baseline_close_24"
                             android:tint="@android:color/white"
-                            android:contentDescription="TODO" />
+                            android:contentDescription="@string/todo" />
 
                         <TextView
                             android:id="@+id/nameToolbar"
@@ -45,7 +45,7 @@
                             android:layout_gravity="center_vertical"
                             android:layout_marginStart="15dp"
                             android:layout_weight="1"
-                            android:text="Name"
+                            android:text="@string/name"
                             android:textAppearance="@style/TextAppearance.AppCompat.Title"
                             android:textColor="@android:color/white" />
 
@@ -57,7 +57,7 @@
                             android:src="@drawable/ic_baseline_edit_24"
                             android:visibility="gone"
                             android:tint="@android:color/white"
-                            android:contentDescription="TODO" />
+                            android:contentDescription="@string/todo" />
 
                         <ImageButton
                             android:id="@+id/moreBtn"
@@ -67,7 +67,7 @@
                             android:src="@drawable/ic_baseline_more_vert_24"
                             android:visibility="gone"
                             android:tint="@android:color/white"
-                            android:contentDescription="TODO" />
+                            android:contentDescription="@string/todo" />
                     </LinearLayout>
                 </com.google.android.material.appbar.AppBarLayout>
 
@@ -101,7 +101,7 @@
                                     android:layout_height="?attr/actionBarSize"
                                     android:src="@drawable/ic_baseline_calendar_month_24"
                                     app:tint="@color/corona_blue"
-                                    android:contentDescription="TODO" />
+                                    android:contentDescription="@string/todo" />
 
                                 <LinearLayout
                                     android:layout_width="match_parent"
@@ -118,14 +118,14 @@
                                             android:id="@+id/meetingDate"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
-                                            android:text="28/09/1996"
+                                            android:text="@string/placeholder"
                                             android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
 
                                         <TextView
                                             android:id="@+id/meetingDateType"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
-                                            android:text="Datum des Meetings"
+                                            android:text="@string/meeting_date"
                                             android:textAppearance="@style/TextAppearance.AppCompat.Small" />
 
 
@@ -151,7 +151,7 @@
                                 <View
                                     android:layout_width="match_parent"
                                     android:layout_height="1dp"
-                                    android:background="#e6e6e6" />
+                                    android:background="@color/background_white" />
 
                             </LinearLayout>
                             <LinearLayout
@@ -165,7 +165,7 @@
                                     android:background="?attr/selectableItemBackgroundBorderless"
                                     android:src="@drawable/ic_baseline_schedule_24"
                                     app:tint="@color/corona_blue"
-                                    android:contentDescription="TODO" />
+                                    android:contentDescription="@string/todo" />
 
                                 <LinearLayout
                                     android:layout_width="match_parent"
@@ -182,14 +182,14 @@
                                             android:id="@+id/duration"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
-                                            android:text="50 Minuten"
+                                            android:text="@string/placeholder"
                                             android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
 
                                         <TextView
                                             android:id="@+id/durationType"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
-                                            android:text="Meeting Dauer"
+                                            android:text="@string/meeting_duration"
                                             android:textAppearance="@style/TextAppearance.AppCompat.Small" />
 
                                     </LinearLayout>
@@ -202,14 +202,14 @@
                                             android:id="@+id/startTime"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
-                                            android:text="16:45"
+                                            android:text="@string/placeholder"
                                             android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
 
                                         <TextView
                                             android:id="@+id/timeTypeStart"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
-                                            android:text="Meeting Start"
+                                            android:text="@string/meeting_start"
                                             android:textAppearance="@style/TextAppearance.AppCompat.Small" />
 
                                     </LinearLayout>
@@ -223,14 +223,14 @@
                                             android:id="@+id/endTime"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
-                                            android:text="15:45"
+                                            android:text="@string/placeholder"
                                             android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
 
                                         <TextView
                                             android:id="@+id/timeTypeEnd"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
-                                            android:text="Meeting Ende"
+                                            android:text="@string/meeting_end"
                                             android:textAppearance="@style/TextAppearance.AppCompat.Small" />
 
 
@@ -256,7 +256,7 @@
                                 <View
                                     android:layout_width="match_parent"
                                     android:layout_height="1dp"
-                                    android:background="#e6e6e6" />
+                                    android:background="@color/background_white" />
 
                             </LinearLayout>
 
@@ -272,7 +272,7 @@
                                     android:layout_height="?attr/actionBarSize"
                                     android:src="@drawable/ic_outline_people_24"
                                     app:tint="@color/corona_blue"
-                                    android:contentDescription="TODO" />
+                                    android:contentDescription="@string/todo" />
 
                                 <LinearLayout
                                     android:layout_width="0dp"
@@ -290,14 +290,14 @@
                                             android:id="@+id/participantCount"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
-                                            android:text="5"
+                                            android:text="@string/placeholder"
                                             android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
 
                                         <TextView
                                             android:id="@+id/participantType"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
-                                            android:text="Teilnehmer"
+                                            android:text="@string/teilnehmer"
                                             android:textAppearance="@style/TextAppearance.AppCompat.Small" />
 
                                         <com.google.android.material.chip.ChipGroup
@@ -316,7 +316,7 @@
                                     android:layout_height="?attr/actionBarSize"
                                     android:layout_gravity="top"
                                     app:srcCompat="@drawable/ic_baseline_keyboard_arrow_down_24"
-                                    android:contentDescription="TODO" />
+                                    android:contentDescription="@string/todo" />
                             </LinearLayout>
 
                             <LinearLayout
@@ -337,7 +337,7 @@
                                 <View
                                     android:layout_width="match_parent"
                                     android:layout_height="1dp"
-                                    android:background="#e6e6e6" />
+                                    android:background="@color/background_white" />
 
                             </LinearLayout>
                             <LinearLayout
@@ -351,7 +351,7 @@
                                     android:layout_height="?attr/actionBarSize"
                                     android:src="@drawable/ic_outline_place_24"
                                     app:tint="@color/corona_blue"
-                                    android:contentDescription="TODO" />
+                                    android:contentDescription="@string/todo" />
 
                                 <LinearLayout
                                     android:layout_width="match_parent"
@@ -368,14 +368,14 @@
                                             android:id="@+id/ort"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
-                                            android:text="Regensburg"
+                                            android:text="@string/placeholder"
                                             android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
 
                                         <TextView
                                             android:id="@+id/ortType"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
-                                            android:text="Ort"
+                                            android:text="@string/location"
                                             android:textAppearance="@style/TextAppearance.AppCompat.Small" />
 
 

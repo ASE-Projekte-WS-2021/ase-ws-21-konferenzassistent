@@ -35,7 +35,6 @@ public class TeilnehmerverwaltungFragment extends Fragment implements ContactCre
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override

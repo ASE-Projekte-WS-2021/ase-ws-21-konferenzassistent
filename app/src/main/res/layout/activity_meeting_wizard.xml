@@ -26,7 +26,7 @@
                     android:id="@+id/wizard_meeting_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Vorlesung Nachbesprechung H25"
+                    android:text="@string/placeholder"
                     android:layout_margin="8dp"
                     android:textSize="20sp"
                     android:gravity="center"
@@ -72,7 +72,7 @@
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent"
-                                android:contentDescription="TODO" />
+                                android:contentDescription="@string/todo" />
 
                             <androidx.constraintlayout.widget.ConstraintLayout
                                 android:id="@+id/constraintLayout"
@@ -89,7 +89,7 @@
                                     android:layout_width="247dp"
                                     android:layout_height="26dp"
                                     android:gravity="center"
-                                    android:text="COUNTDOWN EINSTELLEN"
+                                    android:text="@string/countdown_einstellen"
                                     android:textColor="@color/dark_gray"
                                     android:textSize="16sp"
                                     android:textStyle="bold"
@@ -121,7 +121,7 @@
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintTop_toTopOf="parent"
-                                android:contentDescription="TODO" />
+                                android:contentDescription="@string/todo" />
 
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -159,7 +159,7 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="2dp"
-                    android:background="#e6e6e6" />
+                    android:background="@color/background_white" />
 
                 <Button
                     android:id="@+id/wizard_continue"
@@ -167,7 +167,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="16dp"
                     android:background="@drawable/btn_round"
-                    android:text="Weiter"
+                    android:text="@string/weiter"
                     android:textSize="20sp"
                     android:textStyle="bold"
                     app:cornerRadius="49dp" />

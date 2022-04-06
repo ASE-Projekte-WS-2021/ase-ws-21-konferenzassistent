@@ -21,7 +21,7 @@
                 android:id="@+id/meeting_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Vorlesung Nachbesprechung H25"
+                android:text="@string/placeholder"
                 android:layout_margin="8dp"
                 android:textSize="20sp"
                 android:gravity="center"
@@ -64,7 +64,7 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="2dp"
-                    android:background="#e6e6e6" />
+                    android:background="@color/background_white" />
                 <Button
                     android:id="@+id/end_meeting"
                     android:layout_width="match_parent"

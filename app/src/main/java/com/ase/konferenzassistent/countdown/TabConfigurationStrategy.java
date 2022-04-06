@@ -2,6 +2,7 @@ package com.ase.konferenzassistent.countdown;
 
 import androidx.annotation.NonNull;
 
+import com.ase.konferenzassistent.R;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
@@ -12,8 +13,8 @@ public class TabConfigurationStrategy implements TabLayoutMediator.TabConfigurat
     public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
         // Sets the right Tab Text
         if (position == 1)
-            tab.setText("Informationen");
+            tab.setText(R.string.informationen_tab);
         else
-            tab.setText("Timer");
+            tab.setText(R.string.timer_tab);
     }
 }

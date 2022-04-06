@@ -17,7 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ase.konferenzassistent.R;
-import com.ase.konferenzassistent.meetingwizard.RecyclerViewAdvancedCountdownAdapter;
+import com.ase.konferenzassistent.countdown.AdvancedCountdownObject;
 import com.ase.konferenzassistent.meetingwizard.RecyclerViewAdvancedCountdownItemAdapter;
 
 import java.util.ArrayList;
@@ -26,18 +26,17 @@ public class RecyclerViewCreatedCountdownElementsAdapter
         extends RecyclerView.Adapter<RecyclerViewCreatedCountdownElementsAdapter.ViewHolder> {
 
     private final Context mContext;
-    private final ArrayList<RecyclerViewAdvancedCountdownAdapter.AdvancedCountdownObject> mAdvancedCountdownObjects;
+    private final ArrayList<AdvancedCountdownObject> mAdvancedCountdownObjects;
 
     private final ArrayList<RecyclerItemPresetAdapter> presetAdapters = new ArrayList<>();
     private final ArrayList<Boolean> contentHidden = new ArrayList<>();
 
     public RecyclerViewCreatedCountdownElementsAdapter(
-            ArrayList<RecyclerViewAdvancedCountdownAdapter.AdvancedCountdownObject> mAdvancedCountdownObjects,
+            ArrayList<AdvancedCountdownObject> mAdvancedCountdownObjects,
             Context mContext) {
         this.mAdvancedCountdownObjects = mAdvancedCountdownObjects;
         this.mContext = mContext;
     }
-
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
@@ -52,7 +51,6 @@ public class RecyclerViewCreatedCountdownElementsAdapter
             contentHidden.add(true);
         }
         holder.countdownContainer.setVisibility(!contentHidden.get(position) ? View.VISIBLE : View.GONE);
-
 
         // Create new Item
         holder.buttonCreate.setOnClickListener(view -> {
@@ -73,7 +71,6 @@ public class RecyclerViewCreatedCountdownElementsAdapter
                 ViewCompat.setBackgroundTintList(holder.buttonHide, ColorStateList.valueOf(mContext.getResources().getColor(R.color.black)));
                 contentHidden.set(position, false);
             }
-
         });
 
         holder.countdownName.setOnEditorActionListener((textView, i, keyEvent) -> {
@@ -91,8 +88,6 @@ public class RecyclerViewCreatedCountdownElementsAdapter
             mAdvancedCountdownObjects.remove(holder.getAdapterPosition());
             notifyItemRemoved(holder.getAdapterPosition());
         });
-
-
     }
 
 
@@ -111,7 +106,6 @@ public class RecyclerViewCreatedCountdownElementsAdapter
 
     private void buildRecyclerView(ViewHolder holder, int position) {
 
-
         RecyclerView recyclerView = holder.recyclerView;
         RecyclerItemPresetAdapter adapter = new RecyclerItemPresetAdapter(
                 mAdvancedCountdownObjects.get(position).getmItems(),
@@ -122,7 +116,6 @@ public class RecyclerViewCreatedCountdownElementsAdapter
         recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
 
     }
-
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         final EditText countdownName;
@@ -143,6 +136,4 @@ public class RecyclerViewCreatedCountdownElementsAdapter
         }
 
     }
-
-
 }

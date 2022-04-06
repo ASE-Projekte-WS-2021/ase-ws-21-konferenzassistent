@@ -25,7 +25,7 @@
             <EditText
                 android:id="@+id/checklist_name"
                 android:layout_width="wrap_content"
-                android:hint="Checklist item name..."
+                android:hint="@string/checklist_item_name"
                 android:imeOptions="actionDone"
                 android:textSize="14sp"
                 android:inputType="text"
@@ -39,7 +39,7 @@
             <EditText
                 android:id="@+id/checklist_hint"
                 android:layout_width="wrap_content"
-                android:hint="Checklist item hint..."
+                android:hint="@string/checklist_item_hint"
                 android:imeOptions="actionDone"
                 android:textSize="14sp"
                 android:inputType="text"
@@ -66,14 +66,14 @@
                 android:background="@drawable/ic_baseline_delete_forever_24"
                 android:minHeight="32dp"
                 android:minWidth="32dp"
-                android:contentDescription="TODO" />
+                android:contentDescription="@string/todo" />
             </LinearLayout>
         </LinearLayout>
         <View
             android:layout_width="match_parent"
             android:layout_marginTop="8dp"
             android:layout_height="1dp"
-            android:background="#e6e6e6" />
+            android:background="@color/background_white" />
     </LinearLayout>
 
 

@@ -11,9 +11,8 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
 
+import com.ase.konferenzassistent.countdown.AdvancedCountdownObject;
 import com.ase.konferenzassistent.countdown.CountdownActivity;
 import com.ase.konferenzassistent.shared.CustomAlertBottomSheetAdapter;
 import com.ase.konferenzassistent.shared.InformationBottomSheetAdapter;
@@ -26,7 +25,6 @@ import com.ase.konferenzassistent.data.RoomDB;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.Random;
 
 public class MeetingWizardActivity extends AppCompatActivity implements OnAdapterItemClickListener, CustomAlertBottomSheetAdapter.onLeaveListener {
 
@@ -57,7 +55,7 @@ public class MeetingWizardActivity extends AppCompatActivity implements OnAdapte
     private ArrayList<Long> mCountdownTime;
     private ArrayList<Boolean> mEnabled;
     // advanced Countdown
-    private ArrayList<RecyclerViewAdvancedCountdownAdapter.AdvancedCountdownObject> advancedCountdownObjects;
+    private ArrayList<AdvancedCountdownObject> advancedCountdownObjects;
     // participants
     private ArrayList<Participant> participants;
     // checklists
@@ -87,11 +85,11 @@ public class MeetingWizardActivity extends AppCompatActivity implements OnAdapte
         this.mEnabled = mEnabled;
     }
 
-    public ArrayList<RecyclerViewAdvancedCountdownAdapter.AdvancedCountdownObject> getAdvancedCountdownObjects() {
+    public ArrayList<AdvancedCountdownObject> getAdvancedCountdownObjects() {
         return advancedCountdownObjects;
     }
 
-    public void setAdvancedCountdownObjects(ArrayList<RecyclerViewAdvancedCountdownAdapter.AdvancedCountdownObject> advancedCountdownObjects) {
+    public void setAdvancedCountdownObjects(ArrayList<AdvancedCountdownObject> advancedCountdownObjects) {
         this.advancedCountdownObjects = advancedCountdownObjects;
     }
 
@@ -194,13 +192,13 @@ public class MeetingWizardActivity extends AppCompatActivity implements OnAdapte
 
             switch (currentFragment) {
                 case "wizard_fragment0":
-                    informationBottomSheetAdapter.setmLayout(R.layout.information_timer);
+                    informationBottomSheetAdapter.setMLayout(R.layout.information_timer);
                     break;
                 case "wizard_fragment1":
-                    informationBottomSheetAdapter.setmLayout(R.layout.information_teilnehmer);
+                    informationBottomSheetAdapter.setMLayout(R.layout.information_teilnehmer);
                     break;
                 case "wizard_fragment2":
-                    informationBottomSheetAdapter.setmLayout(R.layout.information_checklist);
+                    informationBottomSheetAdapter.setMLayout(R.layout.information_checklist);
                     break;
                 default:
                     throw new IllegalArgumentException("Invalid fragment");
@@ -208,7 +206,6 @@ public class MeetingWizardActivity extends AppCompatActivity implements OnAdapte
 
             //show the info screen
             informationBottomSheetAdapter.show(getSupportFragmentManager(), informationBottomSheetAdapter.getTag());
-
 
         });
     }
@@ -229,7 +226,7 @@ public class MeetingWizardActivity extends AppCompatActivity implements OnAdapte
         titleText.setText(getIntent().getStringExtra("meeting_wizard_title"));
         location = getIntent().getStringExtra(MEETING_LOCATION);
         advancedCountdownObjects =
-                (ArrayList<RecyclerViewAdvancedCountdownAdapter.AdvancedCountdownObject>)
+                (ArrayList<AdvancedCountdownObject>)
                         getIntent().getSerializableExtra(MEETING_COUNTDOWN);
         checklistItems = (ArrayList<ChecklistItem>) getIntent().getSerializableExtra(MEETING_CHECKLIST);
     }
@@ -297,12 +294,9 @@ public class MeetingWizardActivity extends AppCompatActivity implements OnAdapte
         Intent intent = new Intent(this, CountdownActivity.class);
 
         putExtras(intent);
-        // only get Attending Participants
-
         // start next activity
         startActivity(intent);
         finish();
-        //}
     }
 
     // Sends the data to the Countdown
@@ -319,7 +313,6 @@ public class MeetingWizardActivity extends AppCompatActivity implements OnAdapte
         intent.putExtra(COUNTDOWN_ARRAY, advancedCountdownObjects);
         intent.putExtra(MEETING_LOCATION, location);
         intent.putExtra(MEETING_TITLE, titleText.getText());
-
     }
 
     @Override
