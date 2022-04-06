@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ase.konferenzassistent.R;
+import com.ase.konferenzassistent.data.MeetingData;
 import com.ase.konferenzassistent.mainscreen.MainScreenActivity;
 import com.ase.konferenzassistent.shared.Interfaces.OnFilterButtonClickListener;
 import com.ase.konferenzassistent.data.MeetingParticipantPair;
@@ -37,7 +38,7 @@ public class VerlaufFragment extends Fragment implements OnFilterButtonClickList
     private RecyclerView rvMeetings;
     private TextView introText, isFilteredTextView, pastMeetingCountText;
     // Meeting List
-    private List<Meeting> meetingsList;
+    private List<MeetingData> meetingsList;
     private List<ParticipantData> participantsList;
     private MeetingHistoryAdapter meetingHistoryAdapter;
     // Filter Button
@@ -103,15 +104,9 @@ public class VerlaufFragment extends Fragment implements OnFilterButtonClickList
         meetingsList = new ArrayList<>();
         List<MeetingParticipantPair> d = database.meetingWithParticipantDao().getMeetings();
 
-        d.forEach(data -> meetingsList.add(new Meeting(
-                "" + data.getMeeting().getID(),
-                data.getMeeting().getStartDate(),
-                data.getMeeting().getEndDate(),
-                data.getMeeting().getLocation(),
-                data.getMeeting().getTitle(),
-                "" + data.getMeeting().getDuration(),
-                "" + data.getParticipants().size())));
-
+        d.forEach(meetingParticipantPair ->         {
+            meetingsList.add(meetingParticipantPair.getMeeting());
+        });
 
         meetingHistoryAdapter = new MeetingHistoryAdapter(this.getContext(), getParentFragmentManager(), meetingsList, this);
         ItemTouchHelper.Callback callback = new CardviewTouchHelper(meetingHistoryAdapter);
@@ -140,21 +135,18 @@ public class VerlaufFragment extends Fragment implements OnFilterButtonClickList
 
     @Override
     public void onFilterButtonClicked(FilterData filterData) {
-        // TODO filter meetingsList based on filterData
-
         // early return if reset-button instead of filter button clicked
         if (!filterData.isShouldFilter()) {
             if (!dataIsFiltered) {
                 return;
             }
             dataIsFiltered = false;
-            // TODO duplicate code from createArrayFromDatabase
             meetingHistoryAdapter = new MeetingHistoryAdapter(this.getContext(), getParentFragmentManager(), meetingsList, this);
             rvMeetings.setAdapter(meetingHistoryAdapter);
             updatePastMeetingInfo();
             return;
         }
-        Stream<Meeting> filteredMeetingsStream = meetingsList.stream();
+        Stream<MeetingData> filteredMeetingsStream = meetingsList.stream();
         // for every person in peopleList
         // get list of meetings person was in from ConnectionDatabase
         // filter meetings with this person
@@ -163,15 +155,15 @@ public class VerlaufFragment extends Fragment implements OnFilterButtonClickList
                 .collect(Collectors.toList());
         for (String personId : personIds) {
             List<Integer> personMeetingIds = database.meetingWithParticipantDao().getMeetingIDsByParticipantID(personId);
-            filteredMeetingsStream = filteredMeetingsStream.filter(meeting -> personMeetingIds.contains(Integer.parseInt(meeting.getId())));
+            filteredMeetingsStream = filteredMeetingsStream.filter(meeting -> personMeetingIds.contains(meeting.getID()));
         }
         // if minCount not -1: filter meetings where numParticipants >= mincount
         if (filterData.getMinCount() != -1) {
-            filteredMeetingsStream = filteredMeetingsStream.filter(meeting -> Integer.parseInt(meeting.getNumberParticipants()) >= filterData.getMinCount());
+            filteredMeetingsStream = filteredMeetingsStream.filter(meeting -> database.meetingWithParticipantDao().getMeetingByID(meeting.getID()).getParticipants().size() >= filterData.getMinCount());
         }
         // same respectively for maxCount
         if (filterData.getMaxCount() != -1) {
-            filteredMeetingsStream = filteredMeetingsStream.filter(meeting -> Integer.parseInt(meeting.getNumberParticipants()) <= filterData.getMaxCount());
+            filteredMeetingsStream = filteredMeetingsStream.filter(meeting -> database.meetingWithParticipantDao().getMeetingByID(meeting.getID()).getParticipants().size() <= filterData.getMaxCount());
         }
         // filter meetings with same location
         if (filterData.getLocation() != null) {
@@ -180,12 +172,12 @@ public class VerlaufFragment extends Fragment implements OnFilterButtonClickList
         // Convert start or end time to millis (probably add method to Meeting class), filter where time >= filterData.dateStart and <= filterData.dateEnd
         if (filterData.getDateStart() != null && filterData.getDateEnd() != null) {
             filteredMeetingsStream = filteredMeetingsStream.filter(meeting ->
-                    meeting.getLongDateStart() >= filterData.getDateStart() &&
-                            meeting.getLongDateEnd() <= filterData.getDateEnd()
+                    Long.parseLong(meeting.getStartDate()) >= filterData.getDateStart() &&
+                            Long.parseLong(meeting.getEndDate()) <= filterData.getDateEnd()
             );
         }
         // Collect stream as list, sort by id if necessary, change dataIsFiltered, set filtered list to adapter, update view elements
-        List<Meeting> filteredMeetingList = filteredMeetingsStream.collect(Collectors.toList());
+        List<MeetingData> filteredMeetingList = filteredMeetingsStream.collect(Collectors.toList());
         dataIsFiltered = filteredMeetingList.size() != meetingsList.size();
         rvMeetings.setAdapter(new MeetingHistoryAdapter(
                 this.getContext(),
