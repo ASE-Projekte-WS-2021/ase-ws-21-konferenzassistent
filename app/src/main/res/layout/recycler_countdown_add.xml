@@ -30,7 +30,7 @@
                     android:id="@+id/countdown_name"
                     android:layout_width="0dp"
                     android:layout_weight="1"
-                    android:hint="Countdown Name..."
+                    android:hint="@string/countdown_name"
                     android:imeOptions="actionDone"
                     android:textSize="14sp"
                     android:inputType="text"
@@ -48,7 +48,7 @@
                     android:layout_gravity="center"
                     android:backgroundTint="@color/black"
                     android:background="@drawable/ic_baseline_keyboard_arrow_down_24"
-                    android:contentDescription="TODO" />
+                    android:contentDescription="@string/todo" />
 
 
             </LinearLayout>

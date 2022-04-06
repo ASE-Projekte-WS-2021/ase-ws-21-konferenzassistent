@@ -139,7 +139,7 @@
                                 android:layout_marginStart="16dp"
                                 android:textColor="@color/black"
                                 android:textStyle="bold"
-                                android:text="Neue Checkliste erstellen"/>
+                                android:text="@string/neue_checkliste_erstellen"/>
 
                             <androidx.constraintlayout.widget.Placeholder
                                 android:layout_width="0dp"
@@ -152,7 +152,7 @@
                                 android:layout_gravity="center"
                                 android:layout_marginEnd="16dp"
                                 android:background="@drawable/ic_baseline_arrow_forward_ios_24"
-                                android:contentDescription="TODO" />
+                                android:contentDescription="@string/todo" />
 
 
                         </LinearLayout>

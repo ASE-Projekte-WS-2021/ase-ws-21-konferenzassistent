@@ -65,7 +65,7 @@
                                 android:layout_gravity="center"
                                 android:layout_marginEnd="16dp"
                                 android:background="@drawable/ic_baseline_arrow_forward_ios_24"
-                                android:contentDescription="TODO" />
+                                android:contentDescription="@string/todo" />
 
 
                         </LinearLayout>

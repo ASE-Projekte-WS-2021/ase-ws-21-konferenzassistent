@@ -20,14 +20,14 @@
                     android:layout_margin="8dp"
                     android:textSize="32sp"
                     android:textColor="@color/dark_gray"
-                    android:text="Die wichtigsten Funktionen"/>
+                    android:text="@string/die_wichtigsten_funktionen"/>
 
                 <ImageView
                     android:src="@drawable/ic_baseline_image_24"
                     android:minHeight="150dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:contentDescription="TODO" />
+                    android:contentDescription="@string/todo" />
 
                 <!-- Paragraph -->
                 <LinearLayout
@@ -47,7 +47,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:src="@drawable/ic_baseline_looks_one_24"
-                            android:contentDescription="TODO" />
+                            android:contentDescription="@string/todo" />
                         <TextView
                             android:layout_marginStart="16dp"
                             android:layout_width="wrap_content"
@@ -88,7 +88,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:src="@drawable/ic_baseline_looks_two_24"
-                            android:contentDescription="TODO" />
+                            android:contentDescription="@string/todo" />
                         <TextView
                             android:layout_marginStart="16dp"
                             android:layout_width="wrap_content"
@@ -131,7 +131,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:src="@drawable/ic_baseline_looks_two_24"
-                            android:contentDescription="TODO" />
+                            android:contentDescription="@string/todo" />
                         <TextView
                             android:layout_marginStart="16dp"
                             android:layout_width="wrap_content"

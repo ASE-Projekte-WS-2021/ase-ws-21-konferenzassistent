@@ -52,7 +52,7 @@
                                 android:id="@+id/meeting_ort_text_view"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="Regensburg"
+                                android:text="@string/placeholder_meeting_location"
                                 android:gravity="center"
                                 android:textColor="@color/white"
                                 android:textSize="24sp" />
@@ -99,13 +99,13 @@
                                     android:layout_marginLeft="4dp"
                                     android:src="@drawable/ic_baseline_schedule_24"
                                     app:tint="@color/white"
-                                    android:contentDescription="TODO" />
+                                    android:contentDescription="@string/todo" />
 
                                 <TextView
                                     android:id="@+id/meeting_start_zeit_text_view"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="17:00"
+                                    android:text="@string/placeholder_meeting_start_time"
                                     android:textColor="@color/white"
                                     android:textSize="34sp" />
 
@@ -142,7 +142,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
                                     android:layout_marginTop="5dp"
-                                    android:text="5"
+                                    android:text="@string/placeholder_meeting_participants"
                                     android:textColor="@color/white"
                                     android:textSize="30sp" />
 
