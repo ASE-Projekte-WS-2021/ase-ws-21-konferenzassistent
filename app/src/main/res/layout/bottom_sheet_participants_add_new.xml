@@ -96,7 +96,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_margin="16dp"
                                     android:background="@color/transparent"
-                                    android:hint="Name"
+                                    android:hint="@string/name"
                                     android:imeOptions="actionDone"
                                     android:inputType="text"
                                     android:maxLines="1"
@@ -116,7 +116,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_margin="16dp"
                                     android:background="@color/transparent"
-                                    android:hint="Email"
+                                    android:hint="@string/email"
                                     android:imeOptions="actionDone"
                                     android:inputType="textEmailAddress"
                                     android:maxLines="1"
@@ -205,7 +205,7 @@
                                         android:layout_gravity="center"
                                         android:layout_marginEnd="16dp"
                                         android:background="@drawable/ic_baseline_arrow_forward_ios_24"
-                                        android:contentDescription="TODO" />
+                                        android:contentDescription="@string/todo" />
 
 
                                 </LinearLayout>
@@ -243,7 +243,7 @@
                                         android:layout_width="match_parent"
                                         android:layout_height="match_parent"
                                         android:gravity="center"
-                                        android:text="Teilnehmer löschen"
+                                        android:text="@string/delete_participant"
                                         android:textColor="@color/corona_white"
                                         android:textSize="14sp"
                                         android:textStyle="bold" />

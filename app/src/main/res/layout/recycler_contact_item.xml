@@ -29,7 +29,7 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/ic_baseline_contacts_24"
                     android:backgroundTint="@color/white"
-                    android:contentDescription="TODO" />
+                    android:contentDescription="@string/todo" />
 
             </androidx.cardview.widget.CardView>
 
@@ -41,7 +41,7 @@
                 android:textColor="@color/black"
                 android:gravity="center"
                 android:textSize="16sp"
-                android:text="Regensburg"/>
+                android:text="@string/placeholder_meeting_location"/>
 
         </LinearLayout>
 

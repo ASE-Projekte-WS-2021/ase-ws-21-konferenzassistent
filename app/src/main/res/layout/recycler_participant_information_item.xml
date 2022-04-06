@@ -39,7 +39,7 @@ android:id="@+id/location_container">
                     android:textStyle="bold"
                     android:gravity="center"
                     android:textSize="16sp"
-                    android:text="Hans Meier"/>
+                    android:text="@string/example_name"/>
 
                 <TextView
                     android:id="@+id/participant_status"
@@ -50,7 +50,7 @@ android:id="@+id/location_container">
                     android:textColor="@color/corona_white"
                     android:gravity="center"
                     android:textSize="10sp"
-                    android:text="Ungeimpft"/>
+                    android:text="@string/example_status"/>
             </LinearLayout>
         </LinearLayout>
 
