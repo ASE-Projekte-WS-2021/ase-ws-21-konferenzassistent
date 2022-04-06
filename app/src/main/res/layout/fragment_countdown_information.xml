@@ -24,7 +24,7 @@
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:backgroundTint="#F2000000"
+                android:backgroundTint="@color/black"
                 app:cardCornerRadius="16dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp">
@@ -62,7 +62,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="@string/meeting_ort"
                                 android:gravity="center"
-                                android:textColor="#90ffffff"
+                                android:textColor="@color/countdown_information_text"
                                 android:textSize="16sp" />
 
 
@@ -119,7 +119,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/meeting_startzeit"
-                                android:textColor="#90ffffff"
+                                android:textColor="@color/countdown_information_text"
                                 android:textSize="16sp" />
 
 
@@ -150,7 +150,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="@string/teilnehmer"
-                                    android:textColor="#90ffffff"
+                                    android:textColor="@color/countdown_information_text"
                                     android:textSize="16sp" />
 
 
@@ -172,7 +172,7 @@
                             android:layout_height="wrap_content"
                             android:text="@string/anwesendeteilnehmer"
                             android:gravity="center"
-                            android:textColor="#90ffffff"
+                            android:textColor="@color/countdown_information_text"
                             android:textSize="16sp" />
 
                     </LinearLayout>

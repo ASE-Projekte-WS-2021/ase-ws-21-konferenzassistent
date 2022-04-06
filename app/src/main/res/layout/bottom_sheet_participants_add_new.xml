@@ -108,7 +108,7 @@
                                     android:layout_height="1dp"
                                     android:layout_marginStart="16dp"
                                     android:layout_marginEnd="16dp"
-                                    android:background="#e6e6e6" />
+                                    android:background="@color/background_white" />
 
                                 <EditText
                                     android:id="@+id/participant_input_email"
@@ -128,7 +128,7 @@
                                     android:layout_height="1dp"
                                     android:layout_marginStart="16dp"
                                     android:layout_marginEnd="16dp"
-                                    android:background="#e6e6e6" />
+                                    android:background="@color/background_white" />
 
 
                                 <!-- Status Text Edit -->
