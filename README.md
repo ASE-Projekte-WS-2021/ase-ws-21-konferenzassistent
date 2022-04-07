@@ -8,7 +8,7 @@ Mithilfe der App sollen in Zeiten von Corona persönliche Meetings so sicher wie
 
 Sie wendet sich jede Person, die ihre persönlichen Meetings sicherer gestalten möchte, empfohlen wird sie besonders für Teamleiter von Arbeitsgruppen.
 
-[**Detailliertere Übersicht über die App und ihre Features**](https://github.com/ASE-Projekte-WS-2021/ase-ws-21-konferenzassistent/blob/readme-update/documentation/folien.pdf)
+[**Detailliertere Übersicht über die App und ihre Features**](https://github.com/ASE-Projekte-WS-2021/ase-ws-21-konferenzassistent/blob/main/documentation/folien.pdf)
 
 ## Baue App aus Quellcode
 
