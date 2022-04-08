@@ -30,7 +30,7 @@ Sie wendet sich jede Person, die ihre persönlichen Meetings sicherer gestalten 
 - Planung und Implementierung der Datenbank
 - Bugs finden und fixen/vorbeugen
 - Informationsbuttons 
-- Teile dder Checkliste
+- Teile der Checkliste
 
 ### Yu Liu ([@Leosssss](https://github.com/Leosssss))
 
