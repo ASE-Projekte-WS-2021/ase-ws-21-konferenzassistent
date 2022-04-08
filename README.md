@@ -19,6 +19,8 @@ Sie wendet sich jede Person, die ihre persönlichen Meetings sicherer gestalten 
 
 ## Team
 
+Oft überschneiden sich Aufgabenbereiche, da wir viel mit Pair programming gearbeitet haben. Die Schwerpunkte der einzelnen Mitglieder waren: 
+
 ### Johannes Hoffmann ([@jmhoffmann9612](https://github.com/jmhoffmann9612), [@Syhans](https://github.com/Syhans))
 
 - Organisation allgemein
@@ -30,7 +32,6 @@ Sie wendet sich jede Person, die ihre persönlichen Meetings sicherer gestalten 
 - Planung und Implementierung der Datenbank
 - Bugs finden und fixen/vorbeugen
 - Informationsbuttons 
-- Teile der Checkliste
 
 ### Yu Liu ([@Leosssss](https://github.com/Leosssss))
 
