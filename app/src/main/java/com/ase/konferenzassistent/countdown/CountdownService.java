@@ -32,7 +32,7 @@ import java.util.ArrayList;
 
 public class CountdownService extends Service {
 
-    public static final String COUNTDOWN_SERVICE = "com.example.myapplication.countdown_service";
+    public static final String COUNTDOWN_SERVICE = "com.ase.konferenzassistent.countdown_service";
     // Service Tag
     private final Intent bi = new Intent(COUNTDOWN_SERVICE);
     // Countdown Object that save the current states of the Countdowns
