@@ -3,6 +3,7 @@ package com.ase.konferenzassistent.mainscreen.settings;
 import static com.ase.konferenzassistent.shared.presets.CountdownPreset.convertToAdvancedCountdownList;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;

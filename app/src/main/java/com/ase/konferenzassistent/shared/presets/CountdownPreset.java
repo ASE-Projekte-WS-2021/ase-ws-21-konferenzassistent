@@ -30,7 +30,7 @@ public class CountdownPreset implements Preset {
         database.countdownPresetDao().delete(database.countdownPresetDao().getOne(id));
     }
 
-    public static void convertToDatabaseEntry(RoomDB database, CountdownPreset preset) {
+    public static long convertToDatabaseEntry(RoomDB database, CountdownPreset preset) {
         String title = preset.getTitle();
 
         // create new preset
@@ -71,6 +71,8 @@ public class CountdownPreset implements Preset {
 
             });
         });
+
+        return presetId;
     }
 
     public static void updateCountdownDatabaseEntry(RoomDB database, CountdownPreset preset){

@@ -188,14 +188,14 @@ public class PresetAddBottomSheet extends BottomSheetDialogFragment implements C
                 listener.onEditingDone(
                         new CountdownPreset(
                                 bi.presetName.getText().toString(), advancedCountdownObjects,
-                                preset == null? -1 : preset.getID())
+                                preset == null? -1 : preset.getID()), itemPosition
                 );
             } else {
                 // Create a new Checklist Preset
                 listener.onEditingDone(
                         new ChecklistPreset(
                                 bi.presetName.getText().toString(), checklistItems,
-                                preset == null? -1 : preset.getID())
+                                preset == null? -1 : preset.getID()), itemPosition
                 );
             }
             dismiss();
@@ -264,6 +264,6 @@ public class PresetAddBottomSheet extends BottomSheetDialogFragment implements C
     }
 
     public interface editingDone {
-        void onEditingDone(Preset preset);
+        void onEditingDone(Preset preset, int itemPosition);
     }
 }
