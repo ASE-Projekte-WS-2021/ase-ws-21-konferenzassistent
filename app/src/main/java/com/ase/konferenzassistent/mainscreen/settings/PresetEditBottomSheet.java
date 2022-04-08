@@ -185,26 +185,30 @@ public class PresetEditBottomSheet extends BottomSheetDialogFragment implements 
     }
 
     @Override
-    public void onEditingDone(Preset preset) {
+    public void onEditingDone(Preset preset, int itemPosition) {
         // Checks what view type is active
         if (viewType.equals(PRESET_TYPE_COUNTDOWN)) {
-            countdownObjects.add((CountdownPreset) preset);
             recyclerViewPresetAdapter.notifyItemInserted(countdownObjects.size());
-            writeCountdownPresetToDatabase((CountdownPreset) preset);
+            int presetID = (int)writeCountdownPresetToDatabase((CountdownPreset) preset);
+            // Set id to reference back to it
+            ((CountdownPreset) preset).setId(presetID);
+            countdownObjects.add((CountdownPreset) preset);
         } else {
-            checklistPresets.add((ChecklistPreset) preset);
             recyclerViewPresetAdapter.notifyItemInserted(checklistPresets.size());
-            writeChecklistPresetToDatabase((ChecklistPreset) preset);
+            int presetID = (int)writeChecklistPresetToDatabase((ChecklistPreset) preset);
+            // Set id to reference back to it
+            ((ChecklistPreset) preset).setId(presetID);
+            checklistPresets.add((ChecklistPreset) preset);
         }
         listener.onClose();
     }
 
-    private void writeCountdownPresetToDatabase(CountdownPreset preset) {
-        convertToDatabaseEntry(RoomDB.getInstance(getContext()), preset);
+    private long writeCountdownPresetToDatabase(CountdownPreset preset) {
+        return convertToDatabaseEntry(RoomDB.getInstance(getContext()), preset);
     }
 
-    private void writeChecklistPresetToDatabase(ChecklistPreset preset) {
-        convertToChecklistDatabaseEntry(RoomDB.getInstance(getContext()), preset);
+    private long writeChecklistPresetToDatabase(ChecklistPreset preset) {
+        return convertToChecklistDatabaseEntry(RoomDB.getInstance(getContext()), preset);
     }
 
     public interface onCloseListener {

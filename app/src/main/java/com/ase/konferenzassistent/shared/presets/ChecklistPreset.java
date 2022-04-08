@@ -26,7 +26,7 @@ public class ChecklistPreset implements Preset {
         database.checklistPresetDao().delete(database.checklistPresetDao().getOne(id));
     }
 
-    public static void convertToChecklistDatabaseEntry(RoomDB database, ChecklistPreset preset) {
+    public static long convertToChecklistDatabaseEntry(RoomDB database, ChecklistPreset preset) {
         String title = preset.getTitle();
 
         // create new preset
@@ -49,6 +49,8 @@ public class ChecklistPreset implements Preset {
             presetWithItemData.setItemID((int) itemId);
             database.checklistPresetWithItemDao().insert(presetWithItemData);
         });
+
+        return presetId;
     }
 
     public static void updateChecklistDatabaseEntry(RoomDB database, ChecklistPreset preset){
