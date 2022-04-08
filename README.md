@@ -27,8 +27,10 @@ Sie wendet sich jede Person, die ihre persönlichen Meetings sicherer gestalten 
 
 ### Maximilian Huber ([@MaximilianHuber](https://github.com/MaximilianHuber))
 
-- Datenbankaufbau und -struktur
-- Recherche Corona-Maßnahmen und -Informationen
+- Planung und Implementierung der Datenbank
+- Bugs finden und fixen/vorbeugen
+- Informationsbuttons 
+- Teile dder Checkliste
 
 ### Yu Liu ([@Leosssss](https://github.com/Leosssss))
 
