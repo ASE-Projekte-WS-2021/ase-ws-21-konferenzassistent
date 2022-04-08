@@ -187,10 +187,10 @@ public class MeetingWizardActivity extends AppCompatActivity implements OnAdapte
 
             List<Fragment> fragmentList = manager.getFragments();
 
-            String currentFragment = null;
+            String currentFragment;
             currentFragment = fragmentList.get(0).getTag();
 
-            switch (currentFragment) {
+            switch (Objects.requireNonNull(currentFragment)) {
                 case "wizard_fragment0":
                     informationBottomSheetAdapter.setMLayout(R.layout.information_timer);
                     break;

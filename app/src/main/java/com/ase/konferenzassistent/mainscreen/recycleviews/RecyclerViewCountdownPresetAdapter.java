@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,8 +20,7 @@ import com.ase.konferenzassistent.R;
 import com.ase.konferenzassistent.data.RoomDB;
 import com.ase.konferenzassistent.mainscreen.settings.PresetAddBottomSheet;
 import com.ase.konferenzassistent.mainscreen.settings.PresetEditBottomSheet;
-import com.ase.konferenzassistent.shared.CustomAlertBottomSheetAdapter;
-import com.ase.konferenzassistent.shared.Interfaces.Preset;
+import com.ase.konferenzassistent.shared.interfaces.Preset;
 import com.ase.konferenzassistent.shared.presets.ChecklistPreset;
 import com.ase.konferenzassistent.shared.presets.CountdownPreset;
 
@@ -34,8 +32,9 @@ public class RecyclerViewCountdownPresetAdapter
     private final ArrayList<Preset> preset;
     private final Context mContext;
     private final Integer viewType;
-    PresetEditBottomSheet parent;
+    final PresetEditBottomSheet parent;
 
+    @SuppressWarnings("unchecked")
     public RecyclerViewCountdownPresetAdapter(
             ArrayList<? extends Preset> preset,
             Context mContext,
@@ -84,14 +83,13 @@ public class RecyclerViewCountdownPresetAdapter
             // update database entry, add it to the preset and notify that the preset changed
             CountdownPreset.updateCountdownDatabaseEntry(RoomDB.getInstance(mContext), (CountdownPreset) editedPreset);
             preset.set(itemPosition, (CountdownPreset)editedPreset);
-            notifyItemChanged(itemPosition);
         }
         else {
             // update database entry, add it to the preset and notify that the preset changed
             ChecklistPreset.updateChecklistDatabaseEntry(RoomDB.getInstance(mContext), (ChecklistPreset)editedPreset);
             preset.set(itemPosition, (ChecklistPreset)editedPreset);
-            notifyItemChanged(itemPosition);
         }
+        notifyItemChanged(itemPosition);
     }
 
     // View holder Class

@@ -35,7 +35,7 @@ public class RecycleViewCountdownAdapter extends RecyclerView.Adapter<RecycleVie
         this.mCountdowns = mCountdowns;
         this.mContext = mContext;
         this.listener = listener;
-        this.pastColor = mContext.getResources().getColor(R.color.corona_blue); // Start color
+        this.pastColor = ResourcesCompat.getColor(mContext.getResources(),R.color.corona_blue,null); // Start color
     }
 
     // For color change effect
@@ -61,9 +61,7 @@ public class RecycleViewCountdownAdapter extends RecyclerView.Adapter<RecycleVie
 
         cdServiceObject countdownObject = mCountdowns.get(position);
 
-        AdvancedCountdownObject countdown =
-                countdownObject.getTimer();
-
+        AdvancedCountdownObject countdown = countdownObject.getTimer();
         RecyclerViewAdvancedCountdownItemAdapter.AdvancedCountdownItem timer =
                 countdown.getmItems().get(countdownObject.getCountdownPosition());
 
@@ -94,9 +92,13 @@ public class RecycleViewCountdownAdapter extends RecyclerView.Adapter<RecycleVie
 
         holder.replayButton.setEnabled(false);
         holder.pauseButton.setEnabled(true);
-        ViewCompat.setBackgroundTintList(holder.replayButton, ColorStateList.valueOf(mContext.getResources().getColor(R.color.dark_gray)));
+        ViewCompat.setBackgroundTintList(holder.replayButton, ColorStateList.valueOf(
+                ResourcesCompat.getColor(mContext.getResources(), R.color.dark_gray, null)));
+
+        // if timer is done enable the replay button
         if (countdownObject.getTimerDone()) {
-            ViewCompat.setBackgroundTintList(holder.replayButton, ColorStateList.valueOf(mContext.getResources().getColor(R.color.white)));
+            ViewCompat.setBackgroundTintList(holder.replayButton, ColorStateList.valueOf(
+                    ResourcesCompat.getColor(mContext.getResources(), R.color.white, null)));
             holder.replayButton.setEnabled(true);
             holder.pauseButton.setEnabled(false);
         }
@@ -110,7 +112,7 @@ public class RecycleViewCountdownAdapter extends RecyclerView.Adapter<RecycleVie
 
 
         if (position == getItemCount() - 1) {
-            pastColor = mContext.getResources().getColor(R.color.corona_blue); // reset color
+            pastColor = ResourcesCompat.getColor(mContext.getResources(), R.color.corona_blue, null); // reset color
         }
     }
 

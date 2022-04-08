@@ -38,6 +38,7 @@ public class AdvancedCountdownObject implements Serializable {
         return mItems;
     }
 
+    @SuppressWarnings("unused")
     public void setmItems(ArrayList<RecyclerViewAdvancedCountdownItemAdapter.AdvancedCountdownItem> mItems) {
         this.mItems = mItems;
     }

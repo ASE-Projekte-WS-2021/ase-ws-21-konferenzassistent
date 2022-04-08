@@ -18,7 +18,7 @@ import com.ase.konferenzassistent.R;
 import com.ase.konferenzassistent.data.MeetingData;
 import com.ase.konferenzassistent.data.RoomDB;
 import com.ase.konferenzassistent.shared.CustomAlertBottomSheetAdapter;
-import com.ase.konferenzassistent.shared.Interfaces.CardviewTouchHelperAdapter;
+import com.ase.konferenzassistent.shared.interfaces.CardviewTouchHelperAdapter;
 
 import java.util.List;
 

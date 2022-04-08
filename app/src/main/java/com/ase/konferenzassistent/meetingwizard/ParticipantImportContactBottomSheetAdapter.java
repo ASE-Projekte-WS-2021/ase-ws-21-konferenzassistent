@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 
 import androidx.activity.result.ActivityResultLauncher;
@@ -27,7 +26,6 @@ import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class ParticipantImportContactBottomSheetAdapter extends BottomSheetDialogFragment {
     final static float MIN_SCROLL_FOR_CLOSURE = 0.5f;
@@ -187,7 +185,7 @@ public class ParticipantImportContactBottomSheetAdapter extends BottomSheetDialo
 
                 // Returns phone Number if needed for future versions
                 if (phoneCursor.moveToNext()) {
-                    String number = phoneCursor.getString(phoneCursor.getColumnIndexOrThrow(
+                    @SuppressWarnings("unused") String number = phoneCursor.getString(phoneCursor.getColumnIndexOrThrow(
                             ContactsContract.CommonDataKinds.Phone.NUMBER
                     ));
                 }

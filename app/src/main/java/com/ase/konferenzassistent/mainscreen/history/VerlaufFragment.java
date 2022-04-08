@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.ase.konferenzassistent.R;
 import com.ase.konferenzassistent.data.MeetingData;
 import com.ase.konferenzassistent.mainscreen.MainScreenActivity;
-import com.ase.konferenzassistent.shared.Interfaces.OnFilterButtonClickListener;
+import com.ase.konferenzassistent.shared.interfaces.OnFilterButtonClickListener;
 import com.ase.konferenzassistent.data.MeetingParticipantPair;
 import com.ase.konferenzassistent.data.ParticipantData;
 import com.ase.konferenzassistent.data.RoomDB;

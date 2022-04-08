@@ -6,7 +6,6 @@ import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
@@ -102,13 +101,6 @@ public class MeetingBottomSheetAdapter extends BottomSheetDialogFragment {
 
         // cancel button clicked
         bi.cancelBtn.setOnClickListener(view1 -> dismiss());
-
-        // TODO: ?
-        // edit button clicked
-        bi.editBtn.setOnClickListener(view12 -> Toast.makeText(view12.getContext(), "Edit Funktion fehlt noch", Toast.LENGTH_SHORT).show());
-
-        // more button clicked
-        bi.moreBtn.setOnClickListener(view13 -> Toast.makeText(view13.getContext(), "Brauchen wir den?", Toast.LENGTH_SHORT).show());
 
         // hiding bar at the start
         hideAppBar(bi.appBarLayout);

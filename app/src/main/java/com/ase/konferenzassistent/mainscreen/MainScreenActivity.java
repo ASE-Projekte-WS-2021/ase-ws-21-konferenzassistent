@@ -180,7 +180,6 @@ public class MainScreenActivity extends AppCompatActivity {
         convertToChecklistDatabaseEntry(database, preset);
     }
 
-    // TODO: simplify
     private void createStandard(RoomDB database) {
 
         CountdownPresetData preset = new CountdownPresetData();

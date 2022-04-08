@@ -64,7 +64,6 @@ public class CountdownActivity extends AppCompatActivity implements Serializable
         @Override
         public void onReceive(Context context, Intent intent) {
             // send Update to the UI
-            updateTime(intent);
             serviceObjectArrayList.clear();
             serviceObjectArrayList = (ArrayList<cdServiceObject>) intent.getSerializableExtra(COUNTDOWN_OBJECTS);
             timer.updateView(serviceObjectArrayList);
@@ -194,7 +193,6 @@ public class CountdownActivity extends AppCompatActivity implements Serializable
 
         participantCount = "" + participants.size();
 
-        // TODO: Rework that part :YIKERS:
         // Create an Array List with all the active Countdowns
         countdownObjects.forEach(object -> {
             // Check if the Countdown is enabled
@@ -241,18 +239,10 @@ public class CountdownActivity extends AppCompatActivity implements Serializable
 
     }
 
-    // Update Countdown Timer and sends UI updates to the Fragment
-    private void updateTime(Intent intent) {
-        // Check if the Intent has Extras
-        intent.getExtras();// TODO: implement new logic
-    }
-
     private void saveToDatabase() {
         Date endDate = new Date();
         long diff = endDate.getTime() - startDate.getTime();
         long seconds = diff / 1000;
-        long minutes = seconds / 60;
-        long hours = minutes / 60;
 
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
         dateFormat.setTimeZone(TimeZone.getDefault());
