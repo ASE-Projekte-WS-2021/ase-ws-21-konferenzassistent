@@ -19,7 +19,7 @@ Sie wendet sich jede Person, die ihre persönlichen Meetings sicherer gestalten 
 
 ## Team
 
-Oft überschneiden sich Aufgabenbereiche, da wir viel mit Pair programming gearbeitet haben. Die Schwerpunkte der einzelnen Mitglieder waren: 
+Oft überschneiden sich Aufgabenbereiche, da wir viel mit Pair Programming gearbeitet haben. Die Schwerpunkte der einzelnen Mitglieder waren: 
 
 ### Johannes Hoffmann ([@jmhoffmann9612](https://github.com/jmhoffmann9612), [@Syhans](https://github.com/Syhans))
 
