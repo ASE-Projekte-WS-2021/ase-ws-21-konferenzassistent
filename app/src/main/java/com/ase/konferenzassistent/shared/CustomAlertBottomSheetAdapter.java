@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.databinding.DataBindingUtil;
 
 import com.ase.konferenzassistent.R;
@@ -71,7 +72,8 @@ public class CustomAlertBottomSheetAdapter extends BottomSheetDialogFragment {
         // skip it being collapsable
         bottomSheetBehavior.setSkipCollapsed(true);
 
-        ((View) view.getParent()).setBackgroundColor(getResources().getColor(android.R.color.transparent));
+        ((View) view.getParent()).setBackgroundColor(
+                ResourcesCompat.getColor(getResources(),android.R.color.transparent, null));
 
         bottomSheetBehavior.addBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
             @Override
@@ -84,8 +86,7 @@ public class CustomAlertBottomSheetAdapter extends BottomSheetDialogFragment {
             }
         });
 
-
-        // cancel buttun clicked
+        // cancel button clicked
         bi.buttonDismiss.setOnClickListener(view12 -> dismiss());
 
         bi.buttonDismissChanges.setOnClickListener(view1 -> {

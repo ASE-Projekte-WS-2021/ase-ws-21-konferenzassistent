@@ -68,7 +68,8 @@ public class RecyclerViewCreatedCountdownElementsAdapter
             } else {
                 holder.countdownContainer.setVisibility(View.VISIBLE);
                 holder.buttonHide.setBackground(ResourcesCompat.getDrawable(mContext.getResources(), R.drawable.ic_baseline_keyboard_arrow_up_24, null));
-                ViewCompat.setBackgroundTintList(holder.buttonHide, ColorStateList.valueOf(mContext.getResources().getColor(R.color.black)));
+                ViewCompat.setBackgroundTintList(holder.buttonHide, ColorStateList.valueOf(
+                        ResourcesCompat.getColor(mContext.getResources(),R.color.black, null)));
                 contentHidden.set(position, false);
             }
         });

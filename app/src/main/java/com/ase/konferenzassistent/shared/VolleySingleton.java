@@ -21,8 +21,6 @@ public class VolleySingleton {
         return mInstance;
     }
 
-
-
     @SuppressWarnings({"rawtypes", "unchecked"})
     public void addToRequestQueue(Request request) {
         mRequestQueue.add(request);

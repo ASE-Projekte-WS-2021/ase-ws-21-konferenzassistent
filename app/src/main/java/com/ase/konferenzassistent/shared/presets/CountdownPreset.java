@@ -1,7 +1,7 @@
 package com.ase.konferenzassistent.shared.presets;
 
 import com.ase.konferenzassistent.countdown.AdvancedCountdownObject;
-import com.ase.konferenzassistent.shared.Interfaces.Preset;
+import com.ase.konferenzassistent.shared.interfaces.Preset;
 import com.ase.konferenzassistent.data.RoomDB;
 import com.ase.konferenzassistent.data.presets.countdown.CountdownItemData;
 import com.ase.konferenzassistent.data.presets.countdown.CountdownItemPair;
@@ -77,7 +77,7 @@ public class CountdownPreset implements Preset {
 
     public static void updateCountdownDatabaseEntry(RoomDB database, CountdownPreset preset){
         String title = preset.getTitle();
-        Integer presetId = preset.getID();
+        int presetId = preset.getID();
 
         // Update preset
         database.countdownPresetDao().update(title, presetId);
@@ -150,7 +150,6 @@ public class CountdownPreset implements Preset {
                 children.add(child);
 
             });
-
 
             list.add(advancedCountdownObject);
         });

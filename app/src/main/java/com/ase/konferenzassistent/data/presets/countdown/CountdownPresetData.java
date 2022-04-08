@@ -4,7 +4,7 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-import com.ase.konferenzassistent.shared.Interfaces.Preset;
+import com.ase.konferenzassistent.shared.interfaces.Preset;
 
 import java.io.Serializable;
 

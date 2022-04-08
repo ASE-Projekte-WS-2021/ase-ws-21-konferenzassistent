@@ -13,8 +13,10 @@ import androidx.core.util.Pair;
 import androidx.core.view.ViewCompat;
 
 import com.ase.konferenzassistent.R;
+
 import com.ase.konferenzassistent.data.MeetingData;
-import com.ase.konferenzassistent.shared.Interfaces.OnFilterButtonClickListener;
+import com.ase.konferenzassistent.shared.interfaces.OnFilterButtonClickListener;
+
 import com.ase.konferenzassistent.data.ParticipantData;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.android.material.chip.Chip;

@@ -13,7 +13,7 @@ import com.ase.konferenzassistent.R;
 import com.ase.konferenzassistent.databinding.BottomSheetPresetsBinding;
 import com.ase.konferenzassistent.mainscreen.recycleviews.RecyclerViewPresetAdapter;
 import com.ase.konferenzassistent.shared.CustomAlertBottomSheetAdapter;
-import com.ase.konferenzassistent.shared.Interfaces.PresetPair;
+import com.ase.konferenzassistent.shared.interfaces.PresetPair;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;

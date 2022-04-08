@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.core.view.ViewCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -30,7 +31,7 @@ public class RecycleViewPlaceholderAdapter extends RecyclerView.Adapter<RecycleV
             Context mContext) {
         this.mCountdowns = mCountdowns;
         this.mContext = mContext;
-        this.pastColor = mContext.getResources().getColor(R.color.corona_blue); // Start color
+        this.pastColor = ResourcesCompat.getColor(mContext.getResources(), R.color.corona_blue, null); // Start color
     }
 
     // For color change effect
@@ -75,13 +76,14 @@ public class RecycleViewPlaceholderAdapter extends RecyclerView.Adapter<RecycleV
         } else {
             // check if there is an item before and if its the last entry
             if (lastItem != null && position == getItemCount() - 1) {
-                lastItem.countdownPastContainer.setBackgroundColor(mContext.getColor(R.color.transparent));
+                lastItem.countdownPastContainer.setBackgroundColor(
+                        ResourcesCompat.getColor( mContext.getResources(), R.color.transparent, null));
             }
             holder.countdownPastContainer.setVisibility(View.GONE);
         }
 
         if (position == getItemCount() - 1) {
-            pastColor = mContext.getResources().getColor(R.color.corona_blue); // reset color
+            pastColor = ResourcesCompat.getColor(mContext.getResources(), R.color.corona_blue, null); // reset color
         }
     }
 

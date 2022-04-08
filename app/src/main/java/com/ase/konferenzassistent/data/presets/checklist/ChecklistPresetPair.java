@@ -4,7 +4,7 @@ import androidx.room.Embedded;
 import androidx.room.Junction;
 import androidx.room.Relation;
 
-import com.ase.konferenzassistent.shared.Interfaces.PresetPair;
+import com.ase.konferenzassistent.shared.interfaces.PresetPair;
 
 import java.util.List;
 

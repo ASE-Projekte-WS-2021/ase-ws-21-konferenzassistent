@@ -6,7 +6,7 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.ase.konferenzassistent.shared.Interfaces.CardviewTouchHelperAdapter;
+import com.ase.konferenzassistent.shared.interfaces.CardviewTouchHelperAdapter;
 import com.ase.konferenzassistent.R;
 
 import java.util.Objects;
