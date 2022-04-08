@@ -104,9 +104,7 @@ public class VerlaufFragment extends Fragment implements OnFilterButtonClickList
         meetingsList = new ArrayList<>();
         List<MeetingParticipantPair> d = database.meetingWithParticipantDao().getMeetings();
 
-        d.forEach(meetingParticipantPair ->         {
-            meetingsList.add(meetingParticipantPair.getMeeting());
-        });
+        d.forEach(meetingParticipantPair -> meetingsList.add(meetingParticipantPair.getMeeting()));
 
         meetingHistoryAdapter = new MeetingHistoryAdapter(this.getContext(), getParentFragmentManager(), meetingsList, this);
         ItemTouchHelper.Callback callback = new CardviewTouchHelper(meetingHistoryAdapter);
