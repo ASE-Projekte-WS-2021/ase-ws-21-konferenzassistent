@@ -114,7 +114,7 @@ public class MainScreenActivity extends AppCompatActivity {
 
         // Check if the destination is the Verlauf Fragmnet
         if (!Objects.requireNonNull(navController.getCurrentDestination()).getDisplayName()
-                .equals("com.example.myapplication:id/miVerlauf")) {
+                .equals("com.ase.konferenzassistent:id/miVerlauf")) {
             findViewById(R.id.main_activity_filter_button).setVisibility(View.GONE);
         } else
             findViewById(R.id.main_activity_filter_button).setVisibility(View.VISIBLE);
