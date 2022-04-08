@@ -156,7 +156,7 @@ public class CountdownService extends Service {
                 .setContentTitle("Konferenzassistent")
                 .setContentText(htmlText)
                 .setStyle(new NotificationCompat.BigTextStyle().bigText(htmlText).setBigContentTitle("Konferenzassistent"))
-                .setSmallIcon(R.drawable.ic_android)
+                .setSmallIcon(R.drawable.ic_baseline_coronavirus_24)
                 .setContentIntent(pendingIntent)
                 .build();
 
@@ -183,7 +183,7 @@ public class CountdownService extends Service {
         Notification notification = new NotificationCompat.Builder(this, CHANNEL_ID)
                 .setContentTitle("Konferenzassistent")
                 .setContentText(NotificationTextBuilder())
-                .setSmallIcon(R.drawable.ic_android)
+                .setSmallIcon(R.drawable.ic_baseline_coronavirus_24)
                 .setContentIntent(pendingIntent)
                 .setCategory(NotificationCompat.CATEGORY_MESSAGE)
                 .setPriority(NotificationCompat.PRIORITY_HIGH)

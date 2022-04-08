@@ -13,15 +13,15 @@ import androidx.core.util.Pair;
 import androidx.core.view.ViewCompat;
 
 import com.ase.konferenzassistent.R;
-import com.ase.konferenzassistent.mainscreen.history.Meeting;
-import com.ase.konferenzassistent.mainscreen.history.VerlaufFragment;
-import com.ase.konferenzassistent.shared.Interfaces.OnFilterButtonClickListener;
+
+import com.ase.konferenzassistent.data.MeetingData;
+import com.ase.konferenzassistent.shared.interfaces.OnFilterButtonClickListener;
+
 import com.ase.konferenzassistent.data.ParticipantData;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.datepicker.MaterialDatePicker;
-import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.text.DateFormat;
@@ -32,7 +32,7 @@ import java.util.stream.Collectors;
 
 public class MeetingFilterBottomSheet extends BottomSheetDialogFragment {
 
-    private final List<Meeting> meetingList;
+    private final List<MeetingData> meetingList;
     private final List<ParticipantData> participantList;
     private final OnFilterButtonClickListener listener;
 
@@ -41,7 +41,7 @@ public class MeetingFilterBottomSheet extends BottomSheetDialogFragment {
     private TextInputEditText countMinEditText, countMaxEditText, dateStartEditText, dateEndEditText;
     private Long dateStart, dateEnd;
 
-    public MeetingFilterBottomSheet(List<Meeting> meetingList, List<ParticipantData> participantList, OnFilterButtonClickListener listener) {
+    public MeetingFilterBottomSheet(List<MeetingData> meetingList, List<ParticipantData> participantList, OnFilterButtonClickListener listener) {
         super();
 
         this.meetingList = meetingList;
@@ -89,9 +89,8 @@ public class MeetingFilterBottomSheet extends BottomSheetDialogFragment {
         peopleList = participantList.stream()
                 .map(ParticipantData::getName)
                 .collect(Collectors.toList());
-
         locationList = meetingList.stream()
-                .map(Meeting::getLocation)
+                .map(MeetingData::getLocation)
                 .distinct()
                 .collect(Collectors.toList());
         locationList.remove(getString(R.string.meeting_data_no_location));

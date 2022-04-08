@@ -162,8 +162,6 @@
 
             </LinearLayout>
 
-
-            as
             <View
                 android:id="@+id/extraSpace"
                 android:layout_width="match_parent"

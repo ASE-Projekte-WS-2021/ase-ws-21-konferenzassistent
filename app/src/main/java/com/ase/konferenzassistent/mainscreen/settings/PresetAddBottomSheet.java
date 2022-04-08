@@ -19,7 +19,7 @@ import com.ase.konferenzassistent.mainscreen.recycleviews.RecyclerViewCreatedChe
 import com.ase.konferenzassistent.mainscreen.recycleviews.RecyclerViewCreatedCountdownElementsAdapter;
 import com.ase.konferenzassistent.countdown.AdvancedCountdownObject;
 import com.ase.konferenzassistent.shared.CustomAlertBottomSheetAdapter;
-import com.ase.konferenzassistent.shared.Interfaces.Preset;
+import com.ase.konferenzassistent.shared.interfaces.Preset;
 import com.ase.konferenzassistent.checklist.ChecklistItem;
 import com.ase.konferenzassistent.meetingwizard.RecyclerViewAdvancedCountdownItemAdapter;
 import com.ase.konferenzassistent.shared.presets.ChecklistPreset;
@@ -47,7 +47,7 @@ public class PresetAddBottomSheet extends BottomSheetDialogFragment implements C
     Integer viewType;
     // Preset Lists
     private final ArrayList<AdvancedCountdownObject> advancedCountdownObjects = new ArrayList<>();
-    private final ArrayList<ChecklistItem> checklistItems = new ArrayList<>();;
+    private final ArrayList<ChecklistItem> checklistItems = new ArrayList<>();
 
     public void setVariables(Integer viewType, Preset preset, PresetEditBottomSheet parentSheet, int itemPosition) {
         this.viewType = viewType;
@@ -55,13 +55,12 @@ public class PresetAddBottomSheet extends BottomSheetDialogFragment implements C
         if(preset != null){
             if(viewType == PRESET_TYPE_COUNTDOWN){
                 advancedCountdownObjects.addAll(((CountdownPreset)preset).getAdvancedCountdownObject());
-                this.preset = preset;
             }
             else
             {
                 checklistItems.addAll(((ChecklistPreset)preset).getChecklistItems());
-                this.preset = preset;
             }
+            this.preset = preset;
             this.itemPosition = itemPosition;
         }
         this.parentSheet = parentSheet;
@@ -188,14 +187,14 @@ public class PresetAddBottomSheet extends BottomSheetDialogFragment implements C
                 listener.onEditingDone(
                         new CountdownPreset(
                                 bi.presetName.getText().toString(), advancedCountdownObjects,
-                                preset == null? -1 : preset.getID())
+                                preset == null? -1 : preset.getID()), itemPosition
                 );
             } else {
                 // Create a new Checklist Preset
                 listener.onEditingDone(
                         new ChecklistPreset(
                                 bi.presetName.getText().toString(), checklistItems,
-                                preset == null? -1 : preset.getID())
+                                preset == null? -1 : preset.getID()), itemPosition
                 );
             }
             dismiss();
@@ -264,6 +263,6 @@ public class PresetAddBottomSheet extends BottomSheetDialogFragment implements C
     }
 
     public interface editingDone {
-        void onEditingDone(Preset preset);
+        void onEditingDone(Preset preset, int itemPosition);
     }
 }

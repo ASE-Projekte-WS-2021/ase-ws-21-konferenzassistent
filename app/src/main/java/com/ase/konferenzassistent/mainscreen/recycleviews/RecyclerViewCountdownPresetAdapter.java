@@ -2,6 +2,7 @@ package com.ase.konferenzassistent.mainscreen.recycleviews;
 
 import static com.ase.konferenzassistent.mainscreen.settings.PresetEditBottomSheet.PRESET_TYPE_COUNTDOWN;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,7 +10,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,8 +20,7 @@ import com.ase.konferenzassistent.R;
 import com.ase.konferenzassistent.data.RoomDB;
 import com.ase.konferenzassistent.mainscreen.settings.PresetAddBottomSheet;
 import com.ase.konferenzassistent.mainscreen.settings.PresetEditBottomSheet;
-import com.ase.konferenzassistent.shared.CustomAlertBottomSheetAdapter;
-import com.ase.konferenzassistent.shared.Interfaces.Preset;
+import com.ase.konferenzassistent.shared.interfaces.Preset;
 import com.ase.konferenzassistent.shared.presets.ChecklistPreset;
 import com.ase.konferenzassistent.shared.presets.CountdownPreset;
 
@@ -30,17 +29,18 @@ import java.util.ArrayList;
 public class RecyclerViewCountdownPresetAdapter
         extends RecyclerView.Adapter<RecyclerViewCountdownPresetAdapter.ViewHolder> implements PresetAddBottomSheet.editingDone {
 
-    private final ArrayList<? extends Preset> preset;
+    private final ArrayList<Preset> preset;
     private final Context mContext;
     private final Integer viewType;
-    PresetEditBottomSheet parent;
+    final PresetEditBottomSheet parent;
 
+    @SuppressWarnings("unchecked")
     public RecyclerViewCountdownPresetAdapter(
             ArrayList<? extends Preset> preset,
             Context mContext,
             Integer viewType,
             PresetEditBottomSheet parent) {
-        this.preset = preset;
+        this.preset = (ArrayList<Preset>)preset;
         this.mContext = mContext;
         this.viewType = viewType;
         this.parent = parent;
@@ -76,14 +76,20 @@ public class RecyclerViewCountdownPresetAdapter
         return preset.size();
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     @Override
-    public void onEditingDone(Preset preset) {
+    public void onEditingDone(Preset editedPreset, int itemPosition) {
         if(viewType.equals(PRESET_TYPE_COUNTDOWN)){
-            CountdownPreset.updateCountdownDatabaseEntry(RoomDB.getInstance(mContext), (CountdownPreset) preset);
+            // update database entry, add it to the preset and notify that the preset changed
+            CountdownPreset.updateCountdownDatabaseEntry(RoomDB.getInstance(mContext), (CountdownPreset) editedPreset);
+            preset.set(itemPosition, (CountdownPreset)editedPreset);
         }
         else {
-            ChecklistPreset.updateChecklistDatabaseEntry(RoomDB.getInstance(mContext), (ChecklistPreset)preset);
+            // update database entry, add it to the preset and notify that the preset changed
+            ChecklistPreset.updateChecklistDatabaseEntry(RoomDB.getInstance(mContext), (ChecklistPreset)editedPreset);
+            preset.set(itemPosition, (ChecklistPreset)editedPreset);
         }
+        notifyItemChanged(itemPosition);
     }
 
     // View holder Class

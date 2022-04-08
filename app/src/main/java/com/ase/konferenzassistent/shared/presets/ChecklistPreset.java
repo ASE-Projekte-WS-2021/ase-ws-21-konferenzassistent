@@ -1,6 +1,6 @@
 package com.ase.konferenzassistent.shared.presets;
 
-import com.ase.konferenzassistent.shared.Interfaces.Preset;
+import com.ase.konferenzassistent.shared.interfaces.Preset;
 import com.ase.konferenzassistent.checklist.ChecklistItem;
 import com.ase.konferenzassistent.data.RoomDB;
 import com.ase.konferenzassistent.data.presets.checklist.ChecklistItemData;
@@ -26,7 +26,7 @@ public class ChecklistPreset implements Preset {
         database.checklistPresetDao().delete(database.checklistPresetDao().getOne(id));
     }
 
-    public static void convertToChecklistDatabaseEntry(RoomDB database, ChecklistPreset preset) {
+    public static long convertToChecklistDatabaseEntry(RoomDB database, ChecklistPreset preset) {
         String title = preset.getTitle();
 
         // create new preset
@@ -49,11 +49,13 @@ public class ChecklistPreset implements Preset {
             presetWithItemData.setItemID((int) itemId);
             database.checklistPresetWithItemDao().insert(presetWithItemData);
         });
+
+        return presetId;
     }
 
     public static void updateChecklistDatabaseEntry(RoomDB database, ChecklistPreset preset){
         String title = preset.getTitle();
-        Integer presetId = preset.getID();
+        int presetId = preset.getID();
 
         // Update preset
         database.checklistPresetDao().update(title, presetId);

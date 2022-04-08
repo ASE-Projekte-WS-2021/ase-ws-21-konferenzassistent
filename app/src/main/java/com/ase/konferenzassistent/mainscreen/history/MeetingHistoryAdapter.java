@@ -15,9 +15,10 @@ import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ase.konferenzassistent.R;
+import com.ase.konferenzassistent.data.MeetingData;
 import com.ase.konferenzassistent.data.RoomDB;
 import com.ase.konferenzassistent.shared.CustomAlertBottomSheetAdapter;
-import com.ase.konferenzassistent.shared.Interfaces.CardviewTouchHelperAdapter;
+import com.ase.konferenzassistent.shared.interfaces.CardviewTouchHelperAdapter;
 
 import java.util.List;
 
@@ -25,11 +26,11 @@ public class MeetingHistoryAdapter extends RecyclerView.Adapter<MeetingHistoryAd
         CardviewTouchHelperAdapter, CustomAlertBottomSheetAdapter.onLeaveListener {
     private final Context ct;
     private final FragmentManager manager;
-    private final List<Meeting> meetingsList;
+    private final List<MeetingData> meetingsList;
     final swiped swipedListener;
     private int swipedItemPosition = -1;
 
-    public MeetingHistoryAdapter(Context ct, FragmentManager manager, List<Meeting> meetingsList, swiped swipedListener) {
+    public MeetingHistoryAdapter(Context ct, FragmentManager manager, List<MeetingData> meetingsList, swiped swipedListener) {
         this.ct = ct;
         this.manager = manager;
         this.meetingsList = meetingsList;
@@ -48,13 +49,16 @@ public class MeetingHistoryAdapter extends RecyclerView.Adapter<MeetingHistoryAd
     public void onBindViewHolder(@NonNull MeetingHistoryViewHolder holder, int position) {
 
         // Get the Values from the meeting List
-        int id = Integer.parseInt(meetingsList.get(position).getId());
-        String duration = Integer.parseInt(meetingsList.get(position).getDuration()) / 60 + "";
-        String startTime = meetingsList.get(position).getDate().substring(11);
-        String endTime = meetingsList.get(position).getDateEnd().substring(11);
-        String participants = meetingsList.get(position).getNumberParticipants();
+        int id = meetingsList.get(position).getID();
+        String duration = meetingsList.get(position).getDuration() / 60 + "";
+        String startTime = meetingsList.get(position).getStartDate().substring(11);
+        String endTime = meetingsList.get(position).getEndDate().substring(11);
+        String participants = "" + RoomDB.getInstance(ct.getApplicationContext()).
+                meetingWithParticipantDao().
+                getMeetingByID(meetingsList.get(position).getID())
+                .getParticipants().size();
         String ort = meetingsList.get(position).getLocation();
-        String date = meetingsList.get(position).getDate().substring(0, 10);
+        String date = meetingsList.get(position).getStartDate().substring(0, 10);
         String title = meetingsList.get(position).getTitle();
 
         // set the Text Values of the Holder
@@ -100,7 +104,7 @@ public class MeetingHistoryAdapter extends RecyclerView.Adapter<MeetingHistoryAd
     @Override
     public void onLeaving() {
         RoomDB database = RoomDB.getInstance(ct.getApplicationContext());
-        database.meetingDao().delete(database.meetingDao().getOne(Integer.parseInt(meetingsList.get(swipedItemPosition).getId())));
+        database.meetingDao().delete(database.meetingDao().getOne(meetingsList.get(swipedItemPosition).getID()));
 
         notifyItemRemoved(swipedItemPosition);
         meetingsList.remove(swipedItemPosition);

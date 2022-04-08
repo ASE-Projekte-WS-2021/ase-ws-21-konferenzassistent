@@ -9,7 +9,6 @@ import static com.ase.konferenzassistent.shared.presets.CountdownPreset.removeFr
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -21,7 +20,7 @@ import com.ase.konferenzassistent.R;
 import com.ase.konferenzassistent.databinding.BottomSheetEditPresetsBinding;
 import com.ase.konferenzassistent.mainscreen.recycleviews.RecyclerViewCountdownPresetAdapter;
 import com.ase.konferenzassistent.shared.CustomAlertBottomSheetAdapter;
-import com.ase.konferenzassistent.shared.Interfaces.Preset;
+import com.ase.konferenzassistent.shared.interfaces.Preset;
 import com.ase.konferenzassistent.data.RoomDB;
 import com.ase.konferenzassistent.data.presets.checklist.ChecklistPresetPair;
 import com.ase.konferenzassistent.data.presets.countdown.CountdownPresetPair;
@@ -32,7 +31,6 @@ import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 
 public class PresetEditBottomSheet extends BottomSheetDialogFragment implements PresetAddBottomSheet.editingDone {
@@ -185,26 +183,30 @@ public class PresetEditBottomSheet extends BottomSheetDialogFragment implements 
     }
 
     @Override
-    public void onEditingDone(Preset preset) {
+    public void onEditingDone(Preset preset, int itemPosition) {
         // Checks what view type is active
         if (viewType.equals(PRESET_TYPE_COUNTDOWN)) {
-            countdownObjects.add((CountdownPreset) preset);
             recyclerViewPresetAdapter.notifyItemInserted(countdownObjects.size());
-            writeCountdownPresetToDatabase((CountdownPreset) preset);
+            int presetID = (int)writeCountdownPresetToDatabase((CountdownPreset) preset);
+            // Set id to reference back to it
+            ((CountdownPreset) preset).setId(presetID);
+            countdownObjects.add((CountdownPreset) preset);
         } else {
-            checklistPresets.add((ChecklistPreset) preset);
             recyclerViewPresetAdapter.notifyItemInserted(checklistPresets.size());
-            writeChecklistPresetToDatabase((ChecklistPreset) preset);
+            int presetID = (int)writeChecklistPresetToDatabase((ChecklistPreset) preset);
+            // Set id to reference back to it
+            ((ChecklistPreset) preset).setId(presetID);
+            checklistPresets.add((ChecklistPreset) preset);
         }
         listener.onClose();
     }
 
-    private void writeCountdownPresetToDatabase(CountdownPreset preset) {
-        convertToDatabaseEntry(RoomDB.getInstance(getContext()), preset);
+    private long writeCountdownPresetToDatabase(CountdownPreset preset) {
+        return convertToDatabaseEntry(RoomDB.getInstance(getContext()), preset);
     }
 
-    private void writeChecklistPresetToDatabase(ChecklistPreset preset) {
-        convertToChecklistDatabaseEntry(RoomDB.getInstance(getContext()), preset);
+    private long writeChecklistPresetToDatabase(ChecklistPreset preset) {
+        return convertToChecklistDatabaseEntry(RoomDB.getInstance(getContext()), preset);
     }
 
     public interface onCloseListener {

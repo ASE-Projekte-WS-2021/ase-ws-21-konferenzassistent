@@ -18,7 +18,6 @@ public class Participant implements Serializable {
         this.isSelected = isSelected;
     }
 
-    // TODO: Add more things ?
     public String getName() {
         return Name;
     }
