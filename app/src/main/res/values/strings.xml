@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:locale="de">
     <string name="app_name">Corona-Konferenz-Assistent</string>
     <string name="app_opened_first_time_key">app_opened_first_time</string>
 
